@@ -7,10 +7,9 @@ image: node:16
 
 pipelines:
   default:
-    - parallel:
     - step:
-      script:
-        - echo "Start AsomeCode"
+        script:
+          - echo "Start AsomeCode"
   branches:
     develop:
       - step:
