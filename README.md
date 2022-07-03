@@ -1,29 +1,34 @@
-# README #
+# asomecode-front
 
-This README would normally document whatever steps are necessary to get your application up and running.
+## Project setup
+```
+yarn install
+```
 
-### What is this repository for? ###
+### Compiles and hot-reloads for development
+```
+yarn serve
+```
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+### Compiles and minifies for production
+```
+yarn build
+```
 
-### How do I get set up? ###
+### Run your unit tests
+```
+yarn test:unit
+```
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+### Run your end-to-end tests
+```
+yarn test:e2e
+```
 
-### Contribution guidelines ###
+### Lints and fixes files
+```
+yarn lint
+```
 
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
