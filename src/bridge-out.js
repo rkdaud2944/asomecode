@@ -71,6 +71,17 @@ export default {
         this.post(msg);
     },
 
+    /**
+     * 파라메터가 필요없는 AsomeCode 명령어 처리
+     * @param code
+     */
+    sendCode(code) {
+        const msg = {
+            code: code,
+        };
+        this.post(msg);
+    },
+
     post(msg) {
         try {
             App.postMessage(JSON.stringify(msg));
