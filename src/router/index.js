@@ -15,6 +15,10 @@ const routes = [
         component: () => import('../views/lesson/ListView.vue')
     },
     {
+        path: '/lesson/detail/:id',
+        component: () => import('../views/lesson/DetailView.vue')
+    },
+    {
         path: '/help',
         component: () => import('../views/help/pin/ListView.vue')
     },

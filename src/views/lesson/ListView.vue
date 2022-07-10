@@ -18,7 +18,7 @@
                 {{ $route.query.description }}
             </el-row>
 
-            <el-row @click="onLessonClick(lesson)" class="list" v-for="(lesson, index) in lessons" :key="index">
+            <el-row @click="goTo(`/lesson/detail/${lesson.id}`)" class="list" v-for="(lesson, index) in lessons" :key="index">
                 <el-col :span="2" class="list-left" >{{ index + 1 }}차시</el-col>
                 <el-col :span="21" class="list-main" >{{ lesson.title }}</el-col>
             </el-row>
@@ -27,7 +27,11 @@
 </template>
 
 <script>
+import VueBase from '@/VueBase';
+
 export default {
+    mixins: [VueBase],
+
     data() {
         return {
             lessons: [
@@ -56,12 +60,6 @@ export default {
 
     mounted() {
         console.log(this.$route.query);
-    },
-
-    methods: {
-        onLessonClick(lesson) {
-            this.goTo(`/lesson/detail/${lesson.id}`);
-        },
     },
 }
 </script>
