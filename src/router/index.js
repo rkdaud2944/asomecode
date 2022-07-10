@@ -15,8 +15,17 @@ const routes = [
         component: () => import('../views/lesson/ListView.vue')
     },
     {
-        path: '/subject/list',
+        path: '/help/subject/list',
         component: () => import('../views/subject/ListView.vue')
+    },
+    {
+        path: '/help/subject/detail',
+        props: true,
+        component: () => import('../views/subject/DetailView.vue')
+    },
+    {
+        path: '/help/subject/write',
+        component: () => import('../views/subject/WriteView.vue')
     },
 ]
 
