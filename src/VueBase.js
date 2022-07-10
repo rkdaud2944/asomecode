@@ -12,7 +12,11 @@ export default {
                 router.push({path: path, query: params});
             } else {
                 router.push({path: path});
-            }            
+            }
+        },
+
+        openUrl(url) {
+            window.open(url, "_blank");
         },
 
         sendCode(code) {

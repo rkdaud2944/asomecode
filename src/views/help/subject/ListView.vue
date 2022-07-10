@@ -32,7 +32,7 @@
             :page-size="pageSize"
             :page-count="pageCount"
             :current-page="currentPage"
-            @current-change="onChangeCurrentPage" />        
+            @current-change="onChangeCurrentPage" />
     </el-row>
 </template>
 

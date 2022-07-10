@@ -8,7 +8,11 @@
 </template>
 
 <script>
+import VueBase from "@/VueBase";
+
 export default {
+    mixins: [VueBase],
+
     data() {
         return {
             tabName: 'pin',
@@ -17,14 +21,15 @@ export default {
 
     mounted() {
         // TODO: 오류 발생
-        const names = this.$route.path.split('/');
-        this.tabName = names[2];
-        console.log(names, this.tabName);
+        // const names = this.$route.path.split('/');
+        // this.tabName = names[2];
+        // console.log(names, this.tabName);
     },
 
     methods: {
         onTabClick(tab) {
             console.log(tab.props.label);
+            this.goTo(`/help/${tab.props.label}/list`);
         },
     },
 }
