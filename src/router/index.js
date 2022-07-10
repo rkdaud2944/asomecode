@@ -14,6 +14,10 @@ const routes = [
         props: true,
         component: () => import('../views/lesson/ListView.vue')
     },
+    {
+        path: '/subject/list',
+        component: () => import('../views/subject/ListView.vue')
+    },
 ]
 
 const router = createRouter({

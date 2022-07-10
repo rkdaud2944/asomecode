@@ -1,5 +1,5 @@
 <template>
-    <el-row>
+    <el-row v-if="showHeaderMain">
         <HeaderMain />
     </el-row>
     <router-view />
@@ -16,10 +16,24 @@ export default {
         HeaderMain,
     },
 
+    data() {
+        return {
+            showHeaderMain: false,
+        }
+    },
+
     watch: {
         $route(to) {
             globals.currentPath = to.path;
-        },
+
+            this.showHeaderMain = true;
+            const skipHeaderMains = ['/help', '/subject'];
+            skipHeaderMains.forEach(path => {
+                if (to.path.startsWith(path)) {
+                    this.showHeaderMain = false;
+                }
+            });
+        }
     },
 
     setup() {
