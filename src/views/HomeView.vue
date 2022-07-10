@@ -14,7 +14,7 @@
         <el-col :span="1"></el-col>
     </el-row>
 
-    <div class="what_is_asomeit">
+    <div class="what-is-asomeit">
         <img src="/images/korea/what_is_asomeit.png">
         <p>
             SW 코딩교육을 통해 <b>논리적인 사고</b>와 <b>창의력</b>을 길러 줄 수 있는 프로그램으로
@@ -41,25 +41,35 @@ export default {
         return {
             subjects: [
                 {
+                    id: 0,
                     title: '어썸키트 1',
                     description: '최소한의 부품과 장치를 이용하여 교구의 비용은 줄이고 피지컬 컴퓨팅 전반의 코딩을 체험할 수 있도록 준비된 교육 프로그램',
                 },
                 {
+                    id: 1,
                     title: '어썸키드 2',
                     description: '각종 부품과 센서에 대해 이해하고 간단한 놀잇감을 직접 개발해보면서 생활 속에서 만나는 다양한 장치의 원리를 이해하도록 개발된 프로그램',
                 },
                 {
+                    id: 2,
                     title: '어썸봇',
                     description: '스마트폰으로 조종하는 2족로봇을 직접 개발하고 개발된 놀잇감을 프로그램을 통해 개조하도록 개발된 프로그램',
                 },
                 {
+                    id: 3,
                     title: '어썸카',
                     description: '스마트폰으로 조종하는 RC자동차를 직접 개발하고 개발된 놀잇감을 프로그램을 통해 개조하도록 개발된 프로그램',
+                },                
+                {
+                    id: 4,
+                    title: '커스텀 과목 1',
+                    description: '사용자가 자신의 개발된 교구를 직접 개발할 수 있는 프로그램',
                 },
                 {
-                    title: '커스텀 과목',
+                    id: 5,
+                    title: '커스텀 과목2',
                     description: '사용자가 자신의 개발된 교구를 직접 개발할 수 있는 프로그램',
-                }
+                },
             ]
         }
     },
@@ -78,7 +88,7 @@ export default {
     text-align: center;
     float: right;
 }
-.what_is_asomeit {
+.what-is-asomeit {
     background: #D1DCE6;
     margin-top: 10px;
     padding: 12px;

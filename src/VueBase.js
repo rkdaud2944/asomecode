@@ -7,8 +7,12 @@ export default {
             router.go(-1);
         },
 
-        goTo(path) {
-            router.push({path: path});
+        goTo(path, params) {
+            if (params) {
+                router.push({path: path, query: params});
+            } else {
+                router.push({path: path});
+            }            
         },
 
         sendCode(code) {

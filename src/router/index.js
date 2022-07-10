@@ -9,6 +9,11 @@ const routes = [
         path: '/help',
         component: () => import('../views/HelpView.vue')
     },
+    {
+        path: '/lesson/list',
+        props: true,
+        component: () => import('../views/lesson/ListView.vue')
+    },
 ]
 
 const router = createRouter({

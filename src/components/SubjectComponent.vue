@@ -8,13 +8,19 @@
         <br>
 
         <div class="more-button">
-            <el-button class="more-button" type="success">더알아보기</el-button>
+            <el-button @click="goTo('/lesson/list', subject)" class="more-button" type="success">더알아보기</el-button>
         </div>
     </div>
 </template>
 
 <script>
+import VueBase from '@/VueBase'
+
 export default {
+    mixins: [
+        VueBase,
+    ],
+
     props: ["subject"],
 
     setup() {
