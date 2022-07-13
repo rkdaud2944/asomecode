@@ -1,17 +1,13 @@
 <template>
     <Header />
-    <br>
+    <br />
 
     <el-row>
-          <el-input
-            placeholder="Type something"
-            prefix-icon="el-icon-search"
-            v-model="keyword">
-        </el-input>
+        <w-input class="ma3" label="검색어를 입력하세요" label-position="inside" outline inner-icon-left="wi-search"> </w-input>
     </el-row>
-    <br>
+    <br />
 
-    <el-row>
+    <el-row class="ma3">
         <el-col :span="10">
             <LessonList ref="sourceList" />
         </el-col>
@@ -20,8 +16,8 @@
             <div class="button-bar">
                 <el-button @click="addLessons" type="primary">추가</el-button>
             </div>
-            <br>
-            <br>
+            <br />
+            <br />
 
             <div class="button-bar">
                 <el-button @click="deleteLessons" type="danger">삭제</el-button>
@@ -32,13 +28,22 @@
             <LessonList ref="targetList" />
         </el-col>
     </el-row>
+
+    <div class="ma6">
+        <w-input label="제목"></w-input><br>
+        <w-textarea outline>설명</w-textarea><br>
+        <w-button @click="goTo('/help/subject/list')" bg-color="primary" color="success-light2">완료</w-button>
+    </div>
 </template>
 
 <script>
-import Header from '@/components/HeaderHelp.vue';
-import LessonList from '@/components/LessonList.vue';
+import VueBase from "@/VueBase";
+import Header from "@/components/HeaderHelp.vue";
+import LessonList from "@/components/LessonList.vue";
 
 export default {
+    mixins: [VueBase],
+
     components: {
         Header,
         LessonList,
@@ -46,36 +51,36 @@ export default {
 
     data() {
         return {
-            keyword: '',
-        }
+            keyword: "",
+        };
     },
 
     mounted() {
         const rows = [
             {
                 id: 0,
-                category: 'AsomeKit',
-                title: 'SW코딩 왜 배워야 할까요?',
+                category: "AsomeKit",
+                title: "SW코딩 왜 배워야 할까요?",
             },
             {
                 id: 1,
-                category: 'AsomeKit',
-                title: '프로그래밍과 사물인터넷은 뭔가요?',
+                category: "AsomeKit",
+                title: "프로그래밍과 사물인터넷은 뭔가요?",
             },
             {
                 id: 2,
-                category: 'AsomeKit',
-                title: '어썸보드와 어썸코드 사용 준비하기',
+                category: "AsomeKit",
+                title: "어썸보드와 어썸코드 사용 준비하기",
             },
             {
                 id: 3,
-                category: 'AsomeKit',
-                title: 'LED 제어하기와 신호등 만들기',
+                category: "AsomeKit",
+                title: "LED 제어하기와 신호등 만들기",
             },
             {
                 id: 4,
-                category: 'AsomeKit',
-                title: '버튼 스위치 이용하기와 주사위 만들기',
+                category: "AsomeKit",
+                title: "버튼 스위치 이용하기와 주사위 만들기",
             },
         ];
         this.$refs.sourceList.addRows(rows);
@@ -102,7 +107,7 @@ export default {
             }
         },
     },
-}
+};
 </script>
 
 <style>

@@ -8489,6 +8489,11 @@
     "glob-to-regexp" "^0.4.1"
     "graceful-fs" "^4.1.2"
 
+"wave-ui@^2.39.1":
+  "integrity" "sha512-Xs8XtpOUMvjDgJlezaHVnW1DuEZQbhOaUO8CzeTNp+l3OnrX7Wna2CWBH1MmglkGFZ2vMcX8+bbPLcqm2bbqhQ=="
+  "resolved" "https://registry.npmjs.org/wave-ui/-/wave-ui-2.39.1.tgz"
+  "version" "2.39.1"
+
 "wbuf@^1.1.0", "wbuf@^1.7.3":
   "integrity" "sha512-O84QOnr0icsbFGLS0O3bI5FswxzRr8/gHwWkDlQFskhSPryQXvrTMxjxGP4+iWYoauLoBvfDpkrOauZ+0iZpDA=="
   "resolved" "https://registry.npmjs.org/wbuf/-/wbuf-1.7.3.tgz"
