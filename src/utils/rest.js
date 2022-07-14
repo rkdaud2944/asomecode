@@ -7,7 +7,7 @@ const etc = useEtcStore();
 const instance = axios.create({
     baseURL: process.env.VUE_APP_API_BASEURL,
 });
-
+/*
 instance.interceptors.request.use(function (config) {  
     if (config["method"] === "get") {
         etc.loading = true;
@@ -20,7 +20,7 @@ instance.interceptors.request.use(function (config) {
     }
     return config;
 });
-
+*/
 instance.interceptors.response.use(
     function (response) {
         etc.loading = false;
