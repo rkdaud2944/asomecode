@@ -1,7 +1,7 @@
 <template>
     <el-row class="header">
         <el-col :span="10">
-            <img src="/images/common/logo_con.jpg" />
+            <img src="/images/common/logom.png" style="padding: 0px; margin: 6px; margin-left: 250px; width: 150px; height: 55px;">
         </el-col>
         <el-col :span="13">
         </el-col>
@@ -9,13 +9,17 @@
     </el-row>
 
     <el-row>
-        <el-col class="left" :span="8">
-            {{ $route.query.title }}
+        <el-col class="left " :span="6">
+           <p class="test2"> {{ $route.query.title }}</p>
+           <p class="test3">{{ $route.query.title_eng }}</p>
+           <img src="../../../public/images/common/asomebot.png" style="margin-left: 230px; margin-top: 65px; object-fit: cover;">
+            <!-- {{ $route.query}} -->
         </el-col>
         <el-col :span="1"></el-col>
-        <el-col :span="15">
+        <el-col :span="17">
             <el-row class="list-header">
-                {{ $route.query.description }}
+               <p class="test4"> {{ $route.query.description }} </p>
+               <div style="background-color:darkgray; height: 1px; width: 100%;"></div>
             </el-row>
 
             <el-row @click="goTo(`/lesson/detail/${lesson.id}`)" class="list" v-for="(lesson, index) in lessons" :key="index">
@@ -28,6 +32,7 @@
 
 <script>
 import VueBase from '@/VueBase';
+import '../../../public/css/common.css'
 
 export default {
     mixins: [VueBase],
@@ -42,12 +47,12 @@ export default {
                 },
                 {
                     id: 1,
-                    title: '어썸키드 과정 2',
+                    title: '어썸키트 과정 2',
                     description: '각종 부품과 센서에 대해 이해하고 간단한 놀잇감을 직접 개발해보면서 생활 속에서 만나는 다양한 장치의 원리를 이해하도록 개발된 프로그램',
                 },
                 {
                     id: 2,
-                    title: '어썸키드 과정 2',
+                    title: '어썸키트 과정 3',
                     description: '각종 부품과 센서에 대해 이해하고 간단한 놀잇감을 직접 개발해보면서 생활 속에서 만나는 다양한 장치의 원리를 이해하도록 개발된 프로그램',
                 },
             ],
@@ -66,19 +71,21 @@ export default {
 
 <style scoped>
 .el-col {
-    border-radius: 8px;
+    
 }
 .header {
     width: 100%;
-    background: rgb(3, 84, 87);
-    margin-top: 10px;
+    background: rgb(255, 102, 51);
     padding: 4px;
 }
 .left {
     width: 100%;
-    height: 90vh;
-    background: rgb(186, 193, 0);
-    margin-top: 10px;
+    height: 45vh;
+    background: rgba(255, 167, 101, 0.99);
+    background-image: radial-gradient(rgb(255, 184, 131) 19%, transparent 0), radial-gradient(rgb(255, 184, 131) 19%, transparent 0);
+    background-position: 1,10px;
+     background-size: 15px 15px;
+    /* margin-top: 10px; */
     padding: 4px;
 }
 .list-header {
@@ -87,6 +94,7 @@ export default {
 }
 .list {
     cursor: pointer;
+
 }
 .list-left {
     width: 100%;
@@ -97,6 +105,8 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    
+    border-radius: 8px; 
 }
 .list-main {
     height: 32px;
@@ -105,5 +115,32 @@ export default {
     margin: 10px;
     display: flex;
     align-items: center;
+    
+    border-radius: 8px; 
+}
+.test2
+{
+    font-family: inherit;
+    font-size: 55px;
+    font-weight: 900;
+    color: white;
+    text-align: right;
+    margin-top : 23%;
+    margin-right : 6%;
+    margin-bottom: 0px;
+    letter-spacing:-5px;
+}
+.test3{
+   font-family: inherit;
+    font-size: 24px;
+    color: white;
+    text-align: right;
+    margin: 0px;
+    margin-right : 6%;
+}
+.test4{
+    font-size: 27px;
+    font-weight: 300;
+    margin-top : 100px;
 }
 </style>
