@@ -1,5 +1,5 @@
 <template>
-    <el-row style="background: gray; width: 100%; padding: 10px">
+    <el-row style="background: #353543; width: 100%; padding: 10px">
         <el-col :span="1"></el-col>
         <el-col :span="10">
             <el-button @click="sendCode('connect')" type="primary">connect</el-button>
