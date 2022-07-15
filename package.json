@@ -24,7 +24,8 @@
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
     "vuedraggable": "^4.1.0",
-    "wave-ui": "^2.39.1"
+    "wave-ui": "^2.39.1",
+    "yarn": "^1.22.19"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
