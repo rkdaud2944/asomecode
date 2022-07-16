@@ -2,7 +2,7 @@
     <Header />
 
     <div>
-        Subject Detail
+        Subject Set Detail
     </div>
 </template>
 

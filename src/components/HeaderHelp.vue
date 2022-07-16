@@ -4,6 +4,7 @@
         <el-tab-pane label="module">모듈 라이브러리</el-tab-pane>
         <el-tab-pane label="qna">Q&A</el-tab-pane>
         <el-tab-pane label="subject">커스텀 과목</el-tab-pane>
+        <el-tab-pane label="subject-set">커스텀 과목 세트</el-tab-pane>
     </el-tabs>
 </template>
 
@@ -28,7 +29,6 @@ export default {
 
     methods: {
         onTabClick(tab) {
-            console.log(tab.props.label);
             this.goTo(`/help/${tab.props.label}/list`);
         },
     },

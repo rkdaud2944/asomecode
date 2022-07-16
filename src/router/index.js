@@ -44,6 +44,19 @@ const routes = [
         component: () => import('../views/help/subject/WriteView.vue')
     },
     {
+        path: '/help/subject-set/list',
+        component: () => import('../views/help/subject-set/ListView.vue')
+    },
+    {
+        path: '/help/subject-set/detail',
+        props: true,
+        component: () => import('../views/help/subject-set/DetailView.vue')
+    },
+    {
+        path: '/help/subject-set/write',
+        component: () => import('../views/help/subject-set/WriteView.vue')
+    },
+    {
         path: '/board/list',
         component: () => import('../views/board/BoardList.vue')
     },
