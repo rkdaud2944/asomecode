@@ -64,6 +64,10 @@ const routes = [
         path: '/help/subject-set/write',
         component: () => import('../views/help/subject-set/SubjectSetWrite.vue')
     },
+    {
+        path: '/help/subject-set/edit/:id',
+        component: () => import('../views/help/subject-set/SubjectSetEdit.vue')
+    },
 
     // board
     {

@@ -16,8 +16,8 @@
         <div class="row flex flex-center">
             <q-btn @click="selectSubjetSet" color="primary" label="적용" />
             <q-btn @click="clearSelection" color="primary" label="취소" class="q-ml-md" />
-            <q-btn color="secondary" label="수정" class="q-ml-md" />
-            <q-btn color="deep-orange" label="삭제" class="q-ml-md" />
+            <q-btn @click="goTo(`/help/subject-set/edit/${id}`)" color="secondary" label="수정" class="q-ml-md" />
+            <q-btn @click="deleteSubjectSet" color="deep-orange" label="삭제" class="q-ml-md" />
         </div>
     </div>
 </template>
@@ -36,6 +36,7 @@ export default {
 
     data() {
         return {
+            id: this.$route.query.id,
             columns: columns,
             rows: subjectSets.getSubjects(this.$route.query.id ),
             selected: this.$route.query.id == localStorage.getItem('selectedSubjectSetId'),
@@ -53,6 +54,11 @@ export default {
             this.selected = false;
             localStorage.setItem('selectedSubjectSetId', null);
             this.refresh();
+        },
+
+        deleteSubjectSet() {
+            // TODO: 삭제 하기
+            this.goTo('/help/subject-set/list');
         },
     },
 }
