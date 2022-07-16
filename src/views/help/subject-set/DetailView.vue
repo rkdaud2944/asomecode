@@ -37,8 +37,8 @@ export default {
     data() {
         return {
             columns: columns,
-            selected: this.$route.query.id == localStorage.getItem('selectedSubjectSetId'),
             rows: subjectSets.getSubjects(this.$route.query.id ),
+            selected: this.$route.query.id == localStorage.getItem('selectedSubjectSetId'),
         }
     },
 

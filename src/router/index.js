@@ -30,19 +30,25 @@ const routes = [
         path: '/help/qna/list',
         component: () => import('../views/help/qna/ListView.vue')
     },
+
     {
         path: '/help/subject/list',
-        component: () => import('../views/help/subject/ListView.vue')
+        component: () => import('../views/help/subject/SubjectList.vue')
     },
     {
         path: '/help/subject/detail',
         props: true,
-        component: () => import('../views/help/subject/DetailView.vue')
+        component: () => import('../views/help/subject/SubjectDetail.vue')
     },
     {
         path: '/help/subject/write',
-        component: () => import('../views/help/subject/WriteView.vue')
+        component: () => import('../views/help/subject/SubjectWrite.vue')
     },
+    {
+        path: '/help/subject/edit',
+        component: () => import('../views/help/subject/SubjectEdit.vue')
+    },
+
     {
         path: '/help/subject-set/list',
         component: () => import('../views/help/subject-set/ListView.vue')

@@ -12,17 +12,16 @@
                 </q-input>
                 <br />
                 <LessonList ref="sourceList" />
-
             </div>
 
             <div class="col">
-                <div class="button-bar">
+                <div class="flex flex-center">
                     <el-button @click="addLessons" type="primary">추가</el-button>
                 </div>
                 <br />
                 <br />
 
-                <div class="button-bar">
+                <div class="flex flex-center">
                     <el-button @click="deleteLessons" type="danger">삭제</el-button>
                 </div>
 
@@ -106,10 +105,3 @@ export default {
     },
 };
 </script>
-
-<style>
-.button-bar {
-    width: 100%;
-    text-align: center;
-}
-</style>
