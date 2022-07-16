@@ -2,7 +2,17 @@ import router from "@/router";
 import bridgeOut from "./bridge-out";
 
 export default {
+    data() {
+        return {
+            selectedSubjectSetId: null,
+        }
+    },
+
     methods: {
+        refresh() {
+            bridgeOut.refresh();
+        },
+
         goBack() {
             router.go(-1);
         },

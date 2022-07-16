@@ -5,5 +5,6 @@ export const useEtcStore = defineStore("etc",  {
 
     state: () => ({
         loading: false,
+        selectedSubjectSetId: null,
     }),
 });

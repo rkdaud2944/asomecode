@@ -1,7 +1,7 @@
 <template>
     <div class="main">
         <br>
-        <h3>{{ subject.title }}</h3>
+        <h5>{{ subject.title }}</h5>
 
         <p class="text">{{ subject.description }}</p>
         <br>
@@ -22,8 +22,8 @@ export default {
 
     props: ["subject"],
 
-    setup() {
-
+    mounted() {
+        console.log(this.subject);
     },
 }
 </script>
