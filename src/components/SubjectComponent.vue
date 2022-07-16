@@ -28,24 +28,12 @@ export default {
 .main {
     width: 100%;
     height: 320px;
-    background: white;
+    background: rgb(237, 225, 138);
     text-align: center;
     position : relative;
-}
-.icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 30px;
-    background: black;
 }
 .text {
     margin-left: 10px;
     margin-right: 10px;
-}
-.more-button {
-    position : absolute;
-    bottom: 20px;
-    width: 100px;
-    left: calc(50% - 50px);
 }
 </style>
