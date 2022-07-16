@@ -38,7 +38,14 @@
         <q-input filled v-model="title" label="제목" stack-label :dense="dense" />
         <br>
 
-        <q-input filled v-model="author" label="작성자" stack-label :dense="dense" />
+        <div class="row">
+            <div class="col q-pr-md">
+                <q-input filled v-model="author" label="작성자" stack-label :dense="dense" />
+            </div>
+            <div class="col q-pl-md">
+                <q-input filled v-model="password" label="비밀먼호" type="password" stack-label :dense="dense" />
+            </div>
+        </div>
         <br>
 
         <q-input v-model="text" filled type="textarea" />
@@ -67,6 +74,7 @@ export default {
             keyword: "",
             title: "",
             author: "",
+            password: "",
             text: "",
         };
     },

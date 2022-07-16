@@ -21,10 +21,6 @@ export default {
     ],
 
     props: ["subject"],
-
-    mounted() {
-        console.log(this.subject);
-    },
 }
 </script>
 

@@ -38,7 +38,14 @@
         <q-input filled v-model="title" label="제목" stack-label :dense="dense" />
         <br>
 
-        <q-input filled v-model="author" label="작성자" stack-label :dense="dense" />
+        <div class="row">
+            <div class="col q-pr-md">
+                <q-input filled v-model="author" label="작성자" stack-label :dense="dense" />
+            </div>
+            <div class="col q-pl-md">
+                <q-input filled v-model="password" label="비밀먼호" type="password" stack-label :dense="dense" />
+            </div>
+        </div>
         <br>
 
         <q-input v-model="text" filled type="textarea" />
@@ -50,6 +57,7 @@
 
 <script>
 import VueBase from "@/VueBase";
+import lessons from "@/data/lessons";
 import Header from "@/components/HeaderHelp.vue";
 import LessonList from "@/components/LessonList.vue";
 
@@ -66,39 +74,13 @@ export default {
             keyword: "",
             title: "",
             author: "",
+            password: "",
             text: "",
         };
     },
 
     mounted() {
-        const rows = [
-            {
-                id: 0,
-                category: "AsomeKit",
-                title: "SW코딩 왜 배워야 할까요?",
-            },
-            {
-                id: 1,
-                category: "AsomeKit",
-                title: "프로그래밍과 사물인터넷은 뭔가요?",
-            },
-            {
-                id: 2,
-                category: "AsomeKit",
-                title: "어썸보드와 어썸코드 사용 준비하기",
-            },
-            {
-                id: 3,
-                category: "AsomeKit",
-                title: "LED 제어하기와 신호등 만들기",
-            },
-            {
-                id: 4,
-                category: "AsomeKit",
-                title: "버튼 스위치 이용하기와 주사위 만들기",
-            },
-        ];
-        this.$refs.sourceList.addRows(rows);
+        this.$refs.sourceList.addRows(lessons);
     },
 
     methods: {
