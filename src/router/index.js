@@ -6,10 +6,6 @@ const routes = [
         component: () => import('../views/HomeView.vue')
     },
     {
-        path: '/editor',
-        component: () => import('../views/EditorView.vue')
-    },
-    {
         path: '/lesson/list',
         props: true,
         component: () => import('../views/lesson/ListView.vue')
@@ -46,6 +42,18 @@ const routes = [
     {
         path: '/help/subject/write',
         component: () => import('../views/help/subject/WriteView.vue')
+    },
+    {
+        path: '/board/list',
+        component: () => import('../views/board/BoardList.vue')
+    },
+    {
+        path: '/board/detail',
+        component: () => import('../views/board/BoardDetail.vue')
+    },
+    {
+        path: '/board/create',
+        component: () => import('../views/board/CreateBoard.vue')
     },
 ]
 
