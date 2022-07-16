@@ -18,9 +18,10 @@
                 {{ subject.description }}
             </el-row>
 
-            <el-row @click="goTo(`/lesson/detail/${lesson.id}`)" class="list" v-for="(lesson, index) in subject.lessons" :key="index">
-                <el-col :span="2" class="list-left" >{{ index + 1 }}차시</el-col>
-                <el-col :span="21" class="list-main" >{{ lesson.title }}</el-col>
+            <el-row @click="goTo(`/lesson/detail/${lesson.id}`)" class="list" v-for="(lesson, index) in subject.lessons"
+                :key="index">
+                <el-col :span="2" class="list-left">{{ index + 1 }}차시</el-col>
+                <el-col :span="21" class="list-main">{{ lesson.title }}</el-col>
             </el-row>
         </el-col>
     </el-row>
@@ -39,7 +40,7 @@ export default {
     },
 
     setup() {
-    
+
     },
 
     mounted() {
@@ -65,12 +66,14 @@ export default {
 .el-col {
     border-radius: 8px;
 }
+
 .header {
     width: 100%;
     background: rgb(3, 84, 87);
     margin-top: 10px;
     padding: 4px;
 }
+
 .left {
     width: 100%;
     height: 90vh;
@@ -78,6 +81,7 @@ export default {
     margin-top: 10px;
     padding: 4px;
 }
+
 .list-header {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -86,9 +90,11 @@ export default {
     line-height: 30px;
     margin-bottom: 15px;
 }
+
 .list {
     cursor: pointer;
 }
+
 .list-left {
     width: 100%;
     height: 32px;
@@ -99,6 +105,7 @@ export default {
     align-items: center;
     justify-content: center;
 }
+
 .list-main {
     height: 32px;
     background: #D3DCE6;
