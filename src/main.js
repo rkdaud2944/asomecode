@@ -5,18 +5,15 @@ import {createPinia} from 'pinia'
 import errorLog from "@/utils/errorLog";
 import ElementPlus from "element-plus";
 import ko from "element-plus/es/locale/lang/ko";
-import WaveUI from 'wave-ui'
+import { Quasar } from 'quasar'
+import quasarUserOptions from './quasar-user-options'
 import "element-plus/dist/index.css";
-import 'wave-ui/dist/wave-ui.css'
 
-const app = createApp(App)
+const app = createApp(App).use(Quasar, quasarUserOptions).use(Quasar, quasarUserOptions)
     .use(router)
     .use(createPinia())
-    .use(ElementPlus, { locale: ko });
-
-new WaveUI(app, {
-    // Some Wave UI options.
-})
+    .use(ElementPlus, { locale: ko })
+    .use(Quasar, quasarUserOptions);
 
 app.config.errorHandler = (e) => {
     console.log("------->", e);

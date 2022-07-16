@@ -1403,6 +1403,11 @@
   "resolved" "https://registry.npmjs.org/@sxzz/popperjs-es/-/popperjs-es-2.11.7.tgz"
   "version" "2.11.7"
 
+"@quasar/extras@^1.0.0":
+  "integrity" "sha512-OHyR/pfW0R8E5DvnsV1wg9ISnLL/yXHyOMZsqPY3gUtmfdF2634x2osdVg4YpBYW29vIQeV5feGWGIx8nuprdA=="
+  "resolved" "https://registry.npmjs.org/@quasar/extras/-/extras-1.14.3.tgz"
+  "version" "1.14.3"
+
 "@sideway/address@^4.1.3":
   "integrity" "sha512-7vwq+rOHVWjyXxVlR76Agnvhy8I9rpzjosTESvmhNeXOXdZZB15Fl+TI9x1SiHZH5Jv2wTGduSxFDIaq0m3DUw=="
   "resolved" "https://registry.npmjs.org/@sideway/address/-/address-4.1.4.tgz"
@@ -4911,11 +4916,6 @@
   "resolved" "https://registry.npmjs.org/ignore/-/ignore-5.2.0.tgz"
   "version" "5.2.0"
 
-"immutable@^4.0.0":
-  "integrity" "sha512-oNkuqVTA8jqG1Q6c+UglTOD1xhC1BtjKI7XkCXRkZHrN5m18/XsnUp8Q89GkQO/z+0WjonSvl0FLhDYftp46nQ=="
-  "resolved" "https://registry.npmjs.org/immutable/-/immutable-4.1.0.tgz"
-  "version" "4.1.0"
-
 "import-fresh@^3.0.0", "import-fresh@^3.2.1":
   "integrity" "sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw=="
   "resolved" "https://registry.npmjs.org/import-fresh/-/import-fresh-3.3.0.tgz"
@@ -7118,6 +7118,11 @@
   dependencies:
     "side-channel" "^1.0.4"
 
+"quasar@^2.0.0":
+  "integrity" "sha512-DWI0S+bXASfMSPrB8c/LVsXpA4dF7cBUbaJlcrM+1ioTNBHtiudma2Nhk2SDd5bzk9AYVHh5A8JCZuKqQAXt7g=="
+  "resolved" "https://registry.npmjs.org/quasar/-/quasar-2.7.5.tgz"
+  "version" "2.7.5"
+
 "queue-microtask@^1.2.2":
   "integrity" "sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A=="
   "resolved" "https://registry.npmjs.org/queue-microtask/-/queue-microtask-1.2.3.tgz"
@@ -7405,14 +7410,12 @@
     "klona" "^2.0.4"
     "neo-async" "^2.6.2"
 
-"sass@^1.3.0", "sass@^1.32.7":
-  "integrity" "sha512-zb/oMirbKhUgRQ0/GFz8TSAwRq2IlR29vOUJZOx0l8sV+CkHUfHa4u5nqrG+1VceZp7Jfj59SVW9ogdhTvJDcQ=="
-  "resolved" "https://registry.npmjs.org/sass/-/sass-1.53.0.tgz"
-  "version" "1.53.0"
+"sass@^1.3.0", "sass@1.32.12":
+  "integrity" "sha512-zmXn03k3hN0KaiVTjohgkg98C3UowhL1/VSGdj4/VAAiMKGQOE80PFPxFP2Kyq0OUskPKcY5lImkhBKEHlypJA=="
+  "resolved" "https://registry.npmjs.org/sass/-/sass-1.32.12.tgz"
+  "version" "1.32.12"
   dependencies:
     "chokidar" ">=3.0.0 <4.0.0"
-    "immutable" "^4.0.0"
-    "source-map-js" ">=0.6.2 <2.0.0"
 
 "saxes@^5.0.1":
   "integrity" "sha512-5LBh1Tls8c9xgGjw3QrMwETmTMVk0oFgvrFSvWx62llR2hcEInrKNZ2GZCCuuy2lvWrdl5jhbpeqc5hRYKFOcw=="
@@ -7702,7 +7705,7 @@
   "resolved" "https://registry.npmjs.org/sortablejs/-/sortablejs-1.14.0.tgz"
   "version" "1.14.0"
 
-"source-map-js@^1.0.1", "source-map-js@^1.0.2", "source-map-js@>=0.6.2 <2.0.0":
+"source-map-js@^1.0.1", "source-map-js@^1.0.2":
   "integrity" "sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw=="
   "resolved" "https://registry.npmjs.org/source-map-js/-/source-map-js-1.0.2.tgz"
   "version" "1.0.2"
@@ -8395,6 +8398,13 @@
     "core-util-is" "1.0.2"
     "extsprintf" "^1.2.0"
 
+"vue-cli-plugin-quasar@~5.0.1":
+  "integrity" "sha512-yFPN0mRQJJH4a1AoLC6zDLxWzTjRQYKp8gO8wYQO43F+SK4qiMOeXrjsMvjUAa5QYxkbPa27rrwP59gTqTgKLQ=="
+  "resolved" "https://registry.npmjs.org/vue-cli-plugin-quasar/-/vue-cli-plugin-quasar-5.0.1.tgz"
+  "version" "5.0.1"
+  dependencies:
+    "webpack-merge" "^5.7.3"
+
 "vue-demi@*":
   "integrity" "sha512-xmkJ56koG3ptpLnpgmIzk9/4nFf4CqduSJbUM0OdPoU87NwRuZ6x49OLhjSa/fC15fV+5CbEnrxU4oyE022svg=="
   "resolved" "https://registry.npmjs.org/vue-demi/-/vue-demi-0.13.1.tgz"
@@ -8493,11 +8503,6 @@
   dependencies:
     "glob-to-regexp" "^0.4.1"
     "graceful-fs" "^4.1.2"
-
-"wave-ui@^2.39.1":
-  "integrity" "sha512-Xs8XtpOUMvjDgJlezaHVnW1DuEZQbhOaUO8CzeTNp+l3OnrX7Wna2CWBH1MmglkGFZ2vMcX8+bbPLcqm2bbqhQ=="
-  "resolved" "https://registry.npmjs.org/wave-ui/-/wave-ui-2.39.1.tgz"
-  "version" "2.39.1"
 
 "wbuf@^1.1.0", "wbuf@^1.7.3":
   "integrity" "sha512-O84QOnr0icsbFGLS0O3bI5FswxzRr8/gHwWkDlQFskhSPryQXvrTMxjxGP4+iWYoauLoBvfDpkrOauZ+0iZpDA=="
@@ -8815,11 +8820,6 @@
     "string-width" "^4.2.0"
     "y18n" "^5.0.5"
     "yargs-parser" "^20.2.2"
-
-"yarn@^1.22.19":
-  "integrity" "sha512-/0V5q0WbslqnwP91tirOvldvYISzaqhClxzyUKXYxs07yUILIs5jx/k6CFe8bvKSkds5w+eiOqta39Wk3WxdcQ=="
-  "resolved" "https://registry.npmjs.org/yarn/-/yarn-1.22.19.tgz"
-  "version" "1.22.19"
 
 "yauzl@^2.10.0":
   "integrity" "sha512-p4a9I6X6nu6IhoGmBqAcbJy1mlC4j27vEPZX9F4L4/vZT3Lyq1VkFHw/V/PUcB9Buo+DG3iHkT0x3Qya58zc3g=="
