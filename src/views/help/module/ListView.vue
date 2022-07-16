@@ -1,7 +1,7 @@
 <template>
     <Header />
 
-    <div>
+    <div class="q-pa-md">
         Module 라이브러리
     </div>
 </template>

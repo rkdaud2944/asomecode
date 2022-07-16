@@ -1,7 +1,7 @@
 <template>
     <Header />
 
-    <div>
+    <div class="q-pa-md">
         Subject Detail
     </div>
 </template>
