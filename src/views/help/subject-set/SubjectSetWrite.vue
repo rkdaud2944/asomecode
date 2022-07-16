@@ -17,12 +17,12 @@
 
             <div class="col">
                 <div class="row flex flex-center">
-                    <q-btn @click="addLessons" color="primary" label="추가" class="q-ml-md" />
+                    <q-btn @click="addSets" color="primary" label="추가" class="q-ml-md" />
                 </div>
                 <br>
 
                 <div class="row flex flex-center">
-                    <q-btn @click="deleteLessons" color="deep-orange" label="삭제" class="q-ml-md" />
+                    <q-btn @click="deleteSets" color="deep-orange" label="삭제" class="q-ml-md" />
                 </div>
             </div>
 
@@ -82,7 +82,7 @@ export default {
     },
 
     methods: {
-        addLessons() {
+        addSets() {
             const sourceList = this.$refs.sourceList;
             const targetList = this.$refs.targetList;
             const source = sourceList.getSelected();
@@ -92,7 +92,7 @@ export default {
             }
         },
 
-        deleteLessons() {
+        deleteSets() {
             const sourceList = this.$refs.sourceList;
             const targetList = this.$refs.targetList;
             const target = targetList.getSelected();

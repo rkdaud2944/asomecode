@@ -2,7 +2,7 @@
     <Header />
 
     <div class="q-pa-md">
-        <q-table :rows="subjectSet" :columns="columns" row-key="id" hide-bottom/>
+        <q-table @row-click="onRowClick" :rows="subjectSet" :columns="columns" row-key="id" hide-bottom/>
         <br>
 
         <br>
@@ -48,7 +48,7 @@ export default {
     },
 
     methods: {
-        onSubjectClick(row) {
+        onRowClick(e, row) {
             this.$router.push({ path: '/help/subject-set/detail', query: row });
         },
 

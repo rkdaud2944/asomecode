@@ -1,32 +1,20 @@
 <template>
     <Header />
 
-    <el-row>
-        <el-col :span="2"> </el-col>
-        <el-col :span="20">
-            <el-table
-                @row-click="onSubjectClick"
-                :data="subjects"
-                style="width: 100%"
-            >
-                <el-table-column prop="id" label="id" width="80"></el-table-column>
-                <el-table-column prop="title" label="title"></el-table-column>
-                <el-table-column prop="author" label="author"></el-table-column>
-                <el-table-column prop="created_at" label="created_at"></el-table-column>
-                <el-table-column prop="views" label="views"></el-table-column>
-            </el-table>
-        </el-col>
-    </el-row>
+    <div class="q-pa-md">
+        <q-table @row-click="onRowClick" :rows="subjects" :columns="columns" row-key="id" hide-bottom />
+        <br>
 
-    <br>
-    <div class="write-button-bar">
-        <q-btn @click="onWriteButtonClick" color="primary" label="글쓰기" />
-    </div>
+        <br>
+        <div class="row flex flex-center">
+            <q-btn @click="onWriteButtonClick" color="primary" label="글쓰기" />
+        </div>
 
-    <br>
-    <div class="q-pa-lg flex flex-center">
-        <q-pagination @update:model-value="onPageChanged" v-model="currentPage" :max="pageCount" :max-pages="10"
-            boundary-numbers color="purple" />
+        <br>
+        <div class="q-pa-lg flex flex-center">
+            <q-pagination @update:model-value="onPageChanged" v-model="currentPage" :max="pageCount" :max-pages="10"
+                boundary-numbers color="purple" />
+        </div>
     </div>
 </template>
 
@@ -41,6 +29,7 @@ export default {
 
     data() {
         return {
+            columns: columns,
             rowCount: 1000,
             pageSize: process.env.VUE_APP_PAGE_SIZE,
             currentPage: 1,
@@ -55,8 +44,8 @@ export default {
     },
 
     methods: {
-        onSubjectClick(row) {
-            this.$router.push({path: '/help/subject/detail', query: row});
+        onRowClick(e, row) {
+            this.$router.push({ path: '/help/subject/detail', query: row });
         },
 
         onPageChanged(page) {
@@ -64,20 +53,16 @@ export default {
         },
 
         onWriteButtonClick() {
-            this.$router.push({path: '/help/subject/write'});
+            this.$router.push({ path: '/help/subject/write' });
         },
     }
 }
-</script>
 
-<style scoped>
-.pagination {
-    width: 100%;
-    margin: 0 auto;
-    text-align: center;
-}
-.write-button-bar {
-    margin-right: 32px;
-    text-align: right;
-}
-</style>
+const columns = [
+    { name: 'id', align: 'center', label: 'id', field: 'id' },
+    { name: 'title', align: 'left', label: '제목', field: 'title' },
+    { name: 'author', align: 'center', label: '작성자', field: 'author' },
+    { name: 'created_at', align: 'center', label: '작성일', field: 'created_at' },
+    { name: 'views', align: 'center', label: '조회수', field: 'views' },
+];
+</script>

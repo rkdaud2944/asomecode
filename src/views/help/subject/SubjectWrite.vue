@@ -15,16 +15,14 @@
             </div>
 
             <div class="col">
-                <div class="flex flex-center">
-                    <el-button @click="addLessons" type="primary">추가</el-button>
+                <div class="row flex flex-center">
+                    <q-btn @click="addLessons" color="primary" label="추가" class="q-ml-md" />
                 </div>
-                <br />
-                <br />
+                <br>
 
-                <div class="flex flex-center">
-                    <el-button @click="deleteLessons" type="danger">삭제</el-button>
+                <div class="row flex flex-center">
+                    <q-btn @click="deleteLessons" color="deep-orange" label="삭제" class="q-ml-md" />
                 </div>
-
             </div>
 
             <div class="col-5">
