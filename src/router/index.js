@@ -8,29 +8,30 @@ const routes = [
     {
         path: '/lesson/list',
         props: true,
-        component: () => import('../views/lesson/ListView.vue')
+        component: () => import('../views/lesson/LessonList.vue')
     },
     {
         path: '/lesson/detail/:id',
-        component: () => import('../views/lesson/DetailView.vue')
+        component: () => import('../views/lesson/LessonDetail.vue')
     },
     {
         path: '/help',
-        component: () => import('../views/help/pin/ListView.vue')
+        component: () => import('../views/help/pin/PinList.vue')
     },
     {
         path: '/help/pin/list',
-        component: () => import('../views/help/pin/ListView.vue')
+        component: () => import('../views/help/pin/PinList.vue')
     },
     {
         path: '/help/module/list',
-        component: () => import('../views/help/module/ListView.vue')
+        component: () => import('../views/help/module/ModuleList.vue')
     },
     {
         path: '/help/qna/list',
-        component: () => import('../views/help/qna/ListView.vue')
+        component: () => import('../views/help/qna/QnaList.vue')
     },
 
+    // /help/subject
     {
         path: '/help/subject/list',
         component: () => import('../views/help/subject/SubjectList.vue')
@@ -49,19 +50,22 @@ const routes = [
         component: () => import('../views/help/subject/SubjectEdit.vue')
     },
 
+    // /help/subject-set
     {
         path: '/help/subject-set/list',
-        component: () => import('../views/help/subject-set/ListView.vue')
+        component: () => import('../views/help/subject-set/SubjectSetList.vue')
     },
     {
         path: '/help/subject-set/detail',
         props: true,
-        component: () => import('../views/help/subject-set/DetailView.vue')
+        component: () => import('../views/help/subject-set/SubjectSetDetail.vue')
     },
     {
         path: '/help/subject-set/write',
-        component: () => import('../views/help/subject-set/WriteView.vue')
+        component: () => import('../views/help/subject-set/SubjectSetWrite.vue')
     },
+
+    // board
     {
         path: '/board/list',
         component: () => import('../views/board/BoardList.vue')
