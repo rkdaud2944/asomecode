@@ -22,7 +22,7 @@
         <br>
 
         <div class="row flex flex-center">
-            <q-btn @click="goTo('/help/subject/edit')" color="secondary" label="수정" class="q-ml-md" />
+            <q-btn @click="goTo(`/help/subject/edit/${id}`)" color="secondary" label="수정" class="q-ml-md" />
             <q-btn @click="deleteSubject" color="deep-orange" label="삭제" class="q-ml-md" />
         </div>
     </div>
@@ -44,14 +44,13 @@ export default {
         return {
             columns: columns,
             rows: lessons,
+            id: this.$route.query.id,
+
+            // TODO: API 가져오기, query 대신 id만 넘기기
             title: this.$route.query.title,
             author: this.$route.query.author,
             text: this.$route.query.text,
         };
-    },
-
-    mounted() {
-        this.$refs.sourceList.addRows(lessons);
     },
 
     methods: {
