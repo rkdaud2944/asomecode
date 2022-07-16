@@ -23,8 +23,7 @@
 </template>
 
 <script>
-import {useEtcStore} from '@/store/etc'
-import subjects from '@/data/subjects';
+import subjectSets from '@/data/subject-sets';
 import VueBase from '@/VueBase';
 import Header from '@/components/HeaderHelp.vue';
 
@@ -35,18 +34,11 @@ export default {
         Header,
     },
 
-    setup() {
-        const etc = useEtcStore();
-        return {
-            etc,
-            columns: columns,
-            rows: subjects,
-        }
-    },
-
     data() {
         return {
+            columns: columns,
             selected: this.$route.query.id == localStorage.getItem('selectedSubjectSetId'),
+            rows: subjectSets.getSubjects(this.$route.query.id ),
         }
     },
 

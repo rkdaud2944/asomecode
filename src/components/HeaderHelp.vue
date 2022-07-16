@@ -1,5 +1,5 @@
 <template>
-    <q-tabs @update:model-value="onTabClick" v-model="tabName" indicator-color="yellow" class="bg-primary text-white shadow-2 q-mb-md">
+    <q-tabs @click="onTabClick" @update:model-value="onTabUpdated" v-model="tabName" indicator-color="yellow" class="bg-primary text-white shadow-2 q-mb-md">
         <q-tab name="pin" icon="pin" label="핀 라이브러리" />
         <q-tab name="module" icon="view_module" label="모듈 라이브러리" />
         <q-tab name="qna" icon="question_mark" label="Q&A" />
@@ -21,14 +21,23 @@ export default {
     },
 
     mounted() {
-        const names = this.$route.path.split('/');
-        this.tabName = names[2];
-        console.log(names, this.tabName);
+        this.tabName = this.getTabNameFromPath();
     },
 
     methods: {
-        onTabClick(tab) {
+        onTabUpdated(tab) {
             this.goTo(`/help/${tab}/list`);
+        },
+
+        onTabClick() {
+            if (this.tabName == this.getTabNameFromPath()) {
+                this.goTo(`/help/${this.tabName}/list`);
+            }
+        },
+
+        getTabNameFromPath() {
+            const names = this.$route.path.split('/');
+            return names[2];
         },
     },
 }

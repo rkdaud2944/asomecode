@@ -57,7 +57,7 @@ export default {
     setup() {
         return {
             selectedSubjectSetId: localStorage.getItem('selectedSubjectSetId'),
-            subjects: subjectSets.getSubjects(localStorage.getItem('selectedSubjectSetId')),
+            subjects: subjectSets.getSubjectsOrDefaults(localStorage.getItem('selectedSubjectSetId')),
         }
     },
 

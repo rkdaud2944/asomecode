@@ -57,13 +57,22 @@ export default {
     ],
 
     getSubjects(id) {
-        const subjectSet = this.rows.find((subjectSet) => subjectSet.id == id);
+        try {
+            const subjectSet = this.rows.find((subjectSet) => subjectSet.id == id);
+            return subjects.filter((subject) => subjectSet.subjects.includes(subject.id));
+        } catch (error) {
+            console.log(error);
+            return [];
+        }
+    },
 
-        // id가 지정되지 않으면 기본 과목 목록을 반환
-        if (!subjectSet) {
+    getSubjectsOrDefaults(id) {
+        try {
+            const subjectSet = this.rows.find((subjectSet) => subjectSet.id == id);
+            return subjects.filter((subject) => subjectSet.subjects.includes(subject.id));
+        } catch (error) {
+            console.log(error);
             return subjects.filter(subject => subject.author == "AsomeIT");
         }
-
-        return subjects.filter((subject) => subjectSet.subjects.includes(subject.id));
     }
 };
