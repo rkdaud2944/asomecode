@@ -1,23 +1,18 @@
 <template>
-    <el-row style="background: #353543; width: 100%; padding: 10px">
-        <el-col :span="1"></el-col>
-        <el-col :span="10">
-            <el-button @click="sendCode('connect')" type="primary">connect</el-button>
-            <el-button @click="goTo('/')" type="primary">home</el-button>
-            <el-button @click="openUrl('/editor')" type="primary">editor</el-button>
-            <el-button @click="sendCode('stop')" type="danger">stop</el-button>
-        </el-col>
-        <el-col :span="2"></el-col>
-        <el-col :span="10">
-            <div style="float: right">
-                <el-button @click="sendCode('reboot')" type="danger">reboot</el-button>
-                <el-button @click="sendCode('format')" type="danger">format</el-button>
-                <el-button @click="sendCode('update')" type="primary">update</el-button>
-                <el-button @click="openUrl('/help')" type="success">HELP</el-button>
-            </div>
-        </el-col>
-        <el-col :span="1"></el-col>
-    </el-row>
+    <div class="row" style="background: #353543; width: 100%; padding: 10px">
+        <div class="col">
+            <q-btn @click="sendCode('connect')" color="primary" label="connect" class="q-ml-md" />
+            <q-btn @click="goTo('/')" color="secondary" label="home" class="q-ml-md" />
+            <q-btn @click="openUrl('/editor')" color="secondary" label="editor" class="q-ml-md" />
+            <q-btn @click="sendCode('stop')" color="deep-orange" label="stop" class="q-ml-md" />
+        </div>
+        <div class="on-right">
+            <q-btn @click="sendCode('reboot')" color="primary" label="reboot" class="q-ml-md" />
+            <q-btn @click="sendCode('format')" color="deep-orange" label="format" class="q-ml-md" />
+            <q-btn @click="sendCode('update')" color="deep-orange" label="update" class="q-ml-md" />
+            <q-btn @click="openUrl('/help')" color="deep-orange" label="HELP" class="q-ml-md" />
+        </div>
+    </div>
 </template>
 
 <script>
@@ -25,9 +20,5 @@ import VueBase from "@/VueBase";
 
 export default {
     mixins: [VueBase],
-
-    setup() {
-
-    },
 }
 </script>

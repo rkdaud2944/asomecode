@@ -1,8 +1,8 @@
 <template>
     <Header />
 
-    <div>
-        Subject Set Detail
+    <div class="q-pa-md">
+        Q&A
     </div>
 </template>
 

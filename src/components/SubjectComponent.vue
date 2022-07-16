@@ -1,13 +1,13 @@
 <template>
     <div class="main">
         <br>
-        <h3>{{ subject.title }}</h3>
+        <h5>{{ subject.title }}</h5>
 
         <p class="text">{{ subject.description }}</p>
         <br>
 
-        <div class="more-button">
-            <el-button @click="goTo('/lesson/list', subject)" class="more-button" type="success">더알아보기</el-button>
+        <div class="row flex flex-center">
+            <q-btn @click="goTo('/lesson/list', subject)" color="secondary" label="더알아보기" class="q-ml-md" />
         </div>
     </div>
 </template>
@@ -21,10 +21,6 @@ export default {
     ],
 
     props: ["subject"],
-
-    setup() {
-
-    },
 }
 </script>
 

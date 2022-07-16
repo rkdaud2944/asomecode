@@ -38,13 +38,23 @@
         <q-input filled v-model="title" label="제목" stack-label :dense="dense" />
         <br>
 
-        <q-input filled v-model="author" label="작성자" stack-label :dense="dense" />
+        <div class="row">
+            <div class="col q-pr-md">
+                <q-input filled v-model="author" label="작성자" stack-label :dense="dense" />
+            </div>
+            <div class="col q-pl-md">
+                <q-input filled v-model="password" label="비밀먼호" type="password" stack-label :dense="dense" />
+            </div>
+        </div>
         <br>
 
         <q-input v-model="text" filled type="textarea" />
         <br>
 
-        <q-btn @click="goTo('/help/subject/list')" color="primary" label="완료" />
+        <div class="row flex flex-center">
+            <q-btn @click="update" color="secondary" label="저장" class="q-ml-md" />
+            <q-btn @click="goBack" color="deep-orange" label="취소" class="q-ml-md" />
+        </div>
     </div>
 </template>
 
@@ -67,6 +77,7 @@ export default {
             keyword: "",
             title: "",
             author: "",
+            password: "",
             text: "",
         };
     },
@@ -94,6 +105,11 @@ export default {
                 sourceList.addRows(target);
                 targetList.removeRows(target);
             }
+        },
+
+        update() {
+            // TODO: 업데이트 하기
+            this.goBack();
         },
     },
 };

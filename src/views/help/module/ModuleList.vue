@@ -1,8 +1,8 @@
 <template>
     <Header />
 
-    <div>
-        Subject Detail
+    <div class="q-pa-md">
+        Module 라이브러리
     </div>
 </template>
 

@@ -1,11 +1,11 @@
 <template>
-    <el-tabs type="border-card" v-model="tabName" @tab-click="onTabClick">
-        <el-tab-pane label="pin">핀 라이브러리</el-tab-pane>
-        <el-tab-pane label="module">모듈 라이브러리</el-tab-pane>
-        <el-tab-pane label="qna">Q&A</el-tab-pane>
-        <el-tab-pane label="subject">커스텀 과목</el-tab-pane>
-        <el-tab-pane label="subject-set">커스텀 과목 세트</el-tab-pane>
-    </el-tabs>
+    <q-tabs @click="onTabClick" @update:model-value="onTabUpdated" v-model="tabName" indicator-color="yellow" class="bg-primary text-white shadow-2 q-mb-md">
+        <q-tab name="pin" icon="pin" label="핀 라이브러리" />
+        <q-tab name="module" icon="view_module" label="모듈 라이브러리" />
+        <q-tab name="qna" icon="question_mark" label="Q&A" />
+        <q-tab name="subject" icon="list" label="커스텀 과목" />
+        <q-tab name="subject-set" icon="workspaces_filled" label="커스텀 과목 세트" />
+    </q-tabs>
 </template>
 
 <script>
@@ -16,20 +16,28 @@ export default {
 
     data() {
         return {
-            tabName: 'pin',
+            tabName: '',
         }
     },
 
     mounted() {
-        // TODO: 오류 발생
-        // const names = this.$route.path.split('/');
-        // this.tabName = names[2];
-        // console.log(names, this.tabName);
+        this.tabName = this.getTabNameFromPath();
     },
 
     methods: {
-        onTabClick(tab) {
-            this.goTo(`/help/${tab.props.label}/list`);
+        onTabUpdated(tab) {
+            this.goTo(`/help/${tab}/list`);
+        },
+
+        onTabClick() {
+            if (this.tabName == this.getTabNameFromPath()) {
+                this.goTo(`/help/${this.tabName}/list`);
+            }
+        },
+
+        getTabNameFromPath() {
+            const names = this.$route.path.split('/');
+            return names[2];
         },
     },
 }
