@@ -2,9 +2,11 @@
     <Header />
     <br />
 
-    <el-row>
-        <w-input class="ma3" label="검색어를 입력하세요" label-position="inside" outline inner-icon-left="wi-search"> </w-input>
-    </el-row>
+    <q-input class="q-ma-md" color="teal" filled v-model="keyword" label="검색어">
+        <template v-slot:prepend>
+            <q-icon name="search" />
+        </template>
+    </q-input>
     <br />
 
     <el-row class="ma3">
@@ -29,10 +31,13 @@
         </el-col>
     </el-row>
 
-    <div class="ma6">
-        <w-input label="제목"></w-input><br>
-        <w-textarea outline>설명</w-textarea><br>
-        <w-button @click="goTo('/help/subject/list')" bg-color="primary" color="success-light2">완료</w-button>
+    <div class="q-ma-md">
+        <q-input filled v-model="title" label="제목" stack-label :dense="dense" />
+        <br>
+        <q-input v-model="text" label="내용" filled type="textarea" />
+        <br>
+
+        <q-btn @click="goTo('/help/subject/list')" color="primary" label="완료" />
     </div>
 </template>
 
@@ -52,6 +57,8 @@ export default {
     data() {
         return {
             keyword: "",
+            title: "",
+            text: "",
         };
     },
 
