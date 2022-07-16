@@ -53,7 +53,7 @@ const routes = [
     },
     {
         path: '/board/create',
-        component: () => import('../views/board/CreateBoard.vue')
+        component: () => import('../views/board/CreateArticle.vue')
     },
 ]
 
