@@ -6,7 +6,7 @@
         <el-col :span="20">
             <el-table
                 @row-click="onSubjectClick"
-                :data="subjects"
+                :data="subjectSet"
                 style="width: 100%"
             >
                 <el-table-column prop="id" label="id" width="80"></el-table-column>
@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import subjects from '@/data/subjects';
+import subjectSet from '@/data/subject-sets';
 import Header from '@/components/HeaderHelp.vue';
 
 export default {
@@ -44,7 +44,7 @@ export default {
             rowCount: 1000,
             pageSize: process.env.VUE_APP_PAGE_SIZE,
             currentPage: 1,
-            subjects: subjects,
+            subjectSet: subjectSet,
         }
     },
 
@@ -56,7 +56,7 @@ export default {
 
     methods: {
         onSubjectClick(row) {
-            this.$router.push({path: '/help/subject/detail', query: row});
+            this.$router.push({path: '/help/subject-set/detail', query: row});
         },
 
         onPageChanged(page) {
@@ -64,7 +64,7 @@ export default {
         },
 
         onWriteButtonClick() {
-            this.$router.push({path: '/help/subject/write'});
+            this.$router.push({path: '/help/subject-set/write'});
         },
     }
 }

@@ -2,7 +2,6 @@
     <div class="main">
         <br>
         <h3>{{ subject.title }}</h3>
-        <br>
 
         <p class="text">{{ subject.description }}</p>
         <br>
@@ -32,7 +31,7 @@ export default {
 <style scoped>
 .main {
     width: 100%;
-    height: 300px;
+    height: 320px;
     background: white;
     text-align: center;
     position : relative;
