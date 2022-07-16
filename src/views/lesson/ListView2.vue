@@ -1,13 +1,9 @@
 <template>
     <q-layout view="hHh LpR fff">
         <q-header style="top: 52px;" class="bg-primary text-white" height-hint="98">
-            <q-toolbar>
-                <q-toolbar-title>
-                    <q-avatar>
-                        <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
-                    </q-avatar>
-                    게시판
-                </q-toolbar-title>
+            <q-toolbar style="height: 65px;">
+                <img src="/images/common/logo.png">
+                <q-toolbar-title>과목 상세</q-toolbar-title>
             </q-toolbar>
         </q-header>
 

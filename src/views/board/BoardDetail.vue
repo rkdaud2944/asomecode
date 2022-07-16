@@ -1,7 +1,6 @@
 <template>
     <q-layout view="hHh LpR fff">
-
-        <q-header class="bg-primary text-white" height-hint="98">
+        <q-header style="top: 52px;" class="bg-primary text-white" height-hint="98">
             <q-toolbar>
                 <q-toolbar-title>
                     <q-avatar>
@@ -10,10 +9,9 @@
                     게시판 상세
                 </q-toolbar-title>
             </q-toolbar>
-
         </q-header>
 
-        <q-page-container style="margin: 0px 100px 0px 100px;">
+        <q-page-container style="margin: 10px 100px 0px 100px;">
             <q-btn color="primary" label="목록으로" @click="goBack" />
 
             <div class="row content-header">

@@ -1,7 +1,6 @@
 <template>
     <q-layout view="hHh LpR fff">
-
-        <q-header class="bg-primary text-white" height-hint="98">
+        <q-header style="top: 52px;" class="bg-primary text-white" height-hint="98">
             <q-toolbar>
                 <q-toolbar-title>
                     <q-avatar>
@@ -12,7 +11,7 @@
             </q-toolbar>
         </q-header>
 
-        <q-page-container style="margin: 0px 100px 0px 100px;">
+        <q-page-container style="margin: 10px 100px 0px 100px;">
             <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
                 <q-input filled v-model="writer" label="작성자" />
                 <q-input filled v-model="password" type="password" label="비밀번호" />
