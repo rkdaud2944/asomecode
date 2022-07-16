@@ -34,7 +34,7 @@
     <div class="q-ma-md">
         <q-input filled v-model="title" label="제목" stack-label :dense="dense" />
         <br>
-        <q-input v-model="text" label="내용" filled type="textarea" />
+        <q-input v-model="text" filled type="textarea" />
         <br>
 
         <q-btn @click="goTo('/help/subject/list')" color="primary" label="완료" />

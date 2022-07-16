@@ -20,20 +20,14 @@
 
     <br>
     <div class="write-button-bar">
-        <el-button @click="onWriteButtonClick" type="primary">글쓰기</el-button>
+        <q-btn @click="onWriteButtonClick" color="primary" label="글쓰기" />
     </div>
 
     <br>
-    <el-row class="pagination">
-        <el-pagination
-            background
-            layout="prev, pager, next"
-            :total="rowCount"
-            :page-size="pageSize"
-            :page-count="pageCount"
-            :current-page="currentPage"
-            @current-change="onChangeCurrentPage" />
-    </el-row>
+    <div class="q-pa-lg flex flex-center">
+        <q-pagination @update:model-value="onPageChanged" v-model="currentPage" :max="pageCount" :max-pages="10"
+            boundary-numbers color="purple" />
+    </div>
 </template>
 
 <script>
@@ -93,9 +87,10 @@ export default {
             this.$router.push({path: '/help/subject/detail', query: row});
         },
 
-        onChangeCurrentPage(page) {
+        onPageChanged(page) {
             console.log(page);
         },
+
         onWriteButtonClick() {
             this.$router.push({path: '/help/subject/write'});
         },
