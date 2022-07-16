@@ -20,8 +20,10 @@
     </div>
 
     <div class="row">
-        <div class="col q-ma-md" v-for="(subject, index) in subjects" :key="index">
-            <Subject :subject="subject" />
+        <div class="col-3" v-for="(subject, index) in subjects" :key="index">
+            <div class="q-ma-md">
+                <Subject :subject="subject" />
+            </div>
         </div>
     </div>
 </template>
