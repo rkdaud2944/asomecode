@@ -24,6 +24,7 @@
     "swiper": "^8.2.6",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
+    "vue3-ace-editor": "^2.2.2",
     "vuedraggable": "^4.1.0",
     "yarn": "^1.22.19"
   },

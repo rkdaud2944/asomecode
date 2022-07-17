@@ -6,6 +6,12 @@ const routes = [
         component: () => import('../views/HomeView.vue')
     },
     {
+        path: '/editor',
+        component: () => import('../views/EditorView.vue')
+    },
+
+    // lesson
+    {
         path: '/lesson/list',
         props: true,
         component: () => import('../views/lesson/LessonList.vue')
@@ -14,6 +20,8 @@ const routes = [
         path: '/lesson/detail/:id',
         component: () => import('../views/lesson/LessonDetail.vue')
     },
+
+    // help 기타
     {
         path: '/help',
         component: () => import('../views/help/pin/PinList.vue')
