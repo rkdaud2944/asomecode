@@ -1,40 +1,26 @@
 <template>
     <Header />
 
-    <div class="q-pa-md">
-        <q-table @row-click="onRowClick" :rows="subjects" :columns="columns" row-key="id" hide-bottom />
+    <div class="q-pa-sd">
+        <QuasarGrid ref="grid" :rowKey="id" @onPageChanged="onPageChanged" @onRowClick="onRowClick" />
         <br>
 
         <br>
         <div class="row flex flex-center">
             <q-btn @click="onWriteButtonClick" color="primary" label="글쓰기" />
         </div>
-
-        <br>
-        <div class="q-pa-lg flex flex-center">
-            <q-pagination @update:model-value="onPageChanged" v-model="currentPage" :max="pageCount" :max-pages="10"
-                boundary-numbers color="purple" />
-        </div>
     </div>
 </template>
 
 <script>
 import subjects from '@/data/subjects';
+import userColumns from '@/assets/quasar/table-columns';
 import Header from '@/components/HeaderHelp.vue';
+import QuasarGrid from '@/components/QuasarGrid';
 
 export default {
     components: {
-        Header,
-    },
-
-    data() {
-        return {
-            columns: columns,
-            rowCount: 1000,
-            pageSize: process.env.VUE_APP_PAGE_SIZE,
-            currentPage: 1,
-            subjects: subjects,
-        }
+        Header, QuasarGrid,
     },
 
     computed: {
@@ -43,13 +29,19 @@ export default {
         }
     },
 
-    methods: {
-        onRowClick(e, row) {
-            this.$router.push({ path: '/help/subject/detail', query: row });
-        },
+    mounted() {
+        this.$refs.grid.setColumns(userColumns.user);
+        this.onPageChanged(1);
+    },
 
+    methods: {
         onPageChanged(page) {
             console.log(page);
+            this.$refs.grid.setRows(subjects, 1000);
+        },
+
+        onRowClick(e, row) {
+            this.$router.push({ path: '/help/subject/detail', query: row });
         },
 
         onWriteButtonClick() {
@@ -57,12 +49,4 @@ export default {
         },
     }
 }
-
-const columns = [
-    { name: 'id', align: 'center', label: 'id', field: 'id' },
-    { name: 'title', align: 'left', label: '제목', field: 'title' },
-    { name: 'author', align: 'center', label: '작성자', field: 'author' },
-    { name: 'created_at', align: 'center', label: '작성일', field: 'created_at' },
-    { name: 'views', align: 'center', label: '조회수', field: 'views' },
-];
 </script>
