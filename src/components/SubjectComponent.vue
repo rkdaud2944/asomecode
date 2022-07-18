@@ -1,5 +1,6 @@
 <template>
-    <div class="main">
+    <!-- <div class="main test"> -->
+    <div class="main test" v-bind:id="'component'+subject.id">
         <br>
         <h3>{{ subject.title }}</h3>
         <br>
@@ -25,6 +26,15 @@ export default {
 
     setup() {
 
+    },
+
+    beforeMount(){
+        var componentColorMap = new Map();
+        componentColorMap.set(1,'red')
+        componentColorMap.set(2,'yellow')
+        componentColorMap.set(3,'blue')
+        componentColorMap.set(4,'green')
+        console.log("맵테스트 : "+componentColorMap.get(1))
     },
 }
 </script>
@@ -53,4 +63,23 @@ export default {
     width: 100px;
     left: calc(50% - 50px);
 }
+.test{
+    background-color: rgb(255, 102, 51);
+}
+#component1{
+    background-color: rgb(250, 190, 0);
+}
+#component2{
+    background-color: rgb(0, 153, 204);
+}
+#component3{
+    background-color: rgb(51, 204, 51);
+}
+#component4{
+    background-color: rgb(171, 101, 236);
+}
+#component5{
+    background-color: rgb(171, 101, 236);
+}
+
 </style>

@@ -1,7 +1,7 @@
 <template>
     <el-row class="header">
         <el-col :span="10">
-            <img src="/images/common/logo_con.jpg" />
+            <img src="/images/common/logo2.png" style="margin-left: 25px">
         </el-col>
         <el-col :span="13">
             <div class="header-button-bar">
@@ -22,12 +22,15 @@
             <br>흥미있는 놀잇감형 교구를 활용해 어렵지 않게 배울 수 있습니다.
         </p>
     </div>
+<div class="main-page">
 
     <el-row class="subject-list">
         <el-col class="subject" :span="6" v-for="(subject, index) in subjects" :key="index">
             <Subject :subject="subject" />
         </el-col>
     </el-row>
+
+</div>
 </template>
 
 <script>
@@ -87,9 +90,8 @@ export default {
 <style scoped>
 .header {
     width: 100%;
-    background: rgb(3, 84, 87);
-    margin-top: 10px;
-    padding: 4px;
+    background: rgb(255, 255, 255);
+    padding: 20px;
 }
 .header-button-bar {
     line-height: 75px;
@@ -97,9 +99,11 @@ export default {
     float: right;
 }
 .what-is-asomeit {
-    background: #D1DCE6;
-    margin-top: 10px;
-    padding: 12px;
+    background: rgba(209, 220, 230, 0.99);
+    background-image: radial-gradient(rgb(224, 230, 235) 19%, transparent 0), radial-gradient(rgb(224, 230, 235) 19%, transparent 0);
+    background-position: 1,10px;
+     background-size: 15px 15px;
+    padding: 40px;
     text-align: center;
 }
 .what-is-asometext {
@@ -109,13 +113,28 @@ export default {
     line-height: 25px;
 }
 .subject-list {
-    width: 100%;
-    background: rgb(31, 63, 1);
-    margin-top: 10px;
-    padding: 4px;
+    width: 90%;
+    height: 85%;
+    background: rgb(255,255,255);
+    margin-top: 5%;
     text-align: center;
+    margin-right: auto;
+    margin-left: auto;
 }
 .subject {
-    padding: 10px;
+    padding: 5px;
+    height: 380px;
+    background-color: rgb(255, 255, 255);
+}
+.subject-in{
+    height:95%;
+}
+.main-page{
+    float: left;
+    padding: 0%;
+    margin : 0px;
+    background-color: rgb(224, 230, 235);
+    width: 1888px;
+    height: 1000px;
 }
 </style>
