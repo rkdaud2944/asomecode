@@ -1,16 +1,16 @@
 <template>
     <el-row class="header">
         <el-col :span="10">
-        <a href="">
+        <a href="#">
             <img src="/images/common/logo2.png" style="padding: 10px; width: 186px;">
             </a>
         </el-col>
         <el-col :span="13">
             <div class="header-button-bar">
-                <a class="notice" href="{%ulr 'asdfsadf%'}"></a>
-                <a class="libaray" href="{%ulr 'asdfsadf%'}"></a>
-                <a class="community" href="{%ulr 'asdfsadf%'}"></a>
-                <a class="faq" href="{%ulr 'asdfsadf%'}"></a>
+                <a class="notice" href="#"></a>
+                <a class="libaray" href="#"></a>
+                <a class="community" href="#"></a>
+                <a class="faq" href="#"></a>
             </div>
         </el-col>
         <el-col :span="1"></el-col>
