@@ -1,7 +1,20 @@
 <template>
     <Header />
 
-    <div class="q-pa-sd">
+    <div class="row q-pa-md">
+        <div class="col q-pr-md">
+            <q-select filled v-model="model" :options="options" label="Filled" />
+        </div>
+        <div class="col q-pl-md">
+            <q-input color="teal" filled v-model="keyword" label="검색어">
+                <template v-slot:prepend>
+                    <q-icon name="search" />
+                </template>
+            </q-input>
+        </div>
+    </div>
+
+    <div class="q-pa-md">
         <QuasarGrid ref="grid" :rowKey="id" @onPageChanged="onPageChanged" @onRowClick="onRowClick" />
 
         <br>

@@ -1,7 +1,8 @@
 <template>
-    <div class="q-pa-md">
+    <div>
         <q-table @row-click="onRowClick" :rows="rows" :columns="columns" row-key="rowKey" :pagination="paginationOption" hide-bottom />
     </div>
+    <br>
 
     <div class="flex flex-center">
         <q-pagination @update:model-value="onPageChanged" v-model="currentPage" :max="pageCount" :max-pages="10"
