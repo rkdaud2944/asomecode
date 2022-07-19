@@ -12,8 +12,9 @@
         <el-col class="left " :span="6">
            <p class="test2"> {{ $route.query.title }}</p>
            <p class="test3">{{ $route.query.title_eng }}</p>
-           <img src="../../../public/images/common/asomebot.png" style="margin-left: 230px; margin-top: 65px; object-fit: cover;">
-            <!-- {{ $route.query}} -->
+           <div>
+           <img src="../../../public/images/common/asomebot.png">
+           </div>
         </el-col>
         <el-col :span="1"></el-col>
         <el-col :span="17">

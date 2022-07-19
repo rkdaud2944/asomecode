@@ -1,17 +1,22 @@
 <template>
     <!-- <div class="main test"> -->
     <div class="main test" v-bind:id="'component'+subject.id">
-        <br>
-        <h3>{{ subject.title }}</h3>
-        <br>
+    
+            <img :src="subject.images" class="images">
+        
+            <br>
+        <p class="h3_style">{{ subject.title }}</p>
+    
+        <p class="eng_text">{{ subject.title_eng }}</p>
+
 
         <p class="text">{{ subject.description }}</p>
         <br>
 
-        <div class="more-button">
-            <el-button @click="goTo('/lesson/list', subject)" class="more-button" type="success">더알아보기</el-button>
+            <div @click="goTo('/lesson/list', subject)"
+            class="more-button" ><p style="color:white; font-size: 14px; line-height: 3px ;">더 알아보기 <b>〉</b></p> </div>
         </div>
-    </div>
+
 </template>
 
 <script>
@@ -42,8 +47,7 @@ export default {
 <style scoped>
 .main {
     width: 100%;
-    height: 300px;
-    background: white;
+    height: 400px;
     text-align: center;
     position : relative;
 }
@@ -56,12 +60,20 @@ export default {
 .text {
     margin-left: 10px;
     margin-right: 10px;
+    line-height: 24px;
+    font-size:14px;
+    font-family: Helvetica Neue;
 }
 .more-button {
-    position : absolute;
-    bottom: 20px;
-    width: 100px;
-    left: calc(50% - 50px);
+    margin-top :30px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 170px;
+    height: 30px;
+    border: 2px solid white;
+    border-radius: 18px;
+    cursor: pointer;
+    
 }
 .test{
     background-color: rgb(255, 102, 51);
@@ -76,10 +88,23 @@ export default {
     background-color: rgb(51, 204, 51);
 }
 #component4{
-    background-color: rgb(171, 101, 236);
+    background-color: rgb(155, 98, 185);
 }
 #component5{
-    background-color: rgb(171, 101, 236);
+    background-color: rgb(155, 98, 185);
 }
 
+.h3_style{
+    color: white;
+    font-size : 40px;
+    margin: 0px;
+}
+.images{
+    display:inline-block; margin:auto; margin-top:-40px; width:122px; height:121px;
+}
+.eng_text{
+    color: rgba(0,0,0,0.7);
+    font-size : 15px;
+    margin: 5px;
+}
 </style>
