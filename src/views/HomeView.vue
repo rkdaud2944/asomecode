@@ -100,7 +100,7 @@ export default {
 .header {
     width: 100%;
     background: rgb(255, 255, 255);
-    padding: 20px;
+    padding: 15px;
 }
 .header-button-bar {
     line-height: 75px;

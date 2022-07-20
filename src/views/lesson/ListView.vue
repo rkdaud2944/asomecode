@@ -1,7 +1,7 @@
 <template>
     <el-row class="header">
         <el-col :span="10">
-            <img src="/images/common/logom.png" style="padding: 0px; margin: 6px; margin-left: 250px; width: 150px; height: 55px;">
+            <img src="/images/common/logom.png" style="padding: 0px; margin: 6px; margin-left: 200px; width: 120px; height: 45px;">
         </el-col>
         <el-col :span="13">
         </el-col>
@@ -12,9 +12,8 @@
         <el-col class="left " :span="6">
            <p class="test2"> {{ $route.query.title }}</p>
            <p class="test3">{{ $route.query.title_eng }}</p>
-           <div>
-           <img src="../../../public/images/common/asomebot.png">
-           </div>
+           <img src="../../../public/images/common/asomebot.png" style="position:absolute ; right:20px; bottom: -70px;">
+
         </el-col>
         <el-col :span="1"></el-col>
         <el-col :span="17">
@@ -88,6 +87,7 @@ export default {
      background-size: 15px 15px;
     /* margin-top: 10px; */
     padding: 4px;
+    position: relative;
 }
 .list-header {
     margin-top: 20px;

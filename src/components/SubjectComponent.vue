@@ -65,14 +65,16 @@ export default {
     font-family: Helvetica Neue;
 }
 .more-button {
-    margin-top :30px;
-    margin-right: auto;
-    margin-left: auto;
+    bottom: 40px;
+    right: 0;
+    left: 0;
     width: 170px;
     height: 30px;
     border: 2px solid white;
     border-radius: 18px;
     cursor: pointer;
+    position: absolute;
+    margin : auto;
     
 }
 .test{
