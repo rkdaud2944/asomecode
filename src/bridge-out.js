@@ -49,6 +49,16 @@ export default {
     },
 
     /**
+     * 웹을 초키화 하라고 네이티브로 메시지를 전달한다.
+     */
+    refresh() {
+        const msg = {
+            code: "refresh",
+        };
+        this.post(msg);
+    },
+
+    /**
      * 주어진 url로 메인 웹뷰를 이동한다.
      * 상단에 되돌아가기 버튼을 클릭하면 return url로 복귀한다.
      * @param url 이동할 url

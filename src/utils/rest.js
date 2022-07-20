@@ -8,16 +8,16 @@ const instance = axios.create({
     baseURL: process.env.VUE_APP_API_BASEURL,
 });
 
-instance.interceptors.request.use(function (config) {  
+instance.interceptors.request.use(function (config) {
     if (config["method"] === "get") {
         etc.loading = true;
     }
 
-    if (store.state.main.token !== null) {
-        config["headers"] = {
-            Authorization: `Bearer ${store.state.main.token}`,
-        };
-    }
+    // if (store.state.main.token !== null) {
+    //     config["headers"] = {
+    //         Authorization: `Bearer ${store.state.main.token}`,
+    //     };
+    // }
     return config;
 });
 

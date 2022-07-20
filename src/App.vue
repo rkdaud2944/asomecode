@@ -6,10 +6,9 @@
 </template>
 
 <script>
-import "element-plus/dist/index.css";
-import globals from './globals'
-import {useMemberStore} from '@/store/member'
-import HeaderMain from '@/components/HeaderMain.vue'
+import globals from "./globals";
+import { useMemberStore } from "@/store/member";
+import HeaderMain from "@/components/HeaderMain.vue";
 
 export default {
     components: {
@@ -19,7 +18,7 @@ export default {
     data() {
         return {
             showHeaderMain: false,
-        }
+        };
     },
 
     watch: {
@@ -27,21 +26,21 @@ export default {
             globals.currentPath = to.path;
 
             this.showHeaderMain = true;
-            const skipHeaderMains = ['/editor', '/help'];
-            skipHeaderMains.forEach(path => {
+            const skipHeaderMains = ["/editor", "/help"];
+            skipHeaderMains.forEach((path) => {
                 if (to.path.startsWith(path)) {
                     this.showHeaderMain = false;
                 }
             });
-        }
+        },
     },
 
     setup() {
         const memberStore = useMemberStore();
 
         return {
-            memberStore
-        }
-    }
-}
+            memberStore,
+        };
+    },
+};
 </script>

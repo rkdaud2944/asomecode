@@ -1,22 +1,15 @@
 <template>
-    <!-- <div class="main test"> -->
-    <div class="main test" v-bind:id="'component'+subject.id">
-    
-            <img :src="subject.images" class="images">
-        
-            <br>
-        <p class="h3_style">{{ subject.title }}</p>
-    
-        <p class="eng_text">{{ subject.title_eng }}</p>
-
+    <div class="main">
+        <br>
+        <h5>{{ subject.title }}</h5>
 
         <p class="text">{{ subject.description }}</p>
         <br>
 
-            <div @click="goTo('/lesson/list', subject)"
-            class="more-button" ><p style="color:white; font-size: 14px; line-height: 3px ;">더 알아보기 <b>〉</b></p> </div>
+        <div class="row flex flex-center">
+            <q-btn @click="goTo('/lesson/list', subject)" color="secondary" label="더알아보기" class="q-ml-md" />
         </div>
-
+    </div>
 </template>
 
 <script>
@@ -28,85 +21,19 @@ export default {
     ],
 
     props: ["subject"],
-
-    setup() {
-
-    },
-
-    beforeMount(){
-        var componentColorMap = new Map();
-        componentColorMap.set(1,'red')
-        componentColorMap.set(2,'yellow')
-        componentColorMap.set(3,'blue')
-        componentColorMap.set(4,'green')
-        console.log("맵테스트 : "+componentColorMap.get(1))
-    },
 }
 </script>
 
 <style scoped>
 .main {
     width: 100%;
-    height: 400px;
+    height: 320px;
+    background: rgb(237, 225, 138);
     text-align: center;
     position : relative;
-}
-.icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 30px;
-    background: black;
 }
 .text {
     margin-left: 10px;
     margin-right: 10px;
-    line-height: 24px;
-    font-size:14px;
-    font-family: Helvetica Neue;
-}
-.more-button {
-    bottom: 40px;
-    right: 0;
-    left: 0;
-    width: 170px;
-    height: 30px;
-    border: 2px solid white;
-    border-radius: 18px;
-    cursor: pointer;
-    position: absolute;
-    margin : auto;
-    
-}
-.test{
-    background-color: rgb(255, 102, 51);
-}
-#component1{
-    background-color: rgb(250, 190, 0);
-}
-#component2{
-    background-color: rgb(0, 153, 204);
-}
-#component3{
-    background-color: rgb(51, 204, 51);
-}
-#component4{
-    background-color: rgb(155, 98, 185);
-}
-#component5{
-    background-color: rgb(155, 98, 185);
-}
-
-.h3_style{
-    color: white;
-    font-size : 40px;
-    margin: 0px;
-}
-.images{
-    display:inline-block; margin:auto; margin-top:-40px; width:122px; height:121px;
-}
-.eng_text{
-    color: rgba(0,0,0,0.7);
-    font-size : 15px;
-    margin: 5px;
 }
 </style>

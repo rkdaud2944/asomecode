@@ -7,23 +7,24 @@
     "prod": "vue-cli-service serve --mode prod",
     "build-dev": "vue-cli-service build --mode dev",
     "build-prod": "vue-cli-service build --mode prod",
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@quasar/extras": "^1.0.0",
     "axios": "^0.27.2",
     "core-js": "^3.8.3",
-    "element-plus": "^2.2.8",
     "mitt": "^3.0.0",
     "moment": "^2.29.3",
     "pinia": "^2.0.14",
+    "quasar": "^2.0.0",
     "swiper": "^8.2.6",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
-    "vuedraggable": "^4.1.0"
+    "vue3-ace-editor": "^2.2.2",
+    "vuedraggable": "^4.1.0",
+    "yarn": "^1.22.19"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -41,7 +42,8 @@
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
     "jest": "^27.0.5",
-    "sass": "^1.32.7",
-    "sass-loader": "^12.0.0"
+    "sass": "1.32.12",
+    "sass-loader": "^12.0.0",
+    "vue-cli-plugin-quasar": "~5.0.1"
   }
 }
