@@ -15,7 +15,9 @@
     <!-- <div class="main test"> -->
     <div class="main subject-color" v-bind:id="'component'+subject.id">
     
-            <img :src="subject.images" class="images">
+            <a href="#">
+                <img :src="subject.images" class="images">
+            </a>
         
             <br>
         <p class="h3_style">{{ subject.title }}</p>
@@ -82,7 +84,7 @@ setup() {
     bottom: 40px;
     right: 0;
     left: 0;
-    width: 170px;
+    width: 60%;
     height: 30px;
     border: 2px solid white;
     border-radius: 18px;

@@ -1,6 +1,8 @@
 <template>
     <div class="header">
-        <img src="/images/common/logom.png" style="padding: 0px; margin: 8px; margin-left: 200px; width: 120px; height: 45px;"/>
+        <a href="#">
+            <img src="/images/common/logom.png" style="margin: 10px; margin-left: 200px; width: 120px; height: 45px;"/>
+        </a>
     </div>
 
     <div class="row q-pa-md" style="padding: 0px;">
@@ -10,16 +12,26 @@
             <h4 class="subject-in-title_eng">{{ subject.subTitle }}</h4>
             <img src="../../../public/images/common/asomebot.png" style="position:absolute ; right:20px; bottom: -70px;">
         </div>
+
         <div class="col-8">
             <div class="row list-header">
                 {{ subject.description }}
             </div>
         <div style="background-color:darkgray; height: 1px; width: 100%; margin-bottom:20px">
+
         </div>
             <div @click="goTo(`/lesson/detail/${lesson.id}`)" class="row" v-for="(lesson, index) in subject.lessons"
                 :key="index">
-                <div class="col-2 list-left rounded q-ma-sm q-pa-md flex flex-center">{{ index + 1 }}차시</div>
-                <div class="col-9 list-main rounded q-ma-sm q-pa-md">{{ lesson.title }}</div>
+
+                <div class="col-12 list-left rounded q-ma-sm q-pa-md" style="height: 80px; cursor: pointer;">
+                    
+                    <div style="background:white ; width: 10%; height: 100%; border-radius: 20px; display: inline-block !important; position: relative;">
+                    <p style="padding:0px; position: absolute; top:25%; left:20%; font-size: 20px;"><b>{{ index + 1 }}</b> 차시</p>
+                    </div>
+
+                    <p style="text-align:right; display: inline-block; position: relative; bottom: 40%; margin-left: 30px; font-size: 20px;">{{ lesson.title }}</p>
+                </div>
+                
             </div>
         </div>
     </div>
@@ -70,13 +82,15 @@ export default {
     margin-bottom: 15px;
 }
 .list-left {
-    background: #D3DCE6;
+    background:rgb(242,242,242);
+    
 }
 .list-main {
-    background: #D3DCE6;
+    background:rgb(242,242,242);
+    
 }
 .rounded {
-    border-radius: 10px;
+    border-radius: 30px;
 }
 .subject-in-title
 {
@@ -104,7 +118,7 @@ export default {
     background: rgba(255, 167, 101, 0.99);
     background-image: radial-gradient(rgb(255, 184, 131) 19%, transparent 0), radial-gradient(rgb(255, 184, 131) 19%, transparent 0);
     background-position: 1,10px;
-     background-size: 15px 15px;
+    background-size: 15px 15px;
     padding: 0px;
     position: relative;
     margin-right: 50px;

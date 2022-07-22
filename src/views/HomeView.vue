@@ -1,10 +1,12 @@
 <template>
     <div class="row q-pa-md">
-        <div class="col">
-            <img src="/images/common/logo2.png" style="margin-left: 70px; width: 186px;"/>
-            </div>
-        <div class="col" style="text-align: right; padding-right: 80px;">
-            <ImageButton :src="'/images/common/header_button_image/bt_notice.png'" />
+        <div>
+            
+            <a href="#"><img src="/images/common/logo2.png" class="img">
+            </a>
+        </div>
+        <div class="col menu">
+            <ImageButton :src="'/images/common/header_button_image/bt_notice.png'"/>
             <ImageButton :src="'/images/common/header_button_image/bt_library.png'" />
             <ImageButton :src="'/images/common/header_button_image/bt_community.png'" />
             <ImageButton :src="'/images/common/header_button_image/bt_faq.png'" />
@@ -13,7 +15,7 @@
 
     <div class="what-is-asomeit" style="height: 170px;">
         <img src="/images/korea/what_is_asomeit.png">
-        <p style="font-size: 18px;">
+        <p class="what-is-asomeit-font">
             SW 코딩교육을 통해 <b>논리적인 사고</b>와 <b>창의력</b>을 길러 줄 수 있는 프로그램으로
             <br>흥미있는 놀잇감형 교구를 활용해 어렵지 않게 배울 수 있습니다.
         </p>
@@ -28,6 +30,8 @@
             </div>
         </div>
     </div>
+
+    
 </template>
 
 <script>
@@ -50,25 +54,106 @@ export default {
 </script>
 
 <style scoped>
-.what-is-asomeit {
-    background: url(https://asomecode-web.s3.ap-northeast-2.amazonaws.com/asomecode-web-version/common/images/p1_back.gif);
-    margin-top: 10px;
-    padding: 20px;
-    text-align: center;
+@media (min-width: 791px){
+    .what-is-asomeit{
+        background: url(https://asomecode-web.s3.ap-northeast-2.amazonaws.com/asomecode-web-version/common/images/p1_back.gif);
+        margin-top: 10px;
+        padding: 20px;
+        text-align: center;
+    }
+    .subject{
+        margin:1px;
+        margin-bottom: 70px;
+        box-shadow:3px 3px 20px rgba(0,0,0,0.51);
+    }
+    .subject_box{
+        box-sizing: border-box;
+        
+    }
+    .test{
+        margin-top: 5%;
+        width: 18%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .what-is-asomeit-font{
+        font-size: 20px;
+        font-family: Helvetica Neue;
+        line-height: 34px;
+    }
+    .menu{
+        text-align: right;
+        margin-right:50px;
+    }
+    .img{
+        margin-left: 70px;
+        width: 186px;
+        
+    }
 }
-.subject{
-    margin:8px;
-    margin-bottom: 70px;
-    box-shadow:3px 3px 20px rgba(0,0,0,0.51);
+
+@media (min-width: 767px) and (max-width: 883px){
+    .what-is-asomeit-font{
+        font-size: 16px;
+        font-family: Helvetica Neue;
+        line-height: 24px;
+    }
+    .test{
+        margin-top: 5%;
+        width: 45%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .what-is-asomeit{
+        background: url(https://asomecode-web.s3.ap-northeast-2.amazonaws.com/asomecode-web-version/common/images/p1_back.gif);
+        margin-top: 10px;
+        padding: 20px;
+        text-align: center;
+    }
+    .menu{
+        text-align: center;
+        margin-right:0px;
+    }
+    .img{
+        display: none;
+    }
+    .subject{
+        margin:1px;
+        margin-bottom: 70px;
+        box-shadow:3px 3px 20px rgba(0,0,0,0.51);
+    }
 }
-.subject_box{
-    box-sizing: border-box;
-    
+
+@media (min-width: 100px) and (max-width: 767px){
+    .what-is-asomeit-font{
+        font-size: 16px;
+        font-family: Helvetica Neue;
+        line-height: 24px;
+    }
+    .test{
+        margin-top: 5%;
+        width: 95%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .what-is-asomeit{
+        background: url(https://asomecode-web.s3.ap-northeast-2.amazonaws.com/asomecode-web-version/common/images/p1_back.gif);
+        margin-top: 10px;
+        padding: 20px;
+        text-align: center;
+    }
+    .menu{
+        text-align: center;
+        margin-right:0px;
+    }
+    .img{
+        display: none;
+    }
+    .subject{
+        margin:1px;
+        margin-bottom: 70px;
+        box-shadow:3px 3px 20px rgba(0,0,0,0.51);
+    }
 }
-.test{
-    margin-top: 5%;
-    width: 18%;
-    margin-left: auto;
-    margin-right: auto;
-}
+
 </style>
