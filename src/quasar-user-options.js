@@ -1,10 +1,12 @@
-
+import { Dialog, Notify } from 'quasar'
 import './styles/quasar.sass'
 import '@quasar/extras/material-icons/material-icons.css'
+import langKo from 'quasar/lang/ko-KR'
 
-// To be used on app.use(Quasar, { ... })
 export default {
-  config: {},
-  plugins: {
-  }
+    config: {},
+    lang: langKo,
+    plugins: {
+        Dialog, Notify,
+    },
 }

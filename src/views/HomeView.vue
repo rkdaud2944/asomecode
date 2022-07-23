@@ -1,57 +1,47 @@
 <template>
-    <el-row class="header">
-        <el-col :span="10">
-            <img src="/images/common/logo2.png" />
-        </el-col>
-        <el-col :span="13">
-            <div class="header-button-bar">
-                <el-link :underline="false">
-                    <img class="header-button-image" :src="noticeImageSrc"
-                        @mouseover="noticeImageSrc = noticeImageSrc + '.over.png'"
-                        @mouseleave="noticeImageSrc = noticeImageSrc.replace('.over.png', '')" />
-                </el-link>
-                <el-link :underline="false">
-                    <img class="header-button-image" :src="libraryImageSrc"
-                        @mouseover="libraryImageSrc = libraryImageSrc + '.over.png'"
-                        @mouseleave="libraryImageSrc = libraryImageSrc.replace('.over.png', '')" />
-                </el-link>
-                <el-link :underline="false">
-                    <img class="header-button-image" :src="communityImageSrc"
-                        @mouseover="communityImageSrc = communityImageSrc + '.over.png'"
-                        @mouseleave="communityImageSrc = communityImageSrc.replace('.over.png', '')" />
-                </el-link>
-                <el-link :underline="false">
-                    <img class="header-button-image" :src="faqImageSrc"
-                        @mouseover="faqImageSrc = faqImageSrc + '.over.png'"
-                        @mouseleave="faqImageSrc = faqImageSrc.replace('.over.png', '')" />
-                </el-link>
-            </div>
-        </el-col>
-        <el-col :span="1"></el-col>
-    </el-row>
+    <div class="row q-pa-md">
+        <div>
+            
+            <a href="#"><img src="/images/common/logo2.png" class="img">
+            </a>
+        </div>
+        <div class="col menu">
+            <ImageButton :src="'/images/common/header_button_image/bt_notice.png'"/>
+            <ImageButton :src="'/images/common/header_button_image/bt_library.png'" />
+            <ImageButton :src="'/images/common/header_button_image/bt_community.png'" />
+            <ImageButton :src="'/images/common/header_button_image/bt_faq.png'" />
+        </div>
+    </div>
 
-    <div class="what-is-asomeit">
+    <div class="what-is-asomeit" style="height: 170px;">
         <img src="/images/korea/what_is_asomeit.png">
-        <p>
+        <p class="what-is-asomeit-font">
             SW 코딩교육을 통해 <b>논리적인 사고</b>와 <b>창의력</b>을 길러 줄 수 있는 프로그램으로
             <br>흥미있는 놀잇감형 교구를 활용해 어렵지 않게 배울 수 있습니다.
         </p>
     </div>
 
-    <el-row class="subject-list">
-        <el-col class="subject" :span="6" v-for="(subject, index) in subjects" :key="index">
-            <Subject :subject="subject" />
-        </el-col>
-    </el-row>
+    <div style="background:rgb(224,230,235);">
+        <div class="row subject_box">
+            <div class="col-3 test" v-for="(subject, index) in subjects" :key="index">
+                <div class="q-ma-md subject">
+                <Subject :subject="subject" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
 </template>
 
 <script>
 import subjectSets from '@/data/subject-sets';
+import ImageButton from '@/components/ImageButton.vue';
 import Subject from '@/components/SubjectComponent.vue'
 
 export default {
     components: {
-        Subject,
+        ImageButton, Subject,
     },
 
     setup() {
@@ -60,53 +50,110 @@ export default {
             subjects: subjectSets.getSubjectsOrDefaults(localStorage.getItem('selectedSubjectSetId')),
         }
     },
-
-    data() {
-        return {
-            noticeImageSrc: '/images/common/header_button_image/bt_notice.png',
-            libraryImageSrc: '/images/common/header_button_image/bt_library.png',
-            communityImageSrc: '/images/common/header_button_image/bt_community.png',
-            faqImageSrc: '/images/common/header_button_image/bt_faq.png',
-        }
-    },
 }
 </script>
 
 <style scoped>
-.header {
-    width: 100%;
-    background: rgb(255, 255, 255);
-    margin-top: 10px;
-    padding: 4px;
+@media (min-width: 791px){
+    .what-is-asomeit{
+        background: url(https://asomecode-web.s3.ap-northeast-2.amazonaws.com/asomecode-web-version/common/images/p1_back.gif);
+        margin-top: 10px;
+        padding: 20px;
+        text-align: center;
+    }
+    .subject{
+        margin:1px;
+        margin-bottom: 70px;
+        box-shadow:3px 3px 20px rgba(0,0,0,0.51);
+    }
+    .subject_box{
+        box-sizing: border-box;
+        
+    }
+    .test{
+        margin-top: 5%;
+        width: 18%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .what-is-asomeit-font{
+        font-size: 20px;
+        font-family: Helvetica Neue;
+        line-height: 34px;
+    }
+    .menu{
+        text-align: right;
+        margin-right:50px;
+    }
+    .img{
+        margin-left: 70px;
+        width: 186px;
+        
+    }
 }
 
-.header-button-bar {
-    line-height: 75px;
-    text-align: center;
-    float: right;
+@media (min-width: 767px) and (max-width: 883px){
+    .what-is-asomeit-font{
+        font-size: 16px;
+        font-family: Helvetica Neue;
+        line-height: 24px;
+    }
+    .test{
+        margin-top: 5%;
+        width: 45%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .what-is-asomeit{
+        background: url(https://asomecode-web.s3.ap-northeast-2.amazonaws.com/asomecode-web-version/common/images/p1_back.gif);
+        margin-top: 10px;
+        padding: 20px;
+        text-align: center;
+    }
+    .menu{
+        text-align: center;
+        margin-right:0px;
+    }
+    .img{
+        display: none;
+    }
+    .subject{
+        margin:1px;
+        margin-bottom: 70px;
+        box-shadow:3px 3px 20px rgba(0,0,0,0.51);
+    }
 }
 
-.header-button-image {
-    width: 82px;
-    height: 79px;
+@media (min-width: 100px) and (max-width: 767px){
+    .what-is-asomeit-font{
+        font-size: 16px;
+        font-family: Helvetica Neue;
+        line-height: 24px;
+    }
+    .test{
+        margin-top: 5%;
+        width: 95%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .what-is-asomeit{
+        background: url(https://asomecode-web.s3.ap-northeast-2.amazonaws.com/asomecode-web-version/common/images/p1_back.gif);
+        margin-top: 10px;
+        padding: 20px;
+        text-align: center;
+    }
+    .menu{
+        text-align: center;
+        margin-right:0px;
+    }
+    .img{
+        display: none;
+    }
+    .subject{
+        margin:1px;
+        margin-bottom: 70px;
+        box-shadow:3px 3px 20px rgba(0,0,0,0.51);
+    }
 }
 
-.what-is-asomeit {
-    background: url(https://asomecode-web.s3.ap-northeast-2.amazonaws.com/asomecode-web-version/common/images/p1_back.gif);
-    margin-top: 10px;
-    padding: 20px;
-    text-align: center;
-}
-
-.subject-list {
-    width: 100%;
-    background: rgb(31, 63, 1);
-    margin-top: 10px;
-    padding: 4px;
-    text-align: center;
-}
-
-.subject {
-    padding: 10px;
-}
 </style>

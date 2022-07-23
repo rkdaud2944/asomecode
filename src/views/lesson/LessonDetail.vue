@@ -1,13 +1,13 @@
 <template>
-    <el-row>
-        <el-col :span="8">
-            목차
-        </el-col>
+    <div class="row">
+        <div class="col-3">
+            <h4  class="flex flex-center">목차</h4>
+        </div>
 
-        <el-col :span="16">
+        <div class="col-9">
             <div v-html="content"></div>
-        </el-col>
-    </el-row>
+        </div>
+    </div>
 </template>
 
 <script>

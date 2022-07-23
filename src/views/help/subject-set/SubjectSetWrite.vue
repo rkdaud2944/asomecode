@@ -16,16 +16,14 @@
             </div>
 
             <div class="col">
-                <div class="button-bar">
-                    <el-button @click="addLessons" type="primary">추가</el-button>
+                <div class="row flex flex-center">
+                    <q-btn @click="addSets" color="primary" label="추가" class="q-ml-md" />
                 </div>
-                <br />
-                <br />
+                <br>
 
-                <div class="button-bar">
-                    <el-button @click="deleteLessons" type="danger">삭제</el-button>
+                <div class="row flex flex-center">
+                    <q-btn @click="deleteSets" color="deep-orange" label="삭제" class="q-ml-md" />
                 </div>
-
             </div>
 
             <div class="col-5">
@@ -84,7 +82,7 @@ export default {
     },
 
     methods: {
-        addLessons() {
+        addSets() {
             const sourceList = this.$refs.sourceList;
             const targetList = this.$refs.targetList;
             const source = sourceList.getSelected();
@@ -94,7 +92,7 @@ export default {
             }
         },
 
-        deleteLessons() {
+        deleteSets() {
             const sourceList = this.$refs.sourceList;
             const targetList = this.$refs.targetList;
             const target = targetList.getSelected();
@@ -106,10 +104,3 @@ export default {
     },
 };
 </script>
-
-<style>
-.button-bar {
-    width: 100%;
-    text-align: center;
-}
-</style>
