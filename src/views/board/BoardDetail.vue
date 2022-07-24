@@ -1,6 +1,6 @@
 <template>
-    <q-layout view="hHh LpR fff">
-        <q-header style="top: 52px;" class="bg-primary text-white" height-hint="98">
+    <q-layout view="hhh LpR fff">
+        <q-header class="bg-primary text-white" height-hint="98">
             <q-toolbar>
                 <q-toolbar-title>
                     <q-avatar>
@@ -11,8 +11,11 @@
             </q-toolbar>
         </q-header>
 
-        <q-page-container style="margin: 10px 100px 0px 100px;">
+        <q-page-container style="margin: 0px 100px 0px 100px;">
+            <br>
             <q-btn color="primary" label="목록으로" @click="goBack" />
+            <q-btn style="float:right" color="primary" label="삭제" @click="goBack" />
+            <q-btn style="float:right; margin-right: 10px;" color="primary" label="수정" @click="goEditArticle" />
 
             <div class="row content-header">
                 <div class="col-8">김태후니<br>2022-07-15</div>
@@ -85,8 +88,12 @@ export default {
         function goBack() {
             $router.go(-1)
         }
+
+        function goEditArticle() {
+            $router.push({ path: "/board/edit" })
+        }
         return {
-            goBack
+            goBack, goEditArticle
         }
     },
 }
