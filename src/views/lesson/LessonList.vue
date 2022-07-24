@@ -160,11 +160,12 @@ export default {
         height: auto;
     }
     .description-text{
-    font-size:2vw; 
+    font-size:25px; 
     }
 }
-@media (min-width: 718px) and (max-width:784px) {
-    
+
+@media (min-width: 784px) and (max-width: 834px){
+
     .header {
         height: 0px;
     }
@@ -201,7 +202,8 @@ export default {
     }
     .left {
         width: 100%;
-        height: 33.5vw;
+        height: 280px;
+        min-height: 280px;
         background: rgba(255, 167, 101, 0.99);
         background-image: radial-gradient(rgb(255, 184, 131) 19%, transparent 0), radial-gradient(rgb(255, 184, 131) 19%, transparent 0);
         background-position: 1,10px;
@@ -246,7 +248,108 @@ export default {
     }  
     .asomebot{
         position:absolute;
-        left: 230px;
+        left: 30%;
+        top: 125px;
+    }
+    .subject-size{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 98%;
+        height: auto;
+    }
+    .description-text{
+        font-size:2vw;
+        margin: 35px;
+    }
+}
+
+
+@media (min-width: 718px) and (max-width:784px) {
+    
+    .header {
+        height: 0px;
+    }
+    .list-left {
+        background:rgb(242,242,242);
+        
+    }
+    .list-main {
+        background:rgb(242,242,242);
+        
+    }
+    .rounded {
+        border-radius: 30px;
+    }
+    .subject-in-title
+    {
+        font-family: inherit;
+        font-size: 55px;
+        font-weight: 900;
+        color: white;
+        text-align: center;
+        margin-top : 5%;
+        margin-right : 0%;
+        margin-bottom: 0px;
+        letter-spacing:-5px;
+    }
+    .subject-in-title_eng{
+        font-family: inherit;
+        font-size: 24px;
+        color: white;
+        text-align: center;
+        margin-top: 0px;
+        margin-left : 6%;
+    }
+    .left {
+        width: 100%;
+        height: 280px;
+        min-height: 280px;
+        background: rgba(255, 167, 101, 0.99);
+        background-image: radial-gradient(rgb(255, 184, 131) 19%, transparent 0), radial-gradient(rgb(255, 184, 131) 19%, transparent 0);
+        background-position: 1,10px;
+        background-size: 15px 15px;
+        padding: 0px;
+        position: relative;
+        margin-right: 10px;
+        float: left;
+    }
+    .list-top-bar{
+        background-color:darkgray;
+        height: 1px;
+        width: 98%;
+        margin-bottom:20px;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+    .subject-number{
+        background:white;
+        width: 10%;
+        height: 100%;
+        border-radius: 20px;
+        display: inline-block !important;
+        position: relative;
+        font-size: 20px;
+    }
+    .subject-number-text{
+        padding:0px;
+        position: absolute;
+        top:30%;
+        left:22%;
+        font-size: 2vw;
+    }
+    .subject-title-text{
+        text-align:right;
+        display: inline-block;
+        position: relative;
+        bottom: 40%;
+        margin-left: 30px;
+        font-size: 20px;
+    }  
+    .asomebot{
+        position:absolute;
+        left: 30%;
         top: 125px;
     }
     .subject-size{
@@ -298,7 +401,8 @@ export default {
     }
     .left {
         width: 100%;
-        height: 33.5vw;
+        height: 280px;
+        min-height: 280px;
         background: rgba(255, 167, 101, 0.99);
         background-image: radial-gradient(rgb(255, 184, 131) 19%, transparent 0), radial-gradient(rgb(255, 184, 131) 19%, transparent 0);
         background-position: 1,10px;
@@ -319,8 +423,8 @@ export default {
     }
     .subject-number{
         background:white;
-        width: 10%;
-        height: 100%;
+        width: 100%;
+        height: 65%;
         border-radius: 20px;
         display: inline-block !important;
         position: relative;
@@ -329,21 +433,21 @@ export default {
     .subject-number-text{
         padding:0px;
         position: absolute;
-        top:30%;
-        left:22%;
-        font-size: 2vw;
+        top:15%;
+        left:44%;
+        font-size: 3vw;
     }
     .subject-title-text{
         text-align:right;
         display: inline-block;
         position: relative;
-        bottom: 40%;
-        margin-left: 30px;
-        font-size: 20px;
+        left: 28%;
+        font-size: 15px;
+
     }  
     .asomebot{
         position:absolute;
-        left: 230px;
+        left: 30%;
         top: 125px;
     }
     .subject-size{
