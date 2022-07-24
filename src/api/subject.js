@@ -2,12 +2,12 @@ import rest from "@/utils/rest";
 
 export default {
     defaultSubjectSet: async function () {
-        var url = `/asomeit/api/default/subjectSet`;
+        var url = `/default/subjectSet`;
         return rest.get(url)
     },
 
     subjectDetail: async function (id) {
-        var url = `/asomeit/api/subject/${id}`;
+        var url = `/subject/${id}`;
         return rest.get(url)
     },
 }
