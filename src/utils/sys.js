@@ -1,5 +1,5 @@
 export default {
-    os: function () {
+    os() {
         const userAgent = navigator.userAgent.toLowerCase();
         if (userAgent.indexOf("android") > -1) {
             return "android";
