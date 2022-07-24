@@ -23,7 +23,7 @@
 
     <div style="background:rgb(224,230,235);">
         <div class="row subject_box">
-            <div class="col-3 test" v-for="(subject, index) in subjects" :key="index">
+            <div class="col-3 subject-box-interval" v-for="(subject, index) in subjects" :key="index">
                 <div class="q-ma-md subject">
                 <Subject :subject="subject" />
                 </div>
@@ -70,7 +70,7 @@ export default {
         box-sizing: border-box;
         
     }
-    .test{
+    .subject-box-interval{
         margin-top: 5%;
         width: 18%;
         margin-left: auto;
@@ -98,7 +98,7 @@ export default {
         font-family: Helvetica Neue;
         line-height: 24px;
     }
-    .test{
+    .subject-box-interval{
         margin-top: 5%;
         width: 45%;
         margin-left: auto;
@@ -130,7 +130,7 @@ export default {
         font-family: Helvetica Neue;
         line-height: 24px;
     }
-    .test{
+    .subject-box-interval{
         margin-top: 5%;
         width: 95%;
         margin-left: auto;

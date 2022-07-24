@@ -1,38 +1,15 @@
 <template>
-    <!-- <div class="main">
-        <br>
-        <h5>{{ subject.title }}</h5>
-        <p>{{ subject.title_eng }}</p>
-
-        <p class="text">{{ subject.description }}</p>
-        <br>
-
-        <div class="row flex flex-center">
-            <q-btn @click="goTo('/lesson/list', subject)" color="secondary" label="더알아보기" class="q-ml-md" />
-        </div>
-    </div> -->
-
-    <!-- <div class="main test"> -->
     <div class="main subject-color" v-bind:id="'component'+subject.id">
-    
-            <a href="#">
-                <img :src="subject.images" class="images">
-            </a>
-        
-            <br>
+        <img :src="subject.images" class="images">
+        <br>
         <p class="h3_style">{{ subject.title }}</p>
-    
-       <p class="eng_text">{{ subject.title_eng }}</p>
-
-
+        <p class="eng_text">{{ subject.title_eng }}</p>
         <p class="text">{{ subject.description }}</p>
         <br>
-
-            <div class="more-button" @click="goTo('/lesson/list', subject)">
-                <p style="color:white; font-size: 15px; line-height:28px; ">더 알아보기 <b>〉</b>
-                </p>
-            </div>
+        <div class="more-button" @click="goTo('/lesson/list', subject)">
+            <p style="color:white; font-size: 15px; line-height:28px; ">더 알아보기 <b>〉</b></p>
         </div>
+    </div>
 
 
 </template>
