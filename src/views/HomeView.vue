@@ -2,7 +2,7 @@
     <div class="row q-pa-md">
         <div>
             
-            <a href="#"><img src="/images/common/logo2.png" class="img">
+            <a href="/"><img src="/images/common/logo2.png" class="img">
             </a>
         </div>
         <div class="col menu">

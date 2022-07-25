@@ -1,4 +1,10 @@
 <template>
+    <div class="header">
+        <a href="/">
+            <img src="/images/common/logom.png" class="logo"/>
+        </a>
+    </div>
+
     <div class="row">
         <div class="col-3">
             <h4 class="flex flex-center">목차</h4>
@@ -68,4 +74,15 @@ export default {
     font-size: 0.8em;
     padding-left: 30px;
 }
+.header {
+        width: 100%;
+        background: rgb(255, 102, 51);
+        height: 70px;
+    }
+    .logo{
+        margin: 10px;
+        margin-left: 200px;
+        width: 120px;
+        height: 45px;
+    }
 </style>

@@ -1,6 +1,6 @@
 <template>
     <div class="header">
-        <a href="#">
+        <a href="/">
             <img src="/images/common/logom.png" class="logo"/>
         </a>
     </div>
@@ -160,7 +160,7 @@ export default {
         height: auto;
     }
     .description-text{
-    font-size:25px; 
+    font-size:20px; 
     }
 }
 

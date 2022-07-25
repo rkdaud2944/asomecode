@@ -1,20 +1,20 @@
 <template>
     <div class="row" style="background: #353543; width: 100%; height: auto; padding: 10px;">
-    <img src="../../public/images/common/logom.png" class="logo">
+    <img src="../../public/images/common/logom.png" class="main-logo">
     <input id="check-btn" type="checkbox"/>
-    <label for="check-btn" class="test" style="margin-left: auto;"><img src="../../public/images/common/mobile_m.png" style="width: 70%; margin: 12px;"></label>
+    <label for="check-btn" class="test" style="margin-left: auto;  "><img src="../../public/images/common/mobile_m.png" style="width: 70%; margin: 12px;"></label>
        
-        <div class="col menubars">
-            <q-btn @click="sendCode('connect')" class="button" style="min-width: 0px; min-height: 0px; box-shadow: 0em; padding: 0px;"><img src="../../public/images/common/mobile_02.png" style="width: 100px; padding: 0; margin:0px"></q-btn>
-            <q-btn @click="goTo('/')" color="black" label="home" class="q-ml-md" />
-            <q-btn @click="openUrl('/editor')" color="secondary" label="editor" class="q-ml-md" />
-            <q-btn @click="sendCode('stop')" color="deep-orange" label="stop" class="q-ml-md" />
+        <div class="menubars">
+            <q-btn class="connect" @click="sendCode('connect')" style="min-width: 0px; min-height: 0px; box-shadow: 0em; padding: 0px;"><img src="../../public/images/common/mobile_02.png" style="width: 100px; padding: 0; margin:0px; margin-right:5px;"></q-btn>
+            <q-btn class="home" @click="goTo('/')"  style="min-width: 0px; min-height: 0px; box-shadow: 0em; padding: 0px;"><img src="../../public/images/common/mobile_01.png" style="width: 100px; padding: 0; margin:0px; margin-right:5px;"></q-btn>
+            <q-btn @click="openUrl('/editor')"  style="min-width: 0px; min-height: 0px; box-shadow: 0em; padding: 0px;"><img src="../../public/images/common/mobile_03.png" style="width: 100px; padding: 0; margin:0px; margin-right:5px;"></q-btn>
+            <q-btn @click="sendCode('stop')"  style="min-width: 0px; min-height: 0px; box-shadow: 0em; padding: 0px;"><img src="../../public/images/common/mobile_04.png" style="width: 100px; padding: 0; margin:0px; margin-right:5px;"></q-btn>
         </div>
-        <div class="on-right menubars">
-            <q-btn @click="sendCode('reboot')" color="secondary" label="reboot" class="q-ml-md" />
-            <q-btn @click="sendCode('format')" color="deep-orange" label="format" class="q-ml-md" />
-            <q-btn @click="sendCode('update')" color="brown" label="update" class="q-ml-md" />
-            <q-btn @click="openUrl('/help')" color="purple" label="HELP" class="q-ml-md" />
+        <div class="menubars right-align">
+            <q-btn @click="sendCode('reboot')" style="min-width: 0px; min-height: 0px; box-shadow: 0em; padding: 0px;"><img src="../../public/images/common/mobile_05.png" style="width: 100px; padding: 0; margin:0px; margin-right:5px;"></q-btn>
+            <q-btn @click="sendCode('format')" style="min-width: 0px; min-height: 0px; box-shadow: 0em; padding: 0px;"><img src="../../public/images/common/mobile_06.png" style="width: 100px; padding: 0; margin:0px; margin-right:5px;"></q-btn>
+            <q-btn @click="sendCode('update')" style="min-width: 0px; min-height: 0px; box-shadow: 0em; padding: 0px;"><img src="../../public/images/common/mobile_07.png" style="width: 100px; padding: 0; margin:0px; margin-right:5px;"></q-btn>
+            <q-btn @click="openUrl('/help')" style="min-width: 0px; min-height: 0px; box-shadow: 0em; padding: 0px;"><img src="../../public/images/common/mobile_08.png" style="width: 100px; padding: 0; margin:0px; margin-right:5px;"></q-btn>
         </div>
     </div>
 </template>
@@ -28,21 +28,29 @@ export default {
 
 </script>
 <style>
-@media (min-width: 883px){
+.home:hover{
+    background: url(../../public/images/common/mobile_01.png.over.png) no-repeat;
+    background-size:cover ;
+    margin-right:5px;
+}
+
+@media (min-width: 884px){
 #check-btn{
     display: none
-    }
-
+}
 .test{
     display: none
 }
-.logo{
+.main-logo{
     display: none;
 }
 .button{
     min-width: 0px; min-height: 0px; box-shadow: 0em; padding: 0px;
 }
-
+.right-align{
+    display: block;
+    margin-left: auto;
+}
 }
 @media (min-width: 100px) and (max-width: 883px){
 #check-btn{
@@ -54,13 +62,26 @@ export default {
 }
 .test{
     width: 50px;
+    text-align: right;
+    
 }
 .menubars{
     display: none;
+    width: 1000px;
+    height: 40px;
+    margin-top: 20px;
+    top: 120px;
+    text-align: center;
+    
 }
-.logo{
+.main-logo{
     margin-left:auto;
     width: 30%;
+    height: 96px;
 }
+.right-align{
+    text-align: center;
+}
+
 }
 </style>
