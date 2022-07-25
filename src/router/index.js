@@ -88,7 +88,11 @@ const routes = [
     },
     {
         path: '/board/create',
-        component: () => import('../views/board/CreateBoard.vue')
+        component: () => import('../views/board/CreateArticle.vue')
+    },
+    {
+        path: '/board/edit',
+        component: () => import('../views/board/EditArticle.vue')
     },
 ]
 
