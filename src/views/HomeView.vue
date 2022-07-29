@@ -1,5 +1,5 @@
 <template>
-    <div class="row q-pa-md nav-padding">
+    <div class="row q-pa-md nav-padding" style="padding-left: 0px; padding-right: 0px;">
         <div>
             
             <a href="/"><img src="/images/common/logo2.png" class="img">
@@ -56,24 +56,25 @@ export default {
 <style scoped>
 @media (min-width: 883px){
     .nav-padding{
-        padding-top: 120px;
+        padding-top: 100px;
+        padding-bottom: 0px;
     }
 }
 @media (max-width: 883px){
     .nav-padding{
-        padding-top: 165px;
+        padding-top: 105px;
+        padding-bottom: 0px;
     }
 }
 @media (min-width: 791px){
     .what-is-asomeit{
         background: url(https://asomecode-web.s3.ap-northeast-2.amazonaws.com/asomecode-web-version/common/images/p1_back.gif);
-        margin-top: 10px;
         padding: 20px;
         text-align: center;
     }
     .subject{
         margin:1px;
-        margin-bottom: 70px;
+        margin-bottom: 110px;
         box-shadow:3px 3px 20px rgba(0,0,0,0.51);
     }
     .subject_box{
@@ -81,7 +82,7 @@ export default {
         
     }
     .subject-box-interval{
-        margin-top: 5%;
+        margin-top: 70px;
         width: 18%;
         margin-left: auto;
         margin-right: auto;
@@ -93,11 +94,13 @@ export default {
     }
     .menu{
         text-align: right;
-        margin-right:50px;
+        margin-top:0px;
     }
     .img{
+        position: relative;
+        top: 10px;
         margin-left: 70px;
-        width: 186px;
+        width: 156px;
         
     }
 }
@@ -109,20 +112,21 @@ export default {
         line-height: 24px;
     }
     .subject-box-interval{
-        margin-top: 5%;
+        margin-top: 70px;
         width: 45%;
         margin-left: auto;
         margin-right: auto;
     }
     .what-is-asomeit{
         background: url(https://asomecode-web.s3.ap-northeast-2.amazonaws.com/asomecode-web-version/common/images/p1_back.gif);
-        margin-top: 10px;
         padding: 20px;
         text-align: center;
     }
     .menu{
+        background:rgb(224, 230, 235);
         text-align: center;
-        margin-right:0px;
+        position: relative;
+        width: 100%;
     }
     .img{
         display: none;
@@ -141,20 +145,21 @@ export default {
         line-height: 24px;
     }
     .subject-box-interval{
-        margin-top: 5%;
+        margin-top: 70px;
         width: 95%;
         margin-left: auto;
         margin-right: auto;
     }
     .what-is-asomeit{
         background: url(https://asomecode-web.s3.ap-northeast-2.amazonaws.com/asomecode-web-version/common/images/p1_back.gif);
-        margin-top: 10px;
         padding: 20px;
         text-align: center;
     }
     .menu{
+        background:rgb(224, 230, 235);
         text-align: center;
-        margin-right:0px;
+        position: relative;
+        width: 100%;
     }
     .img{
         display: none;

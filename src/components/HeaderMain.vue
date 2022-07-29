@@ -51,6 +51,8 @@
 </nav>
 </template>
 
+
+
 <script>
 import VueBase from "@/VueBase";
 
@@ -107,15 +109,16 @@ ul li {
     padding-left:0px;
 }
 .menulist li{
-    padding:8px 12px;
+    padding:8px 12px;   
 } 
 .toggle {
     display: none;
 }
 .toggle-img{
     position:relative;
-    top: 16px;
+    top: 27px;
     right:10px;
+    width: 30px;
 }
 .ui-img{
     width:20px;
@@ -178,18 +181,18 @@ ul li {
 }
 #fs-one{
     position:relative;
-    right: 15px;
-    font-size: 15px;
+    right: 19px;
+    font-size: 11.9px;
 }
 #fs-two{
     position:relative;
-    right:9px;
-    font-size: 15px;
+    right:11px;
+    font-size: 11.9px;
 }
 #fs-three{
     position:relative;
-    right: 2px;
-    font-size: 15px;
+    right: 6px;
+    font-size: 11.9px;
 }
 
 }
@@ -267,27 +270,25 @@ ul li {
     margin-right: auto;
     display: block;
 }
-.logo{
+.main-logo{
     width: 139px;
     height: 53px;
     margin: 15px;
 }
 #fs-one{
     position:relative;
-    right: 18px;
-    font-size: 16px;
-    line-height: 18px;
+    right: 19px;
+    font-size: 11.9px;
 }
 #fs-two{
     position:relative;
-    right:9px;
-    font-size: 15px;
+    right:11px;
+    font-size: 11.9px;
 }
 #fs-three{
     position:relative;
-    right: 2px;
-    font-size: 15px;
-    line-height: 15px;
+    right: 6px;
+    font-size: 11.9px;
 }
 #fs-four{
 

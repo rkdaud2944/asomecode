@@ -19,9 +19,9 @@
             </div>
             <div class="list-top-bar"></div>
             <div @click="goTo(`/lesson/detail/${lesson.id}`)" class="list-left rounded q-ma-sm q-pa-md" v-for="(lesson, index) in subject.lessons" :key="index" style="cursor: pointer" >
-                <div style="height: 60px;">          
+                <div class="subject-div-size">          
                     <div class="subject-number">
-                        <p class="subject-number-text"><b>{{ index + 1 }}</b> 차시</p>
+                        <p class="subject-number-text"> <span class="testColor">{{ index + 1 }}</span> 차시</p>
                     </div>
                     <p class="subject-title-text">{{ lesson.title }}</p>
                 </div>
@@ -63,19 +63,27 @@ export default {
 </script>
 
 <style scoped>
+
+.testColor{
+    color: orange;
+    font-weight: bold;
+    font-size: 20px;
+}
+.q-ma-sm{
+    margin: 10px;
+}
+.q-pa-md{
+    padding: 5px 10px;
+}
+/* nav bar fixed 겹침방지용 코드 */
 @media (min-width: 884px){
     .nav-padding{
         padding-top: 120px;
     }
 }
-@media (min-width: 1180px){
-    .subject-margin {
-    margin-left:40px ;
-    }
-}
 @media (max-width: 884px){
     .nav-padding{
-        padding-top: 130px;
+        padding-top: 100px;
     }
     .subject-logo{
         display: none;
@@ -84,6 +92,15 @@ export default {
         min-height: 10px;
     }
 }
+
+/* description 위치조절용 코드 */
+@media (min-width: 1180px){
+    .subject-margin {
+    margin-left:40px ;
+    }
+}
+
+/* 가장 큰 사이즈 */
 @media (min-width: 834px){
 
     .header {
@@ -118,7 +135,7 @@ export default {
         font-weight: 900;
         color: white;
         text-align: right;
-        margin-top : 23%;
+        margin-top : 55px;
         margin-right : 6%;
         margin-bottom: 0px;
         letter-spacing:-5px;
@@ -150,19 +167,26 @@ export default {
         margin-bottom:20px
     }
     .subject-number{
-        background:white ; width: 10%; height: 100%; border-radius: 20px; display: inline-block !important; position: relative;
+        background:white ; width: 80px; height: 40px; border-radius: 20px; display: inline-block !important; position: relative;
         font-size: 20px;
     }
     .subject-number-text{
-        padding:0px; position: absolute; top:30%; left:22%; font-size: 1.3vw;
+        padding:0px;
+        position: absolute;
+        top:10px;
+        left:20px;
+        font-size: 15px;
+    }
+    .subject-div-size{
+        height: 40px;
     }
     .subject-title-text{
         text-align:right;
         display: inline-block;
         position: relative;
-        bottom: 40%;
+        bottom: 15px;
         margin-left: 30px;
-        font-size: 20px;
+        font-size: 15px;
     }
     .asomebot{
         position:absolute ;
@@ -174,10 +198,11 @@ export default {
         height: auto;
     }
     .description-text{
-    font-size:20px; 
+    font-size:17px; 
     }
 }
 
+/* 두 번째로 큰 사이즈 */
 @media (min-width: 784px) and (max-width: 834px){
 
     .header {
@@ -201,7 +226,7 @@ export default {
         font-weight: 900;
         color: white;
         text-align: center;
-        margin-top : 5%;
+        margin-top : 30px;
         margin-right : 0%;
         margin-bottom: 0px;
         letter-spacing:-5px;
@@ -237,29 +262,27 @@ export default {
         display: block;
     }
     .subject-number{
-        background:white;
-        width: 10%;
-        height: 100%;
-        border-radius: 20px;
-        display: inline-block !important;
-        position: relative;
+        background:white ; width: 80px; height: 40px; border-radius: 20px; display: inline-block !important; position: relative;
         font-size: 20px;
     }
     .subject-number-text{
         padding:0px;
         position: absolute;
-        top:30%;
-        left:22%;
-        font-size: 2vw;
+        top:10px;
+        left:20px;
+        font-size: 15px;
+    }
+    .subject-div-size{
+        height: 40px;
     }
     .subject-title-text{
         text-align:right;
         display: inline-block;
         position: relative;
-        bottom: 40%;
+        bottom: 15px;
         margin-left: 30px;
-        font-size: 20px;
-    }  
+        font-size: 15px;
+    } 
     .asomebot{
         position:absolute;
         left: 30%;
@@ -273,12 +296,12 @@ export default {
         height: auto;
     }
     .description-text{
-        font-size:2vw;
+        font-size:17px;
         margin: 35px;
     }
 }
 
-
+/* 두 번째로 작은 사이즈 */
 @media (min-width: 718px) and (max-width:784px) {
     
     .header {
@@ -302,7 +325,7 @@ export default {
         font-weight: 900;
         color: white;
         text-align: center;
-        margin-top : 5%;
+        margin-top : 30px;
         margin-right : 0%;
         margin-bottom: 0px;
         letter-spacing:-5px;
@@ -338,29 +361,27 @@ export default {
         display: block;
     }
     .subject-number{
-        background:white;
-        width: 10%;
-        height: 100%;
-        border-radius: 20px;
-        display: inline-block !important;
-        position: relative;
+        background:white ; width: 80px; height: 40px; border-radius: 20px; display: inline-block !important; position: relative;
         font-size: 20px;
     }
     .subject-number-text{
         padding:0px;
         position: absolute;
-        top:30%;
-        left:22%;
-        font-size: 2vw;
+        top:10px;
+        left:20px;
+        font-size: 15px;
     }
     .subject-title-text{
         text-align:right;
         display: inline-block;
         position: relative;
-        bottom: 40%;
+        bottom: 15px;
         margin-left: 30px;
-        font-size: 20px;
+        font-size: 15px;
     }  
+    .subject-div-size{
+        height: 40px;
+    }
     .asomebot{
         position:absolute;
         left: 30%;
@@ -374,12 +395,14 @@ export default {
         height: auto;
     }
     .description-text{
-        font-size:2vw;
+        font-size:17px;
         margin: 35px;
     }
 }
+
+/* 가장 작은 사이즈 */
 @media (min-width: 100px) and (max-width:718px) {
-        .header {
+    .header {
         height: 0px;
     }
     .list-left {
@@ -400,7 +423,7 @@ export default {
         font-weight: 900;
         color: white;
         text-align: center;
-        margin-top : 5%;
+        margin-top : 30px;
         margin-right : 0%;
         margin-bottom: 0px;
         letter-spacing:-5px;
@@ -438,7 +461,7 @@ export default {
     .subject-number{
         background:white;
         width: 100%;
-        height: 65%;
+        height: 35px;
         border-radius: 20px;
         display: inline-block !important;
         position: relative;
@@ -447,18 +470,18 @@ export default {
     .subject-number-text{
         padding:0px;
         position: absolute;
-        top:15%;
+        top:6px;
         left:44%;
-        font-size: 3vw;
+        font-size: 18px;
     }
     .subject-title-text{
-        text-align:right;
-        display: inline-block;
+        text-align:center;
         position: relative;
-        left: 28%;
         font-size: 15px;
-
     }  
+    .subject-div-size{
+        height: 70px;
+    }
     .asomebot{
         position:absolute;
         left: 30%;
@@ -472,9 +495,8 @@ export default {
         height: auto;
     }
     .description-text{
-        font-size:2vw;
+        font-size:17px;
         margin: 35px;
     }
-
 }
 </style>
