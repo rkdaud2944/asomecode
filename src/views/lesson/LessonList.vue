@@ -1,7 +1,7 @@
 <template>
-    <div class="header">
+    <div class="header nav-padding">
         <a href="/">
-            <img src="/images/common/logom.png" class="logo"/>
+            <img src="/images/common/logom.png" class="subject-logo"/>
         </a>
     </div>
 
@@ -63,22 +63,36 @@ export default {
 </script>
 
 <style scoped>
-
+@media (min-width: 884px){
+    .nav-padding{
+        padding-top: 120px;
+    }
+}
 @media (min-width: 1180px){
     .subject-margin {
     margin-left:40px ;
     }
 }
-
-
+@media (max-width: 884px){
+    .nav-padding{
+        padding-top: 130px;
+    }
+    .subject-logo{
+        display: none;
+    }
+    .header {
+        min-height: 10px;
+    }
+}
 @media (min-width: 834px){
 
     .header {
         width: 100%;
         background: rgb(255, 102, 51);
-        height: 70px;
+        min-height: 10px;
+        padding-top: 100px;
     }
-    .logo{
+    .subject-logo{
         margin: 10px;
         margin-left: 200px;
         width: 120px;

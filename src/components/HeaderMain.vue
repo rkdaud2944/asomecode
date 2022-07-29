@@ -1,22 +1,54 @@
 <template>
-    <div class="row" style="background: #353543; width: 100%; height: auto; padding: 10px;">
-    <img src="../../public/images/common/logom.png" class="main-logo">
-    <input id="check-btn" type="checkbox"/>
-    <label for="check-btn" class="test" style="margin-left: auto;  "><img src="../../public/images/common/mobile_m.png" style="width: 70%; margin: 12px;"></label>
-       
-        <div class="menubars">
-            <q-btn class="connect" @click="sendCode('connect')" style="min-width: 0px; min-height: 0px; box-shadow: 0em; padding: 0px;"><img src="../../public/images/common/mobile_02.png" style="width: 100px; padding: 0; margin:0px; margin-right:5px;"></q-btn>
-            <q-btn class="home" @click="goTo('/')"  style="min-width: 0px; min-height: 0px; box-shadow: 0em; padding: 0px;"><img src="../../public/images/common/mobile_01.png" style="width: 100px; padding: 0; margin:0px; margin-right:5px;"></q-btn>
-            <q-btn @click="openUrl('/editor')"  style="min-width: 0px; min-height: 0px; box-shadow: 0em; padding: 0px;"><img src="../../public/images/common/mobile_03.png" style="width: 100px; padding: 0; margin:0px; margin-right:5px;"></q-btn>
-            <q-btn @click="sendCode('stop')"  style="min-width: 0px; min-height: 0px; box-shadow: 0em; padding: 0px;"><img src="../../public/images/common/mobile_04.png" style="width: 100px; padding: 0; margin:0px; margin-right:5px;"></q-btn>
-        </div>
-        <div class="menubars right-align">
-            <q-btn @click="sendCode('reboot')" style="min-width: 0px; min-height: 0px; box-shadow: 0em; padding: 0px;"><img src="../../public/images/common/mobile_05.png" style="width: 100px; padding: 0; margin:0px; margin-right:5px;"></q-btn>
-            <q-btn @click="sendCode('format')" style="min-width: 0px; min-height: 0px; box-shadow: 0em; padding: 0px;"><img src="../../public/images/common/mobile_06.png" style="width: 100px; padding: 0; margin:0px; margin-right:5px;"></q-btn>
-            <q-btn @click="sendCode('update')" style="min-width: 0px; min-height: 0px; box-shadow: 0em; padding: 0px;"><img src="../../public/images/common/mobile_07.png" style="width: 100px; padding: 0; margin:0px; margin-right:5px;"></q-btn>
-            <q-btn @click="openUrl('/help')" style="min-width: 0px; min-height: 0px; box-shadow: 0em; padding: 0px;"><img src="../../public/images/common/mobile_08.png" style="width: 100px; padding: 0; margin:0px; margin-right:5px;"></q-btn>
-        </div>
+
+<nav class="header-nav">
+    <div class="logo_box">
+        <img src="../../public/images/common/logom.png" class="main-logo">
     </div>
+
+    <div class="menulist">
+        <ul class="ui-left">
+            <li class="ui-left-bt" @click="sendCode('connect')">
+                <img src="../../public/images/common/connect.png" class="ui-img">
+                <p class="ui-left-font" id="fs-four">연결하기</p>
+            </li>
+            <li class="ui-left-bt" @click="goTo('/')">
+                <img src="../../public/images/common/home.png" class="ui-img">
+                <p class="ui-left-font" id="fs-one">홈</p>
+            </li>
+            <li class="ui-left-bt" @click="openUrl('/editor')">
+                <img src="../../public/images/common/editor.png" class="ui-img">
+                <p class="ui-left-font" id="fs-four">소스편집</p>
+            </li>
+            <li class="ui-left-bt" @click="sendCode('stop')">
+                <img src="../../public/images/common/stop.png" class="ui-img">
+                <p class="ui-left-font" id="fs-three">멈추기</p>
+            </li>
+        </ul>
+
+        <ul class="ui-right">
+            <li class="ui-right-bt" @click="sendCode('reboot')">
+                <img src="../../public/images/common/reboot.png" class="ui-img">
+                <p class="ui-right-font" id="fs-three">재부팅</p>
+            </li>
+            <li class="ui-right-bt" @click="sendCode('format')">
+                <img src="../../public/images/common/format.png" class="ui-img">
+                <p class="ui-right-font" id="fs-two">포맷</p>
+            </li>
+            <li class="ui-right-bt" @click="sendCode('update')">
+                <img src="../../public/images/common/update.png" class="ui-img">
+                <p class="ui-right-font" id="fs-four">업데이트</p>
+            </li>
+            <li class="ui-right-bt" @click="openUrl('/help')">
+                <img src="../../public/images/common/help.png" class="ui-img">
+                <p class="ui-right-font" id="fs-three">HELP</p>
+            </li>
+        </ul>
+    </div>
+
+    <a class="toggle">
+        <img src="../../public/images/common/mobile_m.png" class="toggle-img">
+    </a>
+</nav>
 </template>
 
 <script>
@@ -24,64 +56,246 @@ import VueBase from "@/VueBase";
 
 export default {
     mixins: [VueBase],
+    data(){
+        return{
+
+        }
+    },
+    mounted() {
+        const toggleBtn = document.querySelector('.toggle');
+        const menu = document.querySelector('.menulist');
+
+        toggleBtn.addEventListener('click', () => {
+            menu.classList.toggle('active');
+        }) 
+    },
+
 }
+
 
 </script>
+
+
+
 <style>
-.home:hover{
-    background: url(../../public/images/common/mobile_01.png.over.png) no-repeat;
-    background-size:cover ;
-    margin-right:5px;
+
+/* 공용 */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
+
+ul li {
+    list-style-type: none;
+    float: left;
+}
+.header-nav{
+    display : flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: #353543;
+    width: 100%;
+    height: auto;
+    position: fixed;
+    z-index: 200;
+
+}
+.menulist{
+    list-style:none;
+    font-size:18px;
+    color:white;
+    display : flex;
+    padding-left:0px;
+}
+.menulist li{
+    padding:8px 12px;
+} 
+.toggle {
+    display: none;
+}
+.toggle-img{
+    position:relative;
+    top: 16px;
+    right:10px;
+}
+.ui-img{
+    width:20px;
+    right:4px;
+    bottom:3px;
+    position:relative;
 }
 
-@media (min-width: 884px){
-#check-btn{
-    display: none
+/* 데스크탑 버전 */
+
+@media screen and (min-width: 883px){
+
+.ui-left{
+    float: left;
 }
-.test{
-    display: none
+.ui-right{
+    position: absolute;
+    right: 50px;
+}
+.logo_box{
+    display: none;
 }
 .main-logo{
     display: none;
 }
-.button{
-    min-width: 0px; min-height: 0px; box-shadow: 0em; padding: 0px;
+
+.ui-left-bt{
+    width: 90px;
+    height: 32.5px;
+    border: 1px solid white !important;
+    background: #353543;
+    border-radius: 15px;
+    margin: 5px;
+    cursor: pointer;
 }
-.right-align{
-    display: block;
+.ui-right-bt{
+    width: 90px;
+    height: 32.5px;
+    border: 1px solid black !important;
+    background-color: white;
+    border-radius: 15px;
+    margin: 5px;
+    cursor: pointer;
+}
+.ui-left-font{
+    color: white;
+    line-height: 15px;
+    font-size :11.9px;
+    margin: 0%;
+    float: right;
+    font-family:'Noto Sans KR', sans-serif;
+
+}
+.ui-right-font{
+    color: black;
+    line-height: 15px;
+    font-size :11.9px;;
+    float: right;
+    font-family:'Noto Sans KR', sans-serif;
+}
+#fs-one{
+    position:relative;
+    right: 15px;
+    font-size: 15px;
+}
+#fs-two{
+    position:relative;
+    right:9px;
+    font-size: 15px;
+}
+#fs-three{
+    position:relative;
+    right: 2px;
+    font-size: 15px;
+}
+
+}
+
+/* 태블릿 버전 */
+
+@media screen and (max-width: 883px){
+
+.header-nav{
+    flex-direction:column;
+    align-items: flex-start;
+    min-height: 100px;
+}
+.menulist{
+    display:none;
+    flex-direction:column;
+    align-items: center;
+    width:100%;
+}
+.toggle {
+    display:block;
+    font-size:28px;
+    position:absolute;
+    right:18px;
+    cursor: pointer;
+}
+.menulist.active,
+.iconlist.active{
+    display:flex;
+}
+
+.ui-left-bt{
+    width: 90px;
+    height: 32.5px;
+    border: 1px solid white !important;
+    background: #353543;
+    border-radius: 15px;
+    margin: 5px;
+    margin-top: 50px;
+    cursor: pointer;
+}
+.ui-right-bt{
+    width: 90px;
+    height: 32.5px;
+    border: 1px solid black !important;
+    background-color: white;
+    border-radius: 15px;
+    margin: 5px;
+    cursor: pointer;
+}
+.ui-left-font{
+    color: white;
+    float: right;
+    font-family:'Noto Sans KR', sans-serif;
+}
+.ui-right-font{
+    color: black;
+    line-height: 15px;
+    font-size: 11.9px;;
+    float: right;
+    font-family:'Noto Sans KR', sans-serif;
+}
+.ui-left{
+    padding: 0px;
+    margin: 0px;
+}
+.ui-right{
     margin-left: auto;
+    margin-right:auto;
+    display: block;
+    padding: 0px;
 }
-}
-@media (min-width: 100px) and (max-width: 883px){
-#check-btn{
-    display: none;
-    
-}
-#check-btn:checked ~ .menubars{
+.logo_box{
+    margin-left: auto;
+    margin-right: auto;
     display: block;
 }
-.test{
-    width: 50px;
-    text-align: right;
-    
+.logo{
+    width: 139px;
+    height: 53px;
+    margin: 15px;
 }
-.menubars{
-    display: none;
-    width: 1000px;
-    height: 40px;
-    margin-top: 20px;
-    top: 120px;
-    text-align: center;
-    
+#fs-one{
+    position:relative;
+    right: 18px;
+    font-size: 16px;
+    line-height: 18px;
 }
-.main-logo{
-    margin-left:auto;
-    width: 30%;
-    height: 96px;
+#fs-two{
+    position:relative;
+    right:9px;
+    font-size: 15px;
 }
-.right-align{
-    text-align: center;
+#fs-three{
+    position:relative;
+    right: 2px;
+    font-size: 15px;
+    line-height: 15px;
 }
+#fs-four{
 
+    position:relative;
+    right: 0px;
+    font-size: 11.9px;
+    line-height: 17px;
+    text-align: center;
+}
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="row q-pa-md">
+    <div class="row q-pa-md nav-padding">
         <div>
             
             <a href="/"><img src="/images/common/logo2.png" class="img">
@@ -54,6 +54,16 @@ export default {
 </script>
 
 <style scoped>
+@media (min-width: 883px){
+    .nav-padding{
+        padding-top: 120px;
+    }
+}
+@media (max-width: 883px){
+    .nav-padding{
+        padding-top: 165px;
+    }
+}
 @media (min-width: 791px){
     .what-is-asomeit{
         background: url(https://asomecode-web.s3.ap-northeast-2.amazonaws.com/asomecode-web-version/common/images/p1_back.gif);

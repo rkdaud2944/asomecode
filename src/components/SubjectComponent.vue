@@ -95,11 +95,16 @@ setup() {
     margin: 0px;
 }
 .images{
-    display:inline-block; margin:auto; margin-top:-40px; width:122px; height:121px;
+    display:inline-block;
+    margin:auto;
+    margin-top:-40px;
+    width:122px;
+    height:121px;
 }
 .eng_text{
     color: rgba(0,0,0,0.7);
     font-size : 16px;
     margin: 5px;
 }
+
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="header">
+    <div class="header nav-padding">
         <a href="/">
             <img src="/images/common/logom.png" class="logo"/>
         </a>
@@ -49,6 +49,7 @@ export default {
 </script>
 
 <style scoped>
+
 .title {
     width: 100%;
     margin: 8px;
@@ -74,15 +75,35 @@ export default {
     font-size: 0.8em;
     padding-left: 30px;
 }
+
+@media (min-width: 883px){
 .header {
         width: 100%;
         background: rgb(255, 102, 51);
         height: 70px;
-    }
-    .logo{
+}
+.logo {
         margin: 10px;
         margin-left: 200px;
         width: 120px;
         height: 45px;
+}
+.nav-padding{
+        padding-top: 180px;
     }
+}
+
+@media (max-width: 883px){
+.nav-padding{
+        padding-top: 130px;
+    }
+.header {
+        width: 100%;
+        background: rgb(255, 102, 51);
+        min-height: 10px;
+}
+.logo {
+        display:none;
+}
+}
 </style>
