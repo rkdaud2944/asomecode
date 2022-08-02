@@ -11,6 +11,7 @@ import { useMemberStore } from "@/store/member";
 import HeaderMain from "@/components/HeaderMain.vue";
 
 export default {
+    
     components: {
         HeaderMain,
     },
@@ -42,6 +43,12 @@ export default {
             memberStore,
         };
     },
+    methods : {
+        refreshAll() {
+            // 새로고침
+            this.$router.go();
+        }
+    }
 };
 </script>
 <style>

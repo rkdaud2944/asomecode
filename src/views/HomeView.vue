@@ -95,6 +95,7 @@ export default {
     .menu{
         text-align: right;
         margin-top:0px;
+        margin-right: 50px;
     }
     .img{
         position: relative;

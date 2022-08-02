@@ -6,16 +6,22 @@
     </div>
 
     <div class="row">
-        <div class="col-3">
-            <h4 class="flex flex-center">목차</h4>
+        <div class="col-3" style="height:904px;">
+            <div class="flex flex-center title-box">
+                <a href="javascript:history.back()" class="gohome"><img src="../../../public/images/common/p3_list.png"></a>
+                <p class="title-style">목차</p>   
+            </div>
+        <div class="test">
             <div @click="moveTo(title.tag)" :class="`title title-${title.level}`" v-for="(title, index) in titles" :key="index">
                 {{title.name}}
             </div>
         </div>
+        </div>
 
-        <div class="col-9">
+        <div class="col-9 contents">
             <div v-html="content"></div>
         </div>
+
     </div>
 </template>
 
@@ -24,6 +30,7 @@ import markdown from "@/utils/markdown";
 import lesson03 from "@/data/lesson03.js";
 
 export default {
+    
     data() {
         return {
             titles: [],
@@ -35,6 +42,19 @@ export default {
         markdown.setHtml(lesson03);
         this.titles = markdown.getTitles(lesson03);
         this.content = markdown.getContent();
+
+        let header = document.querySelector(".col-3");
+     
+        window.onscroll = function () {
+        let windowTop = window.scrollY;
+        if (windowTop > 60) {
+            header.classList.add("drop");
+        } 
+        else {
+            header.classList.remove("drop");
+        }
+        };
+        
     },
 
     methods: {
@@ -46,64 +66,12 @@ export default {
         },
     },
 };
+
+
 </script>
 
 <style scoped>
+@import '@/assets/css/component/lesson.css';
 
-.title {
-    width: 100%;
-    margin: 8px;
-    cursor: pointer;
-}
 
-.title-1 {
-    font-size: 1.5em;
-    font-weight: bold;
-}
-
-.title-2 {
-    font-size: 1.2em;
-    padding-left: 10px;
-}
-
-.title-3 {
-    font-size: 1em;
-    padding-left: 20px;
-}
-
-.title-4 {
-    font-size: 0.8em;
-    padding-left: 30px;
-}
-
-@media (min-width: 883px){
-.header {
-        width: 100%;
-        background: rgb(255, 102, 51);
-        height: 70px;
-}
-.logo {
-        margin: 10px;
-        margin-left: 200px;
-        width: 120px;
-        height: 45px;
-}
-.nav-padding{
-        padding-top: 180px;
-    }
-}
-
-@media (max-width: 883px){
-.nav-padding{
-        padding-top: 130px;
-    }
-.header {
-        width: 100%;
-        background: rgb(255, 102, 51);
-        min-height: 10px;
-}
-.logo {
-        display:none;
-}
-}
 </style>
