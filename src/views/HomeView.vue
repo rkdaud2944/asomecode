@@ -56,8 +56,11 @@ export default {
 <style scoped>
 @media (min-width: 883px){
     .nav-padding{
-        padding-top: 100px;
+        padding-top: 80px;
         padding-bottom: 0px;
+    }
+    .menu{
+        margin-right: 50px;
     }
 }
 @media (max-width: 883px){
@@ -79,11 +82,12 @@ export default {
     }
     .subject_box{
         box-sizing: border-box;
+        height: 650px;
         
     }
     .subject-box-interval{
         margin-top: 70px;
-        width: 18%;
+        width: 24%;
         margin-left: auto;
         margin-right: auto;
     }
@@ -95,7 +99,6 @@ export default {
     .menu{
         text-align: right;
         margin-top:0px;
-        margin-right: 50px;
     }
     .img{
         position: relative;
@@ -114,7 +117,7 @@ export default {
     }
     .subject-box-interval{
         margin-top: 70px;
-        width: 45%;
+        width: 47%;
         margin-left: auto;
         margin-right: auto;
     }

@@ -70,8 +70,4 @@ export default {
 
 </script>
 
-<style scoped>
-@import '@/assets/css/component/lesson.css';
-
-
-</style>
+<style scoped src="@/assets/css/component/lesson.css"/>
