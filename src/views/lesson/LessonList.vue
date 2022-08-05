@@ -34,6 +34,8 @@
 import VueBase from '@/VueBase';
 import apiSubject from "@/api/subject";
 
+
+
 export default {
     mixins: [VueBase],
 
@@ -58,7 +60,8 @@ export default {
                     console.log(e);
                 });
         },
-    }
+    },
+
 }
 </script>
 

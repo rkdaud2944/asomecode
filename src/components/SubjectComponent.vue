@@ -37,7 +37,4 @@ setup() {
 }
 </script>
 
-<style scoped>
-@import '@/assets/css/component/subject.css';
-
-</style>
+<style scoped src="@/assets/css/component/subject.css"/>

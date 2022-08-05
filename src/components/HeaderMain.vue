@@ -79,7 +79,4 @@ export default {
 
 
 
-<style scoped>
-@import '@/assets/css/component/nav_bar.css';
-
-</style>
+<style scoped src="@/assets/css/component/nav_bar.css"/>

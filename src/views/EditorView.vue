@@ -47,21 +47,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.header {
-    height: 64px;
-}
-.footer {
-    height: 64px;
-}
-
-.body {
-    width: 100vw;
-    height: 100vh;
-    background: #272822;
-}
-
-.editor {
-    height: calc(100vh - 128px);
-}
-</style>
+<style scoped src="@/assets/css/component/editorview.css"/>

@@ -1,0 +1,121 @@
+@media (min-width: 883px){
+    .nav-padding{
+        padding-top: 80px;
+        padding-bottom: 0px;
+    }
+    .menu{
+        margin-right: 50px;
+    }
+}
+@media (max-width: 883px){
+    .nav-padding{
+        padding-top: 105px;
+        padding-bottom: 0px;
+    }
+}
+@media (min-width: 791px){
+    .what-is-asomeit{
+        background: url(https://asomecode-web.s3.ap-northeast-2.amazonaws.com/asomecode-web-version/common/images/p1_back.gif);
+        padding: 20px;
+        text-align: center;
+    }
+    .subject{
+        margin:1px;
+        margin-bottom: 110px;
+        box-shadow:3px 3px 20px rgba(0,0,0,0.51);
+    }
+    .subject_box{
+        box-sizing: border-box;
+        height: 650px;
+        
+    }
+    .subject-box-interval{
+        margin-top: 70px;
+        width: 24%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .what-is-asomeit-font{
+        font-size: 20px;
+        font-family: Helvetica Neue;
+        line-height: 34px;
+    }
+    .menu{
+        text-align: right;
+        margin-top:0px;
+    }
+    .img{
+        position: relative;
+        top: 10px;
+        margin-left: 70px;
+        width: 156px;
+        
+    }
+}
+
+@media (min-width: 767px) and (max-width: 883px){
+    .what-is-asomeit-font{
+        font-size: 16px;
+        font-family: Helvetica Neue;
+        line-height: 24px;
+    }
+    .subject-box-interval{
+        margin-top: 70px;
+        width: 47%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .what-is-asomeit{
+        background: url(https://asomecode-web.s3.ap-northeast-2.amazonaws.com/asomecode-web-version/common/images/p1_back.gif);
+        padding: 20px;
+        text-align: center;
+    }
+    .menu{
+        background:rgb(224, 230, 235);
+        text-align: center;
+        position: relative;
+        width: 100%;
+    }
+    .img{
+        display: none;
+    }
+    .subject{
+        margin:1px;
+        margin-bottom: 70px;
+        box-shadow:3px 3px 20px rgba(0,0,0,0.51);
+    }
+}
+
+@media (min-width: 100px) and (max-width: 767px){
+    .what-is-asomeit-font{
+        font-size: 16px;
+        font-family: Helvetica Neue;
+        line-height: 24px;
+    }
+    .subject-box-interval{
+        margin-top: 70px;
+        width: 95%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .what-is-asomeit{
+        background: url(https://asomecode-web.s3.ap-northeast-2.amazonaws.com/asomecode-web-version/common/images/p1_back.gif);
+        padding: 20px;
+        text-align: center;
+    }
+    .menu{
+        background:rgb(224, 230, 235);
+        text-align: center;
+        position: relative;
+        width: 100%;
+    }
+    .img{
+        display: none;
+    }
+    .subject{
+        margin:1px;
+        margin-bottom: 70px;
+        box-shadow:3px 3px 20px rgba(0,0,0,0.51);
+    }
+}
+
