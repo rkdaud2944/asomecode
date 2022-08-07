@@ -1,7 +1,7 @@
 import rest from "@/utils/rest";
 
 export default {
-    create: async function (body) {
+    async create(body) {
         return new Promise((resolve, reject) => {
             var url = "article"
             rest
@@ -17,8 +17,38 @@ export default {
         })
     },
 
-    list: async function (page, size, boardType) {
-        var url = `/articles?page=${page - 1}&size=${size}&boardType=${boardType}`;
-        return rest.get(url)
+    async getArticles(params) {
+        return new Promise((resolve, reject) => {
+            rest.get("articles", { params })
+                .then(response => {
+                    console.log(response.data);
+                    if (response.data.resultCode) {
+                        reject(response);
+                        return;
+                    }
+
+                    resolve(response);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        });
+    },
+
+    async deleteArticle(id, password) {
+        return new Promise((resolve, reject) => {
+            rest.delete(`article/${id}`, {data: {"password": password}})
+                .then(response => {
+                    console.log(response.data);
+                    if (response.data.resultCode) {
+                        reject(response);
+                        return;
+                    }
+                    resolve(response);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        });
     },
 }

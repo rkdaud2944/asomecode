@@ -27,7 +27,7 @@ export default {
             globals.currentPath = to.path;
 
             this.showHeaderMain = true;
-            const skipHeaderMains = ["/editor", "/help"];
+            const skipHeaderMains = ["/editor", "/help", "/board"];
             skipHeaderMains.forEach((path) => {
                 if (to.path.startsWith(path)) {
                     this.showHeaderMain = false;
