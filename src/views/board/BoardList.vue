@@ -51,58 +51,66 @@
                 <q-card-section>
                     <q-btn color="primary" label="목록으로" v-close-popup />
                     <q-btn style="float:right" color="primary" label="삭제" @click="deleteAticleDialog = true" />
-                    <q-btn style="float:right; margin-right: 10px;" color="primary" label="수정" @click="goEditArticle" />
+                    <q-btn style="float:right; margin-right: 10px;" color="primary" label="수정" />
                 </q-card-section>
 
                 <q-card-section class="q-pt-none">
                     <div class="row content-header">
-                        <div class="col-8">김태후니<br>2022-07-15</div>
-                        <div class="col-4" style="text-align: right;">댓글수: 0, 조회수: 120000</div>
+                        <div class="col-8">{{ articleDetail.writer }}<br>{{ articleDetail.createAt }}</div>
+                        <div class="col-4" style="text-align: right;">댓글수: {{ articleDetail.commentCount }}, 조회수: {{ articleDetail.viewCount }}</div>
                     </div>
 
                     <div class="column content">
                         <div class="col-4">
-                            <h2>어썸 아이티 게시판 첫 글</h2>
+                            <h2>{{ articleDetail.title }}</h2>
                         </div>
                         <q-linear-progress /><br>
-                        <div class="col-8">신입 개발자입니다.<br>
-                            회사에서 사용할 노트북을 하나 사려고 하는데 사는 김에 맥북을 하나 사고 싶습니다.<br>
-                            선배님들 추천해주실 수 있을까요?<br>
-                            M1칩말고 M2칩을 사라고 하던데...<br>
-                            Intellij DBeaver MongoDB 등등 사용중이고 큰 툴은 사용하지 않습니다.</div>
+                        <div class="col-8">{{ articleDetail.content }}</div>
                     </div>
 
                     <div class="column comment-header">
-                        <div class="col">댓글 2</div>
+                        <div class="col">댓글</div>
                     </div>
 
-                    <div class="column comment">
-                        <div class="col-5">김태후니2<br>2022-07-15</div><br>
-                        <div class="col">무적권 M1 으로 사십쇼</div>
-                    </div>
-                    <div class="column comment">
-                        <div class="col-5">김태후니3<br>2022-07-15</div><br>
-                        <div class="col">굳이 비싼 M2 살 이유가 전혀 없습니다~</div>
+                    <div class="column comment" v-for="comment in articleDetail.comments" :key="comment">
+                        <div class="col-5">{{ comment.writer }}</div>
+                        <div class="col">{{ comment.content }}</div>
+                        <div class="col">{{ comment.createAt }} <span v-on:click="onComment(comment.id)">답글쓰기</span> </div>
+
+                        <div class="column reply-header" v-if="comment.replies.length != 0">
+                            <div class="col">답글</div>
+                        </div>
+
+                        <div class="col reply" v-for="reply in comment.replies" :key="reply">
+                            <div class="col-5">{{ reply.writer }}</div>
+                        <div class="col">{{ reply.content }}</div>
+                        <div class="col">{{ reply.createAt }}</div>
+                        </div>
+
+                        <CreateReply v-if="createReply[comment.id] " :index="comment.id" @onCancelCreateReply="onCancelCreateReply"/>
                     </div>
 
-                    <div class="row create-comment-container">
+                    <q-form @submit="createComment(articleDetail.id)" class="row create-comment-container">
                         <div class="col-2">
                             <div class="col">
-                                <q-input class="input-writer-password" outlined label="작성자" />
-                            </div>
-                            <div class="col">
-                                <q-input class="input-writer-password" outlined label="비밀번호" />
+                                <q-input class="input-writer-password" 
+                                :rules="articleBodyRule"
+                                v-model="createCommentBody.writer" outlined label="작성자" />
+
+                                <q-input class="input-writer-password" 
+                                :rules="articleBodyRule"
+                                v-model="createCommentBody.password" outlined label="비밀번호" />
                             </div>
                         </div>
                         <div class="col-10">
                             <div class="col">
-                                <q-input filled type="textarea" />
+                                <q-input v-model="createCommentBody.content" filled type="textarea" />
                             </div>
                             <div class="col" style="text-align: right;">
-                                <q-btn class="sumit-comment-btn" color="primary" label="등록" />
+                                <q-btn class="sumit-comment-btn" color="primary" label="등록" type="submit"/>
                             </div>
                         </div>
-                    </div>
+                    </q-form>
                 </q-card-section>
             </q-card>
         </q-dialog>
@@ -119,7 +127,7 @@
 
                 <q-card-actions align="right" class="text-primary">
                     <q-btn class="form-btn" label="취소" color="primary" v-close-popup />
-                    <q-btn class="form-btn" label="삭제" color="red" @click="onDeleteArticle()" />
+                    <q-btn class="form-btn" label="삭제" color="red" @click="onDeleteArticle(articleDetail.id)" />
                 </q-card-actions>
             </q-card>
         </q-dialog>
@@ -139,11 +147,12 @@
 <script>
 import apiBoard from "@/api/board";
 import Grid from '@/components/GridPage.vue';
+import CreateReply from '@/components/board/createReply.vue';
 import { ref } from 'vue'
 
 export default {
     components: {
-        Grid
+        Grid, CreateReply
     },
 
     data() {
@@ -159,11 +168,20 @@ export default {
                 boardType: "QnA",
             },
 
+            createCommentBody: {
+                writer: null,
+                password: null,
+                content: null,
+            },
+
             articleBodyRule: [
                 val => (val !== null && val !== '') || '입력해주세요',
             ],
 
             deleteArticlePassword: null,
+
+            articleDetail: null,
+            createReply: [],
         }
     },
 
@@ -192,13 +210,33 @@ export default {
 
         onRowClick(row) {
             this.articleDetailDialog = true
-            console.log('onRowClick', row);
+            this.getArticle(row.id)
         },
 
         getArticles() {
             apiBoard.getArticles(this.params)
                 .then(response => {
                     this.$refs.grid.setData(response.data);
+                })
+                .catch((response) => {
+                    this.$q.notify({
+                        color: "deep-orange",
+                        textColor: "white",
+                        message: response.data.message,
+                    });
+                });
+        },
+
+        getArticle(id) {
+            apiBoard.getArticle(id)
+                .then(response => {
+                    this.articleDetail = response.data
+                    this.createReply = [];
+                    this.createCommentBody = {
+                        writer: null,
+                        password: null,
+                        content: null,
+                    };
                 })
                 .catch((response) => {
                     this.$q.notify({
@@ -243,7 +281,45 @@ export default {
                     console.log(response)
                     this.getArticles()
                     this.deleteAticleDialog = false
-                    this.createArticleDialog = false
+                    this.articleDetailDialog = false
+                    this.articleDetail = null
+                })
+                .catch((response) => {
+                    this.$q.notify({
+                        color: "deep-orange",
+                        textColor: "white",
+                        message: response.data.message,
+                    });
+                });
+        },
+
+        onComment(index) {
+            this.createReply[index] = true
+        },
+        
+        onCancelCreateReply(index) {
+            this.createReply[index] = false
+        },
+
+        onCreateReply(index) {
+            this.createReply[index] = false
+        },
+
+        createComment(id) {
+            if (this.createCommentBody.content == null ||
+                this.createCommentBody.content == '') {
+                this.$q.notify({
+                    color: "deep-orange",
+                    textColor: "white",
+                    message: "내용을 입력해주세요",
+                });
+                return
+            }
+
+            let body = this.createCommentBody
+            apiBoard.createComment(body, id)
+                .then(() => {
+                    this.getArticle(id)
                 })
                 .catch((response) => {
                     this.$q.notify({
@@ -303,7 +379,8 @@ h2 {
     border: solid;
     border-top: 0px;
     border-color: #ddd;
-    padding: 10px 15px;
+    padding: 12px 23px 10px 0;
+    padding-left: 46px;
 }
 
 .create-comment-container {
@@ -321,5 +398,22 @@ h2 {
 .sumit-comment-btn {
     width: 80px;
     margin-top: 10px;
+}
+
+.reply-header {
+    border: solid;
+    border-color: #ddd;
+    padding: 7px 12px;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: rgb(241, 240, 240);
+}
+
+.reply {
+    border: solid;
+    border-top: 0px;
+    border-color: #ddd;
+    padding: 12px 23px 10px 0;
+    padding-left: 46px;
 }
 </style>

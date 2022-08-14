@@ -15,7 +15,7 @@
             <br>
             <q-btn color="primary" label="목록으로" @click="goBack" />
             <q-btn style="float:right" color="primary" label="삭제" @click="goBack" />
-            <q-btn style="float:right; margin-right: 10px;" color="primary" label="수정" @click="goEditArticle" />
+            <q-btn style="float:right; margin-right: 10px;" color="primary" label="수정"/>
 
             <div class="row content-header">
                 <div class="col-8">김태후니<br>2022-07-15</div>
@@ -89,11 +89,8 @@ export default {
             $router.go(-1)
         }
 
-        function goEditArticle() {
-            $router.push({ path: "/board/edit" })
-        }
         return {
-            goBack, goEditArticle
+            goBack
         }
     },
 }
