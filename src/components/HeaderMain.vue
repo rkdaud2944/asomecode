@@ -1,7 +1,7 @@
 <template>
     <div class="row" style="background: #353543; width: 100%; padding: 10px">
         <div class="col">
-            <q-btn @click="sendCode('connect')" color="primary" label="connect" class="q-ml-md" />
+            <q-btn @click="connect()" color="primary" label="connect" class="q-ml-md" />
             <q-btn @click="goTo('/')" color="black" label="home" class="q-ml-md" />
             <q-btn @click="openUrl('/editor')" color="secondary" label="editor" class="q-ml-md" />
             <q-btn @click="sendCode('stop')" color="deep-orange" label="stop" class="q-ml-md" />
@@ -16,9 +16,19 @@
 </template>
 
 <script>
+import serial from "@/utils/serial";
 import VueBase from "@/VueBase";
 
 export default {
     mixins: [VueBase],
+
+    methods: {
+        connect() {
+            serial.connect();
+        },
+        sendCode() {
+            // serial.sendCode(code);
+        }
+    }
 }
 </script>
