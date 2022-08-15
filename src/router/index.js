@@ -77,19 +77,6 @@ const routes = [
         component: () => import('../views/help/subject-set/SubjectSetEdit.vue')
     },
 
-    // board
-    {
-        path: '/board/list',
-        component: () => import('../views/board/BoardList.vue')
-    },
-    {
-        path: '/board/detail',
-        component: () => import('../views/board/BoardDetail.vue')
-    },
-    {
-        path: '/board/create',
-        component: () => import('../views/board/CreateBoard.vue')
-    },
 ]
 
 const router = createRouter({
