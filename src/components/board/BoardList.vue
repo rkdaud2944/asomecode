@@ -1,20 +1,9 @@
 <template>
     <q-layout view="hhh LpR fff">
-        <q-header class="bg-primary text-white" height-hint="98">
-            <q-toolbar>
-                <q-toolbar-title>
-                    <q-avatar>
-                        <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
-                    </q-avatar>
-                    게시판
-                </q-toolbar-title>
-            </q-toolbar>
-        </q-header>
-
         <q-page-container style="margin: 0px 100px 0px 100px;">
             <div class="q-pa-md">
                 <div style="text-align: right; margin-bottom: 10px;">
-                    <q-btn color="secondary" label="새 글 작성" @click="onCreateArticleDialog('QnA')" />
+                    <q-btn color="secondary" label="새 글 작성" @click="onCreateArticleDialog(boardType)" />
                 </div>
 
                 <CreateArticle ref="createArticleDialog" @succeededCreateArticle="succeededCreateArticle" />
@@ -25,16 +14,6 @@
         </q-page-container>
 
         <ArticleDetail ref="articleDetailDialog" @getArticles="getArticles"/>
-
-        <q-footer class="bg-grey-8 text-white">
-            <q-toolbar>
-                <q-toolbar-title>
-                    <q-avatar>
-                        <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
-                    </q-avatar>
-                </q-toolbar-title>
-            </q-toolbar>
-        </q-footer>
     </q-layout>
 </template>
 
@@ -45,6 +24,8 @@ import CreateArticle from '@/components/board/CreateArticleDialog.vue';
 import ArticleDetail from '@/components/board/ArticleDetailDialog.vue';
 
 export default {
+    props: ["boardType"],
+
     components: {
         Grid, CreateArticle, ArticleDetail
     },
@@ -53,7 +34,7 @@ export default {
         return {
             columns: columns,
             pageSize: process.env.VUE_APP_PAGE_SIZE,
-            params: { page: 0, size: this.pageSize, boardType: "QnA" },
+            params: { page: 0, size: this.pageSize, boardType: this.boardType },
         }
     },
 
@@ -104,6 +85,6 @@ const columns = [
 ]
 </script>
 
-<style scoped>
+<style>
 
 </style>

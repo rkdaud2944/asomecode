@@ -79,16 +79,8 @@ const routes = [
 
     // board
     {
-        path: '/board/list',
-        component: () => import('../views/board/BoardList.vue')
-    },
-    {
-        path: '/board/detail',
-        component: () => import('../views/board/BoardDetail.vue')
-    },
-    {
-        path: '/board/edit',
-        component: () => import('../views/board/EditArticle.vue')
+        path: '/notice/list',
+        component: () => import('../views/notice/NoticeBoard.vue')
     },
 ]
 

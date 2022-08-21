@@ -6,7 +6,7 @@
             </a>
         </div>
         <div class="col menu">
-            <ImageButton :src="'/images/common/header_button_image/bt_notice.png'"/>
+            <ImageButton :src="'/images/common/header_button_image/bt_notice.png'" @click="onClickNotice"/>
             <ImageButton :src="'/images/common/header_button_image/bt_library.png'" />
             <ImageButton :src="'/images/common/header_button_image/bt_community.png'" />
             <ImageButton :src="'/images/common/header_button_image/bt_faq.png'" />
@@ -50,6 +50,12 @@ export default {
             subjects: subjectSets.getSubjectsOrDefaults(localStorage.getItem('selectedSubjectSetId')),
         }
     },
+
+    methods: {
+        onClickNotice() {
+            this.$router.push({ path: '/notice/list'});
+        },
+    }
 }
 </script>
 

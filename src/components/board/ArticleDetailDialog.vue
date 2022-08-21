@@ -21,7 +21,7 @@
                         <h2>{{ articleDetail.title }}</h2>
                     </div>
                     <q-linear-progress /><br>
-                    <div class="col-8">{{ articleDetail.content }}</div>
+                    <div class="col-8" v-html="articleDetail.content"></div>
                 </div>
 
                 <div class="column comment-header">

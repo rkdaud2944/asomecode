@@ -66,6 +66,13 @@ export default {
             apiBoard.create(body)
                 .then(() => {
                     this.dialog = false
+                    this.createArticleBody = {
+                        writer: null,
+                        password: null,
+                        title: null,
+                        content: null,
+                        boardType: null,
+                    }
                     this.$emit("succeededCreateArticle");
                 })
                 .catch((response) => {
