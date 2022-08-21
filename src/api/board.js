@@ -4,14 +4,15 @@ export default {
     async create(body) {
         return new Promise((resolve, reject) => {
             var url = "article"
-            rest
-                .post(url, body)
-                .then((response) => {
+            rest.post(url, body)
+                .then(response => {
+                    if (response.data.resultCode) {
+                        reject(response);
+                        return;
+                    }
                     resolve(response);
-                })
-                .catch((e) => {
-                    console.log("서버 오류입니다. 잠시 후에 다시 시도해주세요.")
-                    reject(e);
+                }).catch(error => {
+                    console.log(error);
                 });
         })
     },
@@ -24,10 +25,8 @@ export default {
                         reject(response);
                         return;
                     }
-
                     resolve(response);
-                })
-                .catch(error => {
+                }).catch(error => {
                     console.log(error);
                 });
         });
@@ -49,9 +48,9 @@ export default {
         });
     },
 
-    async deleteArticle(id, password) {
+    async deleteArticle(type, id, password) {
         return new Promise((resolve, reject) => {
-            rest.delete(`article/${id}`, {data: {"password": password}})
+            rest.delete(`${type}/${id}`, { data: { "password": password } })
                 .then(response => {
                     if (response.data.resultCode) {
                         reject(response);
@@ -67,28 +66,30 @@ export default {
 
     async createComment(body, id) {
         return new Promise((resolve, reject) => {
-            rest
-                .post(`comment/${id}`, body)
-                .then((response) => {
+            rest.post(`comment/${id}`, body)
+                .then(response => {
+                    if (response.data.resultCode) {
+                        reject(response);
+                        return;
+                    }
                     resolve(response);
-                })
-                .catch((e) => {
-                    console.log("서버 오류입니다. 잠시 후에 다시 시도해주세요.")
-                    reject(e);
+                }).catch(error => {
+                    console.log(error);
                 });
         })
     },
 
     async createReply(body, id) {
         return new Promise((resolve, reject) => {
-            rest
-                .post(`reply/${id}`, body)
-                .then((response) => {
+            rest.post(`reply/${id}`, body)
+                .then(response => {
+                    if (response.data.resultCode) {
+                        reject(response);
+                        return;
+                    }
                     resolve(response);
-                })
-                .catch((e) => {
-                    console.log("서버 오류입니다. 잠시 후에 다시 시도해주세요.")
-                    reject(e);
+                }).catch(error => {
+                    console.log(error);
                 });
         })
     },
