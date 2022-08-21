@@ -11,37 +11,37 @@ export default {
                 baudRate: 115200,
                 lock: false,
             });
-                
+
         } catch (error) {
             console.log(error);
             port = null;
-            return;            
+            return;
         }
 
         parser = new ReadlineParser({ delimiter: '\r\n' });
         port.pipe(parser);
 
-        parser.on('data', console.log);  
+        parser.on('data', console.log);
 
         port.on('close', () => {
             console.log('Seiral.closed');
             this.terminate();
         });
-        
+
         port.on('error', (err) => {
             console.error("Seiral.error", err);
             this.terminate();
         });
-        
+
         port.on('connected', (err) => {
             console.log('Seiral.connected', err);
             this.terminate();
-        });         
+        });
     },
 
     disconnect() {
         try {
-            port.close();            
+            port.close();
         } catch (error) {
             console.log(error);
         }
@@ -52,4 +52,13 @@ export default {
         port = null;
         parser = null;
     },
+
+    list() {
+        SerialPort.list((err, ports) => {
+            console.log("list", ports);
+            ports.forEach(port => {
+                console.log(port);
+            });
+        });
+    }
 }

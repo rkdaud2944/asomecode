@@ -16,8 +16,7 @@
 </template>
 
 <script>
-// import serial from "@/utils/serial";
-import { SerialPort } from "serialport";
+import serial from "@/utils/serial";
 import VueBase from "@/VueBase";
 
 export default {
@@ -25,13 +24,8 @@ export default {
 
     methods: {
         connect() {
-            // const port = new SerialPort({
-            //     path: "path",
-            //     baudRate: 115200,
-            //     lock: false,
-            // });
-            console.log(SerialPort);
-            // serial.connect();
+            serial.list();
+            // serial.connect("COM1");
         },
         sendCode() {
             // serial.sendCode(code);

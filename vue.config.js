@@ -5,26 +5,14 @@ module.exports = defineConfig({
         'quasar'
     ],
 
-    configureWebpack: {
-        resolve: {
-            fallback: {
-                os: require.resolve("os-browserify/browser"),
-                path: false,
-                fs: false,
-                stream: false,
-                child_process: false,
-            },
-        },
-    },
-
     pluginOptions: {
         quasar: {
             importStrategy: 'kebab',
             rtlSupport: false
         },
         electronBuilder: {
+            nodeIntegration: true,
             externals: ['serialport'],
-            nodeModulesPath: ['../../node_modules']
         }
     }
 })
