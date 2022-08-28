@@ -3,7 +3,7 @@
         <div class="col">
             <q-btn ref="btConnect" @click="connect()" :color="btConnectColor" label="connect" class="q-ml-md" />
             <q-btn @click="goTo('/')" color="black" label="home" class="q-ml-md" />
-            <q-btn @click="openUrl('/editor')" color="secondary" label="editor" class="q-ml-md" />
+            <q-btn @click="goTo('/editor')" color="secondary" label="editor" class="q-ml-md" />
             <q-btn @click="stop()" color="deep-orange" label="stop" class="q-ml-md" />
         </div>
         <div class="on-right">

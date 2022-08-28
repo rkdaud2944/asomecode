@@ -1,5 +1,5 @@
 <template>
-    <div ref="console" style="overflow-y: scroll; height:200px;">
+    <div ref="console" class="q-pa-md" style="overflow-y: scroll; height:200px;">
         <div v-for="(row, index) in rows" :key="index">
             {{ row }}
         </div>
@@ -18,6 +18,8 @@ import serial from "@/utils/serial";
 export default {
     data() {
         return {
+            timer: null,
+            buffer: [],
             rows: [],
             text: "",
         };
@@ -31,7 +33,21 @@ export default {
             this.rows = [];
         });
         eventbus.on("onSerialReceived", (data) => {
-            this.rows.push(data);
+            if (data && data.startsWith("###")) {
+                // TODO:
+                console.log(data);
+                return;
+            }
+
+            this.buffer.push(data);
+        });
+
+        this.timer = setInterval(() => {
+            if (this.buffer.length == 0) return;
+
+            this.rows = this.rows.concat(this.buffer);
+            this.buffer = [];
+
             if (this.rows.length > 256) {
                 this.rows = this.rows.slice(-256);
             }
@@ -41,7 +57,12 @@ export default {
                     this.$refs.console.scrollTop = this.$refs.console.scrollHeight;
                 }
             });
-        });
+
+        }, 500);
+    },
+
+    unmounted() {
+        clearInterval(this.timer);
     },
 
     methods: {

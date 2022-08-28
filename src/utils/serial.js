@@ -5,6 +5,12 @@ let port = null;
 let parser = null;
 
 export default {
+    async getAsomeboard() {
+        const ports = await SerialPort.list();
+        console.log(ports);
+        return ports.find(port => port.manufacturer.startsWith("Silicon Labs"));
+    },
+
     async connect() {
         if (port !== null) this.disconnect();
 
@@ -24,16 +30,17 @@ export default {
         parser = new ReadlineParser({ delimiter: '\r\n' });
         port.pipe(parser);
 
-        parser.on('data', (msg) => eventbus.emit("onSerialReceived", msg));
+        parser.on('data', (msg) => {
+            eventbus.emit("onSerialReceived", msg)
+        });
 
         port.on('close', () => {
             this.terminate();
             eventbus.emit("onSerialClosed");
         });
         port.on('error', () => {
-            eventbus.emit("onError", "어썸보드에서 오류가 감지되었습니다.");
             this.disconnect();
-            eventbus.emit("onSerialClosed");
+            eventbus.emit("onError", "어썸보드에서 오류가 감지되었습니다.");
         });
 
         try {
@@ -100,12 +107,26 @@ export default {
         this.write(codeListFiles);
     },
 
-    async getAsomeboard() {
-        const ports = await SerialPort.list();
-        console.log(ports);
-        return ports.find(port => port.manufacturer.startsWith("Silicon Labs"));
-    }
+    runCode(codes) {
+        this.writeLn( `_codes_ = ""`);
+        for (let code of codes.split("\r\n")) {
+            code = code.replace(/\\/gi, '\\\\');
+            code = code.replace(/'/gi, "\\'");
+            this.writeLn(`_codes_ = _codes_ + '${code}\\n'`);
+        }
+        this.writeLn(`exec(_codes_)`);
+    },
 }
+
+// sLine := Space2Tab(Lines[Loop]);
+// sLine := StringReplace(sLine, '\', '\\', [rfReplaceAll]);
+// sLine := StringReplace(sLine, '''', '\''', [rfReplaceAll]);
+// sLine := StringReplace(sLine, #9, '\t', [rfReplaceAll]);
+// sLine := StringReplace(sLine, '{mod}', '%', [rfReplaceAll]);
+// sLine := StringReplace(sLine, '@@NOW', CurrentTime, [rfReplaceAll]);
+// sLine := RemoveComment(sLine);
+// sLine := Format('_codes_ = _codes_ + ''%s\n''', [sLine]);
+// FSendBuffer.Add('exec(_codes_)' + #10#13);
 
 const codeListFiles =
 `import os\r\n

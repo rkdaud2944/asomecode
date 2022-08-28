@@ -12,7 +12,7 @@
 import globals from "./globals";
 import { useMemberStore } from "@/store/member";
 import HeaderMain from "@/components/HeaderMain.vue";
-import ConsoleLog from "./components/ConsoleLog.vue";
+import ConsoleLog from "@/components/ConsoleLog.vue";
 
 export default {
     components: {
@@ -22,7 +22,7 @@ export default {
     computed: {
         showHeaderMain() {
             let result = true;
-            const skipHeaderMains = ["/editor", "/help"];
+            const skipHeaderMains = ["/help"];
             skipHeaderMains.forEach((path) => {
                 if (this.$route.path.startsWith(path)) {
                     result = false;
