@@ -1,4 +1,5 @@
 import { SerialPort, ReadlineParser } from "serialport";
+import eventbus from "@/utils/eventbus";
 
 let port = null;
 let parser = null;
@@ -8,10 +9,8 @@ export default {
         if (port !== null) this.disconnect();
 
         const asomeboard = await this.getAsomeboard();
-        console.log(asomeboard);
         if (asomeboard == null) {
-            // TODO: 오류 메시지 출력
-            console.log("asomeboard not found");
+            eventbus.emit("onError", "어썸보드를 찾을 수 없습니다.");
             return;
         }
 
@@ -25,28 +24,24 @@ export default {
         parser = new ReadlineParser({ delimiter: '\r\n' });
         port.pipe(parser);
 
-        parser.on('data', console.log);
+        parser.on('data', (msg) => eventbus.emit("onSerialReceived", msg));
 
         port.on('close', () => {
-            console.log('Seiral.closed');
             this.terminate();
+            eventbus.emit("onSerialClosed");
         });
-        port.on('error', (err) => {
-            console.error("Seiral.error", err);
-            this.terminate();
-        });
-        port.on('connected', (err) => {
-            console.log('Seiral.connected', err);
-            this.terminate();
+        port.on('error', () => {
+            eventbus.emit("onError", "어썸보드에서 오류가 감지되었습니다.");
+            this.disconnect();
+            eventbus.emit("onSerialClosed");
         });
 
         try {
             port.open();
-            // TODO: 이벤트 처리
-            console.log('Seiral.open');
+            eventbus.emit("onSerialConnected");
         } catch (error) {
-            // TODO: 오류 메시지 출력
             console.log(error);
+            eventbus.emit("onError", "어썸보드에 연결할 수가 없습니다.");
             port = null;
             return;
         }
