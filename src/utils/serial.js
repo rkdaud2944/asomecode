@@ -110,23 +110,18 @@ export default {
     runCode(codes) {
         this.writeLn( `_codes_ = ""`);
         for (let code of codes.split("\r\n")) {
+            // sLine := RemoveComment(sLine);
+            // sLine := Space2Tab(Lines[Loop]);
+            // sLine := StringReplace(sLine, #9, '\t', [rfReplaceAll]);
             code = code.replace(/\\/gi, '\\\\');
             code = code.replace(/'/gi, "\\'");
+            code = code.replace(/{mod}/gi, "%");
+            code = code.replace(/@@NOW/gi, "CurrentTime");
             this.writeLn(`_codes_ = _codes_ + '${code}\\n'`);
         }
         this.writeLn(`exec(_codes_)`);
     },
 }
-
-// sLine := Space2Tab(Lines[Loop]);
-// sLine := StringReplace(sLine, '\', '\\', [rfReplaceAll]);
-// sLine := StringReplace(sLine, '''', '\''', [rfReplaceAll]);
-// sLine := StringReplace(sLine, #9, '\t', [rfReplaceAll]);
-// sLine := StringReplace(sLine, '{mod}', '%', [rfReplaceAll]);
-// sLine := StringReplace(sLine, '@@NOW', CurrentTime, [rfReplaceAll]);
-// sLine := RemoveComment(sLine);
-// sLine := Format('_codes_ = _codes_ + ''%s\n''', [sLine]);
-// FSendBuffer.Add('exec(_codes_)' + #10#13);
 
 const codeListFiles =
 `import os\r\n
