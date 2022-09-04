@@ -20,6 +20,10 @@ const routes = [
         path: '/lesson/detail/:id',
         component: () => import('../views/lesson/LessonDetail.vue')
     },
+    {
+        path: '/edit/lesson/:id',
+        component: () => import('../views/lesson/EditLesson.vue')
+    },
 
     // help 기타
     {
