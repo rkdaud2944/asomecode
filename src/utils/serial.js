@@ -110,6 +110,7 @@ export default {
     runCode(codes) {
         this.writeLn( `_codes_ = ""`);
         for (let code of codes.split("\r\n")) {
+            // TODO:
             // sLine := RemoveComment(sLine);
             // sLine := Space2Tab(Lines[Loop]);
             // sLine := StringReplace(sLine, #9, '\t', [rfReplaceAll]);
