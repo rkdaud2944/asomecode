@@ -22,36 +22,36 @@
                 <q-tab-panel name="md">
                     <textarea class="inputText" :value="input" @input="update"></textarea>
                 </q-tab-panel>
-
-                <q-tab-panel name="style">
-                    <textarea class="inputText" :value="inputStyle"></textarea>
-                </q-tab-panel>
             </q-tab-panels>
         </q-card>
 
-        <div class="output" v-html="output"></div>
+        <div class="markdown_output" v-html="output"></div>
     </div>
 </template>
 
 <script>
-import { marked } from 'marked'
 import { debounce } from 'lodash-es'
 import lesson03 from "@/data/lesson03.js";
+import markdown from "@/utils/markdown.js";
 
 export default {
     data() {
         return {
             tab: "md",
             input: lesson03,
-            inputStyle: "<style>\n\n</style>",
         };
+    },
+
+    mounted() {
+        markdown.markedInput(lesson03)
     },
 
     computed: {
         output() {
-            return marked(this.input)
+            return markdown.markedInput(this.input)
         }
     },
+
     methods: {
         update: debounce(function (e) {
             this.input = e.target.value
@@ -60,6 +60,7 @@ export default {
 }
 </script>
     
+<style src="@/assets/css/component/markdown_content.css"/>
 <style>
 @media (min-width: 883px) {
     .header {
@@ -100,7 +101,7 @@ export default {
     box-sizing: border-box;
 }
 
-.output {
+.markdown_output {
     overflow: auto;
     width: 50%;
     height: 100%;

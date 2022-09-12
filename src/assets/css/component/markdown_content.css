@@ -1,0 +1,40 @@
+.markdown_output h2 {
+    padding-top: 15px;
+    border-top: 2px solid #ff8123;
+    font-size: 23px;
+    font-weight: bold;
+    line-height: 30px;
+    color: #ff8123;
+    margin: 0px;
+    margin-bottom: 10px;
+}
+
+.markdown_output h3 {
+    font-weight: 700;
+    font-size: 1.2em;
+    word-break: keep-all;
+    height: 30px;
+    margin: 0px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    line-height: normal;
+}
+
+.markdown_output p {
+    font-size: 1.2em;
+    width: 98%;
+    word-break: keep-all;
+    display: block;
+    margin: 0px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+.markdown_output ul {
+    font-size: 1.2em;
+}
+
+.markdown_output .img_content_box {
+    font-size: 1.2em;
+    text-align: center
+}
