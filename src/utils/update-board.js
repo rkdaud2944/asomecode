@@ -4,7 +4,11 @@ import downloadToBoard from "./download-to-board";
 
 export default {
     async start() {
-        downloadToBoard.download("update.py");
+        downloadToBoard.download("boot.py");
+        downloadToBoard.download("asomebot.py");
+        downloadToBoard.download("asomecar.py");
+        downloadToBoard.download("button.py");
+        downloadToBoard.download("buzzer.py");
         // versions = await getRemoteFileList();
         // for (const file in versions) {
         //     const fileInfo = versions[file];

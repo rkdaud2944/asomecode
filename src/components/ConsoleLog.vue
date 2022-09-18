@@ -68,6 +68,14 @@ export default {
 
     methods: {
         send() {
+            if (this.text == "") return;
+
+            if (this.text.startsWith("/list")) {
+                serial.listFiles();
+                this.text = "";
+                return;
+            }
+
             serial.writeLn(this.text);
             this.text = "";
         },
