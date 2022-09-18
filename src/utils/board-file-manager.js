@@ -1,5 +1,5 @@
 /**
- * 서버에서 파일을 파이썬 또는 리소스 파일을 다운받아서 어썸보드에 저장한다.
+ * 파일을 파이썬 또는 리소스 파일을 다운받아서 어썸보드에 저장한다.
  */
 
 import config from "@/config";
@@ -17,6 +17,16 @@ eventbus.on("onSerialReceived", (data) => {
 const buffer = [];
 
 const downloadToBoard = {
+    async saveText(filename, text) {
+        const file = {
+            isOpened: false,
+            name: filename,
+            lines: text.replaceAll("\r", "").split("\n"),
+        }
+        buffer.push(file);
+        eventbus.emit("onSerialReceived", "### Next Line");
+    },
+
     async download(filename) {
         let lines = [];
         try {
@@ -32,14 +42,11 @@ const downloadToBoard = {
             lines: lines,
         }
         buffer.push(file);
-        console.log("download", buffer);
         eventbus.emit("onSerialReceived", "### Next Line");
     },
 
     nextLine() {
         if (buffer.length == 0) return;
-
-        console.log("nextLine", buffer);
 
         const file = buffer[0];
         if (file.lines.length == 0) {

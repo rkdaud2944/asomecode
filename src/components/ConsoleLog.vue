@@ -31,11 +31,11 @@ export default {
             this.rows = [];
         });
         eventbus.on("onSerialReceived", (data) => {
-            if (data && (data.startsWith("###") || data.startsWith(">>> ###"))) {
-                // TODO:
-                // console.log(data);
-                return;
-            }
+            // if (data && (data.startsWith("###") || data.startsWith(">>> ###"))) {
+            //     // TODO:
+            //     // console.log(data);
+            //     return;
+            // }
 
             data = data.replaceAll(" ", "&nbsp;");
             data = data.replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;");
@@ -68,8 +68,6 @@ export default {
 
     methods: {
         send() {
-            if (this.text == "") return;
-
             if (this.text.startsWith("/list")) {
                 serial.listFiles();
                 this.text = "";

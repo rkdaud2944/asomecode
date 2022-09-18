@@ -76,7 +76,7 @@ export default {
         if (port == null) return;
         try {
             port.write(text);
-            console.log("------> " + text);
+            // console.log("------> " + text);
         } catch (error) {
             console.log(error);
         }
@@ -86,7 +86,7 @@ export default {
         if (port == null) return;
         try {
             port.write(text +"\r\n");
-            console.log("------> " + text);
+            // console.log("------> " + text);
         } catch (error) {
             console.log(error);
         }
@@ -111,7 +111,7 @@ export default {
 
     runCode(codes) {
         this.writeLn( `_codes_ = ""`);
-        for (let code of codes.split("\r\n")) {
+        for (let code of codes.replaceAll("\r", "").split("\n")) {
             // TODO:
             // sLine := RemoveComment(sLine);
             // sLine := Space2Tab(Lines[Loop]);
