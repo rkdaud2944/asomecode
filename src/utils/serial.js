@@ -8,7 +8,7 @@ export default {
     async getAsomeboard() {
         const ports = await SerialPort.list();
         console.log(ports);
-        return ports.find(port => port.manufacturer.startsWith("Silicon Labs"));
+        return ports.find((port) => port.manufacturer && port.manufacturer.startsWith("Silicon Labs"));
     },
 
     async connect() {
@@ -76,6 +76,7 @@ export default {
         if (port == null) return;
         try {
             port.write(text);
+            console.log("------> " + text);
         } catch (error) {
             console.log(error);
         }
@@ -85,6 +86,7 @@ export default {
         if (port == null) return;
         try {
             port.write(text +"\r\n");
+            console.log("------> " + text);
         } catch (error) {
             console.log(error);
         }

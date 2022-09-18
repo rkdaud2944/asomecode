@@ -1,8 +1,6 @@
 <template>
-    <div ref="console" class="q-pa-md" style="overflow-y: scroll; height:200px;">
-        <div v-for="(row, index) in rows" :key="index">
-            {{ row }}
-        </div>
+    <div ref="console" class="q-pa-md" style="overflow-y: scroll; height:800px;">
+        <div v-for="(row, index) in rows" :key="index" v-html="row"></div>
     </div>
     <q-input @keydown.enter.prevent="send" filled v-model="text">
         <template v-slot:prepend>
@@ -33,11 +31,14 @@ export default {
             this.rows = [];
         });
         eventbus.on("onSerialReceived", (data) => {
-            if (data && data.startsWith("###")) {
+            if (data && (data.startsWith("###") || data.startsWith(">>> ###"))) {
                 // TODO:
-                console.log(data);
+                // console.log(data);
                 return;
             }
+
+            data = data.replaceAll(" ", "&nbsp;");
+            data = data.replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;");
 
             this.buffer.push(data);
         });

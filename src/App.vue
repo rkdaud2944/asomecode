@@ -2,7 +2,6 @@
     <el-row v-if="showHeaderMain">
         <HeaderMain />
     </el-row>
-    <router-view />
     <el-row v-if="showHeaderMain">
         <ConsoleLog />
     </el-row>
