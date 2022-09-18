@@ -17,7 +17,7 @@ let tobeDowndloads = [];
 
 const updateBoard = {
     async start() {
-        serial.runCode(codesGetVersion);
+        serial.runCode(codeGetVersion);
 
         versions = [];
         filenameQue = [];
@@ -74,7 +74,7 @@ function getFileVersion(filename) {
     serial.writeLn(`getVersion("${filename}")`);
 }
 
-const codesGetVersion = `
+const codeGetVersion = `
 def getVersion(filename):
     global f
     try:

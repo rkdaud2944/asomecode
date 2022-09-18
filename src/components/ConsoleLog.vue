@@ -74,6 +74,12 @@ export default {
                 return;
             }
 
+            if (this.text.startsWith("/view")) {
+                serial.viewFile(this.text.split(" ")[1]);
+                this.text = "";
+                return;
+            }
+
             serial.writeLn(this.text);
             this.text = "";
         },

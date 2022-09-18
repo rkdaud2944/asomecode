@@ -109,6 +109,10 @@ export default {
         this.write(codeListFiles);
     },
 
+    viewFile(filename) {
+        this.runCode(codeViewFile(filename));
+    },
+
     runCode(codes) {
         this.writeLn( `_codes_ = ""`);
         for (let code of codes.replaceAll("\r", "").split("\n")) {
@@ -138,3 +142,15 @@ _codes_ = _codes_ + '    count = count + 1\\n'\r\n
 _codes_ = _codes_ + '    print(file)\\n'\r\n
 _codes_ = _codes_ + 'print(count, "files")\\n'\r\n
 exec(_codes_)\r\n`;
+
+function codeViewFile(filename) {
+    return `print("### System.Start.View")
+f = open("${filename}", "r")
+while True:
+    line = f.readline()
+    if not line:
+        break
+    print("> " + line[:-1])
+f.close()
+print("### System.End.View")`;
+}
