@@ -1,6 +1,4 @@
-export default `
-
-## 1.학습 목표
+export default `## 1.학습 목표
 
 <video controls width="100%">
     <source src="/video/Korean/starter/03.execute.webm" type="video/webm">

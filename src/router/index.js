@@ -17,11 +17,13 @@ const routes = [
         component: () => import('../views/lesson/LessonList.vue')
     },
     {
-        path: '/lesson/detail/:id',
+        path: '/lesson/detail',
+        props: true,
         component: () => import('../views/lesson/LessonDetail.vue')
     },
     {
-        path: '/edit/lesson/:id',
+        path: '/edit/lesson',
+        props: true,
         component: () => import('../views/lesson/EditLesson.vue')
     },
 

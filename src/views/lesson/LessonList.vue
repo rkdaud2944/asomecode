@@ -18,7 +18,7 @@
                 <p class="description-text">{{ subject.description }}</p>
             </div>
             <div class="list-top-bar"></div>
-            <div @click="goTo(`/lesson/detail/${lesson.id}`)" class="list-left rounded q-ma-sm q-pa-md" v-for="(lesson, index) in subject.lessons" :key="index" style="cursor: pointer" >
+            <div @click="goTo('/lesson/detail', { id: lesson.id })" class="list-left rounded q-ma-sm q-pa-md" v-for="(lesson, index) in subject.lessons" :key="index" style="cursor: pointer" >
                 <div class="subject-div-size">          
                     <div class="subject-number">
                         <p class="subject-number-text"> <span class="testColor">{{ index + 1 }}</span> 차시</p>
