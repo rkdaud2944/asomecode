@@ -9,7 +9,7 @@ export default {
         for (let i = 0; i < lines.length; i++) {
             const line = lines[i].trim();
             if (!line.startsWith("#")) continue;
-
+            
             const tag = "tag-" + i;
             const title_items = line.split(" ");
             const level = title_items[0];

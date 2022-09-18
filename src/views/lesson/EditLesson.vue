@@ -6,8 +6,8 @@
     </div>
 
     <div class="lesson-title">
-        <q-input outlined v-model="text" label="제목" style="width: 50%;" />
-        <q-btn color="primary" style="margin-left: 20px; height: 28px;">수정</q-btn>
+        <q-input outlined v-model="lesson.title" label="제목" style="width: 50%;" />
+        <q-btn color="primary" style="margin-left: 20px; height: 28px;" @click="updateLesson">수정</q-btn>
     </div>
 
     <div class="editor">
@@ -16,7 +16,7 @@
                 <q-btn color="secondary" @click="onImageUploadDialog" glossy label="이미지 삽입" />
                 <q-btn color="secondary" @click="onVideoUploadDialog" glossy label="동영상 삽입" />
             </q-btn-group>
-            <textarea ref="inputTextarea" class="inputText" :value="input" @input="update"></textarea>
+            <textarea ref="inputTextarea" class="inputText" :value="lesson.content" @input="update"></textarea>
         </q-card>
 
         <div class="markdown_output" v-html="output"></div>
@@ -81,14 +81,15 @@
 
 <script>
 import { debounce } from 'lodash-es'
-import lesson03 from "@/data/lesson03.js";
 import markdown from "@/utils/markdown.js";
 import { ref } from 'vue'
+import { Notify } from 'quasar'
 import apiAwsS3 from "@/api/awsS3";
+import apiLesson from "@/api/lesson";
 export default {
     data() {
         return {
-            input: lesson03,
+            lesson: null,
         };
     },
 
@@ -103,18 +104,45 @@ export default {
     },
 
     mounted() {
-        markdown.markedInput(lesson03)
+        this.getLesson(this.$route.query.id)
+        markdown.markedInput(this.lesson.content)
     },
 
     computed: {
         output() {
-            return markdown.markedInput(this.input)
+            return markdown.markedInput(this.lesson.content)
         }
     },
 
     methods: {
+        updateLesson() {
+            let param = {
+                title: this.lesson.title,
+                content: this.lesson.content,
+                htmlUrl: this.lesson.htmlUrl,
+                description: this.lesson.description
+            }
+            apiLesson.updateLesson(param, this.$route.query.id)
+                .then(() => {
+                    Notify.create({
+                        color: "deep-orange",
+                        textColor: "white",
+                        message: '수정 완료!',
+                    });
+                })
+                .catch(this.showError);
+        },
+
+        getLesson(id) {
+            apiLesson.lessonDetail(id)
+                .then((response) => {
+                    this.lesson = response.data;
+                })
+                .catch(this.showError);
+        },
+
         update: debounce(function (e) {
-            this.input = e.target.value
+            this.lesson.content = e.target.value
         }, 200),
 
         onImageUploadDialog() {
@@ -126,7 +154,7 @@ export default {
             var value = this.$refs.inputTextarea.value;
             var selectionStart = this.$refs.inputTextarea.selectionStart;
             var output = [value.slice(0, selectionStart), markedImage, value.slice(selectionStart)].join('')
-            this.input = output
+            this.lesson.content = output
         },
 
         onVideoUploadDialog() {
@@ -139,7 +167,7 @@ export default {
             var value = this.$refs.inputTextarea.value;
             var selectionStart = this.$refs.inputTextarea.selectionStart;
             var output = [value.slice(0, selectionStart), markedVideo, value.slice(selectionStart)].join('')
-            this.input = output
+            this.lesson.content = output
         },
 
         uploadLessonImage() {
@@ -168,10 +196,6 @@ export default {
     }
 }
 </script>
-    
-
-
-
 
 
 

@@ -6,7 +6,7 @@
         <p class="eng_text">{{ subject.title_eng }}</p>
         <p class="text">{{ subject.description }}</p>
         <br>
-        <div class="more-button" @click="goTo('/lesson/list', subject)">
+        <div class="more-button" @click="goTo('/lesson/list', { id: subject.id })">
             <p style="color:white; font-size: 15px; line-height:28px; ">더 알아보기 <b>〉</b></p>
         </div>
     </div>
@@ -25,14 +25,6 @@ export default {
     props: ["subject"],
 setup() {
 
-    },
-
-    beforeMount(){
-        var componentColorMap = new Map();
-        componentColorMap.set(1,'red')
-        componentColorMap.set(2,'yellow')
-        componentColorMap.set(3,'blue')
-        componentColorMap.set(4,'green')
     },
 }
 </script>

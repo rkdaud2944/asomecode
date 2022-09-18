@@ -34,8 +34,6 @@
 import VueBase from '@/VueBase';
 import apiSubject from "@/api/subject";
 
-
-
 export default {
     mixins: [VueBase],
 
@@ -53,12 +51,9 @@ export default {
         getSubject(id) {
             apiSubject.subjectDetail(id)
                 .then((response) => {
-                    console.log(response.data);
                     this.subject = response.data;
                 })
-                .catch((e) => {
-                    console.log(e);
-                });
+                .catch(this.showError);
         },
     },
 
