@@ -1,10 +1,4 @@
 <template>
-    <div class="header nav-padding">
-        <a href="/">
-            <img src="/images/common/logom.png" class="logo" />
-        </a>
-    </div>
-
     <div class="lesson-title">
         <q-input outlined v-model="lesson.title" label="제목" style="width: 50%;" />
         <q-btn color="primary" style="margin-left: 20px; height: 28px;" @click="updateLesson">수정</q-btn>
@@ -203,28 +197,6 @@ export default {
 
 <style src="@/assets/css/component/markdown_content.css"/>
 <style>
-@media (min-width: 883px) {
-    .header {
-        width: 100%;
-        background: rgb(255, 129, 35);
-        height: 70px;
-    }
-}
-
-@media (min-width:783px) {
-    .logo {
-        bottom: 65px;
-        left: 115px;
-        width: 120px;
-        height: 45px;
-        position: relative;
-    }
-
-    .nav-padding {
-        padding-top: 160px;
-    }
-}
-
 .lesson-title {
     display: flex;
     margin: 20px;

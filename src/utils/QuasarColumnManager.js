@@ -1,7 +1,10 @@
+import strg from "@/utils/strg";
+
 export default class QuasarColumHeader {
     constructor(columns) {
         this.columns = columns;
     }
+
     getHeader(col) {
         // ↑, ↓
         let sortSign = "";
@@ -11,6 +14,16 @@ export default class QuasarColumHeader {
             return `<div class="q-table-header-label cursor-pointer text-deep-orange">${sortSign} ${col.label}</div>`;
         } else {
             return col.label;
+        }
+    }
+
+    getColumn(col) {
+        switch (col.type) {
+            case "url": return strg.toLink(col.value);
+            case "number": return strg.getPriceStr(col.value);
+            case "codeText": return this.getCode(col).label;
+            case "image": return strg.toImage(col.value);
+            default: return col.value;
         }
     }
 

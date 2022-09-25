@@ -21,11 +21,6 @@ const routes = [
         props: true,
         component: () => import('../views/lesson/LessonDetail.vue')
     },
-    {
-        path: '/edit/lesson',
-        props: true,
-        component: () => import('../views/lesson/EditLesson.vue')
-    },
 
     // help 기타
     {
@@ -101,7 +96,12 @@ const routes = [
             {
                 path: '/backOffice/create/lesson',
                 component: () => import('../views/backOffice/CreateLesson.vue')
-            }
+            },
+            {
+                path: '/backOffice/edit/lesson',
+                props: true,
+                component: () => import('../views/backOffice/EditLesson.vue')
+            },
         ]
     },
 ]

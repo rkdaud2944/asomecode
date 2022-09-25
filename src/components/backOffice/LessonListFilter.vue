@@ -12,26 +12,40 @@
 
         <q-input class="input-box" filled v-model="params.title" label="차시 제목" color="teal">
             <template v-slot:prepend>
-                <q-icon name="campaign" />
+                <q-icon name="title" />
             </template>
         </q-input>
+
+        <q-select class="input-box" v-model="params.defaultSubjectId" 
+        :options="defaultSubjectSet" :option-value="opt => opt.id" :option-label="opt => opt.title" 
+        label="과목명" emit-value filled map-options>
+            <template v-slot:prepend>
+                <q-icon name="subject" />
+            </template>
+        </q-select>
     </div>
 </template>
 
 <script>
+import apiSubject from "@/api/subject";
 export default {
 
     data() {
         return {
+            defaultSubjectSet: null,
             params: {
                 title: null,
             },
         };
     },
 
+    mounted() {
+        this.getDefaultSubjectSet()
+    },
+
     computed: {
         filters() {
-            const filters = {...this.params};
+            const filters = { ...this.params };
             return filters;
         }
     },
@@ -47,6 +61,14 @@ export default {
 
         onFilterChanged() {
             this.$emit("onFilterChanged", this.filters);
+        },
+
+        getDefaultSubjectSet(id) {
+            apiSubject.defaultSubjectSet(id)
+                .then((response) => {
+                    this.defaultSubjectSet = response.data;
+                })
+                .catch(this.showError);
         },
     },
 }
