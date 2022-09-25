@@ -4,7 +4,7 @@
             <q-toolbar>
                 <q-toolbar-title>
                     <div class="row" style="width: 100vh; height: 64px">
-                        <q-btn icon="play_arrow" class="q-mt-md q-mb-md" color="primary" label="Run"/>
+                        <q-btn @click="run" icon="play_arrow" class="q-mt-md q-mb-md" color="primary" label="Run"/>
                         <q-btn icon="stop_circle" class="q-mt-md q-mb-md q-ml-sm" color="deep-orange" label="Stop"/>
 
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import serial from "@/utils/serial";
 import { VAceEditor } from "vue3-ace-editor";
 import 'ace-builds/src-noconflict/mode-python';
 import 'ace-builds/src-noconflict/theme-monokai';
@@ -44,6 +45,24 @@ export default {
             content: '',
         }
     },
+
+    methods: {
+        run() {
+            serial.runCode(this.content);
+        },
+        stop() {
+            console.log('stop');
+        },
+        upload() {
+            console.log('upload');
+        },
+        open() {
+            console.log('open');
+        },
+        save() {
+            console.log('save');
+        }
+    }
 };
 </script>
 
