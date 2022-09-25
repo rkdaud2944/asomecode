@@ -35,6 +35,14 @@ export default {
     watch: {
         $route(to) {
             globals.currentPath = to.path;
+
+            this.showHeaderMain = true;
+            const skipHeaderMains = ["/editor", "/help", "/backOffice"];
+            skipHeaderMains.forEach((path) => {
+                if (to.path.startsWith(path)) {
+                    this.showHeaderMain = false;
+                }
+            });
         },
     },
 
