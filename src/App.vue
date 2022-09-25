@@ -13,8 +13,7 @@ import { useMemberStore } from "@/store/member";
 import HeaderMain from "@/components/HeaderMain.vue";
 import ConsoleLog from "@/components/ConsoleLog.vue";
 
-export default {
-    
+export default {    
     components: {
         HeaderMain, ConsoleLog,
     },
@@ -46,6 +45,7 @@ export default {
             memberStore,
         };
     },
+
     methods : {
         refreshAll() {
             // 새로고침
