@@ -9,7 +9,7 @@
                     <q-item-label>차시 목록</q-item-label>
                 </q-item-section>
             </q-item>
-            <q-item clickable @click="goTo('/campaign/create')">
+            <q-item clickable @click="goTo('/backOffice/create/lesson')">
                 <q-item-section avatar>
                     <q-icon name="add_circle_outline" />
                 </q-item-section>
