@@ -2,33 +2,18 @@
 
 ## Project setup
 ```
-yarn install
+npm install --global node-gyp
+npm install
 ```
 
-### Compiles and hot-reloads for development
+## dev 환경 실행
+
 ```
-yarn serve
+npm run e:dev
 ```
 
-### Compiles and minifies for production
-```
-yarn build
-```
+## prod 환경 빌드
 
-### Run your unit tests
 ```
-yarn test:unit
+npm run e:prod
 ```
-
-### Run your end-to-end tests
-```
-yarn test:e2e
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
