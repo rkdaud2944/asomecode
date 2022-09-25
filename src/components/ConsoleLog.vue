@@ -1,5 +1,5 @@
 <template>
-    <div ref="console" class="q-pa-md" style="overflow-y: scroll; height:800px;">
+    <div ref="console" class="q-pa-md" style="overflow-y: scroll; height:320px;">
         <div v-for="(row, index) in rows" :key="index" v-html="row"></div>
     </div>
     <q-input @keydown.enter.prevent="send" filled v-model="text">
