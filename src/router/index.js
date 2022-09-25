@@ -88,6 +88,17 @@ const routes = [
         path: '/notice/list',
         component: () => import('../views/notice/NoticeBoard.vue')
     },
+
+    // BO
+    {
+        path: '/backOffice',
+        component: () => import('../views/backOffice/HomeView.vue')
+    },
+
+    {
+        path: '/backOffice/lessons',
+        component: () => import('../views/backOffice/LessonList.vue')
+    },
 ]
 
 const router = createRouter({
