@@ -14,6 +14,7 @@ import HeaderMain from "@/components/HeaderMain.vue";
 import ConsoleLog from "@/components/ConsoleLog.vue";
 
 export default {
+    
     components: {
         HeaderMain, ConsoleLog,
     },
@@ -45,5 +46,11 @@ export default {
             memberStore,
         };
     },
+    methods : {
+        refreshAll() {
+            // 새로고침
+            this.$router.go();
+        }
+    }
 };
 </script>

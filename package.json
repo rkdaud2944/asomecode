@@ -22,6 +22,9 @@
     "axios": "^0.27.2",
     "core-js": "^3.8.3",
     "fs": "^0.0.1-security",
+    "jquery": "^3.6.0",
+    "lodash-es": "^4.17.21",
+    "marked": "^4.1.0",
     "mitt": "^3.0.0",
     "moment": "^2.29.3",
     "os-browserify": "^0.3.0",
@@ -34,7 +37,9 @@
     "vue-router": "^4.0.3",
     "vue3-ace-editor": "^2.2.2",
     "vuedraggable": "^4.1.0",
-    "yarn": "^1.22.19"
+    "yarn": "^1.22.19",
+    "aws-sdk": "^2.1097.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

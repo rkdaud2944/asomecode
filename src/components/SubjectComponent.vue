@@ -6,7 +6,7 @@
         <p class="eng_text">{{ subject.title_eng }}</p>
         <p class="text">{{ subject.description }}</p>
         <br>
-        <div class="more-button" @click="goTo('/lesson/list', subject)">
+        <div class="more-button" @click="goTo('/lesson/list', { id: subject.id })">
             <p style="color:white; font-size: 15px; line-height:28px; ">더 알아보기 <b>〉</b></p>
         </div>
     </div>
@@ -26,80 +26,7 @@ export default {
 setup() {
 
     },
-
-    beforeMount(){
-        var componentColorMap = new Map();
-        componentColorMap.set(1,'red')
-        componentColorMap.set(2,'yellow')
-        componentColorMap.set(3,'blue')
-        componentColorMap.set(4,'green')
-    },
 }
 </script>
 
-<style scoped>
-.main {
-    width: 100%;
-    height: 400px;
-    text-align: center;
-    position : relative;
-}
-.icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 30px;
-    background: black;
-}
-.text {
-    margin-left: 10px;
-    margin-right: 10px;
-    line-height: 24px;
-    font-size:14px;
-    font-family: Helvetica Neue;
-}
-.more-button {
-    bottom: 40px;
-    right: 0;
-    left: 0;
-    width: 60%;
-    height: 30px;
-    border: 2px solid white;
-    border-radius: 18px;
-    cursor: pointer;
-    position: absolute;
-    margin : auto;
-    
-}
-.subject-color{
-    background-color: rgb(255, 102, 51);
-}
-#component2{
-    background-color: rgb(250, 190, 0);
-}
-#component3{
-    background-color: rgb(0, 153, 204);
-}
-#component4{
-    background-color: rgb(51, 204, 51);
-}
-#component5{
-    background-color: rgb(155, 98, 185);
-}
-#component5{
-    background-color: rgb(155, 98, 185);
-}
-
-.h3_style{
-    color: white;
-    font-size : 40px;
-    margin: 0px;
-}
-.images{
-    display:inline-block; margin:auto; margin-top:-40px; width:122px; height:121px;
-}
-.eng_text{
-    color: rgba(0,0,0,0.7);
-    font-size : 16px;
-    margin: 5px;
-}
-</style>
+<style scoped src="@/assets/css/component/subject.css"/>

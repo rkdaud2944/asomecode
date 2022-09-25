@@ -17,8 +17,14 @@ const routes = [
         component: () => import('../views/lesson/LessonList.vue')
     },
     {
-        path: '/lesson/detail/:id',
+        path: '/lesson/detail',
+        props: true,
         component: () => import('../views/lesson/LessonDetail.vue')
+    },
+    {
+        path: '/edit/lesson',
+        props: true,
+        component: () => import('../views/lesson/EditLesson.vue')
     },
 
     // help 기타
@@ -77,6 +83,11 @@ const routes = [
         component: () => import('../views/help/subject-set/SubjectSetEdit.vue')
     },
 
+    // board
+    {
+        path: '/notice/list',
+        component: () => import('../views/notice/NoticeBoard.vue')
+    },
 ]
 
 const router = createRouter({

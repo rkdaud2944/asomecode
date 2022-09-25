@@ -1,34 +1,54 @@
 <template>
+    <div class="header nav-padding">
+        <a href="/">
+            <img src="/images/common/logom.png" class="logo" />
+        </a>
+    </div>
+
     <div class="row">
-        <div class="col-3">
-            <h4 class="flex flex-center">목차</h4>
-            <div @click="moveTo(title.tag)" :class="`title title-${title.level}`" v-for="(title, index) in titles" :key="index">
-                {{title.name}}
+        <div class="col-3" style="height:904px;">
+            <div class="flex flex-center title-box">
+                <a href="javascript:history.back()" class="gohome"><img
+                        src="../../../public/images/common/p3_list.png"></a>
+                <p class="title-style">목차</p>
+            </div>
+            <div class="test">
+                <div @click="moveTo(title.tag)" :class="`title title-${title.level}`" v-for="(title, index) in titles"
+                    :key="index">
+                    {{title.name}}
+                </div>
             </div>
         </div>
 
-        <div class="col-9">
-            <div v-html="content"></div>
+        <div class="col-9 contents"><br>
+            <div class="markdown_output" v-html="output"></div>
         </div>
+
     </div>
 </template>
 
 <script>
 import markdown from "@/utils/markdown";
-import lesson03 from "@/data/lesson03.js";
+import apiLesson from "@/api/lesson";
 
 export default {
+
     data() {
         return {
-            titles: [],
-            content: "",
+            lesson: null,
+            titles: null,
+            content: null,
         };
     },
 
+    computed: {
+        output() {
+            return markdown.markedInput(this.lesson.content)
+        }
+    },
+
     mounted() {
-        markdown.setHtml(lesson03);
-        this.titles = markdown.getTitles(lesson03);
-        this.content = markdown.getContent();
+        this.getLesson(this.$route.query.id)
     },
 
     methods: {
@@ -38,34 +58,43 @@ export default {
             const top = element.offsetTop;
             window.scrollTo(0, top);
         },
+
+        getLesson(id) {
+            apiLesson.lessonDetail(id)
+                .then((response) => {
+                    this.lesson = response.data;
+                    markdown.setHtml(this.lesson.content);
+                    this.titles = markdown.getTitles(this.lesson.content);
+                    this.content = markdown.getContent();
+
+                    let header = document.querySelector(".col-3");
+                    window.onscroll = function () {
+                        let windowTop = window.scrollY;
+                        if (windowTop > 60) {
+                            header.classList.add("drop");
+                        }
+                        else {
+                            header.classList.remove("drop");
+                        }
+                    };
+                })
+                .catch(this.showError);
+        },
     },
 };
+
+
 </script>
 
-<style scoped>
-.title {
-    width: 100%;
-    margin: 8px;
-    cursor: pointer;
-}
 
-.title-1 {
-    font-size: 1.5em;
-    font-weight: bold;
-}
 
-.title-2 {
-    font-size: 1.2em;
-    padding-left: 10px;
-}
+<style scoped src="@/assets/css/component/lesson.css"/>
 
-.title-3 {
-    font-size: 1em;
-    padding-left: 20px;
-}
 
-.title-4 {
-    font-size: 0.8em;
-    padding-left: 30px;
+<style src="@/assets/css/component/markdown_content.css"/>
+<style>
+.markdown_output {
+    padding-top: 80px;
+    margin: 0px 22px 0px 22px;
 }
 </style>

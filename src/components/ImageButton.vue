@@ -25,6 +25,7 @@ export default {
 </script>
 
 <style scoped>
+
 .image-button {
     max-width: 82px;
     cursor: pointer;
