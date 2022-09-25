@@ -1,10 +1,11 @@
 <template>
-    <el-row v-if="showHeaderMain">
+    <div v-if="showHeaderMain">
         <HeaderMain />
-    </el-row>
-    <el-row v-if="showHeaderMain">
+    </div>
+    <router-view />
+    <div v-if="showHeaderMain">
         <ConsoleLog />
-    </el-row>
+    </div>
 </template>
 
 <script>
@@ -18,34 +19,6 @@ export default {
         HeaderMain, ConsoleLog,
     },
 
-    computed: {
-        showHeaderMain() {
-            let result = true;
-            const skipHeaderMains = ["/help"];
-            skipHeaderMains.forEach((path) => {
-                if (this.$route.path.startsWith(path)) {
-                    result = false;
-                    return;
-                }
-            });
-            return result;
-        },
-    },
-
-    watch: {
-        $route(to) {
-            globals.currentPath = to.path;
-
-            this.showHeaderMain = true;
-            const skipHeaderMains = ["/editor", "/help", "/backOffice"];
-            skipHeaderMains.forEach((path) => {
-                if (to.path.startsWith(path)) {
-                    this.showHeaderMain = false;
-                }
-            });
-        },
-    },
-
     setup() {
         const memberStore = useMemberStore();
 
@@ -57,11 +30,36 @@ export default {
         };
     },
 
-    methods : {
-        refreshAll() {
-            // 새로고침
-            this.$router.go();
-        }
-    }
+    data() {
+        return {
+            showHeaderMain: true,
+        };
+    },
+
+    watch: {
+        $route(to) {
+            globals.currentPath = to.path;
+
+            this.showHeaderMain = true;
+            const skipHeaderMains = ["/editor", "/help", "/backOffice"];
+            skipHeaderMains.forEach((path) => {
+                if (to.path.startsWith(path)) {
+                    this.showHeaderMain = false;
+                    console.log("skipHeaderMains", path);
+                }
+            });
+        },
+    },
+
+    mounted() {
+        window.goTo = (path, params) => {
+            if (params) {
+                // console.log("goTo", this);
+                this.$router.push({path: path, query: params});
+            } else {
+                this.$router.push({path: path});
+            }
+        };
+    },
 };
 </script>
