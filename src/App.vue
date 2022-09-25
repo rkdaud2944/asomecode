@@ -41,6 +41,9 @@ export default {
     setup() {
         const memberStore = useMemberStore();
 
+        console.log("Appp platform", process.env.VUE_APP_PLATFORM);
+        console.log("Appp mode", process.env.VUE_APP_MODE);
+
         return {
             memberStore,
         };
