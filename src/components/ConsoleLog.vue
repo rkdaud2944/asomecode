@@ -31,8 +31,8 @@ export default {
             this.rows = [];
         });
         eventbus.on("onSerialReceived", (data) => {
+            // TODO: 디버깅을 위해서 임시 주석 처리
             // if (data && (data.startsWith("###") || data.startsWith(">>> ###"))) {
-            //     // TODO:
             //     // console.log(data);
             //     return;
             // }
