@@ -12,8 +12,9 @@
                     @onRowClick="onRowClick" />
             </div>
         </q-page-container>
-
-        <ArticleDetail ref="articleDetailDialog" @getArticles="getArticles"/>
+        <div>
+            <ArticleDetail ref="articleDetailDialog" @getArticles="getArticles" />
+        </div>
     </q-layout>
 </template>
 

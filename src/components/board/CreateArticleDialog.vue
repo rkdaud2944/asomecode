@@ -7,10 +7,10 @@
 
             <q-card-section class="q-pt-none">
                 <q-form @submit="onSubmitArticle" @reset="onResetArticleBody" class="q-gutter-md">
-                    <q-input :rules="articleBodyRule" filled v-model="createArticleBody.writer" label="작성자" />
-                    <q-input :rules="articleBodyRule" filled v-model="createArticleBody.password" type="password"
+                    <q-input :rules="[val => !!val || '작성자를 입력해 주세요']" filled v-model="createArticleBody.writer" label="작성자" />
+                    <q-input :rules="[val => !!val || '비밀번호를 입력해']" filled v-model="createArticleBody.password" type="password"
                         label="비밀번호" />
-                    <q-input :rules="articleBodyRule" filled v-model="createArticleBody.title" label="제목" />
+                    <q-input :rules="[val => !!val || '제목을 입력해 주세요']" filled v-model="createArticleBody.title" label="제목" />
                     <q-editor v-model="createArticleBody.content" min-height="10rem" />
                     <div>
                         <q-btn class="form-btn" label="취소" color="primary" v-close-popup />
@@ -24,17 +24,20 @@
 </template>
 
 <script>
+import VueBase from "@/VueBase";
 import apiBoard from "@/api/board";
 import { ref } from 'vue'
 
 export default {
+    mixins: [VueBase],
+
     data() {
         return {
             createArticleBody: {
-                writer: null,
-                password: null,
-                title: null,
-                content: null,
+                writer: "",
+                password: "",
+                title: "",
+                content: "",
                 boardType: null,
             },
         }

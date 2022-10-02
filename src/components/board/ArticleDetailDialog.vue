@@ -1,85 +1,87 @@
 <template>
-    <q-dialog v-model="dialog">
-        <q-card style="width: 1000px; max-width: 80vw;">
-            <q-card-section>
-                <q-btn color="primary" label="목록으로" v-close-popup />
-                <q-btn style="float:right" color="primary" label="삭제"
-                    @click="onDeleteDialog('article', articleDetail.id)" />
-                <q-btn style="float:right; margin-right: 10px;" color="primary" label="수정" />
-            </q-card-section>
+    <div>
+        <q-dialog v-model="dialog">
+            <q-card style="width: 1000px; max-width: 80vw;">
+                <q-card-section>
+                    <q-btn color="primary" label="목록으로" v-close-popup />
+                    <q-btn style="float:right" color="primary" label="삭제"
+                        @click="onDeleteDialog('article', articleDetail.id)" />
+                    <q-btn style="float:right; margin-right: 10px;" color="primary" label="수정" />
+                </q-card-section>
 
-            <q-card-section class="q-pt-none">
-                <div class="row content-header">
-                    <div class="col-8">{{ articleDetail.writer }}<br>{{ articleDetail.createAt }}</div>
-                    <div class="col-4" style="text-align: right;">댓글수: {{ articleDetail.commentCount }}, 조회수: {{
-                            articleDetail.viewCount
-                    }}</div>
-                </div>
-
-                <div class="column content">
-                    <div class="col-4">
-                        <h2>{{ articleDetail.title }}</h2>
-                    </div>
-                    <q-linear-progress /><br>
-                    <div class="col-8" v-html="articleDetail.content"></div>
-                </div>
-
-                <div class="column comment-header">
-                    <div class="col">댓글</div>
-                </div>
-
-                <div class="column comment" v-for="comment in articleDetail.comments" :key="comment">
-                    <div class="col-5">{{ comment.writer }}</div>
-                    <div class="col">{{ comment.content }}</div>
-                    <div class="col">{{ comment.createAt }}
-                        <q-btn dense color="primary" icon="close" size="xs"
-                            @click="onDeleteDialog('comment', comment.id)" />
-                        <span v-on:click="onComment(comment.id)"> 답글쓰기</span>
+                <q-card-section class="q-pt-none">
+                    <div class="row content-header">
+                        <div class="col-8">{{ articleDetail.writer }}<br>{{ articleDetail.createAt }}</div>
+                        <div class="col-4" style="text-align: right;">댓글수: {{ articleDetail.commentCount }}, 조회수: {{
+                        articleDetail.viewCount
+                        }}</div>
                     </div>
 
-                    <div class="column reply-header" v-if="comment.replies.length != 0">
-                        <div class="col">답글</div>
+                    <div class="column content">
+                        <div class="col-4">
+                            <h2>{{ articleDetail.title }}</h2>
+                        </div>
+                        <q-linear-progress /><br>
+                        <div class="col-8" v-html="articleDetail.content"></div>
                     </div>
 
-                    <div class="col reply" v-for="reply in comment.replies" :key="reply">
-                        <div class="col-5">{{ reply.writer }}</div>
-                        <div class="col">{{ reply.content }}</div>
-                        <div class="col">{{ reply.createAt }}
+                    <div class="column comment-header">
+                        <div class="col">댓글</div>
+                    </div>
+
+                    <div class="column comment" v-for="comment in articleDetail.comments" :key="comment">
+                        <div class="col-5">{{ comment.writer }}</div>
+                        <div class="col">{{ comment.content }}</div>
+                        <div class="col">{{ comment.createAt }}
                             <q-btn dense color="primary" icon="close" size="xs"
-                                @click="onDeleteDialog('reply', reply.id)" />
+                                @click="onDeleteDialog('comment', comment.id)" />
+                            <span v-on:click="onComment(comment.id)"> 답글쓰기</span>
                         </div>
+
+                        <div class="column reply-header" v-if="comment.replies.length != 0">
+                            <div class="col">답글</div>
+                        </div>
+
+                        <div class="col reply" v-for="reply in comment.replies" :key="reply">
+                            <div class="col-5">{{ reply.writer }}</div>
+                            <div class="col">{{ reply.content }}</div>
+                            <div class="col">{{ reply.createAt }}
+                                <q-btn dense color="primary" icon="close" size="xs"
+                                    @click="onDeleteDialog('reply', reply.id)" />
+                            </div>
+                        </div>
+
+                        <CreateReply v-if="createReply[comment.id]" :index="comment.id"
+                            @onCancelCreateReply="onCancelCreateReply" @onCreateReply="onCreateReply" />
                     </div>
 
-                    <CreateReply v-if="createReply[comment.id]" :index="comment.id"
-                        @onCancelCreateReply="onCancelCreateReply" @onCreateReply="onCreateReply" />
-                </div>
+                    <q-form @submit="createComment(articleDetail.id)" class="row create-comment-container">
+                        <div class="col-2">
+                            <div class="col">
+                                <q-input class="input-writer-password" v-model="createCommentBody.writer" outlined
+                                    label="작성자" />
 
-                <q-form @submit="createComment(articleDetail.id)" class="row create-comment-container">
-                    <div class="col-2">
-                        <div class="col">
-                            <q-input class="input-writer-password" v-model="createCommentBody.writer" outlined
-                                label="작성자" />
+                                <q-input class="input-writer-password" v-model="createCommentBody.password" outlined
+                                    label="비밀번호" />
+                            </div>
+                        </div>
+                        <div class="col-10">
+                            <div class="col">
+                                <q-input v-model="createCommentBody.content" filled type="textarea" />
+                            </div>
+                            <div class="col" style="text-align: right;">
+                                <q-btn class="sumit-comment-btn" color="primary" label="등록" type="submit" />
+                            </div>
+                        </div>
+                    </q-form>
+                </q-card-section>
+            </q-card>
+        </q-dialog>
 
-                            <q-input class="input-writer-password" v-model="createCommentBody.password" outlined
-                                label="비밀번호" />
-                        </div>
-                    </div>
-                    <div class="col-10">
-                        <div class="col">
-                            <q-input v-model="createCommentBody.content" filled type="textarea" />
-                        </div>
-                        <div class="col" style="text-align: right;">
-                            <q-btn class="sumit-comment-btn" color="primary" label="등록" type="submit" />
-                        </div>
-                    </div>
-                </q-form>
-            </q-card-section>
-        </q-card>
-    </q-dialog>
-
-    <DeleteDialog ref="deleteAticleDialog" 
+        <DeleteDialog ref="deleteAticleDialog" 
         @succeededDeleteArticle="succeededDeleteArticle"
         @succeededDeleteComment="succeededDeleteComment" />
+    </div>
 </template>
 
 <script>
@@ -101,7 +103,7 @@ export default {
                 content: null,
             },
 
-            articleDetail:[],
+            articleDetail: [],
             createReply: [],
         }
     },
@@ -149,7 +151,7 @@ export default {
 
         succeededDeleteArticle() {
             this.dialog = false
-            this.$emit("getArticles");
+            this.$emit("onPageChanged");
         },
 
         succeededDeleteComment() {

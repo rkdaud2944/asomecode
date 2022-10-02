@@ -1,6 +1,6 @@
 <!-- 페이징 처리가 된 그리트 콤포넌트 -->
 <template>
-    <div :style="style">
+    <div>
         <div>
             <q-table :rows="rows" :columns="columns" :pagination="paginationOption"
                 row-key="name" hide-bottom>

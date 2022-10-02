@@ -1,6 +1,8 @@
 <template>
     <Header />
-    <BoardList :boardType="boardType" />
+    <div>
+        <BoardList boardType="QnA" />
+    </div>
 </template>
 
 <script>
@@ -9,12 +11,6 @@ import BoardList from '@/components/board/BoardList.vue';
 export default {
     components: {
         Header, BoardList,
-    },
-
-    data() {
-        return {
-            boardType: "QnA"
-        }
     },
 }
 </script>

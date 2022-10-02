@@ -84,15 +84,6 @@ export default {
         pageCount() {
             return Math.ceil(this.rowCount / this.pageSize);
         },
-
-        recordCounts() {
-            return [
-                ["실제 캠페인", this.data.allCount],
-                ["인증", this.data.confirmedCount],
-                ["미인증", this.data.unconfirmedCount],
-                ["삭제", this.data.deletedCount],
-            ];
-        }
     },
 
     mounted() {
