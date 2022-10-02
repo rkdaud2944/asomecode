@@ -3,13 +3,12 @@
         <HeaderMain />
     </div>
     <router-view />
-    <div v-if="showHeaderMain">
-        <ConsoleLog />
-    </div>
+    <ConsoleLog />
 </template>
 
 <script>
 import globals from "./globals";
+import bridgeIn from "./bridge-in";
 import { useMemberStore } from "@/store/member";
 import HeaderMain from "@/components/HeaderMain.vue";
 import ConsoleLog from "@/components/ConsoleLog.vue";
@@ -20,6 +19,8 @@ export default {
     },
 
     setup() {
+        bridgeIn.init();
+        
         const memberStore = useMemberStore();
 
         console.log("Appp platform", process.env.VUE_APP_PLATFORM);

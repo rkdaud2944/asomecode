@@ -93,6 +93,7 @@ export default {
     },
 
     stop() {
+        console.log("stop");
         this.write(String.fromCharCode(3));
     },
 
@@ -114,6 +115,8 @@ export default {
     },
 
     runCode(codes) {
+        console.log("runCode", codes);
+
         this.writeLn( `_codes_ = ""`);
         for (let code of codes.replaceAll("\r", "").split("\n")) {
             // TODO: 파이썬 코드의 주석을 삭제한다. 특히 한글 주석은 보드에 에러를 유발할 수 있다.
