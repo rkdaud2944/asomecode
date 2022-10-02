@@ -75,13 +75,7 @@ export default {
                     }
                     this.$emit("succeededCreateArticle");
                 })
-                .catch((response) => {
-                    this.$q.notify({
-                        color: "deep-orange",
-                        textColor: "white",
-                        message: response.data.message,
-                    });
-                });
+                .catch(this.showError);
         },
     },
 }

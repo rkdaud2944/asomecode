@@ -123,7 +123,7 @@ export default {
             apiLesson.updateLesson(param, this.$route.query.id)
                 .then(() => {
                     Notify.create({
-                        color: "deep-orange",
+                        color: "blue",
                         textColor: "white",
                         message: '수정 완료!',
                     });

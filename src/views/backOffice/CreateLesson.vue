@@ -1,91 +1,97 @@
 <template>
-    <div class="lesson-title">
-        <q-input outlined v-model="lesson.title" label="제목" style="width: 50%;" />
-        <q-btn color="positive" style="margin-left: 20px; height: 28px;">수정</q-btn>
-    </div>
-    <div class="select-subject">
-        <q-select outlined v-model="selectedDefaultSubject" :options="defaultSubjectSet" option-value="id"
-            option-label="title" label="과목" />
-    </div>
+    <q-form @submit="createLesson" greedy>
+        <div class="lesson-title">
+            <q-input outlined v-model="lesson.title" label="제목" style="width: 50%;"
+                :rules="[val => !!val || '제목을 입력해 주세요']" />
+            <q-btn color="positive" style="margin-left: 20px; height: 28px;" type="submit">생성</q-btn>
+            <q-btn color="warning" style="margin-left: 20px; height: 28px;" @click="clearForm">초기화</q-btn>
+        </div>
+        <div class="select-subject">
+            <q-select outlined v-model="selectedDefaultSubject" :options="defaultSubjectSet" option-value="id"
+                option-label="title" label="과목" :rules="[val => !!val || '과목을 선택해 주세요']" />
+        </div>
 
-    <div class="editor">
-        <q-card class="input">
-            <q-btn-group>
-                <q-btn color="secondary" @click="onImageUploadDialog" glossy label="이미지 삽입" />
-                <q-btn color="secondary" @click="onVideoUploadDialog" glossy label="동영상 삽입" />
-            </q-btn-group>
-            <textarea ref="inputTextarea" class="inputText" :value="lesson.content" @input="update"></textarea>
-        </q-card>
+        <div class="editor">
+            <q-card class="input">
+                <q-btn-group>
+                    <q-btn color="secondary" @click="onImageUploadDialog" glossy label="이미지 삽입" />
+                    <q-btn color="secondary" @click="onVideoUploadDialog" glossy label="동영상 삽입" />
+                </q-btn-group>
+                <textarea ref="inputTextarea" class="inputText" :value="lesson.content" @input="update"></textarea>
+            </q-card>
 
-        <div class="markdown_output" v-html="output"></div>
-    </div>
+            <div class="markdown_output" v-html="output"></div>
+        </div>
 
-    <q-dialog v-model="imageUploadDialog">
-        <q-card style="width: 600px; max-width: 80vw;">
-            <q-card-section>
-                <div class="text-h6">이미지 업로드</div>
-            </q-card-section>
+        <q-dialog v-model="imageUploadDialog">
+            <q-card style="width: 600px; max-width: 80vw;">
+                <q-card-section>
+                    <div class="text-h6">이미지 업로드</div>
+                </q-card-section>
 
-            <q-card-section class="q-pt-none">
-                <q-file filled bottom-slots v-model="image" label="Label" counter>
-                    <template v-slot:prepend>
-                        <q-icon name="cloud_upload" @click.stop.prevent />
-                    </template>
-                    <template v-slot:append>
-                        <q-icon name="close" @click.stop.prevent="image = null" class="cursor-pointer" />
-                    </template>
+                <q-card-section class="q-pt-none">
+                    <q-file filled bottom-slots v-model="image" label="Label" counter>
+                        <template v-slot:prepend>
+                            <q-icon name="cloud_upload" @click.stop.prevent />
+                        </template>
+                        <template v-slot:append>
+                            <q-icon name="close" @click.stop.prevent="image = null" class="cursor-pointer" />
+                        </template>
 
-                    <template v-slot:hint>
-                        Field hint
-                    </template>
-                </q-file>
-                <div>
-                    <q-btn class="uploadDialog-btn" label="취소" color="primary" v-close-popup />
-                    <q-btn class="uploadDialog-btn" label="등록" type="submit" color="positive"
-                        @click="uploadLessonImage" />
-                </div>
-            </q-card-section>
-        </q-card>
-    </q-dialog>
+                        <template v-slot:hint>
+                            Field hint
+                        </template>
+                    </q-file>
+                    <div>
+                        <q-btn class="uploadDialog-btn" label="취소" color="primary" v-close-popup />
+                        <q-btn class="uploadDialog-btn" label="등록" type="submit" color="positive"
+                            @click="uploadLessonImage" />
+                    </div>
+                </q-card-section>
+            </q-card>
+        </q-dialog>
 
-    <q-dialog v-model="videoUploadDialog">
-        <q-card style="width: 600px; max-width: 80vw;">
-            <q-card-section>
-                <div class="text-h6">비디오 업로드</div>
-            </q-card-section>
+        <q-dialog v-model="videoUploadDialog">
+            <q-card style="width: 600px; max-width: 80vw;">
+                <q-card-section>
+                    <div class="text-h6">비디오 업로드</div>
+                </q-card-section>
 
-            <q-card-section class="q-pt-none">
-                <q-file filled bottom-slots v-model="video" label="Label" counter>
-                    <template v-slot:prepend>
-                        <q-icon name="cloud_upload" @click.stop.prevent />
-                    </template>
-                    <template v-slot:append>
-                        <q-icon name="close" @click.stop.prevent="video = null" class="cursor-pointer" />
-                    </template>
+                <q-card-section class="q-pt-none">
+                    <q-file filled bottom-slots v-model="video" label="Label" counter>
+                        <template v-slot:prepend>
+                            <q-icon name="cloud_upload" @click.stop.prevent />
+                        </template>
+                        <template v-slot:append>
+                            <q-icon name="close" @click.stop.prevent="video = null" class="cursor-pointer" />
+                        </template>
 
-                    <template v-slot:hint>
-                        Field hint
-                    </template>
-                </q-file>
-                <div>
-                    <q-btn class="uploadDialog-btn" label="취소" color="primary" v-close-popup />
-                    <q-btn class="uploadDialog-btn" label="등록" type="submit" color="positive"
-                        @click="uploadLessonVideo" />
-                </div>
-            </q-card-section>
-        </q-card>
-    </q-dialog>
+                        <template v-slot:hint>
+                            Field hint
+                        </template>
+                    </q-file>
+                    <div>
+                        <q-btn class="uploadDialog-btn" label="취소" color="primary" v-close-popup />
+                        <q-btn class="uploadDialog-btn" label="등록" type="submit" color="positive"
+                            @click="uploadLessonVideo" />
+                    </div>
+                </q-card-section>
+            </q-card>
+        </q-dialog>
+    </q-form>
 </template>
 
 <script>
+import VueBase from "@/VueBase";
 import { debounce } from 'lodash-es'
 import markdown from "@/utils/markdown.js";
 import { ref } from 'vue'
 import apiAwsS3 from "@/api/awsS3";
-//import { Notify } from 'quasar'
-//import apiLesson from "@/api/lesson";
+import apiLesson from "@/api/lesson";
 import apiSubject from "@/api/subject";
 export default {
+    mixins: [VueBase],
+
     data() {
         return {
             defaultSubjectSet: null,
@@ -180,21 +186,46 @@ export default {
                 })
                 .catch(this.showError);
         },
+
+        createLesson() {
+            let body = {
+                title: this.lesson.title,
+                description: "",
+                htmlUrl: "",
+                content: this.lesson.content,
+                defaultSubjectId: this.selectedDefaultSubject.id,
+            }
+            apiLesson.create(body)
+                .then(() => {
+                    this.showSuccess();
+                    this.$router.push("/backOffice/lessons");
+                })
+                .catch(this.showError);
+        },
+
+        clearForm() {
+            this.selectedDefaultSubject = null;
+            this.lesson= {
+                title: "",
+                content: "",
+            };
+        },
     }
 }
 </script>
+
+
 <style src="@/assets/css/component/markdown_content.css"/>
 <style>
 .lesson-title {
     display: flex;
-    margin: 20px;
+    margin: 20px 20px 0px 20px;
     align-items: center;
 }
 
 .select-subject {
-    width: 500px;
-    display: flex;
-    margin: 20px;
+    width: 30%;
+    margin-left: 20px;
     align-items: center;
 }
 

@@ -1,6 +1,22 @@
 import rest from "@/utils/rest";
 
 export default {
+    async create(body) {
+        return new Promise((resolve, reject) => {
+            var url = "lesson"
+            rest.post(url, body)
+                .then(response => {
+                    if (response.data.resultCode) {
+                        reject(response);
+                        return;
+                    }
+                    resolve(response);
+                }).catch(error => {
+                    console.log(error);
+                });
+        })
+    },
+
     async getLessons(params) {
         return new Promise((resolve, reject) => {
             rest.get("lessons", {params})

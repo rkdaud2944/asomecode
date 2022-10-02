@@ -1,3 +1,4 @@
+import { Notify } from 'quasar'
 import router from "@/router";
 import bridgeOut from "./bridge-out";
 
@@ -31,6 +32,23 @@ export default {
 
         sendCode(code) {
             bridgeOut.sendCode(code);
-        }
+        },
+
+        showSuccess() {
+            Notify.create({
+                type: "positive",
+                color: "blue",
+                textColor: "white",
+                message: "요청하신 작업이 완료되었습니다."
+            });
+        },
+
+        showError(response) {
+            Notify.create({
+                color: "deep-orange",
+                textColor: "white",
+                message: response.data.message,
+            });
+        },
     }
 }
