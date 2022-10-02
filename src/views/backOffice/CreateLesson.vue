@@ -1,7 +1,11 @@
 <template>
     <div class="lesson-title">
         <q-input outlined v-model="lesson.title" label="제목" style="width: 50%;" />
-        <q-btn color="primary" style="margin-left: 20px; height: 28px;" @click="updateLesson">수정</q-btn>
+        <q-btn color="positive" style="margin-left: 20px; height: 28px;">수정</q-btn>
+    </div>
+    <div class="select-subject">
+        <q-select outlined v-model="selectedDefaultSubject" :options="defaultSubjectSet" option-value="id"
+            option-label="title" label="과목" />
     </div>
 
     <div class="editor">
@@ -80,9 +84,14 @@ import { ref } from 'vue'
 import apiAwsS3 from "@/api/awsS3";
 //import { Notify } from 'quasar'
 //import apiLesson from "@/api/lesson";
+import apiSubject from "@/api/subject";
 export default {
     data() {
         return {
+            defaultSubjectSet: null,
+            defaultSubjectOptions: [],
+            selectedDefaultSubject: null,
+
             lesson: {
                 title: "",
                 content: "",
@@ -98,6 +107,10 @@ export default {
             videoUploadDialog: ref(false),
             video: ref(null),
         }
+    },
+
+    mounted() {
+        this.getDefaultSubjectSet()
     },
 
     computed: {
@@ -158,18 +171,28 @@ export default {
                 .catch(function (e) {
                     console.log(e);
                 });
-        }
+        },
+
+        getDefaultSubjectSet() {
+            apiSubject.defaultSubjectSet()
+                .then((response) => {
+                    this.defaultSubjectSet = response.data;
+                })
+                .catch(this.showError);
+        },
     }
 }
 </script>
-
-
-
-
-
 <style src="@/assets/css/component/markdown_content.css"/>
 <style>
 .lesson-title {
+    display: flex;
+    margin: 20px;
+    align-items: center;
+}
+
+.select-subject {
+    width: 500px;
     display: flex;
     margin: 20px;
     align-items: center;

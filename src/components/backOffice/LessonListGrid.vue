@@ -21,7 +21,7 @@
                         </q-td>
 
                         <q-td>
-                            <q-btn @click="openUrl(`/lesson/detail?id=${props.row.id}`)" flat style="color: #FF0080" label="보기" />
+                            <q-btn @click="goTo('/lesson/detail', { id: props.row.id})" flat style="color: #FF0080" label="보기" />
                             <q-btn  @click="goTo('/backOffice/edit/lesson', { id: props.row.id})" flat style="color: #FF0080" label="수정" />
                         </q-td>
                     </q-tr>

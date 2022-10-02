@@ -1,7 +1,8 @@
 <template>
     <div class="lesson-title">
         <q-input outlined v-model="lesson.title" label="제목" style="width: 50%;" />
-        <q-btn color="primary" style="margin-left: 20px; height: 28px;" @click="updateLesson">수정</q-btn>
+        <q-btn color="positive" style="margin-left: 20px; height: 28px;" @click="updateLesson">수정</q-btn>
+        <q-btn color="primary" style="margin-left: 10px; height: 28px;" @click="goBack()">취소</q-btn>
     </div>
 
     <div class="editor">
@@ -74,6 +75,7 @@
 </template>
 
 <script>
+import VueBase from "@/VueBase";
 import { debounce } from 'lodash-es'
 import markdown from "@/utils/markdown.js";
 import { ref } from 'vue'
@@ -81,6 +83,8 @@ import { Notify } from 'quasar'
 import apiAwsS3 from "@/api/awsS3";
 import apiLesson from "@/api/lesson";
 export default {
+    mixins: [VueBase],
+
     data() {
         return {
             lesson: null,
