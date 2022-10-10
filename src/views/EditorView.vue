@@ -51,6 +51,10 @@ export default {
         }
     },
 
+    mounted() {
+        this.content = localStorage.getItem("code");
+    },
+
     methods: {
         ...remoteSerial,
 

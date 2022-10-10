@@ -41,7 +41,7 @@
                     <img src="../../public/images/common/help.png" class="ui-img">
                     <p class="ui-right-font" id="fs-three">HELP</p>
                 </li>
-                <li @click="openUrl('/backOffice')">
+                <li @click="openUrl('BO', '/backOffice')">
                     BO
                 </li>
             </ul>

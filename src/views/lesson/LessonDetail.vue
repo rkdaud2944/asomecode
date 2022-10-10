@@ -23,11 +23,12 @@
         <div class="col-9 contents"><br>
             <div class="markdown_output" v-html="output"></div>
         </div>
-
     </div>
 </template>
 
 <script>
+/* eslint-disable */
+
 import markdown from "@/utils/markdown";
 import apiLesson from "@/api/lesson";
 
@@ -49,6 +50,10 @@ export default {
 
     mounted() {
         this.getLesson(this.$route.query.id)
+    },
+
+    updated() {
+        hljs.highlightAll();
     },
 
     methods: {

@@ -6,13 +6,10 @@
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint",
-
     "e:prod": "vue-cli-service electron:serve --mode e-prod",
     "e:dev": "vue-cli-service electron:serve --mode e-dev",
-
     "eb:prod": "vue-cli-service electron:build --mode e-prod",
     "eb:dev": "vue-cli-service electron:build --mode e-dev",
-
     "rebuild": "electron-rebuild -f -w serialport",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps",
@@ -21,6 +18,7 @@
   "main": "background.js",
   "dependencies": {
     "@quasar/extras": "^1.0.0",
+    "aws-sdk": "^2.1097.0",
     "axios": "^0.27.2",
     "core-js": "^3.8.3",
     "fs": "^0.0.1-security",
@@ -35,13 +33,12 @@
     "serialport": "^10.4.0",
     "stream": "^0.0.2",
     "swiper": "^8.2.6",
+    "uuid": "^8.3.2",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
     "vue3-ace-editor": "^2.2.2",
     "vuedraggable": "^4.1.0",
-    "yarn": "^1.22.19",
-    "aws-sdk": "^2.1097.0",
-    "uuid": "^8.3.2"
+    "yarn": "^1.22.19"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
