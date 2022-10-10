@@ -14,7 +14,7 @@
                     <img src="../../public/images/common/home.png" class="ui-img">
                     <p class="ui-left-font" id="fs-one">홈</p>
                 </li>
-                <li class="ui-left-bt" @click="goTo('/editor')">
+                <li class="ui-left-bt" @click="openUrl('editor', '/editor')">
                     <img src="../../public/images/common/editor.png" class="ui-img">
                     <p class="ui-left-font" id="fs-four">소스편집</p>
                 </li>
@@ -37,7 +37,7 @@
                     <img src="../../public/images/common/update.png" class="ui-img">
                     <p class="ui-right-font" id="fs-four">업데이트</p>
                 </li>
-                <li class="ui-right-bt" @click="openUrl('/help')">
+                <li class="ui-right-bt" @click="openUrl('metaverse', 'http://www.metalive.be:13300/world/')">
                     <img src="../../public/images/common/help.png" class="ui-img">
                     <p class="ui-right-font" id="fs-three">HELP</p>
                 </li>

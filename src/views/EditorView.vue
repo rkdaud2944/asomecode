@@ -34,11 +34,11 @@
 </template>
 
 <script>
-import serial from "@/utils/serial";
 import { VAceEditor } from "vue3-ace-editor";
 import 'ace-builds/src-noconflict/mode-python';
 import 'ace-builds/src-noconflict/theme-monokai';
 import VueBase from "@/VueBase";
+import remoteSerial from "@/utils/remoteSerial";
 
 export default {
     mixins: [VueBase],
@@ -52,7 +52,7 @@ export default {
     },
 
     methods: {
-        ...serial,
+        ...remoteSerial,
 
         upload() {
             console.log('upload');

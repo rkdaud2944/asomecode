@@ -1,6 +1,7 @@
 import { Notify } from 'quasar'
 import router from "@/router";
 import bridgeOut from "./bridge-out";
+import windows from "@/utils/windows";
 
 export default {
     data() {
@@ -26,8 +27,8 @@ export default {
             }
         },
 
-        openUrl(url) {
-            window.open(url, "_blank");
+        openUrl(name, url) {
+            windows.open(name, url);
         },
 
         sendCode(code) {
