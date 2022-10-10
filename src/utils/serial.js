@@ -1,5 +1,6 @@
 import { SerialPort, ReadlineParser } from "serialport";
 import eventbus from "@/utils/eventbus";
+import { Notify } from 'quasar'
 
 let port = null;
 let parser = null;
@@ -12,7 +13,7 @@ export default {
     },
 
     async connect() {
-        if (port !== null) this.disconnect();
+        this.disconnect();
 
         const asomeboard = await this.getAsomeboard();
         if (asomeboard == null) {
@@ -38,25 +39,27 @@ export default {
             this.terminate();
             eventbus.emit("onSerialClosed");
         });
-        port.on('error', () => {
+
+        port.on('error', (e) => {
+            console.log("error", e);
             this.disconnect();
-            eventbus.emit("onError", "어썸보드에서 오류가 감지되었습니다.");
+            this.fireErrorEvent("어썸보드에서 오류가 감지되었습니다.");
         });
 
         try {
             port.open();
             eventbus.emit("onSerialConnected");
         } catch (error) {
-            console.log(error);
-            eventbus.emit("onError", "어썸보드에 연결할 수가 없습니다.");
             port = null;
+            console.log(error);
+            this.fireErrorEvent("어썸보드에 연결할 수가 없습니다.");
             return;
         }
     },
 
     disconnect() {
         try {
-            port.close();
+            if (port) port.close();
         } catch (error) {
             console.log(error);
         }
@@ -76,7 +79,6 @@ export default {
         if (port == null) return;
         try {
             port.write(text);
-            // console.log("------> " + text);
         } catch (error) {
             console.log(error);
         }
@@ -134,6 +136,15 @@ export default {
         }
         this.writeLn(`exec(_codes_)`);
     },
+
+    fireErrorEvent(msg) {
+        eventbus.emit("onError", msg);
+        Notify.create({
+            color: "deep-orange",
+            textColor: "white",
+            message: msg,
+        });
+    }
 }
 
 const codeListFiles =

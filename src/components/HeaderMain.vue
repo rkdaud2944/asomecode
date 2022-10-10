@@ -88,14 +88,6 @@ export default {
     methods: {
         ...serial,
 
-        connect() {
-            serial.connect();
-        },
-
-        sendCode() {
-            serial.writeLn("print('Hi')");
-        },
-
         update() {
             updateBoard.start();
         },
