@@ -1,5 +1,15 @@
 <template>
-    <div ref="console" class="q-pa-md" style="overflow-y: scroll; height:320px;">
+    <div ref="console" class="q-pa-md" style="overflow-y: scroll; height:220px;">
+
+        <q-page-sticky :offset="[20, -40]">
+            <q-expansion-item class="shadow-1 overflow-hidden" dense
+            style="border-radius: 30px; width: 40px;"
+            switch-toggle-side
+            header-class="bg-white text-black"
+            @click="onConsoleWindowControl">
+            </q-expansion-item>
+        </q-page-sticky>
+
         <div v-for="(row, index) in rows" :key="index" v-html="row"></div>
     </div>
     <q-input @keydown.enter.prevent="send" filled v-model="text">
@@ -20,6 +30,7 @@ export default {
             buffer: [],
             rows: [],
             text: "",
+            consoleEnabled: true,
         };
     },
 
@@ -82,6 +93,16 @@ export default {
 
             serial.writeLn(this.text);
             this.text = "";
+        },
+
+        onConsoleWindowControl() {
+            if (this.consoleEnabled) {
+                this.$refs.console.style.height = '50px'
+                this.consoleEnabled = false
+            } else {
+                this.$refs.console.style.height = '220px'
+                this.consoleEnabled = true
+            }
         },
     }
 };

@@ -1,9 +1,17 @@
 <template>
-    <div v-if="showHeaderMain">
-        <HeaderMain />
-    </div>
-    <router-view />
-    <ConsoleLog />
+    <q-layout view="hHh lpr fFf">
+        <div v-if="showHeaderMain">
+            <HeaderMain />
+        </div>
+
+        <q-page-container>
+            <router-view />
+        </q-page-container>
+
+        <q-footer reveal class="bg-grey-4 text-white">
+            <ConsoleLog />
+        </q-footer>
+    </q-layout>
 </template>
 
 <script>
@@ -13,14 +21,14 @@ import { useMemberStore } from "@/store/member";
 import HeaderMain from "@/components/HeaderMain.vue";
 import ConsoleLog from "@/components/ConsoleLog.vue";
 
-export default {    
+export default {
     components: {
         HeaderMain, ConsoleLog,
     },
 
     setup() {
         bridgeIn.init();
-        
+
         const memberStore = useMemberStore();
 
         console.log("Appp platform", process.env.VUE_APP_PLATFORM);
@@ -34,6 +42,7 @@ export default {
     data() {
         return {
             showHeaderMain: true,
+            showFooterMain: true,
         };
     },
 
@@ -42,10 +51,12 @@ export default {
             globals.currentPath = to.path;
 
             this.showHeaderMain = true;
+            this.showFooterMain = true;
             const skipHeaderMains = ["/editor", "/help", "/backOffice"];
             skipHeaderMains.forEach((path) => {
                 if (to.path.startsWith(path)) {
                     this.showHeaderMain = false;
+                    this.showFooterMain = false;
                     console.log("skipHeaderMains", path);
                 }
             });
@@ -56,9 +67,9 @@ export default {
         window.goTo = (path, params) => {
             if (params) {
                 // console.log("goTo", this);
-                this.$router.push({path: path, query: params});
+                this.$router.push({ path: path, query: params });
             } else {
-                this.$router.push({path: path});
+                this.$router.push({ path: path });
             }
         };
     },
