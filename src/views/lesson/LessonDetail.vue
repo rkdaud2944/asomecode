@@ -27,7 +27,6 @@
 
 <script>
 /* eslint-disable */
-
 import markdown from "@/utils/markdown";
 import apiLesson from "@/api/lesson";
 
@@ -50,7 +49,11 @@ export default {
             const element = window.document.getElementById(tag);
             console.log(tag, element);
             const top = element.offsetTop - 100; // 헤더 길이만큼 낮추기
-            window.scrollTo(0, top);
+
+            window.scrollTo({
+                top: top,
+                behavior: 'smooth'
+            });
         },
 
         getLesson(id) {
@@ -93,7 +96,15 @@ export default {
 
 
 
+
+
+
+
 <style scoped src="@/assets/css/component/lesson.css"/>
+
+
+
+
 
 
 
