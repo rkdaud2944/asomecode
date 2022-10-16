@@ -16,6 +16,7 @@
                 <q-btn-group>
                     <q-btn color="secondary" @click="onImageUploadDialog" glossy label="이미지 삽입" />
                     <q-btn color="secondary" @click="onVideoUploadDialog" glossy label="동영상 삽입" />
+                    <q-btn color="secondary" @click="onFunctionBtnDialog" glossy label="함수 버튼 생성" />
                 </q-btn-group>
                 <textarea ref="inputTextarea" class="inputText" :value="lesson.content" @input="update"></textarea>
             </q-card>
@@ -72,8 +73,28 @@
                     </q-file>
                     <div>
                         <q-btn class="uploadDialog-btn" label="취소" color="primary" v-close-popup />
-                        <q-btn class="uploadDialog-btn" label="등록" type="submit" color="positive"
+                        <q-btn class="uploadDialog-btn" label="생성" type="submit" color="positive"
                             @click="uploadLessonVideo" />
+                    </div>
+                </q-card-section>
+            </q-card>
+        </q-dialog>
+
+        <q-dialog v-model="functionBtnDialog">
+            <q-card style="width: 600px; max-width: 80vw;">
+                <q-card-section>
+                    <div class="text-h6">함수 버튼 생성</div>
+                </q-card-section>
+
+                <q-card-section class="q-pt-none">
+                    <q-input v-model="functionName" label="버튼 이름" stack-label />
+                    <div class="q-mt-md">
+                        <CodeEditor v-model="functionCode" style="width: 100%;"></CodeEditor>
+                    </div>
+                    <div>
+                        <q-btn class="uploadDialog-btn" label="취소" color="primary" v-close-popup />
+                        <q-btn class="uploadDialog-btn" label="생성" type="submit" color="positive"
+                            @click="createfunctionBtn" />
                     </div>
                 </q-card-section>
             </q-card>
@@ -89,8 +110,13 @@ import { ref } from 'vue'
 import apiAwsS3 from "@/api/awsS3";
 import apiLesson from "@/api/lesson";
 import apiSubject from "@/api/subject";
+import CodeEditor from 'simple-code-editor';
 export default {
     mixins: [VueBase],
+
+    components: {
+        CodeEditor
+    },
 
     data() {
         return {
@@ -112,6 +138,10 @@ export default {
 
             videoUploadDialog: ref(false),
             video: ref(null),
+
+            functionBtnDialog: ref(false),
+            functionName: ref(''),
+            functionCode: ref(''),
         }
     },
 
@@ -144,6 +174,10 @@ export default {
 
         onVideoUploadDialog() {
             this.videoUploadDialog = true
+        },
+
+        onFunctionBtnDialog() {
+            this.functionBtnDialog = true
         },
 
         insertVideo(insert) {
@@ -179,6 +213,11 @@ export default {
                 });
         },
 
+        createfunctionBtn() {
+            console.log(this.functionName, this.functionCode)
+            console.log('test')
+        },
+
         getDefaultSubjectSet() {
             apiSubject.defaultSubjectSet()
                 .then((response) => {
@@ -205,7 +244,7 @@ export default {
 
         clearForm() {
             this.selectedDefaultSubject = null;
-            this.lesson= {
+            this.lesson = {
                 title: "",
                 content: "",
             };
@@ -213,6 +252,12 @@ export default {
     }
 }
 </script>
+
+
+
+
+
+
 
 
 <style src="@/assets/css/component/markdown_content.css"/>
