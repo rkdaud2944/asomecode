@@ -8,7 +8,7 @@
             <router-view />
         </q-page-container>
 
-        <q-footer reveal class="bg-grey-4 text-white">
+        <q-footer v-if="showFooterMain" class="bg-grey-4 text-white">
             <ConsoleLog />
         </q-footer>
     </q-layout>
