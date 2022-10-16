@@ -13,10 +13,9 @@
                 <p class="title-style">목차</p>
             </div>
             <div class="test">
-                <!-- <div @click="moveTo(title.tag)" :class="`title title-${title.level}`" v-for="(title, index) in titles"
-                    :key="index">
+                <div @click="moveTo(title.tag)" :class="`title`" v-for="(title, index) in titles" :key="index">
                     {{title.name}}
-                </div> -->
+                </div>
             </div>
         </div>
 
@@ -37,30 +36,20 @@ export default {
     data() {
         return {
             lesson: null,
-            // titles: null,
-            // content: null,
+            titles: [],
+            output: null,
         };
-    },
-
-    computed: {
-        output() {
-            return markdown.markedInput(this.lesson.content)
-        }
     },
 
     mounted() {
         this.getLesson(this.$route.query.id)
     },
 
-    updated() {
-        hljs.highlightAll();
-    },
-
     methods: {
         moveTo(tag) {
             const element = window.document.getElementById(tag);
             console.log(tag, element);
-            const top = element.offsetTop;
+            const top = element.offsetTop - 100; // 헤더 길이만큼 낮추기
             window.scrollTo(0, top);
         },
 
@@ -68,20 +57,17 @@ export default {
             apiLesson.lessonDetail(id)
                 .then((response) => {
                     this.lesson = response.data;
-                    // markdown.setHtml(this.lesson.content);
-                    // this.titles = markdown.getTitles(this.lesson.content);
-                    // this.content = markdown.getContent();
+                    this.output = markdown.markedInput(this.lesson.content)
 
-                    // let header = document.querySelector(".col-3");
-                    // window.onscroll = function () {
-                    //     let windowTop = window.scrollY;
-                    //     if (windowTop > 60) {
-                    //         header.classList.add("drop");
-                    //     }
-                    //     else {
-                    //         header.classList.remove("drop");
-                    //     }
-                    // };
+                    let domparser = new DOMParser()
+                    let doc = domparser.parseFromString(this.output, 'text/html')
+                    const elements = doc.getElementsByTagName("h2");
+                    for (let i = 0; i < elements.length; i++) {
+                        this.titles.push({
+                            name: elements[i].innerText,
+                            tag: elements[i].id,
+                        });
+                    }
                 })
                 .catch(this.showError);
         },
@@ -93,7 +79,35 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <style scoped src="@/assets/css/component/lesson.css"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <style src="@/assets/css/component/markdown_content.css"/>
