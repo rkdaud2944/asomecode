@@ -1,0 +1,235 @@
+Create a new dance move
+
+1. Learning Objective
+	[video ./video/block/01/16.execute.webm]
+	* Learn to develop new dance motions.
+	* Learn to connect and execute new motions to the AsomeController.
+	* Learn to be able to explain and demonstrate the motions newly created.
+
+
+2. Preview
+	@ How do you make a dance move?
+	You can create various motions by adjusting the angle and moving time of the 4 motors connected to the AsomeBot. You can create the motion to wag foot as follows:
+	[image ./images/blocks/16-01.png]
+
+	@ Create a new dance move
+	You can use 3 methods to create new dance moves.
+	1. First, combine existing motions into a single motion. This motion can be bundled together like a single motion
+	[image ./images/blocks/16-02.png]
+	2. Second, specify one servomotor angle and motion time at a time. You must specify which servomotor to move.
+	[image ./images/blocks/16-03.png]
+	3. Last, specify multiple servomotor angles and motion times at a time. Specify the angle and moving speed of each motor at a time.Creating a motion like the one below will create a motion that takes 2 seconds to lift and lower two feet.
+	[image ./images/blocks/16-04.png]
+
+	@ Adjusting moving time
+	The moving time of the motor set to 1 second and 0.1 second will demonstrate completely different motions due to the difference of the moving speed even if the same motion is created as below.
+	[image ./images/blocks/16-05.png]
+
+
+3. learn which blocks to use
+	@ Change to access point mode ([INTERNET] Group)
+	Assign a name of the AsomeBot to be controlled by the smartphone.
+	[block_image ./images/blocks/16-06.png
+		import internet
+		internet.open_ap("")
+	]
+	① Enter a name you want to use. Only English and numbers can be used.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_eng.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Give AsomeBot a name. Only English and numbers can be used for naming AsomeBot. Once you assigned a name, the name will retain even when the power is turned on and off.</p>
+		<p class="main_text"② Check the name you specified and try connecting. First, find the name of AsomeBot you entered from the WiFi list and connect to your smartphone. If a message pops up saying that the Internet connection is unstable, do not press any buttons and wait for the message to disappear.</p>
+		<div class="content_image_box"><img src="./images/blocks/16-07.png" style="width:49%;"><img src="./images/blocks/16-08.png" style="width:49%;"></div>
+		</div>
+	]
+
+	@ Open UDP socket ([INTERNET] Group)
+	AsomeBot opens a port to communicate via the Internet.
+	[block_image ./images/blocks/16-09.png
+		import udp_socket
+		udp_socket.open(1234)
+	]
+	① The port number to be used. Use the number as is without modification.
+
+	@ Read Messages ([INTERNET] Group)
+	Read messages sent from the smartphone.
+	[block_image ./images/blocks/16-10.png
+		msg = udp_socket.read_text()
+	]
+
+	@ Repeat infinitely ([ADVANCE] Group)
+	Run blocks inside blocks to run in order. Here, you will wait for your smartphone App to send a message, and execute the command according to the message.
+	[block_image ./images/blocks/16-11.png
+		while True:
+		  pass
+	]
+
+	@ if ([ADVANCE] Group)
+	Execute the block in the block when the detail input as condition is correct. If the condition is incorrect, the block following the if block will be executed.
+	[block_image ./images/blocks/16-12.png
+		if i == :
+	]
+	① Input a variable to be used in the conditional statement. The default value is ‘i’.
+	② Select the default inequality to compare the conditions.
+	③ Input the default value to use in the condition. You need to add blocks to specify the conditional value.
+	④ Add blocks to be executed when the condition is correct.
+
+	@ Character Value ([ADVANCE] Group)
+	The value is used to represent the entered characters rather than variables or numbers.
+	[block_image ./images/blocks/16-13.png
+		''
+	]
+	① Enter characters to be used as a condition.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_eng.png">
+		<p class="quiz_line"></p>
+		<p class="main_text"① If you created blocks like below, talk about how they move:</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/16-14.png"></div>
+		</div>
+	]
+
+	@ Attention ([BASIC] Group)
+	AsomeBot may fall if connected to other motions when the feet have moved heavily. Putting [Attention] between each motion will let AsomeBot to stand at attention to prevent from falling.
+	[block_image ./images/blocks/16-15.png
+		asomebot.home()
+	]
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_eng.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">Create and run a program that poses stand at attention after ballet motions.</p>
+		</div>
+	]
+
+	@ Dance Moves without Option ([DANCE] Group)
+	[block_image ./images/blocks/16-16.png
+		asomebot.ballet()
+	]
+	Perform ballet moves by standing the toes of AsomeBot.
+
+	[block_image ./images/blocks/16-17.png
+		asomebot.wiggle()
+	]
+	AsomeBot wiggles in place.
+
+	[block_image ./images/blocks/16-18.png
+		asomebot.flap()
+	]
+	AsomeBot flaps its feet.
+
+	[block_image ./images/blocks/16-19.png
+		asomebot.warigari()
+	]
+	AsomeBot performs Warigari with its feet.
+
+	[block_image ./images/blocks/16-20.png
+		asomebot.yaho()
+	]
+	AsomeBot lifts up the tiptoe of the feet. The opposite of ballet motion.
+
+	[block_image ./images/blocks/16-21.png
+		asomebot.moonwalk()
+	]
+	AsomeBot performs moonwalk dance.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_eng.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">Ballet is a motion that only stands at tiptoe. Therefore, combine with other motions and create more fun moves.</p>
+		</div>
+	]
+
+	@ Dance Moves with Option ([DANCE] Group)
+	Select the direction to move AsomeBot’s foot direction in the option of all dance moves.
+	[block_image ./images/blocks/16-22.png
+		asomebot.mouse(1)
+	]
+	Lift up one foot of AsomeBot and execute the motion.
+
+	[block_image ./images/blocks/16-23.png
+		asomebot.swing(1)
+	]
+	Lift up and fold back one foot of AsomeBot.
+
+	[block_image ./images/blocks/16-24.png
+		asomebot.tick_tock(1)
+	]
+	Fold one foot of AsomeBot back and wag once.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_eng.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Mouse is made by Korean elementary school student. The student mimicked the scene whistling with moving feet in Mickey Mouse animation and named his project “Mouse”.</p>
+		<p class="main_text">② Using Swing and TickTock motions, create a program that moves the feet at a time.</p>
+		</div>
+	]
+
+	@ Set angle of motor ([WALK] Group)
+	The block controls 1 motor. Select one motor and specify the angle and speed of movement of the selected motor.
+	[block_image ./images/blocks/16-25.png
+		asomebot.angles([0],[90-90],1*1000)
+	]
+	① Select the number of the motor to be moved.
+	② Enter the angle to move the selected motor.
+	③ Enter the time it takes for the motor to move.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_eng.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">Using the AsomeBot motor number in the figure, create a program that lets AsomeBot's right foot (motor 3) angle to sustain at 30 degrees for 1 second and 90 degrees after 1 second.</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/16-26.png"></div>
+		</div>
+	]
+
+	@ Set angles ([WALK] Group)
+	The block controls angles of 4 motors at the same time. You can specify the angle you want of the 4 motors and rotate and set the moving time.
+	[block_image ./images/blocks/16-27.png
+		asomebot.angles([0],[90-90],1*1000)
+	]
+	① Specify angles of 0, 1, 2 and 3 motors in order from the left.
+	② Enter the time it takes for the motor to move.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_eng.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">Using the AsomeBot motor number in the figure, create a program that lets AsomeBot to lift up and down of the left and right feet alternatively.<br>
+		Hint. Left foot angle 150 degrees / Right foot angle 30 degrees</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/16-28.png"></div>
+		</div>
+	]
+
+
+4. Play Activity
+	@ Game Rule
+	① Create a program that can control AsomeBot with the Asome Controller.
+	② Create 3 new dance moves of your choice.
+	- Motion created by combining existing motions
+	- Motion created by moving the motor one by one
+	- Motion created by moving multiple motors at once
+	③ Create a program to execute the new motions with the number button of the Asome Controller.
+
+	@ Algorithm
+	Did you created awesome dance moves? Show off the dance moves you created with the method below:
+	① Demonstrate your dance move and let the audience know the name of the dance move.
+	② Also explain why you created the dance move.
+	③ Listen to your friends’ dance move story.
+	④Play the music and let the robot to perform awesome dance to the dance move you created.
+	[image ./images/blocks/16-29.png]
+
+	@ Play game
+	[image ./images/blocks/16-30.png]
+
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]

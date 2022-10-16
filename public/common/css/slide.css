@@ -1,0 +1,13 @@
+.title_bar {
+	color: #FF0000 !important;
+	font-size: 1em !important;
+}
+
+.comment {
+	float: left !important;
+	font-size: 0.7em !important;
+}
+
+.comment_bar {
+	margin-top: 48% !important;
+}

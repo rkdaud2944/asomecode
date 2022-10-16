@@ -1,0 +1,395 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<head>
+<!-- AsomeHeader Start -->
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>AsomeCode</title>
+    <meta name="Robots" content="all" />
+    <meta name="reply-to" content="" />
+    <meta name="date" content="" />
+
+    <link rel="stylesheet" href="../../common/css/AsomeCODE.css">
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/highlight.css">
+    <link rel="stylesheet" href="../../common/css/vs2015.css">
+    <link rel="stylesheet" href="../../common/css/quiz_css.css">
+
+    <script src="../../common/js/jquery-3.2.1.min.js"></script>
+
+    <link rel="stylesheet" href="../../common/css/bootstrap.min.css">
+    <script src="../../common/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="../../common/css/jodit.min.css"/>
+    <link rel="stylesheet" href="../../common/css/prism.css"/>
+    <script src="../../common/js/jodit.min.js"></script>
+    <script src="../../common/js/prism.js"></script>
+
+    <script src="../../common/js/AsomeCODE.js"></script>
+    <script src="../../common/js/board.js"></script>
+    <script src="../../common/js/highlight.pack.js"></script>
+    <script src="../../common/js/highlightjs-line-numbers.min.js"></script>
+
+    <script src="../../common/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../common/ace/ext-static_highlight.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../common/ace/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+<!-- AsomeHeader End -->
+</head>
+
+<body class="p3">    
+
+    <div class="modal fade" id="video_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <video id="video_player" width="100%" controls>
+                        <source id="video_src" type="video/webm" src=""/>
+                        <track id="video_subtitle" kind="subtitles" srclang="en" label="english" src="" default>
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="wrap">
+        <ul class="blind">
+            <li><a href="#contents">본문 바로가기(Skip Contents)</a></li>
+        </ul>
+        <div id="mobile">
+            <div class="logo">
+                <a href="javascript:void(0);"><img src="../../common/images/logom.png"></a>
+                <div class="m"><a><img src="../../common/images/mobile_m.png"></a></div>
+            </div>
+            <div class="mobile_top">
+                <div class="top_m">
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')">
+                        <img class="image-btn" filename="../../common/images/mobile_01.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeConnect')">
+                        <img class="image-btn" filename="../../common/images/mobile_02.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=ShowEditor')">
+                        <img class="image-btn" filename="../../common/images/mobile_03.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+                        <img class="image-btn last" filename="../../common/images/mobile_04.png">
+                    </a>
+                </div>
+                <div class="top_m">
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeReboot')">
+                        <img class="image-btn" filename="../../common/images/mobile_05.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeFormat')">
+                        <img class="image-btn" filename="../../common/images/mobile_06.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeUpdate')">
+                        <img class="image-btn" filename="../../common/images/mobile_07.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeBlock')">
+                        <img class="image-btn last" filename="../../common/images/blockcoding.png">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="header">
+            <ul class="left">
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeConnect')">
+                    <img class="image-btn" filename="../../common/images/top_01.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')">
+                    <img class="image-btn" filename="../../common/images/top_02.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=ShowEditor')">
+                    <img class="image-btn" filename="../../common/images/top_03.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+                    <img class="image-btn" filename="../../common/images/top_05.png">
+                </a></li>
+            </ul>
+            <ul class="right">
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeReboot')">
+                    <img class="image-btn" filename="../../common/images/top_04.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeFormat')">
+                    <img class="image-btn" filename="../../common/images/top_06.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeUpdate')">
+                    <img class="image-btn" filename="../../common/images/top_07.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeBlock')">
+                    <img class="image-btn" filename="../../common/images/blockcoding.png">
+                </a></li>
+                <li> &nbsp; </li>
+                <a href="javascript:void(0);" onclick="logout()"><img src="../../common/images/logout.png" id="bt_logout" class="last"></a>
+            </ul>
+        </div>
+        <div class="mobile_nav3"></div>
+        <div id="p3_header">
+            <ul>
+                <li class="headleft"><a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')"><img src="../../common/images/logo.png"></a></li>
+                <li class="headright"></li>
+            </ul>
+        </div>
+
+        <div id="p3_container">
+            <div class="left">
+                <div class="top">
+                    <div class="link_list"><a href="javascript:void(0);" onclick="run_cmd('Code=GoBack')"><img src="../../common/images/p3_list.png" alt="강의목록"></a></div>
+                    <div class="header_text"><div id="chapter" class="chapter">Unit {0}</div>
+                        <br>
+
+                        Menari seperti idola
+                    </div>
+                </div>
+                <div class="beg">
+                    <ul>
+                        <li><a href="javascript:fnMove('pn1')">1. Tujuan Pembelajaran</a></li>
+<li><a href="javascript:fnMove('pn2')">2. Pratinjau</a></li>
+<li><a href="javascript:fnMove('pn3')">3. Pelajari tentang blok yang akan digunakan</a></li>
+<li><a href="javascript:fnMove('pn4')">4. Mainkan Aktivitas</a></li>
+
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="right">
+                <div class="contents">
+                    <br>
+
+<li class="lefts bold" id="pn1">1. Tujuan Pembelajaran<span class="video_button" level="block" filename="01.ch01"></span></li>
+<div style="max-width: 600px;"><video width="100%" controls>
+<source id="video_src" type="video/webm" src="./video/block/01/20.execute.webm"/>
+Your browser does not support HTML5 video.</video></div>
+<p class="main_text">• Memahami 1: 1 dan 1: n metode pengendalian<br>
+• Buat program yang dapat mengontrol beberapa AsomeBots secara bersamaan.<br>
+• Hubungkan berbagai gerakan dansa dan kembangkan program tari baru.<br>
+</p>
+<br>
+<br>
+
+<li class="lefts bold" id="pn2">2. Pratinjau<span class="video_button" level="block" filename="01.ch02"></span></li>
+<p class="main_text"><strong>A. Biarkan robot menari seperti idola.</strong></p>
+<p class="main_text">Anda dapat menggunakan fungsi WiFi AsomeBot untuk membuat beberapa robot menari secara bersamaan.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/20-01.png"></div>
+<br>
+<p class="main_text">Cara mengirim sinyal melalui WiFi</p>
+<p class="main_text">① operasi 1: 1</p>
+<p class="main_text">Hubungkan ponsel cerdas Anda dan AsomeBot untuk beroperasi satu per satu.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/20-02.png"></div>
+<p class="main_text">② Operasikan beberapa robot sekaligus</p>
+<p class="main_text">Setelah smartphone mengirim sinyal ke router, router mentransmisikan sinyal ke beberapa AsomeBots untuk operasi.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/20-03.png"></div>
+<br>
+<p class="main_text"><strong>B. Bagaimana Anda membuat gerakan tari?</strong></p>
+<p class="main_text">Anda dapat membuat berbagai gerakan dengan menyesuaikan sudut dan waktu bergerak dari 4 motor yang terhubung ke AsomeBot. Anda dapat membuat gerakan mengibaskan kaki sebagai berikut:</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/20-04.png"></div>
+<br>
+<p class="main_text"><strong>C. Saya ingin robot saya melakukan gerakan yang berbeda secara bersamaan.</strong></p>
+<p class="main_text">Seperti idola, terkadang Anda hanya perlu menyimpan gerakan berbeda saat Anda ingin setiap AsomeBot menari gerakan yang berbeda.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/20-05.png"></div>
+<br>
+<p class="main_text">Dalam urutan apa Anda harus membangun sebuah program?</p>
+<p class="main_text">① Biarkan AsomeBot untuk mengakses router Internet.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/20-06.png"></div>
+<p class="main_text">② Kembangkan gerakan tarian untuk setiap robot.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/20-07.png"></div>
+<p class="main_text">③ Operasikan dengan satu smartphone.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/20-08.png"></div>
+<br>
+<br>
+
+<li class="lefts bold" id="pn3">3. Pelajari tentang blok yang akan digunakan<span class="video_button" level="block" filename="01.ch03"></span></li>
+<p class="main_text"><strong>A. Terhubung ke internet/connect to internet (grup [INTERNET])</strong></p>
+<p class="main_text">Tentukan nama dan kata sandi router nirkabel tempat AsomeBot akan terhubung.Untuk menggunakan blok, Anda harus memiliki router Internet nirkabel. Namun, router Internet tidak perlu terhubung ke Internet.</p>
+<div id="src_1" style="display: none;">import internet
+internet.connect("","")
+</div>
+<img class="block_image" src="./images/blocks/20-09.png" onclick="run_code($('#src_1').text())">
+<p class="main_text">① Masukkan nama router Internet. </p>
+<p class="main_text">② Masukkan kata sandi router Internet.</p>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/reference_indonesia.png">
+<p class="quiz_line"></p>
+<p class="main_text">Temukan router Internet di ponsel cerdas Anda. Anda dapat menemukan nama router nirkabel yang ingin Anda gunakan dalam daftar WiFi dan terhubung ke ponsel cerdas Anda. Jika sebuah pesan muncul karena koneksi Internet tidak stabil, jangan tekan tombol apa pun dan tunggu pesannya menghilang.</p>
+<div class="content_image_box"><img src="./images/blocks/20-10.png" style="width:49%;"><img src="./images/blocks/20-11.png" style="width:49%;"></div>
+</div>
+
+<br>
+<p class="main_text"><strong>B. Buka/open socket UDP (grup [INTERNET])</strong></p>
+<p class="main_text">AsomeBot membuka port untuk berkomunikasi melalui Internet.</p>
+<div id="src_2" style="display: none;">import udp_socket
+udp_socket.open(1234)
+</div>
+<img class="block_image" src="./images/blocks/20-12.png" onclick="run_code($('#src_2').text())">
+<p class="main_text">① Nomor port yang akan digunakan. Gunakan nomor sebagaimana adanya tanpa modifikasi.</p>
+<br>
+<p class="main_text"><strong>C. Baca Pesan/read message (grup [INTERNET])</strong></p>
+<p class="main_text">Baca pesan yang dikirim dari smartphone.</p>
+<div id="src_3" style="display: none;">msg = udp_socket.read_text()
+</div>
+<img class="block_image" src="./images/blocks/20-13.png" onclick="run_code($('#src_3').text())">
+<br>
+<p class="main_text"><strong>D. Ulangi hingga tak terbatas/repeat infinitely (grup [ADVANCE])</strong></p>
+<p class="main_text">Blok di dalam blok ini akan dijalankan secara berurutan dan berulang tanpa henti. Di sini, Anda akan menunggu Aplikasi ponsel cerdas Anda untuk mengirim pesan, dan menjalankan perintah sesuai dengan pesan tersebut.</p>
+<div id="src_4" style="display: none;">while True:
+  pass
+</div>
+<img class="block_image" src="./images/blocks/20-14.png" onclick="run_code($('#src_4').text())">
+<br>
+<p class="main_text"><strong>E. Ulangi/repeat (grup [ADVANCE])</strong></p>
+<p class="main_text">Ulangi perintah di blok sebanyak yang Anda inginkan.</p>
+<div id="src_5" style="display: none;">for count in range(1):
+  pass
+</div>
+<img class="block_image" src="./images/blocks/20-15.png" onclick="run_code($('#src_5').text())">
+<p class="main_text">① Tentukan berapa kali untuk mengulangi.</p>
+<p class="main_text">② Tambahkan blok untuk mengulang.</p>
+<br>
+<p class="main_text"><strong>F. Jika/if (grup [ADVANCE])</strong></p>
+<p class="main_text">Jalankan blok di dalam blok [If] ketika input detail kondisinya benar. Jika kondisinya salah, blok yang mengikuti blok [if] akan dieksekusi.</p>
+<div id="src_6" style="display: none;">if i == :
+</div>
+<img class="block_image" src="./images/blocks/20-16.png" onclick="run_code($('#src_6').text())">
+<p class="main_text">① Masukkan variabel yang akan digunakan dalam pernyataan bersyarat. Nilai default adalah ' i'.</p>
+<p class="main_text">② Pilih ketidaksetaraan default untuk membandingkan kondisi.</p>
+<p class="main_text">③ Masukkan nilai default untuk digunakan dalam kondisi ini.Anda perlu menambahkan blok untuk menentukan nilai bersyarat.</p>
+<p class="main_text">④ Tambahkan blok yang akan dieksekusi ketika kondisinya benar.</p>
+<br>
+<p class="main_text"><strong>G. Nilai Karakter (grup [ADVANCE])</strong></p>
+<p class="main_text">Nilai ini digunakan untuk mewakili karakter yang dimasukkan daripada variabel atau angka.</p>
+<div id="src_7" style="display: none;">''
+</div>
+<img class="block_image" src="./images/blocks/20-17.png" onclick="run_code($('#src_7').text())">
+<p class="main_text">① Masukkan karakter yang akan digunakan sebagai syarat.</p>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_indonesia.png">
+<p class="quiz_line"></p>
+<p class="main_text">① Jika Anda membuat blok seperti di bawah ini, bicarakan bagaimana mereka bergerak:</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/20-18.png"></div>
+<p class="main_text">② Buat program yang memungkinkan semua robot yang terhubung berjalan maju saat menekan  </p> 
+<div class="content_image_box" style="float:left; margin: 0 1%;">
+    <img class="content_image" src="./images/blocks/20-19.png" style="width: auto;">
+</div>
+<p class="main_text">tombol Pengendali AsomeBot. </p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/20-20.png"></div>
+</div>
+
+<br>
+<p class="main_text"><strong>H. Siaga/Attention (Grup [BASIC])</strong></p>
+<p class="main_text">AsomeBot dapat jatuh jika terhubung ke gerakan lain ketika kaki telah bergerak terlalu banyak. Menempatkan [Attention] di antara setiap gerakan akan membuat AsomeBot berdiri tegak untuk mencegah agar tidak jatuh.</p>
+<div id="src_8" style="display: none;">asomebot.home()
+</div>
+<img class="block_image" src="./images/blocks/20-21.png" onclick="run_code($('#src_8').text())">
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_indonesia.png">
+<p class="quiz_line"></p>
+<p class="main_text">Buat dan jalankan program yang membat pose siaga/attention setelah gerakan balet.</p>
+</div>
+
+<br>
+<p class="main_text"><strong>I. Gerakan tari tanpa Opsi (grup [DANCE])</strong></p>
+<div id="src_9" style="display: none;">asomebot.ballet()
+</div>
+<img class="block_image" src="./images/blocks/20-22.png" onclick="run_code($('#src_9').text())">
+<p class="main_text">Lakukan gerakan balet dengan mengacungkan jari kaki AsomeBot.</p>
+<br>
+<div id="src_10" style="display: none;">asomebot.wiggle()
+</div>
+<img class="block_image" src="./images/blocks/20-23.png" onclick="run_code($('#src_10').text())">
+<p class="main_text">AsomeBot bergoyang-goyang di tempat.</p>
+<br>
+<div id="src_11" style="display: none;">asomebot.flap()
+</div>
+<img class="block_image" src="./images/blocks/20-24.png" onclick="run_code($('#src_11').text())">
+<p class="main_text">AsomeBot mengepakkan kakinya.</p>
+<br>
+<div id="src_12" style="display: none;">asomebot.warigari()
+</div>
+<img class="block_image" src="./images/blocks/20-25.png" onclick="run_code($('#src_12').text())">
+<p class="main_text">AsomeBot melakukan Warigari dengan kakinya.</p>
+<br>
+<div id="src_13" style="display: none;">asomebot.yaho()
+</div>
+<img class="block_image" src="./images/blocks/20-26.png" onclick="run_code($('#src_13').text())">
+<p class="main_text">AsomeBot mengangkat ujung jari kaki.Kebalikan dari gerak balet.</p>
+<br>
+<div id="src_14" style="display: none;">asomebot.moonwalk()
+</div>
+<img class="block_image" src="./images/blocks/20-27.png" onclick="run_code($('#src_14').text())">
+<p class="main_text">AsomeBot menampilkan tarian moonwalk.</p>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_indonesia.png">
+<p class="quiz_line"></p>
+<p class="main_text">Gabungkan gerakan tarian yang tidak memerlukan opsi dan buat program tarian.</p>
+</div>
+
+<br>
+<p class="main_text"><strong>J. Gerakan tari dengan Opsi (grup [DANCE])</strong></p>
+<p class="main_text">Pilih arah untuk menggerakkan kaki AsomeBot di opsi semua gerakan dansa.</p>
+<div id="src_15" style="display: none;">asomebot.mouse(1)
+</div>
+<img class="block_image" src="./images/blocks/20-28.png" onclick="run_code($('#src_15').text())">
+<p class="main_text">Angkat satu kaki AsomeBot dan lakukan gerakan.</p>
+<br>
+<div id="src_16" style="display: none;">asomebot.swing(1)
+</div>
+<img class="block_image" src="./images/blocks/20-29.png" onclick="run_code($('#src_16').text())">
+<p class="main_text">Angkat dan lipat kembali satu kaki AsomeBot.</p>
+<br>
+<div id="src_17" style="display: none;">asomebot.tick_tock(1)
+</div>
+<img class="block_image" src="./images/blocks/20-30.png" onclick="run_code($('#src_17').text())">
+<p class="main_text">Lipat satu kaki AsomeBot kembali dan goyangkan sekali.</p>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_indonesia.png">
+<p class="quiz_line"></p>
+<p class="main_text">① Mouse dibuat oleh siswa sekolah dasar Korea.Siswa menirukan adegan bersiul moving dengan kaki bergerak dalam animasi Mickey Mouse dan menamai proyeknya "Mouse".</p>
+<p class="main_text">② Menggunakan gerakan Swing dan TickTock, buat program yang menggerakkan kaki pada satu waktu.</p>
+</div>
+
+<br>
+<br>
+
+<li class="lefts bold" id="pn4">4. Mainkan Aktivitas<span class="video_button" level="block" filename="01.ch04"></span></li>
+<p class="main_text"><strong>A. Aturan Permainan</strong></p>
+<p class="main_text">① Anda harus memutuskan musik apa yang akan digunakan untuk kompetisi tari dan bagian yang akan digunakan (kurang dari 30 detik).</p>
+<p class="main_text">② Buat panggung pertunjukan yang bagus di atas kertas bersama teman-teman Anda </p>
+<p class="main_text">③ Bentuk tim 3-5 AsomeBots.</p>
+<p class="main_text">④ Buat program agar AsomeBot dari tim menari dengan musik secara harmonis.</p>
+<br>
+<p class="main_text"><strong>B. Algoritma</strong></p>
+<p class="main_text">Apa yang harus Anda lakukan untuk membuat program yang memungkinkan beberapa AsomeBots menari dalam gerakan yang sama?</p>
+<p class="main_text">① Tentukan berapa detik ketukan lagu.</p>
+<p class="main_text">② Periksa waktu yang diperlukan untuk melakukan setiap gerakan tarian.</p>
+<p class="main_text">③ Atur gerakan tarian ke musik dan periksa di mana ketukan gerak dan musik tidak cocok.</p>
+<p class="main_text">④ Inset perintah [Delay] di area di mana ketukan tidak cocok dengan gerakan.</p>
+<p class="main_text">⑤ Tentukan setiap gerakan AsomeBot berbeda di mana diperlukan.</p>
+<br>
+<p class="main_text"><strong>C. Bermain game</strong></p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/20-31.png"></div>
+<br>
+<script type="text/javascript">
+    $(".video_button").css("display", "none");
+</script>
+
+
+
+                </div>
+            </div>
+
+        </div>
+        <!-- //container -->
+    </div>
+    <!-- //wrap -->
+</body>
+
+</html>

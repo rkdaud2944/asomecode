@@ -1,0 +1,151 @@
+Let’s make a cooking timer robot
+
+1. Learning Objective
+	[video ./video/block/01/17.execute.webm]
+	* Understand the principle of a timer
+	* Execute a specific motion at fixed time.
+	* Create and explain a cooking timer program
+
+
+2. Preview
+	@ Cooking timer
+	When we cooking food, we use a device called a “cooking timer’ to measure the cooking time precisely.
+	[image ./images/blocks/17-01.png]
+	① You can also use a timer not only for cooking but also when studying.
+	② A timer can also be used to prevent incidents.
+	③ A timer is very convenient as you can control the time precisely.
+
+	@ AsomeBot has a watch inside.
+	Inside the AsomeBot is a very sophisticated clock that measures time in milliseconds. Therefore, you can make a cooking timer using the watch function of AsomeBot.
+	[image ./images/blocks/17-02.png]
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_eng.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">AsomeBot has no number display or watch to show. How can AsomeBot express the measured time?</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/17-03.png"></div>
+		<p class="main_text">AsomeBot can make sound and also move. Therefore, it can express the time in the following way:</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/17-04.png"></div>
+		<p class="main_text">Let's find out more if there are other ways of expression.</p>
+		</div>
+	]
+
+
+3. learn which blocks to use
+	@ Delay ([ADVANCE] Group)
+	Wait without moving for the specified seconds. Using this block, the robot can move as you want in the interval of 10 sec., 30 sec., and 60 sec.
+	[block_image ./images/blocks/17-05.png
+		delay(1)
+	]
+	① Input the number of seconds to wait after a click.
+
+	@ Repeat ([ADVANCE] Group)
+	Repeat the commands in the block as many times as you want.
+	[block_image ./images/blocks/17-06.png
+		for count in range(1):
+		  pass
+	]
+	① Specify the number of times to repeat.
+	② Add blocks to repeat.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_eng.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">Using the repeat block and [Delay] block, create a program that lets the robot to Flap every 30 sec.</p>
+		</div>
+	]
+
+	@ Dance Moves without Option ([DANCE] Group)
+	[block_image ./images/blocks/17-07.png
+		asomebot.ballet()
+	]
+	Perform ballet moves by standing the toes of AsomeBot.
+
+	[block_image ./images/blocks/17-08.png
+		asomebot.wiggle()
+	]
+	AsomeBot wiggles in place.
+
+	[block_image ./images/blocks/17-09.png
+		asomebot.flap()
+	]
+	AsomeBot flaps its feet.
+
+	[block_image ./images/blocks/17-10.png
+		asomebot.warigari()
+	]
+	AsomeBot performs Warigari with its feet.
+
+	[block_image ./images/blocks/17-11.png
+		asomebot.yaho()
+	]
+	AsomeBot lifts up the tiptoe of the feet. The opposite of ballet motion.
+
+	[block_image ./images/blocks/17-12.png
+		asomebot.moonwalk()
+	]
+	AsomeBot performs moonwalk dance.
+
+	@ Buzzer on ([SOUND] Dance)
+	Make the buzzer unable to use. To make sound with the buzzer, you must use this block. Note that if the block is not used first, you cannot use the block.
+	[block_image ./images/blocks/17-13.png
+		turnoff_pins( (1, 5, 6, 7, 8) )
+		import music
+		music.open(1)
+	]
+
+	@ Buzzer off ([SOUND] Group)
+	This allows you to use other parts again after using the buzzer. You cannot use other parts while using the buzzer. After playing the music, the block must be used to run other components.
+	[block_image ./images/blocks/17-14.png
+		turnoff_pins( (1, 5, 6, 7, 8) )
+		import asomebot
+		asomebot.ready(5, 6, 7, 8)
+	]
+
+	@ Play for ([SOUND] Group)
+	Using this block, you can make the sound you want using the frequency.
+	[block_image ./images/blocks/17-15.png
+		music.note("C1",1*1000)
+	]
+	① Select the scale from the list that you want to play.
+	② Select the octave of scale from the list to play.
+	③ Specify the time to make the sound.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_eng.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">Make a note for 3-octave Fa for 0.5 sec.</p>
+		</div>
+	]
+
+	@ Beat and time
+	The play time for each beat of the music score we use are as below: When playing music, create a program that reflects the playing time for each beat.
+	[image ./images/blocks/17-16.png]
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_eng.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Make a sound at 3-octave G in an 8 note beat.</p>
+		<p class="main_text">② Wait for 1 minute, and create a program to play music with a buzzer.</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/17-17.png"></div>
+		</div>
+	]
+
+
+4. Play Activity
+	@ Algorithm
+	You can make a cooking timer with the following method: Let’s find out together if there are other ways to make it.
+	[image ./images/blocks/17-18.png]
+
+	@ Making a cooking timer of your choice
+	[image ./images/blocks/17-19.png]
+
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]

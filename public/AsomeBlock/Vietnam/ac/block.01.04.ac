@@ -1,0 +1,101 @@
+Hãy cùng làm cho AsomeBot đi thẳng
+
+1. Mục tiêu bài học
+	[video ./video/block/01/04.execute.webm]
+	* Điều chỉnh góc của từng động cơ của chân AsomeBot.
+	* Điều chỉnh góc của chân để AsomeBot đi thẳng.
+
+
+2. Preview
+	@ Tại sao AsomeBot không thể đi thẳng
+	Điều này là do các góc cơ bản của bốn động cơ của AsomeBot không chính xác. Ngoài ra, nó không thể đi thẳng vì mức độ trượt trên sàn hoặc trọng tâm của AsomeBot. Nếu vậy, thay đổi góc của chân AsomeBot một ít.
+	[image ./images/blocks/04-01.png]
+
+	@ Số lượng động cơ
+	Bốn động cơ của AsomeBot được đánh số như trong hình sau: Khi thay đổi góc với khối, hãy nhớ số động cơ và thay đổi góc của động cơ mong muốn.
+	[image ./images/blocks/04-02.png]
+
+
+3. Tìm hiểu những khối để sử dụng
+	@ Đặt căn chỉnh (Nhóm BASIC)
+	Bạn có thể điều chỉnh giá trị các góc của bốn động cơ được kết nối với AsomeBot. Góc thay đổi bằng cách điều chỉnh góc với khối Set align và thêm khối Attention, sau đó thực hiện robot. Đảm bảo ghi nhớ góc vì góc đã thay đổi sẽ được đặt lại nếu bị ngắt kết nối.
+	[block_image ./images/blocks/04-03.png
+		asomebot.align(90,90,90,90)
+	]
+	① Điều chỉnh góc của động cơ số 1. Động cơ về cơ bản được đặt ở 90 độ.
+	② Điều chỉnh góc của động cơ số 2. Động cơ về cơ bản được đặt ở 90 độ.
+	③ Điều chỉnh góc của động cơ số 3. Động cơ về cơ bản được đặt ở 90 độ.
+	④ Điều chỉnh góc của động cơ số 4. Động cơ về cơ bản được đặt ở 90 độ.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_veitnam.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Điều chỉnh góc của mỗi động cơ hơn 90 độ và điều chỉnh lại dưới 90 độ. Xem cách mỗi động cơ thay đổi hướng.<br>
+		② Điều chỉnh góc sao cho tất cả các chân của AsomeBot đều ở đúng góc.
+		</p>
+		</div>
+	]
+
+	@ Đứng thẳng (Nhóm BASIC)
+	Chân của AsomeBot được căn chỉnh (đứng thẳng).
+	[block_image ./images/blocks/attention.png
+		asomebot.home()
+	]
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_veitnam.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">• Tạo một chương trình khối mà AsomeBot tiến lên 3 bước và đứng thẳng.<br>
+		</p>
+		</div>
+	]
+
+	@ Trì hoãn (Nhóm ADVANCE)
+	Đợi số giây được chỉ định để hoạt động.
+	[block_image ./images/blocks/delay.png
+		delay(1)
+	]
+	① Nhập số giây để chờ sau khi nhấp.
+
+	@ Các vấn đề xảy ra khi các góc khác nhau
+	[image ./images/blocks/04-07.png]
+	Nếu các góc của số 0 và số 1 khác nhau, khoảng cách di chuyển giữa bên trái và bên phải là khác nhau.
+
+	[image ./images/blocks/04-08.png]
+	Nếu góc của số 2 và số 3 khác nhau thì chiều cao của bàn chân nâng lên sẽ khác.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_veitnam.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Đặt góc của một chân để nâng lên rất nhiều, như hình dưới đây và để AsomeBot đi về phía trước. Nó đi như thế nào?<br>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/04-05.png"></div>
+		</p>
+		<p class="main_text">② Làm thế nào để bạn thiết lập các góc của chân AsomeBot để cho nó đi theo vòng tròn như dưới đây?<br>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/04-06.png"></div>
+		</p>
+		</div>
+	]
+
+
+4. Chơi trò chơi
+	@ Luật chơi
+	① Điều chỉnh các góc của bốn động cơ của AsomeBot để đi thẳng.
+	② Cuộc đua xem robot nào về đích hơn mà không chạm vào vạch kẻ lề. (Robot bị loại nếu chạm vào vạch kẻ lề.)
+	[image ./images/blocks/04-10.jpg]
+
+	@ Thuật toán
+	① Điều chỉnh nhẹ ở góc 90 độ để AsomeBot đi thẳng.
+	② Trì hoãn trong 5 giây với khối Delay và sau đó cho phép robot đi bộ 50 bước về phía trước.
+	[image ./images/blocks/04-09.png]
+
+	@ Chơi trò chơi
+	Thực hiện khối và chơi một trò chơi ở vạch xuất phát.
+	
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]

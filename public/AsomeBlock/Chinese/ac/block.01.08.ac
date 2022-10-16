@@ -1,0 +1,142 @@
+AsomeBot 飞镖游戏
+
+1. 学习目标
+	[video ./video/block/01/08.execute.webm]
+	* 了解游戏规则，与 AsomeBot玩飞镖。
+	* 设置一个防守和攻击策略用程序完成。
+
+
+2. 预习
+	@ 飞镖游戏
+	这是英国士兵在中世纪玩的游戏, 最早是向一个空桶盖子上投掷箭头. 现在, 飞镖已经发展成为一项世界级的休闲运动。
+	[image ./images/blocks/08-01.png]
+
+	@ 飞镖的分数
+	飞镖在每投三次以后计分，分数用下列方法计算。
+	[image ./images/blocks/08-02.png]
+	① 单倍 : 对应本扇形区域的分数。
+	② 双倍 : 击中扇形最外侧圈，获基本分数两倍的分数。
+	③ 三倍 : 击中第2道扇形外圈，获基本分三倍的分数.
+	④ 中心 : 击中靶心的外圈，获得50分.
+
+
+3. 学习使用模块
+	@ 向前移动 Move forward ([WALK] 组)
+	按照设定的步数向前步行。
+	[block_image ./images/blocks/03-07.png
+		for i in range(1): asomebot.forward()
+	]
+	点击后，输入前行的步数. 输入1则左脚和右脚各走一步。
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_china.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">• 查看机器人如果要走到靶中心需要多少步。<br>
+		</p>
+		</div>
+	]
+
+	@ 向后移动 Move backward ([WALK] 组)
+	按照设定的步数向后步行。
+	[block_image ./images/blocks/03-08.png
+		for i in range(1): asomebot.backward()
+	]
+	点击后，输入后退的步数. 输入1则左脚和右脚各走一步。
+
+	@ 左转Turn Left ([WALK] 组)
+	按照输入的步数左转行走。
+	[block_image ./images/blocks/03-09.png
+		for i in range(1): asomebot.turn_left()
+	]
+	点击后，输入左转的步数。要旋转90度, 机器人需要转3 ~ 4 次。
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_china.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">• 创建一个程序，在原地旋转180度。<br>
+		</p>
+		</div>
+	]
+
+	@ 右转 Turn Right ([WALK] 组)
+	按照输入的步数右转行走。
+	[block_image ./images/blocks/03-10.png
+		for i in range(1): asomebot.turn_right()
+	]
+	点击后，输入右转的步数。要旋转90度, 机器人需要转3 ~ 4 次。
+
+	@ 延迟 Delay ([ADVANCE] 组)
+	等待指定的时间。
+	[block_image ./images/blocks/delay.png
+		delay(1)
+	]
+	点击后，输入等待的时间，单位为秒。
+
+	@ 测距 Measure distance ([SENSOR] 组)
+	用超声波传感器测量与前方障碍物间的距离. 测量值保存在变量‘Cm’中。
+	[block_image ./images/blocks/07-03.png
+		cm = hcsr04.get_distance()
+	]
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_china.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">• 创建一个程序使 AsomeBot 一直向前行走，如果想停止，按上方 Stop 键停止。<br>
+		</p>
+		</div>
+	]
+
+	@ 无限重复 Repeat infinity ([ADVANCE] 组)
+	使这个模块中的模块指令，无限重复执行。
+	[block_image ./images/blocks/07-04.png
+		while True:
+		  pass
+	]
+
+	@ 如果if ([ADVANCE] 组)
+	如果输入的条件是正确的，模块中的模块程序将会被执行；如果条件是错误的, if模块后面的模块程序将会被执行。
+	[block_image ./images/blocks/07-05.png
+	]
+	① 按照条件语句输入变量。默认值为 ‘i’, 增加传感器模块, 变量会增加且可被选择。
+	② 选择条件语句的不等号。
+	③ 输入作为条件的参考值。 这里, 你需要增加一个条件模块。
+	④ 当条件符合时，增加想要执行的模块。
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_china.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① 创建一个程序，使 AsomeBot 向前行走 10 步, 然后在原地旋转向后看。<br>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/08-03.png"></div>
+		</p>
+		<p class="main_text">② 创建一个程序，向前移动8步, AsomeBot用超声波传感器测距，如果与其他Asomebot距离小于5cm, 继续向前移动5步。<br>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/08-04.png"></div>
+		</p>
+		</div>
+	]
+
+
+4. 互动游戏
+	@ 活动规则
+	① 三个机器人为一个队。
+	② 用石头、剪刀和布的方式决定哪个组先开始。
+	③ 提前编好程序，1号机器人先移动。
+	④ 当1号机器人停止, 另一个队的1号机器人开始行走。
+	⑤ 当两个队的机器人按顺序行走完后, 合计得分数高的队为获胜。
+	[image ./images/blocks/08-05.png]
+
+	@ 算法
+	① 在飞镖游戏里, 有两个主要策略。第一个策略是让你的机器人占据较好的位置。根据想要得到的分数选择一个位置，让机器人走到那个位置。 第二个是防守，阻止对手到达较好的位置。
+	② 如果你想要的位置上已经被对方机器人占据，或者对方想要占领我的位置时，编一个程序攻击对方机器人来保护自己。
+	
+	@ 玩游戏
+	[image ./images/blocks/08-06.jpg]
+	
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]	

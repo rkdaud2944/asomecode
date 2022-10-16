@@ -1,0 +1,145 @@
+用智能手机控制Asomebot
+
+1. 学习目标
+	[video ./video/block/01/11.execute.webm]
+	* 了解一下WiFi的功能。
+	* 通过WiFi将智能手机和AsomeBot连接起来，并操纵一下。
+
+
+2. 预览
+	@ AsomeBot可以通过无线控制。
+	您可以用智能手机通过无线控制Asomebot。
+	[image ./images/blocks/11-01.png]
+
+	@ 蓝牙和WiFi
+	了解蓝牙和wifi的功能。
+	[image ./images/blocks/11-02.png]
+
+	@ 为何命名为WiFi？
+	WiFi是一个复合词，意味着它可以实现优质的无线通信。
+	[image ./images/blocks/11-03.png]
+
+
+3. 了解要用的程序块
+	@ Change to access point mode（设置接入点模式）（[INTERNET（互联网）]组）
+	设定一下智能手机控制的AsomeBot名称。
+	[block_image ./images/blocks/11-04.png
+		import internet
+		internet.open_ap("")
+	]
+	① 输入您要用的名称。只能用英文和数字。
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_china.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① 为AsomeBot设定一个名称。只有英文和数字才可用于AsomeBot的名称。设定名称后，即使打开或关闭电源，也依然保留其名称。</p>
+		<p class="main_text">② 检查您设定的名称并尝试连接。先从WiFi列表中查找所输入的AsomeBot名称，并连接到您的智能手机。如果弹出一条信息显示互联网连接不稳定，请不要按任何按钮，要等待其信息消失。</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/11-05.png"></div>
+		</div>
+	]
+
+	@ Open UDP Socket（打开UDP Socket）（[INTERNET（互联网）]组）
+	打开AsomeBot可通过互联网进行通信的端口。
+	[block_image ./images/blocks/11-06.png
+		import udp_socket
+		udp_socket.open(1234)
+	]
+	① 这是要用的端口号。不要做任何的改动，原封不动地使用端口号。
+
+	@ Read Messages（读取信息）（[INTERNET（互联网）]组）
+	读取智能手机发送的信息。
+	[block_image ./images/blocks/11-07.png
+		msg = udp_socket.read_text()
+	]
+
+	@ Repeat infinitely（无限重复）（[ADVANCE（逻辑条件）]组）
+	[Repeat infinity]持续按顺序重复运行区块中的程序块。此时，等待智能手机应用程序发送的信息，接到信息就执行信息中的命令。
+	[block_image ./images/blocks/07-04.png
+		while True:
+		  pass
+	]
+
+	@ if（如果）（[ADVANCE（逻辑条件）]组）
+	[if]所输入的条件正确时，运行区块中的程序块。如果条件不正确，则运行[if]之后的程序块。
+	[block_image ./images/blocks/07-05.png
+		if i == :
+	]
+	① 输入用于条件语句的变量。默认值为“i”，添加传感器区块,就添加相关变量供您选择。
+	② 选择比较条件的标准不等式
+	③ 输入用于条件的默认值。在此，需要您添加指定条件值的区块。
+	④ 添加条件正确时要运行的程序块。
+
+	@ Letter value（字母值）（[ADVANCE（逻辑条件）]组）
+	用于表示所输入的字母，而不是变量或数字。
+	[block_image ./images/blocks/11-09.png
+		''
+	]
+	① 输入用作条件的字母。
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_china.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">假设您编制了如下所示的程序块，请试着说明一下它们如何运行。</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/11-08.png"></div>
+		</div>
+	]
+
+	@ Install Asome Controller（安装Asome控制器）
+	安装Asome控制器应用程序，才能无线控制AsomeBot。您通过此应用程序可以向Asomebot发送信息并控制AsomeBot。在App Store中搜索“asomeit”，查找并安装“Asome Controller”。
+	
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_china.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">起名给Asomebot，保证其在互联网上可用，并编制满足如下条件的程序。<br>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/01-08.png"></div>
+		* 等待智能手机应用程序发送的指令。<br>
+		* 如果信息为“H”，则[attention（立正）]。<br>
+		* 如果信息为“F”，则[one step forward(向前移动一步)]。<br>
+		* 如果信息为“B”，则[one step backward(向后移动一步)]。<br>
+		* 如果信息为“L”，则[once to left（向左转一次）]。<br>
+		* 如果信息为“R”，则[once to right（向右转一次）]。</p>
+		<div id="src_7" style="display: none;">import internet
+		internet.open_ap("asomebot01")
+		import udp_socket
+		udp_socket.open(1234)
+		while True:
+		  msg = udp_socket.read_text()
+		  if msg == 'H':
+		    asomebot.home()
+		  if msg == 'F':
+		    for i in range(1): asomebot.forward()
+		  if msg == 'B':
+		    for i in range(1): asomebot.backward()
+		  if msg == 'L':
+		    for i in range(1): asomebot.turn_left()
+		  if msg == 'R':
+		    for i in range(1): asomebot.turn_right()
+		</div>
+		<img class="content_image" src="./images/blocks/11-10.png" onclick="run_code($('#src_7').text())">
+		</div>
+	]
+
+
+4. 线下游戏活动
+	@ 游戏规则
+	① 两个AsomeBot玩一场吃球游戏。
+	② 在1分钟内得分高的机器人获胜。
+	③ 通过石头剪刀布指定各自的起始位置。
+	④ 步行时吃到更多球的机器人获胜（红球10分/黄球0分）。
+	⑤ 如果您的机器人撞到对方，您的分数就被重置为零。
+	[image ./images/blocks/11-11.png]
+
+	@ 算法
+	如下是通过Asome控制器运行Asomebot的算法。
+	[image ./images/blocks/11-12.png]
+
+	@ 玩游戏
+	玩一场游戏，看看谁吃到的球更多，而获得的分更高。
+	[image ./images/blocks/03-17.jpg]
+	
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]

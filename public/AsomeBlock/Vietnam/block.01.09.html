@@ -1,0 +1,303 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<head>
+<!-- AsomeHeader Start -->
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>AsomeCode</title>
+    <meta name="Robots" content="all" />
+    <meta name="reply-to" content="" />
+    <meta name="date" content="" />
+
+    <link rel="stylesheet" href="../../common/css/AsomeCODE.css">
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/highlight.css">
+    <link rel="stylesheet" href="../../common/css/vs2015.css">
+    <link rel="stylesheet" href="../../common/css/quiz_css.css">
+
+    <script src="../../common/js/jquery-3.2.1.min.js"></script>
+
+    <link rel="stylesheet" href="../../common/css/bootstrap.min.css">
+    <script src="../../common/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="../../common/css/jodit.min.css"/>
+    <link rel="stylesheet" href="../../common/css/prism.css"/>
+    <script src="../../common/js/jodit.min.js"></script>
+    <script src="../../common/js/prism.js"></script>
+
+    <script src="../../common/js/AsomeCODE.js"></script>
+    <script src="../../common/js/board.js"></script>
+    <script src="../../common/js/highlight.pack.js"></script>
+    <script src="../../common/js/highlightjs-line-numbers.min.js"></script>
+
+    <script src="../../common/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../common/ace/ext-static_highlight.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../common/ace/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+<!-- AsomeHeader End -->
+</head>
+
+<body class="p3">    
+
+    <div class="modal fade" id="video_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <video id="video_player" width="100%" controls>
+                        <source id="video_src" type="video/webm" src=""/>
+                        <track id="video_subtitle" kind="subtitles" srclang="en" label="english" src="" default>
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="wrap">
+        <ul class="blind">
+            <li><a href="#contents">본문 바로가기(Skip Contents)</a></li>
+        </ul>
+        <div id="mobile">
+            <div class="logo">
+                <a href="javascript:void(0);"><img src="../../common/images/logom.png"></a>
+                <div class="m"><a><img src="../../common/images/mobile_m.png"></a></div>
+            </div>
+            <div class="mobile_top">
+                <div class="top_m">
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')">
+                        <img class="image-btn" filename="../../common/images/mobile_01.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeConnect')">
+                        <img class="image-btn" filename="../../common/images/mobile_02.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=ShowEditor')">
+                        <img class="image-btn" filename="../../common/images/mobile_03.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+                        <img class="image-btn last" filename="../../common/images/mobile_04.png">
+                    </a>
+                </div>
+                <div class="top_m">
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeReboot')">
+                        <img class="image-btn" filename="../../common/images/mobile_05.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeFormat')">
+                        <img class="image-btn" filename="../../common/images/mobile_06.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeUpdate')">
+                        <img class="image-btn" filename="../../common/images/mobile_07.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeBlock')">
+                        <img class="image-btn last" filename="../../common/images/blockcoding.png">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="header">
+            <ul class="left">
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeConnect')">
+                    <img class="image-btn" filename="../../common/images/top_01.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')">
+                    <img class="image-btn" filename="../../common/images/top_02.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=ShowEditor')">
+                    <img class="image-btn" filename="../../common/images/top_03.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+                    <img class="image-btn" filename="../../common/images/top_05.png">
+                </a></li>
+            </ul>
+            <ul class="right">
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeReboot')">
+                    <img class="image-btn" filename="../../common/images/top_04.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeFormat')">
+                    <img class="image-btn" filename="../../common/images/top_06.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeUpdate')">
+                    <img class="image-btn" filename="../../common/images/top_07.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeBlock')">
+                    <img class="image-btn" filename="../../common/images/blockcoding.png">
+                </a></li>
+                <li> &nbsp; </li>
+                <a href="javascript:void(0);" onclick="logout()"><img src="../../common/images/logout.png" id="bt_logout" class="last"></a>
+            </ul>
+        </div>
+        <div class="mobile_nav3"></div>
+        <div id="p3_header">
+            <ul>
+                <li class="headleft"><a href="javascript:void(0);"><img src="../../common/images/logo.png"></a></li>
+                <li class="headright"></li>
+            </ul>
+        </div>
+
+        <div id="p3_container">
+            <div class="left">
+                <div class="top">
+                    <div class="link_list"><a href="javascript:void(0);" onclick="run_cmd('Code=GoBack')"><img src="../../common/images/p3_list.png" alt="강의목록"></a></div>
+                    <div class="header_text"><div id="chapter" class="chapter">Unit {0}</div>
+                        <br>
+
+                        Hãy làm cho robot hát
+                    </div>
+                </div>
+                <div class="beg">
+                    <ul>
+                        <li><a href="javascript:fnMove('pn1')">1. Mục tiêu bài học</a></li>
+<li><a href="javascript:fnMove('pn2')">2. Preview</a></li>
+<li><a href="javascript:fnMove('pn3')">3. Tìm hiểu những khối để sử dụng</a></li>
+<li><a href="javascript:fnMove('pn4')">4. Chơi trò chơi</a></li>
+
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="right">
+                <div class="contents">
+                    <br>
+
+<li class="lefts bold" id="pn1">1. Mục tiêu bài học<span class="video_button" level="block" filename="01.ch01"></span></li>
+<div style="max-width: 600px;"><video width="100%" controls>
+<source id="video_src" type="video/webm" src="./video/block/01/09.execute.webm"/>
+Your browser does not support HTML5 video.</video></div>
+<p class="main_text">• Tìm hiểu cách tạo âm thanh bằng cách sử dụng bộ chuông của AsomeBot.<br>
+• Chơi một bài hát sử dụng các nốt có sẵn.<br>
+</p>
+<br>
+<br>
+
+<li class="lefts bold" id="pn2">2. Preview<span class="video_button" level="block" filename="01.ch02"></span></li>
+<p class="main_text"><strong>A. Cách truyền âm thanh</strong></p>
+<p class="main_text">Âm thanh là sự rung động gây ra các vật thể, dụng cụ hoặc con người</p>
+<p class="main_text">di chuyển đến không khí xung quanh chúng ta và truyền đến tai của chúng ta.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/09-01.png"></div>
+<br>
+<p class="main_text"><strong>B. Làm thế nào máy tính bắt chước âm thanh</strong></p>
+<p class="main_text">Nó có thể bắt chước cao độ bằng cách sử dụng tần số âm thanh.</p>
+<p class="main_text">Nó có thể bắt chước cường độ và hình dạng của âm thanh, khi bắt chước âm thanh chính xác hơn.</p>
+<br>
+<p class="main_text">3 yếu tố của âm thanh</p>
+<p class="main_text">• điểm mạnh: cường độ và điểm yếu của âm thanh<br>
+• Chiều cao: Mức độ cao và thấp của âm thanh<br>
+• hình: Nó cũng được gọi là giai điệu<br>
+</p>
+<p class="main_text">        Để được phân biệt bởi dạng sóng</p>
+<p class="main_text">        Lý do mọi người có tiếng nói khác nhau</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/09-02.png"></div>
+<br>
+<p class="main_text"><strong>C. Ai đã làm ra thang đo?</strong></p>
+<p class="main_text">Thang đo tám nốt, Do-Re-Mi-Fa-Sol-La-Si-Do, được thực hiện bởi Pythagoras, một nhà toán học nổi tiếng. Pythagoras, người đi ngang qua thợ rèn, nghe người ta đập sắt bằng những chiếc búa khác nhau, có công thức cho âm thanh, và tạo ra thang âm tám nốt mà chúng ta sử dụng.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/09-03.png"></div>
+<br>
+<p class="main_text"><strong>D. Lưu ý và mã</strong></p>
+<p class="main_text">Nếu bạn sử dụng tất cả các cách viết của ghi chú, các chữ cái quá nhiều, vì vậy chương trình sử dụng một mã bao gồm một ký tự và quãng tám.</p>
+<p class="main_text">Thang đo chúng tôi sử dụng thường xuyên nhất là ba quãng tám.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/09-04.png"></div>
+<br>
+<br>
+
+<li class="lefts bold" id="pn3">3. Tìm hiểu những khối để sử dụng<span class="video_button" level="block" filename="01.ch03"></span></li>
+<p class="main_text"><strong>A. Chuông mở (Nhóm SOUND(Âm thanh)</strong></p>
+<p class="main_text">Khối này làm cho chuông có sẵn để sử dụng. Khối này phải được sử dụng trước khi chuông phát ra âm thanh.</p>
+<p class="main_text">THẬN TRỌNG. Không thể sử dụng bộ chuông trừ khi bạn sử dụng khối này trước.</p>
+<div id="src_1" style="display: none;">turnoff_pins( (1, 5, 6, 7, 8) )
+import music
+music.open(1)
+</div>
+<img class="block_image" src="./images/blocks/09-05.png" onclick="run_code($('#src_1').text())">
+<br>
+<p class="main_text"><strong>B. Chuông đóng (Nhóm SOUND)</strong></p>
+<p class="main_text">Nó cho phép bạn hoàn thành việc sử dụng bộ chuông và sử dụng lại các bộ phận khác.</p>
+<p class="main_text">Bạn có thể sử dụng các bộ phận khác trong quá trình sử dụng bộ chuông.</p>
+<p class="main_text">Sau khi chơi xong, bạn phải sử dụng khối này để sử dụng các phần khác.</p>
+<div id="src_2" style="display: none;">turnoff_pins( (1, 5, 6, 7, 8) )
+import asomebot
+asomebot.ready(5, 6, 7, 8)
+</div>
+<img class="block_image" src="./images/blocks/09-06.png" onclick="run_code($('#src_2').text())">
+<br>
+<p class="main_text"><strong>C. Tạo ra âm thanh (Nhóm SOUND)</strong></p>
+<p class="main_text">Bạn có thể tạo âm thanh bạn muốn theo tần số với khối này.</p>
+<div id="src_3" style="display: none;">music.tone(0)
+delay(1)
+music.mute()
+</div>
+<img class="block_image" src="./images/blocks/09-07.png" onclick="run_code($('#src_3').text())">
+<p class="main_text">① Nhập tần số bạn muốn phát ra âm thanh</p>
+<p class="main_text">② Nhập thời gian chơi</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/09-09.png"></div>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_veitnam.png">
+<p class="quiz_line"></p>
+<p class="main_text">• Nhập 196 vào tần số và nghe âm thanh. Những âm thanh nào tương ứng với quy mô bạn có thể nghe được?<br>
+</p>
+</div>
+
+<br>
+<p class="main_text"><strong>D. Chơi cho(Nhóm SOUND)</strong></p>
+<p class="main_text">Bạn có thể tạo âm thanh bạn muốn theo tần số với khối này.</p>
+<div id="src_4" style="display: none;">music.note("C1",1*1000)
+</div>
+<img class="block_image" src="./images/blocks/09-08.png" onclick="run_code($('#src_4').text())">
+<p class="main_text">① Chọn ghi chú bạn muốn chơi.</p>
+<p class="main_text">② Chọn quãng tám.</p>
+<p class="main_text">③ Nhập thời gian chơi</p>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_veitnam.png">
+<p class="quiz_line"></p>
+<p class="main_text">• Chơi Fa 3 quãng tám trong 0,5 giây.<br>
+</p>
+</div>
+
+<br>
+<p class="main_text"><strong>E. Nhịp và thời gian</strong></p>
+<p class="main_text">Đây là thời gian chơi của từng nhịp mà chúng tôi sử dụng.</p>
+<p class="main_text">Tạo một chương trình phản ánh thời gian chơi của từng nhịp khi bạn phát nhạc.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/09-10.png"></div>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_veitnam.png">
+<p class="quiz_line"></p>
+<p class="main_text">① Âm thanh phát ra 3 quãng tám G trong một bộ lọc.<br>
+② Sử dụng khối [Make Sound of in Secs](Tạo âm thanh trong giây), tạo chương trình tăng 50 từ 0 đến 1000 và kiểm tra cách âm thanh thay đổi.<br>
+</p>
+</div>
+
+<br>
+<br>
+
+<li class="lefts bold" id="pn4">4. Chơi trò chơi<span class="video_button" level="block" filename="01.ch04"></span></li>
+<p class="main_text"><strong>A. Luật chơi</strong></p>
+<p class="main_text">① Sử dụng các ghi chú nhịp điệu, tạo ra một chương trình phát nhạc mẫu giáo.</p>
+<p class="main_text">② Sử dụng các khối âm thanh bạn đã học trước đó và tạo một chương trình để phát nhạc bạn muốn.</p>
+<br>
+<p class="main_text"><strong>B. Thuật toán</strong></p>
+<p class="main_text">Để phát nhạc, trước tiên bạn phải chuẩn bị sử dụng chuông. Và sau đó, bố trí các khối theo từng thang âm và nhịp, và khi kết thúc màn trình diễn, bạn bố trí các khối để tắt chuông.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/09-11.png"></div>
+<br>
+<p class="main_text"><strong>C. Chơi trò chơi</strong></p>
+<p class="main_text">Nghe nhạc và xem âm nhạc của ai nghe hay hơn.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/09-12.png"></div>
+<br>
+<script type="text/javascript">
+    $(".video_button").css("display", "none");
+</script>
+
+
+
+                </div>
+            </div>
+
+        </div>
+        <!-- //container -->
+    </div>
+    <!-- //wrap -->
+</body>
+
+</html>

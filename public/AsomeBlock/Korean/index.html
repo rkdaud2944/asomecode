@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+    <!-- AsomeHeader Start -->
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>AsomeBlock</title>
+    <meta name="Robots" content="all" />
+    <meta name="reply-to" content="" />
+    <meta name="date" content="" />
+    
+    <link rel="stylesheet" href="../../common/css/AsomeCODE.css">
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/highlight.css">
+    <link rel="stylesheet" href="../../common/css/vs2015.css">
+    <link rel="stylesheet" href="../../common/css/quiz_css.css">
+    
+    <script src="../../common/js/jquery-3.2.1.min.js"></script>
+    
+    <link rel="stylesheet" href="../../common/css/bootstrap.min.css">
+    <script src="../../common/js/bootstrap.min.js"></script>
+    
+    <link rel="stylesheet" href="../../common/css/jodit.min.css"/>
+    <link rel="stylesheet" href="../../common/css/prism.css"/>
+    <script src="../../common/js/jodit.min.js"></script>
+    <script src="../../common/js/prism.js"></script>
+    
+    <script src="../../common/js/AsomeCODE.js"></script>
+    <script src="../../common/js/AsomeCodeUpdate.js"></script>
+    <script src="../../common/js/board.js"></script>
+    <script src="../../common/js/highlight.pack.js"></script>
+    <script src="../../common/js/highlightjs-line-numbers.min.js"></script>
+    
+    <script src="../../common/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../common/ace/ext-static_highlight.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../common/ace/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+    <!-- AsomeHeader End -->
+    
+        <script>
+        $(function() {
+            $("#mobile_menu").click(function() {
+                if ($(".mobile_top").css("display") == "none") {
+                    $(".mobile_top").show();
+                    $("#mobile").css("height", "90px");
+                    $(".mobile_nav").css("margin-top", "160px");
+                } else {
+                    $(".mobile_top").hide();
+                    $("#mobile").css("height", "90px");
+                    $(".mobile_nav").css("margin-top", "90px");
+                }
+            })
+        })
+        </script>
+    </head>
+    
+    <body class="p3">
+    
+        <div id="wrap">
+            <ul class="blind">
+                <li><a href="#contents">본문 바로가기(Skip Contents)</a></li>
+            </ul>
+            <div id="mobile">
+                <div class="logo">
+                    <a href="javascript:void(0);"><img src="../../common/images/logom.png"></a>
+                    <div class="m"><a><img src="../../common/images/mobile_m.png"></a></div>
+                </div>
+                <div class="mobile_top">
+                    <div class="top_m">
+                        <a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')">
+                            <img class="image-btn" filename="../../common/images/mobile_01.png">
+                        </a>
+                        <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeConnect')">
+                            <img class="image-btn" filename="../../common/images/mobile_02.png">
+                        </a>
+                        <a href="javascript:void(0);" onclick="run_cmd('Code=ShowEditor')">
+                            <img class="image-btn" filename="../../common/images/mobile_03.png">
+                        </a>
+                        <a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+                            <img class="image-btn last" filename="../../common/images/mobile_04.png">
+                        </a>
+                    </div>
+                    <div class="top_m">
+                        <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeReboot')">
+                            <img class="image-btn" filename="../../common/images/mobile_05.png">
+                        </a>
+                        <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeFormat')">
+                            <img class="image-btn" filename="../../common/images/mobile_06.png">
+                        </a>
+                        <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeUpdate')">
+                            <img class="image-btn" filename="../../common/images/mobile_07.png">
+                        </a>
+                        <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeBlock')">
+                            <img class="image-btn last" filename="../../common/images/blockcoding.png">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="header">
+                <ul class="left">
+                    <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeConnect')">
+                        <img class="image-btn" filename="../../common/images/button_kor/top_01.png">
+                    </a></li>
+                    <li><a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')">
+                        <img class="image-btn" filename="../../common/images/button_kor/top_02.png">
+                    </a></li>
+                    <li><a href="javascript:void(0);" onclick="run_cmd('Code=ShowEditor')">
+                        <img class="image-btn" filename="../../common/images/button_kor/top_03.png">
+                    </a></li>
+                    <li><a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+                        <img class="image-btn" filename="../../common/images/button_kor/top_05.png">
+                    </a></li>
+                </ul>
+                <ul class="right">
+                    <li class="community"><a href="community.html">
+                        <img class="image-btn" filename="../../common/images/button_kor/community.png">
+                    </a></li>
+                    <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeReboot')">
+                        <img class="image-btn" filename="../../common/images/button_kor/top_04.png">
+                    </a></li>
+                    <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeFormat')">
+                        <img class="image-btn" filename="../../common/images/button_kor/top_06.png">
+                    </a></li>
+                	<li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeUpdate')" class="updateBtn">
+                    	<img class="image-btn" filename="../../common/images/button_kor/top_07.png">
+                	</a></li>
+                	<div class="modalCtn">
+						<div class="modal_content" 
+							    title="클릭하면 창이 닫힙니다.">
+ 					    	보드가 업데이트 중입니다.<br>
+					    	기다려주세요..<br>
+					    	<button class="update_stop">업데이트 정지</button>
+				  	</div>
+					</div>
+                    <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeBlock')">
+                        <img class="image-btn" filename="../../common/images/button_kor/blockcoding.png">
+                    </a></li>
+                </ul>
+            </div>
+            <div id="p2_header">
+                <div class="head">
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')"><img src="../../common/images/logo.png"></a>
+                </div>
+            </div>
+
+        <div id="p1_container">
+            <div class="p1_01">
+                <div class="p1_01_div">
+                    <div><span style="font-size: 40px; color: WHITE;">AsomeIT</span></div>
+                    <br>
+
+                    <div class="regular">
+                        SW 코딩교육을 통해 논리적인 사고와 창의력을 길러 줄 수 있는 프로그램으로 흥미있는 놀잇감형 교구를 활용해 어렵지 않게 배울 수 있습니다.
+                    </div>
+                </div>
+            </div>
+            <div class="p1_contents">
+                <div class="p1_02">
+                    <div class="p1_02_div p1_02_div2 p1_02_div2-1">
+                        <span class="p1_icon"></span>
+                        <div class="title1 bold">AsomeBot #1</div>
+                        <div class="stitle">입문과정</div>
+                        <div class="text">
+                            최소한의 부품과 장치를<br>
+                            이용하여 교구의 비용은 줄이고<br>
+                            피지컬 컴퓨팅 전반의 코딩을<br>
+                            체험할 수 있도록<br>
+                            준비된 교육 프로그램
+                        </div>
+                        <div class="more s1020" style="display: block;">
+                            <a href="javascript:void(0);" onclick="go_url('./free.html')"><img src="../../common/images/page1_link.png"></a>
+                        </div>
+                    </div>
+                    <div class="p1_02_div p1_02_div2 p1_02_div2-2" style="display: ;">
+                        <span class="p1_icon"></span>
+                        <div class="title1 bold">AsomeBot #2</div>
+                        <div class="stitle">Starter</div>
+                        <div class="text">
+                            Develop a program with multiple parts.
+                            Develop practical physical computing devices.
+                        </div>
+                        <div class="more s1021" style="display: none;">
+                            <a href="javascript:void(0);" onclick="go_level('s1021')"><img src="../../common/images/page1_link.png"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- //container -->
+    </div>
+    <!-- //wrap -->
+</body>
+
+</html>

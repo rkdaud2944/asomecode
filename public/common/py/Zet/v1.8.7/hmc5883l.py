@@ -1,0 +1,83 @@
+### AsomeCODE.Version: hmc5883l.py=1 :End.
+
+
+from boot import *
+import math
+import machine
+from array import array
+
+class HMC5883L():
+    
+    __scales = {
+        "0.88": [0, 0.73],
+        "1.3": [1, 0.92],
+        "1.9": [2, 1.22],
+        "2.5": [3, 1.52],
+        "4.0": [4, 2.27],
+        "4.7": [5, 2.56],
+        "5.6": [6, 3.03],
+        "8.1": [7, 4.35]}
+        
+    def __init__(self, i2c, address, gauss, declination=(0,0)):
+        self.i2c = i2c
+        self.address = address
+        degrees, minutes = declination
+        self.__declDegrees = degrees
+        self.__declMinutes = minutes
+        self.__declination = (degrees + minutes / 60) * math.pi / 180
+        reg, self.__scale = self.__scales[gauss]
+        self.i2c_write(0x00, 0x70)
+        self.i2c_write(0x01, reg << 5)
+        self.i2c_write(0x02, 0x00)
+    
+    def i2c_write(self, reg, value):
+        self.i2c.writeto_mem(self.address, reg, bytearray([value]))
+
+    def declination(self):
+        return (self.__declDegrees, self.__declMinutes)
+    
+    def twos_complement(self, val, len):
+        if (val & (1 << len - 1)):
+            val = val - (1<<len)
+        return val
+
+    def __convert(self, data, offset):
+        val = self.twos_complement(data[offset] << 8 | data[offset+1], 16)
+        if val == -4096: return None
+        return round(val * self.__scale, 4)
+
+    def axes(self):
+        data = array('B', [0]*6)
+        self.i2c.readfrom_mem_into(self.address, 0x03, data)
+        x = self.__convert(data, 0)
+        y = self.__convert(data, 4)
+        z = self.__convert(data, 2)
+        return (x,y,z)
+
+    def heading(self):
+        (x, y, z) = self.axes()
+        headingRad = math.atan2(y, x)
+        headingRad += self.__declination
+        if headingRad < 0:
+            headingRad += 2 * math.pi
+        elif headingRad > 2 * math.pi:
+            headingRad -= 2 * math.pi
+        headingDeg = headingRad * 180 / math.pi
+        return headingDeg
+
+    def degrees(self, headingDeg):
+        degrees = math.floor(headingDeg)
+        minutes = round((headingDeg - degrees) * 60)
+        return (degrees, minutes)
+
+    def direction(self):
+        (x, y, z) = self.axes()
+        heading = self.heading()
+        return (x, y, z, heading)
+
+    def to_str(self):
+        (x, y, z, heading) = self.direction()
+        return "Axis X: " + str(x) + "\n" + "Axis Y: " + str(y) + "\n" + "Axis Z: " + str(z) + "\n" + "Heading: " + str(heading)
+
+def create(c, d, address=30, gauss="1.3"):
+    return HMC5883L( machine.I2C(scl=Pin(pin_map[c]), sda=Pin(pin_map[d])), address, gauss )

@@ -1,0 +1,91 @@
+执行命令的机器人
+
+1. 学习目标
+	[video ./video/block/01/06.execute.webm]
+	* 学习如何组合模块，移动到要去的地点。
+	* 学习如何让AsomeBot沿固定轨迹移动。
+
+2. 预习
+	@ 什么是移动路径？
+	将物体或人按照一定的顺序移动到已知的地点。
+	[image ./images/blocks/06-01.png]
+
+	@ 按照指定的路径移动的设备
+	运送披萨的机器人和送快递的无人机都是按照指定路径移动的设备。
+	[image ./images/blocks/06-02.png]
+
+
+3. 学习使用模块
+	@ 向前移动 Move forward ([WALK] 组)
+	按照设定的步数向前步行。
+	[block_image ./images/blocks/03-07.png
+		for i in range(1): asomebot.forward()
+	]
+	点击后，输入前行的步数. 输入1则左脚和右脚各走一步。
+
+	@ 向后移动 Move backward ([WALK] 组)
+	按照设定的步数向后步行。
+	[block_image ./images/blocks/03-08.png
+		for i in range(1): asomebot.backward()
+	]
+	点击后，输入向后移动的步数. 输入1则左脚和右脚各走一步。
+
+	@ 左转 Turn Left ([WALK] 组)
+	按照输入的步数左转行走。
+	[block_image ./images/blocks/03-09.png
+		for i in range(1): asomebot.turn_left()
+	]
+	点击后，输入左转的步数。要旋转90度, 机器人需要转3 ~ 4 次。
+
+	@ 右转Turn Right ([WALK] 组)
+	按照输入的步数右转行走。
+	[block_image ./images/blocks/03-10.png
+		for i in range(1): asomebot.turn_right()
+	]
+	点击后，输入右转的步数。要旋转90度, 机器人需要转3 ~ 4 次。
+
+	@ 延迟 Delay ([ADVANCE] 组)
+	等待特定的时间。
+	[block_image ./images/blocks/delay.png
+		delay(1)
+	]
+	点击后，输入等待时间，单位为秒。
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_china.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① 编一个程序让 AsomeBot 沿着下面的线路行走.<br>
+		(每条线AsomeBot需要走5步, 旋转角度是 90度。)
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/06-03.png"></div>
+		</p>
+		<p class="main_text">② AsomeBot如果按下图行走，应该怎样组合模块？<br>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/06-04.png"></div>
+		</p>
+		</div>
+	]
+
+
+4. 互动游戏
+	@ 活动规则
+	① 选择 AsomeBot 起点。
+	② 选择 AsomeBot 要到访的建筑物, 在每个建筑物上设立一个可以击倒的物体。
+	③ 物体被击倒了才算是顺利访问建筑物。
+	④ 访问所有建筑物的时间最短的为获胜者。
+	⑤ 必须沿着道路行驶。
+
+	@ 算法
+	① 为 AsomeBot 设定行走路径。
+	② 测距，检查机器人走几步才能到达一个终点。
+	③ 根据机器人行走的距离和方向，创建一个程序。
+	[image ./images/blocks/06-06.png]
+
+	@ 玩游戏
+	玩一个游戏，看谁能最快围绕指定建筑物走一圈.
+	[image ./images/blocks/06-07.jpg]
+	
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]

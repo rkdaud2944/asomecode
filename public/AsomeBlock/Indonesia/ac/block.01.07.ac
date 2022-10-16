@@ -1,0 +1,107 @@
+Mari kita membuat AsomeBot “melihat rintangan”
+
+1. Tujuan pembelajaran
+	[video ./video/block/01/07.execute.webm]
+	* Pelajari cara menggunakan sensor ultrasonik.
+	* Pelajari cara membuat AsomeBot menghindari rintangan.
+
+
+2. Pratinjau
+	@ Gelombang ultrasonik
+	Ultrasonik adalah suara yang memiliki frekuensi lebih besar daripada gelombang suara (16-20.000 Hz) yang dapat didengar seseorang. Ini disebut ultrasonik. Kelelawar, yang penglihatannya buruk, menggunakan ultrasonik ini untuk mencari makanan.
+	[image ./images/blocks/07-01.png]
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_indonesia.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">• Hewan apa yang menggunakan ultrasonik?<br>
+		</p>
+		</div>
+	]
+
+	@ Sensor ultrasonik
+	Ini adalah sensor yang menggunakan gelombang ultrasonik, seperti kelelawar, untuk mengukur jarak ke suatu objek.
+	[image ./images/blocks/07-02.png]
+
+
+3. Pelajari blok mana yang akan digunakan
+	@ Mengukur jarak – measure distance (Grup SENSOR)
+	Gunakan sensor ultrasonik untuk mengukur jarak hambatan di depan. Nilai jarak yang diukur disimpan dalam variabel ‘CM’.
+	[block_image ./images/blocks/07-03.png
+		cm = hcsr04.get_distance()
+	]
+
+	@ Ulangi tanpa batas – repeat infinitely (Grup ADVANCE)
+	[Endless loop] membuat blok yang dibundel ke dalamnya untuk terus berjalan tanpa henti secara berurutan.
+	[block_image ./images/blocks/07-04.png
+		while True:
+		  pass
+	]
+
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_indonesia.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">• Buat program yang membuat AsomeBot terus berjalan.
+		Untuk berhenti berjalan, tekan tombol Stop.
+		<br>
+		</p>
+		</div>
+	]
+
+	@ Jika - if (ADVANCE Group)
+	Jika detail input  sebagai suatu kondisi sudah benar, blok di dalam blok dieksekusi. Jika kondisinya salah, blok di belakang blok if yang akan dieksekusi.
+	[block_image ./images/blocks/07-05.png
+		if i == :
+	]
+	① Masukkan variabel yang akan digunakan dengan pernyataan kondisional. Nilai default adalah ‘i’, dan dengan menambahkan blok sensor, variabel akan ditambahkan dan dapat dipilih.
+	② Pilih ketidaksetaraan untuk membandingkan pernyataan bersyarat.
+	③ masukkan nilai referensi untuk digunakan dengan kondisi tersebut. Di sini, Anda perlu menambahkan blok untuk menentukan nilai bersyarat.
+	④ Jika kondisinya benar, tambahkan blok yang akan dieksekusi.
+
+	▣ Contoh penggunaan blok bersyarat ‘jika’
+	Blok-blok berikut adalah program yang jika nilai variabel ‘i’ adalah ‘3’, AsomeBot belok kiri 3 langkah.
+	[block_image ./images/blocks/07-06.png
+		if i == 3:
+		  for i in range(3): asomebot.turn_left()
+		for i in range(1): asomebot.forward()
+	]
+
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_indonesia.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Buat program yang saat AsomeBot berjalan maju, mengukur jarak dengan sensor ultrasonik dan berhenti jika jarak dengan hambatan sama dengan atau kurang dari 3cm.<br>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/07-07.png"></div>
+		</p>
+		<p class="main_text">② Buat program yang saat AsomeBot berjalan maju, mengukur jarak dengan sensor ultrasonik dan jika jarak dengan hambatan sama dengan atau kurang dari 10cm, belok ke kanan 4 langkah kemudian maju lagi.<br>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/07-08.png"></div>
+		</p>
+		</div>
+	]
+
+
+4. Aktivitas bermain
+	@ Aturan main
+	① Tempatkan rintangan yang mudah jatuh di lapangan lari.
+	② Jika lari AsomeBot menemui rintangan, ia harus menghindari rintangan ini.
+	③ Robot yang tiba di garis finish tanpa mengenai  rintangan adalah yang menang.
+	[image ./images/blocks/07-09.png] 
+
+	@ Algoritma
+	Bagaimana Anda membuat program yang AsomeBot menghindari rintangan sambil berjalan?
+	Dengan mengulangi algoritma berikut tanpa batas, Anda dapat membuat program yang membuat AsomeBot berjalan sambil menghindari rintangan.
+	[image ./images/blocks/07-10.png]
+
+	@ Mainkan game
+	Mainkan game dan lihat siapa yang mencapai garis finish terlebih dahulu dengan menghindari rintangan.
+	[image ./images/blocks/07-11.jpg]
+	
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]

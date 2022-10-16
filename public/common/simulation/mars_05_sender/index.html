@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	<title>AsomeIT</title>
+
+	<link rel="stylesheet" href="../../../common/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../common/css/AsomeCODE.css">
+
+    <script src="../../../common/js/jquery-1.9.1.js"></script>
+	<script src="../../../common/js/bootstrap.min.js"></script>
+</head>
+
+<body style="overflow-x: hidden; overflow-y: hidden;">
+	<div style="position: relative;">
+		<img src="back.png" style="position: absolute;">
+		<div id="text" style="position: absolute; top: 70px; left: 60px; color: wheat; font-size: medium; font-family: Verdana;"></div>
+		<input id="message" value="" style="position: absolute; top: 270px; left: 74px; width: 280px; height: 24px;">
+	</div>
+	<script type="text/javascript">
+		window.onload = function() {
+			App.run_cmd("Code=Input/Text=### Simulation started");
+		}
+
+		var message_number = 0;
+
+		$("#message").keydown(function (key) {
+			msg = document.getElementById("message").value;
+			msg = String(msg);
+			if (key.keyCode == 13) {
+				send_message(msg);
+				display_message(msg);
+				$("#message").val('');
+			}
+		});
+
+		function send_message(msg) {
+			var text = "Code=Input/Text='" + msg + "'/";
+			App.run_cmd(text);
+		}
+
+		function display_message(msg) {
+			message_number++;
+			$('<div>', {
+				id: "message" + message_number
+			}).text(
+				message_number + "번 메세지 :" + msg
+			).appendTo("#text");
+		}
+	</script>
+</body>
+</html>

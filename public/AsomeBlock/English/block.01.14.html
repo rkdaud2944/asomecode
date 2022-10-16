@@ -1,0 +1,487 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<head>
+<!-- AsomeHeader Start -->
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>AsomeCode</title>
+    <meta name="Robots" content="all" />
+    <meta name="reply-to" content="" />
+    <meta name="date" content="" />
+
+    <link rel="stylesheet" href="../../common/css/AsomeCODE.css">
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/highlight.css">
+    <link rel="stylesheet" href="../../common/css/vs2015.css">
+    <link rel="stylesheet" href="../../common/css/quiz_css.css">
+
+    <script src="../../common/js/jquery-3.2.1.min.js"></script>
+
+    <link rel="stylesheet" href="../../common/css/bootstrap.min.css">
+    <script src="../../common/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="../../common/css/jodit.min.css"/>
+    <link rel="stylesheet" href="../../common/css/prism.css"/>
+    <script src="../../common/js/jodit.min.js"></script>
+    <script src="../../common/js/prism.js"></script>
+
+    <script src="../../common/js/AsomeCODE.js"></script>
+    <script src="../../common/js/board.js"></script>
+    <script src="../../common/js/highlight.pack.js"></script>
+    <script src="../../common/js/highlightjs-line-numbers.min.js"></script>
+
+    <script src="../../common/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../common/ace/ext-static_highlight.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../common/ace/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+<!-- AsomeHeader End -->
+</head>
+
+<body class="p3">    
+
+    <div class="modal fade" id="video_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <video id="video_player" width="100%" controls>
+                        <source id="video_src" type="video/webm" src=""/>
+                        <track id="video_subtitle" kind="subtitles" srclang="en" label="english" src="" default>
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="wrap">
+        <ul class="blind">
+            <li><a href="#contents">본문 바로가기(Skip Contents)</a></li>
+        </ul>
+        <div id="mobile">
+            <div class="logo">
+                <a href="javascript:void(0);"><img src="../../common/images/logom.png"></a>
+                <div class="m"><a><img src="../../common/images/mobile_m.png"></a></div>
+            </div>
+            <div class="mobile_top">
+                <div class="top_m">
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')">
+                        <img class="image-btn" filename="../../common/images/mobile_01.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeConnect')">
+                        <img class="image-btn" filename="../../common/images/mobile_02.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=ShowEditor')">
+                        <img class="image-btn" filename="../../common/images/mobile_03.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+                        <img class="image-btn last" filename="../../common/images/mobile_04.png">
+                    </a>
+                </div>
+                <div class="top_m">
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeReboot')">
+                        <img class="image-btn" filename="../../common/images/mobile_05.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeFormat')">
+                        <img class="image-btn" filename="../../common/images/mobile_06.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeUpdate')">
+                        <img class="image-btn" filename="../../common/images/mobile_07.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeBlock')">
+                        <img class="image-btn last" filename="../../common/images/blockcoding.png">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="header">
+            <ul class="left">
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeConnect')">
+                    <img class="image-btn" filename="../../common/images/top_01.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')">
+                    <img class="image-btn" filename="../../common/images/top_02.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=ShowEditor')">
+                    <img class="image-btn" filename="../../common/images/top_03.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+                    <img class="image-btn" filename="../../common/images/top_05.png">
+                </a></li>
+            </ul>
+            <ul class="right">
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeReboot')">
+                    <img class="image-btn" filename="../../common/images/top_04.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeFormat')">
+                    <img class="image-btn" filename="../../common/images/top_06.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeUpdate')">
+                    <img class="image-btn" filename="../../common/images/top_07.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeBlock')">
+                    <img class="image-btn" filename="../../common/images/blockcoding.png">
+                </a></li>
+                <li> &nbsp; </li>
+                <!-- <a href="javascript:void(0);" onclick="logout()"><img src="../../common/images/logout.png" id="bt_logout" class="last"></a> -->
+            </ul>
+        </div>
+        <div class="mobile_nav3"></div>
+        <div id="p3_header">
+            <ul>
+                <li class="headleft"><a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')"><img src="../../common/images/logo.png"></a></li>
+                <li class="headright"></li>
+            </ul>
+        </div>
+
+        <div id="p3_container">
+            <div class="left">
+                <div class="top">
+                    <div class="link_list"><a href="javascript:void(0);" onclick="run_cmd('Code=GoBack')"><img src="../../common/images/p3_list.png" alt="강의목록"></a></div>
+                    <div class="header_text"><div id="chapter" class="chapter">Unit {0}</div>
+                        <br>
+
+                        Maze escaping
+                    </div>
+                </div>
+                <div class="beg">
+                    <ul>
+                        <li><a href="javascript:fnMove('pn1')">1. Learning objectives</a></li>
+                        <li><a href="javascript:fnMove('pn2')">2. Preview</a></li>
+                        <li><a href="javascript:fnMove('pn3')">3. learn which blocks to use</a></li>
+                        <li><a href="javascript:fnMove('pn4')">4. Play Activity</a></li>
+
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="right">
+                <div class="contents">
+                    <br>
+                    <li class="lefts bold" id="pn1">1. Learning objectives<span class="video_button" level="block" filename="01.ch01"></span></li>
+                    <div style="max-width: 600px;">
+                      <video width="100%" controls>
+                      <source id="video_src" type="video/webm" src="./video/block/01/14.execute.webm"/>
+                      Your browser does not support HTML5 video.</video>
+                    </div>
+                    <p class="main_text">
+                      • Understand the algorithm that escapes the maze.<br>
+                      • Control the movement of AsomeBot in various situations.<br>
+                      • Understand the characteristics of each section of the maze and develop escape methods<br>
+                    </p>
+                    <br>
+                    <br>
+                    <li class="lefts bold" id="pn2">2. Preview<span class="video_button" level="block" filename="01.ch02"></span></li>
+                    <p class="main_text">
+                      <strong>A. Maze escaping</strong>
+                    </p>
+                    <p class="main_text">
+                      Using AsomeBot's ultrasonic sensors, you can create a program that recognizes the walls of the maze and escapes from the blockages.
+                    </p>
+                    <div class="content_image_box">
+                      <img class="content_image" src="./images/blocks/14-01.png">
+                    </div>
+                    <br>
+                    <p class="main_text">
+                      <strong>B. Specifying the order of rotation</strong>
+                    </p>
+                    <p class="main_text">
+                      AsomeBot can create a program that can completely escape from a maze by itself. However, this method is very complicated for us to make. If AsomeBot walks as shown, AsomeBot can escape the maze through the shortest distance. Let's find out how AsomeBot should move along this path to escape the maze.
+                    </p>
+                    <div class="content_image_box">
+                      <img class="content_image" src="./images/blocks/14-02.png">
+                    </div>
+                    <br>
+                    <p class="main_text">
+                      <strong>C. Simple section rotated by ultrasonic sensor</strong>
+                    </p>
+                    <p class="main_text">
+                      In the areas shown in the Fig, if AsomeBot encounters an obstacle while walking any number of steps, it can walk toward the exit as long as it is instructed with the direction to turn.
+                    </p>
+                    <p class="main_text">
+                      1. Talk about in which direction AsomeBot should turn in each position.
+                    </p>
+                    <p class="main_text">
+                      2. Talk about when AsomeBot should make turn at what distance between the AsomeBot and obstacle.
+                    </p>
+                    <div class="content_image_box">
+                      <img class="content_image" src="./images/blocks/14-03.png">
+                    </div>
+                    <br>
+                    <p class="main_text">
+                      <strong>D. All sections rotated by ultrasonic sensor</strong>
+                    </p>
+                    <p class="main_text">
+                      When AsomeBot encounters a wall, it should rotate in a ‘ㄷ’ shape. It requires more motions and harder than just rotating in one direction. Talk about how AsomeBot can move to the correct position in section ④.
+                    </p>
+                    <div class="content_image_box">
+                      <img class="content_image" src="./images/blocks/14-04.png">
+                    </div>
+                    <br>
+                    <p class="main_text">
+                      <strong>E. Sections that need to be moved by steps</strong>
+                    </p>
+                    <p class="main_text">
+                      This section is where AsomeBot should rotate in a ‘ㄷ’ shape. It requires more motions and harder than just rotating in one direction.
+                    </p>
+                    <p class="main_text">
+                      1. Measure and talk about how many steps are taken to move to each section.
+                    </p>
+                    <p class="main_text">
+                      2. If AsomeBot cannot move sections exactly only by number of steps, talk about how to escape the maze.
+                    </p>
+                    <div class="content_image_box">
+                      <img class="content_image" src="./images/blocks/14-05.png">
+                    </div>
+                    <br>
+                    <br>
+                    <li class="lefts bold" id="pn3">3. learn which blocks to use<span class="video_button" level="block" filename="01.ch03"></span></li>
+                    <p class="main_text">
+                      <strong>A. Delay ([ADVANCE] Group)</strong>
+                    </p>
+                    <p class="main_text">
+                      Wait without moving for the specified seconds.
+                    </p>
+<div id="src_1" style="display: none;">delay(1)
+</div>
+                    <img class="block_image" src="./images/blocks/14-06.png" onclick="run_code($('#src_1').text())">
+                    <p class="main_text">
+                      Input the number of seconds to wait after a click.
+                    </p>
+                    <br>
+                    <div class="quiz_outline">
+                      <img src="../../common/images/quiz_eng.png">
+                      <p class="quiz_line">
+                      </p>
+                      <p class="main_text">
+                        Create a program that walks 3 steps forward after 5 seconds when the program runs.
+                      </p>
+                    </div>
+                    <br>
+                    <p class="main_text">
+                      <strong>B. Attention ([BASIC] Group)</strong>
+                    </p>
+                    <p class="main_text">
+                      AsomeBot takes stand at attention.
+                    </p>
+<div id="src_2" style="display: none;">asomebot.home()
+</div>
+                    <img class="block_image" src="./images/blocks/14-07.png" onclick="run_code($('#src_2').text())">
+                    <br>
+                    <div class="quiz_outline">
+                      <img src="../../common/images/quiz_eng.png">
+                      <p class="quiz_line">
+                      </p>
+                      <p class="main_text">
+                        Create a program that let’s AsomeBot to wait 2 seconds, forward 3 steps and stand at attention.
+                      </p>
+                    </div>
+                    <br>
+                    <p class="main_text">
+                      <strong>C. Set align ([BASIC] Group)</strong>
+                    </p>
+                    <p class="main_text">
+                      You may adjust the value of the angles of the four motors connected to AsomeBot. The angle changes by adjusting the angle with the Set align block and adding the Attention block, and then execute the robot. Make sure to remember the angle as the changed angle will be reset if disconnected.
+                    </p>
+<div id="src_3" style="display: none;">asomebot.align(90,90,90,90)
+</div>
+                    <img class="block_image" src="./images/blocks/14-08.png" onclick="run_code($('#src_3').text())">
+                    <p class="main_text">
+                      ① Adjust the angle of No.1 motor. The motor is basically set at 90 degrees.
+                    </p>
+                    <p class="main_text">
+                      ② Adjust the angle of No.2 motor. The motor is basically set at 90 degrees.
+                    </p>
+                    <p class="main_text">
+                      ③ Adjust the angle of No.3 motor. The motor is basically set at 90 degrees.
+                    </p>
+                    <p class="main_text">
+                      ④ Adjust the angle of No.4 motor. The motor is basically set at 90 degrees.
+                    </p>
+                    <br>
+                    <div class="quiz_outline">
+                      <img src="../../common/images/quiz_eng.png">
+                      <p class="quiz_line">
+                      </p>
+                      <p class="main_text">
+                        Adjust the angle of each motor to walk straight ahead. To escape the maze, the robot must be able to walk correctly.
+                      </p>
+                    </div>
+                    <br>
+                    <p class="main_text">
+                      <strong>D. Measure distance ([SENSOR] Group)</strong>
+                    </p>
+                    <p class="main_text">
+                      With an ultrasonic sensor, measure the distance of the obstacle in front. The value of the measured distance is stored in a variable name ‘Cm’.
+                    </p>
+<div id="src_4" style="display: none;">cm = hcsr04.get_distance()
+</div>
+                    <img class="block_image" src="./images/blocks/14-09.png" onclick="run_code($('#src_4').text())">
+                    <br>
+                    <p class="main_text">
+                      <strong>E. Repeat ([ADVANCE] Group)</strong>
+                    </p>
+                    <p class="main_text">
+                      Repeat the commands in the block as many times as you want.
+                    </p>
+<div id="src_5" style="display: none;">for count in range(1):
+    pass
+</div>
+                    <img class="block_image" src="./images/blocks/14-10.png" onclick="run_code($('#src_5').text())">
+                    <p class="main_text">
+                      ① Specify the number of times to repeat.
+                    </p>
+                    <p class="main_text">
+                      ② Add blocks to repeat.
+                    </p>
+                    <br>
+                    <p class="main_text">
+                      <strong>F. Repeat infinitely ([ADVANCE] Group)</strong>
+                    </p>
+                    <p class="main_text">
+                      Run blocks inside blocks to run in order.
+                    </p>
+<div id="src_6" style="display: none;">while True: 
+    pass
+</div>
+                    <img class="block_image" src="./images/blocks/14-11.png" onclick="run_code($('#src_6').text())">
+                    <br>
+                    <div class="quiz_outline">
+                      <img src="../../common/images/quiz_eng.png">
+                      <p class="quiz_line">
+                      </p>
+                      <p class="main_text">
+                        Create a program that lets AsomeBot to keep walking forward.
+                      </p>
+                    </div>
+                    <br>
+                    <p class="main_text">
+                      <strong>G. if ([ADVANCE] Group)</strong>
+                    </p>
+                    <p class="main_text">
+                      Execute the block in the block when the detail input as condition is correct. If the condition is incorrect, the block following the if block will be executed.
+                    </p>
+<div id="src_7" style="display: none;">if i == :
+</div>
+                    <img class="block_image" src="./images/blocks/14-12.png" onclick="run_code($('#src_7').text())">
+                    <p class="main_text">
+                      ① Input a variable to be used in the conditional statement. The default value is 'i' and changes to 'cm' when using an ultrasonic sensor.
+                    </p>
+                    <p class="main_text">
+                      ② Select the default inequality to compare the conditions.
+                    </p>
+                    <p class="main_text">
+                      ③ Input the default value to use in the condition. You need to add blocks to specify the conditional value.
+                    </p>
+                    <p class="main_text">
+                      ④ Add blocks to be executed when the condition is correct.
+                    </p>
+                    <br>
+                    <p class="main_text">
+                      <strong>H. Data Value ([ADVANCE] Group)</strong>
+                    </p>
+                    <p class="main_text">
+                      Used to specify data values such as variables or numbers.
+                    </p>
+<div id="src_8" style="display: none;">1
+</div>
+                    <img class="block_image" src="./images/blocks/14-13.png" onclick="run_code($('#src_8').text())">
+                    <p class="main_text">
+                      ① Input the default value to use in the condition.
+                    </p>
+                    <br>
+                    <p class="main_text">
+                      <strong>I. Break ([ADVANCE] Group)</strong>
+                    </p>
+                    <p class="main_text">
+                      When you meet the block during the Infinite loop program, stops the infinite loop and execute the following code.
+                    </p>
+<div id="src_10" style="display: none;">break;
+</div>
+                    <img class="block_image" src="./images/blocks/14-19.png" onclick="run_code($('#src_10').text())">
+                    <br>
+                    <br>
+                    <div class="quiz_outline">
+                      <img src="../../common/images/quiz_eng.png">
+                      <p class="quiz_line">
+                      </p>
+                      <p class="main_text">
+                        Create a program that performs [Flap] 3 times when there is a person or object with 50cm in front of AsomeBot.
+                      </p>
+                      <div class="content_image_box">
+                        <img class="content_image" src="./images/blocks/18-16.png">
+                      </div>
+                    </div>
+                    <br>
+                    <div class="quiz_outline">
+                      <img src="../../common/images/quiz_eng.png">
+                      <p class="quiz_line">
+                      </p>
+                      <p class="main_text">
+                        ① Create a program that backwards 3 steps if the distance value measured by the ultrasonic sensor is less than 5cm.
+                      </p>
+                      <div class="content_image_box">
+                        <img class="content_image" src="./images/blocks/14-14.png">
+                      </div>
+                      <p class="main_text">
+                        ② Create a program that turns 3 times to the left and escape the repeat statement if AsomeBot keeps walking forward and encounters an obstacle (an obstacle within 3 cm).
+                      </p>
+                      <div class="content_image_box">
+                        <img class="content_image" src="./images/blocks/14-15.png">
+                      </div>
+                    </div>
+                    <br>
+                    <br>
+                    <li class="lefts bold" id="pn4">4. Play Activity<span class="video_button" level="block" filename="01.ch04"></span></li>
+                    <p class="main_text">
+                      <strong>A. Game Rule</strong>
+                    </p>
+                    <p class="main_text">
+                      ① A student who created a program that can escape the maze in the shortest time wins the game.
+                    </p>
+                    <p class="main_text">
+                      ② Create a program that lets AsomeBot to escape the maze by using a path, like the path of the image or by using other creative methods.
+                    </p>
+                    <div class="content_image_box">
+                      <img class="content_image" src="./images/blocks/14-16.png">
+                    </div>
+                    <br>
+                    <p class="main_text">
+                      <strong>B. Algorithm</strong>
+                    </p>
+                    <p class="main_text">
+                      ① Red section. When AsomeBot encounters an obstacle while walking, it must turn and move.
+                    </p>
+                    <p class="main_text">
+                      ② Green section. When AsomeBot encounters an obstacle, it should move in the shape of ‘ㄷ’.
+                    </p>
+                    <p class="main_text">
+                      ③ Blue section. Move robots in the correct number of steps according to the characteristics of each AsomeBot and rotate to escape the section.
+                    </p>
+                    <div class="content_image_box">
+                      <img class="content_image" src="./images/blocks/14-17.png">
+                    </div>
+                    <br>
+                    <p class="main_text">
+                      <strong>C. Play game</strong>
+                    </p>
+                    <div class="content_image_box">
+                      <img class="content_image" src="./images/blocks/14-18.png">
+                    </div>
+                    <br>
+                    <script type="text/javascript">
+                        $(".video_button").css("display", "none");
+                    </script>
+
+
+                </div>
+            </div>
+
+        </div>
+        <!-- //container -->
+    </div>
+    <!-- //wrap -->
+</body>
+
+</html>

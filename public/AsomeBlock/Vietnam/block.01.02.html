@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<head>
+<!-- AsomeHeader Start -->
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>AsomeCode</title>
+    <meta name="Robots" content="all" />
+    <meta name="reply-to" content="" />
+    <meta name="date" content="" />
+
+    <link rel="stylesheet" href="../../common/css/AsomeCODE.css">
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/highlight.css">
+    <link rel="stylesheet" href="../../common/css/vs2015.css">
+    <link rel="stylesheet" href="../../common/css/quiz_css.css">
+
+    <script src="../../common/js/jquery-3.2.1.min.js"></script>
+
+    <link rel="stylesheet" href="../../common/css/bootstrap.min.css">
+    <script src="../../common/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="../../common/css/jodit.min.css"/>
+    <link rel="stylesheet" href="../../common/css/prism.css"/>
+    <script src="../../common/js/jodit.min.js"></script>
+    <script src="../../common/js/prism.js"></script>
+
+    <script src="../../common/js/AsomeCODE.js"></script>
+    <script src="../../common/js/board.js"></script>
+    <script src="../../common/js/highlight.pack.js"></script>
+    <script src="../../common/js/highlightjs-line-numbers.min.js"></script>
+
+    <script src="../../common/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../common/ace/ext-static_highlight.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../common/ace/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+<!-- AsomeHeader End -->
+</head>
+
+<body class="p3">    
+
+    <div class="modal fade" id="video_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <video id="video_player" width="100%" controls>
+                        <source id="video_src" type="video/webm" src=""/>
+                        <track id="video_subtitle" kind="subtitles" srclang="en" label="english" src="" default>
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="wrap">
+        <ul class="blind">
+            <li><a href="#contents">본문 바로가기(Skip Contents)</a></li>
+        </ul>
+        <div id="mobile">
+            <div class="logo">
+                <a href="javascript:void(0);"><img src="../../common/images/logom.png"></a>
+                <div class="m"><a><img src="../../common/images/mobile_m.png"></a></div>
+            </div>
+            <div class="mobile_top">
+                <div class="top_m">
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')">
+                        <img class="image-btn" filename="../../common/images/mobile_01.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeConnect')">
+                        <img class="image-btn" filename="../../common/images/mobile_02.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=ShowEditor')">
+                        <img class="image-btn" filename="../../common/images/mobile_03.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+                        <img class="image-btn last" filename="../../common/images/mobile_04.png">
+                    </a>
+                </div>
+                <div class="top_m">
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeReboot')">
+                        <img class="image-btn" filename="../../common/images/mobile_05.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeFormat')">
+                        <img class="image-btn" filename="../../common/images/mobile_06.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeUpdate')">
+                        <img class="image-btn" filename="../../common/images/mobile_07.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeBlock')">
+                        <img class="image-btn last" filename="../../common/images/blockcoding.png">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="header">
+            <ul class="left">
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeConnect')">
+                    <img class="image-btn" filename="../../common/images/top_01.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')">
+                    <img class="image-btn" filename="../../common/images/top_02.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=ShowEditor')">
+                    <img class="image-btn" filename="../../common/images/top_03.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+                    <img class="image-btn" filename="../../common/images/top_05.png">
+                </a></li>
+            </ul>
+            <ul class="right">
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeReboot')">
+                    <img class="image-btn" filename="../../common/images/top_04.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeFormat')">
+                    <img class="image-btn" filename="../../common/images/top_06.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeUpdate')">
+                    <img class="image-btn" filename="../../common/images/top_07.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeBlock')">
+                    <img class="image-btn" filename="../../common/images/blockcoding.png">
+                </a></li>
+                <li> &nbsp; </li>
+                <a href="javascript:void(0);" onclick="logout()"><img src="../../common/images/logout.png" id="bt_logout" class="last"></a>
+            </ul>
+        </div>
+        <div class="mobile_nav3"></div>
+        <div id="p3_header">
+            <ul>
+                <li class="headleft"><a href="javascript:void(0);"><img src="../../common/images/logo.png"></a></li>
+                <li class="headright"></li>
+            </ul>
+        </div>
+
+        <div id="p3_container">
+            <div class="left">
+                <div class="top">
+                    <div class="link_list"><a href="javascript:void(0);" onclick="run_cmd('Code=GoBack')"><img src="../../common/images/p3_list.png" alt="강의목록"></a></div>
+                    <div class="header_text"><div id="chapter" class="chapter">Unit {0}</div>
+                        <br>
+
+                        Robot hoạt động nhờ vào động cơ
+                    </div>
+                </div>
+                <div class="beg">
+                    <ul>
+                        <li><a href="javascript:fnMove('pn1')">1. Mục tiêu bài học</a></li>
+<li><a href="javascript:fnMove('pn2')">2. Preview</a></li>
+<li><a href="javascript:fnMove('pn3')">3. Tìm hiểu những khối cần sử dụng</a></li>
+<li><a href="javascript:fnMove('pn4')">4. Chơi trò chơi</a></li>
+
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="right">
+                <div class="contents">
+                    <br>
+
+<li class="lefts bold" id="pn1">1. Mục tiêu bài học<span class="video_button" level="block" filename="01.ch01"></span></li>
+<div style="max-width: 600px;"><video width="100%" controls>
+<source id="video_src" type="video/webm" src="./video/block/01/02.execute.webm"/>
+Your browser does not support HTML5 video.</video></div>
+<p class="main_text">• Bạn sẽ học được nguyên lý di chuyển chân của robot.<br>
+• Bạn có thể khiến AsomeBot tiến hoặc lùi hoặc sang một bên.<br>
+• Tìm hiểu về phạm vi quay của động cơ 180 độ.<br>
+</p>
+<br>
+<br>
+
+<li class="lefts bold" id="pn2">2. Preview<span class="video_button" level="block" filename="01.ch02"></span></li>
+<p class="main_text"><strong>A. Khớp và cơ bắp của robot</strong></p>
+<p class="main_text">Cũng giống như các khớp và cơ bắp trên cơ thể con người, động cơ là các khớp robot và là nguồn năng lượng robot sử dụng để di chuyển.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/02-00.png"></div>
+<br>
+<p class="main_text"><strong>B. Góc quay của động cơ servo</strong></p>
+<p class="main_text">• Động cơ servo chúng tôi sẽ sử dụng trong AsomeBot chỉ có thể xoay tối đa 180 độ.<br>
+• AsomeBot sử dụng bốn động cơ để đi bộ và nhảy.<br>
+• Tất cả 4 động cơ servo đều được đặt ở 90 độ khi AsomeBot đứng nghiêm.<br>
+</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/02-0000.png"></div>
+<br>
+<p class="main_text"><strong>C. Kết nối với chương trình block-coding</strong></p>
+<p class="main_text">Để tạo chương trình mà AsomeBot di chuyển bằng block-coding, bạn phải kết nối AsomeBot và PC (hoặc thiết bị thông minh) bằng cáp USB như sau.</p>
+<br>
+<p class="main_text">① Kết nối đầu nhỏ của cáp USB đến cổng phía sau AsomeBot.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/02-00-01.png"></div>
+<br>
+<p class="main_text">(Các thiết bị thông minh)</p>
+<p class="main_text">② Kết nối đầu còn lại của cáp USB với cổng chuyển đổi và sau đó với cổng kết nối trên thiết bị thông minh.</p>
+<div class="content_image_box"><img src="./images/blocks/02-00-02.png" style="width:49%;"><img src="./images/blocks/02-00-03.png" style="width:49%;"></div>
+
+
+<br>
+<p class="main_text">(PC&Notebook)</p>
+<p class="main_text">③ Kết nối đầu còn lại của cáp USB với cổng USB trên PC.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/02-00-04.png"></div>
+<br>
+<p class="main_text">④ Nhấp nút [Connect](Kết nối) ở đầu màn hình block coding. Nếu một cửa sổ mới bật lên và hiển thị "Connected”, PC của bạn (thiết bị thông minh) được kết nối với AsomeBot.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/02-01.png"></div>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/note_veitnam.png">
+<p class="quiz_line"></p>
+<p class="main_text">1. Đóng cửa sổ kết nối sẽ ngắt kết nối với AsomeBot. </p>
+<p class="main_text">2. Nếu bạn ngắt kết nối và kết nối lại cáp USB để chạy AsomeBot, bạn cần nhấp vào [Connect] để kết nối lại.</p>
+</div>
+
+<br>
+<br>
+
+<li class="lefts bold" id="pn3">3. Tìm hiểu những khối cần sử dụng<span class="video_button" level="block" filename="01.ch03"></span></li>
+<p class="main_text"><strong>A. Tìm hiểu về màn hình khối mã hóa</strong></p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/02-02.png"></div>
+<p class="main_text">① Kết nối: Kết nối với các thiết bị học tập.</p>
+<p class="main_text">② Thực thi: Thực thi khối sẵn sàng.</p>
+<p class="main_text">③ Tạm dừng: Tạm dừng khối lệnh.</p>
+<p class="main_text">④ Lưu: Lưu khối sẵn sàng.</p>
+<p class="main_text">⑤ Tải: Nhập tệp khối đã lưu.</p>
+<p class="main_text">⑥ Tab chọn thiết bị học tập: Chọn thiết bị học tập mong muốn. Khối hiển thị cho từng thiết bị học tập.</p>
+<p class="main_text">⑦ Tab nhóm khối: Các khối được phân biệt và tập hợp theo loại.</p>
+<p class="main_text">⑧ Khối: Khối lệnh để di chuyển các thiết bị học tập.</p>
+<p class="main_text">⑨ Vùng vận hành: Kéo và thêm khối để thực thi.</p>
+<p class="main_text">⑩ Mã Python: Hiển thị các khối được thêm vào bằng ngôn ngữ Python.</p>
+<p class="main_text">⑪ Nút ẩn / hiển thị mã: Hiển thị hoặc ẩn cửa sổ hiển thị mã Python.</p>
+<p class="main_text">⑫ Thùng rác: Bạn có thể xóa một khối bằng cách kéo và thả nó vào thùng rác.</p>
+<br>
+<p class="main_text"><strong>B. Tìm hiểu những khối cần sử dụng</strong></p>
+<p class="main_text">(1) Ready (Nhóm [BASIC])</p>
+<p class="main_text">Trước khi bắt đầu tất cả các chương trình, phải có khối [Ready](Sẵn sàng). Bằng cách thêm khối [Ready] trong vùng làm việc, các lệnh chuẩn bị di chuyển AsomeBot sẽ tự động thực thi.</p>
+<div id="src_1" style="display: none;">import asomebot
+import hcsr04
+hcsr04.open(3, 2)
+asomebot.ready(5, 6, 7, 8)
+</div>
+<img class="block_image" src="./images/blocks/ready.png" onclick="run_code($('#src_1').text())">
+<p class="main_text">• Chuẩn bị để sử dụng cảm biến siêu âm được cài đặt trong AsomeBot<br>
+• Chuẩn bị để sử dụng bốn động cơ servo được cài đặt trong AsomeBot<br>
+</p>
+<br>
+<p class="main_text">(2) Attention (nhóm [BASIC])</p>
+<p class="main_text">• Làm cho AsomeBot đứng nghiêm.<br>
+• Tại thời điểm này, góc của tất cả các động cơ được đặt thành 90 độ.<br>
+</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/02-04.jpg"></div>
+<div id="src_2" style="display: none;">asomebot.home()
+</div>
+<img class="block_image" src="./images/blocks/attention.png" onclick="run_code($('#src_2').text())">
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_veitnam.png">
+<p class="quiz_line"></p>
+<p class="main_text">• Kết nối AsomeBot và thêm các khối Ready và Attention theo thứ tự. Robot có đứng nghiêm hay không?<br>
+</p>
+</div>
+
+<br>
+<p class="main_text">(3) Set angle of motor ( nhóm [WALK])</p>
+<p class="main_text">Bạn có thể lựa chọn động cơ mà bạn muốn chỉnh góc, nhập số góc bạn muốn và thời gian cần thiết để động cơ thay đổi theo góc bạn muốn.</p>
+<div id="src_3" style="display: none;">asomebot.angles([0],[90-90],1*1000)
+</div>
+<img class="block_image" src="./images/blocks/angles.png" onclick="run_code($('#src_3').text())">
+<p class="main_text">① chọn một động cơ mà bạn muốn chỉnh góc.</p>
+<p class="main_text">② Nhập góc mà động cơ đã chọn sẽ thay đổi.</p>
+<p class="main_text">③ Nhập thời gian cần thiết để động cơ để đặt.</p>
+<br>
+<p class="main_text">• Số lượng động cơ<br>
+</p>
+<p class="main_text">Mỗi động cơ của AsomeBot được đánh số như dưới đây.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/02-07.png"></div>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_veitnam.png">
+<p class="quiz_line"></p>
+<p class="main_text">Tạo hình dạng cho chân của AsomeBot như hình dưới đây bằng cách Xoay động cơ.<br>
+</p>
+<div class="content_image_box"><img src="./images/blocks/02-08.jpg" style="width:49%;"><img src="./images/blocks/02-09.jpg" style="width:49%;"></div>
+<div class="content_image_box"><img src="./images/blocks/02-10.jpg" style="width:49%;"><img src="./images/blocks/02-11.jpg" style="width:49%;"></div>
+</div>
+
+<br>
+<br>
+
+<li class="lefts bold" id="pn4">4. Chơi trò chơi<span class="video_button" level="block" filename="01.ch04"></span></li>
+<p class="main_text"><strong>A. Luật chơi</strong></p>
+<p class="main_text">① Đặt mũi tên ở phía dưới chân trái của AsomeBot.</p>
+<p class="main_text">② Tạo một chương trình để hiển thị trạng thái của tôi bằng cách xoay động cơ số 0 của AsomeBot.</p>
+<p class="main_text">③ Tạo một chương trình để hiển thị trạng thái của tôi bằng cách xoay động cơ số 0 của AsomeBot.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/02-12.png"></div>
+<br>
+<p class="main_text"><strong>B. Thuật toán</strong></p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/02-13.png"></div>
+<br>
+<p class="main_text"><strong>C. Chơi trò chơi</strong></p>
+<p class="main_text">Chơi với bạn bè để đoán những gì bạn sẽ chọn.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/02-14.jpg"></div>
+<br>
+<script type="text/javascript">
+    $(".video_button").css("display", "none");
+</script>
+
+
+
+                </div>
+            </div>
+
+        </div>
+        <!-- //container -->
+    </div>
+    <!-- //wrap -->
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+什么是编程?
+
+1. 学习目标
+	[video ./video/block/01/01.execute.webm]
+	* 编程的意义。
+	* 通过编程你可以做什么。
+	* 使用AsomeController操控AsomeBot。
+
+
+2. 预习
+	@ 什么是编程?
+	把人的语言通过编程转化为计算机语言，使计算机完成指令。
+	[image ./images/blocks/01-01.png]
+
+	@ 机器人也是通过编程控制的吗?
+	机器人，汽车，家电中都有电脑芯片，你可以通过编程给机器人发出指令.
+	[image ./images/blocks/01-02.png]
+
+	@ 软件编程有什么作用?
+	通过软件编程可以实现无人驾驶汽车和飞机。
+	[image ./images/blocks/01-03.png ./images/blocks/01-04.png]
+
+	传送披萨机器人和运输货物的无人机都是受软件控制的.
+	[image ./images/blocks/01-05.png ./images/blocks/01-06.png]
+
+
+3. 学习各模块指令
+	@ AsomeBot机器人可以做什么?
+	AsomeBot有4个伺服马达，因此可以用两只脚走路或者可以跳舞的机器人。
+	AsomeBot通过超声波传感器测可以测量距离，也可以演奏简单的音乐。
+	[youtube https://www.youtube.com/embed/FkorGFg4_t0]
+
+	@ 用手机连接 AsomeBot
+	给 Asomebot 接通电源, 打开你的手机，在WiFi中选择你的机器人名字。
+	我们的 AsomeBot 各有不同的名字。
+	首先在老师的帮助下在WiFi清单中检查你的机器人的名字.
+	[image ./images/blocks/01-07.png]
+
+	@ 下载 Asome Controller APP 控制 Asomebot
+	连接到 WiFi 后,  就可以通过无线的方式使用Asome Controller 来控制 AsomeBot了。
+	[image ./images/blocks/01-08.png]
+	① 方向键 : 触碰一次，AsomeBot就会沿此方向行走。
+	② 静止键 : 使 AsomeBot 处于立正状态。
+	③ 动作键 : 触碰某个数字，其相应存储的的动作将会被执行。基本被储存的动作是舞蹈动作。
+
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_china.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">• 确认 AsomeBot 和 Asome控制器是否连接妥当, 触碰方向键移动机器人, 然后触碰动作键看看机器人跳什么舞蹈。<br>
+		</p>
+		</div>
+	]
+
+
+4. 互动游戏
+	@ 移动到指定的地点
+	在地图上的建筑物, 看谁更快移动到要求的地点，但不能偏离道路。
+	例如) 先去邮政局然后到教堂。
+	[image ./images/blocks/01-09.png]
+
+	@ 跳舞比赛
+	看一下谁跳的舞蹈更炫更酷。
+	[image ./images/blocks/01-10.png]
+
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]	

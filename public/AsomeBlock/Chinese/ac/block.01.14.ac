@@ -1,0 +1,162 @@
+逃出迷宫
+
+1. 学习目标
+	[video ./video/block/01/14.execute.webm]
+	* 了解一下逃出迷宫的算法。
+	* 在各种情况下能控制AsomeBot的动作。
+	* 了解迷宫各路段的特点，并编制逃出方法。
+
+
+2. 预览
+	@ 逃出迷宫
+	您可以编制一个用AsomeBot的超声波传感器识别墙壁，并绕开其障碍逃出迷宫的程序。
+	[image ./images/blocks/14-01.png]
+
+	@ 编制转弯顺序
+	可以编制一个AsomeBot自己逃出迷宫的程序。但是，其编制方法对我们来说非常复杂。如图所示的路程是逃出迷宫的最短路线，AsomeBot沿着这一路线就可以迅速逃出迷宫。我们研究一下控制AsomeBot沿着这一路线逃出迷宫的方法。
+	[image ./images/blocks/14-02.png]
+
+	@ 用超声波传感器转弯的简单路段
+	如图所示，不管AsomeBot行走多远，只要提示其遇到障碍时转弯的方向，AsomeBot就会朝着出口行走。
+	1. 说明一下AsomeBot在各个路段向哪个方向转弯。
+	2. 说明一下AsomeBot和障碍物的间距为多少时转弯最好。
+	[image ./images/blocks/14-03.png]
+
+	@ 靠超声波传感器转弯的综合性路段
+	在这一路段，AsomeBot遇到墙壁就要按“ㄷ”形轨迹转弯。此时需要比转一次弯更多、更复杂的操作。说明一下AsomeBot在④路段上如何行走才能到达正确位置。
+	[image ./images/blocks/14-04.png]
+
+	@ 需要按步数行走的路段
+	在这一路段，AsomeBot要按“ㄷ”形轨迹转弯。此时需要比转一次弯更多、更复杂的操作。
+	1. 测量并说明到达各个地点所需的步数。
+	2. 如果AsomeBot只靠步数不能正确地沿着路线行走，那么，说明一下如何才能逃出迷宫。
+	[image ./images/blocks/14-05.png]
+
+
+3. 了解要用的程序块
+	@ Delay（延迟）（[ADVANCE（逻辑条件）]组）
+	在指定的秒数内不作出动作并原地等待。
+	[block_image ./images/blocks/14-06.png
+		delay(1)
+	]
+	输入单击后等待的秒数。
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_china.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">编制一个程序运行5秒后向前走3步的程序。</p>
+		</div>
+	]
+
+	@ Attention（立正）（[BASIC（基础）]组）
+	 AsomeBot采取立正姿势。
+	[block_image ./images/blocks/14-07.png
+		asomebot.home()
+	]
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_china.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">编制一个让AsomeBot等待2秒、向前走3步并立正的程序。</p>
+		</div>
+	]
+
+	@ Set align（设置对齐）（[BASIC（基础）]组）
+	您可以调整连接到AsomeBot四个电机的角度值。先用Set align（设置对齐）程序块调整角度，再添加Attention（立正）程序块后运行，才能重置角度。调整的角度在连接断开时会被重置，因此，要保存好其角度。
+	[block_image ./images/blocks/14-08.png
+		asomebot.align(90,90,90,90)
+	]
+	① 调整1号电机的角度。默认值为90度。
+	② 调整2号电机的角度。默认值为90度。
+	③ 调整3号电机的角度。默认值为90度。
+	④ 调整4号电机的角度。默认值为90度。
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_china.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">调整每个电机角度，使之走向前直线行走。机器人能够直线行走，才能逃出迷宫。</p>
+		</div>
+	]
+
+	@ Measure distance（测量距离）（[SENSOR（传感器）]组）
+	用超声波传感器测量与前方障碍物的距离。测量的距离存储在变量名目“Cm”中。
+	[block_image ./images/blocks/14-09.png
+		cm = hcsr04.get_distance()
+	]
+
+	@ Repaeat（重复）（[ADVANCE（逻辑条件）]组）
+	根据需要多次重复区块中的命令。
+	[block_image ./images/blocks/14-10.png
+		for count in range(1):
+		  pass
+	]
+	① 指定重复的次数。
+	② 添加重复的程序块。
+
+	@ Repeat infinitely（无限重复）（[ADVANCE（逻辑条件）]组）
+	按顺序持续运行区块中的程序块。
+	[block_image ./images/blocks/14-11.png
+		while True:
+		  pass
+	]
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_china.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">编制一个让AsomeBot持续前行的程序。</p>
+		</div>
+	]
+
+	@ if（如果）（[ADVANCE（逻辑条件）]组）
+	所输入的条件正确时，运行区块中的程序块。如果条件不正确，就运行if区块之后的程序块。
+	[block_image ./images/blocks/14-12.png
+		if i == :
+	]
+	① 输入用于条件语句的变量。默认值为“i”，使用超声波传感器时更改为“cm”。
+	② 选择比较条件的标准不等式
+	③ 输入用于条件的默认值。在此，需要您添加指定条件值
+	④ 添加条件正确时要运行的程序块。
+
+	@ Data Value（数据值）（[ADVANCE（逻辑条件）]组）
+	用于指定变量、数字等Data Value（数据值）。
+	[block_image ./images/blocks/14-13.png
+		1
+	]
+	① 输入用于条件的默认值。
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_china.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① 编制一个超声波传感器测量的距离值小于5cm则向后走3步的程序。</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/14-14.png"></div>
+		<p class="main_text">② 编制一个继续前行的AsomeBot遇到障碍物（3厘米内的障碍物）则向左绕弯3次以逃出重复语句的程序。</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/14-15.png"></div>
+		</div>
+	]
+
+
+4. 线下游戏活动
+	@ 游戏规则
+	① 谁能编制出在最短时间内逃出迷宫的程序，谁就赢得比赛。
+	② 编制一个让AsomeBot沿着如下路线或用其他创新方法逃出迷宫的程序。
+	[image ./images/blocks/14-16.png]
+
+	@ 算法
+	① 红色路段：AsomeBot行走时遇到障碍物，就要绕着行走。
+	② 绿色路段：AsomeBot遇到障碍物，就要按“ㄷ”形轨迹行走。
+	③ 蓝色路段：每个AsomeBot根据自己特性，按正确的步数移动后转弯，以走出路段。
+	[image ./images/blocks/14-17.png]
+
+	@ 玩游戏
+	[image ./images/blocks/14-18.png]
+
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]

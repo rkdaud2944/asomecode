@@ -1,0 +1,162 @@
+Melololoskan diri dari labirin/maze
+
+1. Tujuan Pembelajaran
+	[video ./video/block/01/14.execute.webm]
+	* Memahami algoritma untuk lolos dari labirin.
+	* Kontrol pergerakan AsomeBot dalam berbagai situasi.
+	* Memahami karakteristik masing-masing bagian labirin dan mengembangkan metode meloloskan diri
+
+
+2. Pratinjau
+	@ Meloloskan diri dari labirin
+	Menggunakan sensor ultrasonik AsomeBot, Anda dapat membuat program yang mengenali dinding-dinding labirin dan melarikan diri dari hambatan.
+	[image ./images/blocks/14-01.png]
+
+	@ Menentukan urutan belokan
+	AsomeBot bisa  membuat program yang dapat sepenuhnya keluar dari labirin dengan sendirinya.Namun, metode ini sangat rumit untuk kita buat. Jika AsomeBot berjalan seperti yang ditunjukkan, AsomeBot dapat melarikan diri dari labirin melalui jarak terpendek. Mari kita cari tahu bagaimana AsomeBot harus bergerak di sepanjang jalan ini untuk menghindari labirin.
+	[image ./images/blocks/14-02.png]
+
+	@ Bagian sederhana dibelokan oleh sensor ultrasonik
+	Di area yang ditunjukkan pada Gambar, jika AsomeBot menemui hambatan saat berjalan pada sejumlah langkah, ia dapat berjalan menuju pintu keluar selama diperintahkan dengan petunjuk arah untuk berbelok.
+	1. Bicara tentang arah mana AsomeBot harus berpaling di setiap posisi.
+	2. Bicara tentang kapan AsomeBot harus berbelok pada jarak berapa antara AsomeBot dan hambatan.
+	[image ./images/blocks/14-03.png]
+
+	@ Semua bagian diputar oleh sensor ultrasonik
+	Ketika AsomeBot menemukan dinding, ia harus berputar dalam bentuk 'ㄷ'.Ini membutuhkan lebih banyak gerakan dan lebih sulit daripada hanya berputar dalam satu arah. Bicara tentang bagaimana AsomeBot dapat pindah ke posisi yang benar di bagian ④.
+	[image ./images/blocks/14-04.png]
+
+	@ Bagian yang perlu bergerak dengan langkah-langkah
+	Bagian ini adalah tempat AsomeBot harus berputar dalam bentuk 'ㄷ'.Ini membutuhkan lebih banyak gerakan dan lebih sulit daripada hanya berputar dalam satu arah.
+	1. Ukur dan bicarakan berapa banyak langkah yang diambil untuk berpindah ke setiap bagian.
+	2. Jika AsomeBot tidak dapat memindahkan bagian dengan tepat hanya dengan sejumlah langkah, bicarakan bagaimana cara keluar dari labirin.
+	[image ./images/blocks/14-05.png]
+
+
+3. Pelajari tentang blok yang akan digunakan
+	@ Tunda/Delay (grup [ADVANCE])
+	Tunggu tanpa bergerak selama detik yang ditentukan.
+	[block_image ./images/blocks/14-06.png
+		delay(1)
+	]
+	Masukkan jumlah detik untuk menunggu setelah klik.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_indonesia.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">Buat program yang berjalan 3 langkah ke depan setelah 5 detik saat program berjalan.</p>
+		</div>
+	]
+
+	@ Siaga/Attention (grup [BASIC])
+	AsomeBot berdiri tegak.
+	[block_image ./images/blocks/14-07.png
+		asomebot.home()
+	]
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_indonesia.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">Buat program yang memungkinkan AsomeBot menunggu 2 detik, teruskan 3 langkah dan berdiri siaga/attention .</p>
+		</div>
+	]
+
+	@ Atur align (grup [BASIC])
+	Anda dapat menyesuaikan nilai sudut dari empat motor yang terhubung ke AsomeBot . Sudut diubah dengan menyesuaikan sudut menggunakan blok[Set align] dan menambahkan blok [Attention], dan kemudian jalankan robot. Pastikan untuk mengingat sudutnya karena perubahan sudut perlu diatur ulang jika koneksi terputus.
+	[block_image ./images/blocks/14-08.png
+		asomebot.align(90,90,90,90)
+	]
+	① Sesuaikan sudut motor No.1.Motor ini pada dasarnya diatur pada 90 derajat.
+	② Sesuaikan sudut motor No.2.Motor ini pada dasarnya diatur pada 90 derajat.
+	③ Sesuaikan sudut motor No.3.Motor ini pada dasarnya diatur pada 90 derajat.
+	④ Sesuaikan sudut motor No.4.Motor ini pada dasarnya diatur pada 90 derajat.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_indonesia.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">Sesuaikan sudut setiap motor untuk berjalan lurus ke depan. Untuk menghindari labirin, robot harus dapat berjalan dengan benar .</p>
+		</div>
+	]
+
+	@ Mengukur jarak/measure distance (grup [SENSOR])
+	Dengan sensor ultrasonik, ukur jarak penghalang di depan. Nilai jarak yang diukur disimpan dalam nama variabel 'Cm'.
+	[block_image ./images/blocks/14-09.png
+		cm = hcsr04.get_distance()
+	]
+
+	@ Ulangi/repeat (grup [ADVANCE])
+	Ulangi perintah di blok sebanyak yang Anda inginkan.
+	[block_image ./images/blocks/14-10.png
+		for count in range(1):
+		  pass
+	]
+	① Tentukan berapa kali untuk mengulangi.
+	② Tambahkan blok untuk mengulang.
+
+	@ Ulangi hingga tak terbatas/repeat infinitely (grup [ADVANCE])
+	Jalankan blok di dalam blok untuk dijalankan secara berurutan.
+	[block_image ./images/blocks/14-11.png
+		while True:
+		  pass
+	]
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_indonesia.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">Buat program yang memungkinkan AsomeBot terus berjalan maju .</p>
+		</div>
+	]
+
+	@ Jika/if (grup [ADVANCE])
+	Jalankan blok yg ada di dalam blok [If] ketika input detail kondisinya benar. Jika kondisinya salah, blok setelah blok [If] akan dieksekusi.
+	[block_image ./images/blocks/14-12.png
+		if i == :
+	]
+	① Masukkan variabel yang akan digunakan dalam pernyataan bersyarat.Nilai default adalah ' i' dan berubah menjadi 'cm' saat menggunakan sensor ultrasonik.
+	② Pilih ketidaksetaraan default untuk membandingkan kondisi.
+	③ Masukkan nilai default untuk digunakan dalam kondisi ini. Anda perlu menambahkan blok untuk menentukan nilai bersyarat.
+	④ Tambahkan blok yang akan dieksekusi ketika kondisinya benar.
+
+	@ Nilai Data (grup [ADVANCE])
+	Digunakan untuk menentukan nilai data seperti variabel atau angka.
+	[block_image ./images/blocks/14-13.png
+		1
+	]
+	① Masukkan nilai default untuk digunakan dalam kondisi ini.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_indonesia.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Buat program untuk mundur 3 langkah jika nilai jarak yang diukur oleh sensor ultrasonik kurang dari 5cm .</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/14-14.png"></div>
+		<p class="main_text">② Buat program yang belok 3 kali ke kiri dan lepaskan pernyataan berulang jika AsomeBot terus berjalan maju dan menemui rintangan (rintangan dalam jarak 3 cm ).</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/14-15.png"></div>
+		</div>
+	]
+
+
+4. Mainkan Aktivitas
+	@ Aturan Permainan
+	① Siswa yang membuat program yang dapat lolos dari labirin dalam waktu paling singkat memenangkan permainan.
+	② Buat program yang memungkinkan AsomeBot keluar dari labirin dengan menggunakan jalur, seperti jalur gambar atau dengan menggunakan metode kreatif lainnya.
+	[image ./images/blocks/14-16.png]
+
+	@ Algoritma
+	① Bagian merah. Ketika AsomeBot menemukan hambatan saat berjalan, ia harus berbalik dan bergerak.
+	② Bagian hijau. Ketika AsomeBot menghadapi hambatan, ia harus bergerak dalam bentuk 'ㄷ'.
+	③ Bagian biru. Pindahkan robot dalam jumlah langkah yang benar sesuai dengan karakteristik masing-masing  AsomeBot dan putar untuk keluar dari bagian tersebut.
+	[image ./images/blocks/14-17.png]
+
+	@ Bermain game
+	[image ./images/blocks/14-18.png]
+
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]

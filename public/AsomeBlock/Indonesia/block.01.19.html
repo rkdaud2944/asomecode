@@ -1,0 +1,289 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<head>
+<!-- AsomeHeader Start -->
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>AsomeCode</title>
+    <meta name="Robots" content="all" />
+    <meta name="reply-to" content="" />
+    <meta name="date" content="" />
+
+    <link rel="stylesheet" href="../../common/css/AsomeCODE.css">
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/highlight.css">
+    <link rel="stylesheet" href="../../common/css/vs2015.css">
+    <link rel="stylesheet" href="../../common/css/quiz_css.css">
+
+    <script src="../../common/js/jquery-3.2.1.min.js"></script>
+
+    <link rel="stylesheet" href="../../common/css/bootstrap.min.css">
+    <script src="../../common/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="../../common/css/jodit.min.css"/>
+    <link rel="stylesheet" href="../../common/css/prism.css"/>
+    <script src="../../common/js/jodit.min.js"></script>
+    <script src="../../common/js/prism.js"></script>
+
+    <script src="../../common/js/AsomeCODE.js"></script>
+    <script src="../../common/js/board.js"></script>
+    <script src="../../common/js/highlight.pack.js"></script>
+    <script src="../../common/js/highlightjs-line-numbers.min.js"></script>
+
+    <script src="../../common/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../common/ace/ext-static_highlight.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../common/ace/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+<!-- AsomeHeader End -->
+</head>
+
+<body class="p3">    
+
+    <div class="modal fade" id="video_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <video id="video_player" width="100%" controls>
+                        <source id="video_src" type="video/webm" src=""/>
+                        <track id="video_subtitle" kind="subtitles" srclang="en" label="english" src="" default>
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="wrap">
+        <ul class="blind">
+            <li><a href="#contents">본문 바로가기(Skip Contents)</a></li>
+        </ul>
+        <div id="mobile">
+            <div class="logo">
+                <a href="javascript:void(0);"><img src="../../common/images/logom.png"></a>
+                <div class="m"><a><img src="../../common/images/mobile_m.png"></a></div>
+            </div>
+            <div class="mobile_top">
+                <div class="top_m">
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')">
+                        <img class="image-btn" filename="../../common/images/mobile_01.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeConnect')">
+                        <img class="image-btn" filename="../../common/images/mobile_02.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=ShowEditor')">
+                        <img class="image-btn" filename="../../common/images/mobile_03.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+                        <img class="image-btn last" filename="../../common/images/mobile_04.png">
+                    </a>
+                </div>
+                <div class="top_m">
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeReboot')">
+                        <img class="image-btn" filename="../../common/images/mobile_05.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeFormat')">
+                        <img class="image-btn" filename="../../common/images/mobile_06.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeUpdate')">
+                        <img class="image-btn" filename="../../common/images/mobile_07.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeBlock')">
+                        <img class="image-btn last" filename="../../common/images/blockcoding.png">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="header">
+            <ul class="left">
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeConnect')">
+                    <img class="image-btn" filename="../../common/images/top_01.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')">
+                    <img class="image-btn" filename="../../common/images/top_02.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=ShowEditor')">
+                    <img class="image-btn" filename="../../common/images/top_03.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+                    <img class="image-btn" filename="../../common/images/top_05.png">
+                </a></li>
+            </ul>
+            <ul class="right">
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeReboot')">
+                    <img class="image-btn" filename="../../common/images/top_04.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeFormat')">
+                    <img class="image-btn" filename="../../common/images/top_06.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeUpdate')">
+                    <img class="image-btn" filename="../../common/images/top_07.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeBlock')">
+                    <img class="image-btn" filename="../../common/images/blockcoding.png">
+                </a></li>
+                <li> &nbsp; </li>
+                <a href="javascript:void(0);" onclick="logout()"><img src="../../common/images/logout.png" id="bt_logout" class="last"></a>
+            </ul>
+        </div>
+        <div class="mobile_nav3"></div>
+        <div id="p3_header">
+            <ul>
+                <li class="headleft"><a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')"><img src="../../common/images/logo.png"></a></li>
+                <li class="headright"></li>
+            </ul>
+        </div>
+
+        <div id="p3_container">
+            <div class="left">
+                <div class="top">
+                    <div class="link_list"><a href="javascript:void(0);" onclick="run_cmd('Code=GoBack')"><img src="../../common/images/p3_list.png" alt="강의목록"></a></div>
+                    <div class="header_text"><div id="chapter" class="chapter">Unit {0}</div>
+                        <br>
+
+                        Perintah dengan tangan
+                    </div>
+                </div>
+                <div class="beg">
+                    <ul>
+                        <li><a href="javascript:fnMove('pn1')">1. Tujuan Pembelajaran</a></li>
+<li><a href="javascript:fnMove('pn2')">2. Pratinjau</a></li>
+<li><a href="javascript:fnMove('pn3')">3. Pelajari tentang blok yang akan digunakan</a></li>
+<li><a href="javascript:fnMove('pn4')">4. Mainkan Aktivitas</a></li>
+
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="right">
+                <div class="contents">
+                    <br>
+
+<li class="lefts bold" id="pn1">1. Tujuan Pembelajaran<span class="video_button" level="block" filename="01.ch01"></span></li>
+<div style="max-width: 600px;"><video width="100%" controls>
+<source id="video_src" type="video/webm" src="./video/block/01/19.execute.webm"/>
+Your browser does not support HTML5 video.</video></div>
+<p class="main_text">• Memahami prinsip nilai status<br>
+• Memahami 4 nilai status.<br>
+• Buat dan jalankan tindakan berbeda sesuai dengan nilai status.<br>
+</p>
+<br>
+<br>
+
+<li class="lefts bold" id="pn2">2. Pratinjau<span class="video_button" level="block" filename="01.ch02"></span></li>
+<p class="main_text"><strong>A. robot pendeteksi gerakan</strong></p>
+<p class="main_text">Pernahkah Anda melihat robot di pusat perbelanjaan? Robot-robot ini melayani  orang dan membantu mereka mendapatkan arahan. Untuk melakukan itu, robot memiliki banyak sensor dan program AI.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/19-01.png"></div>
+<br>
+<p class="main_text"><strong>B. AsomeBot juga bisa mengenali gerakan tangan.</strong></p>
+<p class="main_text">Meskipun Anda tidak dapat menjadikannya sebagus robot di bandara, AsomeBot dapat memahami dan menjalankan perintah yang kami lakukan dengan tangan.Kemudian, Anda dapat membuat AsomeBot melakukan apa yang Anda inginkan setiap kali Anda membuat program atau bahkan tanpa smartphone!</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/19-02.png"></div>
+<p class="main_text">Untuk menggerakkan AsomeBot dengan tangan Anda, Anda harus terlebih dahulu menggunakan sensor ultrasonik. Anda dapat memeriksa status tentang bagaimana nilai jarak yang diukur oleh sensor ultrasonik berubah, dan melakukan tindakan yang diinginkan sesuai dengan setiap kondisi.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/19-03.png"></div>
+<p class="main_text">AsomeBot mengakui total 4 nilai kesehatan.</p>
+<p class="main_text">① Status pertama adalah tangan (penghalang) di tempat yang jauh (lebih jauh dari 20 cm dan lebih dekat dari 50 cm) dan kemudian lebih jauh atau menghilang 50 cm.Nilai status kondisi ini disimpan sebagai '1'. Ini terutama digunakan untuk menghentikan AsomeBot dalam aksi.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/19-04.png"></div>
+<p class="main_text">② Status kedua adalah tangan yang jauh (lebih dari 20 cm dan lebih dekat dari 50 cm) semakin dekat (dalam jarak 20 cm).Nilai status kondisi ini disimpan sebagai '2'. Pada saat ini, bicarakan gerakan apa yang harus dilakukan.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/19-05.png"></div>
+<p class="main_text">③ Status ketiga adalah tangan yang dekat (dalam 20 cm) tiba-tiba menghilang atau bergerak dengan cepat dari 50 cm.Nilai status kondisi ini disimpan sebagai '3'. Pada saat ini, bicarakan gerakan apa yang harus dilakukan.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/19-06.png"></div>
+<p class="main_text">④ Keempat, ketika tangan yang dekat (dalam jarak 20 cm) pindah ke tempat yang jauh dalam jarak 50cm. Nilai status kondisi ini disimpan sebagai '4'. Pada saat ini, bicarakan gerakan apa yang harus dilakukan.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/19-07.png"></div>
+<br>
+<br>
+
+<li class="lefts bold" id="pn3">3. Pelajari tentang blok yang akan digunakan<span class="video_button" level="block" filename="01.ch03"></span></li>
+<p class="main_text"><strong>A. Persiapkan sensor gerak (grup[SENSOR])</strong></p>
+<p class="main_text">Blok ini mempersiapkan sinyal tangan untuk dikenali oleh sensor ultrasonik. Letakkan blok ini di depan blok [Periksa sensor gerak] untuk diperiksa selanjutnya.</p>
+<div id="src_1" style="display: none;"># code
+</div>
+<img class="block_image" src="./images/blocks/19-08.png" onclick="run_code($('#src_1').text())">
+<br>
+<p class="main_text"><strong>B. Periksa sensor gerak (grup [SENSOR])</strong></p>
+<p class="main_text">Blok mengukur keadaan sensor ultrasonik dan menyimpan dalam variabel 'gerak'. Blok ini harus digunakan agar AsomeBot dapat mengenali gerakan tangan atau rintangan.</p>
+<div id="src_2" style="display: none;"># code
+</div>
+<img class="block_image" src="./images/blocks/19-09.png" onclick="run_code($('#src_2').text())">
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/reference_indonesia.png">
+<p class="quiz_line"></p>
+<p class="main_text">Nilai status yang dapat disimpan dalam variabel gerak</p>
+<p class="main_text">1: Sebuah Hambatan yang jauh dan menghilang</p>
+<p class="main_text">2: Hambatan yang mendekat dekat dari jauh</p>
+<p class="main_text">3: Hambatan dalam jarak yang lebih dekat dan menghilang</p>
+<p class="main_text">4: Hambatan dalam jarak yang lebih dekat dan semakin jauh</p>
+</div>
+
+<br>
+<p class="main_text"><strong>C. Ulangi hingga tak terbatas/repeat infinitely (grup [ADVANCE])</strong></p>
+<p class="main_text">Jalankan blok di dalam blok untuk dijalankan secara berurutan. Di sini, Anda dapat menggunakannya sebagai fungsi untuk mengenali keadaan tangan atau rintangan tanpa batas dan untuk menjalankan perintah sesuai dengan keadaan.</p>
+<div id="src_3" style="display: none;">while True:
+  pass
+</div>
+<img class="block_image" src="./images/blocks/19-10.png" onclick="run_code($('#src_3').text())">
+<br>
+<p class="main_text"><strong>D. Jika/if (grup[ADVANCE])</strong></p>
+<p class="main_text">Jalankan blok didalam  blok ini ketika input detail kondisinya benar. Jika kondisinya salah, blok yang mengikuti blok if akan dieksekusi.</p>
+<div id="src_4" style="display: none;">if i == :
+</div>
+<img class="block_image" src="./images/blocks/19-11.png" onclick="run_code($('#src_4').text())">
+<p class="main_text">① Masukkan variabel yang akan digunakan dalam pernyataan bersyarat. Nilai default adalah ' i' dan di sini, Anda akan menggunakan variabel 'motion'.</p>
+<p class="main_text">② Pilih ketidaksetaraan default untuk membandingkan kondisi.</p>
+<p class="main_text">③ Masukkan nilai default untuk digunakan dalam kondisi ini.Anda perlu menambahkan blok untuk menentukan nilai bersyarat.</p>
+<p class="main_text">④ Tambahkan blok yang akan dieksekusi ketika kondisinya benar.</p>
+<br>
+<p class="main_text"><strong>E. Nilai Karakter (grup [ADVANCE])</strong></p>
+<p class="main_text">Nilai ini digunakan untuk mewakili karakter yang dimasukkan daripada variabel atau angka.</p>
+<div id="src_5" style="display: none;">''
+</div>
+<img class="block_image" src="./images/blocks/19-12.png" onclick="run_code($('#src_5').text())">
+<p class="main_text">① Masukkan karakter yang akan digunakan sebagai syarat.</p>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_indonesia.png">
+<p class="quiz_line"></p>
+<p class="main_text">① Periksa nilai status gerakan dan jika nilai status '2', buat program yang AsomeBot berjalan mundur.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/19-13.png"></div>
+<p class="main_text">② Buat program yang menari dengan gerakan yang berbeda sesuai dengan nilai status gerakan tangan atau rintangan.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/19-14.png"></div>
+</div>
+
+<br>
+<br>
+
+<li class="lefts bold" id="pn4">4. Mainkan Aktivitas<span class="video_button" level="block" filename="01.ch04"></span></li>
+<p class="main_text"><strong>A. Aturan Permainan</strong></p>
+<p class="main_text">① Bicaralah tentang gerakan apa yang harus dibuat untuk status yang sesuai dengan 1-4.</p>
+<p class="main_text">※ Hambatan dalam status 1 dan 3 sudah menghilang. Oleh karena itu, hindari gerakan berjalan atau gerakan yang berulang terlalu lama karena AsomeBot dapat terjatuh dari meja.</p>
+<p class="main_text">② Bicara tentang status apa yang dapat dibuat dengan sensor ultrasonik.</p>
+<p class="main_text">③ Bicara tentang jenis perangkat atau program yang nyaman digunakan dengan sinyal tangan.</p>
+<br>
+<p class="main_text"><strong>B. Algoritma</strong></p>
+<p class="main_text">Bagaimana cara membuat program perintah tangan? Sekarang, perkenalkan teman Anda tentang fungsi baru yang Anda buat.</p>
+<p class="main_text">① Peragakan gerakan perintah tangan dan bagikan nama-nama gerakan baru.</p>
+<p class="main_text">② Juga bagikan mengapa Anda membuat gerakan perintah tangan.</p>
+<p class="main_text">③ Dengarkan kisah perintah tangan teman Anda.</p>
+<p class="main_text">④ Bicara tentang fungsi lain apa yang dapat Anda buat selain gerakan yang Anda buat.</p>
+<br>
+<p class="main_text"><strong>C. Bermain game</strong></p>
+<p class="main_text">Perkenalkan program perintah tangan Anda.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/19-15.png"></div>
+<br>
+<script type="text/javascript">
+    $(".video_button").css("display", "none");
+</script>
+
+
+
+                </div>
+            </div>
+
+        </div>
+        <!-- //container -->
+    </div>
+    <!-- //wrap -->
+</body>
+
+</html>

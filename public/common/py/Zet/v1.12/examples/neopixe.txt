@@ -1,0 +1,15 @@
+import neopixel
+
+# when you using RGBW type and has 30 pcs LEDs
+#np = neopixel.NeoPixel(OutputPin(5).pin, 30, 4)
+
+# when you using RGB type and has 30 pcs LEDs
+np = neopixel.NeoPixel(OutputPin(5).pin, 30, 3)
+
+# when you using RGBW, this will turn on the 1st led.
+#np[0] = (255, 0, 0, 0)
+
+# when you using RGB, this will turn on the 1st led.
+np[0] = (255, 0, 0)
+
+np.write()

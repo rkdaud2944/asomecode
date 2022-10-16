@@ -1,0 +1,122 @@
+Hãy cùng chơi trên AsomeBot
+
+1. Mục tiêu bài học
+	[video ./video/block/01/10.execute.webm]
+	* Phát nhạc bằng cách sử dụng cảm biến siêu âm.
+	* Học cách chơi trong 1 hòa tấu.
+
+
+2. Preview
+	@ Phát nhạc bằng cảm biến siêu âm
+	Bạn có thể tạo nhạc cụ AsomeBot để tạo ra các âm thanh khác nhau tùy thuộc vào khoảng cách đo bằng cảm biến siêu âm.
+	[image ./images/blocks/10-01.png]
+
+	@ AsomeBot có thể chơi nhạc hòa tấu 
+	Bạn có thể chơi một bản hòa tấu với một số AsomeBots.
+	Bài hát nào bạn muốn chơi một bản hòa tấu cùng nhau?
+	[image ./images/blocks/10-02.png]
+
+
+3. Tìm hiểu những khối để sử dụng
+	@ Lặp lại vô tận (Nhóm ADVANCE(Nâng cao))
+	[Endless loop](Vòng lặp vô tận) làm cho các khối nằm trong đó chạy liên tục (vô tận) theo thứ tự.
+	[block_image ./images/blocks/07-04.png
+		while True:
+		  pass
+	]
+
+	@ Nếu (Nhóm ADVANCE)
+	[if](Nếu) làm cho các khối nằm trong nó chạy, khi nó tương ứng với điều kiện.
+	Nếu nó không tương ứng với điều kiện, các khối phía sau [if] sẽ được chạy.
+	[block_image ./images/blocks/07-05.png
+	]
+	① Nhập một biến được sử dụng trong câu lệnh điều kiện. Thêm khối cảm biến vào giá trị mặc định ‘I’ sẽ thêm biến và có thể được chọn.
+	② Chọn bất đẳng thức mặc định để so sánh các điều kiện.
+	③ Nhập giá trị mặc định để sử dụng trong điều kiện. Bạn cần thêm các khối để xác định giá trị có điều kiện.
+	④ Thêm các khối được thực thi khi điều kiện đúng.
+
+	@ Nếu/Không thì (Nhóm ADVANCE)
+	Nếu đầu vào nội dung là điều kiện chính xác, các khối sau nếu được thực thi; nếu không chính xác, các khối trong khối khác sẽ được thực thi.
+	[block_image ./images/blocks/10-03.png
+	]
+	① Nhập một biến được sử dụng trong câu lệnh điều kiện. Thêm khối cảm biến vào giá trị mặc định ‘i’ sẽ thêm biến và có thể được chọn.
+	② Chọn bất đẳng thức để so sánh các điều kiện.
+	③ Nhập giá trị mặc định để sử dụng trong điều kiện. Bạn cần thêm các khối để xác định giá trị có điều kiện.
+	④ Thêm các khối được thực thi khi điều kiện đúng.
+	⑤ Thêm khối để được thực thi khi điều kiện không chính xác.
+
+	@ Đo khoảng cách (Nhóm SENSOR(Cảm biến))
+	Với cảm biến siêu âm, đo khoảng cách của chướng ngại vật phía trước. Giá trị của khoảng cách đo được lưu trữ trong một tên biến “Cm”.
+	[block_image ./images/blocks/07-03.png
+		cm = hcsr04.get_distance()
+	]
+
+	@ Chuông bật (Nhóm SOUND)
+	Làm cho chuông không thể sử dụng. Để tạo âm thanh với bộ chuông, bạn phải sử dụng khối này. Lưu ý rằng nếu khối không được sử dụng trước tiên, bạn không thể sử dụng khối.
+	[block_image ./images/blocks/09-05.png
+		turnoff_pins( (1, 5, 6, 7, 8) )
+		import music
+		music.open(1)
+	]
+
+	@ Chuông tắt (Nhóm SOUND)
+	Điều này cho phép bạn sử dụng các bộ phận khác một lần nữa sau khi sử dụng chuông. Bạn không thể sử dụng các bộ phận khác trong khi sử dụng chuông.
+	[block_image ./images/blocks/09-06.png
+		turnoff_pins( (1, 5, 6, 7, 8) )
+		import asomebot
+		asomebot.ready(5, 6, 7, 8)
+	]
+
+	@ Tạo ra âm thanh (Nhóm SOUND)
+	Sử dụng khối này, bạn có thể tạo ra âm thanh bạn muốn bằng tần số.
+	[block_image ./images/blocks/09-07.png
+		music.tone(0)
+		delay(1)
+		music.mute()
+	]
+	① Nhập tần số của âm thanh bạn muốn.
+	② Chỉ định thời gian để tạo ra âm thanh.
+
+	@ Chơi cho (Nhóm SOUND)
+	Bạn có thể tạo âm thanh bạn muốn theo tần số với khối này.
+	[block_image ./images/blocks/09-08.png
+		music.note("C1",1*1000)
+	]
+	① Chọn ghi chú bạn muốn chơi.
+	② Chọn quãng tám.
+	③ Nhập thời gian chơi
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_veitnam.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Làm cho AsomeBot hoạt động khác nhau theo khoảng cách đo bằng cảm biến siêu âm.<br>
+		• Nếu khoảng cách với chướng ngại vật bằng hoặc nhỏ hơn 5cm, AsomeBot di chuyển lùi 2 bước<br>
+		• Nếu khoảng cách với chướng ngại vật bằng hoặc nhỏ hơn 10cm, AsomeBot vỗ 3 lần và đứng thẳng<br>
+		• Nếu khoảng cách với chướng ngại vật bằng hoặc nhỏ hơn 15cm, AsomeBot nhảy điệu moonwalk<br>
+		② Tạo AsomeBot để tạo ra các âm thanh khác nhau theo cảm biến siêu âm khoảng cách đo được.<br>
+		• Ở độ cao 10cm hoặc trở xuống, hãy chơi Do ~ Si của 3 quãng tám trong một giây tương ứng<br>
+		• Ở độ cao từ 20 cm hoặc trở xuống, hãy phát âm giảm tần số từ 300 xuống 50 trong một giây.
+		</p>
+		</div>
+	]
+
+
+4. Chơi trò chơi
+	@ Luật chơi
+	① Chơi hóa tấu với 3-5 con robot. 
+	② Đặt nhạc để phát theo nhóm.
+	③ Lưu ý rằng âm nhạc không quá khó để chơi cùng nhau.
+
+	@ Thuật toán
+	Trước tiên bạn nên xác định khoảng cách tương ứng với từng nốt để tạo ra âm thanh khác nhau tùy thuộc vào khoảng cách đo bằng cảm biến siêu âm.
+	[image ./images/blocks/10-05.png]
+
+	@ Chơi trò chơi
+	[image ./images/blocks/10-04.jpg]
+	
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]
