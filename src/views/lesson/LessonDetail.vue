@@ -13,10 +13,10 @@
                 <p class="title-style">목차</p>
             </div>
             <div class="test">
-                <div @click="moveTo(title.tag)" :class="`title title-${title.level}`" v-for="(title, index) in titles"
+                <!-- <div @click="moveTo(title.tag)" :class="`title title-${title.level}`" v-for="(title, index) in titles"
                     :key="index">
                     {{title.name}}
-                </div>
+                </div> -->
             </div>
         </div>
 
@@ -37,8 +37,8 @@ export default {
     data() {
         return {
             lesson: null,
-            titles: null,
-            content: null,
+            // titles: null,
+            // content: null,
         };
     },
 
@@ -68,20 +68,20 @@ export default {
             apiLesson.lessonDetail(id)
                 .then((response) => {
                     this.lesson = response.data;
-                    markdown.setHtml(this.lesson.content);
-                    this.titles = markdown.getTitles(this.lesson.content);
-                    this.content = markdown.getContent();
+                    // markdown.setHtml(this.lesson.content);
+                    // this.titles = markdown.getTitles(this.lesson.content);
+                    // this.content = markdown.getContent();
 
-                    let header = document.querySelector(".col-3");
-                    window.onscroll = function () {
-                        let windowTop = window.scrollY;
-                        if (windowTop > 60) {
-                            header.classList.add("drop");
-                        }
-                        else {
-                            header.classList.remove("drop");
-                        }
-                    };
+                    // let header = document.querySelector(".col-3");
+                    // window.onscroll = function () {
+                    //     let windowTop = window.scrollY;
+                    //     if (windowTop > 60) {
+                    //         header.classList.add("drop");
+                    //     }
+                    //     else {
+                    //         header.classList.remove("drop");
+                    //     }
+                    // };
                 })
                 .catch(this.showError);
         },

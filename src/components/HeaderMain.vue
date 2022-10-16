@@ -37,9 +37,12 @@
                     <img src="../../public/images/common/update.png" class="ui-img">
                     <p class="ui-right-font" id="fs-four">업데이트</p>
                 </li>
-                <li class="ui-right-bt" @click="openUrl('metaverse', 'http://www.metalive.be:13300/world/')">
+                <li class="ui-right-bt" @click="openUrl('help', '/help')">
                     <img src="../../public/images/common/help.png" class="ui-img">
                     <p class="ui-right-font" id="fs-three">HELP</p>
+                </li>
+                <li @click="openUrl('metaverse', 'http://www.metalive.be:13300/world/')">
+                    M
                 </li>
                 <li @click="openUrl('BO', '/backOffice')">
                     BO
