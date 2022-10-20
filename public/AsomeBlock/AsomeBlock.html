@@ -44,9 +44,6 @@
     <script src="../common/js/AsomeCODE-web.js?-2019120201-"></script>
     <script src="../common/js/simulation.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="../common/js/keyboard/jquery.onscreenKeyboard.css" />
-    <script src="../common/js/keyboard/jquery.onscreenKeyboard.js"></script>
-
     <link rel="stylesheet" href="../common/js/confirm/jquery-confirm.min.css">
     <script src="../common/js/confirm/jquery-confirm.min.js"></script>
 
@@ -72,7 +69,7 @@
                 <span class="delimiter">|</span>
                 <div class="btn btn-image" onclick="importBlocksFromFile();"><img src="../common/images/icons/load.png" style="width: 66px; height: 17px;"/></div>
                 <span class="delimiter">|</span>
-              
+
                 <div class="btn btn-image dropdown">
                     <img src="../common/images/icons/custom%20block.png" style="width: 82px; height: 17px;" onclick="openPopupMenuCustom()" class="dropbtn">
                     <div id="dropdown_menu_custom" class="dropdown-content">
@@ -80,7 +77,7 @@
                         <a href="../blockmaker/index.html" target="_blank">New Custom</a>
                     </div>
                 </div>
-              
+
                 <!-- <span class="delimiter">|</span>
                 <div class="btn btn-icon-text"><img src="./common/images/button_publish.png" />발행하기</div>
                 <span class="delimiter">|</span>
@@ -116,12 +113,6 @@
         </xml>
     </div>
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            changeToolboxCategory();
-            closeSourceEditor();
-        });
-    </script>
     <div class="onscreenKeyboard" style="display: none; z-index: 99999;"></div>
 </body>
 </html>
