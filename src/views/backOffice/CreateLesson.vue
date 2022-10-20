@@ -1,7 +1,7 @@
 <template>
     <q-form @submit="createLesson" greedy>
         <div class="lesson-title">
-            <q-input outlined v-model="lesson.title" label="제목" style="width: 50%;"
+            <q-input outlined v-model="lessonTitle" label="제목" style="width: 50%;"
                 :rules="[val => !!val || '제목을 입력해 주세요']" />
             <q-btn color="positive" style="margin-left: 20px; height: 28px;" type="submit">생성</q-btn>
             <q-btn color="warning" style="margin-left: 20px; height: 28px;" @click="clearForm">초기화</q-btn>
@@ -18,10 +18,10 @@
                     <q-btn color="secondary" @click="onVideoUploadDialog" glossy label="동영상 삽입" />
                     <q-btn color="secondary" @click="onFunctionBtnDialog" glossy label="함수 버튼 생성" />
                 </q-btn-group>
-                <textarea ref="inputTextarea" class="inputText" :value="lesson.content" @input="update"></textarea>
+                <textarea ref="inputTextarea" class="inputText" :value="input" @input="update"></textarea>
             </q-card>
 
-            <div class="markdown_output" v-html="output"></div>
+            <div class="markdown_output" v-html="markedOutput"></div>
         </div>
 
         <q-dialog v-model="imageUploadDialog">
@@ -124,10 +124,9 @@ export default {
             defaultSubjectOptions: [],
             selectedDefaultSubject: null,
 
-            lesson: {
-                title: "",
-                content: "",
-            },
+            input: '',
+            lessonTitle: '',
+            lessonContent: '',
         };
     },
 
@@ -150,14 +149,15 @@ export default {
     },
 
     computed: {
-        output() {
-            return markdown.markedInput(this.lesson.content)
+        markedOutput() {
+            return markdown.markedInput(this.lessonContent)
         }
     },
 
     methods: {
         update: debounce(function (e) {
-            this.lesson.content = e.target.value
+            this.input = e.target.value
+            this.lessonContent = this.input
         }, 200),
 
         onImageUploadDialog() {
@@ -165,11 +165,12 @@ export default {
         },
 
         insertImage(insert) {
-            var markedImage = `![](${insert})`
-            var value = this.$refs.inputTextarea.value;
-            var selectionStart = this.$refs.inputTextarea.selectionStart;
-            var output = [value.slice(0, selectionStart), markedImage, value.slice(selectionStart)].join('')
-            this.lesson.content = output
+            let markedImage = `![](${insert})`
+            let value = this.$refs.inputTextarea.value;
+            let selectionStart = this.$refs.inputTextarea.selectionStart;
+            let output = [value.slice(0, selectionStart), markedImage, value.slice(selectionStart)].join('')
+            this.lessonContent = output
+            this.input = output
         },
 
         onVideoUploadDialog() {
@@ -181,12 +182,13 @@ export default {
         },
 
         insertVideo(insert) {
-            var markedVideo =
+            let markedVideo =
                 `<video controls width="100%">\n    <source src="${insert}" type="video/webm">\n</video>`
-            var value = this.$refs.inputTextarea.value;
-            var selectionStart = this.$refs.inputTextarea.selectionStart;
-            var output = [value.slice(0, selectionStart), markedVideo, value.slice(selectionStart)].join('')
-            this.lesson.content = output
+            let value = this.$refs.inputTextarea.value;
+            let selectionStart = this.$refs.inputTextarea.selectionStart;
+            let output = [value.slice(0, selectionStart), markedVideo, value.slice(selectionStart)].join('')
+            this.lessonContent = output
+            this.input = output
         },
 
         uploadLessonImage() {
@@ -214,8 +216,21 @@ export default {
         },
 
         createfunctionBtn() {
-            console.log(this.functionName, this.functionCode)
-            console.log('test')
+            let functionNameId = this.functionName.replaceAll(' ','-')
+
+            let markedFunctionBtn = `#[function](${this.functionName})\n`
+            let functionCode = `<div id="${functionNameId}" class="hidden">\n${this.functionCode}</div>`
+
+            let value = this.$refs.inputTextarea.value;
+            let selectionStart = this.$refs.inputTextarea.selectionStart;
+            let output = [value.slice(0, selectionStart), markedFunctionBtn, value.slice(selectionStart)].join('')
+
+            this.lessonContent = output + functionCode
+            this.input = output
+
+            this.functionName = ''
+            this.functionCode = ''
+            this.functionBtnDialog = false
         },
 
         getDefaultSubjectSet() {
@@ -228,10 +243,10 @@ export default {
 
         createLesson() {
             let body = {
-                title: this.lesson.title,
+                title: this.lessonTitle,
                 description: "",
                 htmlUrl: "",
-                content: this.lesson.content,
+                content: this.lessonContent,
                 defaultSubjectId: this.selectedDefaultSubject.id,
             }
             apiLesson.create(body)
@@ -244,20 +259,13 @@ export default {
 
         clearForm() {
             this.selectedDefaultSubject = null;
-            this.lesson = {
-                title: "",
-                content: "",
-            };
+            this.input = '';
+            this.lessonTitle = '';
+            this.lessonContent = '';
         },
     }
 }
 </script>
-
-
-
-
-
-
 
 
 <style src="@/assets/css/component/markdown_content.css"/>
