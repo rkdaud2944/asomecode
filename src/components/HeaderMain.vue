@@ -41,7 +41,7 @@
                     <img src="../../public/images/common/help.png" class="ui-img">
                     <p class="ui-right-font" id="fs-three">HELP</p>
                 </li>
-                <li @click="openUrl('metaverse', '/AsomeBlock/AsomeBlock.html?language=Korean')">
+                <li @click="openUrl('AsomeBlock', '/AsomeBlock/AsomeBlock.html?language=Korean')">
                     Block
                 </li>
                 <li @click="openUrl('metaverse', 'http://www.metalive.be:13300/world/')">
