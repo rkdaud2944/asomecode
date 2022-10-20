@@ -89,7 +89,7 @@
                 <q-card-section class="q-pt-none">
                     <q-input v-model="functionName" label="버튼 이름" stack-label />
                     <div class="q-mt-md">
-                        <CodeEditor v-model="functionCode" style="width: 100%;"></CodeEditor>
+                        <CodeEditor v-model="functionCode" style="width: 100%;" :languages="[['python', 'Python']]" />
                     </div>
                     <div>
                         <q-btn class="uploadDialog-btn" label="취소" color="primary" v-close-popup />
@@ -191,7 +191,7 @@ export default {
 
         uploadLessonImage() {
             apiAwsS3
-                .uploadLessonImage(this.image, this.$route.query.id)
+                .uploadLessonImage(this.image)
                 .then((response) => {
                     this.insertImage(response)
                     this.imageUploadDialog = false
@@ -203,7 +203,7 @@ export default {
 
         uploadLessonVideo() {
             apiAwsS3
-                .uploadLessonVideo(this.video, this.$route.query.id)
+                .uploadLessonVideo(this.video)
                 .then((response) => {
                     this.insertVideo(response)
                     this.videoUploadDialog = false

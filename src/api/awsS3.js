@@ -7,8 +7,8 @@ export default {
     bucketRegion: "ap-northeast-2",
     identityPoolId: process.env.VUE_APP_S3_IDENTITY_POOL_ID,
 
-    uploadLessonImage: async function (file, lessonId) {
-        let s3BucketName = this.s3BucketName + `/lesson/images/${lessonId}`
+    uploadLessonImage: async function (file) {
+        let s3BucketName = this.s3BucketName + `/lesson/images`
 
         awsS3.config.update({
             region: this.bucketRegion,
@@ -41,8 +41,8 @@ export default {
         });
     },
 
-    uploadLessonVideo: async function (file, lessonId) {
-        let s3BucketName = this.s3BucketName + `/lesson/videos/${lessonId}`
+    uploadLessonVideo: async function (file) {
+        let s3BucketName = this.s3BucketName + `/lesson/videos`
 
         awsS3.config.update({
             region: this.bucketRegion,
