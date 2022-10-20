@@ -1,0 +1,395 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<head>
+<!-- AsomeHeader Start -->
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>AsomeCode</title>
+    <meta name="Robots" content="all" />
+    <meta name="reply-to" content="" />
+    <meta name="date" content="" />
+
+    <link rel="stylesheet" href="../../common/css/AsomeCODE.css">
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/highlight.css">
+    <link rel="stylesheet" href="../../common/css/vs2015.css">
+    <link rel="stylesheet" href="../../common/css/quiz_css.css">
+
+    <script src="../../common/js/jquery-3.2.1.min.js"></script>
+
+    <link rel="stylesheet" href="../../common/css/bootstrap.min.css">
+    <script src="../../common/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="../../common/css/jodit.min.css"/>
+    <link rel="stylesheet" href="../../common/css/prism.css"/>
+    <script src="../../common/js/jodit.min.js"></script>
+    <script src="../../common/js/prism.js"></script>
+
+    <script src="../../common/js/AsomeCODE.js"></script>
+    <script src="../../common/js/board.js"></script>
+    <script src="../../common/js/highlight.pack.js"></script>
+    <script src="../../common/js/highlightjs-line-numbers.min.js"></script>
+
+    <script src="../../common/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../common/ace/ext-static_highlight.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../common/ace/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+<!-- AsomeHeader End -->
+</head>
+
+<body class="p3">    
+
+    <div class="modal fade" id="video_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <video id="video_player" width="100%" controls>
+                        <source id="video_src" type="video/webm" src=""/>
+                        <track id="video_subtitle" kind="subtitles" srclang="en" label="english" src="" default>
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="wrap">
+        <ul class="blind">
+            <li><a href="#contents">본문 바로가기(Skip Contents)</a></li>
+        </ul>
+        <div id="mobile">
+            <div class="logo">
+                <a href="javascript:void(0);"><img src="../../common/images/logom.png"></a>
+                <div class="m"><a><img src="../../common/images/mobile_m.png"></a></div>
+            </div>
+            <div class="mobile_top">
+                <div class="top_m">
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')">
+                        <img class="image-btn" filename="../../common/images/mobile_01.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeConnect')">
+                        <img class="image-btn" filename="../../common/images/mobile_02.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=ShowEditor')">
+                        <img class="image-btn" filename="../../common/images/mobile_03.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+                        <img class="image-btn last" filename="../../common/images/mobile_04.png">
+                    </a>
+                </div>
+                <div class="top_m">
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeReboot')">
+                        <img class="image-btn" filename="../../common/images/mobile_05.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeFormat')">
+                        <img class="image-btn" filename="../../common/images/mobile_06.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeUpdate')">
+                        <img class="image-btn" filename="../../common/images/mobile_07.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeBlock')">
+                        <img class="image-btn last" filename="../../common/images/blockcoding.png">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="header">
+            <ul class="left">
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeConnect')">
+                    <img class="image-btn" filename="../../common/images/top_01.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')">
+                    <img class="image-btn" filename="../../common/images/top_02.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=ShowEditor')">
+                    <img class="image-btn" filename="../../common/images/top_03.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+                    <img class="image-btn" filename="../../common/images/top_05.png">
+                </a></li>
+            </ul>
+            <ul class="right">
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeReboot')">
+                    <img class="image-btn" filename="../../common/images/top_04.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeFormat')">
+                    <img class="image-btn" filename="../../common/images/top_06.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeUpdate')">
+                    <img class="image-btn" filename="../../common/images/top_07.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeBlock')">
+                    <img class="image-btn" filename="../../common/images/blockcoding.png">
+                </a></li>
+                <li> &nbsp; </li>
+                <a href="javascript:void(0);" onclick="logout()"><img src="../../common/images/logout.png" id="bt_logout" class="last"></a>
+            </ul>
+        </div>
+        <div class="mobile_nav3"></div>
+        <div id="p3_header">
+            <ul>
+                <li class="headleft"><a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')"><img src="../../common/images/logo.png"></a></li>
+                <li class="headright"></li>
+            </ul>
+        </div>
+
+        <div id="p3_container">
+            <div class="left">
+                <div class="top">
+                    <div class="link_list"><a href="javascript:void(0);" onclick="run_cmd('Code=GoBack')"><img src="../../common/images/p3_list.png" alt="강의목록"></a></div>
+                    <div class="header_text"><div id="chapter" class="chapter">Unit {0}</div>
+                        <br>
+
+                        像Idol明星那样跳舞吧
+                    </div>
+                </div>
+                <div class="beg">
+                    <ul>
+                        <li><a href="javascript:fnMove('pn1')">1. 学习目标</a></li>
+<li><a href="javascript:fnMove('pn2')">2. 预览</a></li>
+<li><a href="javascript:fnMove('pn3')">3. 了解要用的程序块</a></li>
+<li><a href="javascript:fnMove('pn4')">4. 线下游戏活动</a></li>
+
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="right">
+                <div class="contents">
+                    <br>
+
+<li class="lefts bold" id="pn1">1. 学习目标<span class="video_button" level="block" filename="01.ch01"></span></li>
+<div style="max-width: 600px;"><video width="100%" controls>
+<source id="video_src" type="video/webm" src="./video/block/01/20.execute.webm"/>
+Your browser does not support HTML5 video.</video></div>
+<p class="main_text">• 了解一下1：1和1：n控制方法<br>
+• 编制一个可以同时控制多个AsomeBots的程序。<br>
+• 可以将各种舞蹈动作连接起来编制新的舞蹈程序。<br>
+</p>
+<br>
+<br>
+
+<li class="lefts bold" id="pn2">2. 预览<span class="video_button" level="block" filename="01.ch02"></span></li>
+<p class="main_text"><strong>A. 让机器人像偶像那样跳舞</strong></p>
+<p class="main_text">您利用AsomeBot的WiFi功能，就可以使多个机器人同时舞蹈。</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/20-01.png"></div>
+<br>
+<p class="main_text">通过WiFi发送信号的方法</p>
+<p class="main_text">① 1：1操作</p>
+<p class="main_text">将智能手机和AsomeBot直接连接起来逐个操作。</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/20-02.png"></div>
+<p class="main_text">② 一次操作多个AsomeBot</p>
+<p class="main_text">智能手机向路由器发送信号后，路由器就给多个AsomeBot发送信号进行操作。</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/20-03.png"></div>
+<br>
+<p class="main_text"><strong>B. 您如何编制舞蹈动作?</strong></p>
+<p class="main_text">调整连接到AsomeBot的4个电机的角度及运行时间，就能编制多种动作。按照如下方式可以编制拍脚动作:</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/20-04.png"></div>
+<br>
+<p class="main_text"><strong>C. 在同一时间做不同的动作</strong></p>
+<p class="main_text">只需要模仿idol明星们跳舞，将想要让各个AsomeBot跳不同动作舞蹈的时间vs.动作分别储存起来就可以了</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/20-05.png"></div>
+<br>
+<p class="main_text">应该按什么顺序编制程序？</p>
+<p class="main_text">① 将AsomeBot连接到互联网路由器。</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/20-06.png"></div>
+<p class="main_text">② 编制各个机器人的舞蹈动作。</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/20-07.png"></div>
+<p class="main_text">③ 用一部智能手机操作。</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/20-08.png"></div>
+<br>
+<br>
+
+<li class="lefts bold" id="pn3">3. 了解要用的程序块<span class="video_button" level="block" filename="01.ch03"></span></li>
+<p class="main_text"><strong>A. Connect to internet（连接到互联网）（[INTERNET（互联网）]组）</strong></p>
+<p class="main_text">设定AsomeBot无线路由器的名称和密码。要想使用该程序块，就要有无线互联网路由器。但是，此时互联网路由器不需要连接到互联网。</p>
+<div id="src_1" style="display: none;">import internet
+internet.connect("","")
+</div>
+<img class="block_image" src="./images/blocks/20-09.png" onclick="run_code($('#src_1').text())">
+<p class="main_text">① 输入互联网路由器的名称。</p>
+<p class="main_text">② 输入互联网路由器的密码。</p>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/reference_china.png">
+<p class="quiz_line"></p>
+<p class="main_text">在智能手机上查找互联网路由器。您可以在WiFi列表中查找要用的无线路由器的名称，并连接到智能手机。如果弹出一条信息显示互联网连接不稳定，就不要按任何按钮，要等待其信息消失。</p>
+<div class="content_image_box"><img src="./images/blocks/20-10.png" style="width:49%;"><img src="./images/blocks/20-11.png" style="width:49%;"></div>
+</div>
+
+<br>
+<p class="main_text"><strong>B. Open UDP socket（打开UDP套接字）（[INTERNET（互联网）]组）</strong></p>
+<p class="main_text">打开一个AsomeBot可通过互联网进行通信的端口。</p>
+<div id="src_2" style="display: none;">import udp_socket
+udp_socket.open(1234)
+</div>
+<img class="block_image" src="./images/blocks/20-12.png" onclick="run_code($('#src_2').text())">
+<p class="main_text">① 这是要用的端口号。不要做任何的改动，原封不动地使用端口号。</p>
+<br>
+<p class="main_text"><strong>C. Read Messages（读取信息）（[INTERNET（互联网）]组）</strong></p>
+<p class="main_text">读取智能手机发送的信息。</p>
+<div id="src_3" style="display: none;">msg = udp_socket.read_text()
+</div>
+<img class="block_image" src="./images/blocks/20-13.png" onclick="run_code($('#src_3').text())">
+<br>
+<p class="main_text"><strong>D. Repeat infinitely（无限重复）（[ADVANCE（逻辑条件）]组）</strong></p>
+<p class="main_text">按顺序持续运行区块中的程序块。此时，等待智能手机应用程序发送的信息，并按照信息执行命令。</p>
+<div id="src_4" style="display: none;">while True:
+  pass
+</div>
+<img class="block_image" src="./images/blocks/20-14.png" onclick="run_code($('#src_4').text())">
+<br>
+<p class="main_text"><strong>E. Repaeat（重复）（[ADVANCE（逻辑条件）]组）</strong></p>
+<p class="main_text">根据需要多次重复区块中的命令。</p>
+<div id="src_5" style="display: none;">for count in range(1):
+  pass
+</div>
+<img class="block_image" src="./images/blocks/20-15.png" onclick="run_code($('#src_5').text())">
+<p class="main_text">① 指定重复的次数。</p>
+<p class="main_text">② 添加重复的程序块。</p>
+<br>
+<p class="main_text"><strong>F. if（如果） ([ADVANCE（逻辑条件）] 组)</strong></p>
+<p class="main_text">所输入的条件正确时，运行区块中的程序块。如果条件不正确，就运行if区块之后的程序块。</p>
+<div id="src_6" style="display: none;">if i == :
+</div>
+<img class="block_image" src="./images/blocks/20-16.png" onclick="run_code($('#src_6').text())">
+<p class="main_text">① 输入用于条件语句的变量。默认值为“i”。</p>
+<p class="main_text">② 选择比较条件的标准不等式。</p>
+<p class="main_text">③ 输入用于条件的默认值。在此，需要您添加指定条件值的区块。</p>
+<p class="main_text">④ 添加条件正确时要运行的程序块。</p>
+<br>
+<p class="main_text"><strong>G. Character Value（字符值）（[ADVANCE（逻辑条件）]组）</strong></p>
+<p class="main_text">该值用于表示输入的字符，而不是变量或数字。</p>
+<div id="src_7" style="display: none;">''
+</div>
+<img class="block_image" src="./images/blocks/20-17.png" onclick="run_code($('#src_7').text())">
+<p class="main_text">① 输入用于条件的字符。</p>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_china.png">
+<p class="quiz_line"></p>
+<p class="main_text">① 假设您编制了如下所示的程序块，请试着说明一下其如何运行。</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/20-18.png"></div>
+<p class="main_text" style="float: left; width:auto;">② 编制一个按下AsomeBot控制器的</p> 
+<div class="content_image_box" style="float:left; margin: 0 1%;">
+        <img class="content_image" src="./images/blocks/20-19.png" style="width: auto;">
+</div>
+<p class="main_text">键，就可以使连接到无线路由器的所有机器人同时前行的程序。</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/20-20.png"></div>
+</div>
+
+<br>
+<p class="main_text"><strong>H. Attention（立正）（[BASIC（基础）]组）</strong></p>
+<p class="main_text">脚部动作幅度大的时候如果继续其他动作，AsomeBot就会跌倒。每次动作之间插入[Attention（立正）]使AsomeBot立正，就会防止跌倒。</p>
+<div id="src_8" style="display: none;">asomebot.home()
+</div>
+<img class="block_image" src="./images/blocks/20-21.png" onclick="run_code($('#src_8').text())">
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_china.png">
+<p class="quiz_line"></p>
+<p class="main_text">编制并运行Ballet（芭蕾舞）动作后Attention（立正）的程序。</p>
+</div>
+
+<br>
+<p class="main_text"><strong>I. Dance Moves without Option（单个舞蹈动作）（[DANCE（舞蹈）]组）</strong></p>
+<div id="src_9" style="display: none;">asomebot.ballet()
+</div>
+<img class="block_image" src="./images/blocks/20-22.png" onclick="run_code($('#src_9').text())">
+<p class="main_text">AsomeBot用脚尖站着做Ballet（芭蕾舞）般的动作。</p>
+<br>
+<div id="src_10" style="display: none;">asomebot.wiggle()
+</div>
+<img class="block_image" src="./images/blocks/20-23.png" onclick="run_code($('#src_10').text())">
+<p class="main_text">AsomeBot在原地踏步。</p>
+<br>
+<div id="src_11" style="display: none;">asomebot.flap()
+</div>
+<img class="block_image" src="./images/blocks/20-24.png" onclick="run_code($('#src_11').text())">
+<p class="main_text">AsomeBot拍脚。</p>
+<br>
+<div id="src_12" style="display: none;">asomebot.warigari()
+</div>
+<img class="block_image" src="./images/blocks/20-25.png" onclick="run_code($('#src_12').text())">
+<p class="main_text">AsomeBot做出Warigari动作。（改为：双脚在地上蹭的动作）</p>
+<br>
+<div id="src_13" style="display: none;">asomebot.yaho()
+</div>
+<img class="block_image" src="./images/blocks/20-26.png" onclick="run_code($('#src_13').text())">
+<p class="main_text">AsomeBot抬起脚尖。是与[Ballet（芭蕾舞）]相反的动作。</p>
+<br>
+<div id="src_14" style="display: none;">asomebot.moonwalk()
+</div>
+<img class="block_image" src="./images/blocks/20-27.png" onclick="run_code($('#src_14').text())">
+<p class="main_text">AsomeBot走太空步。</p>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_china.png">
+<p class="quiz_line"></p>
+<p class="main_text">将不需要选项的舞蹈动作结合起来编制一个舞蹈程序。</p>
+</div>
+
+<br>
+<p class="main_text"><strong>J. Dance Moves with Option（带选项的舞蹈动作）（[DANCE（舞蹈）]组）</strong></p>
+<p class="main_text">所有舞蹈动作选项均选择的是AsomeBot移动的脚部方向。</p>
+<div id="src_15" style="display: none;">asomebot.mouse(1)
+</div>
+<img class="block_image" src="./images/blocks/20-28.png" onclick="run_code($('#src_15').text())">
+<p class="main_text">AsomeBot抬起一只脚做出动作。</p>
+<br>
+<div id="src_16" style="display: none;">asomebot.swing(1)
+</div>
+<img class="block_image" src="./images/blocks/20-29.png" onclick="run_code($('#src_16').text())">
+<p class="main_text">AsomeBot抬起一只脚向后弯曲。</p>
+<br>
+<div id="src_17" style="display: none;">asomebot.tick_tock(1)
+</div>
+<img class="block_image" src="./images/blocks/20-30.png" onclick="run_code($('#src_17').text())">
+<p class="main_text">Asomebot向后弯曲一只脚，并摇动一下。</p>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_china.png">
+<p class="quiz_line"></p>
+<p class="main_text">① Mouse是由韩国小学生制作的动作。他模仿动画中米老鼠晃动着脚吹口哨的动作而编制，并命名为“Mouse”。</p>
+<p class="main_text">② 利用Swing和TickTock动作编制一下两只脚分别动一次的程序。</p>
+</div>
+
+<br>
+<br>
+
+<li class="lefts bold" id="pn4">4. 线下游戏活动<span class="video_button" level="block" filename="01.ch04"></span></li>
+<p class="main_text"><strong>A. 游戏规则</strong></p>
+<p class="main_text">① 确定用于舞蹈比赛的歌曲及部分（不到30秒）。</p>
+<p class="main_text">② 同朋友一起在纸上画出一个精彩的演出舞台。</p>
+<p class="main_text">③ 组建由3～5个AsomeBots参加的团队。</p>
+<p class="main_text">④ 编制一个程序，让AsomeBot团队伴着音乐和谐地舞动。</p>
+<br>
+<p class="main_text"><strong>B. 算法</strong></p>
+<p class="main_text">要想编制出多个AsomeBots做出相同跳舞动作的程序，应该经过哪些过程呢？</p>
+<p class="main_text">① 确认一下一段音乐节拍所需时间。</p>
+<p class="main_text">② 确认一下各个舞蹈动作所需时间。</p>
+<p class="main_text">③ 根据音乐编排舞蹈动作并检查动作和音乐不和谐的部分。</p>
+<p class="main_text">④ 在动作和节拍不和谐的地方插入[Delay（延迟）]命令，使之变得和谐。</p>
+<p class="main_text">⑤ 必要时在一些部分为各个AsomeBot编制不同的动作。</p>
+<br>
+<p class="main_text"><strong>C. 玩游戏</strong></p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/20-31.png"></div>
+<br>
+<script type="text/javascript">
+    $(".video_button").css("display", "none");
+</script>
+
+
+
+                </div>
+            </div>
+
+        </div>
+        <!-- //container -->
+    </div>
+    <!-- //wrap -->
+</body>
+
+</html>

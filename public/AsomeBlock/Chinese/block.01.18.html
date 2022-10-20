@@ -1,0 +1,426 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<head>
+<!-- AsomeHeader Start -->
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>AsomeCode</title>
+    <meta name="Robots" content="all" />
+    <meta name="reply-to" content="" />
+    <meta name="date" content="" />
+
+    <link rel="stylesheet" href="../../common/css/AsomeCODE.css">
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/highlight.css">
+    <link rel="stylesheet" href="../../common/css/vs2015.css">
+    <link rel="stylesheet" href="../../common/css/quiz_css.css">
+
+    <script src="../../common/js/jquery-3.2.1.min.js"></script>
+
+    <link rel="stylesheet" href="../../common/css/bootstrap.min.css">
+    <script src="../../common/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="../../common/css/jodit.min.css"/>
+    <link rel="stylesheet" href="../../common/css/prism.css"/>
+    <script src="../../common/js/jodit.min.js"></script>
+    <script src="../../common/js/prism.js"></script>
+
+    <script src="../../common/js/AsomeCODE.js"></script>
+    <script src="../../common/js/board.js"></script>
+    <script src="../../common/js/highlight.pack.js"></script>
+    <script src="../../common/js/highlightjs-line-numbers.min.js"></script>
+
+    <script src="../../common/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../common/ace/ext-static_highlight.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../common/ace/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+<!-- AsomeHeader End -->
+</head>
+
+<body class="p3">    
+
+    <div class="modal fade" id="video_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <video id="video_player" width="100%" controls>
+                        <source id="video_src" type="video/webm" src=""/>
+                        <track id="video_subtitle" kind="subtitles" srclang="en" label="english" src="" default>
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="wrap">
+        <ul class="blind">
+            <li><a href="#contents">본문 바로가기(Skip Contents)</a></li>
+        </ul>
+        <div id="mobile">
+            <div class="logo">
+                <a href="javascript:void(0);"><img src="../../common/images/logom.png"></a>
+                <div class="m"><a><img src="../../common/images/mobile_m.png"></a></div>
+            </div>
+            <div class="mobile_top">
+                <div class="top_m">
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')">
+                        <img class="image-btn" filename="../../common/images/mobile_01.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeConnect')">
+                        <img class="image-btn" filename="../../common/images/mobile_02.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=ShowEditor')">
+                        <img class="image-btn" filename="../../common/images/mobile_03.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+                        <img class="image-btn last" filename="../../common/images/mobile_04.png">
+                    </a>
+                </div>
+                <div class="top_m">
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeReboot')">
+                        <img class="image-btn" filename="../../common/images/mobile_05.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeFormat')">
+                        <img class="image-btn" filename="../../common/images/mobile_06.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeUpdate')">
+                        <img class="image-btn" filename="../../common/images/mobile_07.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeBlock')">
+                        <img class="image-btn last" filename="../../common/images/blockcoding.png">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="header">
+            <ul class="left">
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeConnect')">
+                    <img class="image-btn" filename="../../common/images/top_01.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')">
+                    <img class="image-btn" filename="../../common/images/top_02.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=ShowEditor')">
+                    <img class="image-btn" filename="../../common/images/top_03.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+                    <img class="image-btn" filename="../../common/images/top_05.png">
+                </a></li>
+            </ul>
+            <ul class="right">
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeReboot')">
+                    <img class="image-btn" filename="../../common/images/top_04.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeFormat')">
+                    <img class="image-btn" filename="../../common/images/top_06.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeUpdate')">
+                    <img class="image-btn" filename="../../common/images/top_07.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeBlock')">
+                    <img class="image-btn" filename="../../common/images/blockcoding.png">
+                </a></li>
+                <li> &nbsp; </li>
+                <a href="javascript:void(0);" onclick="logout()"><img src="../../common/images/logout.png" id="bt_logout" class="last"></a>
+            </ul>
+        </div>
+        <div class="mobile_nav3"></div>
+        <div id="p3_header">
+            <ul>
+                <li class="headleft"><a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')"><img src="../../common/images/logo.png"></a></li>
+                <li class="headright"></li>
+            </ul>
+        </div>
+
+        <div id="p3_container">
+            <div class="left">
+                <div class="top">
+                    <div class="link_list"><a href="javascript:void(0);" onclick="run_cmd('Code=GoBack')"><img src="../../common/images/p3_list.png" alt="강의목록"></a></div>
+                    <div class="header_text"><div id="chapter" class="chapter">Unit {0}</div>
+                        <br>
+
+                        机器人告知天气
+                    </div>
+                </div>
+                <div class="beg">
+                    <ul>
+                        <li><a href="javascript:fnMove('pn1')">1. 学习目标</a></li>
+<li><a href="javascript:fnMove('pn2')">2. 预览</a></li>
+<li><a href="javascript:fnMove('pn3')">3. 了解要用的程序块</a></li>
+<li><a href="javascript:fnMove('pn4')">4. 线下游戏活动</a></li>
+
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="right">
+                <div class="contents">
+                    <br>
+
+<li class="lefts bold" id="pn1">1. 学习目标<span class="video_button" level="block" filename="01.ch01"></span></li>
+<div style="max-width: 600px;"><video width="100%" controls>
+<source id="video_src" type="video/webm" src="./video/block/01/18.execute.webm"/>
+Your browser does not support HTML5 video.</video></div>
+<p class="main_text">• 了解一下如何通过互联网获取天气资料。<br>
+• 可以分享天气数据中所需要反映的数据。<br>
+• 可以根据天气编制各种动作，让AsomeBot告知天气情况。<br>
+</p>
+<br>
+<br>
+
+<li class="lefts bold" id="pn2">2. 预览<span class="video_button" level="block" filename="01.ch02"></span></li>
+<p class="main_text"><strong>A. 如何预测天气？</strong></p>
+<p class="main_text">卫星监测云的移动状态，持续检测温度和湿度，以预测今天及明天天气。</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/18-01.png"></div>
+<br>
+<p class="main_text"><strong>B. 可以让AsomeBot预报天气吗？</strong></p>
+<p class="main_text">同您的朋友和老师一起讨论一下如何用AsomeBot预报天气。</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/18-02.png"></div>
+<br>
+<p class="main_text"><strong>C. AsomeBot可以通过互联网下载天气、温度、湿度等资料。能能不能利用这一点，通过AsomeBot的动作和声音来告知我们天气呢？</strong></p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/18-03.png"></div>
+<br>
+<p class="main_text"><strong>D. 何时、何地、如何预报天气为好？</strong></p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/18-04.png"></div>
+<br>
+<br>
+
+<li class="lefts bold" id="pn3">3. 了解要用的程序块<span class="video_button" level="block" filename="01.ch03"></span></li>
+<p class="main_text"><strong>A. Connect to internet（连接到互联网）（[INTERNET（互联网）]组）</strong></p>
+<p class="main_text">设定AsomeBot 无线路由器的名称及密码。AsomeBot要通过互联网下载数据，因此，路由器必须连接到互联网。</p>
+<div id="src_1" style="display: none;">import internet
+internet.connect("","")
+</div>
+<img class="block_image" src="./images/blocks/18-05.png" onclick="run_code($('#src_1').text())">
+<p class="main_text">① 输入互联网路由器的名称。</p>
+<p class="main_text">② 输入互联网路由器的密码。</p>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_china.png">
+<p class="quiz_line"></p>
+<p class="main_text">您可以在智能手机WiFi列表中查找要用的无线路由器名称，并连接到智能手机。</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/18-06.png"></div>
+</div>
+
+<br>
+<p class="main_text"><strong>B. Open UDP socket（打开UDP套接字）（[INTERNET（互联网）]组）</strong></p>
+<p class="main_text">打开一个AsomeBot可通过互联网进行通信的端口。</p>
+<div id="src_2" style="display: none;">import udp_socket
+udp_socket.open(1234)
+</div>
+<img class="block_image" src="./images/blocks/18-07.png" onclick="run_code($('#src_2').text())">
+<p class="main_text">① 这是要用的端口号。不要做任何的改动，原封不动地使用端口号。</p>
+<br>
+<p class="main_text"><strong>C. 获取天气资料（[INTERNET（互联网）]组）</strong></p>
+<p class="main_text">通过互联网获取有关天气的资料。</p>
+<div id="src_3" style="display: none;">import internet
+internet.get_weather("Hanoi, VN")
+</div>
+<img class="block_image" src="./images/blocks/18-08.png" onclick="run_code($('#src_3').text())">
+<p class="main_text">① 输入要获取天气资料的城市和国家/地区的名称。</p>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/reference_china.png">
+<p class="quiz_line"></p>
+<p class="main_text">各城市的名称值</p>
+<p class="main_text">河内（越南）：Hanoi, VN</p>
+<p class="main_text">首尔（韩国）：Seoul, KR</p>
+<p class="main_text">洛杉矶（美国）：LA, US</p>
+</div>
+
+<br>
+<p class="main_text"><strong>D. Measure distance（测量距离）（[SENSOR（传感器）]组）</strong></p>
+<p class="main_text">用超声波传感器检测与前方障碍物的距离。测量距离的数值存储于名为“Cm”的变量。当人在适当的距离站立或者经过时，传感器就可以用来告知天气。</p>
+<div id="src_4" style="display: none;">cm = hcsr04.get_distance()
+</div>
+<img class="block_image" src="./images/blocks/18-09.png" onclick="run_code($('#src_4').text())">
+<br>
+<p class="main_text"><strong>E. Repaeat（重复）（[ADVANCE（逻辑条件）]组）</strong></p>
+<p class="main_text">根据需要多次重复区块中的命令。</p>
+<div id="src_5" style="display: none;">for count in range(1):
+  pass
+</div>
+<img class="block_image" src="./images/blocks/18-10.png" onclick="run_code($('#src_5').text())">
+<p class="main_text">① 指定重复的次数。</p>
+<p class="main_text">② 添加重复的程序块。</p>
+<br>
+<p class="main_text"><strong>F. Repeat infinitely（无限重复）（[ADVANCE（逻辑条件）]组）</strong></p>
+<p class="main_text">按顺序持续运行区块中的程序块。</p>
+<div id="src_6" style="display: none;">while True:
+  pass
+</div>
+<img class="block_image" src="./images/blocks/18-11.png" onclick="run_code($('#src_6').text())">
+<br>
+<p class="main_text"><strong>G. if（如果） ([ADVANCE（逻辑条件）] 组)</strong></p>
+<p class="main_text">所输入的条件正确时，运行区块中的程序块。如果条件不正确，就会运行if区块之后的程序块。</p>
+<div id="src_7" style="display: none;">if i == :
+</div>
+<img class="block_image" src="./images/blocks/18-12.png" onclick="run_code($('#src_7').text())">
+<p class="main_text">① 输入用于条件语句的变量。默认值为“i”，使用超声波传感器时更改为“cm”。</p>
+<p class="main_text">② 选择比较条件的标准不等式。</p>
+<p class="main_text">③ 输入用于条件的默认值。此为您需要添加指定条件值的区块。</p>
+<p class="main_text">④ 添加条件正确时要运行的程序块。</p>
+<br>
+<p class="main_text"><strong>H. Data Block（数据区块）、Character Value Block（字符值区块）（[ADVANCE（逻辑条件）]组）</strong></p>
+<p class="main_text">您可以在如下两个区块当中选择一个作为条件语句的条件值。</p>
+<div id="src_8" style="display: none;">1
+</div>
+<img class="block_image" src="./images/blocks/18-13.png" onclick="run_code($('#src_8').text())">
+<p class="main_text">在数据区块，输入可供比较的数值。</p>
+<p class="main_text">① 输入Data Value（数据值），并与条件语句的变量进行比较。</p>
+<br>
+<div id="src_9" style="display: none;">''
+</div>
+<img class="block_image" src="./images/blocks/18-14.png" onclick="run_code($('#src_9').text())">
+<p class="main_text">将通过互联网获取的Character Value（字符值）或所输入的字符作为Conditional value（条件值）的时候，使用Character Value Block（字符值区块）。</p>
+<p class="main_text">① 输入用作条件值的字符。</p>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/reference_china.png">
+<p class="quiz_line"></p>
+<p class="main_text">有关天气的Character Value（字符值）</p>
+<p class="main_text">可以通过互联网获取的天气相关Character Value（字符值）如下：</p>
+<p class="main_text">雨天：rain（雨）</p>
+<p class="main_text">晴天：sunny（晴）</p>
+<p class="main_text">雪天：snow（雪）</p>
+</div>
+
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_china.png">
+<p class="quiz_line"></p>
+<p class="main_text">编制一个通过互联网下载的今天天气值为“晴天”时按顺序分别播放“Do”“Re”“Mi”音各1秒钟的程序。</p>
+</div>
+
+<br>
+<p class="main_text"><strong>I. Break (停止)（[ADVANCE（逻辑条件）]组）</strong></p>
+<p class="main_text">当运行无限重复程序时选择此区块，就会停止无限重复并执行其之后代码指令。</p>
+<div id="src_10" style="display: none;">break;
+</div>
+<img class="block_image" src="./images/blocks/18-15.png" onclick="run_code($('#src_10').text())">
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_china.png">
+<p class="quiz_line"></p>
+<p class="main_text">编制一个当AsomeBot前方50厘米以内有人或物体时执行[Flap（拍脚）]3次的程序。</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/18-16.png"></div>
+</div>
+
+<br>
+<p class="main_text"><strong>J. Attention（立正）（[BASIC（基础）]组）</strong></p>
+<p class="main_text">脚部动作幅度大的时候如果继续其他动作，AsomeBot就会跌倒。每次动作之间插入[Attention（立正）]使AsomeBot立正，就会防止跌倒。</p>
+<div id="src_11" style="display: none;">asomebot.home()
+</div>
+<img class="block_image" src="./images/blocks/18-17.png" onclick="run_code($('#src_11').text())">
+<br>
+<p class="main_text"><strong>K. Dance Moves without Option（单个舞蹈动作）（[DANCE（舞蹈）]组）</strong></p>
+<div id="src_12" style="display: none;">asomebot.ballet()
+</div>
+<img class="block_image" src="./images/blocks/18-18.png" onclick="run_code($('#src_12').text())">
+<p class="main_text">AsomeBot用脚尖站着做Ballet（芭蕾舞）般的动作。</p>
+<br>
+<div id="src_13" style="display: none;">asomebot.wiggle()
+</div>
+<img class="block_image" src="./images/blocks/18-19.png" onclick="run_code($('#src_13').text())">
+<p class="main_text">AsomeBot在原地踏步。</p>
+<br>
+<div id="src_14" style="display: none;">asomebot.flap()
+</div>
+<img class="block_image" src="./images/blocks/18-20.png" onclick="run_code($('#src_14').text())">
+<p class="main_text">AsomeBot拍脚。</p>
+<br>
+<div id="src_15" style="display: none;">asomebot.warigari()
+</div>
+<img class="block_image" src="./images/blocks/18-21.png" onclick="run_code($('#src_15').text())">
+<p class="main_text">AsomeBot用脚执行Warigari。（改为：做出双脚在地上来回蹭的动作）</p>
+<br>
+<div id="src_16" style="display: none;">asomebot.yaho()
+</div>
+<img class="block_image" src="./images/blocks/18-22.png" onclick="run_code($('#src_16').text())">
+<p class="main_text">AsomeBot抬起脚尖。是与[Ballet（芭蕾舞）]相反的动作。</p>
+<br>
+<div id="src_17" style="display: none;">asomebot.moonwalk()
+</div>
+<img class="block_image" src="./images/blocks/18-23.png" onclick="run_code($('#src_17').text())">
+<p class="main_text">AsomeBot走太空步。</p>
+<br>
+<p class="main_text"><strong>L. Dance Moves with Option（带选项的舞蹈动作）（[DANCE（舞蹈）]组）</strong></p>
+<p class="main_text">所有舞蹈动作选项均选择的是AsomeBot移动的脚部方向。</p>
+<div id="src_18" style="display: none;">asomebot.mouse(1)
+</div>
+<img class="block_image" src="./images/blocks/18-24.png" onclick="run_code($('#src_18').text())">
+<p class="main_text">AsomeBot抬起一只脚做出动作。</p>
+<br>
+<div id="src_19" style="display: none;">asomebot.swing(1)
+</div>
+<img class="block_image" src="./images/blocks/18-25.png" onclick="run_code($('#src_19').text())">
+<p class="main_text">AsomeBot抬起一只脚向后弯曲。</p>
+<br>
+<div id="src_20" style="display: none;">asomebot.tick_tock(1)
+</div>
+<img class="block_image" src="./images/blocks/18-26.png" onclick="run_code($('#src_20').text())">
+<p class="main_text">Asomebot向后弯曲一只脚，并摇动一下。</p>
+<br>
+<p class="main_text"><strong>M. Buzzer on（蜂鸣器打开）（[SOUND（声音）]组）</strong></p>
+<p class="main_text">将蜂鸣器保持在激活的状态。运行此区块，才能使用蜂鸣器。请注意，不运行此程序块就不能激活蜂鸣器。</p>
+<div id="src_21" style="display: none;">turnoff_pins( (1, 5, 6, 7, 8) )
+import music
+music.open(1)
+</div>
+<img class="block_image" src="./images/blocks/18-27.png" onclick="run_code($('#src_21').text())">
+<br>
+<p class="main_text"><strong>N. Buzzer off（蜂鸣器关闭）（[SOUND（声音）]组）</strong></p>
+<p class="main_text">关闭蜂鸣器使用状态，允许使用其他部件。蜂鸣器为激活状态时，不能使用其他部件。播放声音后必须使用此程序块，才能运行其他部件。</p>
+<div id="src_22" style="display: none;">turnoff_pins( (1, 5, 6, 7, 8) )
+import asomebot
+asomebot.ready(5, 6, 7, 8)
+</div>
+<img class="block_image" src="./images/blocks/18-28.png" onclick="run_code($('#src_22').text())">
+<br>
+<p class="main_text"><strong>O. Play for（控制声音）（[SOUND（声音）]组）</strong></p>
+<p class="main_text">利用此程序块，您就可以用频率发出想发的声音。</p>
+<div id="src_23" style="display: none;">music.note("C1",1*1000)
+</div>
+<img class="block_image" src="./images/blocks/18-29.png" onclick="run_code($('#src_23').text())">
+<p class="main_text">① 从列表中选择要播放的音阶。</p>
+<p class="main_text">② 从列表中选择要播放的音阶八度音。</p>
+<p class="main_text">③ 设定播放声音的时间。</p>
+<br>
+
+<li class="lefts bold" id="pn4">4. 线下游戏活动<span class="video_button" level="block" filename="01.ch04"></span></li>
+<p class="main_text"><strong>A. 游戏规则</strong></p>
+<p class="main_text">① 谈谈何时如何开始天气预报比较好。</p>
+<p class="main_text">② 谈谈AsomeBot表达天气的方法。</p>
+<p class="main_text">③ 谈谈除了天气（温度、湿度和沙尘）以外还可以预报哪些信息。</p>
+<p class="main_text">④ 谈谈除了天气以外还可以通过互联网获取哪些信息进行预报。</p>
+<br>
+<p class="main_text"><strong>B. 算法</strong></p>
+<p class="main_text">① 设置为通过互联网下载天气资料。</p>
+<p class="main_text">② 编制根据天气执行的动作。</p>
+<p class="main_text">③ 确定满足何种条件时预报天气，并编制相应程序。</p>
+<p class="main_text">④ 编制一个满足条件时根据天气执行某种动作的程序。</p>
+<p class="main_text">⑤ 添加程序使之变得丰富有趣。</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/18-30.png"></div>
+<br>
+<p class="main_text"><strong>C. 编制天气预报程序后展示</strong></p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/18-31.png"></div>
+<br>
+<script type="text/javascript">
+    $(".video_button").css("display", "none");
+</script>
+
+
+
+                </div>
+            </div>
+
+        </div>
+        <!-- //container -->
+    </div>
+    <!-- //wrap -->
+</body>
+
+</html>

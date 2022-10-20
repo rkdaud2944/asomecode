@@ -1,0 +1,69 @@
+코딩이 뭐예요?
+
+1. 학습 목표
+	[video ./video/block/01/01.execute.webm]
+	* 코딩의 의미에 대해 알아봅니다.
+	* 코딩으로 할 수 있는 일들을 알아봅니다.
+	* AsomeController를 이용해 어썸봇을 움직여 봅니다.
+
+
+2. 먼저 알아보기
+	@ 코딩이란?
+	컴퓨터가 일을 할 수 있도록 명령 프로그램을 만드는 작업을 말합니다.
+	[image ./images/blocks/01-01.png]
+
+	@ 로봇을 움직이려면 코딩을 해야 하나요?
+	로봇이나 자동차, 가전제품 속에도 컴퓨터가 들어 있습니다. 로봇을 움직이려면 명령을 내려야 하기 때문에 코딩을 해야 하죠.
+	[image ./images/blocks/01-02.png]
+
+	@ 코딩으로 어떤 일을 할 수 있나요?
+	자율주행 자동차나 비행기도 SW 코딩을 이용해 움직이게 할 수 있습니다.
+	[image ./images/blocks/01-03.png ./images/blocks/01-04.png]
+
+	스스로 피자나 택배를 배달하는 로봇과 드론들도 모두 SW로 움직여요.
+	[image ./images/blocks/01-05.png ./images/blocks/01-06.png]
+
+
+3. 사용할 블록 알아보기
+	@ 어썸봇은 어떤 로봇인가요?
+	어썸봇은 4개의 모터를 이용해 두 발로 걷고 춤을 추는 로봇입니다. 
+	눈처럼 생긴 초음파 센서로 거리를 측정하고 간단한 음악도 연주할 수 있어요.
+	[youtube https://www.youtube.com/embed/FkorGFg4_t0]
+
+	@ 로봇과 스마트폰 연결하기
+	어썸봇의 전원을 켠 상태에서 스마트폰의 WiFi 목록 중 내 로봇의 이름을 찾아서 선택합니다. 
+	어썸봇은 모두 다른 이름을 가지고 있습니다. 선생님에게 자신의 로봇 이름을 먼저 확인하고 WiFi 목록에서 선택하세요.
+	[image ./images/blocks/01-07.png]
+
+	@ Asome Controller 앱으로 어썸봇 조정하기
+	WiFi에 연결된 상태에서 Asome Controller 앱을 실행하면 무선으로 어썸봇을 조종할 수 있습니다.
+	[image ./images/blocks/01-08.png]
+	① 방향키 : 어썸봇이 선택한 방향으로 이동합니다.
+	② Attention키 : 어썸봇을 차렷 자세로 만듭니다.
+	③ 동작키 : 각 번호를 터치할 때마다 저장된 동작이 실행됩니다. 기본적으로 댄스 동작들이 지정되어 있습니다.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">• 어썸봇과 Asome Controller가 잘 연결되었다면 방향키를 터치해 이동시켜 보고 동작키를 터치해 댄스 동작이 어떤 것들이 있는지 확인해 보세요.<br>
+		</p>
+		</div>
+	]
+
+
+4. 플레이 액티비티
+	@ 지정한 장소로 이동하기
+	지도에 나오는 건물들 중 상대방이 원하는 건물로 길을 벗어나지 않고 누가 빨리 이동하는지 경기해 보세요.
+	예) 우체국을 갔다가 교회에 도착해보자.
+	[image ./images/blocks/01-09.png]
+
+	@ 댄스 경연대회
+	누가 댄스를 멋지게 추는지 서로 확인해 보세요.
+	[image ./images/blocks/01-10.png]
+
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]	

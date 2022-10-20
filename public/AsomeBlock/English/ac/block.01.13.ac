@@ -1,0 +1,118 @@
+Make a robot that runs the track
+
+1. Learning objectives
+	[video ./video/block/01/13.execute.webm]
+	* Crate motions you want using the Asome Controller.
+	* Play an AsomBot race that runs on the track.
+
+
+2. Preview
+	@ AsomeBot is remote-controlled by making movement you want
+	With the Asome Controller, we can make and use new movements that we want.
+	[image ./images/blocks/13-01.png]
+
+	@ Make a robot that runs the track
+	In this class, we're going to combine the movements of the Asomebot to develop going around the track quickly and walking and run a race.
+	[image ./images/blocks/13-02.png]
+
+
+3. Learn which blocks to use
+	@ Change to access point mode ([INTERNET] group)
+	Name your AsomeBot controlled by smartphone.
+	[block_image ./images/blocks/11-04.png
+		import internet
+		internet.open_ap("")
+	]
+	① Give the AsomeBot a name that you want. Only English and numbers can be use in the name of the Asomebot.
+	
+	@ Open UDP socket ([INTERNET] group)
+	Open a port for AsomeBot to communicate over the Internet.
+	[block_image ./images/blocks/11-06.png
+		import udp_socket
+		udp_socket.open(1234)
+	]
+	① Port number. Use it as it is without modification
+	
+	@ Read Messages ([INTERNET] group)
+	Read messages from smartphone.
+	[block_image ./images/blocks/11-07.png
+		msg = udp_socket.read_text()
+	]
+
+	@ Repeat infinitely ([ADVANCE] group)
+	[Repeat infinity] makes blocks that are bundled into it to continuously(endlessly) run in order. 
+	This time, This block is used by the smartphone app to wait for messages to be sent, and then execute commands that follow messages when prompted.
+	[block_image ./images/blocks/07-04.png
+		while True:
+		  pass
+	]
+
+	@ Repaeat ([ADVANCE] group)
+	This block allows AsomeBot to repeat a specific movement
+	or a bundle of movements as many times as you want.
+	[block_image ./images/blocks/12-13.png
+		for count in range(1):
+  		  pass
+	]
+	① Enter the number of times to repeat an movement
+	② Add blocks to repeat.
+
+	@ if ([ADVANCE] group)
+	[if] makes blocks that are bundled into it to run, when it corresponds with the condition. If it doesn't correspond with the condition, the blocks behind the [if] are run.
+	[block_image ./images/blocks/07-05.png
+		if i == :
+	]
+	① Enter the variable that is used for the conditional statement. Basic value is ‘I’
+	② Select a inequality sign to compare with the conditions
+	③ Enter the reference value  to use for the condition. At this time, you must add  a conditional value block.
+	④ Add a block to run when conditions are met.
+
+	@ Character Value ([ADVANCE] Group)
+	The value is used to represent the entered characters rather than variables or numbers.
+	[block_image ./images/blocks/11-09.png
+		''
+	]
+	① Enter characters to be used as a condition.
+
+	@ Messages you can send with the Asome Controller
+	You can make AsomeBot move variously Asome Controller.
+	[image ./images/blocks/01-08.png]
+	① Arrow keys is to send F, B, L, R message so that Asomebot moves in the appropriate direction.
+	② Attention : This button send an H message for Asomebot to stand at attention.
+	③ Send the number 1 to 12 in a message to execute the desired movement
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_eng.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Create a program that if you touch the "1" button on the Asome Controller, AsomeBot repeat to turn left one step and move forward one step three times.</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/13-03.png"></div>
+		<p class="main_text">② What are some good dance moves to use with a rotation command when Asomebot goes around a track?</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/13-04.png"></div>
+		</div>
+	]
+
+
+4. Play activity
+	@ Game rules
+	① A game won by a robot that gets to the finish line first by two AsomeBots turning the track.
+	② Controll AsomeBot by the Asome Controller(Can be used by saving to race on its own track function on buttons from 1 to 12)
+	③ Can move on to the other track while running
+	④ If Asomebot crosses the innermost line of the track, it will drop out
+
+	@ Algorithm
+	① In track events, it is advantageous to run inwards. What kind of movements can AsomeBot move to the inside track quickly?
+	[image ./images/blocks/13-05.png]
+
+	② If you use the turn to left command, AsomeBot turns in place so the distance to the moving forward is very short. How can you create a movement that can rotate along a track and go forward much?
+	[image ./images/blocks/13-06.png]
+
+	@ Play game
+	Play a game in which run fast around the track and gets back to the finish line.
+	[image ./images/blocks/13-07.png]
+	
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]

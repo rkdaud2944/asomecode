@@ -1,0 +1,92 @@
+Let's make the errand robot
+
+1. Learning objectives
+	[video ./video/block/01/06.execute.webm]
+	* With the AsomeBot moving blocks, you will learn how to move to the desired location.
+	* Learn how to move AsomeBot to the fixed path.
+
+
+2. Preview
+	@ Moving path
+	The position and order in which an object or person is to move to a given position in order.
+	[image ./images/blocks/06-01.png]
+
+	@ Device that uses moving path
+	Here are robots for pizza delivery or drones for delivery of parcels.
+	[image ./images/blocks/06-02.png]
+
+
+3. Learn which blocks to use
+	@ Move forward (WALK Group)
+	Walk forward by the specified number of steps as an option.
+	[block_image ./images/blocks/03-07.png
+		for i in range(1): asomebot.forward()
+	]
+	Input the number of steps to walk forward after clicking. At one step, the left and right foot move at a time.
+
+	@ Move backward (WALK Group)
+	Walk backward by the specified number of steps as an option.
+	[block_image ./images/blocks/03-08.png
+		for i in range(1): asomebot.backward()
+	]
+	Input the number of steps to walk backward after clicking. At one step, the left and right foot move at a time.
+
+	@ Turn Left (WALK Group)
+	Turn left as many as specified as an option.
+	[block_image ./images/blocks/03-09.png
+		for i in range(1): asomebot.turn_left()
+	]
+	Input the number of steps to rotate to the left after clicking. To turn 90 degrees, the robot has to turn 3 to 4 times.
+
+	@ Turn Right (WALK Group)
+	Turn right as many as specified as an option.
+	[block_image ./images/blocks/03-10.png
+		for i in range(1): asomebot.turn_right()
+	]
+	Input the number of steps to rotate to the right after clicking. To turn 90 degrees, the robot has to turn 3 to 4 times.
+
+	@ Delay (ADVANCE Group)
+	Wait for the specified number of seconds to function.
+	[block_image ./images/blocks/delay.png
+		delay(1)
+	]
+	Input the time to wait after clicking in the unit of seconds.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_eng.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Try to let AsomeBot walk along the line as below.<br>
+		(Each line is AsomeBot 5 steps, and the rotation angle is 90 degrees.)
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/06-03.png"></div>
+		</p>
+		<p class="main_text">② Assemble blocks so that AsomeBot moves the fastest way along the line.<br>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/06-04.png"></div>
+		</p>
+		</div>
+	]
+
+
+4. Play activity
+	@ Game rules
+	① Set the starting point of AsomeBot.
+	② Choose the buildings that AsomeBot should visit, and set up each object that can be knock down for each building.
+	③ The objects should be knock down to be recognized to have visited.
+	④ The person who visited all the appointed buildings in the least time using the program is the winner.
+	⑤ Always move along the road. 
+
+	@ Algorithm
+	① Set the path for AsomeBot to travel.
+	② Measure the distance of the road and check in how many steps the robot can visit the building.
+	③ Create a program according to the distance and direction the robot will travel.
+	[image ./images/blocks/06-06.png]
+
+	@ Play game
+	Play a game and see who can come around by the specified building fast and complete the mission.
+	[image ./images/blocks/06-07.jpg]
+	
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]

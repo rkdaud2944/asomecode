@@ -1,0 +1,36 @@
+html {
+	overflow-y:scroll;
+	overflow-x:auto;
+}
+body {
+	font-size:12px;
+	line-height:120%;
+	font-family:"돋움",Dotum,tahoma,Helvetica,AppleGothic,Sans-serif;
+}
+
+/*
+a:link{color:#ff0000;}
+
+a:visited, a:active{
+	color:#f2f2f2;
+}
+*/
+
+.aa_link{
+	color: #3C4756;
+	text-decoration:none;
+	font-size:9px; 
+}
+.aa_link:hover{
+	font-weight:bold;
+	text-decoration:underline;
+	font-size:9px;
+}
+
+img { 
+	-ms-interpolation-mode: bicubic;
+	vertical-align:top;
+}
+
+
+/* default */

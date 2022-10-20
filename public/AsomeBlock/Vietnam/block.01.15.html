@@ -1,0 +1,332 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<head>
+<!-- AsomeHeader Start -->
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>AsomeCode</title>
+    <meta name="Robots" content="all" />
+    <meta name="reply-to" content="" />
+    <meta name="date" content="" />
+
+    <link rel="stylesheet" href="../../common/css/AsomeCODE.css">
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/highlight.css">
+    <link rel="stylesheet" href="../../common/css/vs2015.css">
+    <link rel="stylesheet" href="../../common/css/quiz_css.css">
+
+    <script src="../../common/js/jquery-3.2.1.min.js"></script>
+
+    <link rel="stylesheet" href="../../common/css/bootstrap.min.css">
+    <script src="../../common/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="../../common/css/jodit.min.css"/>
+    <link rel="stylesheet" href="../../common/css/prism.css"/>
+    <script src="../../common/js/jodit.min.js"></script>
+    <script src="../../common/js/prism.js"></script>
+
+    <script src="../../common/js/AsomeCODE.js"></script>
+    <script src="../../common/js/board.js"></script>
+    <script src="../../common/js/highlight.pack.js"></script>
+    <script src="../../common/js/highlightjs-line-numbers.min.js"></script>
+
+    <script src="../../common/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../common/ace/ext-static_highlight.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../common/ace/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+<!-- AsomeHeader End -->
+</head>
+
+<body class="p3">    
+
+    <div class="modal fade" id="video_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <video id="video_player" width="100%" controls>
+                        <source id="video_src" type="video/webm" src=""/>
+                        <track id="video_subtitle" kind="subtitles" srclang="en" label="english" src="" default>
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="wrap">
+        <ul class="blind">
+            <li><a href="#contents">본문 바로가기(Skip Contents)</a></li>
+        </ul>
+        <div id="mobile">
+            <div class="logo">
+                <a href="javascript:void(0);"><img src="../../common/images/logom.png"></a>
+                <div class="m"><a><img src="../../common/images/mobile_m.png"></a></div>
+            </div>
+            <div class="mobile_top">
+                <div class="top_m">
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')">
+                        <img class="image-btn" filename="../../common/images/mobile_01.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeConnect')">
+                        <img class="image-btn" filename="../../common/images/mobile_02.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=ShowEditor')">
+                        <img class="image-btn" filename="../../common/images/mobile_03.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+                        <img class="image-btn last" filename="../../common/images/mobile_04.png">
+                    </a>
+                </div>
+                <div class="top_m">
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeReboot')">
+                        <img class="image-btn" filename="../../common/images/mobile_05.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeFormat')">
+                        <img class="image-btn" filename="../../common/images/mobile_06.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeUpdate')">
+                        <img class="image-btn" filename="../../common/images/mobile_07.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeBlock')">
+                        <img class="image-btn last" filename="../../common/images/blockcoding.png">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="header">
+            <ul class="left">
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeConnect')">
+                    <img class="image-btn" filename="../../common/images/top_01.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')">
+                    <img class="image-btn" filename="../../common/images/top_02.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=ShowEditor')">
+                    <img class="image-btn" filename="../../common/images/top_03.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+                    <img class="image-btn" filename="../../common/images/top_05.png">
+                </a></li>
+            </ul>
+            <ul class="right">
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeReboot')">
+                    <img class="image-btn" filename="../../common/images/top_04.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeFormat')">
+                    <img class="image-btn" filename="../../common/images/top_06.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeUpdate')">
+                    <img class="image-btn" filename="../../common/images/top_07.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeBlock')">
+                    <img class="image-btn" filename="../../common/images/blockcoding.png">
+                </a></li>
+                <li> &nbsp; </li>
+                <a href="javascript:void(0);" onclick="logout()"><img src="../../common/images/logout.png" id="bt_logout" class="last"></a>
+            </ul>
+        </div>
+        <div class="mobile_nav3"></div>
+        <div id="p3_header">
+            <ul>
+                <li class="headleft"><a href="javascript:void(0);"><img src="../../common/images/logo.png"></a></li>
+                <li class="headright"></li>
+            </ul>
+        </div>
+
+        <div id="p3_container">
+            <div class="left">
+                <div class="top">
+                    <div class="link_list"><a href="javascript:void(0);" onclick="run_cmd('Code=GoBack')"><img src="../../common/images/p3_list.png" alt="강의목록"></a></div>
+                    <div class="header_text"><div id="chapter" class="chapter">Unit {0}</div>
+                        <br>
+
+                        Phát triển robot đá bóng
+                    </div>
+                </div>
+                <div class="beg">
+                    <ul>
+                        <li><a href="javascript:fnMove('pn1')">1. Mục tiêu bài học</a></li>
+<li><a href="javascript:fnMove('pn2')">2. Preview</a></li>
+<li><a href="javascript:fnMove('pn3')">3. Học về các khối được sử dụng</a></li>
+<li><a href="javascript:fnMove('pn4')">4. Chơi trò chơi</a></li>
+
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="right">
+                <div class="contents">
+                    <br>
+
+<li class="lefts bold" id="pn1">1. Mục tiêu bài học<span class="video_button" level="block" filename="01.ch01"></span></li>
+<div style="max-width: 600px;"><video width="100%" controls>
+<source id="video_src" type="video/webm" src="./video/block/01/15.execute.webm"/>
+Your browser does not support HTML5 video.</video></div>
+<p class="main_text">• Hiểu về bóng đá robot<br>
+• AsomeBot có thể được điều chỉnh phù hợp với bóng đá robot.<br>
+• Tạo và kiểm soát các hành động cần thiết cho bóng đá<br>
+</p>
+<br>
+<br>
+
+<li class="lefts bold" id="pn2">2. Preview<span class="video_button" level="block" filename="01.ch02"></span></li>
+<p class="main_text"><strong>A. Bóng đá</strong></p>
+<p class="main_text">Bóng đá là một trò chơi trong đó hai đội đá bóng vào khung thành của đối phương. Đây là một môn thể thao rất phổ biến trên toàn thế giới.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/15-01.png"></div>
+<br>
+<p class="main_text"><strong>B. Robot đá bóng</strong></p>
+<p class="main_text">Kể cả robot cũng có thể đá bóng. Nhiều trò chơi bóng đá robot được tổ chức trên khắp thế giới.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/15-02.jpg"></div>
+<p class="main_text">Chúng ta có thể sử dụng robot mà nó có thể chơi bóng đá dễ dàng hơn.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/15-03.jpg"></div>
+<br>
+<p class="main_text"><strong>C. AsomeBot đá bóng</strong></p>
+<p class="main_text">Chúng ta có thể chơi bóng đá với AsomeBot không?</p>
+<br>
+<p class="main_text"><strong>D. Mặc quần áo cho AsomeBot</strong></p>
+<p class="main_text">AsomeBot có thể chơi bóng đá bằng cách đá bóng bằng chân, nhưng thay đổi thân của AsomeBot như hình ở trên giúp bạn dễ dàng thưởng thức bóng đá AsomeBot hơn. Biến đổi AsomeBot với cốc giấy, hộp các tông, hộp sữa và nhiều thứ khác.</p>
+<br>
+<p class="main_text"><strong>E. Tạo các hành động được sử dụng cho một trận bóng đá</strong></p>
+<p class="main_text">Sẽ rất hữu ích khi kết nối các số trước với các động tác cần thiết để chơi bóng đá với AsomeBot. Ví dụ: nhấn 1 trong Asome Controller sẽ khiến Moonwalk thực thi 3 lần.</p>
+<p class="main_text">Với vải không dệt ở một chân, AsomeBot sẽ di chuyển sang một bên và chặn bóng, hoặc lái bóng ở nơi bạn muốn.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/15-04.png"></div>
+<p class="main_text">Sử dụng cùng một phương pháp, tạo các hành động bổ sung. Chúng ta nên thực hiện một động tác ăn mừng nào khi ghi bàn thắng?</p>
+<br>
+<br>
+
+<li class="lefts bold" id="pn3">3. Học về các khối được sử dụng<span class="video_button" level="block" filename="01.ch03"></span></li>
+<p class="main_text"><strong>A. Thay đổi chế độ điểm truy cập (nhóm [INTERNET])</strong></p>
+<p class="main_text">Gán tên của AsomeBot để được điều khiển bằng máy tính bảng.</p>
+<div id="src_1" style="display: none;">import internet
+internet.open_ap("")
+</div>
+<img class="block_image" src="./images/blocks/15-05.png" onclick="run_code($('#src_1').text())">
+<p class="main_text">① Nhập tên bạn muốn sử dụng. Chỉ có tiếng Anh và số có thể được sử dụng.</p>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_veitnam.png">
+<p class="quiz_line"></p>
+<p class="main_text">① Đặt tên cho AsomeBot. Chỉ có tiếng Anh và số có thể được sử dụng để đặt tên AsomeBot. Khi bạn đã gán tên, tên sẽ được giữ lại ngay cả khi bật và tắt nguồn.</p>
+<p class="main_text">② Kiểm tra tên bạn đã chỉ định và thử kết nối. Đầu tiên, tìm tên AsomeBot bạn đã nhập từ danh sách WiFi và kết nối với máy tính bảng của bạn. Nếu một thông báo bật lên nói rằng kết nối Internet không ổn định, không nhấn bất kỳ nút nào và đợi tin nhắn biến mất.</p>
+<div class="content_image_box"><img src="./images/blocks/15-06.png" style="width:49%;"><img src="./images/blocks/15-07.png" style="width:49%;"></div>
+</div>
+
+<br>
+<p class="main_text"><strong>B. Mở ổ cắm UDP (nhóm [INTERNET])</strong></p>
+<p class="main_text">AsomeBot mở một cổng để giao tiếp qua Internet.</p>
+<div id="src_2" style="display: none;">import udp_socket
+udp_socket.open(1234)
+</div>
+<img class="block_image" src="./images/blocks/15-08.png" onclick="run_code($('#src_2').text())">
+<p class="main_text">① Đây là một cổng được sử dụng. Sử dụng 1 số mà không sửa đổi.</p>
+<br>
+<p class="main_text"><strong>C. Đọc tin nhắn (nhóm [INTERNET])</strong></p>
+<p class="main_text">Đọc tin nhắn được gửi từ máy tính bảng.</p>
+<div id="src_3" style="display: none;">msg = udp_socket.read_text()
+</div>
+<img class="block_image" src="./images/blocks/15-09.png" onclick="run_code($('#src_3').text())">
+<br>
+<p class="main_text"><strong>D. Lặp lại vô tận (nhóm [ADVANCE])</strong></p>
+<p class="main_text">Chạy thứ tự khối bên trong khối. Tại đây, bạn sẽ đợi ứng dụngtrên máy tính bảng của mình gửi tin nhắn và thực hiện lệnh dựa theo tin nhắn đó.</p>
+<div id="src_4" style="display: none;">while True:
+  pass
+</div>
+<img class="block_image" src="./images/blocks/15-10.png" onclick="run_code($('#src_4').text())">
+<br>
+<p class="main_text"><strong>E. Lặp lại (nhóm [ADVANCE])</strong></p>
+<p class="main_text">Lặp lại các lệnh trong khối nhiều lần mà bạn muốn.</p>
+<div id="src_5" style="display: none;">for count in range(1):
+  pass
+</div>
+<img class="block_image" src="./images/blocks/15-11.png" onclick="run_code($('#src_5').text())">
+<p class="main_text">① Xác định số lần lặp lại.</p>
+<p class="main_text">② Thêm các khối để lặp lại.</p>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_veitnam.png">
+<p class="quiz_line"></p>
+<p class="main_text">[Tick Tock] Làm thế nào bạn có thể tạo một câu lệnh lặp lại mà nó thực thi lệnh 3 lần, xoay 1 lần và lặp lại chuyển động 3 lần? Hãy làm và thực thi lệnh đó.</p>
+</div>
+
+<br>
+<p class="main_text"><strong>F. nếu (nhóm [ADVANCE])</strong></p>
+<p class="main_text">Thực hiện khối bên trong khối khi điều kiện đầu vào là chính xác. Nếu điều kiện không chính xác, khối theo sau khối if sẽ được thực thi.</p>
+<div id="src_6" style="display: none;">if i == :
+</div>
+<img class="block_image" src="./images/blocks/15-12.png" onclick="run_code($('#src_6').text())">
+<p class="main_text">① Nhập một biến được sử dụng trong câu lệnh điều kiện. Giá trị mặc định là ‘i’, và sử dụng‘msg’ khi nhận được tin nhắn.</p>
+<p class="main_text">② Chọn bất đẳng thức mặc định để so sánh các điều kiện.</p>
+<p class="main_text">③ Nhập giá trị mặc định để sử dụng trong điều kiện. Bạn cần thêm các khối để xác định giá trị có điều kiện.</p>
+<p class="main_text">④ Thêm các khối được thực thi khi điều kiện đúng.</p>
+<br>
+<p class="main_text"><strong>G. Giá trị ký tự (nhóm [ADVANCE])</strong></p>
+<p class="main_text">Giá trị được sử dụng để thể hiện các ký tự được nhập thay vì các biến hoặc số.</p>
+<div id="src_7" style="display: none;">''
+</div>
+<img class="block_image" src="./images/blocks/15-13.png" onclick="run_code($('#src_7').text())">
+<p class="main_text">① Nhập các ký tự được sử dụng làm điều kiện.</p>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_veitnam.png">
+<p class="quiz_line"></p>
+<p class="main_text">① Nếu bạn đã tạo các khối như bên dưới, hãy nói về cách chúng di chuyển:</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/15-14.png"></div>
+<p class="main_text">② Tạo một chương trình mã hóa khối cho phép AsomeBot đi theo hướng khi nhấn phím điều hướng của Asome Controller.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/15-15.png"></div>
+</div>
+
+<br>
+<p class="main_text"><strong>H. Cài đặt Asome Controller</strong></p>
+<p class="main_text">Để kiểm soát AsomeBot không dây, hãy cài đặt ứng dụng AsomeController. Với ứng dụng này, bạn có thể gửi tin nhắn mà bạn muốn kiểm soát AsomeBot. Tìm ‘asomeit’ trên App Store và cài đặt ‘Asome Controller’. Cài đặt ứng dụng cho phép bạn điều khiển AsomeBot không dây.</p>
+<div class="content_image_box"><img src="./images/blocks/15-16.jpg" style="width:49%;"><img src="./images/blocks/15-17.jpg" style="width:49%;"></div>
+
+
+<br>
+<p class="main_text"><strong>I. Tin nhắn bạn có thể gửi với Asome Controller</strong></p>
+<p class="main_text">Bạn có thể thực thi các chuyển động khác nhau bằng ứng dụng Asome Controller.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/15-18.png"></div>
+<p class="main_text">① Phím điều hướng: Cung cấp các tin nhắn F, B, L và R để AsomeBot đi bộ</p>
+<p class="main_text">② Phím chú ý: Cung cấp tin nhắn H để AsomeBot được đứng nghiêm</p>
+<p class="main_text">③ Phím chuyển động: Cung cấp các số từ 1 đến 12 dưới dạng tin nhắn để thực hiện chuyển động bạn muốn</p>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_veitnam.png">
+<p class="quiz_line"></p>
+<p class="main_text">① Tạo chương trình xoay AsomeBot 1 lần sang trái và di chuyển về phía trước 3 lần khi chạm vào nút “2” trên Asome Controller.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/15-19.png"></div>
+<p class="main_text">Đáp án</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/15-20.png"></div>
+</div>
+
+<br>
+<br>
+
+<li class="lefts bold" id="pn4">4. Chơi trò chơi<span class="video_button" level="block" filename="01.ch04"></span></li>
+<p class="main_text"><strong>A. Luật chơi</strong></p>
+<p class="main_text">① 1 đội gồm có 2 robot</p>
+<p class="main_text">② Đội nào ghi bàn trước sẽ thắng.</p>
+<p class="main_text">③ 2 robot có thể tấn công và phòng thủ.</p>
+<p class="main_text">④ 1 số luật khác có thể được thêm vào.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/15-21.png"></div>
+<br>
+<p class="main_text"><strong>B. Chơi trò chơi</strong></p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/15-22.jpg"></div>
+<br>
+<script type="text/javascript">
+    $(".video_button").css("display", "none");
+</script>
+
+
+
+                </div>
+            </div>
+
+        </div>
+        <!-- //container -->
+    </div>
+    <!-- //wrap -->
+</body>
+
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	<title>AsomeIT</title>
+
+	<link rel="stylesheet" href="../../../common/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../common/css/AsomeCODE.css">
+
+    <script src="../../../common/js/jquery-1.9.1.js"></script>
+	<script src="../../../common/js/bootstrap.min.js"></script>
+</head>
+
+<body style="overflow-x: hidden; overflow-y: hidden;">
+	<div style="position: relative;">
+		<img src="back.png" style="position: absolute;">
+		<img id="asomecar" src="asomecar.png" style="position: absolute; left: 10px; top:10px; z-index: 2; rotate: 0deg;">
+		<img id ="basecamp" src="basecamp.png" style="position: absolute; z-index: 3; left: 315px; top: 210px;">
+		<img src="obstacle_1.png" style="position: absolute; left: 0px; top:70px;">
+		<img src="obstacle_1.png" style="position: absolute; left: 115px; top:70px;">
+		<img src="obstacle_1.png" style="position: absolute; left: 230px; top:170px;">
+		<img src="obstacle_1.png" style="position: absolute; left: 115px; top:170px;">
+		<img src="obstacle_2.png" style="position: absolute; left: 350px; top:0px;">
+		<img src="obstacle_3.png" style="position: absolute; left: 0px; top:190px;">
+
+
+
+		<img id="result" src="success.png" style="position: absolute; top: 80px; left: 85px; z-index: 4; display: none;">
+	</div>	
+
+	<script type="text/javascript">
+		window.onload = function() {
+			App.run_cmd("Code=Input/Text=### Simulation started");
+		}
+
+		let angle = 0;
+		let direction_x = 0;
+		let direction_y = 12;
+
+		function image_rotation(value) {
+			direction_rotation(value)
+			if (value == "left") {
+				angle -= 15;
+			} else if (value == "right") {
+				angle += 15;
+			}
+			document.querySelector('#asomecar').style.transform ='rotate(' + angle + 'deg)'
+		}
+
+		function direction_rotation(value) {
+			if (angle < 0) {
+				angle += 360;
+			} else if(angle >= 360) {
+				angle -= 360;
+			}
+			// 방향 설정
+			if (value == "right") {
+				if (0 <= angle && angle < 90) {
+					direction_x += 2;
+					direction_y -= 2;
+				} else if (90 <= angle && angle < 180) {
+					direction_x -= 2;
+					direction_y -= 2;
+				} else if (180 <= angle && angle < 270) {
+					direction_x -= 2;
+					direction_y += 2;
+				} else {
+					direction_x += 2;
+					direction_y += 2;
+				}
+			} else {
+				if (0 < angle && angle <= 90) {
+					direction_x -= 2;
+					direction_y += 2;
+				} else if (90 < angle && angle <= 180) {
+					direction_x += 2;
+					direction_y += 2;
+				} else if (180 < angle && angle <= 270) {
+					direction_x += 2;
+					direction_y -= 2;
+				} else {
+					direction_x -= 2;
+					direction_y -= 2;
+				}
+			}
+		}
+
+		function go_to_forward() {
+			var x = $("#asomecar").css("left");
+			var y = $("#asomecar").css("top");
+			x = x.substr(0, x.length - 2);
+			y = y.substr(0, y.length - 2);
+			var next_x = Number(x) + direction_x;
+			var next_y = Number(y) - direction_y;
+			if (next_x < 0 || next_y < 0 || next_x > 360 || next_y > 260) {
+				
+			} else {
+				$("#asomecar").css("left", next_x);
+				$("#asomecar").css("top", next_y);
+				cheack_obstacle(next_x, next_y);
+				is_basecamp(next_x, next_y);
+			}
+		}
+
+		function go_to_backward() {
+			var x = $("#asomecar").css("left");
+			var y = $("#asomecar").css("top");
+			x = x.substr(0, x.length - 2);
+			y = y.substr(0, y.length - 2);
+			var next_x = Number(x) - direction_x;
+			var next_y = Number(y) + direction_y;
+			if (next_x < 0 || next_y < 0 || next_x > 360 || next_y > 260) {
+				
+			} else {
+				$("#probe").css("top", y);
+				$("#asomecar").css("left", next_x);
+				$("#asomecar").css("top", next_y);
+				cheack_obstacle(next_x, next_y);
+				is_basecamp(next_x, next_y);
+			}
+		}
+
+		function is_basecamp(next_x, next_y) {
+			if (305 <= next_x && 210 <= next_y) {
+				$("#result").css("display", "block");
+			};
+		}
+
+		function cheack_obstacle(next_x, next_y){
+			if (0 <= next_x && next_x <= 265) {
+				if (20 <= next_y && next_y <= 100) {
+					go_start();
+				}
+			}
+			if (85 <= next_x && next_x <= 300) {
+				if (120 <= next_y && next_y <= 200) {
+					go_start();
+				}
+			}
+			if (315 <= next_x && next_y <= 220) {
+				go_start();
+			}
+			if (next_x <= 35 && 125 <= next_y && next_y <= 235) {
+				go_start();
+			}
+		}
+
+		function go_start(){
+			$("#asomecar").css("left", 0);
+			$("#asomecar").css("top", 0);
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	<title>AsomeIT</title>
+
+	<link rel="stylesheet" href="../../../common/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../common/css/AsomeCODE.css">
+
+    <script src="../../../common/js/jquery-1.9.1.js"></script>
+	<script src="../../../common/js/bootstrap.min.js"></script>
+</head>
+
+<body style="overflow-x: hidden; overflow-y: hidden;">
+	<div style="position: relative;">
+		<img id="background" src="back.png" style="position: absolute;">
+		<img id="spaceship" src="spaceship_off.png" style="position: absolute; left : 120px; top: 70px;">
+		<div id="gauge" style="position: absolute; left: 300px; top: 80px; color: yellow; z-index: 2;"> 0% </div>
+		<img src="battery.png" style="position: absolute; left: 260px; top: 55px;">
+		<img id = "energy" src="energy.png" style="position: absolute; left: 277px; top: 110px; clip: rect(127px, 69px, 127px, 0px); z-index: 5;">
+		<div id="msg_board" style="position: absolute; top: 130px; left: 20px; width: 360px; font-size: 2em; text-align: center; color: white; font-family: Verdana; z-index: 6;"></div>
+	</div>
+
+	<script type="text/javascript">
+		window.onload = function() {
+			App.run_cmd("Code=Input/Text=### Simulation started");
+		}
+		
+		function display_battery(value) {
+			value = 128 - (value * 1.27)
+			$("#energy").css("clip", "rect(" + value + "px, 69px, 127px, 0px)");
+		}
+
+		function set_gauge(value) {
+			value = Math.round(value);
+			$("#gauge").text(value + "%");
+		}
+		
+		function display_message(msg) {
+			$("#msg_board").html(msg);
+			$("#msg_board").css("background-color", "black")
+		}
+	</script>
+</body>
+</html>

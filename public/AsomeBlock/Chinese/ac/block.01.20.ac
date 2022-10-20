@@ -1,0 +1,223 @@
+像Idol明星那样跳舞吧
+
+1. 学习目标
+	[video ./video/block/01/20.execute.webm]
+	* 了解一下1：1和1：n控制方法
+	* 编制一个可以同时控制多个AsomeBots的程序。
+	* 可以将各种舞蹈动作连接起来编制新的舞蹈程序。
+
+
+2. 预览
+	@ 让机器人像偶像那样跳舞
+	您利用AsomeBot的WiFi功能，就可以使多个机器人同时舞蹈。
+	[image ./images/blocks/20-01.png]
+
+	通过WiFi发送信号的方法
+	① 1：1操作
+	将智能手机和AsomeBot直接连接起来逐个操作。
+	[image ./images/blocks/20-02.png]
+	② 一次操作多个AsomeBot
+	智能手机向路由器发送信号后，路由器就给多个AsomeBot发送信号进行操作。
+	[image ./images/blocks/20-03.png]
+
+	@ 您如何编制舞蹈动作?
+	调整连接到AsomeBot的4个电机的角度及运行时间，就能编制多种动作。按照如下方式可以编制拍脚动作:
+	[image ./images/blocks/20-04.png]
+
+	@ 在同一时间做不同的动作
+	只需要模仿idol明星们跳舞，将想要让各个AsomeBot跳不同动作舞蹈的时间vs.动作分别储存起来就可以了
+	[image ./images/blocks/20-05.png]
+
+	应该按什么顺序编制程序？
+	① 将AsomeBot连接到互联网路由器。
+	[image ./images/blocks/20-06.png]
+	② 编制各个机器人的舞蹈动作。
+	[image ./images/blocks/20-07.png]
+	③ 用一部智能手机操作。
+	[image ./images/blocks/20-08.png]
+
+
+3. 了解要用的程序块
+	@ Connect to internet（连接到互联网）（[INTERNET（互联网）]组）
+	设定AsomeBot无线路由器的名称和密码。要想使用该程序块，就要有无线互联网路由器。但是，此时互联网路由器不需要连接到互联网。
+	[block_image ./images/blocks/20-09.png
+		import internet
+		internet.connect("","")
+	]
+	① 输入互联网路由器的名称。
+	② 输入互联网路由器的密码。
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/reference_china.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">在智能手机上查找互联网路由器。您可以在WiFi列表中查找要用的无线路由器的名称，并连接到智能手机。如果弹出一条信息显示互联网连接不稳定，就不要按任何按钮，要等待其信息消失。</p>
+		<div class="content_image_box"><img src="./images/blocks/20-10.png" style="width:49%;"><img src="./images/blocks/20-11.png" style="width:49%;"></div>
+		</div>
+	]
+
+	@ Open UDP socket（打开UDP套接字）（[INTERNET（互联网）]组）
+	打开一个AsomeBot可通过互联网进行通信的端口。
+	[block_image ./images/blocks/20-12.png
+		import udp_socket
+		udp_socket.open(1234)
+	]
+	① 这是要用的端口号。不要做任何的改动，原封不动地使用端口号。
+
+	@ Read Messages（读取信息）（[INTERNET（互联网）]组）
+	读取智能手机发送的信息。
+	[block_image ./images/blocks/20-13.png
+		msg = udp_socket.read_text()
+	]
+
+	@ Repeat infinitely（无限重复）（[ADVANCE（逻辑条件）]组）
+	按顺序持续运行区块中的程序块。此时，等待智能手机应用程序发送的信息，并按照信息执行命令。
+	[block_image ./images/blocks/20-14.png
+		while True:
+		  pass
+	]
+
+	@ Repaeat（重复）（[ADVANCE（逻辑条件）]组）
+	根据需要多次重复区块中的命令。
+	[block_image ./images/blocks/20-15.png
+		for count in range(1):
+		  pass
+	]
+	① 指定重复的次数。
+	② 添加重复的程序块。
+
+	@ if（如果） ([ADVANCE（逻辑条件）] 组)
+	所输入的条件正确时，运行区块中的程序块。如果条件不正确，就运行if区块之后的程序块。
+	[block_image ./images/blocks/20-16.png
+		if i == :
+	]
+	① 输入用于条件语句的变量。默认值为“i”。
+	② 选择比较条件的标准不等式。
+	③ 输入用于条件的默认值。在此，需要您添加指定条件值的区块。
+	④ 添加条件正确时要运行的程序块。
+
+	@ Character Value（字符值）（[ADVANCE（逻辑条件）]组）
+	该值用于表示输入的字符，而不是变量或数字。
+	[block_image ./images/blocks/20-17.png
+		''
+	]
+	① 输入用于条件的字符。
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_china.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① 假设您编制了如下所示的程序块，请试着说明一下其如何运行。</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/20-18.png"></div>
+		<p class="main_text" style="float: left; width:auto;">② 编制一个按下AsomeBot控制器的</p> 
+	    <div class="content_image_box" style="float:left; margin: 0 1%;">
+	            <img class="content_image" src="./images/blocks/20-19.png" style="width: auto;">
+	    </div>
+		<p class="main_text">键，就可以使连接到无线路由器的所有机器人同时前行的程序。</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/20-20.png"></div>
+		</div>
+	]
+
+	@ Attention（立正）（[BASIC（基础）]组）
+	脚部动作幅度大的时候如果继续其他动作，AsomeBot就会跌倒。每次动作之间插入[Attention（立正）]使AsomeBot立正，就会防止跌倒。
+	[block_image ./images/blocks/20-21.png
+		asomebot.home()
+	]
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_china.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">编制并运行Ballet（芭蕾舞）动作后Attention（立正）的程序。</p>
+		</div>
+	]
+
+	@ Dance Moves without Option（单个舞蹈动作）（[DANCE（舞蹈）]组）
+	[block_image ./images/blocks/20-22.png
+		asomebot.ballet()
+	]
+	AsomeBot用脚尖站着做Ballet（芭蕾舞）般的动作。
+
+	[block_image ./images/blocks/20-23.png
+		asomebot.wiggle()
+	]
+	AsomeBot在原地踏步。
+
+	[block_image ./images/blocks/20-24.png
+		asomebot.flap()
+	]
+	AsomeBot拍脚。
+
+	[block_image ./images/blocks/20-25.png
+		asomebot.warigari()
+	]
+	AsomeBot做出Warigari动作。（改为：双脚在地上蹭的动作）
+
+	[block_image ./images/blocks/20-26.png
+		asomebot.yaho()
+	]
+	AsomeBot抬起脚尖。是与[Ballet（芭蕾舞）]相反的动作。
+
+	[block_image ./images/blocks/20-27.png
+		asomebot.moonwalk()
+	]
+	AsomeBot走太空步。
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_china.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">将不需要选项的舞蹈动作结合起来编制一个舞蹈程序。</p>
+		</div>
+	]
+
+	@ Dance Moves with Option（带选项的舞蹈动作）（[DANCE（舞蹈）]组）
+	所有舞蹈动作选项均选择的是AsomeBot移动的脚部方向。
+	[block_image ./images/blocks/20-28.png
+		asomebot.mouse(1)
+	]
+	AsomeBot抬起一只脚做出动作。
+
+	[block_image ./images/blocks/20-29.png
+		asomebot.swing(1)
+	]
+	AsomeBot抬起一只脚向后弯曲。
+
+	[block_image ./images/blocks/20-30.png
+		asomebot.tick_tock(1)
+	]
+	Asomebot向后弯曲一只脚，并摇动一下。
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_china.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Mouse是由韩国小学生制作的动作。他模仿动画中米老鼠晃动着脚吹口哨的动作而编制，并命名为“Mouse”。</p>
+		<p class="main_text">② 利用Swing和TickTock动作编制一下两只脚分别动一次的程序。</p>
+		</div>
+	]
+
+
+4. 线下游戏活动
+	@ 游戏规则
+	① 确定用于舞蹈比赛的歌曲及部分（不到30秒）。
+	② 同朋友一起在纸上画出一个精彩的演出舞台。
+	③ 组建由3～5个AsomeBots参加的团队。
+	④ 编制一个程序，让AsomeBot团队伴着音乐和谐地舞动。
+
+	@ 算法
+	要想编制出多个AsomeBots做出相同跳舞动作的程序，应该经过哪些过程呢？
+	① 确认一下一段音乐节拍所需时间。
+	② 确认一下各个舞蹈动作所需时间。
+	③ 根据音乐编排舞蹈动作并检查动作和音乐不和谐的部分。
+	④ 在动作和节拍不和谐的地方插入[Delay（延迟）]命令，使之变得和谐。
+	⑤ 必要时在一些部分为各个AsomeBot编制不同的动作。
+
+	@ 玩游戏
+	[image ./images/blocks/20-31.png]
+
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]

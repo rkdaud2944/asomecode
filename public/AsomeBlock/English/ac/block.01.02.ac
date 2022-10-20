@@ -1,0 +1,136 @@
+The robot is powered by a motor
+
+1. Learning objectives
+	[video ./video/block/01/02.execute.webm]
+	* You will learn the principle of the moving legs of the robot.
+	* You can let AsomeBot walk forward or backward or to the side.
+	* Learn about the rotation range of a 180-degree motor.
+
+
+2. Preview
+	@ Joints and muscles of robot
+	Just like joints and muscles to move a person's body, the motor is each joint of the robot and power by which robot is moved.
+	[image ./images/blocks/02-00.png]
+
+	@ The rotation angle of servo motor
+	* The server motor we will use in AsomeBot can only rotate up to 180 degrees.
+	* AsomeBot uses four motors to walk and dance.
+	* the 4 servo motors are all set at 90 degrees when AsomeBot stands at attention.
+	[image ./images/blocks/02-0000.png]
+
+	@ Connecting the block-coding program
+	To create a program that the AsomeBot moves by block-coding, you must connect the AsomeBot and PC (or smart device) with a USB cable as follows.
+
+	① Connect the small side of the USB cable to the port behind the AsomeBot.
+	[image ./images/blocks/02-00-01.png]
+
+	(Smart devices)
+	② Connect the other side of the USB cable to the OTG gender and then to the connection port on the smart device.
+	[image ./images/blocks/02-00-02.png ./images/blocks/02-00-03.png]
+
+	(PC&Notebook)
+	③ Connect the other side of the USB cable to the USB port on the PC.
+	[image ./images/blocks/02-00-04.png]
+
+	④ Click the [Connect] button at the top of the block coding screen. If a new window pops up and displays “Connected”, your PC (smart devices) is connected to AsomeBot.
+	[image ./images/blocks/02-01.png]
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/note_eng.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">1. Closing the connection window terminates the connection with AsomeBot.</p>
+		<p class="main_text">2. If you disconnect and reconnect the USB cable to run AsomeBot, you need to click [Connect] for reconnection.</p>
+		</div>
+	]
+
+
+3. Learn which blocks to use
+	@ Learning the block coding screen
+	[image ./images/blocks/02-02.png]
+	① Connect: Connect with the learning tools.
+	② Execute: Execute the ready block.
+	③ Pause: Pauses the block from executing.
+	④ Save: Saves the ready block.
+	⑤ Load: Import the saved block file.
+	⑥ Learning tool selection tab: Select the desired learning tool. The block displays for each learning tool.
+	⑦ Block group tab: Blocks are distinguished and gathered by type.
+	⑧ Block: The command block to move learning tools.
+	⑨ Operation area: Drag and add the block to execute.
+	⑩ Python code: Display the added blocks in the Python language.
+	⑪ Code hide/show button: Show or hide the Python code display window.
+	⑫ Waste bin: You can delete a block by dragging and dropping it in the waste bin.
+
+	@ Learn which blocks to use
+	(1) Ready (BASIC Group)
+	Before starting all programs, there must be a [Ready] block. By adding a [Ready] block in the work area, commands that prepare to move AsomeBot will execute automatically.
+	[block_image ./images/blocks/ready.png
+		import asomebot
+		import hcsr04
+		hcsr04.open(3, 2)
+		asomebot.ready(5, 6, 7, 8)
+	]
+	* Prepare to use the ultrasonic sensor installed in AsomeBot 
+	* Prepare to use the four servo motors installed in AsomeBot
+
+	(2) Attention (BASIC Group)
+	* Make the AsomeBot to stand at attention.
+	* At this time, the angle of all motors are set to 90 degrees.
+	[image ./images/blocks/02-04.jpg]
+	[block_image ./images/blocks/attention.png
+		asomebot.home()
+	]
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_eng.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">• Connect AsomeBot and add the Ready and Attention blocks in order. Is the robot stand at attention?<br>
+		</p>
+		</div>
+	]
+
+	(3) Set angle of motor (WALK Group)
+	You can select the motor for which you want to set the angle and set its angle and the time it takes for the motor to change its angle.
+	[block_image ./images/blocks/angles.png
+		asomebot.angles([0],[90-90],1*1000)
+	]
+	① select a number of motor that you want to set the angle of.
+	② Enter the angle at which the selected motor will set.
+	③ Enter the time it takes for the motor to set.
+
+	* Number of motors
+	Each motor of the AsomeBot is numbered as below.
+	[image ./images/blocks/02-07.png]
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_eng.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">Make a Shape of the AsomeBot's legs as below pictures by Rotating the motors.<br>
+		</p>
+		<div class="content_image_box"><img src="./images/blocks/02-08.jpg" style="width:49%;"><img src="./images/blocks/02-09.jpg" style="width:49%;"></div>
+		<div class="content_image_box"><img src="./images/blocks/02-10.jpg" style="width:49%;"><img src="./images/blocks/02-11.jpg" style="width:49%;"></div>
+		</div>
+	]
+
+
+4. Play activity
+	@ Game rules
+	① Put the arrow on the bottom of the AsomeBot's left foot.
+	② Write and draw your state on a board divided by four space like as a picture.
+	③ Create a program to shows my state by rotating No.0 motor of the AsomeBot.
+	[image ./images/blocks/02-12.png]
+
+	@ Algorithm
+	[image ./images/blocks/02-13.png]
+
+	@ Play game
+	Play with friends to guess what you will choose.
+	[image ./images/blocks/02-14.jpg]
+	
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]	

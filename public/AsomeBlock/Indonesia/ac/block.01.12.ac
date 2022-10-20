@@ -1,0 +1,144 @@
+Membuat robot menari
+
+1. Tujuan pembelajaran
+	[video ./video/block/01/12.execute.webm]
+	* Mari kita melihat ke dalam tarian AsomeBot.
+	* Mari kita melihat ke dalam metode yang tunggu tanpa bergerak selama detik yang ditentukan.
+
+
+2. Pratinjau
+	@ AsomeBot dapat melakukan gerakan tarian
+	AsomeBot tidak hanya bisa berjalan, tetapi juga menari dengan berbagai gerakan.
+	[image ./images/blocks/12-01.png]
+
+	@ Bagaimana bisa membuat gerakan tari?
+	Anda dapat membuat berbagai gerakan dengan mengatur sudut empat motor yang terhubung ke AsomeBot dan jumlah waktu mereka bergerak.
+	Berikut ini adalah cara melakukan gerakan untuk mengibaskan kakinya.
+	[image ./images/blocks/12-02.png]
+
+	@ AsomeBot rentan terhadap kerusakan, terutama saat jatuh
+	Anda dapat membuat berbagai gerakan dengan mengatur sudut empat motor yang terhubung ke AsomeBot dan jumlah waktu mereka bergerak. Jika Anda berpikir kaki AsomeBot dapat terpilin dan labil, tempatkan perintah [Attention] di antara gerakan.
+	[image ./images/blocks/12-03.png]
+
+
+3. Pelajari blok mana yang akan digunakan
+	@ Siaga/Attention (grup [BASIC])
+	Jika AsomeBot banyak menggerakkan kakinya seperti [Balet] dan disambung gerakan lainnya dengan segera,
+	Ia bisa jatuh. Tempatkan blok [Attention] di antara gerakan, agar AsomeBot tidak jatuh.
+	[block_image ./images/blocks/04-04.png
+		asomebot.home()
+	]
+	
+	@ Gerakan tarian tanpa opsi (grup [DANCE])
+	[block_image ./images/blocks/12-04.png
+		asomebot.ballet()
+	]
+	AsomeBot melakukan gerakan seperti balet dengan mengangkat kaki mereka.
+
+	[block_image ./images/blocks/12-05.png
+		asomebot.wiggle()
+	]
+	AsomeBot bergoyang di tempat.
+
+	[block_image ./images/blocks/12-06.png
+		asomebot.flap()
+	]
+	AsomeBot mengepakkan kakinya.
+
+	[block_image ./images/blocks/12-07.png
+		asomebot.warigari()
+	]
+	AsomeBot menggosok kakinya.
+
+	[block_image ./images/blocks/12-08.png
+		asomebot.yaho()
+	]
+	AsomeBot mengangkat ujungnya. Yaho adalah tindakan terbalik dari [Balet].
+
+	[block_image ./images/blocks/12-09.png
+		asomebot.moonwalk()
+	]
+	AsomeBot menari “berjalan di bulan” (moonwalk).
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_indonesia.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Balet hanya melakukan gerakan menjungkat/jinjit. Hubungkan dan coba tindakan lain untuk membuat robot melakukan gerakan seperti balet.</p>
+		<p class="main_text">② Gabungkanlah gerakan-gerakan tarian tanpa opsi ini untuk membuat program tari.</p>
+		</div>
+	]
+
+	@ Gerakan tarian opsional (grup [DANCE])
+	Pilih kaki sisi mana dari AsomeBot untuk bergerak dalam opsi.
+	[block_image ./images/blocks/12-10.png
+		asomebot.mouse(1)
+	]
+	[Mouse] adalah untuk mengangkat dan memindahkan AsomeBot satu kaki.
+
+	[block_image ./images/blocks/12-11.png
+		asomebot.swing(1)
+	]
+	Angkat satu kaki AsomeBot dan putar kembali.
+
+	[block_image ./images/blocks/12-12.png
+		asomebot.tick_tock(1)
+	]
+	putar kembali kaki Asomebot dan bob ke atas dan ke bawah satu kali.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_indonesia.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">* Dengan menggunakan gerakan Mouse, Swing, dan TickTock, buat program yang menggerakkan kedua kaki sekaligus.</p>
+		</div>
+	]
+
+	@ Ulangi/Repeat (grup [ADVANCE])
+	Ulangi sebanyak yang Anda inginkan
+	[block_image ./images/blocks/12-13.png
+		for count in range(1):
+  		  pass
+	]
+	① Masukkan beberapa kali untuk mengulang suatu gerakan
+	② Tambahkan blok untuk mengulang.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_indonesia.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Buat program tari dengan merakit balok seperti yang ditunjukkan.</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/12-14.png"></div>
+		<p class="main_text">② Blok apa yang perlu kamu kumpulkan untuk membuat AsomeBot menari seperti B-boys dengan mengangkat kaki?</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/12-15.png"></div>
+		<p class="main_text">③ Buat program yang menggunakan minimum [Attention] dan jalankan semua blok dalam grup [DANCE] berurutan tanpa robot jatuh.</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/12-16.png"></div>
+		</div>
+	]
+
+
+4. Aktivitas bermain
+	@ Aturan main
+	① Pilih lagu mana yang akan digunakan untuk kompetisi tari dan bagian mana yang akan digunakan (kurang dari 30 detik).
+	② Buat panggung pertunjukan yang hebat dengan menggambar di atas kertas dengan teman-teman.
+	③ Buat program untuk menari mengikuti irama musik.
+	④ Kelompok 3 sampai 5 robot menari mengikuti irama musik sekaligus.
+	⑤ Robot yang menari-nari paling sesuai dengan ketukan music dinyatakan menang.
+
+	@ Algoritma
+	Sangatlah bagus untuk merakit gerakan tarian dengan baik, tetapi AsomeBot tidak menari mengikuti irama musik. Untuk menari sesuai irama, Anda perlu tahu waktu yang diperlukan untuk melakukan setiap tindakan, dan Anda harus dapat menggunakan perintah tunda [Delay] dengan baik.
+
+	Langkah 01. Berapa detik yang dibutuhkan oleh bar musik?
+	Langkah 02. Berapa lama waktu yang dibutuhkan untuk melakukan setiap gerakan tarian?
+	Langkah 03. Menari bergerak sesuai musik dan memeriksa apakah gerakan dan musik selaras
+	Langkah 04. Menari sesuai ketukan dengan menempatkan perintah tunda [Delay] pada bagian di mana gerakan tidak cocok dengan ketukan.
+
+
+	@ Mainkan game
+	[image ./images/blocks/12-17.png]
+	
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]

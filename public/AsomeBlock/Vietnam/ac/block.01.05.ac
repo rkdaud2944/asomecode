@@ -1,0 +1,87 @@
+Chúng ta hãy có một cuộc thi bowling robot
+
+1. Mục tiêu bài học
+	[video ./video/block/01/05.execute.webm]
+	* AsomeBot có thể chơi trò chơi bowling.
+	* Tìm hiểu làm thế nào để hạ gục nhiều chai gỗ.
+
+
+2. Preview
+	@ Luật của bowling
+	Bowling là một trò chơi chiến thắng bởi ai đó lăn một quả bóng lớn và làm đổ nhiều nhất trong số 10 chân gỗ.
+	[image ./images/blocks/05-01.png]
+
+	@ Làm thế nào để đổ nhiều chai gỗ
+	Cách để làm để nhiều chân gỗ nhất là lăn bóng mạnh đến chính giữa những chân gỗ.
+	[image ./images/blocks/05-02.png]
+
+
+3. Tìm hiểu những khối để sử dụng
+	@ Tiến lên phía trước (Nhóm WALK)
+	Đi về phía trước theo số bước được chỉ định làm tùy chọn.
+	[block_image ./images/blocks/03-07.png
+		for i in range(1): asomebot.forward()
+	]
+	Nhập số bước để đi về phía trước sau khi nhấp vào. Tại một bước, chân trái và chân phải di chuyển cùng một lúc.
+
+	@ Lùi phía sau (Nhóm WALK)
+	Đi lùi theo số bước đã chỉ định làm tùy chọn.
+	[block_image ./images/blocks/03-08.png
+		for i in range(1): asomebot.backward()
+	]
+	Nhập số bước để đi lùi sau khi nhấp. Tại một bước, chân trái và chân phải di chuyển cùng một lúc.
+
+	@ Rẽ trái (Nhóm WALK)
+	Rẽ trái với số bước được chỉ định.
+	[block_image ./images/blocks/03-09.png
+		for i in range(1): asomebot.turn_left()
+	]
+	Nhập số bước để xoay sang trái sau khi nhấp. Để quay 90 độ, robot phải quay 3 đến 4 lần.
+
+	@ Rẽ Phải (Nhóm WALK)
+	Rẽ phải với số bước được chỉ định.
+	[block_image ./images/blocks/03-10.png
+		for i in range(1): asomebot.turn_right()
+	]
+	Nhập số bước để xoay sang phải sau khi nhấp. Để quay 90 độ, robot phải quay 3 đến 4 lần.
+
+	@ Trì hoãn (Nhóm ADVANCE)
+	Đợi số giây được chỉ định để hoạt động.
+	[block_image ./images/blocks/delay.png
+		delay(1)
+	]
+	Nhập thời gian để chờ sau khi nhấp vào đơn vị giây.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_veitnam.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">• Đếm số bước mà AsomeBot cần thực hiện để đạt được pin chai gỗ 1.<br>
+		</p>
+		</div>
+	]
+
+
+4. Chơi trò chơi
+	@ Luật chơi
+	① Thay vì bóng bowling, chúng tôi sử dụng AsomeBot
+	② AsomeBot chỉ có thể di chuyển 50 bước, bất kể hướng đi hay rẽ của nó.
+	③ Robot làm rơi xuống nhiều chân bowling nhất trên sân sẽ thắng.
+	④ Nếu số lượng bơling rơi xuống là như nhau, robot có ít bước nhất sẽ thắng.
+	[image ./images/blocks/05-03.png]
+
+	@ Thuật toán
+	Phương pháp nào có thể hạ gục nhiều chân bowling hơn?
+	[image ./images/blocks/05-04.png] ①
+	[image ./images/blocks/05-05.png] ②
+	[image ./images/blocks/05-06.png] ③
+
+	@ Chơi trò chơi
+	Chơi một trò chơi bowling và xem ai có thể hạ gục nhiều chân hơn trong vòng 50 bước.
+	[image ./images/blocks/05-07.jpg]
+	
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]

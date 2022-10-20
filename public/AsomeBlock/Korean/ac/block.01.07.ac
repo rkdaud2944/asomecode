@@ -1,0 +1,105 @@
+로봇이 앞을 볼 수 있게 해주세요
+
+1. 학습 목표
+	[video ./video/block/01/07.execute.webm]
+	* 초음파 센서를 활용하는 방법을 알아봅니다.
+	* 어썸봇이 장애물을 피해 달리는 방법을 알아봅니다.
+
+
+2. 먼저 알아보기
+	@ 초음파가 뭔가요?
+	사람이 귀로 들을 수 있는 음파(16~20,000Hz)보다 주파수가 큰 소리를 초음파라고 부릅니다.
+	눈이 퇴화된 박쥐는 이 초음파를 이용해서 먹이를 찾습니다.
+	[image ./images/blocks/07-01.png]
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">• 박쥐 외에 초음파를 사용하는 동물은 어떤 것들이 있을까요?<br>
+		</p>
+		</div>
+	]
+
+	@ 초음파 센서 알아보기
+	박쥐처럼 초음파을 이용해 물체까지의 거리를 측정하는 장치를 초음파 센서라고 합니다.
+	[image ./images/blocks/07-02.png]
+
+
+3. 사용 블록 알아보기
+	@ 초음파 센서 거리 측정 (SENSOR 그룹)
+	초음파 센서를 이용해서 앞에 있는 장애물의 거리를 측정합니다. 측정된 거리 값은 ‘Cm’라는 이름의 변수에 저장됩니다.
+	[block_image ./images/blocks/07-03.png
+		cm = hcsr04.get_distance()
+	]
+
+	@ 무한 반복 (ADVANCE 그룹)
+	블록 안의 블록을 순서대로 계속 실행되도록 합니다.
+	[block_image ./images/blocks/07-04.png
+		while True:
+		  pass
+	]
+
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">• 어썸봇이 앞으로 무한히 걷도록 프로그램을 만들어 보세요. 걸음을 멈추려면 상단의 Stop 버튼을 누릅니다.<br>
+		</p>
+		</div>
+	]
+
+	@ 만약에(if) (ADVANCE 그룹)
+	조건으로 입력한 내용이 맞을 때 블록 안의 블록을 실행시킵니다. 조건이 틀리다면 [만약에(if)] 블록 뒤에 있는 블록이 실행됩니다.
+	[block_image ./images/blocks/07-05.png
+	]
+	① 조건문에 사용할 변수를 입력합니다. 기본 값은 ‘i’이며 센서 블록을 추가하면 해당되는 변수가 추가되어 선택할 수 있습니다.
+	② 조건을 비교할 기준 부등호를 선택합니다.
+	③ 조건에 사용할 기준 값을 입력합니다. 이때 조건 값을 지정할 블록을 추가해야 합니다.
+	④ 조건에 맞을 때 실행할 블록들을 추가합니다.
+
+	▣ 만약에(if) 조건블록 사용 예
+	‘’i’ 변수의 값이 ‘3’이면 어썸봇이 왼쪽으로 3번 회전하고 ‘3’이 아니라면 앞으로 한걸음 걷는 프로그램입니다.
+	[block_image ./images/blocks/07-06.png
+		if i == 3:
+		  for i in range(3): asomebot.turn_left()
+		for i in range(1): asomebot.forward()
+	]
+
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① 어썸봇이 앞으로 이동하면서 초음파 센서로 거리를 측정해 3CM 이하이면 어썸봇이 멈추도록 프로그램을 만들어 보세요.<br>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/07-07.png"></div>
+		</p>
+		<p class="main_text">② 어썸봇이 앞으로 이동하면서 초음파 센서로 거리를 측정해 10CM 이하이면 어썸봇이 오른쪽으로 4번 회전한 후 다시 앞으로 걷는 프로그램을 만들어 보세요.<br>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/07-08.png"></div>
+		</p>
+		</div>
+	]
+
+
+4. 플레이 액티비티
+	@ 게임 규칙
+	① 달리기 경기장에 쉽게 쓰러지는 장애물을 세워둡니다.
+	② 어썸봇이 달려가다가 장애물을 만나면 이 장애물을 피해야 합니다.
+	③ 장애물을 쓰러트리지 않고 먼저 끝까지 도착한 로봇이 우승합니다.
+	[image ./images/blocks/07-09.png] 
+
+	@ 알고리즘
+	장애물을 피해서 걸어가는 프로그램은 어떻게 만들어야 할까요?
+	다음과 같은 일을 무한히 반복하면 장애물을 피하면서 앞으로 걸어가는 프로그램을 만들 수 있습니다.
+	[image ./images/blocks/07-10.png]
+
+	@ 게임하기
+	누가 장애물을 피해 결승점까지 먼저 도착하는지 게임을 해보세요.
+	[image ./images/blocks/07-11.jpg]
+	
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]

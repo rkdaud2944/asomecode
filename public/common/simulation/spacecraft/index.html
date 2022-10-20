@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	<title>AsomeIT</title>
+
+	<link rel="stylesheet" href="../../../common/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../common/css/AsomeCODE.css">
+
+    <script src="../../../common/js/jquery-1.9.1.js"></script>
+	<script src="../../../common/js/bootstrap.min.js"></script>
+</head>
+
+<body style="overflow-x: hidden; overflow-y: hidden;">
+	<div style="position: relative;">
+		<img src="back.png" style="position: absolute;">
+		<img id="ship" src="spaceship.png" style="position: absolute; display: none; left: 189px; top: 240px;">
+
+		<img id="asteroid_1" src="asteroid.png" style="position: absolute; display: none;">
+		<img id="asteroid_2" src="asteroid.png" style="position: absolute; display: none;">
+		<img id="asteroid_3" src="asteroid.png" style="position: absolute; display: none;">
+		<img id="asteroid_4" src="asteroid.png" style="position: absolute; display: none;">
+		<img id="asteroid_5" src="asteroid.png" style="position: absolute; display: none;">
+		<img id="asteroid_6" src="asteroid.png" style="position: absolute; display: none;">
+		<img id="asteroid_7" src="asteroid.png" style="position: absolute; display: none;">
+		<img id="asteroid_8" src="asteroid.png" style="position: absolute; display: none;">
+		<img id="asteroid_9" src="asteroid.png" style="position: absolute; display: none;">
+		<img id="asteroid_10" src="asteroid.png" style="position: absolute; display: none;">
+		<img id="asteroid_11" src="asteroid.png" style="position: absolute; display: none;">
+		<img id="asteroid_12" src="asteroid.png" style="position: absolute; display: none;">
+		<img id="asteroid_13" src="asteroid.png" style="position: absolute; display: none;">
+		<img id="asteroid_14" src="asteroid.png" style="position: absolute; display: none;">
+		<img id="asteroid_15" src="asteroid.png" style="position: absolute; display: none;">
+		<img id="asteroid_16" src="asteroid.png" style="position: absolute; display: none;">
+		<img id="asteroid_17" src="asteroid.png" style="position: absolute; display: none;">
+		<img id="asteroid_18" src="asteroid.png" style="position: absolute; display: none;">
+		<img id="asteroid_19" src="asteroid.png" style="position: absolute; display: none;">
+		<img id="asteroid_20" src="asteroid.png" style="position: absolute; display: none;">
+	</div>
+
+	<script type="text/javascript">
+		var x;
+		var speed = 1;
+		var asteroids = [];
+
+		setInterval(function() {
+			var index = Math.floor(Math.random() * 30);
+			var ax = Math.floor(Math.random() * (400-23));
+
+			if ($(asteroids[index]).css("display") == "none") {
+				$(asteroids[index]).css("left", ax);
+				$(asteroids[index]).css("top", 0);
+				$(asteroids[index]).css("display", "block");
+			}
+		}, 250);
+
+		setInterval(function() {
+			for (var i=0; i<30; i++) {
+				if ($(asteroids[i]).css("display") == "block") {
+					var left = parseFloat($(asteroids[i]).css("left"));
+					var top  = parseFloat($(asteroids[i]).css("top"));
+
+					$(asteroids[i]).css("top", top + speed);
+
+					if (check_collision(left, top)) {
+						ship_explode();
+						$(asteroids[i]).css("display", "none");
+					}
+
+					if (parseFloat($(asteroids[i]).css("top")) > 300) {
+						$(asteroids[i]).css("display", "none");
+					}
+				}
+			}
+		}, 10);
+
+		function start() {
+			$("#ship").css("display", "block");
+		}
+
+		function move_left() {
+			x = x - 1;
+			$("#ship").css("left", x);
+		}
+
+		function move_right() {
+			x = x + 1;
+			$("#ship").css("left", x);
+		}
+
+		function set_speed(value) {
+			speed = value;
+		}
+
+		function ship_explode() {
+			$("#ship").css("display", "none");
+
+			var audio = new Audio('../../audio/boom.ogg');
+			audio.play();
+		}
+
+		function check_collision(ax, ay) {
+			if ($("#ship").css("display") == "none") {
+				return false;
+			}
+
+			var left = parseFloat($("#ship").css("left")) + 11;
+			var top  = parseFloat($("#ship").css("top"))  + 11;
+
+			ax = ax + 16;
+			ay = ay + 12;
+
+			distance = (left-ax) * (left-ax) + (top - ay) * (top - ay);
+			return distance <= (23 * 23);
+		}
+
+		window.onload = function() {
+// 			App.run_cmd("Code=Input/Text=### Simulation started");
+
+			x = parseFloat($("#ship").css("left"));
+			for (var i=1; i<=30; i++) asteroids.push( document.getElementById("asteroid_" + i) );
+		}
+	</script>	
+</body>
+</html>

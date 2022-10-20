@@ -1,0 +1,406 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<head>
+<!-- AsomeHeader Start -->
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>AsomeCode</title>
+    <meta name="Robots" content="all" />
+    <meta name="reply-to" content="" />
+    <meta name="date" content="" />
+
+    <link rel="stylesheet" href="../../common/css/AsomeCODE.css">
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/highlight.css">
+    <link rel="stylesheet" href="../../common/css/vs2015.css">
+    <link rel="stylesheet" href="../../common/css/quiz_css.css">
+
+    <script src="../../common/js/jquery-3.2.1.min.js"></script>
+
+    <link rel="stylesheet" href="../../common/css/bootstrap.min.css">
+    <script src="../../common/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="../../common/css/jodit.min.css"/>
+    <link rel="stylesheet" href="../../common/css/prism.css"/>
+    <script src="../../common/js/jodit.min.js"></script>
+    <script src="../../common/js/prism.js"></script>
+
+    <script src="../../common/js/AsomeCODE.js"></script>
+    <script src="../../common/js/board.js"></script>
+    <script src="../../common/js/highlight.pack.js"></script>
+    <script src="../../common/js/highlightjs-line-numbers.min.js"></script>
+
+    <script src="../../common/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../common/ace/ext-static_highlight.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../common/ace/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+<!-- AsomeHeader End -->
+</head>
+
+<body class="p3">    
+
+    <div class="modal fade" id="video_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <video id="video_player" width="100%" controls>
+                        <source id="video_src" type="video/webm" src=""/>
+                        <track id="video_subtitle" kind="subtitles" srclang="en" label="english" src="" default>
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="wrap">
+        <ul class="blind">
+            <li><a href="#contents">본문 바로가기(Skip Contents)</a></li>
+        </ul>
+        <div id="mobile">
+            <div class="logo">
+                <a href="javascript:void(0);"><img src="../../common/images/logom.png"></a>
+                <div class="m"><a><img src="../../common/images/mobile_m.png"></a></div>
+            </div>
+            <div class="mobile_top">
+                <div class="top_m">
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')">
+                        <img class="image-btn" filename="../../common/images/mobile_01.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeConnect')">
+                        <img class="image-btn" filename="../../common/images/mobile_02.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=ShowEditor')">
+                        <img class="image-btn" filename="../../common/images/mobile_03.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+                        <img class="image-btn last" filename="../../common/images/mobile_04.png">
+                    </a>
+                </div>
+                <div class="top_m">
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeReboot')">
+                        <img class="image-btn" filename="../../common/images/mobile_05.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeFormat')">
+                        <img class="image-btn" filename="../../common/images/mobile_06.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeUpdate')">
+                        <img class="image-btn" filename="../../common/images/mobile_07.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeBlock')">
+                        <img class="image-btn last" filename="../../common/images/blockcoding.png">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="header">
+            <ul class="left">
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeConnect')">
+                    <img class="image-btn" filename="../../common/images/top_01.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')">
+                    <img class="image-btn" filename="../../common/images/top_02.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=ShowEditor')">
+                    <img class="image-btn" filename="../../common/images/top_03.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+                    <img class="image-btn" filename="../../common/images/top_05.png">
+                </a></li>
+            </ul>
+            <ul class="right">
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeReboot')">
+                    <img class="image-btn" filename="../../common/images/top_04.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeFormat')">
+                    <img class="image-btn" filename="../../common/images/top_06.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeUpdate')">
+                    <img class="image-btn" filename="../../common/images/top_07.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeBlock')">
+                    <img class="image-btn" filename="../../common/images/blockcoding.png">
+                </a></li>
+                <li> &nbsp; </li>
+                <a href="javascript:void(0);" onclick="logout()"><img src="../../common/images/logout.png" id="bt_logout" class="last"></a>
+            </ul>
+        </div>
+        <div class="mobile_nav3"></div>
+        <div id="p3_header">
+            <ul>
+                <li class="headleft"><a href="javascript:void(0);"><img src="../../common/images/logo.png"></a></li>
+                <li class="headright"></li>
+            </ul>
+        </div>
+
+        <div id="p3_container">
+            <div class="left">
+                <div class="top">
+                    <div class="link_list"><a href="javascript:void(0);" onclick="run_cmd('Code=GoBack')"><img src="../../common/images/p3_list.png" alt="강의목록"></a></div>
+                    <div class="header_text"><div id="chapter" class="chapter">Unit {0}</div>
+                        <br>
+
+                        Tạo ra 1 điệu nhảy mới
+                    </div>
+                </div>
+                <div class="beg">
+                    <ul>
+                        <li><a href="javascript:fnMove('pn1')">1. Mục tiêu học tập</a></li>
+<li><a href="javascript:fnMove('pn2')">2. Preview</a></li>
+<li><a href="javascript:fnMove('pn3')">3. Học các khối sử dụng trong bài</a></li>
+<li><a href="javascript:fnMove('pn4')">4. Chơi trò chơi</a></li>
+
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="right">
+                <div class="contents">
+                    <br>
+
+<li class="lefts bold" id="pn1">1. Mục tiêu học tập<span class="video_button" level="block" filename="01.ch01"></span></li>
+<div style="max-width: 600px;"><video width="100%" controls>
+<source id="video_src" type="video/webm" src="./video/block/01/16.execute.webm"/>
+Your browser does not support HTML5 video.</video></div>
+<p class="main_text">• Học cách tạo ra 1 điệu nhảy mới.<br>
+• Học cách kết nối và thực thi các chuyển động với Asomebot Controller.<br>
+• Học cách giải thích và chứng minh các chuyển động mới được tạo ra.<br>
+</p>
+<br>
+<br>
+
+<li class="lefts bold" id="pn2">2. Preview<span class="video_button" level="block" filename="01.ch02"></span></li>
+<p class="main_text"><strong>A. Làm thế nào để bạn thực hiện một điệu nhảy?</strong></p>
+<p class="main_text">Bạn có thể tạo các chuyển động khác nhau bằng cách điều chỉnh góc và thời gian di chuyển của 4 động cơ được kết nối với AsomeBot. Bạn có thể tạo chuyển động để vẫy chân như sau:</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/16-01.png"></div>
+<br>
+<p class="main_text"><strong>B. Tạo 1 điệu nhảy mới</strong></p>
+<p class="main_text">Bạn có thể sử dụng 3 phương pháp để tạo ra những điệu nhảy mới.</p>
+<p class="main_text">1. Đầu tiên, kết hợp các chuyển động hiện có thành một chuyển động duy nhất. Chuyển động này có thể được gộp lại với nhau như một chuyển động đơn</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/16-02.png"></div>
+<p class="main_text">2. Thứ hai, chỉ định một góc động cơ và thời gian chuyển động tại một thời điểm. Bạn phải chỉ định động cơ nào cần di chuyển.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/16-03.png"></div>
+<p class="main_text">3. Cuối cùng, chỉ định nhiều góc động cơ và thời gian chuyển động tại một thời điểm. Chỉ định góc và tốc độ di chuyển của từng động cơ tại một thời điểm. Tạo một chuyển động như bên dưới sẽ mất 2 giây để nâng và hạ hai chân.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/16-04.png"></div>
+<br>
+<p class="main_text"><strong>C. Điều chỉnh thời gian di chuyển</strong></p>
+<p class="main_text">Thời gian di chuyển của động cơ được đặt thành 1 giây và 0,1 giây sẽ thể hiện các chuyển động hoàn toàn khác nhau do sự khác biệt của tốc độ di chuyển ngay cả khi cùng một chuyển động được tạo ra như dưới đây.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/16-05.png"></div>
+<br>
+<br>
+
+<li class="lefts bold" id="pn3">3. Học các khối sử dụng trong bài<span class="video_button" level="block" filename="01.ch03"></span></li>
+<p class="main_text"><strong>A. Change to access point mode ([INTERNET] Group)</strong></p>
+<p class="main_text">Gán tên của AsomeBot để được điều khiển bằng máy tính bảng.</p>
+<div id="src_1" style="display: none;">import internet
+internet.open_ap("")
+</div>
+<img class="block_image" src="./images/blocks/16-06.png" onclick="run_code($('#src_1').text())">
+<p class="main_text">① Nhập tên bạn muốn sử dụng. Chỉ có tiếng Anh và số có thể được sử dụng.</p>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_veitnam.png">
+<p class="quiz_line"></p>
+<p class="main_text">① Đặt tên cho AsomeBot. Chỉ có tiếng Anh và số có thể được sử dụng để đặt tên AsomeBot. Khi bạn đã gán tên, tên sẽ được giữ lại ngay cả khi bật và tắt nguồn.</p>
+<p class="main_text">② Kiểm tra tên bạn đã chỉ định và thử kết nối. Đầu tiên, tìm tên AsomeBot bạn đã nhập từ danh sách WiFi và kết nối với điện thoại thông minh của bạn. Nếu một thông báo bật lên nói rằng kết nối Internet không ổn định, không nhấn bất kỳ nút nào và đợi tin nhắn biến mất.</p>
+<div class="content_image_box"><img src="./images/blocks/16-07.png" style="width:49%;"><img src="./images/blocks/16-08.png" style="width:49%;"></div>
+</div>
+
+<br>
+<p class="main_text"><strong>B. Mở ổ cắm UDP (nhóm [INTERNET])</strong></p>
+<p class="main_text">AsomeBot mở một cổng để giao tiếp qua Internet.</p>
+<div id="src_2" style="display: none;">import udp_socket
+udp_socket.open(1234)
+</div>
+<img class="block_image" src="./images/blocks/16-09.png" onclick="run_code($('#src_2').text())">
+<p class="main_text">① Số cổng được sử dụng. Use the number as is without modification.</p>
+<br>
+<p class="main_text"><strong>C. Đọc tin nhắn ([INTERNET] Group)</strong></p>
+<p class="main_text">Đọc tin nhắn được gửi từ máy tính bảng.</p>
+<div id="src_3" style="display: none;">msg = udp_socket.read_text()
+</div>
+<img class="block_image" src="./images/blocks/16-10.png" onclick="run_code($('#src_3').text())">
+<br>
+<p class="main_text"><strong>D. Lặp lại vô tận (nhóm [ADVANCE])</strong></p>
+<p class="main_text">Chạy khối bên trong khối để chạy theo thứ tự. Tại đây, bạn sẽ đợi ứng dụng máy tính bảng của mình gửi tin nhắn và thực hiện lệnh theo tin nhắn.</p>
+<div id="src_4" style="display: none;">while True:
+  pass
+</div>
+<img class="block_image" src="./images/blocks/16-11.png" onclick="run_code($('#src_4').text())">
+<br>
+<p class="main_text"><strong>E. nếu (nhóm [ADVANCE])</strong></p>
+<p class="main_text">Thực thi khối bên trong khối khi điều kiện đầu vào là chính xác. Nếu điều kiện không chính xác, khối theo sau khối if sẽ được thực thi.</p>
+<div id="src_5" style="display: none;">if i == :
+</div>
+<img class="block_image" src="./images/blocks/16-12.png" onclick="run_code($('#src_5').text())">
+<p class="main_text">① Nhập một biến được sử dụng trong câu lệnh điều kiện. Giá trị mặc định là ‘i’.</p>
+<p class="main_text">② Chọn bất đẳng thức mặc định để so sánh các điều kiện.</p>
+<p class="main_text">③ Nhập giá trị mặc định để sử dụng trong điều kiện. Bạn cần thêm các khối để xác định giá trị có điều kiện.</p>
+<p class="main_text">④ Thêm các khối được thực thi khi điều kiện đúng.</p>
+<br>
+<p class="main_text"><strong>F. Giá trị kí tự (nhóm [ADVANCE])</strong></p>
+<p class="main_text">Giá trị được sử dụng để thể hiện các ký tự được nhập thay vì các biến hoặc số.</p>
+<div id="src_6" style="display: none;">''
+</div>
+<img class="block_image" src="./images/blocks/16-13.png" onclick="run_code($('#src_6').text())">
+<p class="main_text">① Nhập các ký tự được sử dụng làm điều kiện.</p>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_veitnam.png">
+<p class="quiz_line"></p>
+<p class="main_text">① Nếu bạn đã tạo các khối như bên dưới, hãy nói về cách chúng di chuyển:</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/16-14.png"></div>
+</div>
+
+<br>
+<p class="main_text"><strong>G. Chú ý (nhóm [BASIC])</strong></p>
+<p class="main_text">AsomeBot có thể ngã nếu bàn chân thực hiện nhiều chuyển động liên tiếp. Đặt [Attention] giữa mỗi chuyển động sẽ giúp AsomeBot đứng ở vị trí chú ý để tránh bị ngã.</p>
+<div id="src_7" style="display: none;">asomebot.home()
+</div>
+<img class="block_image" src="./images/blocks/16-15.png" onclick="run_code($('#src_7').text())">
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_veitnam.png">
+<p class="quiz_line"></p>
+<p class="main_text">Tạo và chạy một chương trình mà robot đứng nghiêm sau khi thực hiện động tác múa ba lê.</p>
+</div>
+
+<br>
+<p class="main_text"><strong>H. Các điệu nhảy không có tùy chọn (nhóm [DANCE])</strong></p>
+<div id="src_8" style="display: none;">asomebot.ballet()
+</div>
+<img class="block_image" src="./images/blocks/16-16.png" onclick="run_code($('#src_8').text())">
+<p class="main_text">Thực hiện các động tác múa ba lê bằng cách Asomebot đứng các ngón chân.</p>
+<br>
+<div id="src_9" style="display: none;">asomebot.wiggle()
+</div>
+<img class="block_image" src="./images/blocks/16-17.png" onclick="run_code($('#src_9').text())">
+<p class="main_text">AsomeBot ngọ nguậy tại chỗ.</p>
+<br>
+<div id="src_10" style="display: none;">asomebot.flap()
+</div>
+<img class="block_image" src="./images/blocks/16-18.png" onclick="run_code($('#src_10').text())">
+<p class="main_text">AsomeBot vỗ chân.</p>
+<br>
+<div id="src_11" style="display: none;">asomebot.warigari()
+</div>
+<img class="block_image" src="./images/blocks/16-19.png" onclick="run_code($('#src_11').text())">
+<p class="main_text">AsomeBot thực hiện Warigari bằng đôi chân của nó.</p>
+<br>
+<div id="src_12" style="display: none;">asomebot.yaho()
+</div>
+<img class="block_image" src="./images/blocks/16-20.png" onclick="run_code($('#src_12').text())">
+<p class="main_text">AsomeBot nâng ngón chân lên. Nó là sự ngược lại của chuyển động ba lê.</p>
+<br>
+<div id="src_13" style="display: none;">asomebot.moonwalk()
+</div>
+<img class="block_image" src="./images/blocks/16-21.png" onclick="run_code($('#src_13').text())">
+<p class="main_text">AsomeBot biểu diễn điệu nhảy moonwalk.</p>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_veitnam.png">
+<p class="quiz_line"></p>
+<p class="main_text">Ba lê là một chuyển động chỉ đứng ở mũi chân. Do đó, hãy kết hợp với các chuyển động khác và tạo ra nhiều động tác thú vị hơn.</p>
+</div>
+
+<br>
+<p class="main_text"><strong>I. Điệu nhảy với các tùy chọn (nhóm [DANCE])</strong></p>
+<p class="main_text">Chọn hướng để di chuyển hướng chân AsomeBot trong tùy chọn của tất cả các bước nhảy.</p>
+<div id="src_14" style="display: none;">asomebot.mouse(1)
+</div>
+<img class="block_image" src="./images/blocks/16-22.png" onclick="run_code($('#src_14').text())">
+<p class="main_text">Nâng một chân của AsomeBot và thực hiện chuyển động.</p>
+<br>
+<div id="src_15" style="display: none;">asomebot.swing(1)
+</div>
+<img class="block_image" src="./images/blocks/16-23.png" onclick="run_code($('#src_15').text())">
+<p class="main_text">Nâng lên và gập lại một chân của AsomeBot.</p>
+<br>
+<div id="src_16" style="display: none;">asomebot.tick_tock(1)
+</div>
+<img class="block_image" src="./images/blocks/16-24.png" onclick="run_code($('#src_16').text())">
+<p class="main_text">Gấp một chân AsomeBot lại và vẫy một lần.</p>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_veitnam.png">
+<p class="quiz_line"></p>
+<p class="main_text">① ’Mouse’ được làm bởi học sinh tiểu học Hàn Quốc. Học sinh bắt chước cảnh huýt sáo với đôi chân di chuyển trong hoạt hình chuột Mickey và đặt tên cho dự án của mình là ‘Mouse’.</p>
+<p class="main_text">② Sử dụng chuyển động của Swing và TickTock, tạo một chương trình di chuyển bàn chân cùng một lúc.</p>
+</div>
+
+<br>
+<p class="main_text"><strong>J. Đặt góc của động cơ (nhóm [WALK])</strong></p>
+<p class="main_text">Khối điều khiển 1 động cơ. Chọn một động cơ và chỉ định góc và tốc độ di chuyển của động cơ đã chọn.</p>
+<div id="src_17" style="display: none;">asomebot.angles([0],[90-90],1*1000)
+</div>
+<img class="block_image" src="./images/blocks/16-25.png" onclick="run_code($('#src_17').text())">
+<p class="main_text">① Chọn số lượng động cơ sẽ được di chuyển.</p>
+<p class="main_text">② Nhập góc để di chuyển động cơ đã chọn.</p>
+<p class="main_text">③ Nhập thời gian cần thiết để động cơ di chuyển.</p>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_veitnam.png">
+<p class="quiz_line"></p>
+<p class="main_text">Sử dụng số động cơ của AsomeBot trong hình, tạo một chương trình cho phép góc phải (động cơ 3) của AsomeBot duy trì ở 30 độ trong 1 giây và 90 độ sau 1 giây .</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/16-26.png"></div>
+</div>
+
+<br>
+<p class="main_text"><strong>K. Đặt các góc (nhóm [WALK])</strong></p>
+<p class="main_text">Khối điều khiển các góc của 4 động cơ cùng một lúc. Bạn có thể chỉ định góc bạn muốn của 4 động cơ và xoay và đặt thời gian di chuyển của chúng.</p>
+<div id="src_18" style="display: none;">asomebot.angles([0],[90-90],1*1000)
+</div>
+<img class="block_image" src="./images/blocks/16-27.png" onclick="run_code($('#src_18').text())">
+<p class="main_text">① Chỉ định các góc của 0, 1, 2 và 3 động cơ theo thứ tự từ bên trái.</p>
+<p class="main_text">② Nhập thời gian cần thiết để động cơ di chuyển.</p>
+<br>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_veitnam.png">
+<p class="quiz_line"></p>
+<p class="main_text">Using the AsomeBot motor number in the figure, create a program that lets AsomeBot to lift up and down of the left and right feet alternatively.<br>
+Hint. Left foot angle 150 degrees / Right foot angle 30 degrees</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/16-28.png"></div>
+</div>
+
+<br>
+<br>
+
+<li class="lefts bold" id="pn4">4. Chơi trò chơi<span class="video_button" level="block" filename="01.ch04"></span></li>
+<p class="main_text"><strong>A. Luật chơi</strong></p>
+<p class="main_text">① Tạo 1 chương trình dùng Asome Controller để điều khiển Asomebot.</p>
+<p class="main_text">② Tạo 3 điệu nhảy mới theo lựa chọn của bạn.</p>
+<p class="main_text">- Chuyển động được tạo ra bằng cách kết hợp các chuyển động hiện có</p>
+<p class="main_text">- Chuyển động được tạo ra bằng cách di chuyển từng động cơ một.</p>
+<p class="main_text">- Chuyển động được tạo ra bằng cách di chuyển nhiều động cơ cùng 1 lúc.</p>
+<p class="main_text">③ Tạo một chương trình để thực hiện các chuyển động mới bằng các nút số trên Asome Controller.</p>
+<br>
+<p class="main_text"><strong>B. Thuật toán</strong></p>
+<p class="main_text">Bạn đã tạo ra những điệu nhảy tuyệt vời? Hãy thể hiện những điệu nhảy bạn đã tạo bằng phương pháp dưới đây:</p>
+<p class="main_text">① Thể hiện điệu nhảy của robot và cho khán giả biết tên của điệu nhảy đó.</p>
+<p class="main_text">② Cũng giải thích lý do tại sao bạn tạo ra các điệu nhảy.</p>
+<p class="main_text">③ Listen to your friends’ dance move story.</p>
+<p class="main_text">④ Phát nhạc và để robot thực hiện điệu nhảy tuyệt vời theo điệu nhảy mà bạn đã tạo.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/16-29.png"></div>
+<br>
+<p class="main_text"><strong>C. 게임하기</strong></p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/16-30.png"></div>
+<br>
+<script type="text/javascript">
+    $(".video_button").css("display", "none");
+</script>
+
+
+
+                </div>
+            </div>
+
+        </div>
+        <!-- //container -->
+    </div>
+    <!-- //wrap -->
+</body>
+
+</html>

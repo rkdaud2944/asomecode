@@ -1,0 +1,148 @@
+@charset "utf-8";
+
+/*Common*/
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%
+}
+
+html {
+    overflow-y: scroll
+}
+
+body {
+    background-color: #fff;
+    *word-break: break-all;
+    -ms-word-break: break-all
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+th,
+td,
+input,
+textarea,
+select,
+option {
+    font-family: 'NotoSans-Regular', "Nanum Gothic";
+    font-size: 12px;
+    font-smooth: always;
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: unset;
+    -moz-osx-font-smoothing: grayscale;
+    font-smoothing: antialiased;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+img,
+fieldset,
+iframe {
+    border: 0 none
+}
+
+em,
+address {
+    font-style: normal
+}
+
+img,
+input,
+select,
+textarea {
+    vertical-align: middle
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer
+}
+
+a:hover {
+    text-decoration: none
+}
+
+button,
+label {
+    cursor: pointer;
+    _cursor
+    /**/
+    : hand
+}
+
+button * {
+    position: relative
+}
+
+button img {
+    left: -3px;
+    *left: auto
+}
+
+textarea {
+    overflow: auto
+}
+
+html:first-child select {
+    height: 20px;
+    padding-right: 6px
+}
+
+option {
+    padding-right: 6px
+}
+
+.input_text,
+textarea {
+    *margin: -1px 0;
+    padding-right: 1px
+}
+
+.input_check,
+.input_radio {
+    width: 13px;
+    height: 13px
+}
+
+.blind,
+legend,
+caption {
+    text-indent: -9999px;
+    font-size: 0;
+    line-height: 0;
+    overflow: hidden
+}
+
+hr {
+    display: none
+}
+
+legend {
+    *width: 0
+}
+
+:root legend {
+    margin-top: -1px;
+    font-size: 0;
+    line-height: 0
+}
+
+caption {
+    *line-height: 0
+}
+
+div,
+li {
+    box-sizing: border-box;
+}
