@@ -488,18 +488,26 @@ function connect() {
     //asomecode_connect();
 }
 
+function sendCommand(type) {
+    const msg = {
+        type: type,
+    };
+    window.opener.postMessage(JSON.stringify(msg));
+}
+
 function runCode() {
     Blockly.Python.INFINITE_LOOP_TRAP = null;
     let code = generateCode(BlockEditorWorkspace);
-
-    asomecode_connect();
-    asomecode_exec(code, 'run');
+    const msg = {
+        type: "runCode",
+        params: code,
+    };
+    window.opener.postMessage(JSON.stringify(msg));
 }
 
 function stopCode() {
-    asomecode_stop();
+    sendCommand('stop');
 }
-
 
 var asomecodeVersion = null;
 var extensionIdNumber = 0;
@@ -543,51 +551,6 @@ function asomecode_open() {
             console.log(response);
         });
 }
-
-function asomecode_connect() {
-    if (userBrowser == "app") {
-
-    } else {
-
-        chrome.runtime.sendMessage(extensionId, { message: "connect" },
-            function (response) {
-                console.log(response);
-            });
-    }
-}
-
-function asomecode_exec(code, type) {
-    if (userBrowser == "app") {
-        App.run_code(escape_str(code));
-    } else {
-
-        chrome.runtime.sendMessage(extensionId, { message: "exec", source: code, type: type },
-            function (response) {
-                for (var i in response.js) {
-                    responseJs(response.js[i]);
-                }
-                if (response.printMsg != undefined) {
-                    console.log(response.printMsg);
-                }
-                if (response.loop == "Y") {
-                    asomecode_exec();
-                };
-            });
-    }
-}
-
-function asomecode_stop() {
-    if (userBrowser == "app") {
-        App.run_cmd('Code=Stop');
-    } else {
-        loop = "N";
-        chrome.runtime.sendMessage(extensionId, { message: "stop_exec" },
-            function (response) {
-                console.log(response);
-            });
-    }
-}
-
 
 var saveAsomeBlockCustomXmlToLocalStorage = function (xmlContent) {
     let asomeBlockListArray = loadCustomBlocksLocalStorage();
