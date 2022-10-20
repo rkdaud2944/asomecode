@@ -1,8 +1,9 @@
 import axios from 'axios'
 import {useEtcStore} from '@/store/etc'
 import errorLog from './errorLog'
+import { Notify } from 'quasar'
 
-const etc = useEtcStore();
+const etcStroe = useEtcStore();
 
 const instance = axios.create({
     baseURL: process.env.VUE_APP_API_BASEURL,
@@ -10,7 +11,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use(function (config) {
     if (config["method"] === "get") {
-        etc.loading = true;
+        etcStroe.loading = true;
     }
 
     // if (store.state.main.token !== null) {
@@ -23,13 +24,18 @@ instance.interceptors.request.use(function (config) {
 
 instance.interceptors.response.use(
     function (response) {
-        etc.loading = false;
+        etcStroe.loading = false;
         return Promise.resolve(response);
     },
 
     function (error) {
-        etc.loading = false;
-        errorLog.sendMessage(JSON.stringify(error));
+        etcStroe.loading = false;
+        errorLog.sendMessage(0, JSON.stringify(error));
+        Notify.create({
+            color: "deep-orange",
+            textColor: "white",
+            message: error.message,
+        });
         return Promise.reject(error);
     }
 );

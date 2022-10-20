@@ -4,14 +4,16 @@
             <q-toolbar>
                 <q-toolbar-title>
                     <div class="row" style="width: 100vh; height: 64px">
-                        <q-btn icon="play_arrow" class="q-mt-md q-mb-md" color="primary" label="Run"/>
-                        <q-btn icon="stop_circle" class="q-mt-md q-mb-md q-ml-sm" color="deep-orange" label="Stop"/>
+                        <q-btn @click="runCode(content)" icon="play_arrow" class="q-mt-md q-mb-md" color="primary" label="Run"/>
+                        <q-btn @click="stop()" icon="stop_circle" class="q-mt-md q-mb-md q-ml-sm" color="deep-orange" label="Stop"/>
 
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                         <q-btn icon="upload_file" class="q-mt-md q-mb-md" color="secondary" label="Upload"/>
                         <q-btn icon="folder_open" class="q-mt-md q-mb-md q-ml-sm" color="purple" label="Open"/>
                         <q-btn icon="save" class="q-mt-md q-mb-md q-ml-sm" color="brown" label="Save"/>
+
+                        <q-btn @click="goTo('/')" icon="close" class="q-mt-md q-mb-md q-ml-sm" color="brown" label="Close"/>
                     </div>
                 </q-toolbar-title>
             </q-toolbar>
@@ -35,8 +37,12 @@
 import { VAceEditor } from "vue3-ace-editor";
 import 'ace-builds/src-noconflict/mode-python';
 import 'ace-builds/src-noconflict/theme-monokai';
+import VueBase from "@/VueBase";
+import remoteSerial from "@/utils/remoteSerial";
 
 export default {
+    mixins: [VueBase],
+
     components: { VAceEditor },
 
     data() {
@@ -44,24 +50,27 @@ export default {
             content: '',
         }
     },
+
+    mounted() {
+        this.content = localStorage.getItem("code");
+    },
+
+    methods: {
+        ...remoteSerial,
+
+        upload() {
+            console.log('upload');
+        },
+
+        open() {
+            console.log('open');
+        },
+
+        save() {
+            console.log('save');
+        }
+    }
 };
 </script>
 
-<style scoped>
-.header {
-    height: 64px;
-}
-.footer {
-    height: 64px;
-}
-
-.body {
-    width: 100vw;
-    height: 100vh;
-    background: #272822;
-}
-
-.editor {
-    height: calc(100vh - 128px);
-}
-</style>
+<style scoped src="@/assets/css/component/editorview.css"/>

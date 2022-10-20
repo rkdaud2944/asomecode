@@ -1,21 +1,16 @@
 <template>
     <Header />
-
-    <div class="q-pa-md">
-        Q&A
+    <div>
+        <BoardList boardType="QnA" />
     </div>
 </template>
 
 <script>
 import Header from '@/components/HeaderHelp.vue';
-
+import BoardList from '@/components/board/BoardList.vue';
 export default {
     components: {
-        Header,
+        Header, BoardList,
     },
-
-    mounted() {
-        console.log(this.$route.query);
-    }
 }
 </script>

@@ -17,7 +17,8 @@ const routes = [
         component: () => import('../views/lesson/LessonList.vue')
     },
     {
-        path: '/lesson/detail/:id',
+        path: '/lesson/detail',
+        props: true,
         component: () => import('../views/lesson/LessonDetail.vue')
     },
 
@@ -79,16 +80,29 @@ const routes = [
 
     // board
     {
-        path: '/board/list',
-        component: () => import('../views/board/BoardList.vue')
+        path: '/notice/list',
+        component: () => import('../views/notice/NoticeBoard.vue')
     },
+
+    // BO
     {
-        path: '/board/detail',
-        component: () => import('../views/board/BoardDetail.vue')
-    },
-    {
-        path: '/board/create',
-        component: () => import('../views/board/CreateBoard.vue')
+        path: '/backOffice',
+        component: () => import('../views/backOffice/HomeView.vue'),
+        children: [
+            {
+                path: '/backOffice/lessons',
+                component: () => import('../views/backOffice/LessonList.vue')
+            },
+            {
+                path: '/backOffice/create/lesson',
+                component: () => import('../views/backOffice/CreateLesson.vue')
+            },
+            {
+                path: '/backOffice/edit/lesson',
+                props: true,
+                component: () => import('../views/backOffice/EditLesson.vue')
+            },
+        ]
     },
 ]
 

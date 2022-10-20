@@ -50,6 +50,7 @@ export default {
 </script>
 
 <style scoped>
+
 .row {
     height: 32px;
     margin-bottom: 8px;

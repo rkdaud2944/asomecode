@@ -1,12 +1,12 @@
 <template>
-    <div class="row q-pa-md">
+    <div class="row q-pa-md nav-padding" style="padding-left: 0px; padding-right: 0px;">
         <div>
             
-            <a href="#"><img src="/images/common/logo2.png" class="img">
+            <a href="/"><img src="/images/common/logo2.png" class="img">
             </a>
         </div>
         <div class="col menu">
-            <ImageButton :src="'/images/common/header_button_image/bt_notice.png'"/>
+            <ImageButton :src="'/images/common/header_button_image/bt_notice.png'" @click="onClickNotice"/>
             <ImageButton :src="'/images/common/header_button_image/bt_library.png'" />
             <ImageButton :src="'/images/common/header_button_image/bt_community.png'" />
             <ImageButton :src="'/images/common/header_button_image/bt_faq.png'" />
@@ -29,9 +29,7 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    
+    </div>    
 </template>
 
 <script>
@@ -50,110 +48,13 @@ export default {
             subjects: subjectSets.getSubjectsOrDefaults(localStorage.getItem('selectedSubjectSetId')),
         }
     },
+
+    methods: {
+        onClickNotice() {
+            this.$router.push({ path: '/notice/list'});
+        },
+    }
 }
 </script>
 
-<style scoped>
-@media (min-width: 791px){
-    .what-is-asomeit{
-        background: url(https://asomecode-web.s3.ap-northeast-2.amazonaws.com/asomecode-web-version/common/images/p1_back.gif);
-        margin-top: 10px;
-        padding: 20px;
-        text-align: center;
-    }
-    .subject{
-        margin:1px;
-        margin-bottom: 70px;
-        box-shadow:3px 3px 20px rgba(0,0,0,0.51);
-    }
-    .subject_box{
-        box-sizing: border-box;
-        
-    }
-    .subject-box-interval{
-        margin-top: 5%;
-        width: 18%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .what-is-asomeit-font{
-        font-size: 20px;
-        font-family: Helvetica Neue;
-        line-height: 34px;
-    }
-    .menu{
-        text-align: right;
-        margin-right:50px;
-    }
-    .img{
-        margin-left: 70px;
-        width: 186px;
-        
-    }
-}
-
-@media (min-width: 767px) and (max-width: 883px){
-    .what-is-asomeit-font{
-        font-size: 16px;
-        font-family: Helvetica Neue;
-        line-height: 24px;
-    }
-    .subject-box-interval{
-        margin-top: 5%;
-        width: 45%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .what-is-asomeit{
-        background: url(https://asomecode-web.s3.ap-northeast-2.amazonaws.com/asomecode-web-version/common/images/p1_back.gif);
-        margin-top: 10px;
-        padding: 20px;
-        text-align: center;
-    }
-    .menu{
-        text-align: center;
-        margin-right:0px;
-    }
-    .img{
-        display: none;
-    }
-    .subject{
-        margin:1px;
-        margin-bottom: 70px;
-        box-shadow:3px 3px 20px rgba(0,0,0,0.51);
-    }
-}
-
-@media (min-width: 100px) and (max-width: 767px){
-    .what-is-asomeit-font{
-        font-size: 16px;
-        font-family: Helvetica Neue;
-        line-height: 24px;
-    }
-    .subject-box-interval{
-        margin-top: 5%;
-        width: 95%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .what-is-asomeit{
-        background: url(https://asomecode-web.s3.ap-northeast-2.amazonaws.com/asomecode-web-version/common/images/p1_back.gif);
-        margin-top: 10px;
-        padding: 20px;
-        text-align: center;
-    }
-    .menu{
-        text-align: center;
-        margin-right:0px;
-    }
-    .img{
-        display: none;
-    }
-    .subject{
-        margin:1px;
-        margin-bottom: 70px;
-        box-shadow:3px 3px 20px rgba(0,0,0,0.51);
-    }
-}
-
-</style>
+<style scoped src="@/assets/css/component/homeview.css"/>
