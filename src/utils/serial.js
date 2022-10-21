@@ -9,7 +9,10 @@ export default {
     async getAsomeboard() {
         const ports = await SerialPort.list();
         console.log(ports);
-        return ports.find((port) => port.manufacturer && port.manufacturer.startsWith("Silicon Labs"));
+        return ports.find((port) =>
+            port.manufacturer &&
+            (port.manufacturer.startsWith("Silicon Labs") || port.manufacturer.startsWith("wch.cn"))
+        );
     },
 
     async connect() {
