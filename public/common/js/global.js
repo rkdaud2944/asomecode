@@ -33,9 +33,9 @@ if (navigator.userAgent.indexOf("AsomeCodeApp") != -1) {
 async function loadToolboxCategory(product) {
     var url
     if (sessionStorage.getItem("stage") != null) {
-        url = "../common/ajax/get_toolbox_category_common.html";
+        url = "https://asomecode-web.s3.ap-northeast-2.amazonaws.com/asomecode-web-version/common/ajax/get_toolbox_category_common.html";
     } else {
-        url = "../common/ajax/get_toolbox_category_" + product + ".html";
+        url = "https://asomecode-web.s3.ap-northeast-2.amazonaws.com/asomecode-web-version/common/ajax/get_toolbox_category_" + product + ".html";
     }
     try {
         const response = await fetch(url);
@@ -56,9 +56,9 @@ async function loadToolboxBlocks(product, defaultCategory) {
 
     var url
     if (sessionStorage.getItem("stage") != null) {
-        url = "../common/ajax/chapter/get_toolbox_blocks_" + product + ".html";
+        url = "https://asomecode-web.s3.ap-northeast-2.amazonaws.com/asomecode-web-version/common/ajax/chapter/get_toolbox_blocks_" + product + ".html";
     } else {
-        url = "../common/ajax/get_toolbox_blocks_" + product + ".html";
+        url = "https://asomecode-web.s3.ap-northeast-2.amazonaws.com/asomecode-web-version/common/ajax/get_toolbox_blocks_" + product + ".html";
     }
 
     try {

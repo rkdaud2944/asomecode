@@ -48,6 +48,8 @@ export default {
 
     watch: {
         $route(to) {
+            console.log("Appp route", to);
+
             globals.currentPath = to.path;
 
             this.showHeaderMain = true;
@@ -66,7 +68,6 @@ export default {
     mounted() {
         window.goTo = (path, params) => {
             if (params) {
-                // console.log("goTo", this);
                 this.$router.push({ path: path, query: params });
             } else {
                 this.$router.push({ path: path });
