@@ -30,8 +30,10 @@ const downloadToBoard = {
     async download(filename) {
         let lines = [];
         try {
-            const response = await axios.request(config.pythonUrl() + filename);            
-            lines = response.data.replaceAll("\r", "").split("\n");
+            const response = await axios.request(config.pythonUrl() + filename);
+            let text = response.data.replaceAll("\r", "");
+            text = text.replaceAll("\t", "    ");
+            lines = text.split("\n");
         } catch (error) {
             console.log(error);
             return;
@@ -53,6 +55,7 @@ const downloadToBoard = {
             buffer.shift();
             serial.writeLn("f.close()");
             serial.writeLn("f = None");
+            // TODO: 비동기 오류 발생, 시리얼 포트로 전송해서 싱크해야 함 (### 명령어 이벤트 버스 사용하면 안됨)
             eventbus.emit("onSerialReceived", "### Next Line");
             return;
         }
