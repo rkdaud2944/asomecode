@@ -35,7 +35,7 @@ const updateBoard = {
     updateFile(verInfo) {
         try {
             verInfo = verInfo.split(":");
-            verInfo = verInfo[1].trim();                
+            verInfo = verInfo[1].trim();
         } catch (error) {
             console.log(error);
             return;
@@ -44,7 +44,7 @@ const updateBoard = {
         this.nextFile();
     },
 
-    nextFile() {                
+    nextFile() {
         if (filenameQue.length == 0) {
             console.log("tobeDowndloads", tobeDowndloads);
             for (let i = 0; i < tobeDowndloads.length; i++) {
@@ -61,12 +61,12 @@ const updateBoard = {
 export default updateBoard;
 
 async function getRemoteFileList() {
-    try {        
+    try {
         const response = await axios.request(config.pythonUrl() + "versions.json");
         return response.data;
     } catch (error) {
         console.log(error);
-    }    
+    }
     return {};
 }
 
@@ -81,7 +81,7 @@ def getVersion(filename):
         f = open(filename)
         line = f.readline()
         if line == "":
-            raise Exception("파일이 비어있습니다.") 
+            raise Exception("파일이 비어있습니다.")
         print(line)
         f.close()
     except:
