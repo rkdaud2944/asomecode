@@ -2,10 +2,25 @@ import { SerialPort, ReadlineParser } from "serialport";
 import eventbus from "@/utils/eventbus";
 import { Notify } from 'quasar'
 
+eventbus.on("onSerialReceived", (data) => {
+    if (!data) return;
+    if (data.startsWith("(sysname=")) seiral.setBoardType(data);
+});
+
 let port = null;
 let parser = null;
+let boardType = "Zet";
 
-export default {
+const seiral = {
+    setBoardType(boardInfo) {
+        boardInfo.includes("esp32") ? boardType = "Pro" : boardType = "Zet";
+        console.log("Board Type: " + boardType);
+    },
+
+    getBoardType() {
+        return boardType;
+    },
+
     async getAsomeboard() {
         const ports = await SerialPort.list();
         console.log(ports);
@@ -52,6 +67,7 @@ export default {
         try {
             port.open();
             eventbus.emit("onSerialConnected");
+            this.writeLn("import os; os.uname();");
         } catch (error) {
             port = null;
             console.log(error);
@@ -147,6 +163,8 @@ export default {
         });
     }
 }
+
+export default seiral;
 
 const codeListFiles =
 `import os\r\n
