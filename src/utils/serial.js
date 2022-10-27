@@ -91,14 +91,12 @@ export default {
         if (port == null) return;
         try {
             port.write(text +"\r\n");
-            // console.log("------> " + text);
         } catch (error) {
             console.log(error);
         }
     },
 
     stop() {
-        console.log("stop");
         this.write(String.fromCharCode(3));
     },
 

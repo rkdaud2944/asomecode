@@ -6,9 +6,9 @@ import boardFileManager from "@/utils/board-file-manager";
 
 eventbus.on("onSerialReceived", (data) => {
     if (!data) return;
-    if (!data.startsWith("### AsomeCODE.Version:")) return;
 
-    updateBoard.updateFile(data);
+    if (data.startsWith("### AsomeCODE.Version:")) updateBoard.updateFile(data);
+    if (data.startsWith("### Get Remote File List")) updateBoard.getRemoteFileList();
 });
 
 let versions = [];
@@ -16,9 +16,12 @@ let filenameQue = [];
 let tobeDowndloads = [];
 
 const updateBoard = {
-    async start() {
+    start() {
         serial.runCode(codeGetVersion);
+        serial.writeLn('print("### Get Remote File List")');
+    },
 
+    async getRemoteFileList() {
         versions = [];
         filenameQue = [];
         tobeDowndloads = [];
@@ -28,7 +31,6 @@ const updateBoard = {
             versions.push(`${filename}=${fileInfo.Version}`);
             filenameQue.push(filename);
         }
-
         this.nextFile();
     },
 
@@ -46,10 +48,7 @@ const updateBoard = {
 
     nextFile() {
         if (filenameQue.length == 0) {
-            console.log("tobeDowndloads", tobeDowndloads);
-            for (let i = 0; i < tobeDowndloads.length; i++) {
-                boardFileManager.download(tobeDowndloads[i]);
-            }
+            boardFileManager.download(tobeDowndloads);
             return;
         }
 
