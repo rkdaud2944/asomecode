@@ -20,6 +20,7 @@ import bridgeIn from "./bridge-in";
 import { useMemberStore } from "@/store/member";
 import HeaderMain from "@/components/HeaderMain.vue";
 import ConsoleLog from "@/components/ConsoleLog.vue";
+import editorControl from "@/utils/editor-control";
 
 export default {
     components: {
@@ -28,11 +29,9 @@ export default {
 
     setup() {
         bridgeIn.init();
+        editorControl.init();
 
         const memberStore = useMemberStore();
-
-        console.log("Appp platform", process.env.VUE_APP_PLATFORM);
-        console.log("Appp mode", process.env.VUE_APP_MODE);
 
         return {
             memberStore,
