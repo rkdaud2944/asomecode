@@ -1,80 +1,105 @@
 <template>
-    <div class="lesson-title">
-        <q-input outlined v-model="lesson.title" label="제목" style="width: 50%;" />
-        <q-btn color="positive" style="margin-left: 20px; height: 28px;" @click="updateLesson">수정</q-btn>
-        <q-btn color="primary" style="margin-left: 10px; height: 28px;" @click="goBack()">취소</q-btn>
-    </div>
+    <q-form @submit="updateLesson" greedy>
+        <div class="lesson-title">
+            <q-input outlined v-model="lesson.title" label="제목" style="width: 50%;" />
+            <q-btn color="positive" style="margin-left: 20px; height: 28px;" type="submit">수정</q-btn>
+            <q-btn color="primary" style="margin-left: 10px; height: 28px;" @click="goBack()">취소</q-btn>
+        </div>
 
-    <div class="editor">
-        <q-card class="input">
-            <q-btn-group>
-                <q-btn color="secondary" @click="onImageUploadDialog" glossy label="이미지 삽입" />
-                <q-btn color="secondary" @click="onVideoUploadDialog" glossy label="동영상 삽입" />
-            </q-btn-group>
-            <textarea ref="inputTextarea" class="inputText" :value="lesson.content" @input="update"></textarea>
-        </q-card>
+        <div class="editor">
+            <q-card class="input">
+                <q-btn-group>
+                    <q-btn color="secondary" @click="onImageUploadDialog" glossy label="이미지 삽입" />
+                    <q-btn color="secondary" @click="onVideoUploadDialog" glossy label="동영상 삽입" />
+                    <q-btn color="secondary" @click="onFunctionBtnDialog" glossy label="함수 버튼 생성" />
+                    <q-btn color="secondary" @click="onCodeEditorDialog" glossy label="코드 에디터 생성" />
+                </q-btn-group>
+                <textarea ref="inputTextarea" class="inputText" :value="lesson.content" @input="update"></textarea>
+            </q-card>
 
-        <div class="markdown_output" v-html="output"></div>
-    </div>
+            <div class="markdown_output" v-html="output"></div>
+        </div>
 
-    <q-dialog v-model="imageUploadDialog">
-        <q-card style="width: 600px; max-width: 80vw;">
-            <q-card-section>
-                <div class="text-h6">이미지 업로드</div>
-            </q-card-section>
+        <q-dialog v-model="imageUploadDialog">
+            <q-card style="width: 600px; max-width: 80vw;">
+                <q-card-section>
+                    <div class="text-h6">이미지 업로드</div>
+                </q-card-section>
 
-            <q-card-section class="q-pt-none">
-                <q-file filled bottom-slots v-model="image" label="Label" counter>
-                    <template v-slot:prepend>
-                        <q-icon name="cloud_upload" @click.stop.prevent />
-                    </template>
-                    <template v-slot:append>
-                        <q-icon name="close" @click.stop.prevent="image = null" class="cursor-pointer" />
-                    </template>
+                <q-card-section class="q-pt-none">
+                    <q-file filled bottom-slots v-model="image" label="Label" counter>
+                        <template v-slot:prepend>
+                            <q-icon name="cloud_upload" @click.stop.prevent />
+                        </template>
+                        <template v-slot:append>
+                            <q-icon name="close" @click.stop.prevent="image = null" class="cursor-pointer" />
+                        </template>
 
-                    <template v-slot:hint>
-                        Field hint
-                    </template>
-                </q-file>
-                <div>
-                    <q-btn class="uploadDialog-btn" label="취소" color="primary" v-close-popup />
-                    <q-btn class="uploadDialog-btn" label="등록" type="submit" color="positive"
-                        @click="uploadLessonImage" />
-                </div>
-            </q-card-section>
-        </q-card>
-    </q-dialog>
+                        <template v-slot:hint>
+                            Field hint
+                        </template>
+                    </q-file>
+                    <div>
+                        <q-btn class="uploadDialog-btn" label="취소" color="primary" v-close-popup />
+                        <q-btn class="uploadDialog-btn" label="등록" type="submit" color="positive"
+                            @click="uploadLessonImage" />
+                    </div>
+                </q-card-section>
+            </q-card>
+        </q-dialog>
 
-    <q-dialog v-model="videoUploadDialog">
-        <q-card style="width: 600px; max-width: 80vw;">
-            <q-card-section>
-                <div class="text-h6">비디오 업로드</div>
-            </q-card-section>
+        <q-dialog v-model="videoUploadDialog">
+            <q-card style="width: 600px; max-width: 80vw;">
+                <q-card-section>
+                    <div class="text-h6">비디오 업로드</div>
+                </q-card-section>
 
-            <q-card-section class="q-pt-none">
-                <q-file filled bottom-slots v-model="video" label="Label" counter>
-                    <template v-slot:prepend>
-                        <q-icon name="cloud_upload" @click.stop.prevent />
-                    </template>
-                    <template v-slot:append>
-                        <q-icon name="close" @click.stop.prevent="video = null" class="cursor-pointer" />
-                    </template>
+                <q-card-section class="q-pt-none">
+                    <q-file filled bottom-slots v-model="video" label="Label" counter>
+                        <template v-slot:prepend>
+                            <q-icon name="cloud_upload" @click.stop.prevent />
+                        </template>
+                        <template v-slot:append>
+                            <q-icon name="close" @click.stop.prevent="video = null" class="cursor-pointer" />
+                        </template>
 
-                    <template v-slot:hint>
-                        Field hint
-                    </template>
-                </q-file>
-                <div>
-                    <q-btn class="uploadDialog-btn" label="취소" color="primary" v-close-popup />
-                    <q-btn class="uploadDialog-btn" label="등록" type="submit" color="positive"
-                        @click="uploadLessonVideo" />
-                </div>
-            </q-card-section>
-        </q-card>
-    </q-dialog>
+                        <template v-slot:hint>
+                            Field hint
+                        </template>
+                    </q-file>
+                    <div>
+                        <q-btn class="uploadDialog-btn" label="취소" color="primary" v-close-popup />
+                        <q-btn class="uploadDialog-btn" label="등록" type="submit" color="positive"
+                            @click="uploadLessonVideo" />
+                    </div>
+                </q-card-section>
+            </q-card>
+        </q-dialog>
+
+        <q-dialog v-model="functionBtnDialog">
+            <q-card style="width: 600px; max-width: 80vw;">
+                <q-card-section>
+                    <div class="text-h6">함수 버튼 생성</div>
+                </q-card-section>
+
+                <q-card-section class="q-pt-none">
+                    <q-input v-model="functionName" label="버튼 이름" stack-label />
+                    <div class="q-mt-md">
+                        <CodeEditor v-model="functionCode" style="width: 100%;" :languages="[['python', 'Python']]" />
+                    </div>
+                    <div>
+                        <q-btn class="uploadDialog-btn" label="취소" color="primary" v-close-popup />
+                        <q-btn class="uploadDialog-btn" label="생성" type="submit" color="positive"
+                            @click="createfunctionBtn" />
+                    </div>
+                </q-card-section>
+            </q-card>
+        </q-dialog>
+    </q-form>
 </template>
 
 <script>
+/* eslint-disable */
 import VueBase from "@/VueBase";
 import { debounce } from 'lodash-es'
 import markdown from "@/utils/markdown.js";
@@ -82,12 +107,20 @@ import { ref } from 'vue'
 import { Notify } from 'quasar'
 import apiAwsS3 from "@/api/awsS3";
 import apiLesson from "@/api/lesson";
+import CodeEditor from 'simple-code-editor';
 export default {
     mixins: [VueBase],
 
+    components: {
+        CodeEditor
+    },
+
     data() {
         return {
-            lesson: null,
+            lesson: {
+                title: null,
+                content: null,
+            },
         };
     },
 
@@ -98,12 +131,19 @@ export default {
 
             videoUploadDialog: ref(false),
             video: ref(null),
+
+            functionBtnDialog: ref(false),
+            functionName: ref(''),
+            functionCode: ref(''),
         }
+    },
+
+    updated() {
+        hljs.highlightAll();
     },
 
     mounted() {
         this.getLesson(this.$route.query.id)
-        markdown.markedInput(this.lesson.content)
     },
 
     computed: {
@@ -151,21 +191,22 @@ export default {
             var markedImage = `![](${insert})`
             var value = this.$refs.inputTextarea.value;
             var selectionStart = this.$refs.inputTextarea.selectionStart;
-            var output = [value.slice(0, selectionStart), markedImage, value.slice(selectionStart)].join('')
-            this.lesson.content = output
+            this.lesson.content = [value.slice(0, selectionStart), markedImage, value.slice(selectionStart)].join('')
         },
 
         onVideoUploadDialog() {
             this.videoUploadDialog = true
         },
 
+        onFunctionBtnDialog() {
+            this.functionBtnDialog = true
+        },
+
         insertVideo(insert) {
-            var markedVideo =
-                `<video controls width="100%">\n    <source src="${insert}" type="video/webm">\n</video>`
+            var markedVideo = `#[video](${insert})`
             var value = this.$refs.inputTextarea.value;
             var selectionStart = this.$refs.inputTextarea.selectionStart;
-            var output = [value.slice(0, selectionStart), markedVideo, value.slice(selectionStart)].join('')
-            this.lesson.content = output
+            this.lesson.content = [value.slice(0, selectionStart), markedVideo, value.slice(selectionStart)].join('')
         },
 
         uploadLessonImage() {
@@ -190,7 +231,33 @@ export default {
                 .catch(function (e) {
                     console.log(e);
                 });
-        }
+        },
+
+        createfunctionBtn() {
+            let functionNameId = this.functionName.replaceAll(' ', '-')
+
+            let functionBtnContent = `#[function](${this.functionName})\n` +
+                `<div id="${functionNameId}" class="hidden">\n${this.functionCode}\n</div>\n`
+
+            let value = this.$refs.inputTextarea.value;
+            let selectionStart = this.$refs.inputTextarea.selectionStart;
+            this.lesson.content = [value.slice(0, selectionStart), functionBtnContent, value.slice(selectionStart)].join('')
+
+            this.functionName = ''
+            this.functionCode = ''
+            this.functionBtnDialog = false
+        },
+
+        onCodeEditorDialog() {
+            let codeEditorContent = `#[code](${this.functionName})\n` +
+                `<pre onclick="openEditor(getCode('code4'))">\n<code id="code4" class="python">` +
+                `\n# 여기에 코드를 작성해 주세요.\n` +
+                `</code>\n</pre>\n`
+
+            let value = this.$refs.inputTextarea.value;
+            let selectionStart = this.$refs.inputTextarea.selectionStart;
+            this.lesson.content = [value.slice(0, selectionStart), codeEditorContent, value.slice(selectionStart)].join('')
+        },
     }
 }
 </script>

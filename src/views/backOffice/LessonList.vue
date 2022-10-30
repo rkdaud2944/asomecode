@@ -5,7 +5,7 @@
                 <Filter @onFilterChanged="onFilterChanged" />
             </template>
             <template v-slot:main>
-                <Grid ref="grid" rowKey="id" @onPageChanged="onPageChanged" @onBatchMenu="onBatchMenu" />
+                <Grid ref="grid" rowKey="id" @onPageChanged="onPageChanged" />
             </template>
         </FilterFrame>
     </div>

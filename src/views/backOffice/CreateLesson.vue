@@ -17,8 +17,9 @@
                     <q-btn color="secondary" @click="onImageUploadDialog" glossy label="이미지 삽입" />
                     <q-btn color="secondary" @click="onVideoUploadDialog" glossy label="동영상 삽입" />
                     <q-btn color="secondary" @click="onFunctionBtnDialog" glossy label="함수 버튼 생성" />
+                    <q-btn color="secondary" @click="onCodeEditorDialog" glossy label="코드 에디터 생성" />
                 </q-btn-group>
-                <textarea ref="inputTextarea" class="inputText" :value="input" @input="update"></textarea>
+                <textarea ref="inputTextarea" class="inputText" :value="lessonContent" @input="update"></textarea>
             </q-card>
 
             <div class="markdown_output" v-html="markedOutput"></div>
@@ -103,6 +104,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import VueBase from "@/VueBase";
 import { debounce } from 'lodash-es'
 import markdown from "@/utils/markdown.js";
@@ -124,7 +126,6 @@ export default {
             defaultSubjectOptions: [],
             selectedDefaultSubject: null,
 
-            input: '',
             lessonTitle: '',
             lessonContent: '',
         };
@@ -144,6 +145,10 @@ export default {
         }
     },
 
+    updated() {
+        hljs.highlightAll();
+    },
+
     mounted() {
         this.getDefaultSubjectSet()
     },
@@ -156,8 +161,7 @@ export default {
 
     methods: {
         update: debounce(function (e) {
-            this.input = e.target.value
-            this.lessonContent = this.input
+            this.lessonContent = e.target.value
         }, 200),
 
         onImageUploadDialog() {
@@ -168,9 +172,7 @@ export default {
             let markedImage = `![](${insert})`
             let value = this.$refs.inputTextarea.value;
             let selectionStart = this.$refs.inputTextarea.selectionStart;
-            let output = [value.slice(0, selectionStart), markedImage, value.slice(selectionStart)].join('')
-            this.lessonContent = output
-            this.input = output
+            this.lessonContent = [value.slice(0, selectionStart), markedImage, value.slice(selectionStart)].join('')
         },
 
         onVideoUploadDialog() {
@@ -182,13 +184,10 @@ export default {
         },
 
         insertVideo(insert) {
-            let markedVideo =
-                `<video controls width="100%">\n    <source src="${insert}" type="video/webm">\n</video>`
+            let markedVideo = `#[video](${insert})`
             let value = this.$refs.inputTextarea.value;
             let selectionStart = this.$refs.inputTextarea.selectionStart;
-            let output = [value.slice(0, selectionStart), markedVideo, value.slice(selectionStart)].join('')
-            this.lessonContent = output
-            this.input = output
+            this.lessonContent = [value.slice(0, selectionStart), markedVideo, value.slice(selectionStart)].join('')
         },
 
         uploadLessonImage() {
@@ -216,21 +215,29 @@ export default {
         },
 
         createfunctionBtn() {
-            let functionNameId = this.functionName.replaceAll(' ','-')
+            let functionNameId = this.functionName.replaceAll(' ', '-')
 
-            let markedFunctionBtn = `#[function](${this.functionName})\n`
-            let functionCode = `<div id="${functionNameId}" class="hidden">\n${this.functionCode}</div>`
+            let functionBtnContent = `#[function](${this.functionName})\n` +
+                `<div id="${functionNameId}" class="hidden">\n${this.functionCode}\n</div>\n`
 
             let value = this.$refs.inputTextarea.value;
             let selectionStart = this.$refs.inputTextarea.selectionStart;
-            let output = [value.slice(0, selectionStart), markedFunctionBtn, value.slice(selectionStart)].join('')
-
-            this.lessonContent = output + functionCode
-            this.input = output
+            this.lessonContent = [value.slice(0, selectionStart), functionBtnContent, value.slice(selectionStart)].join('')
 
             this.functionName = ''
             this.functionCode = ''
             this.functionBtnDialog = false
+        },
+
+        onCodeEditorDialog() {
+            let codeEditorContent = `#[code](${this.functionName})\n` +
+                `<pre onclick="openEditor(getCode('code4'))">\n<code id="code4" class="python">` + 
+                `\n# 여기에 코드를 작성해 주세요.\n` +
+                `</code>\n</pre>\n`
+
+            let value = this.$refs.inputTextarea.value;
+            let selectionStart = this.$refs.inputTextarea.selectionStart;
+            this.lessonContent = [value.slice(0, selectionStart), codeEditorContent, value.slice(selectionStart)].join('')
         },
 
         getDefaultSubjectSet() {
@@ -266,6 +273,9 @@ export default {
     }
 }
 </script>
+
+
+
 
 
 <style src="@/assets/css/component/markdown_content.css"/>

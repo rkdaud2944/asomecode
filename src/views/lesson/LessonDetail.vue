@@ -82,51 +82,5 @@ export default {
 };
 </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <style scoped src="@/assets/css/component/lesson.css"/>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <style src="@/assets/css/component/markdown_content.css"/>
-<style>
-.markdown_output {
-    padding-top: 80px;
-    margin: 0px 22px 0px 22px;
-}
-</style>
