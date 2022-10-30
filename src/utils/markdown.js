@@ -27,7 +27,7 @@ export default {
                     input = input.replace(line, `<video controls width="100%"><source src="${content}" type="video/webm"></video>`);
 
                 if (contentType == 'function')
-                    input = input.replace(line, `<div onclick="runCode(getCode('${functionNameId}'))" class="bg-positive">${content}</div></br>`);
+                    input = input.replace(line, `<div onclick="runCode(getCode('${functionNameId}'))" class="function_btn">${content}</div></br>`);
 
                 if (contentType == 'code')
                     input = input.replace(line, ``);
