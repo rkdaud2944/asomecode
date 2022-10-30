@@ -1,0 +1,116 @@
+트랙을 달리는 로봇을 만들어요
+
+1. 학습 목표
+	[video ./video/block/01/13.execute.webm]
+	* Asome Controller를 이용해 원하는 동작을 만들어 사용해 봅니다.
+	* 트랙에서 달리는 어썸봇 경주 대회를 진행해 봅니다.
+
+
+2. 먼저 알아보기
+	@ 원하는 동작을 직접 만들어서 조종할 수 있어요.
+	Asome Controller를 이용하면 우리가 원하는 새로운 동작들도 만들어서 사용할 수 있어요.
+	[image ./images/blocks/13-01.png]
+
+	@ 트랙을 달리는 로봇 만들기
+	어썸봇의 동작들을 조합해서 트랙을 빠르게 돌면서 걷는 동작을 개발하고 달리기 대회를 해볼 거예요.
+	[image ./images/blocks/13-02.png]
+
+
+3. 사용 블록 알아보기
+	@ 비밀번호 없는 와이파이 연결하기 ([INTERNET] 그룹)
+	스마트폰으로 조종할 어썸봇의 이름을 지정합니다.
+	[block_image ./images/blocks/11-04.png
+		import internet
+		internet.open_ap("")
+	]
+	① 사용할 이름을 입력합니다. 영어와 숫자만 사용할 수 있습니다.
+	
+	@ 메시지 받을 준비 포트 ([INTERNET] 그룹)
+	어썸봇이 인터넷으로 통신할 수 있는 포트를 열어줍니다.
+	[block_image ./images/blocks/11-06.png
+		import udp_socket
+		udp_socket.open(1234)
+	]
+	① 사용할 포트 번호입니다. 수정하지 않고 그대로 사용합니다.
+	
+	@ 메시지 읽어오기 ([INTERNET] 그룹)
+	스마트폰에서 보내는 메시지를 읽어들입니다.
+	[block_image ./images/blocks/11-07.png
+		msg = udp_socket.read_text()
+	]
+
+	@ 무한 반복 ([ADVANCE] 그룹)
+	블록 안의 블록을 순서대로 계속 실행되도록 합니다. 여기에서는 스마트폰 앱에서 메시지를 보낼 때까지 기다리다가 메시지가 오면 메시지에 따른 명령을 실행하기 위해 사용합니다.
+	[block_image ./images/blocks/07-04.png
+		while True:
+		  pass
+	]
+
+	@ 반복하기 ([ADVANCE] 그룹)
+	블록 안의 명령들을 원하는 횟수만큼 반복합니다.
+	[block_image ./images/blocks/12-13.png
+		for count in range(1):
+  		  pass
+	]
+	① 반복할 횟수를 지정합니다.
+	② 반복할 블록을 추가합니다.
+
+	@ 만약에(if) ([ADVANCE] 그룹)
+	조건으로 입력한 내용이 맞을 때 블록 안의 블록을 실행시킵니다. 조건이 틀리다면 [만약에(if)] 블록 뒤에 있는 블록이 실행됩니다.
+	[block_image ./images/blocks/07-05.png
+		if i == :
+	]
+	① 조건문에 사용할 변수를 입력합니다. 기본 값은 ‘i’이며 센서 블록을 추가하면 해당되는 변수가 추가되어 선택할 수 있습니다.
+	② 조건을 비교할 기준 부등호를 선택합니다.
+	③ 조건에 사용할 기준 값을 입력합니다. 이때 조건 값을 지정할 블록을 추가해야 합니다.
+	④ 조건에 맞을 때 실행할 블록들을 추가합니다.
+
+	@ 문자 값 ([ADVANCE] 그룹)
+	변수나 숫자가 아니라 입력된 문자 그대로를 표현할 때 사용합니다.
+	[block_image ./images/blocks/11-09.png
+		''
+	]
+	① 조건으로 사용 할 문자를 입력합니다.
+
+	@ Asome Controller로 보낼 수 있는 메시지
+	Asome Controller 앱을 이용하면 다양한 동작을 실행할 수 있습니다.
+	[image ./images/blocks/01-08.png]
+	① 방향키 : F, B, L, R 메시지를 전달하여 어썸봇을 걷게 하는 방향키
+	② 차렷키 : H 메시지를 전달하여 어썸봇이 차렷 자세로 만드는 동작
+	③ 동작키 : 1~12번 숫자를 메시지로 전달하여 원하는 동작을 실행
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Asome Controller의 “1”번 버튼을 터치하면 어썸봇이 왼쪽으로 한 번 회전하고 앞으로 한 걸음 가는 동작을 3번 반복하는 프로그램을 만들어보세요.</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/13-03.png"></div>
+		<p class="main_text">② 트랙을 돌 때 회전 명령어와 함께 사용하기 좋은 춤 동작은 어떤 것들이 있을까요?</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/13-04.png"></div>
+		</div>
+	]
+
+
+4. 플레이 액티비티
+	@ 게임 규칙
+	① 두 대의 어썸봇이 트랙을 돌아서 먼저 결승점에 도착하는 로봇이 이기는 게임
+	② Asome Controller로 조종(1~12번에 자신만의 트랙 돌기 기능 사용 가능)
+	③ 달리기 중 상대편 트랙으로 넘어가도 됨
+	④ 트랙 맨 안쪽 선보다 안쪽으로 들어가면 탈락
+
+	@ 알고리즘
+	① 트랙 경기에서는 안쪽 트랙으로 달리는 게 유리합니다. 어썸봇의 어떤 동작들을 이용하면 빠르게 안쪽 트랙으로 이동할 수 있을까요?
+	[image ./images/blocks/13-05.png]
+
+	② 왼쪽으로 회전 명령을 사용하면 재자리에서 회전하기 때문에 앞으로 가는 거리는 아주 적습니다. 트랙을 따라 회전하면서도 앞으로 많이 갈 수 있는 동작은 어떻게 만들면 좋을까요?
+	[image ./images/blocks/13-06.png]
+
+	@ 게임하기
+	누가 빨리 트랙을 돌아 결승점에 도착할지 게임을 해보세요.
+	[image ./images/blocks/13-07.png]
+	
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]

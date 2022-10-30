@@ -6,9 +6,9 @@ import boardFileManager from "@/utils/board-file-manager";
 
 eventbus.on("onSerialReceived", (data) => {
     if (!data) return;
-    if (!data.startsWith("### AsomeCODE.Version:")) return;
 
-    updateBoard.updateFile(data);
+    if (data.startsWith("### AsomeCODE.Version:")) updateBoard.updateFile(data);
+    if (data.startsWith("### Get Remote File List")) updateBoard.getRemoteFileList();
 });
 
 let versions = [];
@@ -16,9 +16,12 @@ let filenameQue = [];
 let tobeDowndloads = [];
 
 const updateBoard = {
-    async start() {
+    start() {
         serial.runCode(codeGetVersion);
+        serial.writeLn('print("### Get Remote File List")');
+    },
 
+    async getRemoteFileList() {
         versions = [];
         filenameQue = [];
         tobeDowndloads = [];
@@ -28,14 +31,13 @@ const updateBoard = {
             versions.push(`${filename}=${fileInfo.Version}`);
             filenameQue.push(filename);
         }
-
         this.nextFile();
     },
 
     updateFile(verInfo) {
         try {
             verInfo = verInfo.split(":");
-            verInfo = verInfo[1].trim();                
+            verInfo = verInfo[1].trim();
         } catch (error) {
             console.log(error);
             return;
@@ -44,12 +46,9 @@ const updateBoard = {
         this.nextFile();
     },
 
-    nextFile() {                
+    nextFile() {
         if (filenameQue.length == 0) {
-            console.log("tobeDowndloads", tobeDowndloads);
-            for (let i = 0; i < tobeDowndloads.length; i++) {
-                boardFileManager.download(tobeDowndloads[i]);
-            }
+            boardFileManager.download(tobeDowndloads);
             return;
         }
 
@@ -61,12 +60,12 @@ const updateBoard = {
 export default updateBoard;
 
 async function getRemoteFileList() {
-    try {        
+    try {
         const response = await axios.request(config.pythonUrl() + "versions.json");
         return response.data;
     } catch (error) {
         console.log(error);
-    }    
+    }
     return {};
 }
 
@@ -81,7 +80,7 @@ def getVersion(filename):
         f = open(filename)
         line = f.readline()
         if line == "":
-            raise Exception("파일이 비어있습니다.") 
+            raise Exception("파일이 비어있습니다.")
         print(line)
         f.close()
     except:

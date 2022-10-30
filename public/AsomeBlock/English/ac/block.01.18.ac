@@ -1,0 +1,256 @@
+Robot tells you weather
+
+1. Learning Objective
+	[video ./video/block/01/18.execute.webm]
+	* Understand how to bring weather data from the Internet.
+	* Learn how to use weather data.
+	* You can make different motions depending on the weather and use AsomeBot to tell the weather.
+
+
+2. Preview
+	@ How do you forecast the weather?
+	Satellites monitor cloud movements and continuously measure temperature and humidity to predict how the weather will change today or tomorrow.
+	[image ./images/blocks/18-01.png]
+	
+	@ Can AsomeBot tell forecast weather?
+	Discuss with your friends and teachers how you can forecast the weather with AsomeBot.
+	[image ./images/blocks/18-02.png]
+
+	@ AsomeBot can download data from the Internet, such as weather, temperature, and humidity. Can we use this to tell the weather in the motion and sound of AsomeBot?
+	[image ./images/blocks/18-03.png]
+
+	@ When, where and how can we forecast the weather?
+	[image ./images/blocks/18-04.png]
+
+
+3. learn which blocks to use
+	@ Connect to internet ([INTERNET] Group)
+	Specify the name and password of the wireless router to which AsomeBot will be connected. The robot has to download data from the Internet, thus, the router must be connected to the Internet.
+	[block_image ./images/blocks/18-05.png
+		import internet
+		internet.connect("","")
+	]
+	① Enter the name of the Internet router.
+	② Enter the password of the Internet router.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_eng.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">You can find the name of the wireless router you want to use in the smartphone WiFi list and connect to your smartphone.</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/18-06.png"></div>
+		</div>
+	]
+
+	@ Open UDP socket ([INTERNET] Group)
+	AsomeBot opens a port to communicate via the Internet.
+	[block_image ./images/blocks/18-07.png
+		import udp_socket
+		udp_socket.open(1234)
+	]
+	① The port number to be used. Use the number as is without modification.
+
+	@ Get Weather data ([INTERNET] Group)
+	Download data related to weather from the Internet.
+	[block_image ./images/blocks/18-08.png
+		import internet
+		internet.get_weather("Hanoi, VN")
+	]
+	① Enter the names of cities and countries to download weather data.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/reference_eng.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">Name value for each city</p>
+		<p class="main_text">Hanoi Vietnam: Hanoi, VN</p>
+		<p class="main_text">Seoul, S. Korea: Seoul, KR</p>
+		<p class="main_text">Los Angeles (the US): LA, us</p>
+		</div>
+	]
+
+	@ Measure distance ([SENSOR] Group)
+	With an ultrasonic sensor, measure the distance of the obstacle in front. The value of the measured distance is stored in a variable name ‘Cm’. Sensors can report the weather when a person is standing or passing at a moderate distance.
+	[block_image ./images/blocks/18-09.png
+		cm = hcsr04.get_distance()
+	]
+
+	@ Repeat ([ADVANCE] Group)
+	Repeat the commands in the block as many times as you want.
+	[block_image ./images/blocks/18-10.png
+		for count in range(1):
+		  pass
+	]
+	① Specify the number of times to repeat.
+	② Add blocks to repeat.
+
+	@ Repeat infinitely ([ADVANCE] Group)
+	Run blocks inside blocks to run in order.
+	[block_image ./images/blocks/18-11.png
+		while True:
+		  pass
+	]
+
+	@ if ([ADVANCE] Group)
+	Execute the block in the block when the detail input as condition is correct. If the condition is incorrect, the block following the if block will be executed.
+	[block_image ./images/blocks/18-12.png
+		if i == :
+	]
+	① Input a variable to be used in the conditional statement. The default value is 'i' and changes to 'cm' when using an ultrasonic sensor. 
+	② Select the default inequality to compare the conditions.
+	③ Input the default value to use in the condition. You need to add blocks to specify the conditional value.
+	④ Add blocks to be executed when the condition is correct.
+
+	@ Data Block Character Value Block ([ADVANCE] Group)
+	You can use one of the following two blocks for the conditional value of the conditional statement.
+	[block_image ./images/blocks/18-13.png
+		1
+	]
+	For the data block, enter and use the value you want to compare.
+	① Enter the data value to compare with the variable of the control statement.
+	
+	[block_image ./images/blocks/18-14.png
+		''
+	]
+	character value block should be used when using a character value for the conditional value or use a character value or input character received from the Internet as conditional value.
+	① Enter characters to be used as a condition.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/reference_eng.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">Character values related to weather</p>
+		<p class="main_text">Weather related character values you can download from the Internet are as follows:</p>
+		<p class="main_text">Rainy days: rain</p>
+		<p class="main_text">Sunny day: sunny</p>
+		<p class="main_text">Snowy day: snow</p>
+		</div>
+	]
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_eng.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">Create a program that plays ‘Do’ ‘Re’ ‘Mi’ scales in order of 1 second if today’s weather value downloaded from the Internet is ‘sunny’.</p>
+		</div>
+	]
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_eng.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">Create a program that performs [Flap] 3 times when there is a person or object with 50cm in front of AsomeBot.</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/18-16.png"></div>
+		</div>
+	]
+
+	@ Attention ([BASIC] Group)
+	AsomeBot may fall if connected to other motions when the feet have moved heavily. Putting [Attention] between each motion will let AsomeBot to stand at attention to prevent from falling.
+	[block_image ./images/blocks/18-17.png
+		asomebot.home()
+	]
+
+	@ Dance moves without Option ([DANCE] Group)
+	[block_image ./images/blocks/18-18.png
+		asomebot.ballet()
+	]
+	Perform ballet moves by standing the toes of AsomeBot.
+
+	[block_image ./images/blocks/18-19.png
+		asomebot.wiggle()
+	]
+	AsomeBot wiggles in place.
+
+	[block_image ./images/blocks/18-20.png
+		asomebot.flap()
+	]
+	AsomeBot flaps its feet.
+
+	[block_image ./images/blocks/18-21.png
+		asomebot.warigari()
+	]
+	AsomeBot performs Warigari with its feet.
+
+	[block_image ./images/blocks/18-22.png
+		asomebot.yaho()
+	]
+	AsomeBot lifts up the tiptoe of the feet. The opposite of ballet motion.
+
+	[block_image ./images/blocks/18-23.png
+		asomebot.moonwalk()
+	]
+	AsomeBot performs moonwalk dance.
+
+	@ Dance Moves with Option ([DANCE] Group)
+	Select the direction to move AsomeBot’s foot direction in the option of all dance moves.
+	[block_image ./images/blocks/18-24.png
+		asomebot.mouse(1)
+	]
+	Lift up one foot of AsomeBot and execute the motion.
+
+	[block_image ./images/blocks/18-25.png
+		asomebot.swing(1)
+	]
+	Lift up and fold back one foot of AsomeBot.
+
+	[block_image ./images/blocks/18-26.png
+		asomebot.tick_tock(1)
+	]
+	Fold one foot of AsomeBot back and wag once.
+
+	@ Buzzer on ([SOUND] Group)
+	Make the buzzer unable to use. To make sound with the buzzer, you must use this block. Note that if the block is not used first, you cannot use the block.
+	[block_image ./images/blocks/18-27.png
+		turnoff_pins( (1, 5, 6, 7, 8) )
+		import music
+		music.open(1)
+	]
+
+	@ Buzzer off ([SOUND] Group)
+	This allows you to use other parts again after using the buzzer. You cannot use other parts while using the buzzer. After playing the music, the block must be used to run other components.
+	[block_image ./images/blocks/18-28.png
+		turnoff_pins( (1, 5, 6, 7, 8) )
+		import asomebot
+		asomebot.ready(5, 6, 7, 8)
+	]
+
+	@ Play for ([SOUND] Group)
+	Using this block, you can make the sound you want using the frequency.
+	[block_image ./images/blocks/18-29.png
+		music.note("C1",1*1000)
+	]
+	① Select the scale from the list that you want to play.
+	② Select the octave of scale from the list to play.
+	③ Specify the time to make the sound.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_eng.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">Make the sound of Do, Mi, and Sol tones for 4-octave for 0.3 seconds each.</p>
+		</div>
+
+
+4. Play Activity
+	@ Game Rule
+	① Let's talk about how and when to start weather forecasting. 
+	② Let's talk about how AsomeBot can express the weather.
+	③ Besides the weather, talk about what other information (temperature, humidity, and fine dust) can be forecast.
+	④ Besides the water, talk about what other data services you can download and forecast from the Internet.
+
+	@ Algorithm
+	① Set to download weather data from the Internet.
+	② Develop motions to run according to the weather.
+	③ Decide which conditions should be forecast when the condition is met and develop  a program.
+	④ Develop a program that performs the motion for today's weather when the condition is met.
+	⑤ Add programs to make it more interesting.
+	[image ./images/blocks/18-30.png]
+
+	@ Create and show off a weather forecasting program
+	[image ./images/blocks/18-31.png]
+
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]

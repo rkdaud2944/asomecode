@@ -1,0 +1,304 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<head>
+<!-- AsomeHeader Start -->
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>AsomeCode</title>
+    <meta name="Robots" content="all" />
+    <meta name="reply-to" content="" />
+    <meta name="date" content="" />
+
+    <link rel="stylesheet" href="../../common/css/AsomeCODE.css">
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/highlight.css">
+    <link rel="stylesheet" href="../../common/css/vs2015.css">
+    <link rel="stylesheet" href="../../common/css/quiz_css.css">
+
+    <script src="../../common/js/jquery-3.2.1.min.js"></script>
+
+    <link rel="stylesheet" href="../../common/css/bootstrap.min.css">
+    <script src="../../common/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="../../common/css/jodit.min.css"/>
+    <link rel="stylesheet" href="../../common/css/prism.css"/>
+    <script src="../../common/js/jodit.min.js"></script>
+    <script src="../../common/js/prism.js"></script>
+
+    <script src="../../common/js/AsomeCODE.js"></script>
+    <script src="../../common/js/board.js"></script>
+    <script src="../../common/js/highlight.pack.js"></script>
+    <script src="../../common/js/highlightjs-line-numbers.min.js"></script>
+
+    <script src="../../common/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../common/ace/ext-static_highlight.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../common/ace/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+<!-- AsomeHeader End -->
+</head>
+
+<body class="p3">    
+
+    <div class="modal fade" id="video_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <video id="video_player" width="100%" controls>
+                        <source id="video_src" type="video/webm" src=""/>
+                        <track id="video_subtitle" kind="subtitles" srclang="en" label="english" src="" default>
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="wrap">
+        <ul class="blind">
+            <li><a href="#contents">본문 바로가기(Skip Contents)</a></li>
+        </ul>
+        <div id="mobile">
+            <div class="logo">
+                <a href="javascript:void(0);"><img src="../../common/images/logom.png"></a>
+                <div class="m"><a><img src="../../common/images/mobile_m.png"></a></div>
+            </div>
+            <div class="mobile_top">
+                <div class="top_m">
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')">
+                        <img class="image-btn" filename="../../common/images/mobile_01.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeConnect')">
+                        <img class="image-btn" filename="../../common/images/mobile_02.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=ShowEditor')">
+                        <img class="image-btn" filename="../../common/images/mobile_03.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+                        <img class="image-btn last" filename="../../common/images/mobile_04.png">
+                    </a>
+                </div>
+                <div class="top_m">
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeReboot')">
+                        <img class="image-btn" filename="../../common/images/mobile_05.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeFormat')">
+                        <img class="image-btn" filename="../../common/images/mobile_06.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeUpdate')">
+                        <img class="image-btn" filename="../../common/images/mobile_07.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeBlock')">
+                        <img class="image-btn last" filename="../../common/images/blockcoding.png">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="header">
+            <ul class="left">
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeConnect')">
+                    <img class="image-btn" filename="../../common/images/top_01.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')">
+                    <img class="image-btn" filename="../../common/images/top_02.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=ShowEditor')">
+                    <img class="image-btn" filename="../../common/images/top_03.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+                    <img class="image-btn" filename="../../common/images/top_05.png">
+                </a></li>
+            </ul>
+            <ul class="right">
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeReboot')">
+                    <img class="image-btn" filename="../../common/images/top_04.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeFormat')">
+                    <img class="image-btn" filename="../../common/images/top_06.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeUpdate')">
+                    <img class="image-btn" filename="../../common/images/top_07.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeBlock')">
+                    <img class="image-btn" filename="../../common/images/blockcoding.png">
+                </a></li>
+                <li> &nbsp; </li>
+                <a href="javascript:void(0);" onclick="logout()"><img src="../../common/images/logout.png" id="bt_logout" class="last"></a>
+            </ul>
+        </div>
+        <div class="mobile_nav3"></div>
+        <div id="p3_header">
+            <ul>
+                <li class="headleft"><a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')"><img src="../../common/images/logo.png"></a></li>
+                <li class="headright"></li>
+            </ul>
+        </div>
+
+        <div id="p3_container">
+            <div class="left">
+                <div class="top">
+                    <div class="link_list"><a href="javascript:void(0);" onclick="run_cmd('Code=GoBack')"><img src="../../common/images/p3_list.png" alt="강의목록"></a></div>
+                    <div class="header_text"><div id="chapter" class="chapter">Unit {0}</div>
+                        <br>
+
+                        Mari kita membuat AsomeBot bernyanyi
+                    </div>
+                </div>
+                <div class="beg">
+                    <ul>
+                        <li><a href="javascript:fnMove('pn1')">1. Tujuan pembelajaran</a></li>
+<li><a href="javascript:fnMove('pn2')">2. Pratinjau</a></li>
+<li><a href="javascript:fnMove('pn3')">3. Pelajari blok mana yang akan digunakan</a></li>
+<li><a href="javascript:fnMove('pn4')">4. Aktivitas bermain</a></li>
+
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="right">
+                <div class="contents">
+                    <br>
+
+<li class="lefts bold" id="pn1">1. Tujuan pembelajaran<span class="video_button" level="block" filename="01.ch01"></span></li>
+<div style="max-width: 600px;"><video width="100%" controls>
+<source id="video_src" type="video/webm" src="./video/block/01/09.execute.webm"/>
+Your browser does not support HTML5 video.</video></div>
+<p class="main_text">• Pelajari cara membuat suara menggunakan buzzer AsomeBot.<br>
+• Mainkan lagu anak-anak menggunakan skala<br>
+</p>
+<br>
+<br>
+
+<li class="lefts bold" id="pn2">2. Pratinjau<span class="video_button" level="block" filename="01.ch02"></span></li>
+<p class="main_text"><strong>A. Cara mengirim suara</strong></p>
+<p class="main_text">Suara adalah getaran yang disebabkan benda, instrumen, atau orang</p>
+<p class="main_text">bergerak ke udara di sekitar kita dan mentransmisikan ke telinga kita.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/09-01.png"></div>
+<br>
+<p class="main_text"><strong>B. Bagaimana komputer meniru suara</strong></p>
+<p class="main_text">Komputer dapat meniru ketinggian nada menggunakan frekuensi suara.</p>
+<p class="main_text">Ia juga bisa meniru kekuatan dan bentuk suara, ketika proses meniru suara dibuat lebih akurat.</p>
+<br>
+<p class="main_text">3 elemen suara</p>
+<p class="main_text">• kekuatan : Intensitas dan kelemahan suara<br>
+• tinggi : Derajat suara tinggi dan rendah<br>
+• bentuk : Ini juga disebut nada<br>
+</p>
+<p class="main_text">        Dibedakan oleh bentuk gelombang</p>
+<p class="main_text">        Alasan orang memiliki suara yang berbeda</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/09-02.png"></div>
+<br>
+<p class="main_text"><strong>C. Siapa yang membuat skala nada?</strong></p>
+<p class="main_text">Skala delapan nada, Do-Re-Mi-Fa-Sol-La-Si-Do, dibuat oleh Pythagoras seorang ahli matematika terkenal.</p>
+<p class="main_text">Pythagoras, yang sedang melewati pandai besi, mendengar orang-orang memalu besi dengan palu yang berbeda, mendapatkan formula untuk suara, dan membuat skala delapan nada yang kami gunakan.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/09-03.png"></div>
+<br>
+<p class="main_text"><strong>D. Not dan kode</strong></p>
+<p class="main_text">Jika Anda menggunakan semua tulisan not, hurufnya akan terlalu banyak, oleh karenanya program hanya menggunakan kode yang terdiri dari satu karakter dan oktaf.</p>
+<p class="main_text">Skala yang paling sering kita gunakan adalah tiga oktaf.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/09-04.png"></div>
+<br>
+<br>
+
+<li class="lefts bold" id="pn3">3. Pelajari blok mana yang akan digunakan<span class="video_button" level="block" filename="01.ch03"></span></li>
+<p class="main_text"><strong>A. Hidupkan bel - Buzzer on (Grup SOUND)</strong></p>
+<p class="main_text">Blok ini membuat bel tersedia untuk digunakan. Blok ini harus digunakan sebelum bel berbunyi.</p>
+<p class="main_text">PERINGATAN. Tidak dapat membunyikan bel kecuali Anda menggunakan blok ini terlebih dahulu.</p>
+<div id="src_1" style="display: none;">turnoff_pins( (1, 5, 6, 7, 8) )
+import music
+music.open(1)
+</div>
+<img class="block_image" src="./images/blocks/09-05.png" onclick="run_code($('#src_1').text())">
+<br>
+<p class="main_text"><strong>B. Matikan bel - Buzzer off (Grup SOUND)</strong></p>
+<p class="main_text">Ini memungkinkan Anda untuk selesai menggunakan bel dan menggunakan bagian lain lagi.</p>
+<p class="main_text">Anda tidak dapat menggunakan bagian lain selama menggunakan bel.</p>
+<p class="main_text">Setelah selesai bermain, Anda harus menggunakan blok ini untuk menggunakan bagian lain.</p>
+<div id="src_2" style="display: none;">turnoff_pins( (1, 5, 6, 7, 8) )
+import asomebot
+asomebot.ready(5, 6, 7, 8)
+</div>
+<img class="block_image" src="./images/blocks/09-06.png" onclick="run_code($('#src_2').text())">
+<br>
+<p class="main_text"><strong>C. Buat suara – make sound (Grup SOUND)</strong></p>
+<p class="main_text">Anda dapat membuat suara yang Anda inginkan berdasarkan frekuensi dengan blok ini.</p>
+<div id="src_3" style="display: none;">music.tone(0)
+delay(1)
+music.mute()
+</div>
+<img class="block_image" src="./images/blocks/09-07.png" onclick="run_code($('#src_3').text())">
+<p class="main_text">① Masukkan frekuensi yang ingin Anda dengarkan</p>
+<p class="main_text">② Masukkan waktu bermain</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/09-09.png"></div>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_indonesia.png">
+<p class="quiz_line"></p>
+<p class="main_text">• Masukkan 196 ke frekuensi dan dengarkan suara. Suara apa yang sesuai dengan skala yang dapat Anda dengar?<br>
+</p>
+</div>
+
+<br>
+<p class="main_text"><strong>D. Mainkan untuk – Play for (Grup SOUND)</strong></p>
+<p class="main_text">Anda dapat membuat suara yang Anda inginkan berdasarkan frekuensi dengan blok ini.</p>
+<div id="src_4" style="display: none;">music.note("C1",1*1000)
+</div>
+<img class="block_image" src="./images/blocks/09-08.png" onclick="run_code($('#src_4').text())">
+<p class="main_text">① Pilih catatan yang ingin Anda mainkan.</p>
+<p class="main_text">② Pilih oktaf.</p>
+<p class="main_text">③ Masukkan waktu bermain</p>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_indonesia.png">
+<p class="quiz_line"></p>
+<p class="main_text">• Mainkan Fa 3-oktaf selama 0,5 detik.<br>
+</p>
+</div>
+
+<br>
+<p class="main_text"><strong>E. Ketukan dan Tempo</strong></p>
+<p class="main_text">Di bawah ini adalah waktu ketukan yang kita gunakan.</p>
+<p class="main_text">Buat program yang dapat menunjukkan setiap ketukan, saat Anda memutar musik.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/09-10.png"></div>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_indonesia.png">
+<p class="quiz_line"></p>
+<p class="main_text">① Keluarkan G 3-oktaf dalam quaver.<br>
+② Menggunakan blok [Make Sound of in Secs], Buat program yang bertambah 50 dari 0 hingga 1000 dan periksa bagaimana suara berubah.<br>
+</p>
+</div>
+
+<br>
+<br>
+
+<li class="lefts bold" id="pn4">4. Aktivitas bermain<span class="video_button" level="block" filename="01.ch04"></span></li>
+<p class="main_text"><strong>A. Aturan main</strong></p>
+<p class="main_text">① Menggunakan not lagu, buat program yang memainkan lagu anak-anak.</p>
+<p class="main_text">②Gunakan blok sound yang Anda pelajari sebelumnya dan buat program untuk memutar musik yang Anda inginkan.</p>
+<br>
+<p class="main_text"><strong>B. Algoritma</strong></p>
+<p class="main_text">Untuk memutar musik, Anda harus terlebih dahulu bersiap untuk menggunakan bel. Dan kemudian, tata letak blok sesuai dengan tangga nada dan ketukannya, dan pada akhir komposisi lagu, Anda meletakkan blok untuk mematikan bel.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/09-11.png"></div>
+<br>
+<p class="main_text"><strong>C. Mainkan game</strong></p>
+<p class="main_text">Dengarkan musik dan lihat musik siapa yang terdengar lebih baik.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/09-12.png"></div>
+<br>
+<script type="text/javascript">
+    $(".video_button").css("display", "none");
+</script>
+
+
+
+                </div>
+            </div>
+
+        </div>
+        <!-- //container -->
+    </div>
+    <!-- //wrap -->
+</body>
+
+</html>

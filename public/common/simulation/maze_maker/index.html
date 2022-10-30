@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	<title>AsomeIT</title>
+
+	<link rel="stylesheet" href="../../../common/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../common/css/AsomeCODE.css">
+
+    <script src="../../../common/js/jquery-1.9.1.js"></script>
+	<script src="../../../common/js/bootstrap.min.js"></script>
+</head>
+
+<body style="overflow-x: hidden; overflow-y: hidden;">
+	<div id="screen" style="position: relative;">
+		<img src="back.png" style="position: absolute;">
+		<img src="blank.png" style="position: absolute; left: 40px; top: -12px;">
+		<img src="blank.png" style="position: absolute; left: 328px; top: 268px;">
+	</div>
+
+	<script type="text/javascript">
+		String.format = function() {
+			var s = arguments[0];
+			for (var i = 0; i < arguments.length - 1; i++) {
+				var reg = new RegExp("\\{" + i + "\\}", "gm");
+				s = s.replace(reg, arguments[i + 1]);
+			}
+			return s;
+		}
+
+		window.onload = function() {
+			App.run_cmd("Code=Input/Text=### Simulation started");
+
+			var html = "<img id=cell_{0} src='blank.png' style='position: absolute; left: {1}px; top: {2}px;'>";
+			for (var y=0; y<8; y++) {
+				for (var x=0; x<10; x++) {
+					$("#screen").append( String.format(html, x + y * 10, x*32 + 40, y*32 + 20) );
+				}
+			}
+
+			html = "<img id='dot' src='dot.png' style='position: absolute; left: {0}px; top: {1}px;'>";
+			$("#screen").append( String.format(html, 40, 20) );
+		}
+
+		function set_cell_type(x, y, cell_type) {
+			var obj = document.getElementById( String.format("cell_{0}", x + y * 10) );
+			if (cell_type == 0) {
+				$(obj).attr("src", "blank.png");
+			} else {
+				$(obj).attr("src", "wall.png");
+			}
+		}
+
+		function move_xy(x, y) {
+			$("#dot").css("left", 32 * x + 40);
+			$("#dot").css("top",  32 * y + 20);
+		}
+	</script>
+</body>
+</html>

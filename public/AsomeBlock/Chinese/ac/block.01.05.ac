@@ -1,0 +1,87 @@
+与机器人进行保龄球比赛
+
+1. 学习目标
+	[video ./video/block/01/05.execute.webm]
+	* AsomeBot可以打保龄球。
+	* 如何击倒更多的球瓶。
+
+
+2. 预习
+	@ 保龄球规则
+	保龄球是用一个大球将10个球瓶击倒，数量最多的为胜者的游戏。
+	[image ./images/blocks/05-01.png]
+
+	@ 如何击倒更多的球瓶
+	击倒更多球瓶的方法是，先打中1号球瓶，当它倒下时能够击到更多的球瓶。
+	[image ./images/blocks/05-02.png]
+
+
+3. 学习模块指令
+	@ 向前移动 Move forward ([WALK] 组)
+	按照设定的步数向前步行。
+	[block_image ./images/blocks/03-07.png
+		for i in range(1): asomebot.forward()
+	]
+	点击后，输入前行的步数. 输入1则左脚和右脚各走一步。
+
+	@ 向后移动 Move backward ([WALK] 组)
+	按照设定的步数向后移动。
+	[block_image ./images/blocks/03-08.png
+		for i in range(1): asomebot.backward()
+	]
+	点击后，输入向后移动的步数. 输入1则左脚和右脚各走一步。
+
+	@ 左转 Turn Left ([WALK] 组)
+	按照输入的步数左转行走。
+	[block_image ./images/blocks/03-09.png
+		for i in range(1): asomebot.turn_left()
+	]
+	点击后，输入左转的步数。要旋转90度, 机器人需要转3 ~ 4 次。
+
+	@ 右转 Turn Right ([WALK] 组)
+	按照输入的步数右转行走。
+	[block_image ./images/blocks/03-10.png
+		for i in range(1): asomebot.turn_right()
+	]
+	点击后，输入右转的步数. 要旋转90度, 机器人得转 3 ~ 4 次。
+
+	@ 延迟 Delay ([ADVANCE] 组)
+	等待特定的时间。
+	[block_image ./images/blocks/delay.png
+		delay(1)
+	]
+	点击后，输入等待时间，单位为秒。
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_china.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">• 查看AsomeBot需要走多少步才能达到1号球瓶。<br>
+		</p>
+		</div>
+	]
+
+
+4. 互动游戏
+	@ 游戏规则
+	① 用AsomeBot代替保龄球。
+	② AsomeBot 不管往什么方向行走，只能步行50步。
+	③ 击倒更多球瓶的机器人为获胜者。
+	④ 如果击倒的球瓶数量相等, 步数最少的获胜。
+	[image ./images/blocks/05-03.png]
+
+	@ 算法
+	哪种方法击倒的球瓶会更多呢?
+	[image ./images/blocks/05-04.png] ①
+	[image ./images/blocks/05-05.png] ②
+	[image ./images/blocks/05-06.png] ③
+
+	@ 玩游戏
+	玩个游戏，在50步内，看谁击倒的球瓶数更多。
+	[image ./images/blocks/05-07.jpg]
+	
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]

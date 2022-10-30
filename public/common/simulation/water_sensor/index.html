@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <title>AsomeIT</title>
+
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/AsomeCODE.css">
+
+    <script src="../../js/AsomeCODE.js"></script>
+    <script src="../../js/jquery-1.9.1.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+</head>
+
+<body style="overflow-x: hidden; overflow-y: hidden;">
+    <div style="position: relative;">
+        <img src="back.png" style="position: absolute;">
+        <img id="water_1" src="water_1.png" style="position: absolute; left: 0px; top: 0px; display: none;">
+        <img id="water_2" src="water_2.png" style="position: absolute; left: 0px; top: 0px; display: none;">
+        <img id="water_3" src="water_3.png" style="position: absolute; left: 0px; top: 0px; display: none;">
+        <img id="water_4" src="water_4.png" style="position: absolute; left: 0px; top: 0px; display: none;">
+        <img id="level_0" src="level_0.png" onclick="write_value(0)"  style="position: absolute; left: 220px; top: 260px;">
+        <img id="level_1" src="level_1.png" onclick="write_value(10)" style="position: absolute; left: 220px; top: 230px;">
+        <img id="level_2" src="level_2.png" onclick="write_value(20)" style="position: absolute; left: 220px; top: 200px;">
+        <img id="level_3" src="level_3.png" onclick="write_value(30)" style="position: absolute; left: 220px; top: 170px;">
+        <img id="level_4" src="level_4.png" onclick="write_value(40)" style="position: absolute; left: 220px; top: 140px;">
+    </div>
+
+    <script type="text/javascript">
+        function write_value(value) {
+            $("#water_1").css("display", "none");
+            $("#water_2").css("display", "none");
+            $("#water_3").css("display", "none");
+            $("#water_4").css("display", "none");
+
+            switch (value) {
+                case 10: $("#water_1").css("display", "block"); break;
+                case 20: $("#water_2").css("display", "block"); break;
+                case 30: $("#water_3").css("display", "block"); break;
+                case 40: $("#water_4").css("display", "block"); break;
+            }
+
+            var text = "Code=Input/Text={0}/";
+            App.run_cmd(String.format(text, value));
+        }
+    </script>   
+</body>
+</html>

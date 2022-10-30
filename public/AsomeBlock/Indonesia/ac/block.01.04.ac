@@ -1,0 +1,101 @@
+Membuat AsomeBot berjalan lurus
+
+1. Tujuan pembelajaran
+	[video ./video/block/01/04.execute.webm]
+	* Sesuaikan sudut setiap motor pada kaki AsomeBot.
+	* Sesuaikan sudut kaki untuk membiarkan AsomeBot berjalan lurus.
+
+
+2. Pratinjau
+	@ Mengapa AsomeBot tidak bisa berjalan lurus
+	Ini karena sudut dasar dari empat motor AsomeBot tidak benar. Juga, ia tidak dapat berjalan lurus karena tingkat selip di lantai atau pusat gravitasi AsomeBot. Jika demikian, ubahlah sudut kaki AsomeBot sedikit.
+	[image ./images/blocks/04-01.png]
+
+	@ Jumlah motor
+	Keempat motor AsomeBot diberi nomor seperti yang ditunjukkan pada gambar berikut, Ketika ingin mengubah sudutnya dengan blok coding , ingat nomor motor dan ubah sudut motor yang diinginkan.
+	[image ./images/blocks/04-02.png]
+
+
+3. Pelajari blok mana yang akan digunakan
+	@ Setel alignment/penjajaran (Grup BASIC)
+	Anda dapat menyesuaikan nilai sudut dari empat motor yang terhubung ke AsomeBot. Sudut berubah dengan menyesuaikan sudut dengan blok Set align dan menambahkan blok Attention, dan kemudian jalankan robot. Pastikan untuk mengingat sudut karena sudut yang diubah perlu diatur ulang jika koneksi terputus.
+	[block_image ./images/blocks/04-03.png
+		asomebot.align(90,90,90,90)
+	]
+	① Sesuaikan sudut motor No.1. Motor ini pada dasarnya diatur pada 90 derajat.
+	② Sesuaikan sudut motor No.2. Motor ini pada dasarnya diatur pada 90 derajat.
+	③ Sesuaikan sudut motor No.3. Motor ini pada dasarnya diatur pada 90 derajat.
+	④ Sesuaikan sudut motor No.4. Motor ini pada dasarnya diatur pada 90 derajat.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_indonesia.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Sesuaikan sudut setiap motor lebih dari 90 derajat dan sesuaikan kembali menjadi kurang dari 90 derajat. Lihat bagaimana setiap motor mengubah arah.<br>
+		② Sesuaikan sudut sehingga semua kaki AsomeBot berada di sudut kanan.
+		</p>
+		</div>
+	]
+
+	@ Attention (Grup BASIC)
+	Kaki-kaki AsomeBot selaras (Attention).
+	[block_image ./images/blocks/attention.png
+		asomebot.home()
+	]
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_indonesia.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">• Buat program blok-coding yang AsomeBot jalani 3 langkah dan berdiri tegak.<br>
+		</p>
+		</div>
+	]
+
+	@ Tunda - Delay (Grup ADVANCE)
+	Tunggu hingga jumlah detik yang ditentukan berfungsi.
+	[block_image ./images/blocks/delay.png
+		delay(1)
+	]
+	① Masukkan jumlah detik untuk menunggu setelah klik. 
+
+	@ Masalah yang disebabkan ketika sudutnya berbeda
+	[image ./images/blocks/04-07.png]
+	Jika sudut No. 0 dan No. 1 berbeda, jarak bergerak antara kiri dan kanan berbeda.
+
+	[image ./images/blocks/04-08.png]
+	Jika sudut No. 2 dan No. 3 berbeda, ketinggian mengangkat kakinya berbeda.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_indonesia.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Atur sudut satu kaki untuk mengangkat banyak, seperti gambar di bawah ini, dan biarkan AsomeBot berjalan maju. Bagaimana cara kerjanya?<br>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/04-05.png"></div>
+		</p>
+		<p class="main_text">② Bagaimana Anda mengatur sudut kaki AsomeBot agar berjalan dalam lingkaran seperti di bawah ini?<br>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/04-06.png"></div>
+		</p>
+		</div>
+	]
+
+
+4. Aktivitas bermain
+	@ Aturan main
+	① Sesuaikan sudut keempat motor AsomeBot untuk berjalan lurus.
+	② Berlomba untuk melihat siapa yang berlari cepat tanpa meninggalkan lapangan sambil berlari ke titik tujuan. (Robot didiskualifikasi jika meninggalkan garis pinggir.)
+	[image ./images/blocks/04-10.jpg]
+
+	@ Algoritma
+	① Sesuaikan sudut sedikit pada 90 derajat untuk membiarkan AsomeBot berjalan lurus.
+	② Tunda selama 5 detik dengan blok Delay, lalu biarkan robot berjalan 50 langkah ke depan.
+	[image ./images/blocks/04-09.png]
+
+	@ Mainkan game
+	Jalankan blok dan mainkan permainan di garis start.
+	
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]	

@@ -1,0 +1,144 @@
+Hãy làm robot nhảy
+
+1. Mục tiêu bài học
+	[video ./video/block/01/12.execute.webm]
+	* Hãy cùng tìm hiểu các bước nhảy khác nhau của AsomeBot.
+	* Hãy cùng tìm hiểu các phương pháp về điều đó chờ mà không di chuyển trong vài giây được chỉ định.
+
+
+2. Preview
+	@ AsomeBot có thể trình diễn các điệu nhảy
+	AsomeBot không chỉ có thể đi bộ mà còn nhảy rất đa dạng.
+	[image ./images/blocks/12-01.png]
+
+	@ Làm thế nào để khiến cho robot nhảy?
+	Bạn có thể thực hiện nhiều chuyển động khác nhau bằng cách đặt góc của bốn động cơ được kết nối với AsomeBot và lượng thời gian chúng di chuyển. 
+	Sau đây là cách thực hiện một động tác vẫy chân.
+	[image ./images/blocks/12-02.png]
+
+	@ AsomeBot dễ bị hư hại, đặc biệt là khi bạn làm nó ngã xuống
+	Bạn có thể thực hiện nhiều chuyển động khác nhau bằng cách đặt góc của bốn động cơ được kết nối với AsomeBot và lượng thời gian chúng di chuyển. Nếu bạn nghĩ rằng chân AsomeBot bị xoắn, hãy đặt lệnh [Attention] vào giữa các chuyển động.
+	[image ./images/blocks/12-03.png]
+
+
+3. Học những khối để dùng trong bài này
+	@ Attention (nhóm [BASIC])
+	Nếu AsomeBot di chuyển đôi chân của mình giống như [Ballet] và kết nối các chuyển động khác ngay lập tức, nó có thể ngã xuống.
+	Đặt lệnh [Attention] giữa các chuyển động để khiến AsomeBot không ngã xuống.
+	[block_image ./images/blocks/04-04.png
+		asomebot.home()
+	]
+	
+	@ Các điệu nhảy mà không có tùy chọn (nhóm [DANCE])
+	[block_image ./images/blocks/12-04.png
+		asomebot.ballet()
+	]
+	AsomeBot thực hiện động tác giống như múa ba lê bằng cách nhấc chân.
+
+	[block_image ./images/blocks/12-05.png
+		asomebot.wiggle()
+	]
+	AsomeBot diễu hành tại chỗ.
+
+	[block_image ./images/blocks/12-06.png
+		asomebot.flap()
+	]
+	AsomeBot vỗ chân.
+
+	[block_image ./images/blocks/12-07.png
+		asomebot.warigari()
+	]
+	AsomeBot chà chân.
+
+	[block_image ./images/blocks/12-08.png
+		asomebot.yaho()
+	]
+	AsomeBot nâng mũi chân của nó. Yaho là hành động ngược của [Ballet]
+
+	[block_image ./images/blocks/12-09.png
+		asomebot.moonwalk()
+	]
+	AsomeBot nhảy điệu moon-walk.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_veitnam.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Ballet chỉ di chuyển các ngón chân. Kết nối và thử một hành động khác để cho robot thực hiện chuyển động giống như múa ballet.</p>
+		<p class="main_text">② Kết hợp các bước nhảy mà không đòi hỏi một tùy chọn và tạo ra một chương trình nhảy.</p>
+		</div>
+	]
+
+	@ Các bước nhảy tùy chọn (nhóm [DANCE])
+	Chọn chân bên nào của AsomeBot để di chuyển trong các tùy chọn.
+	[block_image ./images/blocks/12-10.png
+		asomebot.mouse(1)
+	]
+	[Mouse] là để nâng và di chuyển một chân của Asomebot.
+
+	[block_image ./images/blocks/12-11.png
+		asomebot.swing(1)
+	]
+	Nhấc một chân của AsomeBot và quay lại.
+
+	[block_image ./images/blocks/12-12.png
+		asomebot.tick_tock(1)
+	]
+	quay chân của Asomebot lại và lắc lên xuống một lần.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_veitnam.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">* Sử dụng các chuyển động của Mouse, Swing, và TickTock, tạo ra một chương trình di chuyển cả hai chân cùng một lúc.</p>
+		</div>
+	]
+
+	@ Lặp lại (nhóm [ADVANCE])
+	Lặp lại bao nhiêu lần mà bạn muốn
+	[block_image ./images/blocks/12-13.png
+		for count in range(1):
+  		  pass
+	]
+	① Nhập số lần để lặp lại một chuyển động
+	② Thêm khối để lặp lại.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_veitnam.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Tạo một chương trình nhảy bằng cách lắp ráp các khối như hình.</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/12-14.png"></div>
+		<p class="main_text">② Những khối nào bạn cần phải lắp ráp để tạo ra một điệu nhảy AsomeBot giống như một B-boying với việc nhấc chân?</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/12-15.png"></div>
+		<p class="main_text">③ Tạo một chương trình sử dụng [Attention] ít nhất có thể và thực hiện tất cả các khối trong nhóm [DANCE] một lần mà không làm robot ngã xuống.</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/12-16.png"></div>
+		</div>
+	]
+
+
+4. Chơi trò chơi
+	@ Luật chơi
+	① Chọn bài hát nào sẽ sử dụng cho cuộc thi nhảy và phần nào sẽ sử dụng (dưới 30 giây).
+	② Tạo một sân khấu biểu diễn tuyệt vời bằng cách vẽ trên giấy với bạn bè.
+	③ Tạo một chương trình để nhảy theo nhạc.
+	④ Để 5 robot nhảy theo nhạc cùng 1 lúc.
+	⑤ Robot nhảy nhiều nhất theo nhịp nhạc sẽ chiến thắng.
+
+	@ Thuật toán
+	Thật tuyệt khi lắp ráp các bước nhảy tốt, nhưng AsomeBot không nhảy theo nhịp điệu của âm nhạc. Để nhảy theo nhịp, bạn cần biết thời gian cần thiết để thực hiện từng hành động và bạn cần có khả năng sử dụng tốt các lệnh [Delay].
+
+	Bước 01. Một thanh nhạc mất bao nhiêu giây?
+	Bước 02. Mất bao lâu để thực hiện mỗi bước nhảy?
+	Bước 03. nhảy theo nhạc và kiểm tra xem chuyển động và âm nhạc không đồng điệu
+	Bước 04. nhảy theo nhịp bằng cách đặt lệnh [Delay] trên phần mà nhịp và di chuyển không khớp với nhịp.
+
+
+	@ Chơi trò chơi
+	[image ./images/blocks/12-17.png]
+	
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]

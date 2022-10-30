@@ -1,0 +1,224 @@
+Dance like idols
+
+1. Learning Objective
+	[video ./video/block/01/20.execute.webm]
+	* Understand 1:1 and 1:n controlling methods
+	* Create a program that can control multiple AsomeBots at the same time.
+	* Connect various dance moves and develop a new dance program.
+
+
+2. Preview
+	@ Let the robot to dance like idols.
+	You can use AsomeBot's WiFi function to create several robots dance at the same time.
+	[image ./images/blocks/20-01.png]
+
+	How to send signals via WiFi
+	① 1:1 operation
+	Connect your smartphone and AsomeBot to operate one by one.
+	[image ./images/blocks/20-02.png]
+	② Operate several robots at a time
+	After the smartphone sends a signal to the router, the router transmits signals to several AsomeBots for operation.
+	[image ./images/blocks/20-03.png]
+
+	@ How do you make a dance move?
+	You can create various motions by adjusting the angle and moving time of the 4 motors connected to the AsomeBot. You can create the motion to wag foot as follows:
+	[image ./images/blocks/20-04.png]
+
+	@ I want my robot to perform different motions at the same time.
+	Like idols, sometimes you only need to save different motions of the time when you want each AsomeBot to dance a different move.
+	[image ./images/blocks/20-05.png]
+
+	In what order should you build a program?
+	① Let AsomeBot to access to the Internet router.
+	[image ./images/blocks/20-06.png]
+	② Develop dance moves for each robot.
+	[image ./images/blocks/20-07.png]
+	③ Operate with one smartphone.
+	[image ./images/blocks/20-08.png]
+
+
+3. learn which blocks to use
+	@ Connect to internet ([INTERNET] Group)
+	Specify the name and password of the wireless router to which AsomeBot will be connected. To use the block, you must have a wireless Internet router. However, the Internet router does not need to be connected to the Internet.
+	[block_image ./images/blocks/20-09.png
+		import internet
+		internet.connect("","")
+	]
+	① Enter the name of the Internet router.
+	② Enter the password of the Internet router.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/reference_eng.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">Find the Internet router on your smartphone. You can find the name of the wireless router you want to use in the WiFi list and connect to your smartphone. If a message pops up because the Internet connection is unstable, do not press any buttons and wait for the message to disappear.</p>
+		<div class="content_image_box"><img src="./images/blocks/20-10.png" style="width:49%;"><img src="./images/blocks/20-11.png" style="width:49%;"></div>
+		</div>
+	]
+
+	@ Open UDP socket ([INTERNET] Group)
+	AsomeBot opens a port to communicate via the Internet.
+	[block_image ./images/blocks/20-12.png
+		import udp_socket
+		udp_socket.open(1234)
+	]
+	① The port number to be used. Use the number as is without modification.
+
+	@ Read Messages ([INTERNET] Group)
+	Read messages sent from the smartphone.
+	[block_image ./images/blocks/20-13.png
+		msg = udp_socket.read_text()
+	]
+
+	@ Repeat infinitely ([ADVANCE] Group)
+	Run blocks inside blocks to run in order. Here, you will wait for your smartphone App to send a message, and execute the command according to the message.
+	[block_image ./images/blocks/20-14.png
+		while True:
+		  pass
+	]
+
+	@ Repeat ([ADVANCE] Group)
+	Repeat the commands in the block as many times as you want.
+	[block_image ./images/blocks/20-15.png
+		for count in range(1):
+		  pass
+	]
+	① Specify the number of times to repeat.
+	② Add blocks to repeat.
+
+	@ if ([ADVANCE] Group)
+	Execute the block in the block when the detail input as condition is correct. If the condition is incorrect, the block following the if block will be executed.
+	[block_image ./images/blocks/20-16.png
+		if i == :
+	]
+	① Input a variable to be used in the conditional statement. The default value is ‘i’.
+	② Select the default inequality to compare the conditions.
+	③ Input the default value to use in the condition. You need to add blocks to specify the conditional value.
+	④ Add blocks to be executed when the condition is correct.
+
+	@ Character Value ([ADVANCE] Group)
+	The value is used to represent the entered characters rather than variables or numbers.
+	[block_image ./images/blocks/20-17.png
+		''
+	]
+	① Enter characters to be used as a condition.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_eng.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① If you created blocks like below, talk about how they move:</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/20-18.png"></div>
+		<p class="main_text">② Create a program that lets all robots connected to walk forward when pressing the</p> 
+		<div class="content_image_box" style="float:left; margin: 0 1%;">
+		    <img class="content_image" src="./images/blocks/20-19.png" style="width: auto;">
+		</div> 
+		<p class="main_text">button of the AsomeBot Controller. </p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/20-20.png"></div>
+		</div>
+	]
+
+	@ Attention ([BASIC] Group)
+	AsomeBot may fall if connected to other motions when the feet have moved heavily. Putting [Attention] between each motion will let AsomeBot to stand at attention to prevent from falling.
+	[block_image ./images/blocks/20-21.png
+		asomebot.home()
+	]
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_eng.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">Create and run a program that poses stand at attention after ballet motions.</p>
+		</div>
+	]
+
+	@ Dance Moves without Option ([DANCE] Group)
+	[block_image ./images/blocks/20-22.png
+		asomebot.ballet()
+	]
+	Perform ballet moves by standing the toes of AsomeBot.
+
+	[block_image ./images/blocks/20-23.png
+		asomebot.wiggle()
+	]
+	AsomeBot wiggles in place.
+
+	[block_image ./images/blocks/20-24.png
+		asomebot.flap()
+	]
+	AsomeBot flaps its feet.
+
+	[block_image ./images/blocks/20-25.png
+		asomebot.warigari()
+	]
+	AsomeBot performs Warigari with its feet.
+
+	[block_image ./images/blocks/20-26.png
+		asomebot.yaho()
+	]
+	AsomeBot lifts up the tiptoe of the feet. The opposite of ballet motion.
+
+	[block_image ./images/blocks/20-27.png
+		asomebot.moonwalk()
+	]
+	AsomeBot performs moonwalk dance.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_eng.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">Combine dance moves that don’t require an option and create a dance program.</p>
+		</div>
+	]
+
+	@ Dance Moves with Option ([DANCE] Group)
+	Select the direction to move AsomeBot’s foot in the option of all dance moves.
+	[block_image ./images/blocks/20-28.png
+		asomebot.mouse(1)
+	]
+	Lift up one foot of AsomeBot and execute the motion.
+
+	[block_image ./images/blocks/20-29.png
+		asomebot.swing(1)
+	]
+	Lift up and fold back one foot of AsomeBot.
+
+	[block_image ./images/blocks/20-30.png
+		asomebot.tick_tock(1)
+	]
+	Fold one foot of AsomeBot back and wag once.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_eng.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Mouse is made by Korean elementary school students. The student mimicked the scene whistling</p>
+		<p class="main_text">② with moving feet in Mickey Mouse animation and named his project “Mouse”.<br>
+		Using Swing and TickTock motions, create a program that moves the feet at a time.</p>
+		</div>
+	]
+
+
+4. Play Activity
+	@ Game Rule
+	① You need to decide what music to use for a dance competition and the part to be used (less than 30 seconds).
+	② Draw a great performance stage on paper with your friends. 
+	③ Form a team of 3-5 AsomeBots.
+	④ Create a program so that AsomeBot of a team to dance to the music in harmony.
+
+	@ Algorithm
+	What should you do to create a program that lets multiple AsomeBots dance in the same motion?
+	① Determine how many seconds the beat of the measure of a song is used.
+	② Check the time it takes to perform each dance move.
+	③ Arrange the dance moves to the music and check where the beat of motion and music don’t fit.
+	④ Inset the [Delay] command in the area where the beat does not match the move.
+	⑤ Specify each AsomeBot's move differently where needed.
+
+	@ Play game
+	[image ./images/blocks/20-31.png]
+
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]

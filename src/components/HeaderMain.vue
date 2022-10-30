@@ -41,10 +41,13 @@
                     <img src="../../public/images/common/help.png" class="ui-img">
                     <p class="ui-right-font" id="fs-three">HELP</p>
                 </li>
-                <li @click="openUrl('metaverse', 'http://www.metalive.be:13300/world/')">
+                <li @click="openUrl('AsomeBlock', '/AsomeBlock/AsomeBlock.html?language=Korean')">
+                    Block
+                </li>
+                <li @click="openUrl('metaverse', 'http://www.metalive.be:13300/')">
                     M
                 </li>
-                <li @click="openUrl('BO', '/backOffice')">
+                <li @click="gotoBackOffice">
                     BO
                 </li>
             </ul>
@@ -93,6 +96,13 @@ export default {
 
         update() {
             updateBoard.start();
+        },
+
+        gotoBackOffice() {
+            this.$router.push("/backOffice");
+
+            // 빌드 실행 시에 필요한 코드
+            // this.openUrl('BO', 'app://./index.html?goto=backOffice');
         },
     }
 }

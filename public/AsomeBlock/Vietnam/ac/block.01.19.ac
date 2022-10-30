@@ -1,0 +1,114 @@
+Chỉ huy bằng tay
+
+1. Mục tiêu bài học
+	[video ./video/block/01/19.execute.webm]
+	* Hiểu nguyên tắc của một giá trị trạng thái
+	* Hiểu 4 giá trị trạng thái.
+	* Tạo và thực hiện các hành động khác nhau theo các giá trị trạng thái.
+
+
+2. Preview
+	@ Robot phát hiện chuyển động
+	Bạn đã thấy robot tại các trung tâm mua sắm? Những robot này chăm sóc mọi người và giúp họ có được phương hướng. Để làm điều đó, robot có nhiều cảm biến và chương trình trí tuệ nhân tạo (AI).
+	[image ./images/blocks/19-01.png]
+	
+	@ AsomeBot cũng có thể nhận ra cử chỉ bàn tay.
+	Mặc dù bạn không thể làm cho chúng tuyệt vời như những robot tại các sân bay, AsomeBot có thể hiểu và thực hiện các lệnh mà chúng tôi thực hiện bằng tay. Sau đó, bạn có thể khiến AsomeBot làm những gì bạn muốn mỗi khi bạn tạo một chương trình hoặc thậm chí không cần có máy tính bảng!
+	[image ./images/blocks/19-02.png]
+	Để di chuyển AsomeBot bằng tay của bạn, trước tiên bạn phải sử dụng cảm biến siêu âm. Bạn có thể kiểm tra trạng thái của khoảng cách được đo bằng cảm biến siêu âm thay đổi và thực hiện các hành động mong muốn theo từng điều kiện.
+	[image ./images/blocks/19-03.png]
+	AsomeBot nhận ra tổng cộng 4 giá trị trạng thái.
+	① Trạng thái đầu tiên là một bàn tay (chướng ngại vật) ở một nơi xa (xa hơn 20 cm và gần hơn 50 cm) và sau đó xa hơn hoặc biến mất ( lớn hơn 50 cm). Giá trị trạng thái của trạng thái được lưu dưới dạng '1'. Nó chủ yếu được sử dụng để ngăn chặn AsomeBot hoạt động.
+	[image ./images/blocks/19-04.png]
+	② Trạng thái thứ hai là một bàn tay ở xa (hơn 20 cm và gần hơn 50 cm) đến gần hơn (trong vòng 20 cm). Giá trị trạng thái của trạng thái được lưu dưới dạng '2'. Tại thời điểm này, hãy nói về những chuyển động nên được thực hiện.
+	[image ./images/blocks/19-05.png]
+	③ Trạng thái thứ ba là một bàn tay đang ở gần (trong vòng 20 cm) đột nhiên biến mất hoặc di chuyển nhanh ra khỏi 50 cm. Giá trị trạng thái của trạng thái được lưu dưới dạng '3'. Tại thời điểm này, hãy nói về những chuyển động nên được thực hiện.
+	[image ./images/blocks/19-06.png]
+	④ Thứ tư, khi bàn tay ở gần (trong vòng 20 cm) di chuyển đến một nơi xa trong vòng 50 cm. Giá trị trạng thái của trạng thái được lưu dưới dạng '4'. Tại thời điểm này, hãy nói về những chuyển động nên được thực hiện.
+	[image ./images/blocks/19-07.png]
+
+
+3. Học những khối sử dụng trong bài
+	@ Chuẩn bị cảm biển chuyển động (nhóm [SENSOR])
+	Khối này chuẩn bị tín hiệu tay để được cảm biến siêu âm nhận ra. Đặt khối này trước khối [Check motion sensor] để được kiểm tra tiếp theo.
+	[block_image ./images/blocks/19-08.png
+		# code
+	]
+
+	@ Kiểm tra cảm biến chuyển động (nhóm [SENSOR])
+	Khối này đo trạng thái của cảm biến siêu âm và lưu trữ trong biến ‘motion’. Khối này phải được sử dụng để AsomeBot có thể nhận ra chuyển động hoặc chướng ngại vật của tay.
+	[block_image ./images/blocks/19-09.png
+		# code
+	]
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/reference_vietnam.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">Giá trị trạng thái có thể được lưu trữ trong các biến chuyển động</p>
+		<p class="main_text">1: Một chướng ngại vật ở xa và biến mất</p>
+		<p class="main_text">2: Một chướng ngại vật tiếp cận từ rất xa</p>
+		<p class="main_text">3: Một chướng ngại vật ở khoảng cách gần hơn và biến mất</p>
+		<p class="main_text">4: Một chướng ngại vật ở khoảng cách gần hơn và càng ngày càng xa</p>
+		</div>
+	]
+
+	@ Lặp lại vô tận (nhóm [ADVANCE])
+	Chạy thứ tự khối bên trong khối. Tại đây, bạn có thể sử dụng nó như một chức năng để nhận biết vô hạn trạng thái của tay hoặc chướng ngại vật và thực hiện lệnh theo trạng thái.
+	[block_image ./images/blocks/19-10.png
+		while True:
+		  pass
+	]
+
+	@ nếu (nhóm [ADVANCE])
+	Thực thi khối bên trong khối khi điều kiện đầu vào là chính xác. Nếu điều kiện không chính xác, khối theo sau khối if sẽ được thực thi.
+	[block_image ./images/blocks/19-11.png
+		if i == :
+	]
+	① Nhập một biến được sử dụng trong câu lệnh điều kiện. Giá trị mặc định là ‘i và ở đây, bạn sẽ sử dụng biến ‘motion’.
+	② Chọn bất đẳng thức mặc định để so sánh các điều kiện.
+	③ Nhập giá trị mặc định để sử dụng trong điều kiện. Bạn cần thêm các khối để xác định giá trị có điều kiện.
+	④ Thêm các khối được thực thi khi điều kiện đúng.
+
+	@ Giá trị ký tự (nhóm [ADVANCE])
+	Giá trị được sử dụng để thể hiện các ký tự được nhập thay vì các biến hoặc số.
+	[block_image ./images/blocks/19-12.png
+		''
+	]
+	① Nhập các ký tự được sử dụng làm điều kiện.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_veitnam.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Kiểm tra giá trị trạng thái của chuyển động và nếu giá trị trạng thái là '2', hãy tạo một chương trình mà AsomeBot đi lùi.</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/19-13.png"></div>
+		<p class="main_text">② Tạo một chương trình có các điệu nhảy khác nhau dựa theo trạng thái chuyển động của tay hoặc chướng ngại vật.</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/19-14.png"></div>
+		</div>
+	]
+
+
+4. Chơi trò chơi
+	@ Luật chơi
+	① Nói về chuyển động nào sẽ được tạo cho trạng thái tương ứng với 1-4.
+	※ Chướng ngại vật trong trạng thái 1 và 3 đã biến mất. Do đó, hãy hạn chế chuyển động đi bộ hoặc chuyển động lặp lại quá lâu vì AsomeBot có thể rơi khỏi bàn.
+	② Nói về những gì trạng thái khác có thể được tạo ra với một cảm biến siêu âm.
+	③ Nói về các loại thiết bị hoặc chương trình sẽ thuận tiện để sử dụng với tín hiệu tay.
+
+	@ Thuật toán
+	Làm thế nào nó được thực hiện một chương trình chỉ huy bằng tay? Bây giờ, giới thiệu với bạn bè của bạn về các chức năng mới mà bạn đã tạo.
+	① Chứng minh lệnh chuyển động bằng tay và chia sẻ tên của chuyển động mới.
+	② Cũng chia sẻ lý do tại sao bạn tạo lệnh chuyển động bằng tay.
+	③ Listen to your friends’ hand command story.
+	④ Nói về những chức năng khác bạn có thể thực hiện ngoài các chuyển động bạn đã tạo.
+
+	@ Chơi trò chơi
+	Giới thiệu chương trình chỉ huy bằng tay của bạn.
+	[image ./images/blocks/19-15.png]
+
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]

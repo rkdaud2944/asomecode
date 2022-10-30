@@ -1,0 +1,156 @@
+축구 로봇을 개발해봐요
+
+1. 학습 목표
+	[video ./video/block/01/15.execute.webm]
+	* 로봇 축구에 대해 알아봅니다.
+	* 로봇 축구에 필요한 동작을 만들고 제어해 봅니다.
+
+
+2. 먼저 알아보기
+	@ 축구
+	축구는 두 팀이 상대방의 골대에 공을 차서 넣는 경기입니다. 전 세계적으로 아주 인기가 많은 경기 종목이죠.
+	[image ./images/blocks/15-01.png]
+
+	@ 로봇축구
+	그런데 이런 축구를 로봇으로도 할 수 있습니다. 세계적으로 다양한 로봇 축구 경기대회가 열리고 있습니다.
+	[image ./images/blocks/15-02.jpg]
+	이렇게 조금 쉽게 축구를 할 수 있는 로봇을 사용하기도 합니다.
+	[image ./images/blocks/15-03.jpg]
+
+	@ 어썸봇 축구
+	그럼 우리 어썸봇으로도 축구를 해볼 수 있지 않을까요?
+
+	@ 어썸봇 꾸미기
+	어썸봇이 두 발로 공을 차면서 축구를 할 수도 있지만 그림처럼 어썸봇 몸통을 개조하면 더 쉽게 어썸봇 축구를 즐길 수 있을 거예요. 종이컵, 종이 상자, 우유 팩 등을 이용해서 멋진 축구 어썸봇으로 꾸며보세요.
+
+	@ 축구 경기에 사용할 동작 만들기
+	어썸봇으로 축구를 할 때 필요한 동작들을 미리 번호에 연결해 놓으면 좋을 거예요. 가령 Asome Controller의 1번을 누르면 문워크가 3번 실행되게 하는 거죠.
+	이때 한쪽 발에만 부직포 같은 걸 붙여두면 어썸봇이 옆으로 이동하며 공을 막거나, 원하는 곳으로 공을 몰고 갈 수 있어요.
+	[image ./images/blocks/15-04.png]
+	같은 방법으로 다른 추가 동작들을 만들어보세요. 골을 넣었을 때 사용할 멋진 세레머니 동작은 어떻게 만들면 좋을까요?
+
+
+3. 사용 블록 알아보기
+	@ 비밀번호 없는 와이파이 연결하기 ([INTERNET] 그룹)
+	스마트폰으로 조종할 어썸봇의 이름을 지정합니다.
+	[block_image ./images/blocks/15-05.png
+		import internet
+		internet.open_ap("")
+	]
+	① 사용할 이름을 입력합니다. 영어와 숫자만 사용할 수 있습니다.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① 어썸봇에게 이름을 지어주세요. 어썸봇의 이름으로는 영어와 숫자만 사용할 수 있습니다. 또 한번 이름을 정하면 전원을 껐다 켜도 이름이 유지됩니다.</p>
+		<p class="main_text">② 지정한 이름을 확인하고 연결해 봐요. 먼저 WiFi 목록에서 입력한 어썸봇 이름을 찾아서 스마트폰과 연결할 수 있어요. 인터넷 연결이 이상하다는 메시지가 나타나면 아무 버튼도 누르지 말고 메시지가 사라질 때까지 기다려요.</p>
+		<div class="content_image_box"><img src="./images/blocks/15-06.png" style="width:49%;"><img src="./images/blocks/15-07.png" style="width:49%;"></div>
+		</div>
+	]
+
+	@ 메시지 받을 준비 포트 ([INTERNET] 그룹)
+	어썸봇이 인터넷으로 통신할 수 있는 포트를 열어줍니다.
+	[block_image ./images/blocks/15-08.png
+		import udp_socket
+		udp_socket.open(1234)
+	]
+	① 사용할 포트 번호입니다. 수정하지 않고 그대로 사용합니다.
+
+	@ 메시지 읽어오기 ([INTERNET] 그룹)
+	스마트폰에서 보내는 메시지를 읽어들입니다.
+	[block_image ./images/blocks/15-09.png
+		msg = udp_socket.read_text()
+	]
+
+	@ 무한 반복 ([ADVANCE] 그룹)
+	블록 안의 블록을 순서대로 계속 실행되도록 합니다. 여기에서는 스마트폰 앱에서 메시지를 보낼 때까지 기다리다가 메시지가 오면 메시지에 따른 명령을 실행하기 위해 사용합니다.
+	[block_image ./images/blocks/15-10.png
+		while True:
+		  pass
+	]
+
+	@ 반복하기 ([ADVANCE] 그룹)
+	블록 안의 명령들을 원하는 횟수만큼 반복합니다.
+	[block_image ./images/blocks/15-11.png
+		for count in range(1):
+		  pass
+	]
+	① 반복할 횟수를 지정합니다.
+	② 반복할 블록을 추가합니다.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">[틱톡] 명령을 3번 실행하고, 왼쪽으로 한 번 회전하는 동작을 3번 반복하려면 반복문을 어떻게 만들어야 할까요? 직접 만들고 실행시켜보세요.</p>
+		</div>
+	]
+
+	@ 만약에(if) ([ADVANCE] 그룹)
+	조건으로 입력한 내용이 맞을 때 블록 안의 블록을 실행시킵니다. 조건이 틀리면 [만약에(if)] 블록 뒤에 있는 블록이 실행됩니다.
+	[block_image ./images/blocks/15-12.png
+		if i == :
+	]
+	① 조건문에 사용할 변수를 입력합니다. 기본 값은 ‘i’이며 메시지를 받아올 때는 ‘msg’를 사용합니다.
+	② 조건을 비교할 기준 부등호를 선택합니다.
+	③ 조건에 사용할 기준 값을 입력합니다. 이때 조건 값을 지정할 블록을 추가해야 합니다.
+	④ 조건에 맞을 때 실행할 블록들을 추가합니다.
+
+	@ 문자 값 ([ADVANCE] 그룹)
+	변수나 숫자가 아니라 입력된 문자 그대로를 표현할 때 사용합니다.
+	[block_image ./images/blocks/15-13.png
+		''
+	]
+	① 조건으로 사용 할 문자를 입력합니다.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① 다음과 같이 블록을 만들었다면 어떻게 동작하는지 얘기해 보세요.</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/15-14.png"></div>
+		<p class="main_text">② Asome Controller의 방향키를 누르면 누른 방향으로 어썸봇이 걸어가는 블록코딩 프로그램을 만들어보세요.</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/15-15.png"></div>
+		</div>
+	]
+
+	@ Asome Controller 설치
+	무선으로 어썸봇을 조종하기 위해 AsomeController 앱을 설치해야 합니다. 이 앱을 이용하여 어썸봇에 원하는 메시지를 보내고 조종할 수 있습니다. 앱스토어에서 ‘asomeit’로 검색해 ‘Asome Controller’를 찾아서 설치하세요. 어썸봇을 무선으로 조종할 수 있는 앱이 설치됩니다.
+	[image ./images/blocks/15-16.jpg ./images/blocks/15-17.jpg]
+
+	@ Asome Controller로 보낼 수 있는 메시지
+	Asome Controller 앱을 이용하면 다양한 동작을 실행할 수 있습니다.
+	[image ./images/blocks/15-18.png]
+	① 방향키 : F, B, L, R 메시지를 전달하여 어썸봇을 걷게 하는 방향키
+	② [차렷]키 : H 메시지를 전달하여 어썸봇이 차렷 자세로 만드는 동작
+	③ 동작키 : 1~12번 숫자를 메시지로 전달하여 원하는 동작을 실행
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Asome Controller의 “2”번 버튼을 터치하면 어썸봇이 왼쪽으로 한 번 회전하고 앞으로 한 걸음 가는 동작을 3번 반복하는 동작을 만들어보세요.</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/15-19.png"></div>
+		<p class="main_text">정답</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/15-20.png"></div>
+		</div>
+	]
+
+
+4. 플레이 액티비티
+	@ 게임 규칙
+	① 2대의 로봇이 한 팀이 되어 경기를 합니다.
+	② 먼저 한 골을 넣은 팀이 이기는 게임입니다.
+	③ 2대의 로봇 모두 공격과 수비 가능합니다.
+	④ 다른 규칙도 추가가 가능합니다.
+	[image ./images/blocks/15-21.png]
+
+	@ 게임하기
+	[image ./images/blocks/15-22.jpg]
+
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]

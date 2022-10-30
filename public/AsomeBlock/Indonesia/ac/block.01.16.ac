@@ -1,0 +1,235 @@
+Buat gerakan tarian baru
+
+1. Tujuan Pembelajaran
+	[video ./video/block/01/16.execute.webm]
+	* Belajarlah untuk mengembangkan gerakan tarian baru.
+	* Pelajari cara menyambungkan dan menjalankan gerakan baru ke AsomeBot Controller.
+	* Belajarlah untuk dapat menjelaskan dan menunjukkan gerakan yang baru dibuat.
+
+
+2. Pratinjau
+	@ Bagaimana Anda membuat gerakan tari?
+	Anda dapat membuat berbagai gerakan dengan menyesuaikan sudut dan waktu bergerak dari 4 motor yang terhubung ke AsomeBot .Anda dapat membuat gerakan mengibaskan kaki sebagai berikut:
+	[image ./images/blocks/16-01.png]
+
+	@ Buat gerakan tarian baru
+	Anda dapat menggunakan 3 metode untuk membuat gerakan tarian baru.
+	1. Pertama, gabungkan gerakan yang ada menjadi satu gerakan. Gerakan ini dapat digabungkan menjadi satu gerakan
+	[image ./images/blocks/16-02.png]
+	2. Kedua, tentukan satu sudut motor servo dan waktu gerakan pada suatu waktu. Anda harus menentukan motor servo yang akan dipindahkan.
+	[image ./images/blocks/16-03.png]
+	3. Terakhir, tentukan beberapa sudut motor servo dan waktu gerakan pada suatu waktu. Tentukan sudut dan kecepatan gerak setiap motor pada suatu waktu. Membuat gerakan seperti yang di bawah ini akan membuat gerakan yang membutuhkan 2 detik untuk mengangkat dan menurunkan dua kaki.
+	[image ./images/blocks/16-04.png]
+
+	@ Menyesuaikan waktu bergerak
+	Waktu gerak motor diatur ke 1 detik dan 0,1 detik akan menunjukkan gerakan yang sama sekali berbeda karena perbedaan kecepatan gerak bahkan jika gerakan yang sama dibuat seperti di bawah ini.
+	[image ./images/blocks/16-05.png]
+
+
+3. Pelajari tentang blok yang akan digunakan
+	@ Ubah ke mode titik akses/access point (Grup [INTERNET])
+	Tetapkan nama AsomeBot untuk dikontrol oleh smartphone.
+	[block_image ./images/blocks/16-06.png
+		import internet
+		internet.open_ap("")
+	]
+	① Masukkan nama yang ingin Anda gunakan. Hanya bahasa Inggris dan angka yang dapat digunakan.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_indonesia.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Beri nama AsomeBot. Hanya bahasa Inggris dan angka yang dapat digunakan untuk memberi nama AsomeBot. Setelah Anda menetapkan nama, nama tersebut akan tetap dipertahankan meskipun daya dihidupkan dan dimatikan.</p>
+		<p class="main_text">② Periksa nama yang Anda tentukan dan coba sambungkan. Pertama, cari nama AsomeBot yang Anda masukkan dari daftar WiFi dan sambungkan ke ponsel cerdas Anda. Jika sebuah pesan muncul mengatakan bahwa koneksi Internet tidak stabil, jangan tekan tombol apa pun dan tunggu pesannya menghilang.</p>
+		<div class="content_image_box"><img src="./images/blocks/16-07.png" style="width:49%;"><img src="./images/blocks/16-08.png" style="width:49%;"></div>
+		</div>
+	]
+
+	@ Buka/open soket UDP (grup[INTERNET])
+	AsomeBot membuka port untuk berkomunikasi melalui Internet.
+	[block_image ./images/blocks/16-09.png
+		import udp_socket
+		udp_socket.open(1234)
+	]
+	① Nomor port yang akan digunakan. Gunakan nomor sebagaimana adanya tanpa modifikasi.
+
+	@ Baca Pesan/read message (grup [INTERNET])
+	Baca pesan yang dikirim dari smartphone.
+	[block_image ./images/blocks/16-10.png
+		msg = udp_socket.read_text()
+	]
+
+	@ Ulangi hingga tak terbatas/repeat infinitely (grup [ADVANCE])
+	Jalankan blok di dalam blok untuk dijalankan secara berurutan. Di sini, Anda akan menunggu Aplikasi ponsel cerdas Anda untuk mengirim pesan, dan menjalankan perintah sesuai dengan pesan tersebut.
+	[block_image ./images/blocks/16-11.png
+		while True:
+		  pass
+	]
+
+	@ JIka/if (grup [ADVANCE])
+	Jalankan blok di dalam blok [If] ketika input detail kondisinya benar. Jika kondisinya salah, blok yang mengikuti blok if akan dieksekusi.
+	[block_image ./images/blocks/16-12.png
+		if i == :
+	]
+	① Masukkan variabel yang akan digunakan dalam pernyataan bersyarat. Nilai default adalah ' i'.
+	② Pilih ketidaksetaraan default untuk membandingkan kondisi.
+	③ Masukkan nilai default untuk digunakan dalam kondisi ini.Anda perlu menambahkan blok untuk menentukan nilai bersyarat.
+	④ Tambahkan blok yang akan dieksekusi ketika kondisinya benar.
+
+	@ Nilai Karakter (grup [ADVANCE])
+	Nilai ini digunakan untuk mewakili karakter yang dimasukkan daripada variabel atau angka.
+	[block_image ./images/blocks/16-13.png
+		''
+	]
+	① Masukkan karakter yang akan digunakan sebagai syarat.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_indonesia.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Jika Anda membuat blok seperti di bawah ini, bicarakan bagaimana mereka bergerak:</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/16-14.png"></div>
+		</div>
+	]
+
+	@ Siaga/Attention (grup [BASIC])
+	AsomeBot dapat jatuh jika terhubung ke gerakan lain ketika kaki telah bergerak terlalu banyak. Menempatkan [Attention] di antara setiap gerakan akan membuat AsomeBot berdiri siaga untuk mencegah agar tidak jatuh.
+	[block_image ./images/blocks/16-15.png
+		asomebot.home()
+	]
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_indonesia.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">Buat dan jalankan program untuk berdiri siaga/attention setelah gerakan balet.</p>
+		</div>
+	]
+
+	@ Gerakan tari tanpa Opsi (grup[DANCE])
+	[block_image ./images/blocks/16-16.png
+		asomebot.ballet()
+	]
+	Lakukan gerakan balet dengan mengacungkan jari kaki AsomeBot.
+
+	[block_image ./images/blocks/16-17.png
+		asomebot.wiggle()
+	]
+	AsomeBot bergoyang-goyang di tempat.
+
+	[block_image ./images/blocks/16-18.png
+		asomebot.flap()
+	]
+	AsomeBot mengepakkan kakinya.
+
+	[block_image ./images/blocks/16-19.png
+		asomebot.warigari()
+	]
+	AsomeBot melakukan Warigari dengan kakinya.
+
+	[block_image ./images/blocks/16-20.png
+		asomebot.yaho()
+	]
+	AsomeBot mengangkat ujung jari kaki.Kebalikan dari gerak balet.
+
+	[block_image ./images/blocks/16-21.png
+		asomebot.moonwalk()
+	]
+	AsomeBot melakukan tarian moonwalk.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_indonesia.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">Balet adalah gerakan yang hanya berjinjit. Karena itu, kombinasikan dengan gerakan lain dan ciptakan gerakan yang lebih menyenangkan.</p>
+		</div>
+	]
+
+	@ Gerakan tari dengan Opsi (grup [DANCE])
+	Pilih arah untuk menggerakkan arah kaki AsomeBot di opsi semua gerakan dansa.
+	[block_image ./images/blocks/16-22.png
+		asomebot.mouse(1)
+	] 
+	Angkat satu kaki AsomeBot dan lakukan gerakan.
+
+	[block_image ./images/blocks/16-23.png
+		asomebot.swing(1)
+	]
+	Angkat dan lipat kembali satu kaki AsomeBot.
+
+	[block_image ./images/blocks/16-24.png
+		asomebot.tick_tock(1)
+	]
+	Lipat satu kaki AsomeBot ke belakang dan goyangkan sekali.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_indonesia.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Mouse dibuat oleh siswa sekolah dasar Korea.  Siswa menirukan adegan bersiul dengan kaki bergerak dalam animasi Mickey Mouse dan menamai proyeknya "Mouse".</p>
+		<p class="main_text">② Dengan menggunakan gerakan Swing dan TickTock, buat program yang menggerakkan kaki pada satu waktu.</p>
+		</div>
+	]
+
+	@ Atur sudut/set angle  motor (grup [WALK])
+	Blok ini mengontrol 1 motor. Pilih satu motor dan tentukan sudut dan kecepatan pergerakan motor yang dipilih.
+	[block_image ./images/blocks/16-25.png
+		asomebot.angles([0],[90-90],1*1000)
+	]
+	① Pilih nomor motor yang akan digerakkan.
+	② Masukkan sudut untuk menggerakkan motor yang dipilih.
+	③ Masukkan waktu yang dibutuhkan motor untuk bergerak.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_indonesia.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">Menggunakan nomor motor AsomeBot dalam gambar, buat program yang memungkinkan sudut kanan kaki (motor 3) AsomeBot bertahan pada 30 derajat selama 1 detik dan 90 derajat setelah 1 detik .</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/16-26.png"></div>
+		</div>
+	]
+
+	@ Atur sudut-sudut/set angles (grup [WALK])
+	Blok ini mengontrol sudut 4 motor pada saat yang bersamaan. Anda dapat menentukan sudut yang Anda inginkan dari 4 motor dan memutar dan mengatur waktu bergerak.
+	[block_image ./images/blocks/16-27.png
+		asomebot.angles([0],[90-90],1*1000)
+	]
+	① Tentukan sudut 0, 1, 2 dan 3 motor secara berurutan dari kiri.
+	② Masukkan waktu yang dibutuhkan motor untuk bergerak.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_indonesia.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">Dengan menggunakan nomor motor AsomeBot pada gambar, buat program yang memungkinkan AsomeBot mengangkat dan menurunkan kaki kiri dan kanan secara bergantian.<br>
+		Petunjuk. Sudut kaki kiri 150 derajat / Sudut kaki kanan 30 derajat</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/16-28.png"></div>
+		</div>
+	]
+
+
+4. Mainkan Aktivitas
+	@ Aturan Permainan
+	① Buat program yang dapat mengontrol AsomeBot dengan Asome Controller.
+	② Buat 3 gerakan tarian baru pilihan Anda.
+	- Gerakan yang dibuat dengan menggabungkan gerakan yang ada
+	- Gerakan dibuat dengan menggerakkan motor satu per satu
+	- Gerak yang dibuat dengan menggerakkan beberapa motor sekaligus
+	③ Buat program untuk menjalankan gerakan baru dengan tombol angka Asome Controller.
+
+	@ Algoritma
+	Apakah Anda menciptakan gerakan tarian yang luar biasa? Pamerkan gerakan tari yang Anda buat dengan metode di bawah ini:
+	① Peragakan gerakan tari Anda dan biarkan penonton tahu nama gerakan tari tersebut.
+	② Juga jelaskan mengapa Anda menciptakan gerakan tarian.
+	③ Dengarkan kisah gerakan tari teman Anda.
+	④ Putar musik dan biarkan robot melakukan tarian yang mengagumkan untuk gerakan tarian yang Anda buat.
+	[image ./images/blocks/16-29.png]
+
+	@ Bermain game
+	[image ./images/blocks/16-30.png]
+
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]

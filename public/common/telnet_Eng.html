@@ -1,0 +1,298 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<head>
+    <!-- AsomeHeader Start -->
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>AsomeCode</title>
+    <meta name="Robots" content="all" />
+    <meta name="reply-to" content="" />
+    <meta name="date" content="" />
+
+    <link rel="stylesheet" href="./css/AsomeCODE.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/highlight.css">
+    <link rel="stylesheet" href="./css/vs2015.css">
+
+    <script src="./js/jquery-3.2.1.min.js"></script>
+
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <script src="./js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="./css/jodit.min.css" />
+    <link rel="stylesheet" href="./css/prism.css" />
+    <script src="./js/jodit.min.js"></script>
+    <script src="./js/prism.js"></script>
+
+    <script src="./js/AsomeCODE-web.js"></script>
+    <script src="./js/AsomeCodeCommand.js"></script>
+    <script src="./js/AsomeCodeUpdate.js"></script>
+    <script src="./js/board.js"></script>
+    <script src="./js/highlight.pack.js"></script>
+    <script src="./js/highlightjs-line-numbers.min.js"></script>
+
+    <script src="./ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./ace/ext-static_highlight.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./ace/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+
+    <!-- AsomeHeader End -->
+</head>
+
+<body class="p3">
+
+    <div class="modal fade" id="video_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <video id="video_player" width="100%" controls>
+                        <source id="video_src" type="video/webm" src="" />
+                        <track id="video_subtitle" kind="subtitles" srclang="en" label="english" src="" default>
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="wrap">
+        <ul class="blind">
+            <li><a href="#contents">본문 바로가기(Skip Contents)</a></li>
+        </ul>
+        <div id="header">
+            <ul class="left">
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeConnect')"><img
+                            src="./images/top_01.png"></a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')"><img src="./images/top_02.png"></a>
+                </li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=ShowEditor')"><img
+                            src="./images/top_03.png"></a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=Stop')"><img src="./images/top_05.png"></a>
+                </li>
+            </ul>
+            <ul class="right">
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeReboot')"><img
+                            src="./images/top_04.png"></a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeFormat')"><img
+                            src="./images/top_06.png"></a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeUpdate')"><img
+                            src="./images/top_07.png"></a></li>
+                <li><a href="../AsomeCode-Student/English/help_pin.html" target="help"><img src="./images/top_08.png"></a>
+                </li>
+            </ul>
+        </div>
+        <div id="mobile">
+            <div class="logo">
+                <a href="javascript:void(0);"><img src="./images/logom.png"></a>
+                <div class="m"><a><img src="./images/mobile_m.png"></a></div>
+            </div>
+            <div class="mobile_top">
+                <div class="top_m">
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')"><img
+                            src="./images/mobile_01.png"></a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeConnect')"><img
+                            src="./images/mobile_02.png"></a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=ShowEditor')"><img
+                            src="./images/mobile_03.png"></a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=Stop')"><img src="./images/mobile_04.png"
+                            class="last"></a>
+                </div>
+                <div class="top_m">
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeReboot')"><img
+                            src="./images/mobile_05.png"></a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeFormat')"><img
+                            src="./images/mobile_06.png"></a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeUpdate')"><img
+                            src="./images/mobile_07.png"></a>
+                    <a href="javascript:void(0);" onclick="go_url('./help.html')"><img src="./images/mobile_08.png"
+                            class="last"></a>
+                </div>
+            </div>
+        </div>
+        <div class="mobile_nav3"></div>
+        <div id="p3_header">
+            <ul>
+                <li class="headleft"><a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')"><img src="./images/logo.png"></a></li>
+                <li class="headright"></li>
+            </ul>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <br>
+            <br>
+            <br>
+            <div class="container main">
+                <div class="col-sm-12">
+                    <div class="title_no_video">
+                        Connecting AsomeBlock Android (WiFi) and AsomeBoard 
+                    </div>
+                    <br>
+                    <p class="main_text">
+                        <h3><b>1. Installing and running the AsomeBlock Android (WiFi)</b></h3><br>
+                        <ol>
+                            <li>Download the AsomeBlock Android (WiFi) version from Google Play Store.</li>
+                            <br>
+                            <li> Run the downloaded AsomeBlock Android file. At this time, the mobile phone or tablet PC must be connected to the Internet (AsomeBoard WiFi connection X) </li>
+                            <br>
+                            <li> Select the desired country and language version.</li>
+                            <br>
+                            <li> Click the button at the top right of the screen, and then click the Block button to prepare the block coding.</li>
+                            <br>
+                            <div class="content_image_box"><img src="./images/telnet/download.png" alt="">  <img src="./images/telnet/app.png" alt=""></div>
+                        </ol>
+                        
+                        <h3><b>2. Setting up the AsomeBoard</b></h3><br>
+                        <ol>
+                            <li> After connecting the AsomeBoard in the AsomeCode (block), check whether it is v1.12. If it is another version, please run the ‘Prepare AsomeBoard’ at the bottom. </li>
+                            <br>
+                            <li> Upload the Telnet Server on the v1.12 version of AsomeBoard. Please proceed by following the [Upload Telnet Server] part below. </li>
+                            <br>
+                            <li> When the upload is completed, disconnect the connected USB cable and restart the AsomeBoard. </li>
+                            <br>
+                            <div class="content_image_box"><img src="./images/telnet/cheack_version.png" alt=""></div>
+                        </ol>
+
+                        <h3><b>3. Connecting the AsomeBot Android application and the AsomeBoard</b></h3><br>
+                        <ol>
+                            <li> With the AsomeBot Android application running, search for the previously set WiFi and connect.</li>
+                            <br>
+                            <li> Return to the application and click the Connect button in the block coding window. </li>
+                            <br>
+                            <li> Move the AsomeBot (car) by coding in the same way as the previous block coding.</li>
+                            <br>
+                            <li> If you have completed using the AsomeBlock Android (WiFi), or if you want to code using an entry, you must reconnect the AsomeBot and use the [Delete Autorun Program] at the bottom of this page.</li>
+                            <br>
+                            <div class="content_image_box"><img src="./images/telnet/connnect.png" alt=""></div>
+                        </ol>
+                    </p>
+                </div>
+                <div class="col-sm-12">
+                    <br><br><br>
+                </div>
+                <div class="col-sm-12">
+                    <div class="title_no_video">
+                        Notice
+                    </div>
+                    <br>
+                    <p class="main_text">
+                        <h3><b>Some examples related to Internet and UDP sockets</b></h3>
+                        <ol>
+                            <li> AsomeBlock Android (WiFi) version is AP mode (router). </li>
+                            <li> The Internet-related operation mentioned in textbooks may not work properly except for some examples of UDP sockets. </li>
+                            <li> In the block coding process, some restrictions may apply to the Internet use of blocks. </li>
+                        </ol>
+
+                    </p>
+                </div>
+                <div class="col-sm-12">
+                    <br><br><br>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="title_no_video">
+                        Prepare the AsomeBoard
+                    </div>
+                    <div class="col-sm-12">
+                        <p class="main_text">
+                            To connect to the AsomeBoard using WiFi and not a USB cable, you must use the v1.12 firmware. <br>
+                            Download the firmware below and proceed with the [AsomeBoard-Zet Factory Reset] in the link below to upload the v1.12 board.
+                        </p>
+                        <br>
+                        <p class="main_text">
+                            <b>
+                                Download firmware : 
+                                <a href="https://asomecode.s3.ap-northeast-2.amazonaws.com/AsomeBoard-Zet-1.12.zip">Download the AsomeBoard 1.12 version firmware</a>
+                            </b>
+                        </p>
+                        <p class="main_text">
+                            <b>
+                                How to do factory reset :
+                                <a href="http://asomeit-user-guide.s3-website.ap-northeast-2.amazonaws.com/asomebord-format/#esptool-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0">[Click to update the AsomeBoard 1.12 version]</a>
+                            </b>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <br><br><br>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="title_no_video">
+                        Upload telnet server
+                    </div>
+
+                    <p class="main_text">
+                        To upload a Telnet Server that can remotely process commands to the AsomeBoard, enter the WiFi (SSID) name and password, <br>
+                        click the [Telnet Server Registration] button
+                        <ul>
+                            <li>The ID and password must use a combination of alphabetical letters and numbers.</li>
+                            <li>Password must be in at least 8 digits.</li>
+                            <li>The AsomeBoard must be connected to the AsomeCode.</li>
+                        </ul>
+                    </p>
+
+                    <p class="main_text">
+                        <input type="text" id="ssid" name="sn" class="form-control" placeholder="WiFi ssid">
+                        <input type="text" id="password" name="sn" class="form-control" placeholder="WiFi password">
+                    </p>
+
+<div id="src_1" style="display: none;">code = """
+import internet
+import telnet_server
+
+internet.open_ap("{0}", "{1}")
+
+telnet_server.start()
+"""
+
+f = open("main.py", "w")
+f.write(code)
+f.close()
+</div>
+
+                    <script type="text/javascript">
+                        function save_main() {
+                            var text = String.format($("#src_1").text(), ssid.value, password.value);
+                            run_code(text);
+                        }
+                    </script>
+
+                    <p class="main_text">
+                        <button class="btn btn-primary" onclick="save_main()">Registering Telnet Server</button>
+                    </p>
+                </div>
+
+                <div class="col-sm-12">
+                    <br><br><br>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="title_no_video">
+                        Delete Autorun Program
+                    </div>
+                    <p class="main_text">
+                        If you want to connect the AsomeBot to the entry by using a USB cable, click the button below to delete the autorun program.
+                    </p>
+                    <p class="main_text">
+                        <button class="btn btn-danger" onclick="run_text('import os; os.remove(\'main.py\')')">Delete Autorun Program</button>
+                    </p>
+                </div>
+
+                <div class="col-sm-12">
+                    <br><br><br>
+                </div>
+            </div>
+
+        </div>
+
+</body>
+
+</html>

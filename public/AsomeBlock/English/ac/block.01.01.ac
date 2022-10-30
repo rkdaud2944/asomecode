@@ -1,0 +1,71 @@
+What is coding?
+
+1. Learning objectives
+	[video ./video/block/01/01.execute.webm]
+	* The meaning of coding
+	* Things you can do with coding
+	* Move AsomeBot using AsomeController
+
+
+2. Preview
+	@ What is coding?
+	Creating a program so that computers can work
+	[image ./images/blocks/01-01.png]
+
+	@ Is it coding to move a robot?
+	Computers are embedded in robots, cars, even in appliances. Hence, coding is required as you have to give commands to move robots.
+	[image ./images/blocks/01-02.png]
+
+	@ What does SW(software) programmed by coding do?
+	Autonomous cars and flying airplanes are getting safer using SW.
+	[image ./images/blocks/01-03.png ./images/blocks/01-04.png]
+
+	Robots for pizza delivery or drones for delivery of parcels are powered by SW.
+	[image ./images/blocks/01-05.png ./images/blocks/01-06.png]
+
+
+3. Learn which blocks to use
+	@ What kind of robot is an AsomeBot?
+	AsomeBot is a robot that walks on two feet and dances using four motors.
+	AsomeBot also can measure distances with an eye-like ultrasonic sensor and play simple music.
+	[youtube https://www.youtube.com/embed/FkorGFg4_t0]
+
+	@ Connect to the AsomeBot
+	With the Asomebot powered on, select the name of my robot from the WiFi list on your smartphone. 
+	The appearance of WiFi list depends on your smartphone.
+	Our AsomeBots all have different names. 
+	Check with the teacher the name of your robot first and select it from the WiFi list.
+	[image ./images/blocks/01-07.png]
+
+	@ Asome Controller
+	When connected to WiFi, the Asome Controller app can be executed to control the AsomeBot wirelessly.
+	[image ./images/blocks/01-08.png]
+	① Direction keys : You touch the key once, the AsomeBot walks in that direction.
+	② Attention key : Make AsomeBot to stand at attention.
+	③ Motion keys : Each time you touch each number, a saved action is executed.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_eng.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">• Check whether AsomeBot and AsomeController are connected properly, touch the direction key to move the robot, and touch the action key to see what dances moves are available.<br>
+		</p>
+		</div>
+	]
+
+
+4. Play activity
+	@ Move to the designated location
+	Of the buildings on the map, find out who is moving faster to the building desired by the other party on the map without leaving the road.
+	Example) Stop by at the post office and get to the church.
+	[image ./images/blocks/01-09.png]
+
+	@ Dance competition
+	Check out who is the dancing splendidly.
+	[image ./images/blocks/01-10.png]
+
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]	

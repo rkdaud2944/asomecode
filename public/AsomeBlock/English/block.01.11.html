@@ -1,0 +1,412 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<head>
+<!-- AsomeHeader Start -->
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>AsomeCode</title>
+    <meta name="Robots" content="all" />
+    <meta name="reply-to" content="" />
+    <meta name="date" content="" />
+
+    <link rel="stylesheet" href="../../common/css/AsomeCODE.css">
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/highlight.css">
+    <link rel="stylesheet" href="../../common/css/vs2015.css">
+    <link rel="stylesheet" href="../../common/css/quiz_css.css">
+
+    <script src="../../common/js/jquery-3.2.1.min.js"></script>
+
+    <link rel="stylesheet" href="../../common/css/bootstrap.min.css">
+    <script src="../../common/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="../../common/css/jodit.min.css"/>
+    <link rel="stylesheet" href="../../common/css/prism.css"/>
+    <script src="../../common/js/jodit.min.js"></script>
+    <script src="../../common/js/prism.js"></script>
+
+    <script src="../../common/js/AsomeCODE.js"></script>
+    <script src="../../common/js/board.js"></script>
+    <script src="../../common/js/highlight.pack.js"></script>
+    <script src="../../common/js/highlightjs-line-numbers.min.js"></script>
+
+    <script src="../../common/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../common/ace/ext-static_highlight.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../common/ace/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+<!-- AsomeHeader End -->
+</head>
+
+<body class="p3">    
+
+    <div class="modal fade" id="video_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <video id="video_player" width="100%" controls>
+                        <source id="video_src" type="video/webm" src=""/>
+                        <track id="video_subtitle" kind="subtitles" srclang="en" label="english" src="" default>
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="wrap">
+        <ul class="blind">
+            <li><a href="#contents">본문 바로가기(Skip Contents)</a></li>
+        </ul>
+        <div id="mobile">
+            <div class="logo">
+                <a href="javascript:void(0);"><img src="../../common/images/logom.png"></a>
+                <div class="m"><a><img src="../../common/images/mobile_m.png"></a></div>
+            </div>
+            <div class="mobile_top">
+                <div class="top_m">
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')">
+                        <img class="image-btn" filename="../../common/images/mobile_01.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeConnect')">
+                        <img class="image-btn" filename="../../common/images/mobile_02.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=ShowEditor')">
+                        <img class="image-btn" filename="../../common/images/mobile_03.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+                        <img class="image-btn last" filename="../../common/images/mobile_04.png">
+                    </a>
+                </div>
+                <div class="top_m">
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeReboot')">
+                        <img class="image-btn" filename="../../common/images/mobile_05.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeFormat')">
+                        <img class="image-btn" filename="../../common/images/mobile_06.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeUpdate')">
+                        <img class="image-btn" filename="../../common/images/mobile_07.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeBlock')">
+                        <img class="image-btn last" filename="../../common/images/blockcoding.png">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="header">
+            <ul class="left">
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeConnect')">
+                    <img class="image-btn" filename="../../common/images/top_01.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')">
+                    <img class="image-btn" filename="../../common/images/top_02.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=ShowEditor')">
+                    <img class="image-btn" filename="../../common/images/top_03.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+                    <img class="image-btn" filename="../../common/images/top_05.png">
+                </a></li>
+            </ul>
+            <ul class="right">
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeReboot')">
+                    <img class="image-btn" filename="../../common/images/top_04.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeFormat')">
+                    <img class="image-btn" filename="../../common/images/top_06.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeUpdate')">
+                    <img class="image-btn" filename="../../common/images/top_07.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeBlock')">
+                    <img class="image-btn" filename="../../common/images/blockcoding.png">
+                </a></li>
+                <li> &nbsp; </li>
+                <!-- <a href="javascript:void(0);" onclick="logout()"><img src="../../common/images/logout.png" id="bt_logout" class="last"></a> -->
+            </ul>
+        </div>
+        <div class="mobile_nav3"></div>
+        <div id="p3_header">
+            <ul>
+                <li class="headleft"><a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')"><img src="../../common/images/logo.png"></a></li>
+                <li class="headright"></li>
+            </ul>
+        </div>
+
+        <div id="p3_container">
+            <div class="left">
+                <div class="top">
+                    <div class="link_list"><a href="javascript:void(0);" onclick="run_cmd('Code=GoBack')"><img src="../../common/images/p3_list.png" alt="강의목록"></a></div>
+                    <div class="header_text"><div id="chapter" class="chapter">Unit {0}</div>
+                        <br>
+
+                        Control Asomebot by a smartphone
+                    </div>
+                </div>
+                <div class="beg">
+                    <ul>
+                        <li><a href="javascript:fnMove('pn1')">1. Learning objectives</a></li>
+                        <li><a href="javascript:fnMove('pn2')">2. Preview</a></li>
+                        <li><a href="javascript:fnMove('pn3')">3. Learn which blocks to use</a></li>
+                        <li><a href="javascript:fnMove('pn4')">4. Play activity</a></li>
+
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="right">
+                <div class="contents">
+                    <br>
+                    <li class="lefts bold" id="pn1">1. Learning objectives<span class="video_button" level="block" filename="01.ch01"></span></li>
+                    <div style="max-width: 600px;">
+                      <video width="100%" controls>
+                      <source id="video_src" type="video/webm" src="./video/block/01/11.execute.webm"/>
+                      Your browser does not support HTML5 video.</video>
+                    </div>
+                    <p class="main_text">
+                      • Let us look into the features of WiFi.<br>
+                      • Connect a smartphone and AsomeBot to WiFi to move.<br>
+                    </p>
+                    <br>
+                    <br>
+                    <li class="lefts bold" id="pn2">2. Preview<span class="video_button" level="block" filename="01.ch02"></span></li>
+                    <p class="main_text">
+                      <strong>A. AsomeBot is remote-controlled</strong>
+                    </p>
+                    <p class="main_text">
+                      You can remotely control Asomebot by smartphone.
+                    </p>
+                    <div class="content_image_box">
+                      <img class="content_image" src="./images/blocks/11-01.png">
+                    </div>
+                    <br>
+                    <p class="main_text">
+                      <strong>B. Bluetooth and WiFi</strong>
+                    </p>
+                    <p class="main_text">
+                      Look into features of Bluetooth and wifi.
+                    </p>
+                    <div class="content_image_box">
+                      <img class="content_image" src="./images/blocks/11-02.png">
+                    </div>
+                    <br>
+                    <p class="main_text">
+                      <strong>C. Why name is WiFi?</strong>
+                    </p>
+                    <p class="main_text">
+                      WiFi is a compound word meaning that it enables good quality wireless communication.
+                    </p>
+                    <div class="content_image_box">
+                      <img class="content_image" src="./images/blocks/11-03.png">
+                    </div>
+                    <br>
+                    <br>
+                    <li class="lefts bold" id="pn3">3. Learn which blocks to use<span class="video_button" level="block" filename="01.ch03"></span></li>
+                    <p class="main_text">
+                      <strong>A. Change to access point mode ([INTERNET] group)</strong>
+                    </p>
+                    <p class="main_text">
+                      Name your AsomeBot controlled by smartphone.
+                    </p>
+<div id="src_1" style="display: none;">import internet internet.open_ap("")
+</div>
+                    <img class="block_image" src="./images/blocks/11-04.png" onclick="run_code($('#src_1').text())">
+                    <p class="main_text">
+                      ① Enter a name you want to use. Only English and numbers can be used.
+                    </p>
+                    <div class="quiz_outline">
+                      <img src="../../common/images/quiz_eng.png">
+                      <p class="quiz_line">
+                      </p>
+                      <p class="main_text">
+                        ① Give AsomeBot a name. Only English and numbers can be used for naming AsomeBot. Once you assigned a name, the name will retain even when the power is turned on and off.
+                      </p>
+                      <p class="main_text">
+                        ② Check the name you specified and try connecting. First, find the name of AsomeBot you entered from the WiFi list and connect to your smartphone. If a message pops up saying that the Internet connection is unstable, do not press any buttons and wait for the message to disappear.
+                      </p>
+                      <div class="content_image_box">
+                        <img class="content_image" src="./images/blocks/11-05.png">
+                      </div>
+                    </div>
+                    <br>
+                    <p class="main_text">
+                      <strong>B. Open UDP socket ([INTERNET] group)</strong>
+                    </p>
+                    <p class="main_text">
+                      Open a port for AsomeBot to communicate over the Internet.
+                    </p>
+<div id="src_2" style="display: none;">import udp_socket
+udp_socket.open(1234)
+</div>
+                    <img class="block_image" src="./images/blocks/11-06.png" onclick="run_code($('#src_2').text())">
+                    <p class="main_text">
+                      ① Port number. Use it as it is without modification
+                    </p>
+                    <br>
+                    <p class="main_text">
+                      <strong>C. Read Messages ([INTERNET] group)</strong>
+                    </p>
+                    <p class="main_text">
+                      Read messages from smartphone.
+                    </p>
+<div id="src_3" style="display: none;">msg = udp_socket.read_text()
+</div>
+                    <img class="block_image" src="./images/blocks/11-07.png" onclick="run_code($('#src_3').text())">
+                    <br>
+                    <p class="main_text">
+                      <strong>D. Repeat infinitely ([ADVANCE] group)</strong>
+                    </p>
+                    <p class="main_text">
+                      [Repeat infinity] makes blocks that are bundled into it to continuously(endlessly) run in order. This time, This block is used by the smartphone app to wait for messages to be sent, and then execute commands that follow messages when prompted.
+                    </p>
+<div id="src_4" style="display: none;">while True:
+    pass
+</div>
+                    <img class="block_image" src="./images/blocks/07-04.png" onclick="run_code($('#src_4').text())">
+                    <br>
+                    <p class="main_text">
+                      <strong>E. if ([ADVANCE] group)</strong>
+                    </p>
+                    <p class="main_text">
+                      [if] makes blocks that are bundled into it to run, when it corresponds with the condition. If it doesn't correspond with the condition, the blocks behind the [if] are run.
+                    </p>
+<div id="src_5" style="display: none;">if i == :
+</div>
+                    <img class="block_image" src="./images/blocks/07-05.png" onclick="run_code($('#src_5').text())">
+                    <p class="main_text">
+                      ① Input a variable to be used in the conditional statement. Adding sensor blocks to default value ‘i’ will add the variable and can be selected.
+                    </p>
+                    <p class="main_text">
+                      ② Select the default inequality to compare the conditions.
+                    </p>
+                    <p class="main_text">
+                      ③ Input the default value to use in the condition. You need to add blocks to specify the conditional value.
+                    </p>
+                    <p class="main_text">
+                      ④ Add blocks to be executed when the condition is correct.
+                    </p>
+                    <br>
+                    <p class="main_text">
+                      <strong>F. Character Value ([ADVANCE] Group)</strong>
+                    </p>
+                    <p class="main_text">
+                      The value is used to represent the entered characters rather than variables or numbers.
+                    </p>
+<div id="src_6" style="display: none;">''
+</div>
+                    <img class="block_image" src="./images/blocks/11-09.png" onclick="run_code($('#src_6').text())">
+                    <p class="main_text">
+                      ① Enter characters to be used as a condition.
+                    </p>
+                    <br>
+                    <div class="quiz_outline">
+                      <img src="../../common/images/quiz_eng.png">
+                      <p class="quiz_line">
+                      </p>
+                      <p class="main_text">
+                        If you created blocks like below, talk about how they move:
+                      </p>
+                      <div class="content_image_box">
+                        <img class="content_image" src="./images/blocks/11-08.png">
+                      </div>
+                    </div>
+                    <br>
+                    <p class="main_text">
+                      <strong>G. Install Asome Controller</strong>
+                    </p>
+                    <p class="main_text">
+                      The AsomeController app must be installed to control AsomeBot wirelessly. This app allows you to send messages to Asomebot and to control AsomeBot. Search ‘asomeit’ in the App store. Find and download ‘Asome Controller’.
+                    </p>
+                    <br>
+                    <div class="quiz_outline">
+                      <img src="../../common/images/quiz_eng.png">
+                      <p class="quiz_line">
+                      </p>
+                      <p class="main_text">
+                        Name your Asomebot, make it available on the Internet, and create a program that meets the following conditions.<br>
+                        <div class="content_image_box">
+                          <img class="content_image" src="./images/blocks/01-08.png">
+                        </div>
+                         * Wait for the smartphone app to send a message.<br>
+                         * If the message is “H”, stand at [attention].<br>
+                         * If the message is “F”, move [one step forward].<br>
+                         * If the message is “B”, move [one step backward].<br>
+                         * If the message is “L”, Turn [once to left].<br>
+                         * If the message is “R”, Turn [once to right].
+                      </p>
+<div id="src_7" style="display: none;">import internet
+internet.open_ap("asomebot01")
+import udp_socket udp_socket.open(1234)
+while True: 
+    msg = udp_socket.read_text()
+    if msg == 'H': asomebot.home()
+    if msg == 'F': for i in range(1): asomebot.forward()
+    if msg == 'B': for i in range(1): asomebot.backward()
+    if msg == 'L': for i in range(1): asomebot.turn_left()
+    if msg == 'R': for i in range(1): asomebot.turn_right()
+</div>
+                      <img class="content_image" src="./images/blocks/11-10.png" onclick="run_code($('#src_7').text())">
+                    </div>
+                    <br>
+                    <br>
+                    <li class="lefts bold" id="pn4">4. Play activity<span class="video_button" level="block" filename="01.ch04"></span></li>
+                    <p class="main_text">
+                      <strong>A. Game rules</strong>
+                    </p>
+                    <p class="main_text">
+                      ① Two AsomeBots play one game
+                    </p>
+                    <p class="main_text">
+                      ② Robot wins with more points in 1 min
+                    </p>
+                    <p class="main_text">
+                      ③ Rock-paper-scissors to designate your starting position
+                    </p>
+                    <p class="main_text">
+                      ④ The robot that steps on more marbles while walking wins(Red marble 10points / Yellow 5 points)
+                    </p>
+                    <p class="main_text">
+                      ⑤ If your robot is bumped against the other, your point is reset to zero.
+                    </p>
+                    <div class="content_image_box">
+                      <img class="content_image" src="./images/blocks/11-11.png">
+                    </div>
+                    <br>
+                    <p class="main_text">
+                      <strong>B. Algorithm</strong>
+                    </p>
+                    <p class="main_text">
+                      The following is the algorithm that Asomebot moves depending on touching AsomeController.
+                    </p>
+                    <div class="content_image_box">
+                      <img class="content_image" src="./images/blocks/11-12.png">
+                    </div>
+                    <br>
+                    <p class="main_text">
+                      <strong>C. Play game</strong>
+                    </p>
+                    <p class="main_text">
+                      Play a game with your friends and see who eats the most beads and gets high a score.
+                    </p>
+                    <div class="content_image_box">
+                      <img class="content_image" src="./images/blocks/03-17.jpg">
+                    </div>
+                    <br>
+                    <script type="text/javascript">
+                        $(".video_button").css("display", "none");
+                    </script>
+
+
+
+                </div>
+            </div>
+
+        </div>
+        <!-- //container -->
+    </div>
+    <!-- //wrap -->
+</body>
+
+</html>

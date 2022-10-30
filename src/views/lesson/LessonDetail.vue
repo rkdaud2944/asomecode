@@ -44,6 +44,10 @@ export default {
         this.getLesson(this.$route.query.id)
     },
 
+    updated() {
+        hljs.highlightAll();
+    },
+
     methods: {
         moveTo(tag) {
             const element = window.document.getElementById(tag);
@@ -76,8 +80,6 @@ export default {
         },
     },
 };
-
-
 </script>
 
 
