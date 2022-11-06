@@ -1,5 +1,5 @@
-export default {
-    os() {
+export default class {
+    static os() {
         const userAgent = navigator.userAgent.toLowerCase();
         if (userAgent.indexOf("android") > -1) {
             return "android";
@@ -11,9 +11,9 @@ export default {
             return "safari";
         }
         return "other";
-    },
+    }
 
-    isMobile() {
+    static isMobile() {
         const userAgent = navigator.userAgent.toLowerCase();
         return (
             userAgent.indexOf("android") > -1 ||
@@ -21,10 +21,10 @@ export default {
             userAgent.indexOf("ipad") > -1 ||
             userAgent.indexOf("ipod") > -1
         );
-    },
-    
-    length(object) {
+    }
+
+    static length(object) {
         if (object === null) return 0;
         return object.length;
     }
-};
+}
