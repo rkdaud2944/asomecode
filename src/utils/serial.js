@@ -26,7 +26,7 @@ const seiral = {
         console.log(ports);
         return ports.find((port) =>
             port.manufacturer &&
-            (port.manufacturer.startsWith("Silicon Labs") || port.manufacturer.startsWith("wch.cn"))
+            (port.manufacturer.startsWith("Silicon Labs") || port.manufacturer.startsWith("wch.cn")) || port.vendorId === "1a86"
         );
     },
 
