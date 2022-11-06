@@ -18,7 +18,7 @@
 
         <div>
             <q-pagination @update:model-value="onPageChanged" v-model="page" :max="pageCount" :max-pages="10"
-                boundary-numbers color="purple" 
+                boundary-numbers color="purple"
                 direction-links
                 boundary-links
                 icon-first="skip_previous"
@@ -31,7 +31,7 @@
 
 <script>
 import VueBase from "@/VueBase";
-import QuasarColumnManager from "@/utils/QuasarColumnManager";
+import QuasarColumnManager from "@/utils/quasar-column-manager";
 
 export default {
     mixins: [VueBase],

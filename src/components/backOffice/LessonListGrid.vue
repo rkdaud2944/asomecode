@@ -40,7 +40,7 @@
 <script>
 import VueBase from "@/VueBase";
 import strg from "@/utils/strg";
-import QuasarColumnManager from "@/utils/QuasarColumnManager";
+import QuasarColumnManager from "@/utils/quasar-column-manager";
 import TextBox from '@/components/TextBox.vue';
 
 export default {
