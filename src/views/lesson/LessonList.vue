@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import VueBase from '@/vue-base';
+import VueBase from '@/globals/vue-base';
 import apiSubject from "@/api/subject";
 
 export default {

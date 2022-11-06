@@ -23,8 +23,8 @@
 </template>
 
 <script>
+import VueBase from '@/globals/vue-base';
 import subjectSets from '@/data/subject-sets';
-import VueBase from '@/vue-base';
 import Header from '@/components/HeaderHelp.vue';
 
 export default {

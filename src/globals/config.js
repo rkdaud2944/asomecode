@@ -1,5 +1,8 @@
 import serial from '@/globals/serial';
 
+/**
+ * 런타임에 결정되는 환경변수를 관리한다.
+ */
 export default {
     pythonUrl() {
         if (serial.getBoardType() == "Pro") {

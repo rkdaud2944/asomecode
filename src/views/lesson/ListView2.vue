@@ -31,6 +31,28 @@
 </template>
 
 <script>
+// TODO: 라우터를 따로 불러야 할 이유가 있는가?
+import { useRouter } from 'vue-router'
+
+export default {
+    setup() {
+        const $router = useRouter()
+        function goCreateBoard() {
+            $router.push('/board/create')
+        }
+        return {
+            columns,
+            rows,
+            goCreateBoard
+        }
+    },
+    methods: {
+        onRowClick(row) {
+            this.$router.push({ path: '/board/detail', query: row.id });
+        },
+    }
+}
+
 const columns = [
     { name: 'createdAt', align: 'left', label: '작성 날짜', field: 'createdAt' },
     { name: 'title', label: '제목', align: 'left', field: 'title' },
@@ -57,24 +79,4 @@ const rows = [
         commentCount: 0,
     },
 ]
-
-import { useRouter } from 'vue-router'
-export default {
-    setup() {
-        const $router = useRouter()
-        function goCreateBoard() {
-            $router.push('/board/create')
-        }
-        return {
-            columns,
-            rows,
-            goCreateBoard
-        }
-    },
-    methods: {
-        onRowClick(row) {
-            this.$router.push({ path: '/board/detail', query: row.id });
-        },
-    }
-}
 </script>

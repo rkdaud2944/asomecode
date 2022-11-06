@@ -2,7 +2,7 @@
  * 파일을 파이썬 또는 리소스 파일을 다운받아서 어썸보드에 저장한다.
  */
 
-import config from "@/config";
+import config from "@/globals/config";
 import axios from "axios";
 import serial from "./serial";
 import eventbus from "@/globals/eventbus";

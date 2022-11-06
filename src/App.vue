@@ -15,12 +15,12 @@
 </template>
 
 <script>
-import globals from "./globals";
-import bridgeIn from "./bridge-in";
-import { useMemberStore } from "@/store/member";
+import globals from "@/globals/globals";
+import bridgeIn from "@/globals/bridge-in";
+import editorControl from "@/globals/editor-control";
 import HeaderMain from "@/components/HeaderMain.vue";
 import ConsoleLog from "@/components/ConsoleLog.vue";
-import editorControl from "@/globals/editor-control";
+import { useMemberStore } from "@/store/member";
 
 export default {
     components: {

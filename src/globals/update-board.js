@@ -1,4 +1,4 @@
-import config from "@/config";
+import config from "@/globals/config";
 import axios from "axios";
 import serial from "./serial";
 import eventbus from "@/globals/eventbus";

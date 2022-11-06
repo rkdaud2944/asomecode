@@ -100,14 +100,16 @@
 
 <script>
 /* eslint-disable */
-import VueBase from "@/vue-base";
-import { debounce } from 'lodash-es'
+
+import VueBase from "@/globals/vue-base";
 import markdown from "@/globals/markdown.js";
+import { debounce } from 'lodash-es'
 import { ref } from 'vue'
 import { Notify } from 'quasar'
 import apiAwsS3 from "@/api/aws-s3";
 import apiLesson from "@/api/lesson";
 import CodeEditor from 'simple-code-editor';
+
 export default {
     mixins: [VueBase],
 

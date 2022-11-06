@@ -1,4 +1,4 @@
-import globals from "@/globals";
+import globals from "@/globals/globals";
 import axios from "axios";
 import {useMemberStore} from "@/store/member";
 
