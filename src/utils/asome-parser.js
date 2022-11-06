@@ -20,7 +20,7 @@ const State = {
 
 const TokenType = {
     TEXT: 0,
-    CODE: 1,
+    BEGIN_MARK: 1,
     END_MARK: 2,
 }
 
@@ -67,6 +67,10 @@ class Scanner {
     #do_return() {
         const ch = this.#nextChar();
         switch (ch) {
+            case "\n": 
+                this.onToken({text: "\n", type: TokenType.TEXT})
+                break;
+
             case "[": this.state = State.BEGIN_MARK; 
                 break;
 
@@ -83,9 +87,9 @@ class Scanner {
 
     #do_beginMark() {
         const text = this.source.substr(this.index, 6);
-        if (text.startsWith("code")) {
-            this.index = this.index + "code".length;
-            this.onToken({text: "[code", type: TokenType.CODE});
+        if (text.startsWith("button")) {
+            this.index = this.index + "button".length;
+            this.onToken({text: "[button", type: TokenType.BEGIN_MARK});
         } else {
             this.onToken({text: "[", type: TokenType.TEXT});
         }
@@ -96,10 +100,50 @@ class Scanner {
 class Parser {
     constructor() {
         this.result = "";
+        this.markType = "";
+        this.buffer = "";
     }
 
     addToken(token) {
-        console.log(token);
-        this.result = this.result + token.text;
+        if (token.type == TokenType.BEGIN_MARK) {
+            this.markType = token.text;
+        }
+
+        if (this.markType == "") {
+            this.result = this.result + token.text;            
+        } else {
+            this.buffer = this.buffer + token.text;
+        }
+
+        if (token.type == TokenType.END_MARK) {
+            this.result = this.result + this.#get_markText();
+            this.buffer = "";
+            this.markType = "";
+        }
     }
+
+    #get_markText() {
+        switch (this.markType) {
+            case "[button": return this.#get_buttonText(); 
+            case "[image": return this.#get_imageText(); 
+            case "[video": return this.#get_videoText(); 
+            case "[editor": return this.#get_editorText(); 
+        }
+    }
+
+    #get_buttonText() {
+        return "";
+    } 
+
+    #get_imageText() {
+        return "";
+    }
+
+    #get_videoText() {
+        return "";
+    } 
+
+    #get_editorText() {
+        return "";
+    } 
 }
