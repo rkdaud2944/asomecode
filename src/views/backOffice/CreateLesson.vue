@@ -122,6 +122,8 @@ export default {
 
     data() {
         return {
+            lessonContentBaseUrl: process.env.VUE_APP_LESSON_CONTENT_BASEURL,
+
             defaultSubjectSet: null,
             defaultSubjectOptions: [],
             selectedDefaultSubject: null,
@@ -169,7 +171,8 @@ export default {
         },
 
         insertImage(insert) {
-            let markedImage = `![](${insert})`
+            let content = insert.replace(this.lessonContentBaseUrl + "lesson/images/", "")
+            let markedImage = `[image () ${content}\n]`
             let value = this.$refs.inputTextarea.value;
             let selectionStart = this.$refs.inputTextarea.selectionStart;
             this.lessonContent = [value.slice(0, selectionStart), markedImage, value.slice(selectionStart)].join('')
@@ -184,7 +187,8 @@ export default {
         },
 
         insertVideo(insert) {
-            let markedVideo = `#[video](${insert})`
+            let content = insert.replace(this.lessonContentBaseUrl + "lesson/videos/", "")
+            let markedVideo = `[video ${content}\n]`
             let value = this.$refs.inputTextarea.value;
             let selectionStart = this.$refs.inputTextarea.selectionStart;
             this.lessonContent = [value.slice(0, selectionStart), markedVideo, value.slice(selectionStart)].join('')
@@ -216,9 +220,7 @@ export default {
 
         createfunctionBtn() {
             let functionNameId = this.functionName.replaceAll(' ', '-')
-
-            let functionBtnContent = `#[function](${this.functionName})\n` +
-                `<div id="${functionNameId}" class="hidden">\n${this.functionCode}\n</div>\n`
+            let functionBtnContent = `[button ${functionNameId}\n${this.functionCode}\n]`
 
             let value = this.$refs.inputTextarea.value;
             let selectionStart = this.$refs.inputTextarea.selectionStart;

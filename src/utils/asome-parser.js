@@ -87,9 +87,16 @@ class Scanner {
 
     #do_beginMark() {
         const text = this.source.substr(this.index, 6);
+
         if (text.startsWith("button")) {
             this.index = this.index + "button".length;
             this.onToken({text: "[button", type: TokenType.BEGIN_MARK});
+        } else if (text.startsWith("image")) {
+            this.index = this.index + "image".length;
+            this.onToken({text: "[image", type: TokenType.BEGIN_MARK});
+        } else if (text.startsWith("video")) {
+            this.index = this.index + "video".length;
+            this.onToken({text: "[video", type: TokenType.BEGIN_MARK});
         } else {
             this.onToken({text: "[", type: TokenType.TEXT});
         }
@@ -99,6 +106,7 @@ class Scanner {
 
 class Parser {
     constructor() {
+        this.lessonContentBaseUrl = process.env.VUE_APP_LESSON_CONTENT_BASEURL,
         this.result = "";
         this.markType = "";
         this.buffer = "";
@@ -124,23 +132,36 @@ class Parser {
 
     #get_markText() {
         switch (this.markType) {
-            case "[button": return this.#get_buttonText(); 
-            case "[image": return this.#get_imageText(); 
-            case "[video": return this.#get_videoText(); 
-            case "[editor": return this.#get_editorText(); 
+            case "[button": return this.#get_buttonText(this.buffer); 
+            case "[image": return this.#get_imageText(this.buffer); 
+            case "[video": return this.#get_videoText(this.buffer); 
+            case "[editor": return this.#get_editorText(this.buffer); 
         }
     }
 
-    #get_buttonText() {
-        return "";
-    } 
-
-    #get_imageText() {
-        return "";
+    #get_buttonText(text) {
+        const firstLine = text.split("\n")[0]
+        const id = firstLine.replace("[button ","");
+        let content = text.replace(`${firstLine}`, "").slice(0, -1)
+        return `<div onclick="runCode(getCode('${id}'))" class="function_btn">${id}</div></br>`+ 
+               `<div id="${id}" class="hidden">${content}</div>`;
     }
 
-    #get_videoText() {
-        return "";
+    #get_imageText(text) {
+        const firstLine = text.split("\n")[0]
+        const imageTitle = firstLine.substring(firstLine.indexOf('(') + 1, firstLine.indexOf(')'))
+        let imageSrc = this.lessonContentBaseUrl + "lesson/images/" + text.replace(`[image (${imageTitle}) `, "").slice(0, -1)
+
+        if (imageTitle == '')
+            return `<figure class="img_content_box"><img src="${imageSrc}"></figure>`
+        else
+            return `<figure class="img_content_box"><img src="${imageSrc}"><figcaption align = "center">[${imageTitle}]</figcaption></figure>`
+    }
+
+    #get_videoText(text) {
+        const firstLine = text.split("\n")[0]
+        let content = this.lessonContentBaseUrl + "lesson/videos/" + firstLine.replace("[video ", "")
+        return `<video controls width="100%"><source src="${content}" type="video/webm"></video>`;
     } 
 
     #get_editorText() {

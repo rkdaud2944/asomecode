@@ -24,11 +24,12 @@ export default {
             }
         });
 
-        let filExtension = file.name.substr(file.name.lastIndexOf('.'))
+        let fileExtension = file.name.substr(file.name.lastIndexOf('.'))
 
         return new Promise((resolve, reject) => {
+
             s3.upload({
-                Key: uuidv1(this.today) + filExtension,
+                Key: uuidv1(this.today) + fileExtension,
                 Body: file,
                 ACL: 'public-read'
             }, (err, data) => {
@@ -36,6 +37,7 @@ export default {
                     console.log(err)
                     reject(err);
                 }
+                
                 resolve(data.Location)
             })
         });
@@ -58,11 +60,11 @@ export default {
             }
         });
 
-        let filExtension = file.name.substr(file.name.lastIndexOf('.'))
+        let fileExtension = file.name.substr(file.name.lastIndexOf('.'))
 
         return new Promise((resolve, reject) => {
             s3.upload({
-                Key: uuidv1(this.today) + filExtension,
+                Key: uuidv1(this.today) + fileExtension,
                 Body: file,
                 ACL: 'public-read'
             }, (err, data) => {
