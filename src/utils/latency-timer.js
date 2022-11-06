@@ -1,4 +1,4 @@
-export class LatencyTimer {
+export default class LatencyTimer {
     #timer = null;
     #count = 0;
     #limit = 5000;

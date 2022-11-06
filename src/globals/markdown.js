@@ -1,4 +1,4 @@
-import { AsomeParser } from "../utils/asome-parser";
+import AsomeParser from "../utils/asome-parser";
 
 /* eslint-disable */
 

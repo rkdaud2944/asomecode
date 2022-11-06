@@ -1,4 +1,4 @@
-export class AsomeParser {
+export default class AsomeParser {
     constructor (input) {
         this.scanner = new Scanner(input);
         this.parser = new Parser();
@@ -6,7 +6,7 @@ export class AsomeParser {
         this.scanner.onToken = (token) => this.parser.addToken(token);
     }
 
-    execute() {        
+    execute() {
         this.scanner.execute();
         return this.parser.result;
     }
@@ -54,12 +54,12 @@ class Scanner {
     #do_base() {
         const ch = this.#nextChar();
         switch (ch) {
-            case "\n": 
+            case "\n":
                 this.onToken({text: "\n", type: TokenType.TEXT})
                 this.state = State.RETURN;
                 break;
 
-            default: 
+            default:
                 this.onToken({text: ch, type: TokenType.TEXT})
         }
     }
@@ -67,21 +67,21 @@ class Scanner {
     #do_return() {
         const ch = this.#nextChar();
         switch (ch) {
-            case "\n": 
+            case "\n":
                 this.onToken({text: "\n", type: TokenType.TEXT})
                 break;
 
-            case "[": this.state = State.BEGIN_MARK; 
+            case "[": this.state = State.BEGIN_MARK;
                 break;
 
-            case "]": 
+            case "]":
                 this.onToken({text: ch, type: TokenType.END_MARK})
                 this.state = State.BASE;
                 break;
-            
-            default: 
+
+            default:
                 this.onToken({text: ch, type: TokenType.TEXT})
-                this.state = State.BASE;            
+                this.state = State.BASE;
         }
     }
 
@@ -118,7 +118,7 @@ class Parser {
         }
 
         if (this.markType == "") {
-            this.result = this.result + token.text;            
+            this.result = this.result + token.text;
         } else {
             this.buffer = this.buffer + token.text;
         }
@@ -132,10 +132,10 @@ class Parser {
 
     #get_markText() {
         switch (this.markType) {
-            case "[button": return this.#get_buttonText(this.buffer); 
-            case "[image": return this.#get_imageText(this.buffer); 
-            case "[video": return this.#get_videoText(this.buffer); 
-            case "[editor": return this.#get_editorText(this.buffer); 
+            case "[button": return this.#get_buttonText(this.buffer);
+            case "[image": return this.#get_imageText(this.buffer);
+            case "[video": return this.#get_videoText(this.buffer);
+            case "[editor": return this.#get_editorText(this.buffer);
         }
     }
 
@@ -143,7 +143,7 @@ class Parser {
         const firstLine = text.split("\n")[0]
         const id = firstLine.replace("[button ","");
         let content = text.replace(`${firstLine}`, "").slice(0, -1)
-        return `<div onclick="runCode(getCode('${id}'))" class="function_btn">${id}</div></br>`+ 
+        return `<div onclick="runCode(getCode('${id}'))" class="function_btn">${id}</div></br>`+
                `<div id="${id}" class="hidden">${content}</div>`;
     }
 
@@ -162,9 +162,9 @@ class Parser {
         const firstLine = text.split("\n")[0]
         let content = this.lessonContentBaseUrl + "lesson/videos/" + firstLine.replace("[video ", "")
         return `<video controls width="100%"><source src="${content}" type="video/webm"></video>`;
-    } 
+    }
 
     #get_editorText() {
         return "";
-    } 
+    }
 }
