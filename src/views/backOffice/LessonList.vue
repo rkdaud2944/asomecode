@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import VueBase from '@/VueBase';
+import VueBase from '@/vue-base';
 import apiLesson from '@/api/lesson';
 import FilterFrame from '@/components/FilterFrame.vue';
 import Filter from '@/components/backOffice/LessonListFilter.vue';

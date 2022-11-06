@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import VueBase from "@/VueBase";
+import VueBase from "@/vue-base";
 import QuasarColumnManager from "@/utils/quasar-column-manager";
 
 export default {

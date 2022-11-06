@@ -1,6 +1,6 @@
 import axios from 'axios'
 import {useEtcStore} from '@/store/etc'
-import errorLog from './errorLog'
+import errorLog from './error-log'
 import { Notify } from 'quasar'
 
 const etcStroe = useEtcStore();

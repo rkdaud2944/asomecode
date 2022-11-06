@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import VueBase from '@/VueBase';
+import VueBase from '@/vue-base';
 
 export default {
     mixins: [VueBase],

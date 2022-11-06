@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import VueBase from "@/VueBase";
+import VueBase from "@/vue-base";
 import apiBoard from "@/api/board";
 import { ref } from 'vue'
 

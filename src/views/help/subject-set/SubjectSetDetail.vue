@@ -24,7 +24,7 @@
 
 <script>
 import subjectSets from '@/data/subject-sets';
-import VueBase from '@/VueBase';
+import VueBase from '@/vue-base';
 import Header from '@/components/HeaderHelp.vue';
 
 export default {

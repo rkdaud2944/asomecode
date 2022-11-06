@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import VueBase from "@/VueBase";
+import VueBase from "@/vue-base";
 import lessons from "@/data/lessons";
 import Header from "@/components/HeaderHelp.vue";
 import LessonList from "@/components/LessonList.vue";

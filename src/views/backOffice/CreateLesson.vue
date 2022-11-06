@@ -105,11 +105,11 @@
 
 <script>
 /* eslint-disable */
-import VueBase from "@/VueBase";
+import VueBase from "@/vue-base";
 import { debounce } from 'lodash-es'
 import markdown from "@/globals/markdown.js";
 import { ref } from 'vue'
-import apiAwsS3 from "@/api/awsS3";
+import apiAwsS3 from "@/api/aws-s3";
 import apiLesson from "@/api/lesson";
 import apiSubject from "@/api/subject";
 import CodeEditor from 'simple-code-editor';

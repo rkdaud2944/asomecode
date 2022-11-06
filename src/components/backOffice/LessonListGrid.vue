@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import VueBase from "@/VueBase";
+import VueBase from "@/vue-base";
 import strg from "@/utils/strg";
 import QuasarColumnManager from "@/utils/quasar-column-manager";
 import TextBox from '@/components/TextBox.vue';

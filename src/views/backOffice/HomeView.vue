@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import VueBase from "@/VueBase";
+import VueBase from "@/vue-base";
 import SideMenu from "@/components/backOffice/SideMenu";``
 
 export default {
