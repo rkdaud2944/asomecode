@@ -1,5 +1,5 @@
-import eventbus from "@/utils/eventbus";
-import windows from "@/utils/windows";
+import eventbus from "@/globals/eventbus";
+import windows from "@/globals/windows";
 
 eventbus.on("onSerialReceived", (data) => {
     if (!data) return;

@@ -2,9 +2,9 @@
  * App to Web 브릿지 메시지
  */
 
-import serial from "./utils/serial";
+import serial from "./globals/serial";
 import router from "@/router";
-import windows from "@/utils/windows";
+import windows from "@/globals/windows";
 
 const bridge = {
     init() {

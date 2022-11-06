@@ -38,7 +38,7 @@ import { VAceEditor } from "vue3-ace-editor";
 import 'ace-builds/src-noconflict/mode-python';
 import 'ace-builds/src-noconflict/theme-monokai';
 import VueBase from "@/VueBase";
-import remoteSerial from "@/utils/remoteSerial";
+import remoteSerial from "@/globals/remoteSerial";
 import { LatencyTimer } from "@/utils/latency-timer";
 
 export default {

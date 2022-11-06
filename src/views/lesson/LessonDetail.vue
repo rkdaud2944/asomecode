@@ -27,7 +27,7 @@
 
 <script>
 /* eslint-disable */
-import markdown from "@/utils/markdown";
+import markdown from "@/globals/markdown";
 import apiLesson from "@/api/lesson";
 
 export default {

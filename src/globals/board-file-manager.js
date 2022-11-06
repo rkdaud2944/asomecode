@@ -5,7 +5,7 @@
 import config from "@/config";
 import axios from "axios";
 import serial from "./serial";
-import eventbus from "@/utils/eventbus";
+import eventbus from "@/globals/eventbus";
 
 eventbus.on("onSerialReceived", (data) => {
     if (!data) return;

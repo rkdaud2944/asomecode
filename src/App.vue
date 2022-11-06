@@ -20,7 +20,7 @@ import bridgeIn from "./bridge-in";
 import { useMemberStore } from "@/store/member";
 import HeaderMain from "@/components/HeaderMain.vue";
 import ConsoleLog from "@/components/ConsoleLog.vue";
-import editorControl from "@/utils/editor-control";
+import editorControl from "@/globals/editor-control";
 
 export default {
     components: {

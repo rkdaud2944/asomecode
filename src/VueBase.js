@@ -1,7 +1,7 @@
 import { Notify } from 'quasar'
 import router from "@/router";
 import bridgeOut from "./bridge-out";
-import windows from "@/utils/windows";
+import windows from "@/globals/windows";
 
 export default {
     data() {

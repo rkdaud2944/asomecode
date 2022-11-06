@@ -60,10 +60,10 @@
 </template>
 
 <script>
-import serial from "@/utils/serial";
+import serial from "@/globals/serial";
 import VueBase from "@/VueBase";
-import eventbus from "@/utils/eventbus";
-import updateBoard from "@/utils/update-board";
+import eventbus from "@/globals/eventbus";
+import updateBoard from "@/globals/update-board";
 
 export default {
     mixins: [VueBase],

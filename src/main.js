@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import {createPinia} from 'pinia'
-import errorLog from "@/utils/errorLog";
+import errorLog from "@/globals/errorLog";
 import { Quasar } from 'quasar'
 import quasarUserOptions from './quasar-user-options'
 

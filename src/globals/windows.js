@@ -1,4 +1,4 @@
-import serial from '@/utils/serial';
+import serial from '@/globals/serial';
 
 let windows = [];
 

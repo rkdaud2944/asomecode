@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import eventbus from "@/utils/eventbus";
-import serial from "@/utils/serial";
+import eventbus from "@/globals/eventbus";
+import serial from "@/globals/serial";
 
 export default {
     data() {

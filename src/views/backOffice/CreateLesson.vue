@@ -107,7 +107,7 @@
 /* eslint-disable */
 import VueBase from "@/VueBase";
 import { debounce } from 'lodash-es'
-import markdown from "@/utils/markdown.js";
+import markdown from "@/globals/markdown.js";
 import { ref } from 'vue'
 import apiAwsS3 from "@/api/awsS3";
 import apiLesson from "@/api/lesson";
@@ -233,7 +233,7 @@ export default {
 
         onCodeEditorDialog() {
             let codeEditorContent = `#[code](${this.functionName})\n` +
-                `<pre onclick="openEditor(getCode('code4'))">\n<code id="code4" class="python">` + 
+                `<pre onclick="openEditor(getCode('code4'))">\n<code id="code4" class="python">` +
                 `\n# 여기에 코드를 작성해 주세요.\n` +
                 `</code>\n</pre>\n`
 

@@ -1,5 +1,5 @@
 import { SerialPort, ReadlineParser } from "serialport";
-import eventbus from "@/utils/eventbus";
+import eventbus from "@/globals/eventbus";
 import { Notify } from 'quasar'
 
 eventbus.on("onSerialReceived", (data) => {

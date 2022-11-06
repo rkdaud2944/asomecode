@@ -1,8 +1,8 @@
 import config from "@/config";
 import axios from "axios";
 import serial from "./serial";
-import eventbus from "@/utils/eventbus";
-import boardFileManager from "@/utils/board-file-manager";
+import eventbus from "@/globals/eventbus";
+import boardFileManager from "@/globals/board-file-manager";
 
 eventbus.on("onSerialReceived", (data) => {
     if (!data) return;

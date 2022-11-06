@@ -1,4 +1,4 @@
-import rest from "@/utils/rest";
+import rest from "@/globals/rest";
 
 export default {
     async create(body) {
