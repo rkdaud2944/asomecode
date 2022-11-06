@@ -102,7 +102,7 @@
 /* eslint-disable */
 
 import VueBase from "@/globals/vue-base";
-import markdown from "@/globals/markdown.js";
+import markdown from "@/utils/markdown.js";
 import { debounce } from 'lodash-es'
 import { ref } from 'vue'
 import { Notify } from 'quasar'
@@ -150,7 +150,7 @@ export default {
 
     computed: {
         output() {
-            return markdown.markedInput(this.lesson.content)
+            return markdown.parse(this.lesson.content)
         }
     },
 

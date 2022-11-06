@@ -107,7 +107,7 @@
 /* eslint-disable */
 
 import VueBase from "@/globals/vue-base";
-import markdown from "@/globals/markdown.js";
+import markdown from "@/utils/markdown.js";
 import { debounce } from 'lodash-es'
 import { ref } from 'vue'
 import apiAwsS3 from "@/api/aws-s3";
@@ -159,7 +159,7 @@ export default {
 
     computed: {
         markedOutput() {
-            return markdown.markedInput(this.lessonContent)
+            return markdown.parse(this.lessonContent)
         }
     },
 

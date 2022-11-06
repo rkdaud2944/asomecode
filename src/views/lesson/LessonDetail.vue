@@ -27,7 +27,7 @@
 
 <script>
 /* eslint-disable */
-import markdown from "@/globals/markdown";
+import markdown from "@/utils/markdown";
 import apiLesson from "@/api/lesson";
 
 export default {
@@ -64,7 +64,7 @@ export default {
             apiLesson.lessonDetail(id)
                 .then((response) => {
                     this.lesson = response.data;
-                    this.output = markdown.markedInput(this.lesson.content)
+                    this.output = markdown.parse(this.lesson.content)
 
                     let domparser = new DOMParser()
                     let doc = domparser.parseFromString(this.output, 'text/html')
