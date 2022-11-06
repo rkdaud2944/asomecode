@@ -4,7 +4,7 @@
             <q-toolbar>
                 <q-toolbar-title>
                     <div class="row" style="width: 100vh; height: 64px">
-                        <q-btn @click="runCode(content)" icon="play_arrow" class="q-mt-md q-mb-md" color="primary" label="Run"/>
+                        <q-btn @click="run" icon="play_arrow" class="q-mt-md q-mb-md" color="primary" label="Run"/>
                         <q-btn @click="stop()" icon="stop_circle" class="q-mt-md q-mb-md q-ml-sm" color="deep-orange" label="Stop"/>
 
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -27,7 +27,7 @@
 
         <q-page-container>
             <q-page>
-                <v-ace-editor v-model:value="content" class="editor" lang="python" theme="monokai" />
+                <v-ace-editor v-model:value="content" @update:value="onChanged" class="editor" lang="python" theme="monokai" />
             </q-page>
         </q-page-container>
     </q-layout>
@@ -39,6 +39,7 @@ import 'ace-builds/src-noconflict/mode-python';
 import 'ace-builds/src-noconflict/theme-monokai';
 import VueBase from "@/VueBase";
 import remoteSerial from "@/utils/remoteSerial";
+import { LatencyTimer } from "@/utils/latency-timer";
 
 export default {
     mixins: [VueBase],
@@ -48,15 +49,23 @@ export default {
     data() {
         return {
             content: '',
+            savedContent: '',
         }
     },
 
     mounted() {
         this.content = localStorage.getItem("code");
+        this.timer = new LatencyTimer(5000, () => this.saveToLocalStorage());
+        this.timer.start();
     },
 
     methods: {
         ...remoteSerial,
+
+        run() {
+            this.runCode(this.content);
+            this.saveToLocalStorage();
+        },
 
         upload() {
             console.log('upload');
@@ -68,6 +77,16 @@ export default {
 
         save() {
             console.log('save');
+        },
+
+        onChanged() {
+            this.timer.reset();
+        },
+
+        saveToLocalStorage() {
+            if (this.content == this.savedContent) return;
+            this.savedContent = this.content;
+            localStorage.setItem("code", this.content);
         }
     }
 };
