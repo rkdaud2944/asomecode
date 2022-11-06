@@ -19,7 +19,16 @@ window.addEventListener('message', (msg) => {
     }
 });
 
+/**
+ * POP UP WINDOW를 오픈하고 관리한다.
+ * 메인 윈도우와 통신하기 위해 메시지 통신을 지원한다.
+ */
 export default {
+    /**
+     * POP UP WINDOW를 오픈한다.
+     * @param name 팝업 윈도우의 이름
+     * @param url 팝업 윈도우의 URL
+     */
     open(name, url) {
         windows[name] = window.open(url, name);
     },

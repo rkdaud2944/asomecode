@@ -15,6 +15,10 @@ let versions = [];
 let filenameQue = [];
 let tobeDowndloads = [];
 
+/**
+ * 어썸보드를 업데이트 한다.
+ * 업데이트 대상의 파일을 찾아내고, 실제 업데이트는 BoardFileManager에게 위임한다.
+ */
 const updateBoard = {
     start() {
         serial.runCode(codeGetVersion);

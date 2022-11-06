@@ -11,6 +11,9 @@ let port = null;
 let parser = null;
 let boardType = "Zet";
 
+/**
+ * 시리얼 포트를 열고, 시리얼 포트로부터 데이터를 읽거나 쓰는 등의 기능을 제공한다.
+ */
 const seiral = {
     setBoardType(boardInfo) {
         boardInfo.includes("esp32") ? boardType = "Pro" : boardType = "Zet";

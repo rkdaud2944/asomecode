@@ -1,11 +1,10 @@
-/**
- * App to Web 브릿지 메시지
- */
-
 import serial from "@/globals/serial";
 import router from "@/router";
 import windows from "@/globals/windows";
 
+/**
+ * App to Web 브릿지 메시지
+ */
 const bridge = {
     init() {
         //

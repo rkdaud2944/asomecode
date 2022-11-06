@@ -1,3 +1,6 @@
+/**
+ * POP UP 윈도우에서 메인 윈도우에 있는 시리얼 객체를 사용할 수 있도록 한다.
+ */
 export default {
     sendCommand(type) {
         const msg = {

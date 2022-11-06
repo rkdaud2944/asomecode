@@ -1,10 +1,9 @@
+/* eslint-disable */
+
 /**
  * Web to App 브릿지 메시지
  */
-
-/* eslint-disable */
-
-export default {
+ export default {
     /**
      * Web to App Globals sync
      * @param params 싱크할 데이터

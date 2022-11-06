@@ -3,6 +3,9 @@ import router from "@/router";
 import bridgeOut from "./bridge-out";
 import windows from "@/globals/windows";
 
+/**
+ * Vue 콤포넌트의 공통 기능을 제공한다.
+ */
 export default {
     data() {
         return {

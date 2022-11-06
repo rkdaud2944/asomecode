@@ -12,6 +12,9 @@ eventbus.on("onSerialReceived", (data) => {
 let startToView = false;
 let lines = [];
 
+/**
+ * 코드 에디터와 관련된 Event를 처리한다.
+ */
 const editorControl = {
     init() {
 
