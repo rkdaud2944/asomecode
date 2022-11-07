@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import VueBase from "@/globals/vue-base";
+import VueBase from "@/mixin/vue-base";
 import remoteSerial from "@/globals/remote-serial";
 import LatencyTimer from "@/utils/latency-timer";
 import { VAceEditor } from "vue3-ace-editor";

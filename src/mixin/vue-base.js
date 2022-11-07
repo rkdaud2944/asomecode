@@ -1,6 +1,6 @@
 import { Notify } from 'quasar'
 import router from "@/router";
-import bridgeOut from "./bridge-out";
+import bridgeOut from "../globals/bridge-out";
 import windows from "@/globals/windows";
 
 /**

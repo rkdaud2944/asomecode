@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import VueBase from "@/globals/vue-base";
+import VueBase from "@/mixin/vue-base";
 
 export default {
     mixins: [VueBase],

@@ -101,7 +101,7 @@
 <script>
 /* eslint-disable */
 
-import VueBase from "@/globals/vue-base";
+import VueBase from "@/mixin/vue-base";
 import markdown from "@/utils/markdown.js";
 import { debounce } from 'lodash-es'
 import { ref } from 'vue'

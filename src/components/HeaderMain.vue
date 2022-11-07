@@ -61,7 +61,7 @@
 
 <script>
 import serial from "@/globals/serial";
-import VueBase from "@/globals/vue-base";
+import VueBase from "@/mixin/vue-base";
 import eventbus from "@/globals/eventbus";
 import updateBoard from "@/globals/update-board";
 

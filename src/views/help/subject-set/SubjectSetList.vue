@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import VueBase from '@/globals/vue-base';
+import VueBase from '@/mixin/vue-base';
 import subjectSets from '@/data/subject-sets';
 import userColumns from '@/assets/quasar/table-columns';
 import Header from '@/components/HeaderHelp.vue';
