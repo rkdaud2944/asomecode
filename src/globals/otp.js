@@ -41,6 +41,7 @@ const otp = {
 
     result(data) {
         const code = data.split(":")[1].trim();
+        // TODO: 백엔드에 전달하고 인증 결과 가져와서 처리하기
         console.log("OTP 인증에 성공했습니다.", code);
     },
 };
