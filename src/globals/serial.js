@@ -68,9 +68,9 @@ const seiral = {
         });
 
         try {
-            port.open();
+            await port.open();
             eventbus.emit("onSerialConnected");
-            this.writeLn("import os; os.uname();");
+            this.writeLn("import os; os.uname(); print('### System.Started')");
         } catch (error) {
             port = null;
             console.log(error);

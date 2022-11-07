@@ -18,6 +18,7 @@
 import globals from "@/globals/globals";
 import bridgeIn from "@/globals/bridge-in";
 import editorControl from "@/globals/editor-control";
+import otp from "@/globals/otp";
 import HeaderMain from "@/components/HeaderMain.vue";
 import ConsoleLog from "@/components/ConsoleLog.vue";
 import { useMemberStore } from "@/store/member";
@@ -30,6 +31,7 @@ export default {
     setup() {
         bridgeIn.init();
         editorControl.init();
+        otp.init();
 
         const memberStore = useMemberStore();
 
