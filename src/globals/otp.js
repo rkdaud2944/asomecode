@@ -35,7 +35,7 @@ const otp = {
         Notify.create({
             color: "deep-orange",
             textColor: "white",
-            message: "OTP 인증에 실패했습니다.",
+            message: "OTP 코드를 가져오지 못했습니다.",
         });
     },
 
