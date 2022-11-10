@@ -18,6 +18,12 @@ const bridge = {
         router.push({ path: window.atob(url) });
     },
 
+    // TODO: App이 아닌 내부에서만 사용하기 때문에 분리해야 함
+    /**
+     * 엘레먼트 id 태그 안에 텍스트를 리턴한다.
+     * @param id 엘레먼트 id
+     * @returns 엘ㄹ먼트 내부 텍스트
+     */
     getCode(id) {
         const element = document.getElementById(id);
         return element.textContent;
@@ -31,10 +37,6 @@ const bridge = {
         console.log(code);
         localStorage.setItem("code", code);
         windows.open("editor", "/editor");
-    },
-
-    setCode(code) {
-        console.log(code);
     },
 };
 

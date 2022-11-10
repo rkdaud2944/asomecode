@@ -70,7 +70,7 @@ const seiral = {
         try {
             await port.open();
             eventbus.emit("onSerialConnected");
-            this.writeLn("import os; os.uname(); print('### System.Started')");
+            this.writeLn("import os; os.uname()");
         } catch (error) {
             port = null;
             console.log(error);

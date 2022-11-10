@@ -1,4 +1,5 @@
 import serial from '@/globals/serial';
+import otp from "@/globals/otp";
 
 let windows = [];
 
@@ -16,6 +17,7 @@ window.addEventListener('message', (msg) => {
         case 'stop': serial.stop(); break;
         case 'reboot': serial.reboot(); break;
         case 'runCode': serial.runCode(message.params); break;
+        case 'verifyOtp': otp.start(message.params); break;
     }
 });
 
@@ -32,4 +34,4 @@ export default {
     open(name, url) {
         windows[name] = window.open(url, name);
     },
-}
+};

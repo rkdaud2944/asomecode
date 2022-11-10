@@ -6,7 +6,6 @@ import { Notify } from 'quasar'
 eventbus.on("onSerialReceived", (data) => {
     if (!data) return;
 
-    if (data.startsWith("### System.Started")) otp.start();
     if (data.startsWith("### OTP.Ready")) otp.read();
     if (data.startsWith("### OTP.Error")) otp.error();
     if (data.startsWith("### OTP.Result")) otp.result(data);
@@ -16,11 +15,8 @@ eventbus.on("onSerialReceived", (data) => {
  * OTP 인증을 처리한다.
  */
 const otp = {
-    init() {
-        //
-    },
-
-    start() {
+    start(serialNumber) {
+        this.serialNumber = serialNumber;
         serial.runCode(codeOptStart);
     },
 
@@ -41,8 +37,9 @@ const otp = {
 
     result(data) {
         const code = data.split(":")[1].trim();
+
         // TODO: 백엔드에 전달하고 인증 결과 가져와서 처리하기
-        console.log("OTP 인증에 성공했습니다.", code);
+        console.log("OTP 인증에 성공했습니다.", this.serialNumber, code);
     },
 };
 
