@@ -1,5 +1,7 @@
+import { v1 as uuidv1 } from "uuid"
+
 export default class AsomeParser {
-    constructor (input) {
+    constructor(input) {
         this.scanner = new Scanner(input);
         this.parser = new Parser();
 
@@ -25,7 +27,7 @@ const TokenType = {
 }
 
 class Scanner {
-    constructor (input) {
+    constructor(input) {
         this.source = input;
         this.index = 0;
         this.state = State.BASE;
@@ -55,12 +57,12 @@ class Scanner {
         const ch = this.#nextChar();
         switch (ch) {
             case "\n":
-                this.onToken({text: "\n", type: TokenType.TEXT})
+                this.onToken({ text: "\n", type: TokenType.TEXT })
                 this.state = State.RETURN;
                 break;
 
             default:
-                this.onToken({text: ch, type: TokenType.TEXT})
+                this.onToken({ text: ch, type: TokenType.TEXT })
         }
     }
 
@@ -68,19 +70,19 @@ class Scanner {
         const ch = this.#nextChar();
         switch (ch) {
             case "\n":
-                this.onToken({text: "\n", type: TokenType.TEXT})
+                this.onToken({ text: "\n", type: TokenType.TEXT })
                 break;
 
             case "[": this.state = State.BEGIN_MARK;
                 break;
 
             case "]":
-                this.onToken({text: ch, type: TokenType.END_MARK})
+                this.onToken({ text: ch, type: TokenType.END_MARK })
                 this.state = State.BASE;
                 break;
 
             default:
-                this.onToken({text: ch, type: TokenType.TEXT})
+                this.onToken({ text: ch, type: TokenType.TEXT })
                 this.state = State.BASE;
         }
     }
@@ -90,15 +92,18 @@ class Scanner {
 
         if (text.startsWith("button")) {
             this.index = this.index + "button".length;
-            this.onToken({text: "[button", type: TokenType.BEGIN_MARK});
+            this.onToken({ text: "[button", type: TokenType.BEGIN_MARK });
         } else if (text.startsWith("image")) {
             this.index = this.index + "image".length;
-            this.onToken({text: "[image", type: TokenType.BEGIN_MARK});
+            this.onToken({ text: "[image", type: TokenType.BEGIN_MARK });
         } else if (text.startsWith("video")) {
             this.index = this.index + "video".length;
-            this.onToken({text: "[video", type: TokenType.BEGIN_MARK});
+            this.onToken({ text: "[video", type: TokenType.BEGIN_MARK });
+        } else if (text.startsWith("editor")) {
+            this.index = this.index + "editor".length;
+            this.onToken({ text: "[editor", type: TokenType.BEGIN_MARK });
         } else {
-            this.onToken({text: "[", type: TokenType.TEXT});
+            this.onToken({ text: "[", type: TokenType.TEXT });
         }
         this.state = State.BASE;
     }
@@ -107,7 +112,7 @@ class Scanner {
 class Parser {
     constructor() {
         this.lessonContentBaseUrl = process.env.VUE_APP_LESSON_CONTENT_BASEURL,
-        this.result = "";
+            this.result = "";
         this.markType = "";
         this.buffer = "";
     }
@@ -141,10 +146,12 @@ class Parser {
 
     #get_buttonText(text) {
         const firstLine = text.split("\n")[0]
-        const id = firstLine.replace("[button ","");
+        const functionName = firstLine.replace("[button ", "");
+        const functionId = functionName.replaceAll(' ', '-')
+
         let content = text.replace(`${firstLine}`, "").slice(0, -1)
-        return `<div onclick="runCode(getCode('${id}'))" class="function_btn">${id}</div></br>`+
-               `<div id="${id}" class="hidden">${content}</div>`;
+        return `<div onclick="runCode(getCode('${functionId}'))" class="function_btn">${functionName}</div></br>` +
+            `<div id="${functionId}" class="hidden">${content}</div>`;
     }
 
     #get_imageText(text) {
@@ -164,7 +171,13 @@ class Parser {
         return `<video controls width="100%"><source src="${content}" type="video/webm"></video>`;
     }
 
-    #get_editorText() {
-        return "";
+    #get_editorText(text) {
+        const firstLine = text.split("\n")[0]
+        let content = text.replace(`${firstLine}`, "").slice(0, -1)
+        const uuid = uuidv1(new Date())
+
+        return `<pre onclick="openEditor(getCode('${uuid}'))">\n` +
+            `<code id="${uuid}" class="python">${content}` +
+            `</code></pre>`;
     }
 }

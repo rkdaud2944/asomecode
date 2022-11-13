@@ -12,7 +12,7 @@
                     <q-btn color="secondary" @click="onImageUploadDialog" glossy label="이미지 삽입" />
                     <q-btn color="secondary" @click="onVideoUploadDialog" glossy label="동영상 삽입" />
                     <q-btn color="secondary" @click="onFunctionBtnDialog" glossy label="함수 버튼 생성" />
-                    <q-btn color="secondary" @click="onCodeEditorDialog" glossy label="코드 에디터 생성" />
+                    <q-btn color="secondary" @click="onCreateCodeEditor" glossy label="코드 에디터 생성" />
                 </q-btn-group>
                 <textarea ref="inputTextarea" class="inputText" :value="lesson.content" @input="update"></textarea>
             </q-card>
@@ -119,6 +119,8 @@ export default {
 
     data() {
         return {
+            lessonContentBaseUrl: process.env.VUE_APP_LESSON_CONTENT_BASEURL,
+
             lesson: {
                 title: null,
                 content: null,
@@ -190,9 +192,10 @@ export default {
         },
 
         insertImage(insert) {
-            var markedImage = `![](${insert})`
-            var value = this.$refs.inputTextarea.value;
-            var selectionStart = this.$refs.inputTextarea.selectionStart;
+            let content = insert.replace(this.lessonContentBaseUrl + "lesson/images/", "")
+            let markedImage = `[image () ${content}\n]`
+            let value = this.$refs.inputTextarea.value;
+            let selectionStart = this.$refs.inputTextarea.selectionStart;
             this.lesson.content = [value.slice(0, selectionStart), markedImage, value.slice(selectionStart)].join('')
         },
 
@@ -205,9 +208,10 @@ export default {
         },
 
         insertVideo(insert) {
-            var markedVideo = `#[video](${insert})`
-            var value = this.$refs.inputTextarea.value;
-            var selectionStart = this.$refs.inputTextarea.selectionStart;
+            let content = insert.replace(this.lessonContentBaseUrl + "lesson/videos/", "")
+            let markedVideo = `[video ${content}\n]`
+            let value = this.$refs.inputTextarea.value;
+            let selectionStart = this.$refs.inputTextarea.selectionStart;
             this.lesson.content = [value.slice(0, selectionStart), markedVideo, value.slice(selectionStart)].join('')
         },
 
@@ -236,10 +240,7 @@ export default {
         },
 
         createfunctionBtn() {
-            let functionNameId = this.functionName.replaceAll(' ', '-')
-
-            let functionBtnContent = `#[function](${this.functionName})\n` +
-                `<div id="${functionNameId}" class="hidden">\n${this.functionCode}\n</div>\n`
+            let functionBtnContent = `[button ${this.functionName}\n${this.functionCode}\n]`
 
             let value = this.$refs.inputTextarea.value;
             let selectionStart = this.$refs.inputTextarea.selectionStart;
@@ -250,11 +251,8 @@ export default {
             this.functionBtnDialog = false
         },
 
-        onCodeEditorDialog() {
-            let codeEditorContent = `#[code](${this.functionName})\n` +
-                `<pre onclick="openEditor(getCode('code4'))">\n<code id="code4" class="python">` +
-                `\n# 여기에 코드를 작성해 주세요.\n` +
-                `</code>\n</pre>\n`
+        onCreateCodeEditor() {
+            let codeEditorContent = `[editor\n# 여기에 코드를 작성해 주세요 \n]`
 
             let value = this.$refs.inputTextarea.value;
             let selectionStart = this.$refs.inputTextarea.selectionStart;

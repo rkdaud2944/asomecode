@@ -17,7 +17,7 @@
                     <q-btn color="secondary" @click="onImageUploadDialog" glossy label="이미지 삽입" />
                     <q-btn color="secondary" @click="onVideoUploadDialog" glossy label="동영상 삽입" />
                     <q-btn color="secondary" @click="onFunctionBtnDialog" glossy label="함수 버튼 생성" />
-                    <q-btn color="secondary" @click="onCodeEditorDialog" glossy label="코드 에디터 생성" />
+                    <q-btn color="secondary" @click="onCreateCodeEditor" glossy label="코드 에디터 생성" />
                 </q-btn-group>
                 <textarea ref="inputTextarea" class="inputText" :value="lessonContent" @input="update"></textarea>
             </q-card>
@@ -221,8 +221,7 @@ export default {
         },
 
         createfunctionBtn() {
-            let functionNameId = this.functionName.replaceAll(' ', '-')
-            let functionBtnContent = `[button ${functionNameId}\n${this.functionCode}\n]`
+            let functionBtnContent = `[button ${this.functionName}\n${this.functionCode}\n]`
 
             let value = this.$refs.inputTextarea.value;
             let selectionStart = this.$refs.inputTextarea.selectionStart;
@@ -233,11 +232,8 @@ export default {
             this.functionBtnDialog = false
         },
 
-        onCodeEditorDialog() {
-            let codeEditorContent = `#[code](${this.functionName})\n` +
-                `<pre onclick="openEditor(getCode('code4'))">\n<code id="code4" class="python">` +
-                `\n# 여기에 코드를 작성해 주세요.\n` +
-                `</code>\n</pre>\n`
+        onCreateCodeEditor() {
+            let codeEditorContent = `[editor\n# 여기에 코드를 작성해 주세요 \n]`
 
             let value = this.$refs.inputTextarea.value;
             let selectionStart = this.$refs.inputTextarea.selectionStart;
