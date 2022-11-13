@@ -1,3 +1,8 @@
+.markdown_output {
+    padding-top: 80px;
+    margin: 0px 22px 0px 22px;
+}
+
 .markdown_output h2 {
     padding-top: 15px;
     border-top: 2px solid #ff8123;
@@ -6,6 +11,7 @@
     line-height: 30px;
     color: #ff8123;
     margin: 0px;
+    margin-top: 50px;
     margin-bottom: 10px;
 }
 
@@ -13,8 +19,8 @@
     font-weight: 700;
     font-size: 1.2em;
     word-break: keep-all;
-    height: 30px;
     margin: 0px;
+    margin-top: 30px;
     margin-bottom: 10px;
     margin-left: 10px;
     line-height: normal;
@@ -59,4 +65,76 @@
     font-size: 14px;
     font-weight: bold;
     cursor: pointer;
+}
+
+.markdown_output .slide_component_box {
+	position: relative; width: 98%; height: 0; overflow: hidden; padding-bottom: 66%;
+}
+
+.markdown_output .slide_component {
+	position: absolute; left: 0; top: 0; width: 100%; height: 100%;
+}
+
+.markdown_output .part_component {
+	display: inline-block;
+	width: 32%;
+}
+
+.markdown_output .parts_compoent_box {
+	position: relative; width: 100%; height: 0; overflow: hidden; padding-bottom: 135%;
+}
+
+.markdown_output .parts_compoent {
+	position: absolute; left: 0; top: 0; width: 100%; height: 100%;
+}
+
+.markdown_output .parts_image_bar {
+	position: relative;
+	width: 100%;
+	height: 0;
+	overflow: hidden;
+	padding-bottom: 100%;
+}
+
+.markdown_output .parts_image {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.markdown_output .parts_qty {
+	position: absolute;
+	display: table;
+	width: 23%;
+	height: 23%;
+	font-size: 1.3em;	
+	text-align: center;
+	border-radius: 3em;
+	color: white;
+	background-color: #7d7d7d;
+}
+
+.markdown_output .parts_comment_bar {
+	position: relative;
+	width: 100%;
+	padding: 4px;
+	margin-top: -10px;
+	text-align: center;
+	font-family: Arial;
+	color: white;
+	background-color: #ff8123;
+}
+
+@media all and (min-width:722px) and (max-width:8000px) {
+	.markdown_output .parts_comment_bar {
+		font-size: 1em;
+	}
+}
+
+@media all and (max-width:721px) {
+	.markdown_output .parts_comment_bar {
+		font-size: 0.8em;
+	}
 }

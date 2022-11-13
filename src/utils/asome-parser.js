@@ -1,4 +1,5 @@
 import { v1 as uuidv1 } from "uuid"
+import partImgCode from "@/utils/asome-part-img-code";
 
 export default class AsomeParser {
     constructor(input) {
@@ -102,6 +103,9 @@ class Scanner {
         } else if (text.startsWith("editor")) {
             this.index = this.index + "editor".length;
             this.onToken({ text: "[editor", type: TokenType.BEGIN_MARK });
+        } else if (text.startsWith("parts")) {
+            this.index = this.index + "parts".length;
+            this.onToken({ text: "[parts", type: TokenType.BEGIN_MARK });
         } else {
             this.onToken({ text: "[", type: TokenType.TEXT });
         }
@@ -141,6 +145,7 @@ class Parser {
             case "[image": return this.#get_imageText(this.buffer);
             case "[video": return this.#get_videoText(this.buffer);
             case "[editor": return this.#get_editorText(this.buffer);
+            case "[parts": return this.#get_partsText(this.buffer);
         }
     }
 
@@ -157,7 +162,9 @@ class Parser {
     #get_imageText(text) {
         const firstLine = text.split("\n")[0]
         const imageTitle = firstLine.substring(firstLine.indexOf('(') + 1, firstLine.indexOf(')'))
-        let imageSrc = this.lessonContentBaseUrl + "lesson/images/" + text.replace(`[image (${imageTitle}) `, "").slice(0, -1)
+        let imageSrc = text.replace(`[image (${imageTitle}) `, "").slice(0, -1) // 로컬 파일
+        if (imageSrc.charAt(0) != '/')
+            imageSrc = this.lessonContentBaseUrl + "lesson/images/" + text.replace(`[image (${imageTitle}) `, "").slice(0, -1) // S3 파일
 
         if (imageTitle == '')
             return `<figure class="img_content_box"><img src="${imageSrc}"></figure>`
@@ -179,5 +186,39 @@ class Parser {
         return `<pre onclick="openEditor(getCode('${uuid}'))">\n` +
             `<code id="${uuid}" class="python">${content}` +
             `</code></pre>`;
+    }
+
+    #get_partsText(text) {
+        const firstLine = text.split("\n")[0]
+        const partList = text.replace(`${firstLine}`, "").slice(0, -1).split("\n")
+        let content = ''
+
+        partList.forEach(e => {
+            const partName = e.split('*')[0].trim()
+            const qty = e.split('*')[1]
+            const src = partImgCode.data().parts.find(item => item.label == partName)?.src
+
+            if (src == undefined || qty == undefined)
+                return;
+
+            content = content +
+                `<div class="part_component">
+                    <div class="parts_compoent_box">
+                    <div class="parts_compoent" frameborder="0">
+                        <div style="width: 100%; height: 100%;">
+                        <div class="parts_image_bar">
+                            <img class="parts_image" src="../../common/parts/${src}">
+                            <div class="parts_qty"><p style="display: table-cell; vertical-align: middle;">x ${qty}</p></div>
+                        </div>
+                        <div class="parts_comment_bar">
+                        ${partName}
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>`
+        });
+
+        return `<div>${content}</div>`;
     }
 }
