@@ -4,16 +4,16 @@
             <q-toolbar>
                 <q-toolbar-title>
                     <div class="row" style="width: 100vh; height: 64px">
-                        <q-btn @click="run" icon="play_arrow" class="q-mt-md q-mb-md" color="primary" label="Run"/>
-                        <q-btn @click="stop()" icon="stop_circle" class="q-mt-md q-mb-md q-ml-sm" color="deep-orange" label="Stop"/>
+                        <q-btn @click="run" icon="play_arrow" class="q-mt-md q-mb-md" color="primary" label="Run" />
+                        <q-btn @click="stop()" icon="stop_circle" class="q-mt-md q-mb-md q-ml-sm" color="deep-orange" label="Stop" />
 
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                        <q-btn icon="upload_file" class="q-mt-md q-mb-md" color="secondary" label="Upload"/>
-                        <q-btn icon="folder_open" class="q-mt-md q-mb-md q-ml-sm" color="purple" label="Open"/>
-                        <q-btn icon="save" class="q-mt-md q-mb-md q-ml-sm" color="brown" label="Save"/>
+                        <q-btn @click="upload" icon="upload_file" class="q-mt-md q-mb-md" color="secondary" label="Upload" />
+                        <q-btn icon="folder_open" class="q-mt-md q-mb-md q-ml-sm" color="purple" label="Open" />
+                        <q-btn icon="save" class="q-mt-md q-mb-md q-ml-sm" color="brown" label="Save" />
 
-                        <q-btn @click="goTo('/')" icon="close" class="q-mt-md q-mb-md q-ml-sm" color="brown" label="Close"/>
+                        <q-btn @click="goTo('/')" icon="close" class="q-mt-md q-mb-md q-ml-sm" color="brown" label="Close" />
                     </div>
                 </q-toolbar-title>
             </q-toolbar>
@@ -34,10 +34,11 @@
 </template>
 
 <script>
+import { Dialog } from 'quasar'
+import { VAceEditor } from "vue3-ace-editor";
 import VueBase from "@/mixin/vue-base";
 import remoteSerial from "@/globals/remote-serial";
 import LatencyTimer from "@/utils/latency-timer";
-import { VAceEditor } from "vue3-ace-editor";
 import 'ace-builds/src-noconflict/mode-python';
 import 'ace-builds/src-noconflict/theme-monokai';
 
@@ -68,7 +69,23 @@ export default {
         },
 
         upload() {
-            console.log('upload');
+            Dialog.create({
+                dark: true,
+                title: '파일이름을 입력해주세요',
+                message: '파일이름',
+                prompt: {
+                    type: 'text',
+                    model: ''
+                },
+                cancel: true,
+                persistent: true
+            }).onOk(filename => {
+                if (!filename) return;                
+                if (!filename.endsWith('.py')) {
+                    filename += '.py';
+                }
+                remoteSerial.uploadTextToBoard(filename, this.content);
+            });
         },
 
         open() {
@@ -91,5 +108,7 @@ export default {
     }
 };
 </script>
+
+
 
 <style scoped src="@/assets/css/component/editorview.css"/>

@@ -1,4 +1,5 @@
 import serial from '@/globals/serial';
+import boardFileSaver from '@/globals/board-file-saver';
 import otp from "@/globals/otp";
 
 let windows = [];
@@ -17,6 +18,7 @@ window.addEventListener('message', (msg) => {
         case 'stop': serial.stop(); break;
         case 'reboot': serial.reboot(); break;
         case 'runCode': serial.runCode(message.params); break;
+        case 'uploadTextToBoard': boardFileSaver.save(message.filename, message.text); break;
         case 'verifyOtp': otp.start(message.params); break;
     }
 });

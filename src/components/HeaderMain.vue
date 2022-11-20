@@ -63,7 +63,7 @@
 import serial from "@/globals/serial";
 import VueBase from "@/mixin/vue-base";
 import eventbus from "@/globals/eventbus";
-import updateBoard from "@/globals/update-board";
+import boardUpdater from "@/globals/board-updater";
 
 export default {
     mixins: [VueBase],
@@ -95,7 +95,7 @@ export default {
         ...serial,
 
         update() {
-            updateBoard.start();
+            boardUpdater.start();
         },
 
         gotoBackOffice() {
