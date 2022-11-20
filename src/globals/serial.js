@@ -7,9 +7,75 @@ eventbus.on("onSerialReceived", (data) => {
     if (data.startsWith("(sysname=")) seiral.setBoardType(data);
 });
 
-let port = null;
-let parser = null;
+let serialUnit = null;
 let boardType = "Zet";
+
+class SerialUnit {
+    async open(portName) {
+        this.port = new SerialPort({
+            path: portName,
+            baudRate: 115200,
+            autoOpen: false,
+            lock: false,
+        });
+
+        this.parser = new ReadlineParser({ delimiter: '\r\n' });
+        this.port.pipe(this.parser);
+
+        this.parser.on('data', (msg) => this.onReceived(msg));
+        this.port.on('close', () => {
+            if (this.port != null) this.onClosed()
+        });
+        this.port.on('error', (error) => {
+            console.log(error);
+            this.close();
+            this.onError("어썸보드에서 오류가 감지되었습니다.");
+        });
+
+        try {
+            await this.port.open();            
+            this.onOpened();
+            this.writeLn("import os; os.uname()");
+        } catch (error) {
+            console.log(error);
+            this.onError("어썸보드에 연결할 수가 없습니다.");
+            return;
+        }
+    }
+
+    close() {
+        if (!this.port) return;
+
+        const port = this.port;
+
+        this.port = null;
+        this.parser = null;
+
+        try {
+            port.close();            
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    write(text) {
+        if (this.port == null) return;
+        try {
+            this.port.write(text);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    writeLn(text) {
+        if (this.port == null) return;
+        try {
+            this.port.write(text +"\r\n");
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
 
 /**
  * 시리얼 포트를 열고, 시리얼 포트로부터 데이터를 읽거나 쓰는 등의 기능을 제공한다.
@@ -38,59 +104,23 @@ const seiral = {
 
         const asomeboard = await this.getAsomeboard();
         if (asomeboard == null) {
-            eventbus.emit("onError", "어썸보드를 찾을 수 없습니다.");
+            this.fireErrorEvent("어썸보드를 찾을 수 없습니다.");
             return;
         }
 
-        port = new SerialPort({
-            path: asomeboard.path,
-            baudRate: 115200,
-            autoOpen: false,
-            lock: false,
-        });
-
-        parser = new ReadlineParser({ delimiter: '\r\n' });
-        port.pipe(parser);
-
-        parser.on('data', (msg) => {
-            eventbus.emit("onSerialReceived", msg)
-        });
-
-        port.on('close', () => {
-            this.terminate();
-            eventbus.emit("onSerialClosed");
-        });
-
-        port.on('error', (e) => {
-            console.log("error", e);
-            this.disconnect();
-            this.fireErrorEvent("어썸보드에서 오류가 감지되었습니다.");
-        });
-
-        try {
-            await port.open();
-            eventbus.emit("onSerialConnected");
-            this.writeLn("import os; os.uname()");
-        } catch (error) {
-            port = null;
-            console.log(error);
-            this.fireErrorEvent("어썸보드에 연결할 수가 없습니다.");
-            return;
-        }
+        serialUnit = new SerialUnit();
+        serialUnit.onOpened = () => eventbus.emit("onSerialConnected");
+        serialUnit.onClosed = () => eventbus.emit("onSerialClosed");
+        serialUnit.onReceived = (msg) => eventbus.emit("onSerialReceived", msg);
+        serialUnit.onError = (error) => this.fireErrorEvent(error);
+        serialUnit.open(asomeboard.path);
     },
 
     disconnect() {
-        try {
-            if (port) port.close();
-        } catch (error) {
-            console.log(error);
-        }
-        this.terminate();
-    },
+        if (serialUnit == null) return;
 
-    terminate() {
-        port = null;
-        parser = null;
+        serialUnit.close();
+        serialUnit = null;
     },
 
     list() {
@@ -98,21 +128,11 @@ const seiral = {
     },
 
     write(text) {
-        if (port == null) return;
-        try {
-            port.write(text);
-        } catch (error) {
-            console.log(error);
-        }
+        if (serialUnit) serialUnit.write(text);
     },
 
     writeLn(text) {
-        if (port == null) return;
-        try {
-            port.write(text +"\r\n");
-        } catch (error) {
-            console.log(error);
-        }
+        this.write(text +"\r\n");
     },
 
     stop() {
