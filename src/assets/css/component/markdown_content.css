@@ -68,73 +68,111 @@
 }
 
 .markdown_output .slide_component_box {
-	position: relative; width: 98%; height: 0; overflow: hidden; padding-bottom: 66%;
+    position: relative;
+    width: 98%;
+    height: 0;
+    overflow: hidden;
+    padding-bottom: 66%;
 }
 
 .markdown_output .slide_component {
-	position: absolute; left: 0; top: 0; width: 100%; height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .markdown_output .part_component {
-	display: inline-block;
-	width: 32%;
+    display: inline-block;
+    width: 32%;
 }
 
 .markdown_output .parts_compoent_box {
-	position: relative; width: 100%; height: 0; overflow: hidden; padding-bottom: 135%;
+    position: relative;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    padding-bottom: 135%;
 }
 
 .markdown_output .parts_compoent {
-	position: absolute; left: 0; top: 0; width: 100%; height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .markdown_output .parts_image_bar {
-	position: relative;
-	width: 100%;
-	height: 0;
-	overflow: hidden;
-	padding-bottom: 100%;
+    position: relative;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    padding-bottom: 100%;
 }
 
 .markdown_output .parts_image {
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .markdown_output .parts_qty {
-	position: absolute;
-	display: table;
-	width: 23%;
-	height: 23%;
-	font-size: 1.3em;	
-	text-align: center;
-	border-radius: 3em;
-	color: white;
-	background-color: #7d7d7d;
+    position: absolute;
+    display: table;
+    width: 23%;
+    height: 23%;
+    font-size: 1.3em;
+    text-align: center;
+    border-radius: 3em;
+    color: white;
+    background-color: #7d7d7d;
 }
 
 .markdown_output .parts_comment_bar {
-	position: relative;
-	width: 100%;
-	padding: 4px;
-	margin-top: -10px;
-	text-align: center;
-	font-family: Arial;
-	color: white;
-	background-color: #ff8123;
+    position: relative;
+    width: 100%;
+    padding: 4px;
+    margin-top: -10px;
+    text-align: center;
+    font-family: Arial;
+    color: white;
+    background-color: #ff8123;
+}
+
+.markdown_output .input-group-addon {
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    color: #555;
+    text-align: center;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.markdown_output .form-control {
+    height: 32px;
+    font-size: 14px;
+    line-height: 1;
+    color: #555;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 @media all and (min-width:722px) and (max-width:8000px) {
-	.markdown_output .parts_comment_bar {
-		font-size: 1em;
-	}
+    .markdown_output .parts_comment_bar {
+        font-size: 1em;
+    }
 }
 
 @media all and (max-width:721px) {
-	.markdown_output .parts_comment_bar {
-		font-size: 0.8em;
-	}
+    .markdown_output .parts_comment_bar {
+        font-size: 0.8em;
+    }
 }
