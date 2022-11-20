@@ -1,3 +1,8 @@
+/**
+ * 서버와 보드의 파이썬 파일 버전을 비교하여 보드에 업데이트가 필요한 파일 리스트를 작성하고
+ * BoardFileManager에게 다운로드를 요청한다.
+ */
+
 import config from "@/globals/config";
 import axios from "axios";
 import serial from "./serial";
@@ -7,8 +12,8 @@ import boardFileManager from "@/globals/board-file-manager";
 eventbus.on("onSerialReceived", (data) => {
     if (!data) return;
 
-    if (data.startsWith("### AsomeCODE.Version:")) updateBoard.updateFile(data);
-    if (data.startsWith("### Get Remote File List")) updateBoard.getRemoteFileList();
+    if (data.startsWith("### AsomeCODE.Version:")) boardUpdater.updateFile(data);
+    if (data.startsWith("### Get Remote File List")) boardUpdater.getRemoteFileList();
 });
 
 let versions = [];
@@ -19,7 +24,7 @@ let tobeDowndloads = [];
  * 어썸보드를 업데이트 한다.
  * 업데이트 대상의 파일을 찾아내고, 실제 업데이트는 BoardFileManager에게 위임한다.
  */
-const updateBoard = {
+const boardUpdater = {
     start() {
         serial.runCode(codeGetVersion);
         serial.writeLn('print("### Get Remote File List")');
@@ -61,7 +66,7 @@ const updateBoard = {
     },
 };
 
-export default updateBoard;
+export default boardUpdater;
 
 async function getRemoteFileList() {
     try {

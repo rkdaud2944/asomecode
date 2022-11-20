@@ -1,23 +1,23 @@
 /**
- * 파일을 파이썬 또는 리소스 파일을 다운받아서 어썸보드에 저장한다.
+ * 파일 목록을 전달 받아서 서버로부터 다운받은 후 어썸보드에 저장한다.
  */
 
-import config from "@/globals/config";
 import axios from "axios";
-import serial from "./serial";
+import config from "@/globals/config";
+import serial from "@/globals/serial";
 import eventbus from "@/globals/eventbus";
 
 eventbus.on("onSerialReceived", (data) => {
     if (!data) return;
 
-    if (data.startsWith("### Next File")) downloadToBoard.nextFile();
-    if (data.startsWith("### Next Line")) downloadToBoard.nextLine();
+    if (data.startsWith("### Next File")) boardFileManager.nextFile();
+    if (data.startsWith("### Next Line")) boardFileManager.nextLine();
 });
 
 let tobeDowndloads = [];
 let currentFile = {};
 
-const downloadToBoard = {
+const boardFileManager = {
     async download(filenames) {
         tobeDowndloads = filenames;
         serial.writeLn('print("### Next File")');
@@ -33,9 +33,7 @@ const downloadToBoard = {
         let lines = [];
         try {
             const response = await axios.request(config.pythonUrl() + filename);
-            let text = response.data.replaceAll("\r", "");
-            text = text.replaceAll("\t", "    ");
-            lines = text.split("\n");
+            lines = response.data.replaceAll("\r", "").replaceAll("\t", "    ").replaceAll('"', '\\"').split("\n");
         } catch (error) {
             console.log(error);
             return;
@@ -61,10 +59,10 @@ const downloadToBoard = {
             serial.writeLn(`f = open("${currentFile.name}", "w")`);
         }
 
-        const line = currentFile.lines.shift().replaceAll('"', '\\"');
+        const line = currentFile.lines.shift();
         serial.writeLn(`f.write("${line}\\n")`);
         serial.writeLn('print("### Next Line")');
     },
 };
 
-export default downloadToBoard;
+export default boardFileManager;

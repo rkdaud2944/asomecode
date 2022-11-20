@@ -32,4 +32,13 @@ export default {
         };
         window.opener.postMessage(JSON.stringify(msg));
     },
+
+    uploadTextToBoard(filename, text) {
+        const msg = {
+            type: "uploadTextToBoard",
+            filename: filename,
+            text: text,
+        };
+        window.opener.postMessage(JSON.stringify(msg));
+    }
 }
