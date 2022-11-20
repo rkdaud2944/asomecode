@@ -104,7 +104,7 @@ const seiral = {
 
         const asomeboard = await this.getAsomeboard();
         if (asomeboard == null) {
-            eventbus.emit("onError", "어썸보드를 찾을 수 없습니다.");
+            this.fireErrorEvent("어썸보드를 찾을 수 없습니다.");
             return;
         }
 
