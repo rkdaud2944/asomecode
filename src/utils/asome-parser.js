@@ -1,5 +1,6 @@
 import { v1 as uuidv1 } from "uuid"
 import partImgCode from "@/utils/asome-part-img-code";
+import stripComments from "@/utils/strip-comments";
 
 export default class AsomeParser {
     constructor(input) {
@@ -155,6 +156,9 @@ class Parser {
         const functionId = functionName.replaceAll(' ', '-')
 
         let content = text.replace(`${firstLine}`, "").slice(0, -1)
+        const lines = content.split("\n")
+        content = lines.map( e => stripComments.stripPythonComments(e)).join('\n')
+
         return `<div onclick="runCode(getCode('${functionId}'))" class="function_btn">${functionName}</div></br>` +
             `<div id="${functionId}" class="hidden">${content}</div>`;
     }

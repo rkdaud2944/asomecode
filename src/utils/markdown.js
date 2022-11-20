@@ -1,5 +1,4 @@
 import AsomeParser from "./asome-parser";
-
 /* eslint-disable */
 
 export default class {
