@@ -153,7 +153,7 @@ class Parser {
     #get_buttonText(text) {
         const firstLine = text.split("\n")[0]
         const functionName = firstLine.replace("[button ", "");
-        const functionId = functionName.replaceAll(' ', '-')
+        const functionId = functionName.replaceAll(' ', '-').replaceAll("'", '').replaceAll('"', '')
 
         let content = text.replace(`${firstLine}`, "").slice(0, -1)
         const lines = content.split("\n")
