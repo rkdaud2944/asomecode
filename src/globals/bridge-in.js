@@ -45,6 +45,11 @@ const bridge = {
         document.getElementById("인터넷-연결하기").innerText = 
             `import internet; internet.connect('${wifiName}', '${wifiPassword}')`;
     },
+
+    setInputValue(id) {
+        const inputValue = document.getElementById(id).value;
+        console.log(inputValue)
+    },
 };
 
 window.refresh = bridge.refresh;
@@ -53,5 +58,6 @@ window.getCode = bridge.getCode;
 window.runCode = bridge.runCode;
 window.openEditor = bridge.openEditor;
 window.setWifiInfo = bridge.setWifiInfo;
+window.setInputValue = bridge.setInputValue;
 
 export default bridge;

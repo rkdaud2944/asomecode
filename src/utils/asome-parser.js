@@ -110,6 +110,9 @@ class Scanner {
         } else if (text.startsWith("wifi")) {
             this.index = this.index + "wifi".length;
             this.onToken({ text: "[wifi", type: TokenType.BEGIN_MARK });
+        } else if (text.startsWith("input")) {
+            this.index = this.index + "input".length;
+            this.onToken({ text: "[input", type: TokenType.BEGIN_MARK });
         } else {
             this.onToken({ text: "[", type: TokenType.TEXT });
         }
@@ -151,6 +154,7 @@ class Parser {
             case "[editor": return this.#get_editorText(this.buffer);
             case "[parts": return this.#get_partsText(this.buffer);
             case "[wifi": return this.#get_wifi_Text();
+            case "[input": return this.#get_input_Text(this.buffer);
         }
     }
 
@@ -244,5 +248,18 @@ class Parser {
 
         `<div onclick="runCode(getCode('인터넷-연결하기'))" class="function_btn">인터넷 연결하기</div></br>` +
         `<div id="인터넷-연결하기" class="hidden"></div>`;
+    }
+
+    #get_input_Text(text) {
+        const firstLine = text.split("\n")[0]
+        const incon = firstLine.substring(firstLine.indexOf('(') + 1, firstLine.indexOf(')'))
+        const name = firstLine.replace("[input ", "").replace(`(${incon}) `, '');
+        const id = name.replaceAll(' ', '-').replaceAll("'", '').replaceAll('"', '')
+
+        return `<div class="input-group" >
+          <span class="input-group-addon"><i class="q-icon material-icons">${incon}</i></span>
+          <input class="form-control" type="text" id="${id}" placeholder="${name}" onchange="setInputValue(${id})">
+        </div>
+        <br>`;
     }
 }
