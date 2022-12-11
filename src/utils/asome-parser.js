@@ -244,5 +244,6 @@ class Parser {
 
         `<div onclick="runCode(getCode('인터넷-연결하기'))" class="function_btn">인터넷 연결하기</div></br>` +
         `<div id="인터넷-연결하기" class="hidden"></div>`;
+        // 커밋 테스트
     }
 }
