@@ -107,6 +107,9 @@ class Scanner {
         } else if (text.startsWith("parts")) {
             this.index = this.index + "parts".length;
             this.onToken({ text: "[parts", type: TokenType.BEGIN_MARK });
+        } else if (text.startsWith("wifi")) {
+            this.index = this.index + "wifi".length;
+            this.onToken({ text: "[wifi", type: TokenType.BEGIN_MARK });
         } else {
             this.onToken({ text: "[", type: TokenType.TEXT });
         }
@@ -147,6 +150,7 @@ class Parser {
             case "[video": return this.#get_videoText(this.buffer);
             case "[editor": return this.#get_editorText(this.buffer);
             case "[parts": return this.#get_partsText(this.buffer);
+            case "[wifi": return this.#get_wifi_Text();
         }
     }
 
@@ -160,7 +164,7 @@ class Parser {
         content = lines.map( e => stripComments.stripPythonComments(e)).join('\n')
 
         return `<div onclick="runCode(getCode('${functionId}'))" class="function_btn">${functionName}</div></br>` +
-            `<div id="${functionId}" class="hidden">${content}</div>`;
+               `<div id="${functionId}" class="hidden">${content}</div>`;
     }
 
     #get_imageText(text) {
@@ -224,5 +228,21 @@ class Parser {
         });
 
         return `<div>${content}</div>`;
+    }
+
+    #get_wifi_Text() {
+        return `<div class="input-group" >
+          <span class="input-group-addon"><i class="q-icon material-icons"> wifi</i></span>
+          <input class="form-control" type="text" id="wifi_name" placeholder="와이파이 이름" onchange="setWifiInfo()">
+        </div>
+        <br>
+        <div>
+          <span class="input-group-addon"><i class="q-icon material-icons">lock</i></span>
+            <input class="form-control" type="text" id="wifi_password" placeholder="와이파이 암호" onchange="setWifiInfo()">
+        </div>
+        <br>` +
+
+        `<div onclick="runCode(getCode('인터넷-연결하기'))" class="function_btn">인터넷 연결하기</div></br>` +
+        `<div id="인터넷-연결하기" class="hidden"></div>`;
     }
 }

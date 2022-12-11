@@ -38,6 +38,13 @@ const bridge = {
         localStorage.setItem("code", code);
         windows.open("editor", "/editor");
     },
+
+    setWifiInfo() {
+        const wifiName = document.getElementById('wifi_name').value;
+        const wifiPassword = document.getElementById('wifi_password').value;
+        document.getElementById("인터넷-연결하기").innerText = 
+            `import internet; internet.connect('${wifiName}', '${wifiPassword}')`;
+    },
 };
 
 window.refresh = bridge.refresh;
@@ -45,5 +52,6 @@ window.loadUrl = bridge.loadUrl;
 window.getCode = bridge.getCode;
 window.runCode = bridge.runCode;
 window.openEditor = bridge.openEditor;
+window.setWifiInfo = bridge.setWifiInfo;
 
 export default bridge;
