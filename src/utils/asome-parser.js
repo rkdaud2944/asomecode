@@ -165,10 +165,10 @@ class Parser {
 
         let content = text.replace(`${firstLine}`, "").slice(0, -1)
         const lines = content.split("\n")
-        content = lines.map( e => stripComments.stripPythonComments(e)).join('\n')
+        content = lines.map(e => stripComments.stripPythonComments(e)).join('\n')
 
         return `<div onclick="runCode(getCode('${functionId}'))" class="function_btn">${functionName}</div></br>` +
-               `<div id="${functionId}" class="hidden">${content}</div>`;
+            `<div id="${functionId}" class="hidden">${content}</div>`;
     }
 
     #get_imageText(text) {
@@ -242,12 +242,12 @@ class Parser {
         <br>
         <div>
           <span class="input-group-addon"><i class="q-icon material-icons">lock</i></span>
-            <input class="form-control" type="text" id="wifi_password" placeholder="와이파이 암호" onchange="setWifiInfo()">
+            <input class="form-control" type="text" id="wifi_password" placeholder="와이파이 암호" onchanㄹㄹge="setWifiInfo()">
         </div>
         <br>` +
 
-        `<div onclick="runCode(getCode('인터넷-연결하기'))" class="function_btn">인터넷 연결하기</div></br>` +
-        `<div id="인터넷-연결하기" class="hidden"></div>`;
+            `<div onclick="runCode(getCode('인터넷-연결하기'))" class="function_btn">인터넷 연결하기</div></br>` +
+            `<div id="인터넷-연결하기" class="hidden"></div>`;
     }
 
     #get_input_Text(text) {
@@ -258,7 +258,7 @@ class Parser {
 
         return `<div class="input-group" >
           <span class="input-group-addon"><i class="q-icon material-icons">${incon}</i></span>
-          <input class="form-control" type="text" id="${id}" placeholder="${name}" onchange="setInputValue(${id})">
+          <input class="form-control" type="text" id="${id}" placeholder="${name}" onkeyup="setInputValue('${id}')">
         </div>
         <br>`;
     }

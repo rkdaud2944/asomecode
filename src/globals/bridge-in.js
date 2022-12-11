@@ -48,7 +48,7 @@ const bridge = {
 
     setInputValue(id) {
         const inputValue = document.getElementById(id).value;
-        console.log(inputValue)
+        window.localStorage.setItem(id, inputValue);
     },
 };
 
