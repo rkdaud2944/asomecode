@@ -12,6 +12,7 @@
     <script src="../../../common/js/jquery-1.9.1.js"></script>
 	<script src="../../../common/js/bootstrap.min.js"></script>
 	<script src="../../../common/js/jQueryRotateCompressed.js"></script>
+    <script src="../simulator.js"></script>
 </head>
 
 <body style="overflow-x: hidden; overflow-y: hidden;">
@@ -24,59 +25,48 @@
 		<img id="target" src="target.png" style="position: absolute; left: -100px; top:235px;">
 		<img id="bullet" src="bullet.png" style="position: absolute; left: -100px;">
 	</div>
-
-	<script type="text/javascript">
-		var angle = 0;
-		var power = 0;
-
-		String.format = function() {
-			var s = arguments[0];
-			for (var i = 0; i < arguments.length - 1; i++) {
-				var reg = new RegExp("\\{" + i + "\\}", "gm");
-				s = s.replace(reg, arguments[i + 1]);
-			}
-			return s;
-		}
-
-		window.onload = function() {
-			/* App.run_cmd("Code=Input/Text=### Simulation started"); */
-
-			target_moveto(300);
-		}
-
-		function cannon_angle(a) {
-			angle = a;
-			$("#cannon").rotate(a);
-			$("#info").html(String.format("Angle: {0} <br>Power: {1}", angle, power));
-		}
-
-		function cannon_power(p) {
-			power = p;
-			$("#info").html(String.format("Angle: {0} <br>Power: {1}", angle, power));
-		}
-
-		function bullet_moveto(x, y) {
-			$("#bullet").css("left", x + 37 -8);
-			$("#bullet").css("top",  - y + (220 + 45) -8);
-		}
-
-		function target_moveto(x) {
-			$("#target").attr("src", "target.png");
-			$("#target").css("left", x + 37 - 25);
-		}
-
-		function cannon_fire() {
-			bullet_moveto(0, 0);
-			var audio = new Audio('../../audio/fire.ogg');
-			audio.play();
-		}
-
-		function target_explode() {
-			bullet_moveto(-1000, -1000);
-			$("#target").attr("src", "boom.png");
-			var audio = new Audio('../../audio/boom.ogg');
-			audio.play();
-		}
-	</script>	
 </body>
 </html>
+
+<script type="text/javascript">
+	var angle = 0;
+	var power = 0;
+
+	window.onload = function() {
+		target_moveto(300);
+	}
+
+	function cannon_angle(a) {
+		angle = a;
+		$("#cannon").rotate(a);
+		$("#info").html(`Angle: ${angle} <br>Power: ${power}`);
+	}
+
+	function cannon_power(p) {
+		power = p;
+		$("#info").html(`Angle: ${angle} <br>Power: ${power}`);
+	}
+
+	function bullet_moveto(x, y) {
+		$("#bullet").css("left", x + 37 -8);
+		$("#bullet").css("top",  - y + (220 + 45) -8);
+	}
+
+	function target_moveto(x) {
+		$("#target").attr("src", "target.png");
+		$("#target").css("left", x + 37 - 25);
+	}
+
+	function cannon_fire() {
+		bullet_moveto(0, 0);
+		var audio = new Audio('../../audio/fire.ogg');
+		audio.play();
+	}
+
+	function target_explode() {
+		bullet_moveto(-1000, -1000);
+		$("#target").attr("src", "boom.png");
+		var audio = new Audio('../../audio/boom.ogg');
+		audio.play();
+	}
+</script>	

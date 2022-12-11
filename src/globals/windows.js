@@ -36,4 +36,17 @@ export default {
     open(name, url) {
         windows[name] = window.open(url, name);
     },
+
+    /**
+     * simulator의 자바스크립트를 실행한다.
+     */
+    runJS(name, line) {
+        if (!windows[name]) return;
+
+        const params = {
+            type: "runJS",
+            line: line,
+        };
+        windows[name].postMessage(JSON.stringify(params));
+    }
 };
