@@ -46,9 +46,11 @@ const bridge = {
             `import internet; internet.connect('${wifiName}', '${wifiPassword}')`;
     },
 
-    setInputValue(id) {
-        const inputValue = document.getElementById(id).value;
-        window.localStorage.setItem(id, inputValue);
+    setAsomeMessengerInfo() {
+        const connectCode = document.getElementById('asome_connect_code').value;
+        const msg = document.getElementById('asome_msg').value;
+        document.getElementById("asome-messenger").innerText = 
+            `import http_utils; http_utils.send_msg('${connectCode}', '${msg}')`;
     },
 };
 
@@ -58,6 +60,6 @@ window.getCode = bridge.getCode;
 window.runCode = bridge.runCode;
 window.openEditor = bridge.openEditor;
 window.setWifiInfo = bridge.setWifiInfo;
-window.setInputValue = bridge.setInputValue;
+window.setAsomeMessengerInfo = bridge.setAsomeMessengerInfo;
 
 export default bridge;

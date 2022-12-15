@@ -90,8 +90,8 @@ class Scanner {
     }
 
     #do_beginMark() {
-        const text = this.source.substr(this.index, 6);
-
+        const text = this.source.substr(this.index, 9);
+        console.log(text)
         if (text.startsWith("button")) {
             this.index = this.index + "button".length;
             this.onToken({ text: "[button", type: TokenType.BEGIN_MARK });
@@ -110,9 +110,9 @@ class Scanner {
         } else if (text.startsWith("wifi")) {
             this.index = this.index + "wifi".length;
             this.onToken({ text: "[wifi", type: TokenType.BEGIN_MARK });
-        } else if (text.startsWith("input")) {
-            this.index = this.index + "input".length;
-            this.onToken({ text: "[input", type: TokenType.BEGIN_MARK });
+        } else if (text.startsWith("messenger")) {
+            this.index = this.index + "messenger".length;
+            this.onToken({ text: "[messenger", type: TokenType.BEGIN_MARK });
         } else {
             this.onToken({ text: "[", type: TokenType.TEXT });
         }
@@ -154,7 +154,7 @@ class Parser {
             case "[editor": return this.#get_editorText(this.buffer);
             case "[parts": return this.#get_partsText(this.buffer);
             case "[wifi": return this.#get_wifi_Text();
-            case "[input": return this.#get_input_Text(this.buffer);
+            case "[messenger": return this.#get_asome_messenger_Text();
         }
     }
 
@@ -235,31 +235,30 @@ class Parser {
     }
 
     #get_wifi_Text() {
-        return `<div class="input-group" >
-          <span class="input-group-addon"><i class="q-icon material-icons"> wifi</i></span>
+        return `<div class="input-group">
+          <span class="input-group-addon"><i class="q-icon material-icons">wifi</i></span>
           <input class="form-control" type="text" id="wifi_name" placeholder="와이파이 이름" onchange="setWifiInfo()">
         </div>
-        <br>
-        <div>
+        <div class="input-group">
           <span class="input-group-addon"><i class="q-icon material-icons">lock</i></span>
-            <input class="form-control" type="text" id="wifi_password" placeholder="와이파이 암호" onchanㄹㄹge="setWifiInfo()">
-        </div>
-        <br>` +
+            <input class="form-control" type="text" id="wifi_password" placeholder="와이파이 암호" onchange="setWifiInfo()">
+        </div>` +
 
             `<div onclick="runCode(getCode('인터넷-연결하기'))" class="function_btn">인터넷 연결하기</div></br>` +
             `<div id="인터넷-연결하기" class="hidden"></div>`;
     }
 
-    #get_input_Text(text) {
-        const firstLine = text.split("\n")[0]
-        const incon = firstLine.substring(firstLine.indexOf('(') + 1, firstLine.indexOf(')'))
-        const name = firstLine.replace("[input ", "").replace(`(${incon}) `, '');
-        const id = name.replaceAll(' ', '-').replaceAll("'", '').replaceAll('"', '')
-
-        return `<div class="input-group" >
-          <span class="input-group-addon"><i class="q-icon material-icons">${incon}</i></span>
-          <input class="form-control" type="text" id="${id}" placeholder="${name}" onkeyup="setInputValue('${id}')">
+    #get_asome_messenger_Text() {
+        return `<div class="input-group">
+          <span class="input-group-addon"><i class="q-icon material-icons">wifi</i></span>
+          <input class="form-control" type="text" id="asome_connect_code" placeholder="접속코드" onchange="setAsomeMessengerInfo()">
         </div>
-        <br>`;
+        <div class="input-group">
+          <span class="input-group-addon"><i class="q-icon material-icons">lock</i></span>
+            <input class="form-control" type="text" id="asome_msg" placeholder="메시지" onchange="setAsomeMessengerInfo()">
+        </div>` +
+
+            `<div onclick="runCode(getCode('asome-messenger'))" class="function_btn">전송</div></br>` +
+            `<div id="asome-messenger" class="hidden"></div>`;
     }
 }
