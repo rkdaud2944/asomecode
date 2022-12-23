@@ -3,6 +3,8 @@
 import { app, protocol, BrowserWindow } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
+const path = require('path');
+
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 protocol.registerSchemesAsPrivileged([
@@ -14,9 +16,10 @@ async function createWindow() {
     width: 1024,
     height: 768,
     webPreferences: {
-      enableRemoteModule: !!process.env.IS_TEST,
-      nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
-      contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION
+      enableRemoteModule: true,
+      nodeIntegration: true,
+      contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
+      preload: path.join(__dirname, '..', 'src', 'preload.js'),
     }
   })
   win.setMenu(null)

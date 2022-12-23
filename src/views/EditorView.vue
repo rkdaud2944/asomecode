@@ -10,7 +10,7 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                         <q-btn @click="upload" icon="upload_file" class="q-mt-md q-mb-md" color="secondary" label="Upload" />
-                        <q-btn icon="folder_open" class="q-mt-md q-mb-md q-ml-sm" color="purple" label="Open" />
+                        <q-btn @click="open" icon="folder_open" class="q-mt-md q-mb-md q-ml-sm" color="purple" label="Open" />
                         <q-btn icon="save" class="q-mt-md q-mb-md q-ml-sm" color="brown" label="Save" />
 
                         <q-btn @click="goTo('/')" icon="close" class="q-mt-md q-mb-md q-ml-sm" color="brown" label="Close" />
@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import fs from 'fs';
 import { Dialog } from 'quasar'
 import { VAceEditor } from "vue3-ace-editor";
 import VueBase from "@/mixin/vue-base";
@@ -80,7 +81,7 @@ export default {
                 cancel: true,
                 persistent: true
             }).onOk(filename => {
-                if (!filename) return;                
+                if (!filename) return;
                 if (!filename.endsWith('.py')) {
                     filename += '.py';
                 }
@@ -88,8 +89,17 @@ export default {
             });
         },
 
-        open() {
-            console.log('open');
+        async open() {
+            const file = await window.remote.dialog.showOpenDialog({
+                properties: ['openFile'],
+                filters: [
+                    { name: 'Python', extensions: ['py'] }
+                ]
+            });
+            if (file.canceled) return;
+            if (file.filePaths.length == 0) return;
+
+            this.content = fs.readFileSync(file.filePaths[0], 'utf-8');
         },
 
         save() {
