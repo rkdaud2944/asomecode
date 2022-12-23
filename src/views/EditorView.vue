@@ -11,7 +11,7 @@
 
                         <q-btn @click="upload" icon="upload_file" class="q-mt-md q-mb-md" color="secondary" label="Upload" />
                         <q-btn @click="open" icon="folder_open" class="q-mt-md q-mb-md q-ml-sm" color="purple" label="Open" />
-                        <q-btn icon="save" class="q-mt-md q-mb-md q-ml-sm" color="brown" label="Save" />
+                        <q-btn @click="save" icon="save" class="q-mt-md q-mb-md q-ml-sm" color="brown" label="Save" />
 
                         <q-btn @click="goTo('/')" icon="close" class="q-mt-md q-mb-md q-ml-sm" color="brown" label="Close" />
                     </div>
@@ -94,7 +94,7 @@ export default {
         },
 
         save() {
-            console.log('save');
+            localfile.saveTextToFile('Python', 'py', this.content);
         },
 
         onChanged() {
