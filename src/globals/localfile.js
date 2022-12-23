@@ -1,5 +1,3 @@
-import fs from 'fs';
-
 export default {
     async loadFileAsText(label, ext, charSet='utf-8') {
         const file = await window.remote.dialog.showOpenDialog({
@@ -11,7 +9,7 @@ export default {
         if (file.canceled) return;
         if (file.filePaths.length == 0) return;
 
-        return fs.readFileSync(file.filePaths[0], charSet);
+        return window.fs.readFileSync(file.filePaths[0], charSet);
     },
 
     async saveTextToFile(label, ext, data) {
@@ -23,6 +21,6 @@ export default {
         if (file.canceled) return;
         if (file.filePath.length == 0) return;
 
-        return fs.writeFileSync(file.filePath, data);
+        return window.fs.writeFileSync(file.filePath, data);
     },
 }
