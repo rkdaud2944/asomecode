@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import fs from 'fs';
+import localfile from "@/globals/localfile";
 import { Dialog } from 'quasar'
 import { VAceEditor } from "vue3-ace-editor";
 import VueBase from "@/mixin/vue-base";
@@ -90,16 +90,7 @@ export default {
         },
 
         async open() {
-            const file = await window.remote.dialog.showOpenDialog({
-                properties: ['openFile'],
-                filters: [
-                    { name: 'Python', extensions: ['py'] }
-                ]
-            });
-            if (file.canceled) return;
-            if (file.filePaths.length == 0) return;
-
-            this.content = fs.readFileSync(file.filePaths[0], 'utf-8');
+            this.content = await localfile.loadFileAsText('Python', 'py');
         },
 
         save() {
