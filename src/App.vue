@@ -17,6 +17,7 @@
 <script>
 import globals from "@/globals/globals";
 import bridgeIn from "@/globals/bridge-in";
+import jsControl from "@/globals/js-control";
 import editorControl from "@/globals/editor-control";
 import HeaderMain from "@/components/HeaderMain.vue";
 import ConsoleLog from "@/components/ConsoleLog.vue";
@@ -29,6 +30,7 @@ export default {
 
     setup() {
         bridgeIn.init();
+        jsControl.init();
         editorControl.init();
 
         const memberStore = useMemberStore();

@@ -359,24 +359,16 @@ var importCustomBlocksFromFile = function () {
     loadTextFile(importCustomBlocks);
 }
 
+async function saveTextToFile(text) {
+    const file = await window.remote.dialog.showSaveDialog({
+        filters: [
+            { name: "XML", extensions: ["xml"] }
+        ]
+    });
+    if (file.canceled) return;
+    if (file.filePath.length == 0) return;
 
-var saveTextToFile = function (text) {
-    try {
-        App.saveAsomeBlock(text);
-    } catch (e) {
-        let fileName = prompt("File name :", "asomeit_blocks.xml");
-
-        if (fileName == null || fileName == undefined) {
-
-        } else {
-            var hiddenElement = document.createElement('a');
-            hiddenElement.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(text);
-            hiddenElement.target = '_blank';
-            hiddenElement.download = fileName;
-            hiddenElement.style.display = 'none';
-            hiddenElement.click();
-        }
-    }
+    return window.fs.writeFileSync(file.filePath, text);
 }
 
 function clickElem(elem) {

@@ -10,10 +10,8 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                         <q-btn @click="upload" icon="upload_file" class="q-mt-md q-mb-md" color="secondary" label="Upload" />
-                        <q-btn icon="folder_open" class="q-mt-md q-mb-md q-ml-sm" color="purple" label="Open" />
-                        <q-btn icon="save" class="q-mt-md q-mb-md q-ml-sm" color="brown" label="Save" />
-
-                        <q-btn @click="goTo('/')" icon="close" class="q-mt-md q-mb-md q-ml-sm" color="brown" label="Close" />
+                        <q-btn @click="open" icon="folder_open" class="q-mt-md q-mb-md q-ml-sm" color="purple" label="Open" />
+                        <q-btn @click="save" icon="save" class="q-mt-md q-mb-md q-ml-sm" color="brown" label="Save" />
                     </div>
                 </q-toolbar-title>
             </q-toolbar>
@@ -34,6 +32,7 @@
 </template>
 
 <script>
+import localfile from "@/globals/localfile";
 import { Dialog } from 'quasar'
 import { VAceEditor } from "vue3-ace-editor";
 import VueBase from "@/mixin/vue-base";
@@ -80,7 +79,7 @@ export default {
                 cancel: true,
                 persistent: true
             }).onOk(filename => {
-                if (!filename) return;                
+                if (!filename) return;
                 if (!filename.endsWith('.py')) {
                     filename += '.py';
                 }
@@ -88,12 +87,12 @@ export default {
             });
         },
 
-        open() {
-            console.log('open');
+        async open() {
+            this.content = await localfile.loadFileAsText('Python', 'py');
         },
 
         save() {
-            console.log('save');
+            localfile.saveTextToFile('Python', 'py', this.content);
         },
 
         onChanged() {
