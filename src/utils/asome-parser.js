@@ -91,7 +91,6 @@ class Scanner {
 
     #do_beginMark() {
         const text = this.source.substr(this.index, 9);
-        console.log(text)
         if (text.startsWith("button")) {
             this.index = this.index + "button".length;
             this.onToken({ text: "[button", type: TokenType.BEGIN_MARK });

@@ -172,6 +172,20 @@
     border-radius: 0px 4px 4px 0px;
 }
 
+.markdown_output .answer-btn {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    padding: 6px 12px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.markdown_output .answer-btn:hover {
+    background-color: #286090;
+    color: white;
+  }
+
 @media all and (min-width:722px) and (max-width:8000px) {
     .markdown_output .parts_comment_bar {
         font-size: 1em;
