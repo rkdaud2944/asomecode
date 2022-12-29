@@ -1,8 +1,12 @@
 import rest from "@/globals/rest";
 
 export default {
-    defaultSubjectSet: async function () {
-        var url = `/default/subjectSet`;
+    getSubjectSet: async function (id) {
+        if (id == null || id == 'null' || id == 'undefined') {
+            return rest.get('/subjectSet')
+        }
+
+        var url = `/subjectSet?id=${id}`;
         return rest.get(url)
     },
 

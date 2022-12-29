@@ -1,9 +1,9 @@
 <template>
-    <div class="main subject-color" v-bind:id="'component'+subject.id">
-        <img :src="subject.images" class="images">
+    <div class="main subject-color" v-bind:id="'component' + subject.id">
+        <img :src="imgSrc" class="images">
         <br>
         <p class="h3_style">{{ subject.title }}</p>
-        <p class="eng_text">{{ subject.title_eng }}</p>
+        <p class="eng_text">{{ subject.subTitle }}</p>
         <p class="text">{{ subject.description }}</p>
         <br>
         <div class="more-button" @click="goTo('/lesson/list', { id: subject.id })">
@@ -22,11 +22,13 @@ export default {
         VueBase,
     ],
 
-    props: ["subject"],
-setup() {
-
+    props: ["subject", "index"],
+    
+    data() {
+        return {
+            imgSrc : `/images/common/page${this.index + 1}.png`
+        }
     },
 }
 </script>
-
 <style scoped src="@/assets/css/component/subject.css"/>

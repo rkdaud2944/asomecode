@@ -25,7 +25,7 @@
         <div class="row subject_box">
             <div class="col-3 subject-box-interval" v-for="(subject, index) in subjects" :key="index">
                 <div class="q-ma-md subject">
-                <Subject :subject="subject" />
+                    <Subject :subject="subject" :index="index" />
                 </div>
             </div>
         </div>
@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import subjectSets from '@/data/subject-sets';
+import apiSubject from "@/api/subject";
 import ImageButton from '@/components/ImageButton.vue';
 import Subject from '@/components/SubjectComponent.vue'
 
@@ -45,13 +45,30 @@ export default {
     setup() {
         return {
             selectedSubjectSetId: localStorage.getItem('selectedSubjectSetId'),
-            subjects: subjectSets.getSubjectsOrDefaults(localStorage.getItem('selectedSubjectSetId')),
         }
+    },
+
+    data() {
+        return {
+            subjects: {},
+        }
+    },
+
+    mounted() {
+        this.getSubjectSet()
     },
 
     methods: {
         onClickNotice() {
             this.$router.push({ path: '/notice/list'});
+        },
+
+        getSubjectSet() {
+            apiSubject.getSubjectSet(this.selectedSubjectSetId)
+                .then((response) => {
+                    this.subjects = response.data
+                })
+                .catch(this.showError);
         },
     }
 }

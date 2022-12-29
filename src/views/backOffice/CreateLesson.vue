@@ -274,10 +274,6 @@ export default {
 }
 </script>
 
-
-
-
-
 <style src="@/assets/css/component/markdown_content.css"/>
 <style>
 .lesson-title {
