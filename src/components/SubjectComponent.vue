@@ -10,8 +10,6 @@
             <p style="color:white; font-size: 15px; line-height:28px; ">더 알아보기 <b>〉</b></p>
         </div>
     </div>
-
-
 </template>
 
 <script>
