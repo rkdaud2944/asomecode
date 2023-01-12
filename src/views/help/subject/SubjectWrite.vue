@@ -5,21 +5,34 @@
     <div class="q-pa-md">
         <div class="row">
             <div class="col-3" v-for="subject in defaultSubjects" :key="subject.id">
-                {{ subject.title }}
-                <br>
+                <div class="q-px-md">{{ subject.title }}</div><br>
 
-                <div class="column">
-                    <div class="col" v-for="lesson in lessons.filter(e => e.defaultSubjectId == subject.id)" :key="lesson.id">
-                        <q-checkbox left-label v-model="checkedLessons[lesson.id]" :label="lesson.title"
-                            checked-icon="task_alt" 
-                            unchecked-icon="highlight_off" />
-                    </div>
-                </div>
+                <q-virtual-scroll style="max-height: 300px;"
+                    :items="lessons.filter(e => e.defaultSubjectId == subject.id)" separator v-slot="{ item, index }">
+                    <q-item :key="index" dense>
+                        <q-item-section>
+                            <q-item-label>
+                                <q-checkbox left-label v-model="checkboxValues[item.id]" :label="item.title"
+                                    checked-icon="task_alt" @update:model-value="checkLesson(item)"
+                                    unchecked-icon="highlight_off" />
+                            </q-item-label>
+                        </q-item-section>
+                    </q-item>
+                </q-virtual-scroll>
             </div>
         </div>
     </div>
 
     <div class="q-ma-md">
+        <q-breadcrumbs class="text-primary">
+            <template v-slot:separator>
+                <q-icon size="1.5em" name="chevron_right" color="primary" />
+            </template>
+            <q-breadcrumbs-el v-for="(lesson, index) in checkedLessons" :key="lesson.id">
+                {{ index+ 1 }}차시 {{ lesson.title }}
+            </q-breadcrumbs-el>
+        </q-breadcrumbs><br>
+
         <q-input filled v-model="title" label="제목" stack-label /><br>
         <q-input filled v-model="subTitle" label="부제목 (영문제목)" stack-label /><br>
 
@@ -36,7 +49,8 @@
         <q-input v-model="description" filled type="textarea" />
         <br>
 
-        <q-btn @click="goTo('/help/subject/list')" color="primary" label="완료" />
+        <q-btn @click="createSubject" color="primary" label="생성" />
+        <q-btn class="q-mx-md" @click="clearForm" color="warning" label="초기화" />
     </div>
 </template>
 
@@ -64,6 +78,8 @@ export default {
             password: "",
             description: "",
             checkedLessons: [],
+
+            checkboxValues: [],
         };
     },
 
@@ -73,6 +89,12 @@ export default {
     },
 
     methods: {
+        checkLesson(lesson) {
+            const idx = this.checkedLessons.indexOf(lesson)
+            if (idx > -1) this.checkedLessons.splice(idx, 1)
+            else this.checkedLessons.push(lesson)
+        },
+
         getDefaultSubjectSet() {
             apiSubject.getSubjectSet()
                 .then((response) => {
@@ -86,10 +108,42 @@ export default {
                 .then(response => {
                     this.lessons = response.data.rows
                     this.lessons.forEach(e => {
-                        this.checkedLessons[e.id] = false
+                        this.checkboxValues[e.id] = false
                     });
                 })
-                .catch(e => { console.log(e) });
+                .catch(this.showError);
+        },
+
+        clearForm() {
+            this.title = ""
+            this.subTitle = ""
+            this.writer = ""
+            this.password = ""
+            this.description = ""
+            this.checkedLessons = []
+
+            this.lessons.forEach(e => {
+                this.checkboxValues[e.id] = false
+            });
+        },
+
+        createSubject() {
+            let body = {
+                title: this.title,
+                subTitle: this.subTitle,
+                writer: this.writer,
+                password: this.password,
+                description: this.description,
+                customization: 1,
+                lessons: this.checkedLessons.map(e => e.id),
+            }
+            console.log(body)
+            apiSubject.createSubject(body)
+                .then(() => {
+                    this.showSuccess();
+                    this.$router.push("/help/subject/list");
+                })
+                .catch(this.showError);
         },
     },
 };

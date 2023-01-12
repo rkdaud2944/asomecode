@@ -137,8 +137,8 @@ export default {
             video: ref(null),
 
             functionBtnDialog: ref(false),
-            functionName: ref(''),
-            functionCode: ref(''),
+            functionName: ref(""),
+            functionCode: ref(""),
         }
     },
 
@@ -246,8 +246,8 @@ export default {
             let selectionStart = this.$refs.inputTextarea.selectionStart;
             this.lesson.content = [value.slice(0, selectionStart), functionBtnContent, value.slice(selectionStart)].join('')
 
-            this.functionName = ''
-            this.functionCode = ''
+            this.functionName = ""
+            this.functionCode = ""
             this.functionBtnDialog = false
         },
 

@@ -31,4 +31,20 @@ export default {
             });
         });
     },
+
+    async createSubject(body) {
+        return new Promise((resolve, reject) => {
+            var url = "subject"
+            rest.post(url, body)
+                .then(response => {
+                    if (response.data.resultCode) {
+                        reject(response);
+                        return;
+                    }
+                    resolve(response);
+                }).catch(error => {
+                    console.log(error);
+                });
+        })
+    },
 }
