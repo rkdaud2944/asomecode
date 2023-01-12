@@ -60,7 +60,8 @@ const routes = [
         component: () => import('../views/help/subject/SubjectWrite.vue')
     },
     {
-        path: '/help/subject/edit/:id',
+        path: '/help/subject/edit',
+        props: true,
         component: () => import('../views/help/subject/SubjectEdit.vue')
     },
 

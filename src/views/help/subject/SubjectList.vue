@@ -71,8 +71,8 @@ export default {
             this.getSubjects();
         },
 
-        onRowClick(e, row) {
-            this.$router.push({ path: "/help/subject/detail", query: row });
+        onRowClick(row) {
+            this.$router.push({ path: "/help/subject/detail", query: { id: row.id } });
         },
 
         onWriteButtonClick() {
