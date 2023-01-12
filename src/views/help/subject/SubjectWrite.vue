@@ -46,7 +46,7 @@
         </div>
         <br>
 
-        <q-input v-model="description" filled type="textarea" />
+        <q-input v-model="description" label="과목 설명" filled type="textarea" />
         <br>
 
         <q-btn @click="createSubject" color="primary" label="생성" />
@@ -64,7 +64,7 @@ export default {
     mixins: [VueBase],
 
     components: {
-        Header,
+        Header
     },
 
     data() {
@@ -137,7 +137,7 @@ export default {
                 customization: 1,
                 lessons: this.checkedLessons.map(e => e.id),
             }
-            console.log(body)
+            
             apiSubject.createSubject(body)
                 .then(() => {
                     this.showSuccess();
