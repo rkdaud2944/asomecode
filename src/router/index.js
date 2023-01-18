@@ -80,7 +80,8 @@ const routes = [
         component: () => import('../views/help/subject-set/SubjectSetWrite.vue')
     },
     {
-        path: '/help/subject-set/edit/:id',
+        path: '/help/subject-set/edit',
+        props: true,
         component: () => import('../views/help/subject-set/SubjectSetEdit.vue')
     },
 

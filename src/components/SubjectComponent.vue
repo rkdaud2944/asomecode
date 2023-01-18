@@ -1,5 +1,5 @@
 <template>
-    <div class="main subject-color" v-bind:id="'component' + subject.id">
+    <div class="main subject-color" v-bind:id="`component${this.index + 1}`">
         <img :src="imgSrc" class="images">
         <br>
         <p class="h3_style">{{ subject.title }}</p>

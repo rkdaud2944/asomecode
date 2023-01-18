@@ -66,7 +66,7 @@ export default {
         getSubjectSet() {
             apiSubjectSet.getSubjectSet(this.selectedSubjectSetId)
                 .then((response) => {
-                    this.subjects = response.data
+                    this.subjects = response.data.subjects
                 })
                 .catch(this.showError);
         },

@@ -17,7 +17,7 @@
     </div>
 
     <div class="q-pa-md">
-        <Grid ref="grid" :rowKey="id" :columns="columns" @onPageChanged="onPageChanged" @onRowClick="onRowClick" />
+        <SubjectSetListGrid ref="grid" rowKey="id" :columns="columns" @onPageChanged="onPageChanged" />
         <br>
         <div class="row flex flex-center">
             <q-btn @click="clearSelection" color="primary" label="초기화" />
@@ -30,12 +30,12 @@
 import VueBase from "@/mixin/vue-base";
 import apiSubjectSet from "@/api/subjectSet";
 import Header from '@/components/HeaderHelp.vue';
-import Grid from '@/components/GridPage.vue';
+import SubjectSetListGrid from '@/components/SubjectSetListGrid.vue';
 
 export default {
     mixins: [VueBase],
 
-    components: { Header, Grid },
+    components: { Header, SubjectSetListGrid },
 
     computed: {
         pageCount() {
@@ -83,13 +83,9 @@ export default {
             this.getSubjectSets();
         },
 
-        onRowClick(e, row) {
-            this.$router.push({ path: '/help/subject-set/detail', query: row });
-        },
-
         clearSelection() {
             localStorage.setItem('selectedSubjectSetId', null);
-            this.refresh();
+            this.showSuccess();
         },
 
         onWriteButtonClick() {
@@ -103,5 +99,6 @@ const columns = [
     { name: 'writer', align: 'center', label: '작성자', field: 'writer', style: 'width: 150px' },
     { name: 'title', align: 'left', label: '제목', field: 'title', style: 'width: 250px' },
     { name: 'createAt', align: 'left', label: '생성일', field: 'createAt', style: 'width: 300px' },
+    { name: 'optionBtn', align: 'left', label: 'Option', field: 'optionBtn', style: 'width: 300px' },
 ];
 </script>
