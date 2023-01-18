@@ -51,9 +51,8 @@
 
 <script>
 import VueBase from "@/mixin/vue-base";
-import apiSubject from '@/api/subject';
 import Header from "@/components/HeaderHelp.vue";
-
+import apiSubject from '@/api/subject';
 export default {
     mixins: [VueBase],
 
