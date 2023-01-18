@@ -104,7 +104,6 @@ export default {
 
     methods: {
         checkSubject(subject) {
-            console.log(this.checkedSubjects)
             const idx = this.checkedSubjects.findIndex((e) => e.id == subject.id);
             if (idx > -1) this.checkedSubjects.splice(idx, 1)
             else this.checkedSubjects.push(subject)
