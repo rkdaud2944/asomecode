@@ -99,7 +99,7 @@ export default {
         getDefaultSubjectSet() {
             apiSubjectSet.getSubjectSet()
                 .then((response) => {
-                    this.defaultSubjects = response.data
+                    this.defaultSubjects = response.data.subjects
                 })
                 .catch(this.showError);
         },

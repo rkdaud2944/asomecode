@@ -101,9 +101,15 @@ export default {
         },
 
         deleteSubjectSet() {
-            this.$refs.passwordDialog.hide();
-            this.password = ""
-            this.showSuccess();
+            const params = {
+                password: this.password
+            }
+            apiSubjectSet.deleteSubjectSet(this.$route.query.id, params)
+                .then(() => {
+                    this.showSuccess();
+                    this.$router.push("/help/subject-set/list");
+                })
+                .catch(this.showError);
         },
 
         onclickUpdateBtn() {
