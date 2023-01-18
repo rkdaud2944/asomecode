@@ -4,101 +4,147 @@
 
     <div class="q-pa-md">
         <div class="row">
-            <div class="col-5">
-                <q-input color="teal" filled v-model="keyword" label="검색어">
-                    <template v-slot:prepend>
-                        <q-icon name="search" />
-                    </template>
-                </q-input>
-                <br />
-                <LessonList ref="sourceList" />
-            </div>
+            <div class="col-3" v-for="subject in defaultSubjects" :key="subject.id">
+                <div class="q-px-md">{{ subject.title }}</div><br>
 
-            <div class="col">
-                <div class="row flex flex-center">
-                    <q-btn @click="addLessons" color="primary" label="추가" class="q-ml-md" />
-                </div>
-                <br>
-
-                <div class="row flex flex-center">
-                    <q-btn @click="deleteLessons" color="deep-orange" label="삭제" class="q-ml-md" />
-                </div>
-            </div>
-
-            <div class="col-5">
-                <LessonList ref="targetList" />
+                <q-virtual-scroll style="max-height: 300px;"
+                    :items="lessons.filter(e => e.defaultSubjectId == subject.id)" separator v-slot="{ item, index }">
+                    <q-item :key="index" dense>
+                        <q-item-section>
+                            <q-item-label>
+                                <q-checkbox left-label v-model="checkboxValues[item.id]" :label="item.title"
+                                    checked-icon="task_alt" @update:model-value="checkLesson(item)"
+                                    unchecked-icon="highlight_off" />
+                            </q-item-label>
+                        </q-item-section>
+                    </q-item>
+                </q-virtual-scroll>
             </div>
         </div>
     </div>
 
     <div class="q-ma-md">
-        <q-input filled v-model="title" label="제목" stack-label :dense="dense" />
-        <br>
+        <q-breadcrumbs class="text-primary">
+            <template v-slot:separator>
+                <q-icon size="1.5em" name="chevron_right" color="primary" />
+            </template>
+            <q-breadcrumbs-el v-for="(lesson, index) in checkedLessons" :key="lesson.id">
+                {{ index+ 1 }}차시 {{ lesson.title }}
+            </q-breadcrumbs-el>
+        </q-breadcrumbs><br>
+
+        <q-input filled v-model="title" label="제목" stack-label /><br>
+        <q-input filled v-model="subTitle" label="부제목 (영문제목)" stack-label /><br>
 
         <div class="row">
             <div class="col q-pr-md">
-                <q-input filled v-model="author" label="작성자" stack-label :dense="dense" />
+                <q-input filled v-model="writer" label="작성자" stack-label />
             </div>
             <div class="col q-pl-md">
-                <q-input filled v-model="password" label="비밀먼호" type="password" stack-label :dense="dense" />
+                <q-input filled v-model="password" label="비밀먼호" type="password" stack-label />
             </div>
         </div>
         <br>
 
-        <q-input v-model="text" filled type="textarea" />
+        <q-input v-model="description" label="과목 설명" filled type="textarea" />
         <br>
 
-        <q-btn @click="goTo('/help/subject/list')" color="primary" label="완료" />
+        <q-btn @click="createSubject" color="primary" label="생성" />
+        <q-btn class="q-mx-md" @click="clearForm" color="warning" label="초기화" />
     </div>
 </template>
 
 <script>
 import VueBase from "@/mixin/vue-base";
-import lessons from "@/data/lessons";
+import apiSubject from "@/api/subject";
+import apiSubjectSet from "@/api/subjectSet";
+import apiLesson from "@/api/lesson";
 import Header from "@/components/HeaderHelp.vue";
-import LessonList from "@/components/LessonList.vue";
 
 export default {
     mixins: [VueBase],
 
     components: {
-        Header,
-        LessonList,
+        Header
     },
 
     data() {
         return {
-            keyword: "",
+            defaultSubjects: null,
+            lessons: [],
+
             title: "",
-            author: "",
+            subTitle: "",
+            writer: "",
             password: "",
-            text: "",
+            description: "",
+            checkedLessons: [],
+
+            checkboxValues: [],
         };
     },
 
     mounted() {
-        this.$refs.sourceList.addRows(lessons);
+        this.getDefaultSubjectSet();
+        this.getLessons();
     },
 
     methods: {
-        addLessons() {
-            const sourceList = this.$refs.sourceList;
-            const targetList = this.$refs.targetList;
-            const source = sourceList.getSelected();
-            if (source) {
-                targetList.addRows(source);
-                sourceList.removeRows(source);
-            }
+        checkLesson(lesson) {
+            const idx = this.checkedLessons.indexOf(lesson)
+            if (idx > -1) this.checkedLessons.splice(idx, 1)
+            else this.checkedLessons.push(lesson)
         },
 
-        deleteLessons() {
-            const sourceList = this.$refs.sourceList;
-            const targetList = this.$refs.targetList;
-            const target = targetList.getSelected();
-            if (target) {
-                sourceList.addRows(target);
-                targetList.removeRows(target);
+        getDefaultSubjectSet() {
+            apiSubjectSet.getSubjectSet()
+                .then((response) => {
+                    this.defaultSubjects = response.data
+                })
+                .catch(this.showError);
+        },
+
+        getLessons() {
+            apiLesson.getLessons({ size: 10000 })
+                .then(response => {
+                    this.lessons = response.data.rows
+                    this.lessons.forEach(e => {
+                        this.checkboxValues[e.id] = false
+                    });
+                })
+                .catch(this.showError);
+        },
+
+        clearForm() {
+            this.title = ""
+            this.subTitle = ""
+            this.writer = ""
+            this.password = ""
+            this.description = ""
+            this.checkedLessons = []
+
+            this.lessons.forEach(e => {
+                this.checkboxValues[e.id] = false
+            });
+        },
+
+        createSubject() {
+            let body = {
+                title: this.title,
+                subTitle: this.subTitle,
+                writer: this.writer,
+                password: this.password,
+                description: this.description,
+                customization: 1,
+                lessons: this.checkedLessons.map(e => e.id),
             }
+            
+            apiSubject.createSubject(body)
+                .then(() => {
+                    this.showSuccess();
+                    this.$router.push("/help/subject/list");
+                })
+                .catch(this.showError);
         },
     },
 };

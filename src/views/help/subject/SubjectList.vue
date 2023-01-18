@@ -59,24 +59,8 @@ export default {
     },
 
     methods: {
-        searchSubject() {
-            if (this.selectedFilter == null) return
-            
-            this.params = { page: 0, size: this.pageSize }
-            this.params[this.selectedFilter.value] = this.keyword
-            this.getSubjects();
-        },
-
         onPageChanged() {
             this.getSubjects();
-        },
-
-        onRowClick(e, row) {
-            this.$router.push({ path: "/help/subject/detail", query: row });
-        },
-
-        onWriteButtonClick() {
-            this.$router.push({ path: "/help/subject/write" });
         },
 
         getSubjects() {
@@ -85,6 +69,22 @@ export default {
                     this.$refs.grid.setData(response.data);
                 })
                 .catch(this.showError);
+        },
+
+        searchSubject() {
+            if (this.selectedFilter == null) return
+            
+            this.params = { page: 0, size: this.pageSize }
+            this.params[this.selectedFilter.value] = this.keyword
+            this.getSubjects();
+        },
+        
+        onRowClick(row) {
+            this.$router.push({ path: "/help/subject/detail", query: { id: row.id } });
+        },
+
+        onWriteButtonClick() {
+            this.$router.push({ path: "/help/subject/write" });
         },
     },
 };

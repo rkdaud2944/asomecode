@@ -90,8 +90,7 @@ class Scanner {
     }
 
     #do_beginMark() {
-        const text = this.source.substr(this.index, 6);
-
+        const text = this.source.substr(this.index, 9);
         if (text.startsWith("button")) {
             this.index = this.index + "button".length;
             this.onToken({ text: "[button", type: TokenType.BEGIN_MARK });
@@ -110,6 +109,9 @@ class Scanner {
         } else if (text.startsWith("wifi")) {
             this.index = this.index + "wifi".length;
             this.onToken({ text: "[wifi", type: TokenType.BEGIN_MARK });
+        } else if (text.startsWith("messenger")) {
+            this.index = this.index + "messenger".length;
+            this.onToken({ text: "[messenger", type: TokenType.BEGIN_MARK });
         } else {
             this.onToken({ text: "[", type: TokenType.TEXT });
         }
@@ -151,6 +153,7 @@ class Parser {
             case "[editor": return this.#get_editorText(this.buffer);
             case "[parts": return this.#get_partsText(this.buffer);
             case "[wifi": return this.#get_wifi_Text();
+            case "[messenger": return this.#get_asome_messenger_Text();
         }
     }
 
@@ -161,10 +164,10 @@ class Parser {
 
         let content = text.replace(`${firstLine}`, "").slice(0, -1)
         const lines = content.split("\n")
-        content = lines.map( e => stripComments.stripPythonComments(e)).join('\n')
+        content = lines.map(e => stripComments.stripPythonComments(e)).join('\n')
 
         return `<div onclick="runCode(getCode('${functionId}'))" class="function_btn">${functionName}</div></br>` +
-               `<div id="${functionId}" class="hidden">${content}</div>`;
+            `<div id="${functionId}" class="hidden">${content}</div>`;
     }
 
     #get_imageText(text) {
@@ -231,18 +234,30 @@ class Parser {
     }
 
     #get_wifi_Text() {
-        return `<div class="input-group" >
-          <span class="input-group-addon"><i class="q-icon material-icons"> wifi</i></span>
+        return `<div class="input-group">
+          <span class="input-group-addon"><i class="q-icon material-icons">wifi</i></span>
           <input class="form-control" type="text" id="wifi_name" placeholder="와이파이 이름" onchange="setWifiInfo()">
         </div>
-        <br>
-        <div>
+        <div class="input-group">
           <span class="input-group-addon"><i class="q-icon material-icons">lock</i></span>
             <input class="form-control" type="text" id="wifi_password" placeholder="와이파이 암호" onchange="setWifiInfo()">
-        </div>
-        <br>` +
+        </div>` +
 
-        `<div onclick="runCode(getCode('인터넷-연결하기'))" class="function_btn">인터넷 연결하기</div></br>` +
-        `<div id="인터넷-연결하기" class="hidden"></div>`;
+            `<div onclick="runCode(getCode('인터넷-연결하기'))" class="function_btn">인터넷 연결하기</div></br>` +
+            `<div id="인터넷-연결하기" class="hidden"></div>`;
+    }
+
+    #get_asome_messenger_Text() {
+        return `<div class="input-group">
+          <span class="input-group-addon"><i class="q-icon material-icons">wifi</i></span>
+          <input class="form-control" type="text" id="asome_connect_code" placeholder="접속코드" onchange="setAsomeMessengerInfo()">
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="q-icon material-icons">lock</i></span>
+            <input class="form-control" type="text" id="asome_msg" placeholder="메시지" onchange="setAsomeMessengerInfo()">
+        </div>` +
+
+            `<div onclick="runCode(getCode('asome-messenger'))" class="function_btn">전송</div></br>` +
+            `<div id="asome-messenger" class="hidden"></div>`;
     }
 }

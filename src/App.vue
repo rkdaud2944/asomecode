@@ -49,7 +49,7 @@ export default {
 
     watch: {
         $route(to) {
-            console.log("Appp route", to);
+            console.log("App route", to);
 
             globals.currentPath = to.path;
 

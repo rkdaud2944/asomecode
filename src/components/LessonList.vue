@@ -31,7 +31,7 @@ export default {
 
     methods: {
         addRows(rows) {
-            this.rows.push(...rows);
+            this.rows = rows;
         },
         removeRows(rows) {
             this.rows = this.rows.filter((row) => rows.indexOf(row) < 0);
