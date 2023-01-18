@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import apiSubject from "@/api/subject";
+import apiSubjectSet from "@/api/subjectSet";
 import ImageButton from '@/components/ImageButton.vue';
 import Subject from '@/components/SubjectComponent.vue'
 
@@ -64,7 +64,7 @@ export default {
         },
 
         getSubjectSet() {
-            apiSubject.getSubjectSet(this.selectedSubjectSetId)
+            apiSubjectSet.getSubjectSet(this.selectedSubjectSetId)
                 .then((response) => {
                     this.subjects = response.data
                 })

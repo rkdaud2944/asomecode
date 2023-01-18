@@ -28,7 +28,7 @@
             <template v-slot:separator>
                 <q-icon size="1.5em" name="chevron_right" color="primary" />
             </template>
-            <q-breadcrumbs-el v-for="(lesson, index) in checkedLessons" :key="lesson.id">
+            <q-breadcrumbs-el v-for="(lesson, index) in checkedLessons" :key="lesson">
                 {{ index+ 1 }}차시 {{ lesson.title }}
             </q-breadcrumbs-el>
         </q-breadcrumbs><br>
@@ -57,6 +57,7 @@
 <script>
 import VueBase from "@/mixin/vue-base";
 import apiSubject from "@/api/subject";
+import apiSubjectSet from "@/api/subjectSet";
 import apiLesson from "@/api/lesson";
 import Header from "@/components/HeaderHelp.vue";
 
@@ -83,7 +84,6 @@ export default {
     mounted() {
         this.getDefaultSubjectSet();
         this.getLessons();
-        this.getSubject()
     },
 
     methods: {
@@ -106,7 +106,7 @@ export default {
         },
 
         getDefaultSubjectSet() {
-            apiSubject.getSubjectSet()
+            apiSubjectSet.getSubjectSet()
                 .then((response) => {
                     this.defaultSubjects = response.data
                 })
@@ -120,6 +120,8 @@ export default {
                     this.lessons.forEach(e => {
                         this.checkboxValues[e.id] = false
                     });
+
+                    this.getSubject()
                 })
                 .catch(this.showError);
         },

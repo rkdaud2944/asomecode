@@ -57,6 +57,7 @@
 <script>
 import VueBase from "@/mixin/vue-base";
 import apiSubject from "@/api/subject";
+import apiSubjectSet from "@/api/subjectSet";
 import apiLesson from "@/api/lesson";
 import Header from "@/components/HeaderHelp.vue";
 
@@ -96,7 +97,7 @@ export default {
         },
 
         getDefaultSubjectSet() {
-            apiSubject.getSubjectSet()
+            apiSubjectSet.getSubjectSet()
                 .then((response) => {
                     this.defaultSubjects = response.data
                 })

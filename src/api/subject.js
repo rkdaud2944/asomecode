@@ -1,15 +1,6 @@
 import rest from "@/globals/rest";
 
 export default {
-    getSubjectSet: async function (id) {
-        if (id == null || id == 'null' || id == 'undefined') {
-            return rest.get('/subjectSet')
-        }
-
-        var url = `/subjectSet?id=${id}`;
-        return rest.get(url)
-    },
-
     subjectDetail: async function (id) {
         var url = `/subject/${id}`;
         return rest.get(url)
