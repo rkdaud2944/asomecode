@@ -40,9 +40,17 @@ async function loadToolboxCategory(product) {
     try {
         const response = await fetch(url);
         const resultData = await response.text();
+        
         document.getElementsByClassName('block-category-div')[0].innerHTML = resultData;
-        document.getElementsByClassName('menu-tab-item')[0].innerHTML = resultData;
-        document.getElementsByClassName('js--tab-' + product)[0].classList.add('menu-tab-selected');
+
+        if (document.getElementsByClassName('menu-tab-item').size < 0) {
+            document.getElementsByClassName('menu-tab-item')[0].innerHTML = resultData;
+        }
+
+        if (document.getElementsByClassName('js--tab-' + product).size < 0) {
+            document.getElementsByClassName('js--tab-' + product)[0].classList.add('menu-tab-selected');
+        }
+
         await loadToolboxBlocks(product);
     } catch (error) {
         console.log(error);
