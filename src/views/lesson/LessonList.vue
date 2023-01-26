@@ -39,7 +39,7 @@ export default {
 
     data() {
         return {
-            subject: null,
+            subject: {},
         }
     },
 
