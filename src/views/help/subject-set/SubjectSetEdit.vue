@@ -163,8 +163,8 @@ export default {
 
         updateSubjectSet() {
             let body = {
-                title: this.title,
-                writer: this.writer,
+                title: this.subjectSet.title,
+                writer: this.subjectSet.writer,
                 password: this.password,
                 subjectIds: this.checkedSubjects.map(e => e.id),
             }
