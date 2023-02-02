@@ -334,6 +334,7 @@ Blockly.Msg["IF_CLOCK"] = "시계 모드인가? %2 %3";
 // 02.15
 Blockly.Msg["COMMON_02.15_READY"] = "프로그램 준비 및 시작";
 Blockly.Msg["MEASURE_DISTANCE"] = "거리 측정하기";
+Blockly.Msg["TM1637_WRITE_0"] = "LED 튜브의 전구 끄기";
 Blockly.Msg["RAIN_SHOW"] = "'rAin' 표시하기";
 Blockly.Msg["SUN_SHOW"] = "'Sun' 표시하기";
 Blockly.Msg["CONTINUE"] = "반복문 처음으로 이동";
