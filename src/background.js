@@ -19,7 +19,7 @@ async function createWindow() {
       enableRemoteModule: true,
       nodeIntegration: true,
       contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
-      preload: path.join(__dirname, '..', 'src', 'preload.js'),
+      preload: 'preload.js',
     }
   })
   win.setMenu(null)
