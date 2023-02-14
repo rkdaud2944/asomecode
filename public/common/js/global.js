@@ -32,7 +32,7 @@ if (navigator.userAgent.indexOf("AsomeCodeApp") != -1) {
 
 async function loadToolboxCategory(product) {
     var url
-    if (sessionStorage.getItem("stage") != null) {
+    if (localStorage.getItem("stage") != null) {
         url = "https://asomecode-web.s3.ap-northeast-2.amazonaws.com/asomecode-web-version/common/ajax/get_toolbox_category_common.html";
     } else {
         url = "https://asomecode-web.s3.ap-northeast-2.amazonaws.com/asomecode-web-version/common/ajax/get_toolbox_category_" + product + ".html";
@@ -40,9 +40,15 @@ async function loadToolboxCategory(product) {
     try {
         const response = await fetch(url);
         const resultData = await response.text();
+        
         document.getElementsByClassName('block-category-div')[0].innerHTML = resultData;
-        document.getElementsByClassName('menu-tab-item')[0].innerHTML = resultData;
-        document.getElementsByClassName('js--tab-' + product)[0].classList.add('menu-tab-selected');
+        document.getElementsByClassName('menu-tab-item')[0]?.classList.remove('menu-tab-selected');
+        document.getElementsByClassName('js--tab-' + product)[0]?.classList.add('menu-tab-selected');
+        
+        if (document.getElementById("stageNum") != null) {
+            document.getElementById("stageNum").innerText = localStorage.getItem('stage');
+        }
+
         await loadToolboxBlocks(product);
     } catch (error) {
         console.log(error);
@@ -55,7 +61,7 @@ async function loadToolboxBlocks(product, defaultCategory) {
     }
 
     var url
-    if (sessionStorage.getItem("stage") != null) {
+    if (localStorage.getItem("stage") != null) {
         url = "https://asomecode-web.s3.ap-northeast-2.amazonaws.com/asomecode-web-version/common/ajax/chapter/get_toolbox_blocks_" + product + ".html";
     } else {
         url = "https://asomecode-web.s3.ap-northeast-2.amazonaws.com/asomecode-web-version/common/ajax/get_toolbox_blocks_" + product + ".html";
@@ -250,7 +256,8 @@ function changeToolbox(name, category) {
     BlockEditorWorkspace.updateToolbox(document.getElementById('toolbox_' + name));
 
     document.querySelector(".block-category-div div.btn").classList.remove("category-selected");
-    document.getElementsByClassName('js--category-' + category + '-' + name)[0].classList.add("category-selected");
+
+    document.getElementsByClassName('js--category-' + category + '-' + name)[0]?.classList.add("category-selected");
 
     selectedToolbox.name = name;
     selectedToolbox.category = category;
@@ -269,9 +276,8 @@ var cleanBlockWorkspace = function () {
 async function changeToolboxCategory(product) {
     if (product == undefined || product == "") {
 
-        if (sessionStorage.getItem("stage") != null) {
-            product = sessionStorage.getItem("stage");
-            //			sessionStorage.removeItem("stage")
+        if (localStorage.getItem("stage") != null) {
+            product = localStorage.getItem("stage");
         } else {
             product = getProductFromUrl();
         }

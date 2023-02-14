@@ -1,6 +1,5 @@
 import serial from "@/globals/serial";
 import router from "@/router";
-import windows from "@/globals/windows";
 
 /**
  * App to Web 브릿지 메시지
@@ -36,22 +35,28 @@ const bridge = {
     openEditor(code) {
         console.log(code);
         localStorage.setItem("code", code);
-        windows.open("editor", "/editor");
+        let route = router.resolve({ path: "/editor" });
+        window.open(route.href);
     },
 
     setWifiInfo() {
         const wifiName = document.getElementById('wifi_name').value;
         const wifiPassword = document.getElementById('wifi_password').value;
-        document.getElementById("인터넷-연결하기").innerText = 
+        document.getElementById("인터넷-연결하기").innerText =
             `import internet; internet.connect('${wifiName}', '${wifiPassword}')`;
     },
 
     setAsomeMessengerInfo() {
         const connectCode = document.getElementById('asome_connect_code').value;
         const msg = document.getElementById('asome_msg').value;
-        document.getElementById("asome-messenger").innerText = 
+        document.getElementById("asome-messenger").innerText =
             `import http_utils; http_utils.send_msg('${connectCode}', '${msg}')`;
     },
+
+    presentSession(present, language) {
+        localStorage.setItem("stage", present);
+        window.open(`/AsomeBlock/BlockCoding.html?language=${language}`)
+    }
 };
 
 window.refresh = bridge.refresh;
@@ -61,5 +66,6 @@ window.runCode = bridge.runCode;
 window.openEditor = bridge.openEditor;
 window.setWifiInfo = bridge.setWifiInfo;
 window.setAsomeMessengerInfo = bridge.setAsomeMessengerInfo;
+window.presentSession = bridge.presentSession;
 
 export default bridge;

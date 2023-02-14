@@ -34,7 +34,7 @@ export default {
 
     data() {
         return {
-            lesson: null,
+            lesson: {},
             titles: [],
             output: null,
         };

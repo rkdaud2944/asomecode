@@ -4,110 +4,177 @@
 
     <div class="q-pa-md">
         <div class="row">
-            <div class="col-5">
-                <q-input color="teal" filled v-model="keyword" label="검색어">
-                    <template v-slot:prepend>
-                        <q-icon name="search" />
-                    </template>
-                </q-input>
-                <br />
-                <LessonList ref="sourceList" />
+            <div class="col-3">
+                <div class="q-px-md">기본 과목</div><br>
 
+                <q-virtual-scroll style="max-height: 300px;"
+                    :items="defaultSubjects" separator v-slot="{ item, index }">
+                    <q-item :key="index" dense>
+                        <q-item-section>
+                            <q-item-label>
+                                <q-checkbox left-label v-model="checkboxValues[item.id]"
+                                    checked-icon="task_alt" @update:model-value="checkSubject(item)"
+                                    unchecked-icon="highlight_off">
+                                    {{ item.title }} - {{ item.subTitle }}
+                                </q-checkbox>
+                            </q-item-label>
+                        </q-item-section>
+                    </q-item>
+                </q-virtual-scroll>
             </div>
 
-            <div class="col">
-                <div class="row flex flex-center">
-                    <q-btn @click="addLessons" color="primary" label="추가" class="q-ml-md" />
-                </div>
-                <br>
+            <div class="col-3">
+                <div class="q-px-md">커스텀 과목</div><br>
 
-                <div class="row flex flex-center">
-                    <q-btn @click="deleteLessons" color="deep-orange" label="삭제" class="q-ml-md" />
-                </div>
-            </div>
-
-            <div class="col-5">
-                <LessonList ref="targetList" />
+                <q-virtual-scroll style="max-height: 300px;"
+                    :items="subjects" separator v-slot="{ item, index }">
+                    <q-item :key="index" dense>
+                        <q-item-section>
+                            <q-item-label>
+                                <q-checkbox left-label v-model="checkboxValues[item.id]"
+                                    checked-icon="task_alt" @update:model-value="checkSubject(item)"
+                                    unchecked-icon="highlight_off">
+                                    {{ item.title }} - {{ item.subTitle }}
+                                </q-checkbox>
+                            </q-item-label>
+                        </q-item-section>
+                    </q-item>
+                </q-virtual-scroll>
             </div>
         </div>
     </div>
 
     <div class="q-ma-md">
-        <q-input filled v-model="title" label="제목" stack-label :dense="dense" />
-        <br>
+        <q-breadcrumbs class="text-primary">
+            <template v-slot:separator>
+                <q-icon size="1.5em" name="chevron_right" color="primary" />
+            </template>
+            <q-breadcrumbs-el v-for="subject in checkedSubjects" :key="subject">
+                {{ subject.title }}
+            </q-breadcrumbs-el>
+        </q-breadcrumbs><br>
+
+        <q-input filled v-model="subjectSet.title" label="제목" stack-label /><br>
 
         <div class="row">
             <div class="col q-pr-md">
-                <q-input filled v-model="author" label="작성자" stack-label :dense="dense" />
+                <q-input filled v-model="subjectSet.writer" label="작성자" stack-label />
             </div>
             <div class="col q-pl-md">
-                <q-input filled v-model="password" label="비밀먼호" type="password" stack-label :dense="dense" />
+                <q-input filled v-model="password" label="비밀먼호" type="password" stack-label />
             </div>
         </div>
         <br>
 
-        <q-input v-model="text" filled type="textarea" />
-        <br>
-
-        <div class="row flex flex-center">
-            <q-btn @click="update" color="secondary" label="저장" class="q-ml-md" />
-            <q-btn @click="goBack" color="deep-orange" label="취소" class="q-ml-md" />
-        </div>
+        <q-btn @click="updateSubjectSet" color="secondary" label="수정" />
+        <q-btn class="q-mx-md" @click="goBack()" color="red" label="취소" />
     </div>
 </template>
 
 <script>
 import VueBase from "@/mixin/vue-base";
-import subjects from '@/data/subjects';
+import apiSubjectSet from "@/api/subjectSet";
+import apiSubject from "@/api/subject";
 import Header from "@/components/HeaderHelp.vue";
-import LessonList from "@/components/LessonList.vue";
 
 export default {
     mixins: [VueBase],
 
     components: {
-        Header,
-        LessonList,
+        Header
     },
 
     data() {
         return {
-            keyword: "",
-            title: "",
-            author: "",
+            subjectSet: "",
             password: "",
-            text: "",
+
+            defaultSubjects: null,
+            subjects: [],
+            checkedSubjects: [],
+
+            checkboxValues: [],
         };
     },
 
     mounted() {
-        this.$refs.sourceList.addRows(subjects);
+        this.getDefaultSubjectSet();
+        this.getSubjects();
     },
 
     methods: {
-        addLessons() {
-            const sourceList = this.$refs.sourceList;
-            const targetList = this.$refs.targetList;
-            const source = sourceList.getSelected();
-            if (source) {
-                targetList.addRows(source);
-                sourceList.removeRows(source);
-            }
+        checkSubject(subject) {
+            const idx = this.checkedSubjects.findIndex((e) => e.id == subject.id);
+            if (idx > -1) this.checkedSubjects.splice(idx, 1)
+            else this.checkedSubjects.push(subject)
         },
 
-        deleteLessons() {
-            const sourceList = this.$refs.sourceList;
-            const targetList = this.$refs.targetList;
-            const target = targetList.getSelected();
-            if (target) {
-                sourceList.addRows(target);
-                targetList.removeRows(target);
-            }
+        getSubjectSet() {
+            apiSubjectSet.getSubjectSet(this.$route.query.id)
+                .then(response => {
+                    this.subjectSet = response.data;
+                    this.subjectSet.subjects.forEach(e => {
+                        this.checkboxValues[e.id] = true
+                        this.checkedSubjects.push(e)
+                    });
+                })
+                .catch(this.showError);
         },
 
-        update() {
-            // TODO: 업데이트 하기
-            this.goBack();
+        getDefaultSubjectSet() {
+            apiSubjectSet.getSubjectSet()
+                .then((response) => {
+                    this.defaultSubjects = response.data.subjects
+                    this.defaultSubjects.forEach(e => {
+                        this.checkboxValues[e.id] = false
+                    });
+                })
+                .catch(this.showError);
+        },
+
+        getSubjects() {
+            apiSubject.getSubjects({ size: 10000 })
+                .then(response => {
+                    this.subjects = response.data.rows
+                    this.subjects.forEach(e => {
+                        this.checkboxValues[e.id] = false
+                    });
+
+                    this.getSubjectSet()
+                })
+                .catch(this.showError);
+        },
+
+        clearForm() {
+            this.title = ""
+            this.writer = ""
+            this.password = ""
+            this.checkedSubjects = []
+
+            this.defaultSubjects.forEach(e => {
+                this.checkboxValues[e.id] = false
+            });
+
+            this.subjects.forEach(e => {
+                this.checkboxValues[e.id] = false
+            });
+
+        },
+
+        updateSubjectSet() {
+            let body = {
+                title: this.subjectSet.title,
+                writer: this.subjectSet.writer,
+                password: this.password,
+                subjectIds: this.checkedSubjects.map(e => e.id),
+            }
+            
+            apiSubjectSet.updateSubjectSet(this.subjectSet.id, body)
+                .then(() => {
+                    this.showSuccess();
+                    this.$router.push("/help/subject-set/list");
+                })
+                .catch(this.showError);
         },
     },
 };

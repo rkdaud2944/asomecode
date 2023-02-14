@@ -27,14 +27,15 @@
 </template>
 
 <script>
-import apiSubject from "@/api/subject";
+import apiSubjectSet from "@/api/subjectSet";
 export default {
 
     data() {
         return {
-            defaultSubjectSet: null,
+            defaultSubjectSet: [],
             params: {
                 title: null,
+                defaultSubjectId: null
             },
         };
     },
@@ -63,10 +64,11 @@ export default {
             this.$emit("onFilterChanged", this.filters);
         },
 
-        getDefaultSubjectSet(id) {
-            apiSubject.defaultSubjectSet(id)
+        getDefaultSubjectSet() {
+            apiSubjectSet.getSubjectSet()
                 .then((response) => {
-                    this.defaultSubjectSet = response.data;
+                    this.defaultSubjectSet = response.data.subjects;
+                    console.log(this.defaultSubjectSet)
                 })
                 .catch(this.showError);
         },

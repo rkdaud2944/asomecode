@@ -1,5 +1,5 @@
 <template>
-    <div class="main subject-color" v-bind:id="`component${this.index + 1}`">
+    <div class="main subject-color" v-bind:id="`component${this.index % 5 + 1}`">
         <img :src="imgSrc" class="images">
         <br>
         <p class="h3_style">{{ subject.title }}</p>
@@ -21,12 +21,16 @@ export default {
     ],
 
     props: ["subject", "index"],
-    
+
     data() {
         return {
-            imgSrc : `/images/common/page${this.index + 1}.png`
+            imgSrc: `/images/common/page${this.index % 5 + 1}.png`
         }
     },
 }
 </script>
+
+
+
+
 <style scoped src="@/assets/css/component/subject.css"/>

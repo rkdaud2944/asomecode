@@ -88,7 +88,7 @@ export default {
 
     methods: {
         checkLesson(lesson) {
-            const idx = this.checkedLessons.indexOf(lesson)
+            const idx = this.checkedLessons.findIndex((e) => e.id == lesson.id);
             if (idx > -1) this.checkedLessons.splice(idx, 1)
             else this.checkedLessons.push(lesson)
         },
@@ -99,7 +99,7 @@ export default {
                     this.subject = response.data;
                     this.subject.lessons.forEach(e => {
                         this.checkboxValues[e.id] = true
-                        this.checkedLessons.push(this.lessons.find(lesson => lesson.id == e.id))
+                        this.checkedLessons.push(e)
                     });
                 })
                 .catch(this.showError);
@@ -108,7 +108,7 @@ export default {
         getDefaultSubjectSet() {
             apiSubjectSet.getSubjectSet()
                 .then((response) => {
-                    this.defaultSubjects = response.data
+                    this.defaultSubjects = response.data.subjects
                 })
                 .catch(this.showError);
         },

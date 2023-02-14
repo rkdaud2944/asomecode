@@ -26,8 +26,7 @@
     }
     .subject_box{
         box-sizing: border-box;
-        height: 650px;
-        
+        height: auto;
     }
     .subject-box-interval{
         margin-top: 70px;

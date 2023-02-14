@@ -218,7 +218,7 @@ class Parser {
                     <div class="parts_compoent" frameborder="0">
                         <div style="width: 100%; height: 100%;">
                         <div class="parts_image_bar">
-                            <img class="parts_image" src="../../common/parts/${src}">
+                            <img class="parts_image" src="/common/parts/${src}">
                             <div class="parts_qty"><p style="display: table-cell; vertical-align: middle;">x ${qty}</p></div>
                         </div>
                         <div class="parts_comment_bar">
