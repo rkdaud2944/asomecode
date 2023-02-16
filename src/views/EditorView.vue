@@ -25,7 +25,15 @@
 
         <q-page-container>
             <q-page>
-                <v-ace-editor v-model:value="content" @update:value="onChanged" class="editor" lang="python" theme="monokai" />
+                <v-ace-editor v-model:value="content" 
+                    @update:value="onChanged" 
+                    class="editor" 
+                    lang="python" 
+                    theme="monokai"
+                    :options="{
+                        enableBasicAutocompletion: true,
+                        enableLiveAutocompletion: true
+                    }"/>
             </q-page>
         </q-page-container>
     </q-layout>
@@ -40,6 +48,8 @@ import remoteSerial from "@/globals/remote-serial";
 import LatencyTimer from "@/utils/latency-timer";
 import 'ace-builds/src-noconflict/mode-python';
 import 'ace-builds/src-noconflict/theme-monokai';
+import 'ace-builds/src-noconflict/ext-language_tools';
+
 
 export default {
     mixins: [VueBase],

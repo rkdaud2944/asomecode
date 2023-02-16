@@ -4,7 +4,7 @@
             <q-header elevated class="glossy">
                 <q-toolbar>
                     <q-btn @click="showSideMenu = !showSideMenu" flat dense round aria-label="Menu" icon="menu" />
-                    <q-toolbar-title> Asome IT</q-toolbar-title>
+                    <q-toolbar-title v-bind:style="{flex:'none'}" class="q-btn--actionable" @click="onClickHomeView"> Asome IT</q-toolbar-title>
                     <q-space></q-space>
                 </q-toolbar>
             </q-header>
@@ -25,7 +25,7 @@
 
 <script>
 import VueBase from "@/mixin/vue-base";
-import SideMenu from "@/components/backOffice/SideMenu";``
+import SideMenu from "@/components/backOffice/SideMenu";
 
 export default {
     mixins: [VueBase],
@@ -39,5 +39,11 @@ export default {
             showSideMenu: false,
         };
     },
+    
+    methods: {
+        onClickHomeView() {
+            this.$router.push({ path: '/'});
+        },
+    }
 };
 </script>
