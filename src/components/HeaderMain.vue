@@ -14,7 +14,7 @@
                     <img src="../../public/images/common/home.png" class="ui-img">
                     <p class="ui-left-font" id="fs-one">홈</p>
                 </li>
-                <li class="ui-left-bt" @click="openUrl('editor', '/editor')">
+                <li class="ui-left-bt" @click="openEditor()">
                     <img src="../../public/images/common/editor.png" class="ui-img">
                     <p class="ui-left-font" id="fs-four">소스편집</p>
                 </li>
@@ -62,11 +62,12 @@
 <script>
 import serial from "@/globals/serial";
 import VueBase from "@/mixin/vue-base";
+import bridgeIn from "@/globals/bridge-in";
 import eventbus from "@/globals/eventbus";
 import boardUpdater from "@/globals/board-updater";
 
 export default {
-    mixins: [VueBase],
+    mixins: [VueBase, bridgeIn],
 
     data() {
         return {
@@ -104,6 +105,10 @@ export default {
             // 빌드 실행 시에 필요한 코드
             // this.openUrl('BO', 'app://./index.html?goto=backOffice');
         },
+
+        openEditor() {
+            bridgeIn.openEditor('')
+        }
     }
 }
 </script>
