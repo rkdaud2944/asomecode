@@ -63,10 +63,9 @@ export default {
             savedContent: '',
         }
     },
-
     
     beforeMount(){
-        var keywords = [
+        const keywords = [
             "asomebot",
                 "ready", "align", "angle", "angles", "turn_off", "home", "leg_up", "forward",
                 "backward", "turn_left", "turn_right", "foot_wave", "mouse", "flap", "warigari",
@@ -162,7 +161,7 @@ export default {
                 "is_active",
         ];
 
-        var ace = require("ace-builds/src-noconflict/ext-language_tools.js")
+        const ace = require("ace-builds/src-noconflict/ext-language_tools.js")
         ace.addCompleter({
             getCompletions: function (editor, session, pos, prefix, callback) {
                 var completions = [];
@@ -176,12 +175,7 @@ export default {
                 callback(null, completions);
             }
         })
-
-        
-
-
     },
-
 
     mounted() {
         this.content = localStorage.getItem("code");
