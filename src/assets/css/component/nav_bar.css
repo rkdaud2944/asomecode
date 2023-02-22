@@ -2,11 +2,52 @@
 /* 공용 */
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
-
-ul li {
-    list-style-type: none;
-    float: left;
+.mobile-top{
+    display: inline-block;
+    margin: 5px;
+    margin-top: 30px;
+    width: 50px;
+    height: 22.5px;
+    border: 1px solid white !important;
+    background: #353543;
+    border-radius: 15px;
+    margin: 5px;
+    cursor: pointer;
+    position: relative;
 }
+
+.mobile-bottom{
+    border-top:1px white solid;
+    display: inline-block;
+    margin: 5px;
+    margin-top: 30px;
+    width: 50px;
+}
+
+.menu>.sub{
+    top: 52px;
+    position: relative;
+    display: none;
+    width: 101vw;
+    background: #353543;
+    overflow:hidden;
+    padding: 0;
+    left: 18px;
+}
+
+.menu>.sub li>a{
+    text-decoration:none;
+    color:black;
+}
+
+.menu>.sub.up{
+    height:0px;
+}
+
+.menu>.sub.down{
+    height:100px;
+}
+
 .header-nav{
     display : flex;
     justify-content: space-between;
@@ -33,22 +74,30 @@ ul li {
     display: none;
 }
 .toggle-img{
-    position:relative;
+    position:fixed;
     top: 27px;
     right:10px;
     width: 30px;
 }
+.ui-img{
+    width:17px;
+    right: 25px;
+    position:absolute;
+}
+
+/* 데스크탑 버전 */
+
+@media screen and (min-width: 1052px){
 .ui-img{
     width:20px;
     right:4px;
     bottom:3px;
     position:relative;
 }
-
-/* 데스크탑 버전 */
-
-@media screen and (min-width: 1052px){
-
+ul li {
+    list-style-type: none;
+    float: left;
+}
 .ui-left{
     float: left;
 }
@@ -118,7 +167,6 @@ ul li {
 /* 태블릿 버전 */
 
 @media (min-width: 883px) and (max-width: 1052px){
-   
 .header-nav{
     flex-direction:column;
     align-items: flex-start;
@@ -319,4 +367,5 @@ ul li {
         line-height: 17px;
         text-align: center;
     }
+
 }

@@ -53,9 +53,39 @@
             </ul>
         </div>
 
-        <a class="toggle">
+    <div class="menu toggle" style="width: 100%;">
             <img src="../../public/images/common/mobile_m.png" class="toggle-img">
-        </a>
+            <ul class="sub" style="display: block; text-align: center;">
+                <li class="mobile-top" @click="goTo('/')">
+                    <div>
+                        <img src="../../public/images/common/home.png" class="ui-img">
+                        <p class="ui-left-font" id="fs-one">홈</p>
+                    </div>
+                </li>
+                <li class="mobile-top" @click="connect()">
+                    <p class="ui-left-font" id="fs-four">연결하기</p>
+                </li>          
+                <li class="mobile-top" @click="openUrl('editor', '/editor')">
+                    <p class="ui-left-font" id="fs-four">소스편집</p>
+                </li>
+                <li class="mobile-top" @click="stop()">
+                    <p class="ui-left-font" id="fs-three">멈추기</p>
+                </li>
+
+                <li class="ui-right-bt mobile-bottom" @click="reboot()">
+                    <p class="ui-left-font-danger" id="fs-three">재부팅</p>
+                </li>
+                <li class="ui-right-bt mobile-bottom" @click="format()">
+                    <p class="ui-left-font-danger" id="fs-two">포맷</p>
+                </li>
+                <li class="ui-right-bt mobile-bottom" @click="update()">
+                    <p class="ui-left-font-danger" id="fs-four">업데이트</p>
+                </li>
+                <li class="ui-right-bt mobile-bottom" @click="openUrl('help', '/help')">
+                    <p class="ui-left-font-danger" id="fs-three">HELP</p>
+                </li>
+            </ul>
+        </div>
     </nav>
 </template>
 
@@ -83,12 +113,27 @@ export default {
             this.$q.notify('어썸보드 연결이 끊어졌습니다.');
         });
 
-        const toggleBtn = document.querySelector('.toggle');
-        const menu = document.querySelector('.menulist');
 
-        toggleBtn.addEventListener('click', () => {
-            menu.classList.toggle('active');
-        })
+        const menu=document.querySelector(".menu");
+        const subBar=document.querySelector(".menu>.sub");
+
+let subToggle=true
+
+function slide_menu(){
+  if(subToggle){
+    subBar.style.display="block";
+    subBar.classList.remove("up");
+    subBar.classList.add("down");
+    subToggle=!subToggle;
+  }else{
+    subBar.style.display="none";
+    subBar.classList.remove("down");
+    subBar.classList.add("up");
+    subToggle=!subToggle;
+  }
+  console.log(subBar.classList);
+}
+menu.addEventListener("click",slide_menu);
     },
 
     methods: {
