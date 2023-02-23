@@ -44,9 +44,9 @@
                 <li @click="openUrl('AsomeBlock', '/AsomeBlock/AsomeBlock.html?language=Korean')">
                     Block
                 </li>
-                <li @click="openUrl('metaverse', 'http://www.metalive.be:13300/')">
+                <!-- <li @click="openUrl('metaverse', 'http://www.metalive.be:13300/')">
                     M
-                </li>
+                </li> -->
                 <li @click="gotoBackOffice">
                     BO
                 </li>
@@ -55,35 +55,59 @@
 
     <div class="menu toggle" style="width: 100%;">
             <img src="../../public/images/common/mobile_m.png" class="toggle-img">
-            <ul class="sub" style="display: block; text-align: center;">
-                <li class="mobile-top" @click="goTo('/')">
-                    <div>
-                        <img src="../../public/images/common/home.png" class="ui-img">
-                        <p class="ui-left-font" id="fs-one">홈</p>
-                    </div>
-                </li>
-                <li class="mobile-top" @click="connect()">
-                    <p class="ui-left-font" id="fs-four">연결하기</p>
-                </li>          
-                <li class="mobile-top" @click="openUrl('editor', '/editor')">
-                    <p class="ui-left-font" id="fs-four">소스편집</p>
-                </li>
-                <li class="mobile-top" @click="stop()">
-                    <p class="ui-left-font" id="fs-three">멈추기</p>
-                </li>
-
-                <li class="ui-right-bt mobile-bottom" @click="reboot()">
-                    <p class="ui-left-font-danger" id="fs-three">재부팅</p>
-                </li>
-                <li class="ui-right-bt mobile-bottom" @click="format()">
-                    <p class="ui-left-font-danger" id="fs-two">포맷</p>
-                </li>
-                <li class="ui-right-bt mobile-bottom" @click="update()">
-                    <p class="ui-left-font-danger" id="fs-four">업데이트</p>
-                </li>
-                <li class="ui-right-bt mobile-bottom" @click="openUrl('help', '/help')">
-                    <p class="ui-left-font-danger" id="fs-three">HELP</p>
-                </li>
+            <ul class="sub" style="text-align: center;">
+                <div>
+                    <li class="mobile-top" @click="goTo('/')">
+                        <div>
+                            <img src="../../public/images/common/home.png" class="ui-img">
+                            <p class="ui-left-font" id="fs-one">홈</p>
+                        </div>
+                    </li>
+                    <li class="mobile-top" @click="connect()">
+                        <div>
+                            <img src="../../public/images/common/connect.png" class="ui-img2">
+                            <p class="ui-left-font" id="fs-four">연결하기</p>
+                        </div>
+                    </li>          
+                    <li class="mobile-top" @click="openUrl('editor', '/editor')">
+                        <div>
+                            <img src="../../public/images/common/editor.png" class="ui-img2">
+                            <p class="ui-left-font" id="fs-four">소스편집</p>
+                        </div>
+                    </li>
+                    <li class="mobile-top" @click="stop()">
+                        <div>
+                            <img src="../../public/images/common/stop.png" class="ui-img2" style="top: 2px;">
+                            <p class="ui-left-font" id="fs-three">멈추기</p>
+                        </div>
+                    </li>
+                </div>
+                <div>
+                    <li class="mobile-bottom" @click="reboot()">
+                        <div>
+                            <img src="../../public/images/common/reboot.png" class="ui-img2" style="top: 2px;">
+                            <p class="ui-bottom-font" id="fs-three">재부팅</p>
+                        </div>
+                    </li>
+                    <li class="mobile-bottom" @click="format()">
+                        <div>
+                            <img src="../../public/images/common/format.png" class="ui-img2" style="top: 2px;">
+                            <p class="ui-bottom-font" id="fs-two">포맷</p>
+                        </div>
+                    </li>
+                    <li class="mobile-bottom" @click="update()">
+                        <div>
+                            <img src="../../public/images/common/update.png" class="ui-img2" style="top: 2px;">
+                            <p class="ui-bottom-font" id="fs-four">업데이트</p>
+                        </div>
+                    </li>
+                    <li class="mobile-bottom" @click="openUrl('help', '/help')">
+                        <div>
+                            <img src="../../public/images/common/help.png" class="ui-img2" style="top: 2px;">
+                            <p class="ui-bottom-font" id="fs-three">HELP</p>
+                        </div>
+                    </li>
+                </div>
             </ul>
         </div>
     </nav>
