@@ -25,7 +25,8 @@
 
         <q-page-container>
             <q-page>
-                <v-ace-editor v-model:value="content" 
+                <v-ace-editor
+                    v-model:value="content" 
                     @update:value="onChanged" 
                     class="editor" 
                     lang="python" 
@@ -61,6 +62,119 @@ export default {
             content: '',
             savedContent: '',
         }
+    },
+    
+    beforeMount(){
+        const keywords = [
+            "asomebot",
+                "ready", "align", "angle", "angles", "turn_off", "home", "leg_up", "forward",
+                "backward", "turn_left", "turn_right", "foot_wave", "mouse", "flap", "warigari",
+                "tock", "tick_tock", "wiggle", "ballet", "left_swing", "right_swing", "yaho", "swing", "moonwalk",
+
+            "asomecar",
+                "ready", "stop", "to_left", "to_right",
+
+            "boot",
+                "random", "delay", "OutputPin", "InputPin", "InputPullUp", "AnalogPin", "ServoPin", "turnoff_pins",
+            
+            "button",
+                "create", "is_clicked", "do_click", "setOnClick",
+            
+            "cannon",
+                "show", "set_angle", "set_power", "power_x", "power_y", "bullet_moveto", "target_moveto", "fire", "target_explode",
+
+            "car_race",
+                "show_time", "start", "move", "is_finished",
+            
+            "clock",
+                "set", "datetime", "year", "month", "day", "week", "hour", "minute", "second", "millis", "text",
+
+            "dth_screen",
+                "display",
+
+            "dht11",
+                "measure", "temperature", "humidity",
+            
+            "dice",
+                "roll",
+
+            "disk",
+                "list", "view", "run",
+            
+            "door",
+                "close",
+
+            "flag_game",
+                'join', "is_ready", "count_down", "win",
+
+            "hcsr04",
+                "get_distance",
+            
+            "internet",
+                "connect", "ifconfig", "open_ap", "get_http", "get_time", "send_msg",
+            
+            "interval",
+            
+            "line_sensor",
+                "ready", "read",
+
+            "lunar_lander",
+                "ship_move", "ship_speed_up", "ship_speed_down", "fule_is_empty", "engine_on", "engine_off", "is_landed", "ship_explode",
+            
+            "maze",
+                "move_xy", "can_move",
+
+            "maze_maker",
+                "set_cell_type", "get_left", "get_right", "get_up", "get_down", "find_next_move",
+
+            "music",
+                "get_tone", "tone", "mute", "note",
+
+            "rotary",
+                "direction", "has_changed",
+
+            "scheduler",
+                "check", "wait",
+
+            "sliding_puzzle",
+                "blank_left", "blank_right", "blank_up", "blank_down",
+
+            "sound_effect",
+                "level_up", "so_sad", "ariel", "laugh", "sad", "victory", "get_ready",
+
+            "spacecraft",
+                "move_left", "move_right", "set_speed",
+
+            "stove",
+                "on", "off",
+
+            "timer",
+                "number", "update", "set_mode", "mode", "set_value", "value", "duration",
+
+            "tm1637",
+                "set_brightness", "write_str", "time",
+
+            "udp_socket",
+                "read_text", "send_text",
+
+            "vibration_sensor",
+                "is_active",
+        ];
+
+        const ace = require("ace-builds/src-noconflict/ext-language_tools.js")
+        ace.addCompleter({
+            getCompletions: function (editor, session, pos, prefix, callback) {
+                var completions = [];
+                keywords.forEach(function (w) {
+                    completions.push({
+                        value: w,
+                        meta: "AsomeIT",
+                        score: 1000,
+                    });
+                });
+                callback(null, completions);
+            }
+        })
     },
 
     mounted() {
