@@ -24,10 +24,15 @@ export default {
 
         goTo(path, params) {
             if (params) {
-                router.push({path: path, query: params});
+                router.push({ path: path, query: params });
             } else {
-                router.push({path: path});
+                router.push({ path: path });
             }
+        },
+
+        openRouterPath(path) {
+            let route = router.resolve({ path: path });
+            window.open(route.href);
         },
 
         openUrl(name, url) {
