@@ -1,19 +1,32 @@
 <template>
     <q-layout class="body" view="lhh LpR lff" container sclass="shadow-2 rounded-borders">
-        <q-header reveal class="header bg-black">
+        <q-header reveal class="header" style="background: #353543;">
             <q-toolbar>
-                <q-toolbar-title>
-                    <div class="row" style="width: 100vh; height: 64px">
-                        <q-btn @click="run" icon="play_arrow" class="q-mt-md q-mb-md" color="primary" label="Run" />
-                        <q-btn @click="stop()" icon="stop_circle" class="q-mt-md q-mb-md q-ml-sm" color="deep-orange" label="Stop" />
+                    <ul style="width: auto; height: 30px; float: left; overflow: hidden;">
+                       
+                        <li class="button" @click="run" label="Run">
+                            <img src="../../public/images/common/editor/run.png" class="button-img">
+                        </li>
+                        <li class="button" @click="stop()" label="Stop">
+                            <img src="../../public/images/common/editor/stop.png" class="button-img">
+                        </li>
+                        <li class="button" @click="upload" label="Upload">
+                            <img src="../../public/images/common/editor/update.png" class="button-img">
+                        </li>
+                        <li class="button" @click="open" label="Open">
+                            <img src="../../public/images/common/editor/open.png" class="button-img">
+                        </li>
+                        <li class="button" @click="save" label="Save">
+                            <img src="../../public/images/common/editor/save.png" class="button-img">
+                        </li>
 
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
+                        <!-- <q-btn @click="run" icon="play_arrow" class="q-mt-md q-mb-md" color="primary" label="Run" />
+                        <q-btn @click="stop()" icon="stop_circle" class="q-mt-md q-mb-md q-ml-sm" color="deep-orange" label="Stop" />     
                         <q-btn @click="upload" icon="upload_file" class="q-mt-md q-mb-md" color="secondary" label="Upload" />
                         <q-btn @click="open" icon="folder_open" class="q-mt-md q-mb-md q-ml-sm" color="purple" label="Open" />
-                        <q-btn @click="save" icon="save" class="q-mt-md q-mb-md q-ml-sm" color="brown" label="Save" />
-                    </div>
-                </q-toolbar-title>
+                        <q-btn @click="save" icon="save" label="Save" /> -->
+                        </ul>
             </q-toolbar>
         </q-header>
 
