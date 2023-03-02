@@ -1,9 +1,6 @@
 .header {
     height: 53px;
 }
-.footer {
-    height: 64px;
-}
 
 .body {
     width: 100vw;
@@ -12,7 +9,7 @@
 }
 
 .editor {
-    height: calc(100vh - 128px);
+    height: calc(100vh);
 }
 
 .button-img {
@@ -38,4 +35,11 @@
 ul li {
     list-style-type: none;
     float: left;
+}
+
+.header-box{
+    width: auto;
+    height: 30px;
+    float: left;
+    overflow: hidden;
 }

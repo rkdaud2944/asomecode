@@ -2,8 +2,7 @@
     <q-layout class="body" view="lhh LpR lff" container sclass="shadow-2 rounded-borders">
         <q-header reveal class="header" style="background: #353543;">
             <q-toolbar>
-                    <ul style="width: auto; height: 30px; float: left; overflow: hidden;">
-                       
+                    <ul class="header-box">
                         <li class="button" @click="run" label="Run">
                             <img src="../../public/images/common/editor/run.png" class="button-img">
                         </li>
@@ -19,22 +18,9 @@
                         <li class="button" @click="save" label="Save">
                             <img src="../../public/images/common/editor/save.png" class="button-img">
                         </li>
-
-
-                        <!-- <q-btn @click="run" icon="play_arrow" class="q-mt-md q-mb-md" color="primary" label="Run" />
-                        <q-btn @click="stop()" icon="stop_circle" class="q-mt-md q-mb-md q-ml-sm" color="deep-orange" label="Stop" />     
-                        <q-btn @click="upload" icon="upload_file" class="q-mt-md q-mb-md" color="secondary" label="Upload" />
-                        <q-btn @click="open" icon="folder_open" class="q-mt-md q-mb-md q-ml-sm" color="purple" label="Open" />
-                        <q-btn @click="save" icon="save" label="Save" /> -->
-                        </ul>
+                    </ul>
             </q-toolbar>
         </q-header>
-
-        <q-footer class="footer">
-            <q-toolbar>
-                <q-toolbar-title></q-toolbar-title>
-            </q-toolbar>
-        </q-footer>
 
         <q-page-container>
             <q-page>
