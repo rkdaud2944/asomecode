@@ -69,7 +69,7 @@
                             <p class="ui-left-font" id="fs-four">연결하기</p>
                         </div>
                     </li>          
-                    <li class="ui-left-bt" @click="openEditor()">
+                    <li class="mobile-top" @click="openEditor()">
                         <div>
                             <img src="../../public/images/common/editor.png" class="ui-img2">
                             <p class="ui-left-font" id="fs-four">소스편집</p>
