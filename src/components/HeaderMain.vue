@@ -69,7 +69,7 @@
                             <p class="ui-left-font" id="fs-four">연결하기</p>
                         </div>
                     </li>          
-                    <li class="mobile-top" @click="openUrl('editor', '/editor')">
+                    <li class="mobile-top" @click="openEditor()">
                         <div>
                             <img src="../../public/images/common/editor.png" class="ui-img2">
                             <p class="ui-left-font" id="fs-four">소스편집</p>
@@ -137,6 +137,7 @@ export default {
             this.btConnectColor = "grey";
             this.$q.notify('어썸보드 연결이 끊어졌습니다.');
         });
+        
 
 
         const menu=document.querySelector(".menu");
@@ -166,6 +167,13 @@ menu.addEventListener("click",slide_menu);
 
         update() {
             boardUpdater.start();
+        },
+
+        gotoBackOffice() {
+            this.$router.push("/backOffice");
+
+            // 빌드 실행 시에 필요한 코드
+            // this.openUrl('BO', 'app://./index.html?goto=backOffice');
         },
 
         openEditor() {
