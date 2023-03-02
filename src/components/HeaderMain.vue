@@ -14,7 +14,7 @@
                     <img src="../../public/images/common/home.png" class="ui-img">
                     <p class="ui-left-font" id="fs-one">홈</p>
                 </li>
-                <li class="ui-left-bt" @click="openUrl('editor', '/editor')">
+                <li class="ui-left-bt" @click="openEditor()">
                     <img src="../../public/images/common/editor.png" class="ui-img">
                     <p class="ui-left-font" id="fs-four">소스편집</p>
                 </li>
@@ -69,7 +69,7 @@
                             <p class="ui-left-font" id="fs-four">연결하기</p>
                         </div>
                     </li>          
-                    <li class="mobile-top" @click="openUrl('editor', '/editor')">
+                    <li class="ui-left-bt" @click="openEditor()">
                         <div>
                             <img src="../../public/images/common/editor.png" class="ui-img2">
                             <p class="ui-left-font" id="fs-four">소스편집</p>
@@ -118,6 +118,7 @@ import serial from "@/globals/serial";
 import VueBase from "@/mixin/vue-base";
 import eventbus from "@/globals/eventbus";
 import boardUpdater from "@/globals/board-updater";
+import bridgeIn from "@/globals/bridge-in";
 
 export default {
     mixins: [VueBase],
@@ -136,6 +137,7 @@ export default {
             this.btConnectColor = "grey";
             this.$q.notify('어썸보드 연결이 끊어졌습니다.');
         });
+        
 
 
         const menu=document.querySelector(".menu");
@@ -173,6 +175,10 @@ menu.addEventListener("click",slide_menu);
             // 빌드 실행 시에 필요한 코드
             // this.openUrl('BO', 'app://./index.html?goto=backOffice');
         },
+
+        openEditor() {
+            bridgeIn.openEditor('')
+        }
     }
 }
 </script>
