@@ -53,9 +53,9 @@
             </ul>
         </div>
 
-    <div class="menu toggle" style="width: 100%;">
+    <div class="menu toggle widht-100">
             <img src="../../public/images/common/mobile_m.png" class="toggle-img">
-            <ul class="sub" style="text-align: center;">
+            <ul class="sub align-center">
                 <div>
                     <li class="mobile-top" @click="goTo('/')">
                         <div>
@@ -77,7 +77,7 @@
                     </li>
                     <li class="mobile-top" @click="stop()">
                         <div>
-                            <img src="../../public/images/common/stop.png" class="ui-img2" style="top: 2px;">
+                            <img src="../../public/images/common/stop.png" class="ui-img2 mobile-top-margin">
                             <p class="ui-left-font" id="fs-three">멈추기</p>
                         </div>
                     </li>
@@ -85,25 +85,25 @@
                 <div>
                     <li class="mobile-bottom" @click="reboot()">
                         <div>
-                            <img src="../../public/images/common/reboot.png" class="ui-img2" style="top: 2px;">
+                            <img src="../../public/images/common/reboot.png" class="ui-img2 mobile-top-margin">
                             <p class="ui-bottom-font" id="fs-three">재부팅</p>
                         </div>
                     </li>
                     <li class="mobile-bottom" @click="format()">
                         <div>
-                            <img src="../../public/images/common/format.png" class="ui-img2" style="top: 2px;">
+                            <img src="../../public/images/common/format.png" class="ui-img2 mobile-top-margin">
                             <p class="ui-bottom-font" id="fs-two">포맷</p>
                         </div>
                     </li>
                     <li class="mobile-bottom" @click="update()">
                         <div>
-                            <img src="../../public/images/common/update.png" class="ui-img2" style="top: 2px;">
+                            <img src="../../public/images/common/update.png" class="ui-img2 mobile-top-margin">
                             <p class="ui-bottom-font" id="fs-four">업데이트</p>
                         </div>
                     </li>
                     <li class="mobile-bottom" @click="openUrl('help', '/help')">
                         <div>
-                            <img src="../../public/images/common/help.png" class="ui-img2" style="top: 2px;">
+                            <img src="../../public/images/common/help.png" class="ui-img2 mobile-top-margin">
                             <p class="ui-bottom-font" id="fs-three">HELP</p>
                         </div>
                     </li>
