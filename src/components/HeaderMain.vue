@@ -53,9 +53,9 @@
             </ul>
         </div>
 
-    <div class="menu toggle widht-100">
-            <img src="../../public/images/common/mobile_m.png" class="toggle-img">
-            <ul class="sub align-center">
+    <div class="menu widht-100">
+            <img src="../../public/images/common/mobile_m.png" class="toggle toggle-img">
+            <ul class="align-center sub">
                 <div>
                     <li class="mobile-top" @click="goTo('/')">
                         <div>
@@ -140,7 +140,7 @@ export default {
         
 
 
-        const menu=document.querySelector(".menu");
+        const menu=document.querySelector(".toggle");
         const subBar=document.querySelector(".menu>.sub");
 
 let subToggle=true
@@ -151,8 +151,8 @@ function slide_menu(){
     subBar.classList.remove("up");
     subBar.classList.add("down");
     subToggle=!subToggle;
+    
   }else{
-    subBar.style.display="none";
     subBar.classList.remove("down");
     subBar.classList.add("up");
     subToggle=!subToggle;
@@ -173,7 +173,7 @@ menu.addEventListener("click",slide_menu);
             this.$router.push("/backOffice");
 
             // 빌드 실행 시에 필요한 코드
-            // this.openUrl('BO', 'app://./index.html?goto=backOffice');
+            this.openUrl('BO', 'app://./index.html?goto=backOffice');
         },
 
         openEditor() {
