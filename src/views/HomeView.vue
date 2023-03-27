@@ -11,7 +11,7 @@
             <ImageButton :src="'/images/common/header_button_image/bt_community.png'" />
             <ImageButton :src="'/images/common/header_button_image/bt_faq.png'" />
         </div>
-    </div>
+    </div> 
 
     <div class="what-is-asomeit" style="height: 170px;">
         <img src="/images/korea/what_is_asomeit.png">
@@ -75,9 +75,3 @@ export default {
 </script>
 
 <style scoped src="@/assets/css/component/homeview.css"/>
-<style>
-body {
-  overflow: hidden;
-  height: 100%;
-}
-</style>
