@@ -75,9 +75,3 @@ export default {
 </script>
 
 <style scoped src="@/assets/css/component/homeview.css"/>
-<style>
-body {
-  overflow: hidden;
-  height: 100%;
-}
-</style>
