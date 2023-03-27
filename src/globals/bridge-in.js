@@ -1,5 +1,6 @@
 import serial from "@/globals/serial";
 import router from "@/router";
+import windows from "@/globals/windows";
 
 /**
  * App to Web 브릿지 메시지
@@ -35,8 +36,7 @@ const bridge = {
     openEditor(code) {
         console.log(code);
         localStorage.setItem("code", code);
-        let route = router.resolve({ path: "/editor" });
-        window.open(route.href);
+        windows.open("editor", "/editor");
     },
 
     setWifiInfo() {
