@@ -11,7 +11,7 @@
             <ImageButton :src="'/images/common/header_button_image/bt_community.png'" />
             <ImageButton :src="'/images/common/header_button_image/bt_faq.png'" />
         </div>
-    </div>
+    </div> 
 
     <div class="what-is-asomeit" style="height: 170px;">
         <img src="/images/korea/what_is_asomeit.png">

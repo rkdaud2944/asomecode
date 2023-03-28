@@ -6,20 +6,19 @@
     </div>
 
     <div class="row">
-        <div class="col-3" style="height:904px;">
+        <div class="col-3 scroll" :class="{sidefixed: scrollPosition > 10}">
             <div class="flex flex-center title-box">
-                <a href="javascript:history.back()" class="gohome"><img
-                        src="../../../public/images/common/p3_list.png"></a>
+                <a href="javascript:history.back()" class="gohome" >
+                    <img src="../../../public/images/common/p3_list.png">
+                </a>
                 <p class="title-style">목차</p>
             </div>
-            <div class="test">
-                <div @click="moveTo(title.tag)" :class="`title`" v-for="(title, index) in titles" :key="index">
-                    {{title.name}}
-                </div>
+            <div @click="moveTo(title.tag)" :class="`title`" v-for="(title, index) in titles" :key="index">
+                {{title.name}}
             </div>
         </div>
 
-        <div class="col-9 contents"><br>
+        <div class="col-9 contents" :class="{c9contents: scrollPosition > 10}"><br>
             <div class="markdown_output" v-html="output"></div>
         </div>
     </div>
@@ -31,17 +30,18 @@ import markdown from "@/utils/markdown";
 import apiLesson from "@/api/lesson";
 
 export default {
-
     data() {
         return {
             lesson: {},
             titles: [],
             output: null,
+            scrollPosition: null,
         };
     },
 
     mounted() {
         this.getLesson(this.$route.query.id)
+        window.addEventListener('scroll', this.updateScroll);
     },
 
     updated() {
@@ -49,6 +49,9 @@ export default {
     },
 
     methods: {
+        updateScroll(){
+            this.scrollPosition = window.scrollY
+        },
         moveTo(tag) {
             const element = window.document.getElementById(tag);
             console.log(tag, element);
