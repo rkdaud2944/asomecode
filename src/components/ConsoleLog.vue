@@ -1,17 +1,19 @@
 <template>
-    <div ref="console" class="q-pa-md" style="overflow-y: scroll; height:220px;">
-
-        <q-page-sticky :offset="[20, -40]">
-            <q-expansion-item class="shadow-1 overflow-hidden" dense
-            style="border-radius: 30px; width: 40px;"
-            switch-toggle-side
-            header-class="bg-white text-black"
-            @click="onConsoleWindowControl">
-            </q-expansion-item>
-        </q-page-sticky>
-
-        <div v-for="(row, index) in rows" :key="index" v-html="row"></div>
-    </div>
+    <div class="resizer" @mousedown="startResize"></div>
+        <div>
+            <div :style="{ height: consoleHeight + 'px' }" ref="console resizable" class="q-pa-md">
+                <q-page-sticky :offset="[20, -40]">
+                    <q-expansion-item v-model="arrow" class="shadow-1 overflow-hidden" dense
+                        style="border-radius: 30px; width: 40px;"
+                        switch-toggle-side
+                        header-class="bg-white text-black"
+                        @click="onConsoleWindowControl">
+                    </q-expansion-item>
+                </q-page-sticky>
+                <div v-for="(row, index) in rows" :key="index" v-html="row">
+                </div>
+            </div>
+        </div>
     <q-input @keydown.enter.prevent="send" filled v-model="text">
         <template v-slot:prepend>
             <q-icon name="keyboard_arrow_right" />
@@ -24,6 +26,7 @@ import eventbus from "@/globals/eventbus";
 import serial from "@/globals/serial";
 
 export default {
+    
     data() {
         return {
             timer: null,
@@ -31,6 +34,10 @@ export default {
             rows: [],
             text: "",
             consoleEnabled: true,
+            resizing: false,
+            consoleHeight: 220,
+            startY: 0,
+            arrow: false,
         };
     },
 
@@ -78,7 +85,36 @@ export default {
     },
 
     methods: {
+        onConsoleWindowControl() {
+            if (this.consoleHeight >= 51) {
+                this.consoleEnabled = true;
+            } 
+            else {
+                this.consoleEnabled = false;
+            }
+            this.consoleHeight = this.consoleEnabled ? 50 : 220;          
+        },
+        startResize(e) {
+            this.resizing = true
+            this.startY = e.clientY
+            window.addEventListener('mousemove', this.resizeHandler)
+            window.addEventListener('mouseup', this.stopResize)
+        },
+        resizeHandler(e) {
+            if (this.resizing) {
+                const consoleHeight = this.consoleHeight - (e.clientY - this.startY)
+                this.consoleHeight = Math.max(100, consoleHeight)
+                this.startY = e.clientY
+            }
+        },
+        stopResize() {
+            this.resizing = false
+            window.removeEventListener('mousemove', this.resizeHandler)
+            window.removeEventListener('mouseup', this.stopResize)
+        }
+        ,
         send() {
+
             if (this.text.startsWith("/list")) {
                 serial.listFiles();
                 this.text = "";
@@ -94,17 +130,14 @@ export default {
             serial.writeLn(this.text);
             this.text = "";
         },
+    },
 
-        onConsoleWindowControl() {
-            if (this.consoleEnabled) {
-                this.$refs.console.style.height = '50px'
-                this.consoleEnabled = false
-            } else {
-                this.$refs.console.style.height = '220px'
-                this.consoleEnabled = true
-            }
+    watch: {
+        consoleHeight : function(value){
+            if (value >= 51) this.arrow = false;
         },
-    }
+    },
 };
 </script>
 
+<style scoped src="@/assets/css/component/console.css"/>
