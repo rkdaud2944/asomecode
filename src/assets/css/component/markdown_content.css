@@ -53,7 +53,7 @@
 }
 
 .markdown_output .function_btn {
-    background-image: url(/public/common/images/blockcode-1.png);
+    background-image: url(/src/assets/image/blockcode-1.png);
     background-color: #E7F0ED;
     background-repeat: no-repeat;
     width: 100%;

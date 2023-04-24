@@ -54,6 +54,7 @@ const bridge = {
     },
 
     presentSession(present, language) {
+        console.log("present : "+present)
         localStorage.setItem("stage", present);
         window.open(`/AsomeBlock/BlockCoding.html?language=${language}`)
     }
