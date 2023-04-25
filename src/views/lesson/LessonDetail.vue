@@ -2,7 +2,7 @@
     <div class="header nav-padding">
         <a href="/">
             <!-- <img src="/images/common/logom.png" class="logo" /> -->
-            <img src="logom" class="slogo"/>
+            <img :src="logom" class="slogo"/>
         </a>
     </div>
 
@@ -28,9 +28,9 @@
 
 <script>
 /* eslint-disable */
+import images from "@/assets/images";
 import markdown from "@/utils/markdown";
 import apiLesson from "@/api/lesson";
-import images from "@/assets/image";
 
 export default {
     data() {

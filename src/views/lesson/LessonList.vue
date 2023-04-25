@@ -2,7 +2,7 @@
     <div class="header nav-padding">
         <a href="/">
             <!-- <img src="/images/common/logom.png" class="subject-logo"/> -->
-            <img src="logom" class="subject-logo"/>
+            <img :src="logom" class="subject-logo"/>
         </a>
     </div>
 
@@ -12,7 +12,7 @@
             <br>
             <h4 class="subject-in-title_eng">{{ subject.subTitle }}</h4>
             <!-- <img src="../../../public/images/common/asomebot.png" class="asomebot"> -->
-            <img src="asomebot" class="asomebot"/>
+            <img :src="asomebot" class="asomebot"/>
         </div>
 
         <div class="subject-size subject-margin">
@@ -33,9 +33,9 @@
 </template>
 
 <script>
+import images from "@/assets/images";
 import VueBase from '@/mixin/vue-base';
 import apiSubject from "@/api/subject";
-import images from "@/assets/image";
 
 export default {
     mixins: [VueBase],

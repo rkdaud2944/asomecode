@@ -1,30 +1,24 @@
 <template>
     <nav class="header-nav">
         <div class="logo_box">
-            <!-- <img src="../../public/images/common/logom.png" class="main-logo"> -->
-            <!-- <img :src="require('@/assets/images/my-image.png')" alt="logom"> -->
             <img :src="logom" class="main-logo"/>
         </div>
 
         <div class="menulist">
             <ul class="ui-left">
                 <li class="ui-left-bt" @click="connect()">
-                    <!-- <img src="../../public/images/common/connect.png" class="ui-img"> -->
                     <img :src="connect"  class="ui-img"/>
                     <p class="ui-left-font" id="fs-four">연결하기</p>
                 </li>
                 <li class="ui-left-bt" @click="goTo('/')">
-                    <!-- <img src="../../public/images/common/home.png" class="ui-img"> -->
                     <img :src="home"  class="ui-img"/>
                     <p class="ui-left-font" id="fs-one">홈</p>
                 </li>
                 <li class="ui-left-bt" @click="openEditor()">
-                    <!-- <img src="../../public/images/common/editor.png" class="ui-img"> -->
                     <img :src="editor" class="ui-img"/>
                     <p class="ui-left-font" id="fs-four">소스편집</p>
                 </li>
                 <li class="ui-left-bt" @click="stop()">
-                    <!-- <img src="../../public/images/common/stop.png" class="ui-img"> -->
                     <img :src="stop" class="ui-img"/>
                     <p class="ui-left-font" id="fs-three">멈추기</p>
                 </li>
@@ -32,31 +26,24 @@
 
             <ul class="ui-right">
                 <li class="ui-right-bt" @click="reboot()">
-                    <!-- <img src="../../public/images/common/reboot.png" class="ui-img"> -->
                     <img :src="reboot" class="ui-img"/>
                     <p class="ui-right-font" id="fs-three">재부팅</p>
                 </li>
                 <li class="ui-right-bt" @click="format()">
-                    <!-- <img src="../../public/images/common/format.png" class="ui-img"> -->
                     <img :src="format" class="ui-img"/>
                     <p class="ui-right-font" id="fs-two">포맷</p>
                 </li>
                 <li class="ui-right-bt" @click="update()">
-                    <!-- <img src="../../public/images/common/update.png" class="ui-img"> -->
                     <img :src="updateImg" class="ui-img"/>
                     <p class="ui-right-font" id="fs-four">업데이트</p>
                 </li>
                 <li class="ui-right-bt" @click="openRouterPath('/help')">
-                    <!-- <img src="../../public/images/common/help.png" class="ui-img"> -->
                     <img :src="help" class="ui-img"/>
                     <p class="ui-right-font" id="fs-three">HELP</p>
                 </li>
                 <li @click="openUrl('AsomeBlock', '/AsomeBlock/AsomeBlock.html?language=Korean')">
                     Block
                 </li>
-                <!-- <li @click="openUrl('metaverse', 'http://www.metalive.be:13300/')">
-                    M
-                </li> -->
                 <li @click="openRouterPath('/backOffice')">
                     BO
                 </li>
@@ -64,34 +51,29 @@
         </div>
 
     <div class="menu widht-100">
-            <!-- <img src="../../public/images/common/mobile_m.png" class="toggle toggle-img"> -->
             <img :src="mobileM" class="toggle toggle-img"/>
             <ul class="align-center sub">
                 <div>
                     <li class="mobile-top" @click="goTo('/')">
                         <div>
-                            <!-- <img src="../../public/images/common/home.png" class="ui-img"> -->
                             <img :src="home" class="ui-img"/>
                             <p class="ui-left-font" id="fs-one">홈</p>
                         </div>
                     </li>
                     <li class="mobile-top" @click="connect()">
                         <div>
-                            <!-- <img src="../../public/images/common/connect.png" class="ui-img2"> -->
                             <img :src="connect" class="ui-img2"/>
                             <p class="ui-left-font" id="fs-four">연결하기</p>
                         </div>
                     </li>          
                     <li class="mobile-top" @click="openEditor()">
                         <div>
-                            <!-- <img src="../../public/images/common/editor.png" class="ui-img2"> -->
                             <img :src="editor" class="ui-img2"/>
                             <p class="ui-left-font" id="fs-four">소스편집</p>
                         </div>
                     </li>
                     <li class="mobile-top" @click="stop()">
                         <div>
-                            <!-- <img src="../../public/images/common/stop.png" class="ui-img2 mobile-top-margin"> -->
                             <img :src="stop" class="ui-img2 mobile-top-margin"/>
                             <p class="ui-left-font" id="fs-three">멈추기</p>
                         </div>
@@ -100,28 +82,24 @@
                 <div>
                     <li class="mobile-bottom" @click="reboot()">
                         <div>
-                            <!-- <img src="../../public/images/common/reboot.png" class="ui-img2 mobile-top-margin"> -->
                             <img :src="reboot" class="ui-img2 mobile-top-margin"/>
                             <p class="ui-bottom-font" id="fs-three">재부팅</p>
                         </div>
                     </li>
                     <li class="mobile-bottom" @click="format()">
                         <div>
-                            <!-- <img src="../../public/images/common/format.png" class="ui-img2 mobile-top-margin"> -->
                             <img :src="format" class="ui-img2 mobile-top-margin"/>
                             <p class="ui-bottom-font" id="fs-two">포맷</p>
                         </div>
                     </li>
                     <li class="mobile-bottom" @click="update()">
                         <div>
-                            <!-- <img src="../../public/images/common/update.png" class="ui-img2 mobile-top-margin"> -->
                             <img :src="updateImg" class="ui-img2 mobile-top-margin"/>
                             <p class="ui-bottom-font" id="fs-four">업데이트</p>
                         </div>
                     </li>
                     <li class="mobile-bottom" @click="openUrl('help', '/help')">
                         <div>
-                            <!-- <img src="../../public/images/common/help.png" class="ui-img2 mobile-top-margin"> -->
                             <img :src="help" class="ui-img2 mobile-top-margin"/>
                             <p class="ui-bottom-font" id="fs-three">HELP</p>
                         </div>
@@ -133,13 +111,12 @@
 </template>
 
 <script>
+import images from "@/assets/images";
 import serial from "@/globals/serial";
 import VueBase from "@/mixin/vue-base";
 import bridgeIn from "@/globals/bridge-in";
 import eventbus from "@/globals/eventbus";
 import boardUpdater from "@/globals/board-updater";
-
-import images from "@/assets/image.js";
 
 export default {
     mixins: [VueBase, bridgeIn],
