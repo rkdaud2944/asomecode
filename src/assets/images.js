@@ -33,6 +33,7 @@ import libraryHover from "@/assets/images/library-hover.png";
 import faq from "@/assets/images/faq.png";
 import faqHover from "@/assets/images/faq-hover.png";
 import asomeitQuestionMark from "@/assets/images/asomeit-question-mark.png";
+import contentsList from "@/assets/images/contents-list.png";
 
 export default {
     logom,
@@ -70,5 +71,6 @@ export default {
     faq,
     faqHover,
     asomeitQuestionMark,
+    contentsList
 
 };

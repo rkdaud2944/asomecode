@@ -11,6 +11,7 @@
             <div class="flex flex-center title-box">
                 <a href="javascript:history.back()" class="gohome" >
                     <!-- <img src="../../../public/images/common/p3_list.png"> -->
+                    <img :src="contentsList"/>
                     <lectureList/>
                 </a>
                 <p class="title-style">목차</p>
@@ -41,7 +42,8 @@ export default {
             scrollPosition: null,
 
             logom: images.logom,
-            lectureList: images.lectureList
+            lectureList: images.lectureList,
+            contentsList: images.contentsList
         };
     },
 
