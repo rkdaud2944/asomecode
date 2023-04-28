@@ -5,8 +5,10 @@
                 :row-key="rowKey" hide-bottom>
                 <template v-slot:header="props">
                     <q-tr :props="props">
-                        <q-th @click="onColumnClick(col)" v-for="col in props.cols" :key="col.name" :props="props"
-                            v-html="getColumnHeader(col)" />
+                        <q-th @click="onColumnClick(col)" v-for="col in props.cols" :key="col.name" :props="props" >
+                            <div v-html="getColumnHeader(col)"></div>
+                        </q-th>
+
                     </q-tr>
                 </template>
 

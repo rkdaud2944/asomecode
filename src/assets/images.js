@@ -35,6 +35,28 @@ import faqHover from "@/assets/images/faq-hover.png";
 import asomeitQuestionMark from "@/assets/images/asomeit-question-mark.png";
 import contentsList from "@/assets/images/contents-list.png";
 
+//blockCoding
+import connectBlock from "@/assets/images/blockCoding/connect-block.png";
+import connectBlockHover from "@/assets/images/blockCoding/connect-block-hover.png";
+import customBlock from "@/assets/images/blockCoding/custom-block.png";
+import customBlockHover from "@/assets/images/blockCoding/custom-block-hover.png";
+import loadBlock from "@/assets/images/blockCoding/load-block.png";
+import loadBlockHover from "@/assets/images/blockCoding/load-block-hover.png";
+import saveBlock from "@/assets/images/blockCoding/save-block.png";
+import saveBlockHover from "@/assets/images/blockCoding/save-block-hover.png";
+import playBlock from "@/assets/images/blockCoding/play-block.png";
+import playBlockHover from "@/assets/images/blockCoding/play-block-hover.png";
+import stopBlock from "@/assets/images/blockCoding/stop-block.png";
+import stopBlockHover from "@/assets/images/blockCoding/stop-block-hover.png";
+import sourceView from "@/assets/images/blockCoding/source-view.png";
+import sourceViewHover from "@/assets/images/blockCoding/source-view-hover.png";
+import asomebotIconClick from "@/assets/images/blockCoding/asomebot-icon-click.png";
+import asomebotIcon from "@/assets/images/blockCoding/asomebot-icon.png";
+import asomekitIconClick from "@/assets/images/blockCoding/asomekit-icon-click.png";
+import asomekitIcon from "@/assets/images/blockCoding/asomekit-icon.png";
+import asomecarIconClick from "@/assets/images/blockCoding/asomecar-icon-click.png";
+import asomecarIcon from "@/assets/images/blockCoding/asomecar-icon-click.png";
+
 export default {
     logom,
     logo2,
@@ -71,6 +93,27 @@ export default {
     faq,
     faqHover,
     asomeitQuestionMark,
-    contentsList
+    contentsList,
+
+    connectBlock,
+    connectBlockHover,
+    customBlock,
+    customBlockHover,
+    loadBlock,
+    loadBlockHover,
+    saveBlock,
+    saveBlockHover,
+    playBlock,
+    playBlockHover,
+    stopBlock,
+    stopBlockHover,
+    sourceView,
+    sourceViewHover,
+    asomebotIconClick,
+    asomebotIcon,
+    asomekitIconClick,
+    asomekitIcon,
+    asomecarIconClick,
+    asomecarIcon,
 
 };

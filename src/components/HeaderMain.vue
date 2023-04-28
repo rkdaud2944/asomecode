@@ -41,7 +41,7 @@
                     <img :src="help" class="ui-img"/>
                     <p class="ui-right-font" id="fs-three">HELP</p>
                 </li>
-                <li @click="openUrl('AsomeBlock', '/AsomeBlock/AsomeBlock.html?language=Korean')">
+                <li  @click="openRouterPath('/blockCoding')">
                     Block
                 </li>
                 <li @click="openRouterPath('/backOffice')">
@@ -184,6 +184,8 @@ menu.addEventListener("click",slide_menu);
             // 빌드 실행 시에 필요한 코드
             this.openUrl('BO', 'app://./index.html?goto=backOffice');
         },
+
+        
 
         openEditor() {
             bridgeIn.openEditor('')
