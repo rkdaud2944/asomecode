@@ -5,8 +5,11 @@
                 :row-key="rowKey" hide-bottom>
                 <template v-slot:header="props">
                     <q-tr :props="props">
-                        <q-th @click="onColumnClick(col)" v-for="col in props.cols" :key="col.name" :props="props"
-                            v-html="getColumnHeader(col)" />
+                        <q-th @click="onColumnClick(col)" v-for="col in props.cols" :key="col.name" :props="props">
+                           <div v-html="getColumnHeader(col)">
+                           </div>
+                        </q-th>
+                            
                     </q-tr>
                 </template>
 
@@ -21,7 +24,8 @@
                         </q-td>
 
                         <q-td>
-                            <q-btn @click="goTo('/lesson/detail', { id: props.row.id})" flat style="color: #FF0080" label="보기" />
+                            <q-btn @click="goTo('/backOffice/lesson/detail', { id: props.row.id})" flat style="color: #FF0080" label="보기" />
+                            
                             <q-btn  @click="goTo('/backOffice/edit/lesson', { id: props.row.id})" flat style="color: #FF0080" label="수정" />
                         </q-td>
                     </q-tr>

@@ -1,24 +1,19 @@
 <template>
-    <div class="header nav-padding">
-        <a href="/">
-            <img src="/images/common/logom.png" class="logo" />
-        </a>
-    </div>
-
     <div class="row">
-        <div class="col-3 scroll" :class="{sidefixed: scrollPosition > 10}">
+        <div class="col-3 backsidefixed">
             <div class="flex flex-center title-box">
                 <a href="javascript:history.back()" class="gohome" >
                     <img src="../../../public/images/common/p3_list.png">
                 </a>
-                <p class="title-style">목차</p>
+                <p class="title-style">목차
+                </p>
             </div>
             <div @click="moveTo(title.tag)" :class="`title`" v-for="(title, index) in titles" :key="index">
                 {{title.name}}
             </div>
         </div>
 
-        <div class="col-9 contents" :class="{c9contents: scrollPosition > 10}"><br>
+        <div class="col-9 contents c9contents"><br>
             <div class="markdown_output" v-html="output"></div>
         </div>
     </div>
@@ -35,7 +30,6 @@ export default {
             lesson: {},
             titles: [],
             output: null,
-            scrollPosition: null,
         };
     },
 
@@ -49,9 +43,6 @@ export default {
     },
 
     methods: {
-        updateScroll(){
-            this.scrollPosition = window.scrollY
-        },
         moveTo(tag) {
             const element = window.document.getElementById(tag);
             console.log(tag, element);
@@ -64,6 +55,8 @@ export default {
         },
 
         getLesson(id) {
+            // console.log(this.$route.query.id);
+            // console.log(id);
             apiLesson.lessonDetail(id)
                 .then((response) => {
                     this.lesson = response.data;
@@ -79,7 +72,7 @@ export default {
                         });
                     }
                 })
-            .catch(this.showError);
+                .catch(this.showError);
         },
     },
 };
@@ -87,3 +80,7 @@ export default {
 
 <style scoped src="@/assets/css/component/lesson.css"/>
 <style src="@/assets/css/component/markdown_content.css"/>
+
+<style>
+
+</style>

@@ -76,37 +76,4 @@ export default {
 }
 </script>
 
-<style scoped>
-.input-box {
-    width: 100%;
-    margin-bottom: 8px;
-}
-
-.range-box {
-    background: #F2F2F2;
-    margin-bottom: 8px;
-}
-
-.range-box-label {
-    font-size: 12px;
-    color: #8e8e8e;
-    margin-top: 4px;
-    margin-left: 8px;
-    margin-bottom: 4px;
-}
-
-.range-box-left {
-    width: 45%;
-}
-
-.range-box-center {
-    width: 10%;
-    text-align: center;
-    line-height: 56px;
-}
-
-.range-box-right {
-    width: 45%;
-    float: right;
-}
-</style>
+<style scoped src="@/assets/css/backoffice/backoffice.css"/>
