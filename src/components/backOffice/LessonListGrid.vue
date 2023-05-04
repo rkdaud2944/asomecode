@@ -35,7 +35,7 @@
         <br />
 
         <div>
-            <q-pagination @update:model-value="onPageChanged" v-model="page" :max="pageCount" :max-pages="10"
+            <q-pagination @update:model-value="onPageChanged" v-model="page" :max="pageCount" :max-pages="6"
                 boundary-numbers color="purple" />
         </div>
     </div>
