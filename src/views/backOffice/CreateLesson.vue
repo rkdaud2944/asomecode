@@ -13,16 +13,17 @@
 
         <div class="editor">
             <q-card class="input">
-                <q-btn-group>
-                    <q-btn color="secondary" @click="onImageUploadDialog" glossy label="이미지 삽입" />
-                    <q-btn color="secondary" @click="onVideoUploadDialog" glossy label="동영상 삽입" />
-                    <q-btn color="secondary" @click="onFunctionBtnDialog" glossy label="함수 버튼 생성" />
-                    <q-btn color="secondary" @click="onCreateCodeEditor" glossy label="코드 에디터 생성" />
+                <q-btn-group style="display: flex;">
+                    <q-btn style="flex-grow: 1;" color="secondary" @click="onImageUploadDialog" glossy label="이미지 삽입" />
+                    <q-btn style="flex-grow: 1;" color="secondary" @click="onVideoUploadDialog" glossy label="동영상 삽입" />
+                    <q-btn style="flex-grow: 1;" color="secondary" @click="onFunctionBtnDialog" glossy label="함수 버튼 생성" />
+                    <q-btn style="flex-grow: 1;" color="secondary" @click="onCreateCodeEditor" glossy label="코드 에디터 생성" />
                 </q-btn-group>
-                <textarea ref="inputTextarea" class="inputText" :value="lessonContent" @input="update"></textarea>
+                <textarea ref="inputTextarea" class="inputText" :value="lessonContent" @input="update">
+                </textarea>
             </q-card>
 
-            <div class="markdown_output" v-html="markedOutput"></div>
+            <div class="markdown_output_half" v-html="markedOutput"></div>
         </div>
 
         <q-dialog v-model="imageUploadDialog">
@@ -113,9 +114,23 @@ import { ref } from 'vue'
 import apiAwsS3 from "@/api/aws-s3";
 import apiLesson from "@/api/lesson";
 import apiSubject from "@/api/subject";
+import apiSubjectSet from "@/api/subjectSet";
 import CodeEditor from 'simple-code-editor';
 
 export default {
+
+    beforeUnmount() {
+
+    const links = document.getElementsByTagName('link');
+    for (let i = 0; i < links.length; i++) {
+      const link = links[i];
+      if (link.getAttribute('rel') === 'stylesheet') {
+        link.setAttribute('href', '');
+        link.setAttribute('href', link.getAttribute('href'));
+      }
+    }
+  },
+
     mixins: [VueBase],
 
     components: {
@@ -241,12 +256,22 @@ export default {
         },
 
         getDefaultSubjectSet() {
-            apiSubject.defaultSubjectSet()
+            // apiSubject.defaultSubjectSet()
+            //     .then((response) => {
+            //         this.defaultSubjectSet = response.data;
+            //     })
+            //     .catch(this.showError);
+            
+            apiSubjectSet.getSubjectSets()
                 .then((response) => {
+                    console.log("Aaaa123123")
+                    console.log("Aaaa : "+JSON.parse(response))
                     this.defaultSubjectSet = response.data;
                 })
                 .catch(this.showError);
+            
         },
+
 
         createLesson() {
             let body = {
@@ -299,7 +324,7 @@ export default {
     box-sizing: border-box;
 }
 
-.markdown_output {
+.markdown_output_half {
     overflow: auto;
     width: 50%;
     height: 100%;

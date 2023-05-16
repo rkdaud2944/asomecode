@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="row q-mb-md" style="width: 100%">
+        <div class="row q-mb-md">
             <div class="col">
                 <q-btn @click="onFilterChanged" color="red">필터적용</q-btn>
             </div>

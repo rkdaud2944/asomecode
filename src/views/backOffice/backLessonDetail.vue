@@ -10,7 +10,7 @@
             </div>
             <div @click="moveTo(title.tag)" :class="`title`" v-for="(title, index) in titles" :key="index">
                 {{title.name}}
-            </div>
+            </div>  
         </div>
 
         <div class="col-9 contents c9contents"><br>
@@ -23,6 +23,7 @@
 /* eslint-disable */
 import markdown from "@/utils/markdown";
 import apiLesson from "@/api/lesson";
+import {  mapMutations  } from 'vuex'
 
 export default {
     data() {
@@ -33,9 +34,16 @@ export default {
         };
     },
 
+    computed: {
+    },
+
     mounted() {
         this.getLesson(this.$route.query.id)
         window.addEventListener('scroll', this.updateScroll);
+    },
+
+    beforeUnmount() {
+        this.SetBoViewTitle(null)
     },
 
     updated() {
@@ -43,9 +51,13 @@ export default {
     },
 
     methods: {
+        ...mapMutations({
+            SetBoViewTitle :'setBoViewTitle',
+        }),
+
         moveTo(tag) {
             const element = window.document.getElementById(tag);
-            console.log(tag, element);
+            // console.log(tag, element);
             const top = element.offsetTop - 100; // 헤더 길이만큼 낮추기
 
             window.scrollTo({
@@ -55,13 +67,14 @@ export default {
         },
 
         getLesson(id) {
-            // console.log(this.$route.query.id);
-            // console.log(id);
             apiLesson.lessonDetail(id)
                 .then((response) => {
                     this.lesson = response.data;
                     this.output = markdown.parse(this.lesson.content)
-
+                    
+                    // ##################
+                    this.SetBoViewTitle(this.lesson.title)
+                    
                     let domparser = new DOMParser()
                     let doc = domparser.parseFromString(this.output, 'text/html')
                     const elements = doc.getElementsByTagName("h2");
