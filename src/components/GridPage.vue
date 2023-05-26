@@ -17,7 +17,7 @@
         <br />
 
         <div>
-            <q-pagination @update:model-value="onPageChanged" v-model="page" :max="pageCount" :max-pages="10"
+            <q-pagination @update:model-value="onPageChanged" style="justify-content : center;" v-model="page" :max="pageCount" :max-pages="10"
                 boundary-numbers color="purple"
                 direction-links
                 boundary-links

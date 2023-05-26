@@ -1,5 +1,5 @@
 <template>
-    <q-tabs @click="onTabClick" @update:model-value="onTabUpdated" v-model="tabName" indicator-color="yellow" class="bg-primary text-white shadow-2 q-mb-md">
+    <q-tabs @click="onTabClick" @update:model-value="onTabUpdated" v-model="tabName" indicator-color="yellow" class="bg-primary text-white shadow-2">
         <q-tab name="pin" icon="pin" label="핀 라이브러리" />
         <q-tab name="module" icon="view_module" label="모듈 라이브러리" />
         <q-tab name="qna" icon="question_mark" label="Q&A" />
