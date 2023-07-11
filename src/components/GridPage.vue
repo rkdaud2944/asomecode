@@ -1,7 +1,7 @@
 <!-- 페이징 처리가 된 그리트 콤포넌트 -->
 <template>
     <div>
-        <div>
+        <div style="width: 90%; text-align: center; margin: auto; padding: 0; -webkit-box-shadow: 0 10px 6px -6px #777; -moz-box-shadow: 0 10px 6px -6px #777; box-shadow: 0 10px 6px -6px #777;" >
             <q-table :rows="rows" :columns="columns" :pagination="paginationOption"
                 row-key="name" hide-bottom>
 
@@ -50,6 +50,7 @@ export default {
     },
 
     computed: {
+
         params() {
             return {
                 page: this.page - 1,

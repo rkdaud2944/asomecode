@@ -1,23 +1,50 @@
 <template>
     <Header />
-    <div style="background-color: lightgray; height: 100%; height: 91.7vh;">
-      <div class="row q-pa-md" style="width: 80%; text-align: center; margin: auto;">
-        <div class="col q-pr-md" style="padding: 0; -webkit-box-shadow: 0 10px 6px -6px #777; -moz-box-shadow: 0 10px 6px -6px #777; box-shadow: 0 10px 6px -6px #777;">
-          <q-select filled v-model="selectedFilter" :options="filterOptions" option-value="value" style="width: 30%; border-radius: 0px; float: left; background-color: white;" option-label="label" label="필터를 선택해주세요" />
-          <div class="col q-pl-md" style="padding-left: 0;">
-            <q-input color="teal" style="width: 70%; float: left; background-color: white;" filled v-model="keyword" label="검색어를 입력하세요" v-on:keyup.enter="searchSubject"></q-input>
-          </div>
+    <div style="background-color: #eeeeee; height: 100%; height: 91.7vh;">
+        <div class="row q-pa-md" style="
+            width: 88.5vw;
+            text-align: center;
+            margin: auto;
+            padding: 0;
+            padding-top: 20px;
+            border-radius: 5%;
+        
+            -webkit-box-shadow: 0 10px 6px -6px #777;
+            -moz-box-shadow: 0 10px 6px -6px #777;
+            box-shadow: 0 10px 6px -6px #777;">
+
+            <div class="q-pr-md custom-div1" style="width: 30%; padding: 0px; border-top-left-radius: 5% !important;
+                    border-bottom-left-radius: 5% !important;
+                    border-top-right-radius: 5% !important;
+                    border-bottom-right-radius: 5% !important;">
+                <q-select filled v-model="selectedFilter" :options="filterOptions" option-value="value" style="border-top-left-radius: 5% !important;
+                    border-bottom-left-radius: 5% !important;
+                    border-top-right-radius: 5% !important;
+                    border-bottom-right-radius: 5% !important;
+                    
+                " option-label="label" label="필터를 선택해주세요" />
+            </div>
+            <div class="q-pl-md custom-div2" style="padding-left: 0; width: 70%; background: rgba(255, 255, 255, 1); ">
+                <q-input color="teal" style="
+                    border-top-left-radius: 5% !important;
+                    border-bottom-left-radius: 5% !important;
+                    border-top-right-radius: 5% !important;
+                    border-bottom-right-radius: 5% !important;
+                    border-left: 1px solid rgba(105, 105, 105, 0.5);"
+                    
+                filled v-model="keyword" label="검색어를 입력하세요" v-on:keyup.enter="searchSubject">
+                </q-input>
+            </div>
+
         </div>
-      </div>
-      <div class="q-pa-md">
-        <Grid ref="grid" rowKey="id" :columns="columns" @onPageChanged="onPageChanged" @onRowClick="onRowClick" />
-        <br />        
-        <div class="row flex flex-center">
-          <q-btn @click="onWriteButtonClick" color="primary" label="글쓰기" />
+        <div class="q-pa-md">
+            <Grid ref="grid" rowKey="id" :columns="columns" @onPageChanged="onPageChanged" @onRowClick="onRowClick" /><br />        
+            <div class="row flex flex-center" >
+                <q-btn @click="onWriteButtonClick" color="primary" label="글쓰기" />
+            </div>
         </div>
-      </div>
     </div>
-  </template>
+</template>
 
 
 <script>
@@ -88,10 +115,29 @@ export default {
 const columns = [
     // { name: 'id', align: 'center', label: 'ID', field: 'id', style: 'width: 30px' },
     
-    { name: 'title', align: 'center', label: '제목', field: 'title', style: 'width: 250px' },
-    { name: 'subTitle', align: 'center', label: '부제목', field: 'subTitle', style: 'width: 200px' },
-    { name: 'description', align: 'center', label: '설명', field: 'description', style: 'width: 300px' },
-    { name: 'writer', align: 'center', label: '작성자', field: 'writer', style: 'width: 150px' },
+    { name: 'title', align: 'center', label: '제목', field: 'title', style: 'width: 250px;' },
+    { name: 'subTitle', align: 'center', label: '부제목', field: 'subTitle', style: 'width: 200px;' },
+    { name: 'description', align: 'center', label: '설명', field: 'description', style: 'width: 300px;' },
+    { name: 'writer', align: 'center', label: '작성자', field: 'writer', style: 'width: 150px;' },
     // { name: 'createat', align: 'left', label: '생성일', field: 'createat', style: 'width: 300px' },
 ];
 </script>
+<style>
+.custom-div1 .q-field__control{
+    background-color: #ffffff !important;
+    border-top-left-radius: 5px !important;
+    border-bottom-left-radius: 5px !important;
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+    
+}
+.custom-div2 .q-field__control{
+    background-color: #ffffff !important;
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+    border-top-right-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
+    /* border-left: 1px solid rgba(0,0,0,0.5) !important; */
+}
+
+</style>

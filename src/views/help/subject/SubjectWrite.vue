@@ -41,7 +41,7 @@
                 <q-input filled v-model="writer" label="작성자" stack-label />
             </div>
             <div class="col q-pl-md">
-                <q-input filled v-model="password" label="비밀먼호" type="password" stack-label />
+                <q-input filled v-model="password" label="비밀번호" type="password" stack-label />
             </div>
         </div>
         <br>

@@ -1,15 +1,17 @@
 <template>
     <q-layout view="hhh LpR fff">
-        <q-page-container style="margin: 0px 100px 0px 100px;">
-            <div class="q-pa-md">
-                <div style="text-align: right; margin-bottom: 10px;">
-                    <q-btn color="secondary" label="새 글 작성" @click="onCreateArticleDialog(boardType)" />
+        <q-page-container style="margin: 0px 100px 0px 100px; background-color: #eeeeee; height: 100%; height: 100vh; margin: 0;">
+            <div>
+                <div class="q-pa-md">
+                    <div style="text-align: right; margin-bottom: 20px; margin-right: 5%;">
+                        <q-btn style="-webkit-box-shadow: 0 10px 6px -6px #777; -moz-box-shadow: 0 10px 6px -6px #777; box-shadow: 0 10px 6px -6px #777;" color="secondary" label="새 글 작성" @click="onCreateArticleDialog(boardType)" />
+                    </div>
+
+                    <CreateArticle ref="createArticleDialog" @succeededCreateArticle="succeededCreateArticle" />
+
+                    <Grid ref="grid" rowKey="id" :columns="columns" @onPageChanged="onPageChanged"
+                        @onRowClick="onRowClick" />
                 </div>
-
-                <CreateArticle ref="createArticleDialog" @succeededCreateArticle="succeededCreateArticle" />
-
-                <Grid ref="grid" rowKey="id" :columns="columns" @onPageChanged="onPageChanged"
-                    @onRowClick="onRowClick" />
             </div>
         </q-page-container>
         <div>
