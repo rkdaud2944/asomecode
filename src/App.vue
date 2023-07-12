@@ -26,7 +26,7 @@ import "./blocks/stocks";
 
 export default {
     components: {
-        HeaderMain, ConsoleLog,
+        HeaderMain, ConsoleLog
     },
 
     setup() {
