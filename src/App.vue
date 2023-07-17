@@ -22,10 +22,11 @@ import editorControl from "@/globals/editor-control";
 import HeaderMain from "@/components/HeaderMain.vue";
 import ConsoleLog from "@/components/ConsoleLog.vue";
 import { useMemberStore } from "@/store/member";
+import "./blocks/stocks";
 
 export default {
     components: {
-        HeaderMain, ConsoleLog,
+        HeaderMain, ConsoleLog
     },
 
     setup() {
@@ -55,7 +56,7 @@ export default {
 
             this.showHeaderMain = true;
             this.showFooterMain = true;
-            const skipHeaderMains = ["/editor", "/help", "/backOffice"];
+            const skipHeaderMains = ["/editor", "/help", "/backOffice", "/blockCoding"];
             skipHeaderMains.forEach((path) => {
                 if (to.path.startsWith(path)) {
                     this.showHeaderMain = false;
