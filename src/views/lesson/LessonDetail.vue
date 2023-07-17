@@ -1,7 +1,8 @@
 <template>
     <div class="header nav-padding">
         <a href="/">
-            <img src="/images/common/logom.png" class="logo" />
+            <!-- <img src="/images/common/logom.png" class="logo" /> -->
+            <img :src="logom" class="slogo"/>
         </a>
     </div>
 
@@ -9,7 +10,9 @@
         <div class="col-3 scroll" :class="{sidefixed: scrollPosition > 10}">
             <div class="flex flex-center title-box">
                 <a href="javascript:history.back()" class="gohome" >
-                    <img src="../../../public/images/common/p3_list.png">
+                    <!-- <img src="../../../public/images/common/p3_list.png"> -->
+                    <img :src="contentsList"/>
+                    <lectureList/>
                 </a>
                 <p class="title-style">목차</p>
             </div>
@@ -26,6 +29,7 @@
 
 <script>
 /* eslint-disable */
+import images from "@/assets/images";
 import markdown from "@/utils/markdown";
 import apiLesson from "@/api/lesson";
 
@@ -36,6 +40,10 @@ export default {
             titles: [],
             output: null,
             scrollPosition: null,
+
+            logom: images.logom,
+            lectureList: images.lectureList,
+            contentsList: images.contentsList
         };
     },
 
