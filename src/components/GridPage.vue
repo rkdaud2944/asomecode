@@ -6,7 +6,7 @@
                 row-key="name" hide-bottom>
 
             <template v-slot:body="props">
-                <q-tr @click="onRowClick(props.row)" :props="props">
+                <q-tr @click="onRowClick(props.row)" :props="props" style="font-family:Arial, Helvetica, sans-serif; cursor: pointer;">
                     <q-td v-for="col in props.cols" :key="col.name" :props="props">
                         <div>{{ col.value }}</div>
                     </q-td>
@@ -114,3 +114,18 @@ export default {
     },
 };
 </script>
+
+<style>
+@font-face {
+    font-family: pten;
+    src: url(../assets/fonts/NEXEN\ TIRE_Regular.ttf);
+}
+
+.q-table th {
+    font-size: 16px;
+    font-family: pten;
+}
+.q-table__card {
+    box-shadow: none;
+}
+</style>
