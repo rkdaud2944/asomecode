@@ -1,12 +1,12 @@
 <!-- 페이징 처리가 된 그리트 콤포넌트 -->
 <template>
     <div>
-        <div style="width: 90%; text-align: center; margin: auto; padding: 0; -webkit-box-shadow: 0 10px 6px -6px #777; -moz-box-shadow: 0 10px 6px -6px #777; box-shadow: 0 10px 6px -6px #777;" >
-            <q-table :rows="rows" :columns="columns" :pagination="paginationOption"
+        <div style="width: 90%; text-align: center; margin: auto; padding: 0;" >
+            <q-table :rows="rows" :columns="columns" style=" background-color: #027BE3;" :pagination="paginationOption"
                 row-key="name" hide-bottom>
 
             <template v-slot:body="props">
-                <q-tr @click="onRowClick(props.row)" :props="props" style="font-family:Arial, Helvetica, sans-serif; cursor: pointer;">
+                <q-tr @click="onRowClick(props.row)" :props="props" style="font-family:Arial, Helvetica, sans-serif; cursor: pointer; background-color: #424242;">
                     <q-td v-for="col in props.cols" :key="col.name" :props="props">
                         <div>{{ col.value }}</div>
                     </q-td>
@@ -124,8 +124,10 @@ export default {
 .q-table th {
     font-size: 16px;
     font-family: pten;
+    color: white;
 }
 .q-table__card {
     box-shadow: none;
+    color: white;
 }
 </style>

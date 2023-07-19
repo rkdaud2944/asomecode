@@ -1,24 +1,27 @@
 <template>
     <Header />
+
     <div> 
         <a style="
             text-align: center;
-            margin-top: 35px;
+            padding-top: 35px;
             display: block;
             font-family: pten;
-            font-size: 50px;">
+            font-size: 50px;
+            color: white;">
             Custom Curriculum
         </a>
         <a style="
             text-align: center;
-            margin-bottom: 35px;
+            padding-bottom: 35px;
             display: block;
             font-family: sans-serif;
-            font-size: 20px;">
+            font-size: 20px;
+            color: white;">
             과목을 직접 만들어봐요
         </a>
     </div>
-    <div style="background-color: #ffffff; height: 95vh;">
+    <div style="height: 95vh;">
         <div class="row q-pa-md" style="
             width: 40%;
             margin-left: auto;
@@ -160,5 +163,9 @@ const columns = [
     border-bottom-right-radius: 50px !important;
     /* border-left: 1px solid rgba(0,0,0,0.5) !important; */
 }
-
+body {
+    background-image: url(../../../assets/back2.PNG); 
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 </style>
