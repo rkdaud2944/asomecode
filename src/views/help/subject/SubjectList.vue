@@ -1,60 +1,63 @@
 <template>
     <Header />
-    <!-- <div> 
+
+    <div> 
         <a style="
             text-align: center;
-            margin-top: 35px;
+            padding-top: 35px;
             display: block;
             font-family: pten;
-            font-size: 50px;">
+            font-size: 50px;
+            color: white;">
             Custom Curriculum
         </a>
         <a style="
             text-align: center;
-            margin-bottom: 35px;
+            padding-bottom: 35px;
             display: block;
             font-family: sans-serif;
-            font-size: 20px;">
+            font-size: 20px;
+            color: white;">
             과목을 직접 만들어봐요
         </a>
-    </div> -->
-    <div style="background-color: #F2F3F5  ; height: 95vh;">
+    </div>
+    <div style="height: 95vh;">
         <div class="row q-pa-md" style="
             width: 40%;
             margin-left: auto;
             margin-right: 5%;
             padding: 0;
             padding-top: 20px;">
-            <div style="border-bottom:1px solid rgba(0, 0, 0, 0.3); width: 100%; display: flex;">
+            <div style="border:1px solid rgba(0, 0, 0, 0.5); width: 100%; display: flex; border-radius: 50px;">
                 <div class="custom-div1" style="width: 30%; padding: 0px;">
                     <q-select filled v-model="selectedFilter" :options="filterOptions" option-value="value" style="
-                        /* border-top-left-radius: 50px !important;
+                        border-top-left-radius: 50px !important;
                         border-bottom-left-radius: 50px !important;
                         border-top-right-radius: 5% !important;
-                        border-bottom-right-radius: 5% !important; */
+                        border-bottom-right-radius: 5% !important;
                         overflow: hidden;
                         " option-label="label" label="필터" />
                 </div>
                 <div class="q-pl-md custom-div2" style="padding-left: 0; width: 70%;">
                     <q-input color="teal" style="
-                        /* border-top-left-radius: 5% !important;
+                        border-top-left-radius: 5% !important;
                         border-bottom-left-radius: 5% !important;
                         border-top-right-radius: 50px !important;
-                        border-bottom-right-radius: 50px !important; */
-                        /* border-left: 1px solid rgba(105, 105, 105, 0.5); */
-                        /* overflow: hidden; */
+                        border-bottom-right-radius: 50px !important;
+                        border-left: 1px solid rgba(105, 105, 105, 0.5);
+                        overflow: hidden;
                         " filled v-model="keyword" label="검색어를 입력하세요" v-on:keyup.enter="searchSubject"></q-input>
                 </div>
             </div>
         </div>
 
-        <!-- <div style=" width: 90%; background-color: rgba(0, 0, 0, 0.5); height: 1px; margin: auto; margin-top: 17px;">
+        <div style=" width: 90%; background-color: rgba(0, 0, 0, 0.5); height: 1px; margin: auto; margin-top: 17px;">
 
-        </div> -->
+        </div>
 
         <div style="padding-top: 16px;">
             <Grid ref="grid" rowKey="id" :columns="columns" @onPageChanged="onPageChanged" @onRowClick="onRowClick" /><br />        
-            <div class="row flex flex-center" style=" text-align: right; display: block; margin-right: 5%;">
+            <div class="row flex flex-center" >
                 <q-btn @click="onWriteButtonClick" color="primary" label="글쓰기" />
             </div>
         </div>
@@ -145,20 +148,24 @@ const columns = [
 
 
 .custom-div1 .q-field__control{
-    background-color: #F2F3F5 !important;
-    /* border-top-left-radius: 50px !important;
+    background-color: #ffffff !important;
+    border-top-left-radius: 50px !important;
     border-bottom-left-radius: 50px !important;
     border-top-right-radius: 0px !important;
-    border-bottom-right-radius: 0px !important; */
+    border-bottom-right-radius: 0px !important;
     
 }
 .custom-div2 .q-field__control{
-    background-color: #F2F3F5 !important;
-    /* border-top-left-radius: 0px !important;
+    background-color: #ffffff !important;
+    border-top-left-radius: 0px !important;
     border-bottom-left-radius: 0px !important;
     border-top-right-radius: 50px !important;
-    border-bottom-right-radius: 50px !important; */
+    border-bottom-right-radius: 50px !important;
     /* border-left: 1px solid rgba(0,0,0,0.5) !important; */
 }
-
+body {
+    background-image: url(../../../assets/back2.PNG); 
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 </style>

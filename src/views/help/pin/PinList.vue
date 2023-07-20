@@ -1,28 +1,45 @@
 <template>
     <Header />
 
-    <div class="q-pa-md">
-        어썸보드의 핀을 사용하는 방법에 대해서 알려드립니다.
+    <div class="q-pa-md"> 
+        <a style="
+            text-align: center;
+            padding-top: 35px;
+            display: block;
+            font-family: pten;
+            font-size: 50px;
+            color: white;">
+            Pin Library
+        </a>
+        <a style="
+            text-align: center;
+            padding-bottom: 35px;
+            display: block;
+            font-family: sans-serif;
+            font-size: 20px;
+            color: white;">
+            어썸보드의 핀을 사용하는 방법에 대해서 알려드립니다.
+        </a>
     </div>
     <hr class="hr">
 
     <div class="q-pa-md q-gutter-sm">
-        <q-img class="img" :src="imageBaseUrl + 'button.png'" spinner-color="white" />
-        <q-img class="img" :src="imageBaseUrl + 'buzzer_active.png'" spinner-color="white" />
-        <q-img class="img" :src="imageBaseUrl + 'buzzer_passive.png'" spinner-color="white" />
-        <q-img class="img" :src="imageBaseUrl + 'led.png'" spinner-color="white" />
-        <q-img class="img" :src="imageBaseUrl + 'rotary_encoder.png'" spinner-color="white" />
-        <q-img class="img" :src="imageBaseUrl + 'sensor_cds.png'" spinner-color="white" />
-        <q-img class="img" :src="imageBaseUrl + 'sensor_dht11.png'" spinner-color="white" />
-        <q-img class="img" :src="imageBaseUrl + 'sensor_line.png'" spinner-color="white" />
-        <q-img class="img" :src="imageBaseUrl + 'sensor_rain.png'" spinner-color="white" />
-        <q-img class="img" :src="imageBaseUrl + 'sensor_soil.png'" spinner-color="white" />
-        <q-img class="img" :src="imageBaseUrl + 'sensor_sonic.png'" spinner-color="white" />
-        <q-img class="img" :src="imageBaseUrl + 'sensor_sound.png'" spinner-color="white" />
-        <q-img class="img" :src="imageBaseUrl + 'sensor_sw420.png'" spinner-color="white" />
-        <q-img class="img" :src="imageBaseUrl + 'servo_180.png'" spinner-color="white" />
-        <q-img class="img" :src="imageBaseUrl + 'servo_360.png'" spinner-color="white" />
-        <q-img class="img" :src="imageBaseUrl + 'TM1637.png'" spinner-color="white" />
+        <q-img class="img center" :src="imageBaseUrl + 'button.png'" spinner-color="white" />
+        <q-img class="img center" :src="imageBaseUrl + 'buzzer_active.png'" spinner-color="white" />
+        <q-img class="img center" :src="imageBaseUrl + 'buzzer_passive.png'" spinner-color="white" />
+        <q-img class="img center" :src="imageBaseUrl + 'led.png'" spinner-color="white" />
+        <q-img class="img center" :src="imageBaseUrl + 'rotary_encoder.png'" spinner-color="white" />
+        <q-img class="img center" :src="imageBaseUrl + 'sensor_cds.png'" spinner-color="white" />
+        <q-img class="img center" :src="imageBaseUrl + 'sensor_dht11.png'" spinner-color="white" />
+        <q-img class="img center" :src="imageBaseUrl + 'sensor_line.png'" spinner-color="white" />
+        <q-img class="img center" :src="imageBaseUrl + 'sensor_rain.png'" spinner-color="white" />
+        <q-img class="img center" :src="imageBaseUrl + 'sensor_soil.png'" spinner-color="white" />
+        <q-img class="img center" :src="imageBaseUrl + 'sensor_sonic.png'" spinner-color="white" />
+        <q-img class="img center" :src="imageBaseUrl + 'sensor_sound.png'" spinner-color="white" />
+        <q-img class="img center" :src="imageBaseUrl + 'sensor_sw420.png'" spinner-color="white" />
+        <q-img class="img center" :src="imageBaseUrl + 'servo_180.png'" spinner-color="white" />
+        <q-img class="img center" :src="imageBaseUrl + 'servo_360.png'" spinner-color="white" />
+        <q-img class="img center" :src="imageBaseUrl + 'TM1637.png'" spinner-color="white" />
     </div>
 </template>
 
@@ -46,6 +63,16 @@ export default {
 }
 </script>
 <style>
+@font-face {
+    font-family: pten;
+    src: url(../../../assets/fonts/Pretendard-Black.otf);
+}
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
 .hr {
     border: 1px solid #ff8123;
     border-radius: 4px 4px 0 0;
