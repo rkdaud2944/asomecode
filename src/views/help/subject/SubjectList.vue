@@ -3,8 +3,9 @@
 
     <div> 
         <a style="
-            text-align: center;
+            text-align: left;
             padding-top: 35px;
+            margin-left: 5%;
             display: block;
             font-family: pten;
             font-size: 50px;
@@ -12,13 +13,13 @@
             Custom Curriculum
         </a>
         <a style="
-            text-align: center;
-            padding-bottom: 35px;
+            text-align: left;
+            margin-left: 5%;
             display: block;
             font-family: sans-serif;
             font-size: 20px;
             color: white;">
-            과목을 직접 만들어봐요
+            과목을 직접 커스텀하여<br>나만의 과목을 만들어봐요
         </a>
     </div>
     <div style="height: 95vh;">
@@ -57,7 +58,7 @@
 
         <div style="padding-top: 16px;">
             <Grid ref="grid" rowKey="id" :columns="columns" @onPageChanged="onPageChanged" @onRowClick="onRowClick" /><br />        
-            <div class="row flex flex-center" >
+            <div class="row flex flex-center" style="margin-right: 5%; display: block; text-align: right;" >
                 <q-btn @click="onWriteButtonClick" color="primary" label="글쓰기" />
             </div>
         </div>
