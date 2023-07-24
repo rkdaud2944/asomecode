@@ -14,18 +14,16 @@
             </template>
             </q-table>
         </div>
-        <br />
-
-        <div>
-            <q-pagination @update:model-value="onPageChanged" style="justify-content : center;" v-model="page" :max="pageCount" :max-pages="10"
-                boundary-numbers color="purple"
+            <q-pagination
+                class="page-center"
+                @update:model-value="onPageChanged" v-model="page" :max="pageCount" :max-pages="10"
+                boundary-numbers color="blue"
                 direction-links
                 boundary-links
                 icon-first="skip_previous"
                 icon-last="skip_next"
                 icon-prev="fast_rewind"
                 icon-next="fast_forward"/>
-        </div>
     </div>
 </template>
 
@@ -121,6 +119,22 @@ export default {
     src: url(../assets/fonts/NEXEN\ TIRE_Regular.ttf);
 }
 
+@media screen and (max-width:1250px ) {
+    .page-center {
+        margin-top: 25px;
+        float: left;
+        position: relative;
+        left: 40%;
+    }
+}
+@media screen and (min-width:1250px ) {
+    .page-center {
+        margin-top: 25px;
+        float: left;
+        position: relative;
+        left: 46%;
+    }
+}
 .q-table th {
     font-size: 16px;
     font-family: pten;

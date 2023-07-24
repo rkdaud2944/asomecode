@@ -29,26 +29,20 @@
             margin-right: 5%;
             padding: 0;
             padding-top: 20px;">
-            <div style="border:1px solid rgba(0, 0, 0, 0.5); width: 100%; display: flex; border-radius: 50px;">
-                <div class="custom-div1" style="width: 30%; padding: 0px;">
-                    <q-select filled v-model="selectedFilter" :options="filterOptions" option-value="value" style="
-                        border-top-left-radius: 50px !important;
-                        border-bottom-left-radius: 50px !important;
-                        border-top-right-radius: 5% !important;
-                        border-bottom-right-radius: 5% !important;
-                        overflow: hidden;
-                        " option-label="label" label="필터" />
-                </div>
-                <div class="q-pl-md custom-div2" style="padding-left: 0; width: 70%;">
-                    <q-input color="teal" style="
-                        border-top-left-radius: 5% !important;
-                        border-bottom-left-radius: 5% !important;
-                        border-top-right-radius: 50px !important;
-                        border-bottom-right-radius: 50px !important;
-                        border-left: 1px solid rgba(105, 105, 105, 0.5);
-                        overflow: hidden;
-                        " filled v-model="keyword" label="검색어를 입력하세요" v-on:keyup.enter="searchSubject"></q-input>
-                </div>
+            <div class="custom-div1" style="width: 30%; padding: 0px;">
+                <q-select dense square filled v-model="selectedFilter" :options="filterOptions" option-value="value" option-label="label" label="필터"  />
+            </div>
+            <div class="custom-div2" style="
+                padding-left: 0;
+                width: 70%;
+                border: 1px solid #ffffff !important;
+                border-left:  1px solid black;
+                border-top-left-radius: 0px !important;
+                border-bottom-left-radius: 0px !important;
+                border-top-right-radius: 3px !important;
+                border-bottom-right-radius: 3px !important;
+                background-color: white;">
+                <q-input dense square filled color="teal" style="" v-model="keyword" label="검색어를 입력하세요" v-on:keyup.enter="searchSubject"></q-input>
             </div>
         </div>
 
@@ -149,24 +143,32 @@ const columns = [
 
 
 .custom-div1 .q-field__control{
-    background-color: #ffffff !important;
-    border-top-left-radius: 50px !important;
-    border-bottom-left-radius: 50px !important;
+    border-top-left-radius: 3px !important;
+    border-bottom-left-radius: 3px !important;
     border-top-right-radius: 0px !important;
     border-bottom-right-radius: 0px !important;
-    
+    border: 1px solid #ffffff  !important;
+    background-color: white;
 }
 .custom-div2 .q-field__control{
-    background-color: #ffffff !important;
     border-top-left-radius: 0px !important;
     border-bottom-left-radius: 0px !important;
-    border-top-right-radius: 50px !important;
-    border-bottom-right-radius: 50px !important;
-    /* border-left: 1px solid rgba(0,0,0,0.5) !important; */
+    border-top-right-radius: 3px !important;
+    border-bottom-right-radius: 3px !important;
+    background-color: white;
+}
+/* .q-field__inner{
+    max-height: 35px !important;
+} */
+.q-field__label {
+    font-size: 16px !important;
+    color: black !important;
+}
+.q-field__native{
+    font-size: 14px !important;
+    color: black !important;
 }
 body {
-    background-image: url(../../../assets/back2.PNG); 
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-color: #303030;
 }
 </style>
