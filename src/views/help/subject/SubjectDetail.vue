@@ -1,21 +1,48 @@
 <template>
     <Header />
-    <br />
+    <div> 
+        <input style="
+            text-align: left;
+            padding-top: 35px;
+            margin-left: 5%;
+            display: block;
+            font-family: pten;
+            font-size: 50px;
+            color: black;
+            border: none;
+            width: auto;
+            outline: none;
+            " filled readonly v-model="subject.title"/><br>
+        <input style="
+            text-align: left;
+            margin-left: 5%;
+            display: block;
+            font-family: sans-serif;
+            font-size: 20px;
+            color: black;
+            outline: none;
+            border: none;
+            float: left;" filled readonly v-model="subject.subTitle"/>
+        <input style="
+            text-align: right;
+            margin-left: auto;
+            margin-right: 5%;
+            display: block;
+            font-family: sans-serif;
+            font-size: 20px;
+            color: black;
+            outline: none;
+            border: none;" filled readonly v-model="subject.writer"/>
+    </div>
 
-    <div class="q-ma-md">
+    
+    <div style="width: 90%; background-color:#027BE3; height: 1px; margin: auto; margin-top: 17px;">
+    </div>
+
+    <div class="q-ma-md" style="width: 90%; display: block; margin-left: auto; margin-right:auto;">
         <div class="q-ma-md">차시 목록</div>
-        <q-table :rows="subject.lessons" :columns="columns" row-key="id" hide-bottom /><br>
 
-        <q-input filled v-model="subject.title" label="제목" stack-label readonly /><br>
-        <q-input filled v-model="subject.subTitle" label="부제목 (영문제목)" stack-label readonly /><br>
-
-        <div class="row">
-            <div class="col q-pr-md">
-                <q-input filled v-model="subject.writer" label="작성자" stack-label readonly />
-            </div>
-            <div class="col q-pl-md">
-            </div>
-        </div>
+        <q-table style="background-color:#027BE3; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);" :rows="subject.lessons" :columns="columns" row-key="id" hide-bottom /><br>
         <br>
 
         <q-input v-model="subject.description" label="과목 설명" filled type="textarea" readonly /><br>
@@ -113,3 +140,9 @@ const columns = [
     { name: 'title', align: 'left', label: '제목', field: 'title' },
 ];
 </script>
+
+<style>
+tbody {
+    background-color: #fcfcfc;
+}
+</style>

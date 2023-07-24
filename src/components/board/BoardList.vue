@@ -1,22 +1,48 @@
 <template>
+    
     <q-layout view="hhh LpR fff">
-        <q-page-container style="margin: 0px 100px 0px 100px; background-color: #eeeeee; height: 100%; height: 100vh; margin: 0;">
+        <q-page-container style="margin: 0px 100px 0px 100px; background-color: #ffffff; height: 100%; height: 100vh; margin: 0;">
             <div>
                 <div class="q-pa-md">
-                    <div style="text-align: right; margin-bottom: 20px; margin-right: 5%;">
-                        <q-btn style="-webkit-box-shadow: 0 10px 6px -6px #777; -moz-box-shadow: 0 10px 6px -6px #777; box-shadow: 0 10px 6px -6px #777;" color="secondary" label="새 글 작성" @click="onCreateArticleDialog(boardType)" />
+                    <div class="row q-pa-md" style="
+                        width: 40%;
+                        margin-left: auto;
+                        margin-right: 5%;
+                        padding: 0;
+                        padding-top: 20px;
+                        padding-bottom:20px;
+                        ">
+                        <div class="custom-div1" style="width: 30%; padding: 0px; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
+                            <q-select dense square filled v-model="selectedFilter" :options="filterOptions" option-value="value" option-label="label" label="필터"  />
+                        </div>
+                        <div class="custom-div2" style="
+                            padding-left: 0;
+                            width: 70%;
+                            border-top-left-radius: 0px !important;
+                            border-bottom-left-radius: 0px !important;
+                            border-top-right-radius: 3px !important;
+                            border-bottom-right-radius: 3px !important;
+                            background-color: white;box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
+                            <q-input dense square filled color="teal" style="" v-model="keyword" label="검색어를 입력하세요" v-on:keyup.enter="searchSubject"></q-input>
+                        </div>
+                    </div>
+                    
+                    <div style=" width: 90%; background-color:#027BE3; height: 1px; margin: auto; margin-bottom: 17px;">
                     </div>
 
                     <CreateArticle ref="createArticleDialog" @succeededCreateArticle="succeededCreateArticle" />
-
                     <Grid ref="grid" rowKey="id" :columns="columns" @onPageChanged="onPageChanged"
                         @onRowClick="onRowClick" />
                 </div>
+            </div>
+            <div style="text-align: right; margin-bottom: 10px; margin-right: 6%;">
+                <q-btn color="primary" label="새 글 작성" @click="onCreateArticleDialog(boardType)" />
             </div>
         </q-page-container>
         <div>
             <ArticleDetail ref="articleDetailDialog" @getArticles="getArticles" />
         </div>
+        
     </q-layout>
 </template>
 

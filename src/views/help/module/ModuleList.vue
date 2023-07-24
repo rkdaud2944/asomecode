@@ -1,10 +1,29 @@
 <template>
     <Header />
-
-    <div class="q-pa-md">
-        어썸보드에서 제공하는 다양한 모듈에 대한 설명입니다.
+    <div class="q-pa-md"> 
+        <a style="
+            text-align: center;
+            padding-top: 35px;
+            display: block;
+            font-family: pten;
+            font-size: 50px;
+            color: black;">
+            Module Library
+        </a>
+        <a style="
+            text-align: center;
+            padding-bottom: 35px;
+            display: block;
+            font-family: sans-serif;
+            font-size: 20px;
+            color: black;">
+            어썸보드에서 제공하는 다양한 모듈에 대한 설명입니다.
+        </a>
     </div>
-    <hr class="hr">
+
+    <div class="hr">
+
+    </div>
 </template>
 
 <script>
@@ -22,7 +41,6 @@ export default {
 </script>
 <style>
 .hr {
-    border: 1px solid #ff8123;
-    border-radius: 4px 4px 0 0;
+    border: 1px solid #027BE3;
 }
 </style>

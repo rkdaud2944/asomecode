@@ -1,11 +1,11 @@
 <!-- 페이징 처리가 된 그리트 콤포넌트 -->
 <template>
-    <div>
+    <div style="width: 92.5%; display: block; margin-left: auto; margin-right: auto; text-align: center;">
         <div>
-            <q-table :rows="rows" :columns="columns" :pagination="paginationOption" row-key="name" hide-bottom>
+            <q-table :rows="rows" :columns="columns" :pagination="paginationOption" row-key="name" hide-bottom  style="background-color: #027BE3; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
 
                 <template v-slot:body="props">
-                    <q-tr :props="props">
+                    <q-tr :props="props" style="background-color: #fcfcfc;">
                         <q-td v-for="col in props.cols" :key="col.name" :props="props">
                             <div>{{ col.value }}</div>
                             
@@ -26,8 +26,8 @@
         <br />
 
         <div>
-            <q-pagination @update:model-value="onPageChanged" v-model="page" :max="pageCount" :max-pages="10"
-                boundary-numbers color="purple" direction-links boundary-links icon-first="skip_previous"
+            <q-pagination class="page-center" @update:model-value="onPageChanged" v-model="page" :max="pageCount" :max-pages="10"
+                boundary-numbers color="blue" direction-links boundary-links icon-first="skip_previous"
                 icon-last="skip_next" icon-prev="fast_rewind" icon-next="fast_forward" />
         </div>
     </div>
@@ -129,3 +129,22 @@ export default {
     },
 };
 </script>
+
+<style>
+@media screen and (max-width:1250px ) {
+    .page-center {
+        margin-top: 25px;
+        float: left;
+        position: relative;
+        left: 40%;
+    }
+}
+@media screen and (min-width:1250px ) {
+    .page-center {
+        margin-top: 25px;
+        float: left;
+        position: relative;
+        left: 46%;
+    }
+}
+</style>

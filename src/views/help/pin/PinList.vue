@@ -1,6 +1,6 @@
 <template>
     <Header />
-    <div style=" background-color: #303030; ">
+    <div style=" background-color: #ffffff; ">
         <div class="q-pa-md"> 
             <a style="
                 text-align: center;
@@ -8,7 +8,7 @@
                 display: block;
                 font-family: pten;
                 font-size: 50px;
-                color: white;">
+                color: black;">
                 Pin Library
             </a>
             <a style="
@@ -17,12 +17,12 @@
                 display: block;
                 font-family: sans-serif;
                 font-size: 20px;
-                color: white;">
+                color: black;">
                 어썸보드의 핀을 사용하는 방법에 대해서 알려드립니다.
             </a>
         </div>
-        <hr class="hr">
-
+        <div class="hr">
+        </div>
         <div class="q-pa-md q-gutter-sm" style="background-color: white; width: 600px; margin-left: auto; margin-right: auto; display: block; text-align: center; border-radius: 5px; margin-top: 3px;">
             <q-img class="img center" :src="imageBaseUrl + 'button.png'" spinner-color="white" />
             <q-img class="img center" :src="imageBaseUrl + 'buzzer_active.png'" spinner-color="white" />
@@ -75,8 +75,7 @@ export default {
     text-align: center;
 }
 .hr {
-    border: 1px solid #ff8123;
-    border-radius: 4px 4px 0 0;
+    border: 1px solid #027BE3 ;
 }
 .img {
     display: block;
@@ -85,6 +84,6 @@ export default {
 }
 
 body {
-   
+   background-color: white;
 }
 </style>

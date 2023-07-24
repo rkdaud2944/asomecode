@@ -1,25 +1,56 @@
 <template>
     <Header />
-
-    <div class="row q-pa-md">
-        <div class="col q-pr-md">
-            <q-select filled v-model="selectedFilter" :options="filterOptions" 
-            option-value="value"
-                option-label="label" label="필터" />
+    <div> 
+        <a style="
+            text-align: left;
+            padding-top: 35px;
+            margin-left: 5%;
+            display: block;
+            font-family: pten;
+            font-size: 50px;
+            color: black;">
+            Custom Curriculum Set
+        </a>
+        <a style="
+            text-align: left;
+            margin-left: 5%;
+            display: block;
+            font-family: sans-serif;
+            font-size: 20px;
+            color: black;">
+            직접 커스텀한 과목을<br>어썸코드에 적용시켜 보아요
+        </a>
+    </div>
+    <div class="row q-pa-md" style="
+        width: 40%;
+        margin-left: auto;
+        margin-right: 5%;
+        padding: 0;
+        padding-top: 20px;
+        ">
+        <div class="custom-div1" style="width: 30%; padding: 0px; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
+            <q-select dense square filled v-model="selectedFilter" :options="filterOptions" option-value="value" option-label="label" label="필터"  />
         </div>
-        <div class="col q-pl-md">
-            <q-input color="teal" filled v-model="keyword" label="검색어" v-on:keyup.enter="searchSubject">
-                <template v-slot:prepend>
-                    <q-icon name="search" />
-                </template>
+        <div class="custom-div2" style="
+            padding-left: 0;
+            width: 70%;
+            border-top-left-radius: 0px !important;
+            border-bottom-left-radius: 0px !important;
+            border-top-right-radius: 3px !important;
+            border-bottom-right-radius: 3px !important;
+            background-color: white;box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
+            <q-input dense square filled color="teal" v-model="keyword" label="검색어를 입력하세요" v-on:keyup.enter="searchSubject">
             </q-input>
         </div>
+    </div>
+
+    <div style=" width: 90%; background-color:#027BE3; height: 1px; margin: auto; margin-top: 17px;">
     </div>
 
     <div class="q-pa-md">
         <SubjectSetListGrid ref="grid" rowKey="id" :columns="columns" @onPageChanged="onPageChanged" />
         <br>
-        <div class="row flex flex-center">
+        <div class="row flex flex-center" style="margin-right: 5%; display: block; text-align: right;">
             <q-btn @click="clearSelection" color="primary" label="초기화" />
             <q-btn @click="onWriteButtonClick" color="primary" label="글쓰기" class="q-ml-md" />
         </div>

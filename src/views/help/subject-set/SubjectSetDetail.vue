@@ -3,24 +3,35 @@
     <br>
 
     <div class="q-pa-md">
-        <div>
-            <h4>
-                <span v-if="selected">{{ subjectSet.title }} (선택됨)</span>
-            </h4>
+        <div> 
+        <input style="
+            text-align: left;
+            margin-left: 5%;
+            display: block;
+            font-family: pten;
+            font-size: 50px;
+            color: black;
+            border: none;
+            width: auto;
+            outline: none;
+            " filled readonly v-model="subjectSet.title"/><br>
+        <input style="
+            text-align: right;
+            margin-left: auto;
+            margin-right: 5%;
+            display: block;
+            font-family: sans-serif;
+            font-size: 20px;
+            color: black;
+            outline: none;
+            border: none;" filled readonly v-model="subjectSet.writer"/>
         </div>
-        <br>
+
+        <div style=" width: 98%; background-color:#027BE3; height: 1px; margin: auto; margin-top: 17px;">
+        </div>
 
         <div class="q-ma-md">과목 목록</div>
-        <q-table :rows="subjectSet.subjects" :columns="columns" row-key="id" hide-bottom/><br>
-
-        <div class="row">
-            <div class="col q-pr-md">
-                <q-input filled v-model="subjectSet.title" label="제목" stack-label readonly /><br>
-            </div>
-            <div class="col q-pl-md">
-                <q-input filled v-model="subjectSet.writer" label="작성자" stack-label readonly /><br>
-            </div>
-        </div>
+        <q-table style="background-color:#027BE3; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);" :rows="subjectSet.subjects" :columns="columns" row-key="id" hide-bottom/><br>
 
         <div class="row flex flex-center">
             <q-btn @click="selectSubjetSet" color="primary" label="적용" />
@@ -135,3 +146,9 @@ const columns = [
     { name: 'description', align: 'left', label: '설명', field: 'description', style: 'width: 300px' },
 ];
 </script>
+
+<style>
+tbody {
+    background-color: #fcfcfc;
+}
+</style>

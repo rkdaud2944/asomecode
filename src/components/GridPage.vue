@@ -2,11 +2,11 @@
 <template>
     <div>
         <div style="width: 90%; text-align: center; margin: auto; padding: 0;" >
-            <q-table :rows="rows" :columns="columns" style=" background-color: #027BE3;" :pagination="paginationOption"
+            <q-table :rows="rows" :columns="columns" style=" background-color: #027BE3;  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);" :pagination="paginationOption"
                 row-key="name" hide-bottom>
 
             <template v-slot:body="props">
-                <q-tr @click="onRowClick(props.row)" :props="props" style="font-family:Arial, Helvetica, sans-serif; cursor: pointer; background-color: #424242;">
+                <q-tr @click="onRowClick(props.row)" :props="props" style="font-family:Arial, Helvetica, sans-serif; cursor: pointer; background-color: #fcfcfcf6; ">
                     <q-td v-for="col in props.cols" :key="col.name" :props="props">
                         <div>{{ col.value }}</div>
                     </q-td>
@@ -136,7 +136,7 @@ export default {
     }
 }
 .q-table th {
-    font-size: 16px;
+    font-size: 18px;
     font-family: pten;
     color: white;
     text-align: left;
@@ -146,6 +146,6 @@ export default {
 }
 .q-table__card {
     box-shadow: none;
-    color: white;
+    color: black;
 }
 </style>
