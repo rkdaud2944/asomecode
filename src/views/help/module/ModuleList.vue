@@ -44,4 +44,5 @@ export default {
 .hr {
     border: 1px solid #027BE3;
 }
+
 </style>

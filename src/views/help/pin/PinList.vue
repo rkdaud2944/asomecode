@@ -85,6 +85,8 @@ export default {
 }
 
 body {
-   background-color: white;
+    background-color: white;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 </style>
