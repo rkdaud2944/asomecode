@@ -6,7 +6,8 @@
             padding-top: 35px;
             margin-left: 5%;
             display: block;
-            font-family: pten;
+            font-weight: 600;
+            font-family: none;
             font-size: 50px;
             color: black;">
             Custom Curriculum Set
@@ -18,43 +19,47 @@
             font-family: sans-serif;
             font-size: 20px;
             color: black;">
-            직접 커스텀한 과목을<br>어썸코드에 적용시켜 보아요
+            직접 커스텀한 과목을<br>어썸코드에 적용시켜요
         </a>
     </div>
-    <div class="row q-pa-md" style="
-        width: 40%;
-        margin-left: auto;
-        margin-right: 5%;
-        padding: 0;
-        padding-top: 20px;
-        ">
-        <div class="custom-div1" style="width: 30%; padding: 0px; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
-            <q-select dense square filled v-model="selectedFilter" :options="filterOptions" option-value="value" option-label="label" label="필터"  />
+    <div>
+        <q-btn @click="clearSelection" color="red" label="초기화" style="margin-left: 5%; top: 60px;" />
+        <div class="row q-pa-md" style="
+            width: 40%;
+            margin-left: auto;
+            margin-right: 5%;
+            padding: 0;
+            padding-top: 20px;
+            ">
+            <div class="custom-div1" style="width: 30%; padding: 0px; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
+                <q-select dense square filled v-model="selectedFilter" :options="filterOptions" option-value="value" option-label="label" label="필터"  />
+            </div>
+            <div class="custom-div2" style="
+                padding-left: 0;
+                width: 70%;
+                border-top-left-radius: 0px !important;
+                border-bottom-left-radius: 0px !important;
+                border-top-right-radius: 3px !important;
+                border-bottom-right-radius: 3px !important;
+                background-color: white;
+                box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
+                <q-input dense square filled color="teal" v-model="keyword" label="검색어를 입력하세요" v-on:keyup.enter="searchSubject">
+                </q-input>
+            </div>
         </div>
-        <div class="custom-div2" style="
-            padding-left: 0;
-            width: 70%;
-            border-top-left-radius: 0px !important;
-            border-bottom-left-radius: 0px !important;
-            border-top-right-radius: 3px !important;
-            border-bottom-right-radius: 3px !important;
-            background-color: white;box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
-            <q-input dense square filled color="teal" v-model="keyword" label="검색어를 입력하세요" v-on:keyup.enter="searchSubject">
-            </q-input>
-        </div>
+
+    <div style=" width: 90%; background-color:#027BE3; height: 1px; margin: auto; margin-top: 17px; margin-bottom: 17px;">
     </div>
 
-    <div style=" width: 90%; background-color:#027BE3; height: 1px; margin: auto; margin-top: 17px;">
-    </div>
-
-    <div class="q-pa-md">
+    <div>
         <SubjectSetListGrid ref="grid" rowKey="id" :columns="columns" @onPageChanged="onPageChanged" />
         <br>
         <div class="row flex flex-center" style="margin-right: 5%; display: block; text-align: right;">
-            <q-btn @click="clearSelection" color="primary" label="초기화" />
-            <q-btn @click="onWriteButtonClick" color="primary" label="글쓰기" class="q-ml-md" />
+            
+            <q-btn @click="onWriteButtonClick" color="primary" label="만들기" class="q-ml-md" />
         </div>
     </div>
+</div>
 </template>
 
 <script>
@@ -126,10 +131,10 @@ export default {
 }
 
 const columns = [
-    { name: 'id', align: 'center', label: 'ID', field: 'id', style: 'width: 30px' },
-    { name: 'writer', align: 'center', label: '작성자', field: 'writer', style: 'width: 150px' },
+    // { name: 'id', align: 'center', label: 'ID', field: 'id', style: 'width: 30px' },
     { name: 'title', align: 'left', label: '제목', field: 'title', style: 'width: 250px' },
-    { name: 'createAt', align: 'left', label: '생성일', field: 'createAt', style: 'width: 300px' },
-    { name: 'optionBtn', align: 'left', label: 'Option', field: 'optionBtn', style: 'width: 300px' },
+    { name: 'writer', align: 'center', label: '작성자', field: 'writer', style: 'width: 150px' },
+    { name: 'createAt', align: 'right', label: '생성일', field: 'createAt', style: 'width: 300px' },
+    // { name: 'optionBtn', align: 'left', label: '상세보기', field: 'optionBtn', style: 'width: 300px, text-align:right' },
 ];
 </script>

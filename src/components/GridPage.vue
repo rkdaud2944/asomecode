@@ -136,8 +136,8 @@ export default {
     }
 }
 .q-table th {
-    font-size: 18px;
-    font-family: pten;
+    font-size: 14px;
+    font-weight: 600;
     color: white;
     text-align: left;
 }

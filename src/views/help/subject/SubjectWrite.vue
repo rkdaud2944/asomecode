@@ -48,9 +48,11 @@
 
         <q-input v-model="description" label="과목 설명" filled type="textarea" />
         <br>
-
-        <q-btn @click="createSubject" color="primary" label="생성" />
-        <q-btn class="q-mx-md" @click="clearForm" color="warning" label="초기화" />
+        <div style="text-align: right;">
+            <q-btn @click="createSubject" color="primary" label="생성" />
+            <!-- <q-btn class="q-ml-md" @click="clearForm" color="warning" label="초기화" /> -->
+            <q-btn class="q-ml-md" @click="goBack()" color="green" label="뒤로가기"  />
+        </div>
     </div>
 </template>
 

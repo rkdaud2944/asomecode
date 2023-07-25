@@ -3,42 +3,59 @@
     <br>
 
     <div class="q-pa-md">
-        <div> 
-        <input style="
-            text-align: left;
-            margin-left: 5%;
-            display: block;
-            font-family: pten;
-            font-size: 50px;
-            color: black;
-            border: none;
-            width: auto;
-            outline: none;
-            " filled readonly v-model="subjectSet.title"/><br>
-        <input style="
-            text-align: right;
-            margin-left: auto;
-            margin-right: 5%;
-            display: block;
-            font-family: sans-serif;
-            font-size: 20px;
-            color: black;
-            outline: none;
-            border: none;" filled readonly v-model="subjectSet.writer"/>
+        <div>
+            <div>
+            <p style="text-align: left;
+                padding-top: 35px;
+                padding-left: 2px;
+                margin-left: 5%;
+                display: block;
+                color: #000000;
+                width: auto;
+                margin-bottom: 0;
+                ">Help 
+                <img src="../../../../public/images/common/arrow.png" style="width:10px;
+                    position: relative;
+                    top: 3.8px;
+                    margin-right:4px;">
+                <span style="color: #999899;">Custom Curriculum Set</span>
+            </p>
+            <input style="
+                margin-left: 5%;
+                font-weight: 600;
+                font-family: none;
+                margin-top: 3px;
+                outline: none;
+                border: none;
+                width: auto;
+                font-size: 35px;
+                " filled readonly v-model="subjectSet.title"/><br>
+        </div>
+            <input style="
+                text-align: right;
+                margin-left: auto;
+                margin-right: 5%;
+                display: block;
+                font-family: sans-serif;
+                font-size: 14px;
+                color: black;
+                outline: none;
+                border: none;" filled readonly v-model="subjectSet.writer"/>
         </div>
 
-        <div style=" width: 98%; background-color:#027BE3; height: 1px; margin: auto; margin-top: 17px;">
+        <div style=" width: 90%; background-color:#027BE3; height: 1px; margin: auto; margin-top: 17px;">
         </div>
 
-        <div class="q-ma-md">과목 목록</div>
-        <q-table style="background-color:#027BE3; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);" :rows="subjectSet.subjects" :columns="columns" row-key="id" hide-bottom/><br>
+        <div class="q-ma-md" style="margin-left: 5%;">과목 목록</div>
+        <q-table style="background-color:#027BE3; margin-left: 5%; margin-right: 5%; width: auto; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);" :rows="subjectSet.subjects" :columns="columns" row-key="id" hide-bottom/><br>
 
-        <div class="row flex flex-center">
-            <q-btn @click="selectSubjetSet" color="primary" label="적용" />
-            <q-btn @click="clearSelection" color="primary" label="적용 취소" class="q-ml-md" />
+        <div style="text-align: right; margin-right: 5%;">
+            <q-btn @click="selectSubjetSet" color="primary" label="어썸코드 적용" />
+            <!-- <q-btn @click="clearSelection" color="primary" label="적용 취소" class="q-ml-md" /> -->
 
             <q-btn @click="onclickUpdateBtn" color="secondary" label="수정" class="q-ml-md" />
-            <q-btn @click="onclickDeleteBtn" color="deep-orange" label="삭제" class="q-ml-md" />
+            <q-btn @click="onclickDeleteBtn" color="red" label="삭제" class="q-ml-md" />
+            <q-btn class="q-ml-md" @click="goBack()" color="green" label="뒤로가기"  />
         </div>
     </div>
 
@@ -139,16 +156,25 @@ export default {
 }
 
 const columns = [
-{ name: 'id', align: 'center', label: 'ID', field: 'id', style: 'width: 30px' },
-    { name: 'writer', align: 'center', label: '작성자', field: 'writer', style: 'width: 150px' },
+    // { name: 'id', align: 'center', label: 'ID', field: 'id', style: 'width: 30px' },
     { name: 'title', align: 'left', label: '제목', field: 'title', style: 'width: 250px' },
     { name: 'subTitle', align: 'left', label: '부제목', field: 'subTitle', style: 'width: 200px' },
-    { name: 'description', align: 'left', label: '설명', field: 'description', style: 'width: 300px' },
+    { name: 'description', align: 'left', label: '설명', field: 'description', style: 'width: 300px',
+        format: (value) => {
+            if (value.length > 15) {
+                return value.substring(0, 15) + '...';
+            }
+            return value;
+        },
+    },
+    { name: 'writer', align: 'center', label: '작성자', field: 'writer', style: 'width: 150px' },
 ];
+
 </script>
 
 <style>
 tbody {
     background-color: #fcfcfc;
 }
+
 </style>

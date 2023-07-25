@@ -6,10 +6,11 @@
             padding-top: 35px;
             margin-left: 5%;
             display: block;
-            font-family: pten;
+            font-family: none;
+            font-weight: 600;
             font-size: 50px;
             color: black;">
-            QnA
+            FaQ
         </a>
         <a style="
             text-align: left;
@@ -17,8 +18,9 @@
             display: block;
             font-family: sans-serif;
             font-size: 20px;
-            color: black;">
-            질문에 묻고 답해요
+            color: black;
+            margin-bottom: 7px;">
+            자주 묻는 질문입니다
         </a>
     </div>
 

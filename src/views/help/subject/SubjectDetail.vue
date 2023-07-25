@@ -1,24 +1,39 @@
 <template>
     <Header />
-    <div> 
-        <input style="
-            text-align: left;
-            padding-top: 35px;
-            margin-left: 5%;
-            display: block;
-            font-family: pten;
-            font-size: 50px;
-            color: black;
-            border: none;
-            width: auto;
-            outline: none;
-            " filled readonly v-model="subject.title"/><br>
+    <div>
+        <div>
+            <p style="text-align: left;
+                padding-top: 35px;
+                padding-left: 2px;
+                margin-left: 5%;
+                display: block;
+                color: #000000;
+                width: auto;
+                margin-bottom: 0;
+                ">Help 
+                <img src="../../../../public/images/common/arrow.png" style="width:10px;
+                    position: relative;
+                    top: 3.8px;
+                    margin-right:4px;">
+                <span style="color: #999899;">Custom Curriculum</span>
+            </p>
+            <input style="
+                margin-left: 5%;
+                margin-top: 3px;
+                font-family: none;
+                font-weight: 600;
+                outline: none;
+                border: none;
+                width: auto;
+                font-size: 35px;
+                " filled readonly v-model="subject.title"/><br>
+        </div>
         <input style="
             text-align: left;
             margin-left: 5%;
             display: block;
             font-family: sans-serif;
-            font-size: 20px;
+            font-size: 14px;
             color: black;
             outline: none;
             border: none;
@@ -29,29 +44,28 @@
             margin-right: 5%;
             display: block;
             font-family: sans-serif;
-            font-size: 20px;
+            font-size: 14px;
             color: black;
             outline: none;
             border: none;" filled readonly v-model="subject.writer"/>
     </div>
 
     
-    <div style="width: 90%; background-color:#027BE3; height: 1px; margin: auto; margin-top: 17px;">
-    </div>
+    <div style=" width: 90%; background-color:#027BE3; height: 1px; margin: auto; margin-top: 17px;">
+        </div>
 
-    <div class="q-ma-md" style="width: 90%; display: block; margin-left: auto; margin-right:auto;">
-        <div class="q-ma-md">차시 목록</div>
-
-        <q-table style="background-color:#027BE3; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);" :rows="subject.lessons" :columns="columns" row-key="id" hide-bottom /><br>
+    <div class="q-ma-md" style="margin-left: 5%; ">차시 목록</div>
+     
+        <q-table style="background-color:#027BE3; margin-left: 5%; margin-right: 5%; width: auto; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);" :rows="subject.lessons" :columns="columns" row-key="id" hide-bottom /><br>
         <br>
 
-        <q-input v-model="subject.description" label="과목 설명" filled type="textarea" readonly /><br>
+        <q-input style=" margin-left: 5%; margin-right: 5%; width: auto;" v-model="subject.description" label="과목 설명" filled readonly /><br>
 
-        <div class="row flex flex-center">
+        <div style="text-align: right; margin-right: 5%;">
             <q-btn @click="onclickUpdateBtn" color="secondary" label="수정" class="q-ml-md" />
-            <q-btn @click="onclickDeleteBtn" color="deep-orange" label="삭제" class="q-ml-md" />
+            <q-btn @click="onclickDeleteBtn" color="red" label="삭제" class="q-ml-md" />
+            <q-btn style="margin-right: 0" class="q-mx-md" @click="goBack()" color="green" label="뒤로가기" />
         </div>
-    </div>
 
     <q-dialog ref="passwordDialog" @hide="onCancelPasswordDialog">
         <q-card class="q-dialog-plugin">

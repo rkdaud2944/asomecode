@@ -5,7 +5,8 @@
             text-align: center;
             padding-top: 35px;
             display: block;
-            font-family: pten;
+            font-family: none;
+            font-weight: 600;
             font-size: 50px;
             color: black;">
             Module Library

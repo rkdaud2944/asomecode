@@ -3,8 +3,8 @@
     <q-layout view="hhh LpR fff">
         <q-page-container style="margin: 0px 100px 0px 100px; background-color: #ffffff; height: 100%; height: 100vh; margin: 0;">
             <div>
-                <div class="q-pa-md">
-                    <div class="row q-pa-md" style="
+                <div class="q-pa-md" style="padding: 0;">
+                    <!-- <div class="row q-pa-md" style="
                         width: 40%;
                         margin-left: auto;
                         margin-right: 5%;
@@ -25,7 +25,7 @@
                             background-color: white;box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
                             <q-input dense square filled color="teal" style="" v-model="keyword" label="검색어를 입력하세요" v-on:keyup.enter="searchSubject"></q-input>
                         </div>
-                    </div>
+                    </div> -->
                     
                     <div style=" width: 90%; background-color:#027BE3; height: 1px; margin: auto; margin-bottom: 17px;">
                     </div>
@@ -35,7 +35,7 @@
                         @onRowClick="onRowClick" />
                 </div>
             </div>
-            <div style="text-align: right; margin-bottom: 10px; margin-right: 6%;">
+            <div style="text-align: right; margin-top: 15px; margin-right: 5%;">
                 <q-btn color="primary" label="새 글 작성" @click="onCreateArticleDialog(boardType)" />
             </div>
         </q-page-container>
@@ -106,11 +106,11 @@ export default {
 }
 
 const columns = [
-    { name: 'createAt', align: 'left', label: '작성 날짜', field: 'createAt', style: 'width: 80px' },
+    // { name: 'createAt', align: 'left', label: '작성 날짜', field: 'createAt', style: 'width: 80px' },
     { name: 'title', label: '제목', align: 'left', field: 'title', style: 'width: 80px' },
     { name: 'writer', label: '작성자', align: 'left', field: 'writer', style: 'width: 80px' },
-    { name: 'viewCount', label: '조회수', align: 'left', field: 'viewCount', style: 'width: 80px' },
-    { name: 'commentCount', label: '댓글수', align: 'left', field: 'commentCount', style: 'width: 80px' },
+    // { name: 'viewCount', label: '조회수', align: 'left', field: 'viewCount', style: 'width: 80px' },
+    // { name: 'commentCount', label: '댓글수', align: 'left', field: 'commentCount', style: 'width: 80px' },
 ]
 </script>
 

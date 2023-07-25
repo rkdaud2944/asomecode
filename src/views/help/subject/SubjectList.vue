@@ -1,13 +1,13 @@
 <template>
     <Header />
-
     <div> 
         <a style="
             text-align: left;
             padding-top: 35px;
             margin-left: 5%;
             display: block;
-            font-family: pten;
+            font-family: none;
+            font-weight: 600;
             font-size: 50px;
             color: black;">
             Custom Curriculum
@@ -36,24 +36,24 @@
             <div class="custom-div2" style="
                 padding-left: 0;
                 width: 70%;
-                
                 border-top-left-radius: 0px !important;
                 border-bottom-left-radius: 0px !important;
                 border-top-right-radius: 3px !important;
                 border-bottom-right-radius: 3px !important;
-                background-color: white;box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
-                <q-input dense square filled color="teal" style="" v-model="keyword" label="검색어를 입력하세요" v-on:keyup.enter="searchSubject"></q-input>
+                background-color: white;
+                box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
+                <q-input dense square filled color="teal" style="" v-model="keyword" label="검색어를 입력하세요" v-on:keyup.enter="searchSubject">
+                </q-input>
             </div>
         </div>
 
         <div style=" width: 90%; background-color:#027BE3; height: 1px; margin: auto; margin-top: 17px;">
-
         </div>
 
         <div style="padding-top: 16px;">
             <Grid ref="grid" rowKey="id" :columns="columns" @onPageChanged="onPageChanged" @onRowClick="onRowClick" /><br />        
             <div class="row flex flex-center" style="margin-right: 5%; display: block; text-align: right;" >
-                <q-btn @click="onWriteButtonClick" color="primary" label="글쓰기" />
+                <q-btn @click="onWriteButtonClick" color="primary" label="만들기" />
             </div>
         </div>
     </div>
@@ -130,7 +130,14 @@ const columns = [
     
     { name: 'title', align: 'center', label: '제목', field: 'title', style: 'width: 250px;' },
     { name: 'subTitle', align: 'center', label: '부제목', field: 'subTitle', style: 'width: 200px;' },
-    { name: 'description', align: 'center', label: '설명', field: 'description', style: 'width: 300px;' },
+    { name: 'description', align: 'center', label: '설명', field: 'description', style: 'width: 300px;',
+        format: (value) => {
+            if (value.length > 15) {
+                return value.substring(0, 15) + '...';
+            }
+            return value;
+        },
+    },
     { name: 'writer', align: 'center', label: '작성자', field: 'writer', style: 'width: 150px;' },
     // { name: 'createat', align: 'left', label: '생성일', field: 'createat', style: 'width: 300px' },
 ];

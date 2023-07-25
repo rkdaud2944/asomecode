@@ -1,16 +1,16 @@
 <!-- 페이징 처리가 된 그리트 콤포넌트 -->
 <template>
-    <div style="width: 92.5%; display: block; margin-left: auto; margin-right: auto; text-align: center;">
-        <div>
+    <div>
+        <div style="width: 90%; text-align: center; margin: auto; padding: 0;" >
             <q-table :rows="rows" :columns="columns" :pagination="paginationOption" row-key="name" hide-bottom  style="background-color: #027BE3; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
-
+                
                 <template v-slot:body="props">
                     <q-tr :props="props" style="background-color: #fcfcfc;">
-                        <q-td v-for="col in props.cols" :key="col.name" :props="props">
+                        <q-td v-for="col in props.cols" :key="col.name" :props="props" @click="onDetailPage(props.row.id)" style="cursor: pointer;">
                             <div>{{ col.value }}</div>
-                            
-                            <q-btn style="margin-right: 10px;" @click="onDetailPage(props.row.id)" v-if="col.name == 'optionBtn'" color="primary" label="상세"/>
-                            <q-btn style="margin-right: 10px;" @click="onSelectSubjectSet(props.row)" v-if="col.name == 'optionBtn'" color="primary" label="과목 설정"/>
+                            <!-- <q-avatar rounded size="40px" font-size="35px" color="primary" text-color="white" icon="directions" v-if="col.name == 'optionBtn'" label="상세" />  -->
+
+                            <!-- <q-btn style="margin-right: 10px;" @click="onSelectSubjectSet(props.row)" v-if="col.name == 'optionBtn'" color="primary" label="과목 설정"/> -->
                         </q-td>
                     </q-tr>
                 </template>
@@ -23,7 +23,6 @@
                 </q-tr>
             </q-table>
         </div>
-        <br />
 
         <div>
             <q-pagination class="page-center" @update:model-value="onPageChanged" v-model="page" :max="pageCount" :max-pages="10"
