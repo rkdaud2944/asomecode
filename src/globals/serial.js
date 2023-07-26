@@ -12,6 +12,7 @@ let boardType = "Zet";
 
 class SerialUnit {
     async open(portName) {
+
         this.port = new SerialPort({
             path: portName,
             baudRate: 115200,
@@ -35,7 +36,7 @@ class SerialUnit {
         try {
             await this.port.open();            
             this.onOpened();
-            this.writeLn("import os; os.uname()");
+            // this.writeLn("import os; os.uname()");
         } catch (error) {
             console.log(error);
             this.onError("어썸보드에 연결할 수가 없습니다.");
@@ -43,6 +44,7 @@ class SerialUnit {
         }
     }
 
+    
     close() {
         if (!this.port) return;
 
@@ -114,7 +116,40 @@ const seiral = {
         serialUnit.onReceived = (msg) => eventbus.emit("onSerialReceived", msg);
         serialUnit.onError = (error) => this.fireErrorEvent(error);
         serialUnit.open(asomeboard.path);
+
+        console.log("연결 완료")
     },
+    
+    playAudio() {
+        const fs = require('fs');
+    
+        const CHUNK_SIZE = 256;  // 1KB의 chunk 사이즈로 설정
+        let buffer = Buffer.alloc(CHUNK_SIZE);
+    
+        fs.open('src/assets/sound/wait3.wav', 'r', (err, fd) => {
+            if (err) throw err;
+            
+            function readNextChunk() {
+                fs.read(fd, buffer, 0, CHUNK_SIZE, null, (err, bytesRead) => {
+                if (err) throw err;
+                if (bytesRead > 0) {
+                    serialUnit.write(`import play_sound
+                    read_from_uart()`);  // 파일의 끝에 도달하면, bytesRead가 CHUNK_SIZE보다 작아질 수 있음.
+                    readNextChunk();
+                } else {
+                    fs.close(fd, (err) => {
+                    if (err) throw err;
+                    });
+                }
+                });
+            }
+            
+            readNextChunk();
+        });
+
+    },
+    
+
 
     disconnect() {
         if (serialUnit == null) return;
