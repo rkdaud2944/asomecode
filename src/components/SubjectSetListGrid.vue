@@ -1,15 +1,14 @@
 <!-- 페이징 처리가 된 그리트 콤포넌트 -->
 <template>
     <div>
-        <div style="width: 90%; text-align: center; margin: auto; padding: 0;" >
-            <q-table :rows="rows" :columns="columns" :pagination="paginationOption" row-key="name" hide-bottom  style="background-color: #027BE3; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
+        <div class="width--90 text-align--center margin--auto padding--0">
+            <q-table class="SubjectSetListGrid-table-tr" :rows="rows" :columns="columns" :pagination="paginationOption" row-key="name" hide-bottom>
                 
                 <template v-slot:body="props">
-                    <q-tr :props="props" style="background-color: #fcfcfc;">
-                        <q-td v-for="col in props.cols" :key="col.name" :props="props" @click="onDetailPage(props.row.id)" style="cursor: pointer;">
+                    <q-tr class="background-color--fcfcfc" :props="props">
+                        <q-td class="cursor--pointer" v-for="col in props.cols" :key="col.name" :props="props" @click="onDetailPage(props.row.id)">
                             <div>{{ col.value }}</div>
                             <!-- <q-avatar rounded size="40px" font-size="35px" color="primary" text-color="white" icon="directions" v-if="col.name == 'optionBtn'" label="상세" />  -->
-
                             <!-- <q-btn style="margin-right: 10px;" @click="onSelectSubjectSet(props.row)" v-if="col.name == 'optionBtn'" color="primary" label="과목 설정"/> -->
                         </q-td>
                     </q-tr>
@@ -17,8 +16,7 @@
 
                 <q-tr>
                     <q-td v-for="col in props.cols" :key="col.name" :props="props">
-                        <q-btn @click="openUrl(`/user/detail?id=${props.row.id}`)" flat style="color: #FF0080"
-                            label="설정" />
+                        <q-btn @click="openUrl(`/user/detail?id=${props.row.id}`)" flat label="설정" />
                     </q-td>
                 </q-tr>
             </q-table>
@@ -128,22 +126,5 @@ export default {
     },
 };
 </script>
-
-<style>
-@media screen and (max-width:1250px ) {
-    .page-center {
-        margin-top: 25px;
-        float: left;
-        position: relative;
-        left: 40%;
-    }
-}
-@media screen and (min-width:1250px ) {
-    .page-center {
-        margin-top: 25px;
-        float: left;
-        position: relative;
-        left: 46%;
-    }
-}
-</style>
+<style scoped src="@/assets/css/component/common.css"/>
+<style src="@/assets/css/component/SubjectSetListGrid.css"/>

@@ -1,25 +1,10 @@
 <template>
     <Header />
     <div> 
-        <a style="
-            text-align: left;
-            padding-top: 35px;
-            margin-left: 5%;
-            display: block;
-            font-family: none;
-            font-weight: 600;
-            font-size: 50px;
-            color: black;">
+        <p class="help-main-title-font-style text-align--left margin-left--5">
             FaQ
-        </a>
-        <a style="
-            text-align: left;
-            margin-left: 5%;
-            display: block;
-            font-family: sans-serif;
-            font-size: 20px;
-            color: black;
-            margin-bottom: 7px;">
+        </p>
+        <a class="help-sub-title-font-style text-align--left margin-left--5 margin--bottom-7px">
             자주 묻는 질문입니다
         </a>
     </div>
@@ -38,4 +23,5 @@ export default {
     },
 }
 </script>
+<style scoped src="@/assets/css/component/common.css"/>
 

@@ -6,10 +6,10 @@
         <div class="row">
             <div class="col-6">
                 <div class="q-px-md">
-                    <a style="font-size: 25px;">기본 과목</a>
+                    <a class="font-size--25px">기본 과목</a>
                 </div><br>
 
-                <q-virtual-scroll style="max-height: 300px;"
+                <q-virtual-scroll class="max-height--300px"
                     :items="defaultSubjects" separator v-slot="{ item, index }">
                     <q-item :key="index" dense>
                         <q-item-section>
@@ -27,10 +27,10 @@
 
             <div class="col-6">
                 <div class="q-px-md">
-                    <a style="font-size: 25px;">커스텀 과목</a>
+                    <a class="font-size--25px">커스텀 과목</a>
                 </div><br>
 
-                <q-virtual-scroll style="max-height: 180px;"
+                <q-virtual-scroll class="max-height--180px"
                     :items="subjects" separator v-slot="{ item, index }">
                     <q-item :key="index" dense>
                         <q-item-section>
@@ -69,9 +69,9 @@
             </div>
         </div>
         <br>
-        <div style="text-align: right;">
+        <div class="text-align--right">
             <q-btn @click="updateSubjectSet" color="secondary" label="수정" />
-            <q-btn style="margin-right: 0" class="q-mx-md" @click="goBack()" color="red" label="취소" />
+            <q-btn class="q-mx-md margin-right--0" @click="goBack()" color="red" label="취소" />
         </div>
     </div>
 </template>
@@ -184,3 +184,4 @@ export default {
     },
 };
 </script>
+<style scoped src="@/assets/css/component/common.css"/>

@@ -1,30 +1,17 @@
 <template>
     <Header />
-    <div style=" background-color: #ffffff; ">
+    <div class="background-color--ffffff">
         <div class="q-pa-md"> 
-            <a style="
-                text-align: center;
-                padding-top: 35px;
-                display: block;
-                font-family: none;
-                font-weight: 600;
-                font-size: 50px;
-                color: black;">
+            <p class="help-main-title-font-style text-align--center">
                 Pin Library
-            </a>
-            <a style="
-                text-align: center;
-                padding-bottom: 35px;
-                display: block;
-                font-family: sans-serif;
-                font-size: 20px;
-                color: black;">
+            </p>
+            <p class="help-sub-title-font-style text-align--center padding-bottom--35">
                 어썸보드의 핀을 사용하는 방법에 대해서 알려드립니다.
-            </a>
+            </p>
         </div>
         <div class="hr">
         </div>
-        <div class="q-pa-md q-gutter-sm" style="background-color: white; width: 600px; margin-left: auto; margin-right: auto; display: block; text-align: center; border-radius: 5px; margin-top: 3px;">
+        <div class="q-pa-md q-gutter-sm center background-color--ffffff width--600px border-radius--5px margin-top--3px">
             <q-img class="img center" :src="imageBaseUrl + 'button.png'" spinner-color="white" />
             <q-img class="img center" :src="imageBaseUrl + 'buzzer_active.png'" spinner-color="white" />
             <q-img class="img center" :src="imageBaseUrl + 'buzzer_passive.png'" spinner-color="white" />
@@ -64,29 +51,5 @@ export default {
     }
 }
 </script>
-<style>
-@font-face {
-    font-family: pten;
-    src: url(../../../assets/fonts/Pretendard-Black.otf);
-}
-.center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-}
-.hr {
-    border: 1px solid #027BE3 ;
-}
-.img {
-    display: block;
-    max-width: 449px;
-    height: 200px;
-}
-
-body {
-    background-color: white;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-</style>
+<style scoped src="@/assets/css/component/common.css"/>
+<style src="@/assets/css/component/PinList.css"/>

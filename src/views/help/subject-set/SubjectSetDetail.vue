@@ -1,55 +1,25 @@
 <template>
     <Header />
     <br>
-
     <div class="q-pa-md">
         <div>
             <div>
-            <p style="text-align: left;
-                padding-top: 35px;
-                padding-left: 2px;
-                margin-left: 5%;
-                display: block;
-                color: #000000;
-                width: auto;
-                margin-bottom: 0;
-                ">Help 
-                <img src="../../../../public/images/common/arrow.png" style="width:10px;
-                    position: relative;
-                    top: 3.8px;
-                    margin-right:4px;">
-                <span style="color: #999899;">Custom Curriculum Set</span>
+            <p class="help-detail-font-style">Help 
+                <img class="help-detail-title-img-style" src="../../../../public/images/common/arrow.png">
+                <span class="color--999899">Custom Curriculum Set</span>
             </p>
-            <input style="
-                margin-left: 5%;
-                font-weight: 600;
-                font-family: none;
-                margin-top: 3px;
-                outline: none;
-                border: none;
-                width: auto;
-                font-size: 35px;
-                " filled readonly v-model="subjectSet.title"/><br>
+            <input class="help-detail-title-font-style" filled readonly v-model="subjectSet.title"/><br>
         </div>
-            <input style="
-                text-align: right;
-                margin-left: auto;
-                margin-right: 5%;
-                display: block;
-                font-family: sans-serif;
-                font-size: 14px;
-                color: black;
-                outline: none;
-                border: none;" filled readonly v-model="subjectSet.writer"/>
+            <input class="help-detail-writer-font-style" filled readonly v-model="subjectSet.writer"/>
         </div>
 
-        <div style=" width: 90%; background-color:#027BE3; height: 1px; margin: auto; margin-top: 17px;">
+        <div class="hr">
         </div>
 
-        <div class="q-ma-md" style="margin-left: 5%;">과목 목록</div>
-        <q-table style="background-color:#027BE3; margin-left: 5%; margin-right: 5%; width: auto; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);" :rows="subjectSet.subjects" :columns="columns" row-key="id" hide-bottom/><br>
+        <div class="q-ma-md margin-left--5">과목 목록</div>
+        <q-table class="help-detail-table-style" :rows="subjectSet.subjects" :columns="columns" row-key="id" hide-bottom/><br>
 
-        <div style="text-align: right; margin-right: 5%;">
+        <div class="margin-right--5 text-align--right">
             <q-btn @click="selectSubjetSet" color="primary" label="어썸코드 적용" />
             <!-- <q-btn @click="clearSelection" color="primary" label="적용 취소" class="q-ml-md" /> -->
 
@@ -171,10 +141,5 @@ const columns = [
 ];
 
 </script>
-
-<style>
-tbody {
-    background-color: #fcfcfc;
-}
-
-</style>
+<style scoped src="@/assets/css/component/common.css"/>
+<style src="@/assets/css/component/SubjectDetail.css"/>

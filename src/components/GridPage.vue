@@ -1,29 +1,27 @@
 <!-- 페이징 처리가 된 그리트 콤포넌트 -->
 <template>
     <div>
-        <div style="width: 90%; text-align: center; margin: auto; padding: 0;" >
-            <q-table :rows="rows" :columns="columns" style=" background-color: #027BE3;  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);" :pagination="paginationOption"
-                row-key="name" hide-bottom>
-
-            <template v-slot:body="props">
-                <q-tr @click="onRowClick(props.row)" :props="props" style="font-family:Arial, Helvetica, sans-serif; cursor: pointer; background-color: #fcfcfcf6; ">
-                    <q-td v-for="col in props.cols" :key="col.name" :props="props">
-                        <div>{{ col.value }}</div>
-                    </q-td>
-                </q-tr>
-            </template>
+        <div class="width--90 text-align--center margin--auto padding--0">
+            <q-table class="GridPage-table-tr" :rows="rows" :columns="columns" :pagination="paginationOption" row-key="name" hide-bottom>
+                <template v-slot:body="props">
+                    <q-tr class="GridPage-table-td" @click="onRowClick(props.row)" :props="props">
+                        <q-td v-for="col in props.cols" :key="col.name" :props="props">
+                            <div>{{ col.value }}</div>
+                        </q-td>
+                    </q-tr>
+                </template>
             </q-table>
         </div>
-            <q-pagination
-                class="page-center"
-                @update:model-value="onPageChanged" v-model="page" :max="pageCount" :max-pages="10"
-                boundary-numbers color="blue"
-                direction-links
-                boundary-links
-                icon-first="skip_previous"
-                icon-last="skip_next"
-                icon-prev="fast_rewind"
-                icon-next="fast_forward"/>
+        <q-pagination
+            class="page-center"
+            @update:model-value="onPageChanged" v-model="page" :max="pageCount" :max-pages="10"
+            boundary-numbers color="blue"
+            direction-links
+            boundary-links
+            icon-first="skip_previous"
+            icon-last="skip_next"
+            icon-prev="fast_rewind"
+            icon-next="fast_forward"/>
     </div>
 </template>
 
@@ -112,40 +110,5 @@ export default {
     },
 };
 </script>
-
-<style>
-@font-face {
-    font-family: pten;
-    src: url(../assets/fonts/NEXEN\ TIRE_Regular.ttf);
-}
-
-@media screen and (max-width:1250px ) {
-    .page-center {
-        margin-top: 25px;
-        float: left;
-        position: relative;
-        left: 40%;
-    }
-}
-@media screen and (min-width:1250px ) {
-    .page-center {
-        margin-top: 25px;
-        float: left;
-        position: relative;
-        left: 46%;
-    }
-}
-.q-table th {
-    font-size: 14px;
-    font-weight: 600;
-    color: white;
-    text-align: left;
-}
-.q-table tbody td {
-    text-align: left;
-}
-.q-table__card {
-    box-shadow: none;
-    color: black;
-}
-</style>
+<style scoped src="@/assets/css/component/common.css"/>
+<style src="@/assets/css/component/GridPage.css"/>

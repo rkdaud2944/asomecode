@@ -4,29 +4,7 @@
         <q-page-container style="margin: 0px 100px 0px 100px; background-color: #ffffff; height: 100%; height: 100vh; margin: 0;">
             <div>
                 <div class="q-pa-md" style="padding: 0;">
-                    <!-- <div class="row q-pa-md" style="
-                        width: 40%;
-                        margin-left: auto;
-                        margin-right: 5%;
-                        padding: 0;
-                        padding-top: 20px;
-                        padding-bottom:20px;
-                        ">
-                        <div class="custom-div1" style="width: 30%; padding: 0px; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
-                            <q-select dense square filled v-model="selectedFilter" :options="filterOptions" option-value="value" option-label="label" label="필터"  />
-                        </div>
-                        <div class="custom-div2" style="
-                            padding-left: 0;
-                            width: 70%;
-                            border-top-left-radius: 0px !important;
-                            border-bottom-left-radius: 0px !important;
-                            border-top-right-radius: 3px !important;
-                            border-bottom-right-radius: 3px !important;
-                            background-color: white;box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
-                            <q-input dense square filled color="teal" style="" v-model="keyword" label="검색어를 입력하세요" v-on:keyup.enter="searchSubject"></q-input>
-                        </div>
-                    </div> -->
-                    
+
                     <div style=" width: 90%; background-color:#027BE3; height: 1px; margin: auto; margin-bottom: 17px;">
                     </div>
 

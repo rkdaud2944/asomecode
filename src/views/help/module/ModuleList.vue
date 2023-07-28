@@ -1,30 +1,17 @@
 <template>
     <Header />
     <div class="q-pa-md"> 
-        <a style="
-            text-align: center;
-            padding-top: 35px;
-            display: block;
-            font-family: none;
-            font-weight: 600;
-            font-size: 50px;
-            color: black;">
+        <p class="help-main-title-font-style text-align--center">
             Module Library
-        </a>
-        <a style="
-            text-align: center;
-            padding-bottom: 35px;
-            display: block;
-            font-family: sans-serif;
-            font-size: 20px;
-            color: black;">
+        </p>
+        <p class="help-sub-title-font-style text-align--center padding-bottom--35">
             어썸보드에서 제공하는 다양한 모듈에 대한 설명입니다.
-        </a>
+        </p>
     </div>
 
     <div class="hr">
-
     </div>
+
 </template>
 
 <script>
@@ -40,9 +27,4 @@ export default {
     }
 }
 </script>
-<style>
-.hr {
-    border: 1px solid #027BE3;
-}
-
-</style>
+<style src="@/assets/css/component/common.css"/>

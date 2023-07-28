@@ -6,9 +6,9 @@
         <div class="row">
             <div class="col-6">
                 <div class="q-px-md">
-                    <a style="font-size: 25px;">기본 과목</a>
+                    <a class="font-size--25px">기본 과목</a>
                 </div><br>
-                <q-virtual-scroll style="max-height: 300px;"
+                <q-virtual-scroll class="max-height--300px"
                     :items="defaultSubjects" separator v-slot="{ item, index }">
                     <q-item :key="index" dense>
                         <q-item-section>
@@ -26,10 +26,10 @@
 
             <div class="col-6">
                 <div class="q-px-md">
-                    <a style="font-size: 25px;">커스텀 과목</a>
+                    <a class="font-size--25px">커스텀 과목</a>
                 </div><br>
 
-                <q-virtual-scroll style="max-height: 180px;"
+                <q-virtual-scroll class="max-height--180px"
                     :items="subjects" separator v-slot="{ item, index }">
                     <q-item :key="index" dense>
                         <q-item-section>
@@ -68,7 +68,7 @@
             </div>
         </div>
         <br>
-        <div style="text-align: right;">
+        <div class="text-align--right">
             <q-btn class="q-mx-md" @click="createSubject" color="primary" label="생성" />
             <!-- <q-btn class="q-mx-md" @click="clearForm" color="warning" label="초기화" /> -->
             <q-btn @click="goBack()" color="green" label="뒤로가기"  />
@@ -171,3 +171,4 @@ export default {
     },
 };
 </script>
+<style scoped src="@/assets/css/component/common.css"/>

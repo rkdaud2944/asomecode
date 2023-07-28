@@ -1,58 +1,30 @@
 <template>
     <Header />
     <div> 
-        <a style="
-            text-align: left;
-            padding-top: 35px;
-            margin-left: 5%;
-            display: block;
-            font-family: none;
-            font-weight: 600;
-            font-size: 50px;
-            color: black;">
+        <p class="help-main-title-font-style margin-left--5 text-align--left">
             Custom Curriculum
-        </a>
-        <a style="
-            text-align: left;
-            margin-left: 5%;
-            display: block;
-            font-family: sans-serif;
-            font-size: 20px;
-            color: black;">
+        </p>
+        <p class="help-sub-title-font-style margin-left--5 text-align--left">
             과목을 직접 커스텀하여<br>나만의 과목을 만들어봐요
-        </a>
+        </p>
     </div>
-    <div style="height: 95vh; ">
-        <div class="row q-pa-md" style="
-            width: 40%;
-            margin-left: auto;
-            margin-right: 5%;
-            padding: 0;
-            padding-top: 20px;
-            ">
-            <div class="custom-div1" style="width: 30%; padding: 0px; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
-                <q-select dense square filled v-model="selectedFilter" :options="filterOptions" option-value="value" option-label="label" label="필터"  />
+    <div class="height--95vh">
+        <div class="row q-pa-md help-search-bar">
+            <div class="custom-div1">
+                <q-select dense square filled v-model="selectedFilter" :options="filterOptions" option-value="value" option-label="label" label="필터" />
             </div>
-            <div class="custom-div2" style="
-                padding-left: 0;
-                width: 70%;
-                border-top-left-radius: 0px !important;
-                border-bottom-left-radius: 0px !important;
-                border-top-right-radius: 3px !important;
-                border-bottom-right-radius: 3px !important;
-                background-color: white;
-                box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
-                <q-input dense square filled color="teal" style="" v-model="keyword" label="검색어를 입력하세요" v-on:keyup.enter="searchSubject">
+            <div class="custom-div2">
+                <q-input dense square filled color="teal" v-model="keyword" label="검색어를 입력하세요" v-on:keyup.enter="searchSubject">
                 </q-input>
             </div>
         </div>
 
-        <div style=" width: 90%; background-color:#027BE3; height: 1px; margin: auto; margin-top: 17px;">
+        <div class="hr">
         </div>
 
-        <div style="padding-top: 16px;">
+        <div class="padding-top--16">
             <Grid ref="grid" rowKey="id" :columns="columns" @onPageChanged="onPageChanged" @onRowClick="onRowClick" /><br />        
-            <div class="row flex flex-center" style="margin-right: 5%; display: block; text-align: right;" >
+            <div class="row flex flex-center text-align--right margin-right--5 display-block">
                 <q-btn @click="onWriteButtonClick" color="primary" label="만들기" />
             </div>
         </div>
@@ -127,7 +99,6 @@ export default {
 
 const columns = [
     // { name: 'id', align: 'center', label: 'ID', field: 'id', style: 'width: 30px' },
-    
     { name: 'title', align: 'center', label: '제목', field: 'title', style: 'width: 250px;' },
     { name: 'subTitle', align: 'center', label: '부제목', field: 'subTitle', style: 'width: 200px;' },
     { name: 'description', align: 'center', label: '설명', field: 'description', style: 'width: 300px;',
@@ -142,40 +113,5 @@ const columns = [
     // { name: 'createat', align: 'left', label: '생성일', field: 'createat', style: 'width: 300px' },
 ];
 </script>
-<style>
-@font-face {
-    font-family: pten;
-    src: url(../../../assets/fonts/Pretendard-Black.otf);
-}
-
-
-.custom-div1 .q-field__control{
-    border-top-left-radius: 3px !important;
-    border-bottom-left-radius: 3px !important;
-    border-top-right-radius: 0px !important;
-    border-bottom-right-radius: 0px !important;
-    /* border: 1px solid #000000  !important; */
-    background-color: #fcfcfcf6;
-}
-.custom-div2 .q-field__control{
-    border-top-left-radius: 0px !important;
-    border-bottom-left-radius: 0px !important;
-    border-top-right-radius: 3px !important;
-    border-bottom-right-radius: 3px !important;
-    background-color: #fcfcfcf6;
-}
-/* .q-field__inner{
-    max-height: 35px !important;
-} */
-.q-field__label {
-    font-size: 12px !important;
-    color: black !important;
-}
-.q-field__native{
-    font-size: 10px !important;
-    color: black !important;
-}
-body {
-    background-color: white;
-}
-</style>
+<style scoped src="@/assets/css/component/common.css"/>
+<style src="@/assets/css/component/SubjectList.css"/>
