@@ -9,6 +9,7 @@ eventbus.on("onSerialReceived", (data) => {
 
 let serialUnit = null;
 let boardType = "Zet";
+const fs = require('fs');
 
 class SerialUnit {
     async open(portName) {
@@ -120,34 +121,41 @@ const seiral = {
         console.log("연결 완료")
     },
     
-    playAudio() {
-        const fs = require('fs');
+    playAudio(filePath) {
+        const fileSizeInBytes = fs.statSync(filePath).size; // 파일 사이즈 총량
+        
+        console.log(fileSizeInBytes);
+
+        serialUnit.write()
+
+        const FIRST_CHUNK_SIZE = 2500;  // 1KB의 chunk 사이즈로 설정
     
-        const CHUNK_SIZE = 256;  // 1KB의 chunk 사이즈로 설정
-        let buffer = Buffer.alloc(CHUNK_SIZE);
-    
-        fs.open('src/assets/sound/wait3.wav', 'r', (err, fd) => {
-            if (err) throw err;
-            
-            function readNextChunk() {
-                fs.read(fd, buffer, 0, CHUNK_SIZE, null, (err, bytesRead) => {
-                if (err) throw err;
-                if (bytesRead > 0) {
-                    serialUnit.write(`import play_sound
-                    read_from_uart()`);  // 파일의 끝에 도달하면, bytesRead가 CHUNK_SIZE보다 작아질 수 있음.
-                    readNextChunk();
-                } else {
-                    fs.close(fd, (err) => {
-                    if (err) throw err;
-                    });
-                }
-                });
-            }
-            
-            readNextChunk();
-        });
+        
+        this.readNextChunk(filePath,0,FIRST_CHUNK_SIZE,fileSizeInBytes);
 
     },
+
+    // (path,start,end,fileSize,data)
+    readNextChunk(path,startChunk,endChuck,fileSize) {
+        startChunk = parseInt(startChunk);
+        endChuck = parseInt(endChuck);
+        fileSize = parseInt(fileSize);
+        
+        if(fileSize!=0){
+            fs.readFile(path, (err, data) => {
+                if (err) throw err;
+                // 첫 256 바이트 추출
+                const first256bytes = data.slice(startChunk, endChuck);
+                const base64Data = first256bytes.toString('base64');
+                // 시리얼 포트를 통해 데이터 전송
+                serialUnit.write(`import gc;gc.collect();\r\nimport play_sound;play_sound.base64_receiver('${path}',${startChunk},${endChuck},${fileSize},'${base64Data}')\r\ngc.collect();\r\n`) // 경로, 청크시작점,청크끝점,파일 총 사이즈, 데이터
+            }); 
+        }
+
+
+    },
+    
+    
     
 
 
