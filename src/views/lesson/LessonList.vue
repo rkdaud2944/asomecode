@@ -1,6 +1,6 @@
 <template>
     <div class="header nav-padding">
-        <a href="/">
+        <a @click="goTo('/')">
             <img src="/images/common/logom.png" class="subject-logo"/>
         </a>
     </div>

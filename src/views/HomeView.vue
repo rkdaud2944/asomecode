@@ -2,7 +2,7 @@
     <div class="row q-pa-md nav-padding" style="padding-left: 0px; padding-right: 0px;">
         <div>
 
-            <a href="/"><img src="/images/common/logo2.png" class="img">
+            <a @click="goTo('/')"><img src="/images/common/logo2.png" class="img">
             </a>
         </div>
         <div class="col menu">
