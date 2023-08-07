@@ -1,7 +1,7 @@
 <template>
     <div class="resizer" @mousedown="startResize"></div>
         <div>
-            <div :style="{ height: consoleHeight + 'px' }" ref="console resizable" class="q-pa-md">
+            <div :style="{ height: consoleHeight + 'px' }" ref="console resizable" class="q-pa-md" id="console">
                 <q-page-sticky :offset="[20, -40]">
                     <q-expansion-item v-model="arrow" class="shadow-1 overflow-hidden" dense
                         style="border-radius: 30px; width: 40px;"
@@ -40,7 +40,6 @@ export default {
             arrow: false,
         };
     },
-
     mounted() {
         eventbus.on("onSerialConnected", () => {
             this.rows = [];

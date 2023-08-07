@@ -1,8 +1,7 @@
 <template>
     <div class="header nav-padding">
-        <a href="/">
-            <!-- <img src="/images/common/logom.png" class="logo" /> -->
-            <img :src="logom" class="slogo"/>
+        <a @click="goTo('/')">
+            <img src="/images/common/logom.png" class="logo" />
         </a>
     </div>
 
@@ -29,11 +28,12 @@
 
 <script>
 /* eslint-disable */
-import images from "@/assets/images";
 import markdown from "@/utils/markdown";
 import apiLesson from "@/api/lesson";
 
 export default {
+    mixins: [VueBase],
+    
     data() {
         return {
             lesson: {},

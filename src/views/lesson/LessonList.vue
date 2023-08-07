@@ -1,8 +1,7 @@
 <template>
     <div class="header nav-padding">
-        <a href="/">
-            <!-- <img src="/images/common/logom.png" class="subject-logo"/> -->
-            <img :src="logom" class="subject-logo"/>
+        <a @click="goTo('/')">
+            <img src="/images/common/logom.png" class="subject-logo"/>
         </a>
     </div>
 
