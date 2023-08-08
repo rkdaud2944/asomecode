@@ -4,10 +4,11 @@
 
     <div class="q-pa-md">
         <div class="row">
-            <div class="col-3">
-                <div class="q-px-md">기본 과목</div><br>
-
-                <q-virtual-scroll style="max-height: 300px;"
+            <div class="col-6">
+                <div class="q-px-md">
+                    <a class="font-size--25px">기본 과목</a>
+                </div><br>
+                <q-virtual-scroll class="max-height--300px"
                     :items="defaultSubjects" separator v-slot="{ item, index }">
                     <q-item :key="index" dense>
                         <q-item-section>
@@ -23,10 +24,12 @@
                 </q-virtual-scroll>
             </div>
 
-            <div class="col-3">
-                <div class="q-px-md">커스텀 과목</div><br>
+            <div class="col-6">
+                <div class="q-px-md">
+                    <a class="font-size--25px">커스텀 과목</a>
+                </div><br>
 
-                <q-virtual-scroll style="max-height: 300px;"
+                <q-virtual-scroll class="max-height--180px"
                     :items="subjects" separator v-slot="{ item, index }">
                     <q-item :key="index" dense>
                         <q-item-section>
@@ -61,13 +64,15 @@
                 <q-input filled v-model="writer" label="작성자" stack-label />
             </div>
             <div class="col q-pl-md">
-                <q-input filled v-model="password" label="비밀먼호" type="password" stack-label />
+                <q-input filled v-model="password" label="비밀번호" type="password" stack-label />
             </div>
         </div>
         <br>
-
-        <q-btn @click="createSubject" color="primary" label="생성" />
-        <q-btn class="q-mx-md" @click="clearForm" color="warning" label="초기화" />
+        <div class="text-align--right">
+            <q-btn class="q-mx-md" @click="createSubject" color="primary" label="생성" />
+            <!-- <q-btn class="q-mx-md" @click="clearForm" color="warning" label="초기화" /> -->
+            <q-btn @click="goBack()" color="green" label="뒤로가기"  />
+        </div>
     </div>
 </template>
 
@@ -166,3 +171,4 @@ export default {
     },
 };
 </script>
+<style scoped src="@/assets/css/component/common.css"/>

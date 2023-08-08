@@ -7,7 +7,7 @@
             <div class="col-3" v-for="subject in defaultSubjects" :key="subject.id">
                 <div class="q-px-md">{{ subject.title }}</div><br>
 
-                <q-virtual-scroll style="max-height: 300px;"
+                <q-virtual-scroll class="max-height--300px"
                     :items="lessons.filter(e => e.defaultSubjectId == subject.id)" separator v-slot="{ item, index }">
                     <q-item :key="index" dense>
                         <q-item-section>
@@ -41,7 +41,7 @@
                 <q-input filled v-model="subject.writer" label="작성자" stack-label />
             </div>
             <div class="col q-pl-md">
-                <q-input filled v-model="password" label="비밀먼호" type="password" stack-label />
+                <q-input filled v-model="password" label="비밀번호" type="password" stack-label />
             </div>
         </div>
         <br>
@@ -146,3 +146,5 @@ export default {
     },
 };
 </script>
+
+<style scoped src="@/assets/css/component/common.css"/>
