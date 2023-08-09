@@ -2,19 +2,19 @@
     <div class="row q-pa-md nav-padding" style="padding-left: 0px; padding-right: 0px;">
         <div>
 
-            <a href="/"><img src="/images/common/logo2.png" class="img">
+            <a @click="goTo('/')"><img src="/images/common/logo2.png" class="img">
             </a>
         </div>
         <div class="col menu">
-            <ImageButton :src="'/images/common/header_button_image/bt_notice.png'" @click="onClickNotice"/>
-            <ImageButton :src="'/images/common/header_button_image/bt_library.png'" />
-            <ImageButton :src="'/images/common/header_button_image/bt_community.png'" />
-            <ImageButton :src="'/images/common/header_button_image/bt_faq.png'" />
+            <ImageButton :src="notice" @click="onClickNotice"/>
+            <ImageButton :src="library" />
+            <ImageButton :src="community" />
+            <ImageButton :src="faq" />
         </div>
     </div> 
 
     <div class="what-is-asomeit" style="height: 170px;">
-        <img src="/images/korea/what_is_asomeit.png">
+        <img :src="asomeitQuestionMark">
         <p class="what-is-asomeit-font">
             SW 코딩교육을 통해 <b>논리적인 사고</b>와 <b>창의력</b>을 길러 줄 수 있는 프로그램으로
             <br>흥미있는 놀잇감형 교구를 활용해 어렵지 않게 배울 수 있습니다.
@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import images from "@/assets/images";
 import apiSubjectSet from "@/api/subjectSet";
 import ImageButton from '@/components/ImageButton.vue';
 import Subject from '@/components/SubjectComponent.vue'
@@ -51,6 +52,17 @@ export default {
     data() {
         return {
             subjects: {},
+
+            logo2: images.logo2,
+            notice: images.notice,
+            noticeHover: images.noticeHover,
+            community: images.community,
+            communityHover: images.communityHover,
+            library: images.library,
+            libraryHover: images.libraryHover,
+            faq: images.faq,
+            faqHover: images.faqHover,
+            asomeitQuestionMark: images.asomeitQuestionMark,
         }
     },
 

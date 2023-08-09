@@ -4,19 +4,19 @@
             <q-toolbar>
                     <ul class="header-box">
                         <li class="button" @click="run" label="Run">
-                            <img src="../../public/images/common/editor/run.png" class="button-img">
+                            <img :src="runEdt" class="button-img"/>
                         </li>
                         <li class="button" @click="stop()" label="Stop">
-                            <img src="../../public/images/common/editor/stop.png" class="button-img">
+                            <img :src="stopEdt" class="button-img"/>
                         </li>
                         <li class="button" @click="upload" label="Upload">
-                            <img src="../../public/images/common/editor/update.png" class="button-img">
+                            <img :src="updateEdt" class="button-img"/>
                         </li>
                         <li class="button" @click="open" label="Open">
-                            <img src="../../public/images/common/editor/open.png" class="button-img">
+                            <img :src="openEdt" class="button-img"/>
                         </li>
                         <li class="button" @click="save" label="Save">
-                            <img src="../../public/images/common/editor/save.png" class="button-img">
+                            <img :src="stopEdt" class="button-img"/>
                         </li>
                     </ul>
             </q-toolbar>
@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import images from "@/assets/images.js";
 import localfile from "@/globals/localfile";
 import { Dialog } from 'quasar'
 import { VAceEditor } from "vue3-ace-editor";
@@ -60,6 +61,11 @@ export default {
         return {
             content: '',
             savedContent: '',
+
+            runEdt: images.runEdt,
+            stopEdt: images.stopEdt,
+            updateEdt: images.updateEdt,
+            openEdt: images.openEdt
         }
     },
     
