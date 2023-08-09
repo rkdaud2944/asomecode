@@ -1,5 +1,6 @@
 import { SerialPort, ReadlineParser } from "serialport";
 import eventbus from "@/globals/eventbus";
+import speakerManager from "@/globals/speaker-manager";
 import { Notify } from 'quasar'
 
 eventbus.on("onSerialReceived", (data) => {
@@ -145,10 +146,14 @@ const seiral = {
             fs.readFile(path, (err, data) => {
                 if (err) throw err;
                 // 첫 256 바이트 추출
-                const first256bytes = data.slice(startChunk, endChuck);
-                const base64Data = first256bytes.toString('base64');
+                // const first256bytes = data.slice(startChunk, endChuck);
+                // const base64Data = first256bytes.toString('base64');
+
+                // 스피커 매니저로 한줄씩 배열로 보낼 것이라, startChunk, endChunk 필요없음
+                speakerManager.save(data.toString('base64'));
+
                 // 시리얼 포트를 통해 데이터 전송
-                serialUnit.write(`import gc;gc.collect();\r\nimport play_sound;play_sound.base64_receiver('${path}',${startChunk},${endChuck},${fileSize},'${base64Data}')\r\ngc.collect();\r\n`) // 경로, 청크시작점,청크끝점,파일 총 사이즈, 데이터
+                // serialUnit.write(`import gc;gc.collect();\r\nimport play_sound;play_sound.base64_receiver('${path}',${startChunk},${endChuck},${fileSize},'${base64Data}')\r\ngc.collect();\r\n`) // 경로, 청크시작점,청크끝점,파일 총 사이즈, 데이터
             }); 
         }
 
