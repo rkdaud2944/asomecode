@@ -1,0 +1,157 @@
+Mengembangkan robot sepakbola
+
+1. Tujuan Pembelajaran
+	[video ./video/block/01/15.execute.webm]
+	* Memahami tentang sepak bola robot
+	* AsomeBot dapat disesuaikan dengan robot sepakbola.
+	* Buat dan kontrol tindakan yang diperlukan untuk sepak bola
+
+
+2. Pratinjau
+	@ Sepak Bola
+	Sepak bola adalah permainan di mana dua tim menendang bola ke tiang gawang lawan. Ini adalah olahraga yang sangat populer di seluruh dunia.
+	[image ./images/blocks/15-01.png]
+
+	@ Robot sepakbola
+	Bahkan robot bisa bermain sepak bola. Berbagai permainan sepakbola robot diadakan di seluruh dunia.
+	[image ./images/blocks/15-02.jpg]
+	Kita bisa menggunakan robot yang bisa bermain sepakbola lebih mudah.
+	[image ./images/blocks/15-03.jpg]
+
+	@ Sepakbola AsomeBot
+	Bisakah kita bermain sepak bola dengan AsomeBot?
+
+	@ Menghias AsomeBot
+	AsomeBot dapat bermain sepak bola dengan menendang bolanya dengan kaki, tetapi mengubah tubuh AsomeBot seperti yang ditunjukkan membuatnya lebih mudah untuk menikmati sepak bola AsomeBot. Ubah AsomeBot dengan cangkir kertas, kotak kardus, karton susu dan banyak lagi.
+
+	@ Menciptakan aksi yang akan digunakan untuk pertandingan sepak bola
+	Akan sangat membantu untuk menghubungkan nomor (1-12) di awal dengan gerakan yang diperlukan untuk bermain sepak bola dengan AsomeBot . Misalnya, menekan no 1 Asome Controller akan menyebabkan Moonwalk dieksekusi 3 kali.
+	Dengan kain non-anyaman disatu kaki, AsomeBot akan bergerak ke samping dan memblokir bola, atau mengarahkan bola ke tempat yang Anda inginkan.
+	[image ./images/blocks/15-04.png]
+	Menggunakan metode yang sama, buatlah tindakan tambahan. Bagaimana seharusnya kita membuat gerakan seremonial yang keren ketika membuat gol?
+
+
+3. Pelajari tentang blok yang akan digunakan
+	@ Ubah ke mode titik akses/access point (grup [INTERNET])
+	Tetapkan nama AsomeBot untuk dikontrol oleh smartphone.
+	[block_image ./images/blocks/15-05.png
+		import internet
+		internet.open_ap("")
+	]
+	① Masukkan nama yang ingin Anda gunakan. Hanya bahasa Inggris dan angka yang dapat digunakan.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_indonesia.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Beri nama AsomeBot. Hanya bahasa Inggris dan angka yang dapat digunakan untuk memberi nama AsomeBot. Setelah Anda menetapkan nama, nama tersebut akan tetap dipertahankan meskipun daya dihidupkan dan dimatikan.</p>
+		<p class="main_text">② Periksa nama yang Anda tentukan dan coba sambungkan. Pertama, cari nama AsomeBot yang Anda masukkan dari daftar WiFi dan sambungkan ke ponsel cerdas Anda. Jika sebuah pesan muncul mengatakan bahwa koneksi Internet tidak stabil, jangan tekan tombol apa pun dan tunggu pesannya menghilang.</p>
+		<div class="content_image_box"><img src="./images/blocks/15-06.png" style="width:49%;"><img src="./images/blocks/15-07.png" style="width:49%;"></div>
+		</div>
+	]
+
+	@ Buka/open soket UDP (grup [INTERNET])
+	AsomeBot membuka port untuk berkomunikasi melalui Internet.
+	[block_image ./images/blocks/15-08.png
+		import udp_socket
+		udp_socket.open(1234)
+	]
+	① Ini adalah nomor port yang akan digunakan. Gunakan nomor sebagaimana adanya tanpa modifikasi.
+
+	@ Baca Pesan/read message (grup [INTERNET])
+	Baca pesan yang dikirim dari smartphone.
+	[block_image ./images/blocks/15-09.png
+		msg = udp_socket.read_text()
+	]
+
+	@ Ulangi hingga tak terbatas/repeat infinitely (grup [ADVANCE])
+	Jalankan blok di dalam blok untuk dijalankan secara berurutan. Di sini, Anda akan menunggu Aplikasi ponsel cerdas Anda untuk mengirim pesan, dan menjalankan perintah sesuai dengan pesan tersebut.
+	[block_image ./images/blocks/15-10.png
+		while True:
+		  pass
+	]
+
+	@ Ulangi/repeat (grup [ADVANCE])
+	Ulangi perintah di blok sebanyak yang Anda inginkan.
+	[block_image ./images/blocks/15-11.png
+		for count in range(1):
+		  pass
+	]
+	① Tentukan berapa kali untuk mengulangi.
+	② Tambahkan blok untuk mengulang.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_indonesia.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">[Tick Tock] Bagaimana Anda membuat pernyataan berulang yang mengeksekusi perintah 3 kali, dan memutar 1 kali, dan mengulang gerakan 3 kali? Mari kita buat dan jalankan.</p>
+		</div>
+	]
+
+	@ Jika/if (grup [ADVANCE])
+	Jalankan blok didalam blok [If] ketika input detail kondisinya benar. Jika kondisinya salah, blok setelahi blok [if] yang akan dieksekusi.
+	[block_image ./images/blocks/15-12.png
+		if i == :
+	]
+	① Masukkan variabel yang akan digunakan dalam pernyataan bersyarat.Nilai default adalah 'I' dan menggunakan 'msg' saat menerima pesan.
+	② Pilih ketidaksetaraan default untuk membandingkan kondisi.
+	③ Masukkan nilai default untuk digunakan dalam kondisi ini. Anda perlu menambahkan blok untuk menentukan nilai bersyarat.
+	④ Tambahkan blok yang akan dieksekusi ketika kondisinya benar.
+
+	@ Nilai Karakter (grup [ADVANCE])
+	Nilai ini digunakan untuk mewakili karakter yang dimasukkan daripada variabel atau angka.
+	[block_image ./images/blocks/15-13.png
+		''
+	]
+	① Masukkan karakter yang akan digunakan sebagai syarat.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_indonesia.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Jika Anda membuat blok seperti di bawah ini, bicarakan bagaimana mereka bergerak:</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/15-14.png"></div>
+		<p class="main_text">② Buat program pengkodean blok yang memungkinkan AsomeBot berjalan ke arah yang sesuai saat menekan tombol panah Pengontrol Asome.</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/15-15.png"></div>
+		</div>
+	]
+
+	@ Instalasi Asome Controller
+	Untuk mengontrol AsomeBot secara nirkabel, instal aplikasi AsomeController.  Dengan Aplikasi ini, Anda dapat mengirim  pesan yang Anda inginkan sebagai kontrol AsomeBot .Temukan ' asomeit' di Play Store dan instal 'Asome Controller'. Menginstal Aplikasi ini memungkinkan Anda untuk mengontrol AsomeBot Anda secara nirkabel.
+	[image ./images/blocks/15-16.jpg ./images/blocks/15-17.jpg]
+
+	@ Pesan yang dapat Anda kirim dengan Asome Controller
+	Anda dapat menjalankan berbagai gerakan menggunakan Asome Controller App.
+	[image ./images/blocks/15-18.png]
+	① Tombol Arah: Menghadirkan pesan F, B, L, dan R untuk membiarkan AsomeBot berjalan
+	② Tombol siaga/Attention: Menghadirkan pesan H untuk membiarkan AsomeBot berdri tegak
+	③ Tombol aksi: Menghadirkan angka antara 1 hingga 12 sebagai pesan untuk menjalankan gerakan/aksi yang Anda inginkan
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_indonesia.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Buat program yang memutar AsomeBot 1 kali ke kiri dan bergerak maju 3 kali saat menyentuh tombol "2" pada Asome Controller.</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/15-19.png"></div>
+		<p class="main_text">Jawaban</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/15-20.png"></div>
+		</div>
+	]
+
+
+4. Mainkan Aktivitas
+	@ Aturan Permainan
+	① Dua robot bermain sebagai satu tim
+	② Tim yang membuat skor pertama memenangkan permainan.
+	③ Masing-masing robot dapat menyerang dan bertahan.
+	④ Aturan lain juga bisa ditambahkan.
+	[image ./images/blocks/15-21.png]
+
+	@ Bermain game
+	[image ./images/blocks/15-22.jpg]
+
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	<title>AsomeIT</title>
+
+	<link rel="stylesheet" href="../../../common/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../common/css/AsomeCODE.css">
+
+    <script src="../../../common/js/jquery-1.9.1.js"></script>
+	<script src="../../../common/js/bootstrap.min.js"></script>
+</head>
+
+<style>
+    .container{
+        float: left;
+        position: relative;
+        height: 50vmax;
+        width: 50vmax;
+        /* 시뮬레이션 높이 맞추기 위해 사용 앱에서 사용할 시 삭제 */
+        margin-top: 12%;         
+        }
+
+    .move_btn{
+        height: 40%;
+    }
+
+    .number-circle{
+        z-index: 1;
+        height: 30%;
+    }
+    .numbertext{
+        position: absolute;
+        z-index: 2;
+        text-align: center;
+        font-size: 8vw;
+        color: white;
+        transform: translate( -50%, -50% );
+        user-select: none;
+        font-family: cursive;
+    }
+</style>
+
+<body style="overflow-x: hidden; overflow-y: hidden; background-image: url('back.png');">
+    
+    <div>
+        <div class="container">
+            <img src="stop.png" class="move_btn" id="stop" style="position: absolute; top: 30%; left: 30%;"> 
+            <img src="up.png" class="move_btn" id="up" style="position: absolute; top: -5%; left: 30%; ">
+            <img src="down.png" class="move_btn" id="down" style="position: absolute; top: 65%; left: 30%; ">
+            <img src="right.png" class="move_btn" id="right" style="position: absolute; top: 30%; left: 65%;">
+            <img src="left.png" class="move_btn" id="left" style="position: absolute; top: 30%; left: -5%;">
+        </div>
+
+        <div class="container" id="right_container">
+        </div>
+
+        
+	</div>	
+
+	<script type="text/javascript">
+		window.onload = function() {
+			App.run_cmd("Code=Input/Text=### Simulation started");
+		}
+
+        let number = 0
+
+        for(var y=1; y < 4; y++) {
+			for(var x=1; x < 4; x++) {
+                number ++
+				$('<img>', {
+					src: 'number_circle.png',
+					id: 'circle' + number,
+                    class: 'number-circle' 
+				}).css({
+					position: "absolute",
+					left: x* 30 - 25  + "%",
+					top: y*30 - 25 +"%",
+				}).appendTo("#right_container");
+                $('#circle' + number).text(number);
+                $('<div>', {
+                    class: 'numbertext',
+                    id : 'text' + number
+				}).css({
+					position: "absolute",
+					left: x* 30 -10 + "%",
+					top: y*30 - 10  +"%",
+				}).appendTo("#right_container");
+                
+                $('#text' + number).text(number);
+			}
+		}
+
+        const moveBtn = document.querySelector('#stop')
+        const moveBtnUp = document.querySelector('#up')
+        const moveBtnDown = document.querySelector('#down')
+        const moveBtnLeft = document.querySelector('#left')
+        const moveBtnRight = document.querySelector('#right')
+        const circleBtns = document.querySelectorAll('.number-circle');
+        
+        moveBtn.addEventListener('mousedown', function(){
+            $('#stop').attr('src', "stop_clicked.png");
+        });
+        moveBtn.addEventListener('mouseup', function(){
+            $('#stop').attr('src', "stop.png");
+            var text = "Code=Input/Text=H";
+			App.run_cmd(text);
+        });
+
+        moveBtnUp.addEventListener('mousedown', function(){
+            $('#up').attr('src', "up_clicked.png");
+        });
+        moveBtnUp.addEventListener('mouseup', function(){
+            $('#up').attr('src', "up.png");
+            var text = "Code=Input/Text=F";
+			App.run_cmd(text);
+            
+        });
+
+        moveBtnDown.addEventListener('mousedown', function(){
+            $('#down').attr('src', "down_clicked.png");
+        });
+        moveBtnDown.addEventListener('mouseup', function(){
+            $('#down').attr('src', "down.png");
+            var text = "Code=Input/Text=B";
+			App.run_cmd(text);
+        });
+
+        moveBtnRight.addEventListener('mousedown', function(){
+            $('#right').attr('src', "right_clicked.png");
+        });
+        moveBtnRight.addEventListener('mouseup', function(){
+            $('#right').attr('src', "right.png");
+            var text = "Code=Input/Text=R";
+			App.run_cmd(text);
+        });
+        
+        moveBtnLeft.addEventListener('mousedown', function(){
+            $('#left').attr('src', "left_clicked.png");
+        });
+        moveBtnLeft.addEventListener('mouseup', function(){
+            $('#left').attr('src', "left.png");
+            var text = "Code=Input/Text=L";            
+			App.run_cmd(text);            
+        });
+        console.log(circleBtns);
+        
+
+        [].forEach.call( circleBtns, function(circleBtn){
+            circleBtn.addEventListener('mousedown', function() {
+                $(circleBtn).attr('src', "number_clicked.png");            
+            });
+
+            circleBtn.addEventListener('mouseup', function() {
+                $(circleBtn).attr('src', "number_circle.png"); 
+                var text = "Code=Input/Text="+ $(circleBtn).text()                                
+                App.run_cmd(text);  
+            })
+        }
+        )
+        
+
+	</script>
+</body>
+</html>

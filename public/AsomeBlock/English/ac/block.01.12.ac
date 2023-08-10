@@ -1,0 +1,144 @@
+Let's make dancing robot
+
+1. Learning objectives
+	[video ./video/block/01/12.execute.webm]
+	* Let us look into the AsomeBot's dance.
+	* Let us look into the method that wait without moving for the specified seconds.
+
+
+2. Preview
+	@ AsomeBot can perform dance moves
+	AsomeBot can not only walk, but also dance variously.
+	[image ./images/blocks/12-01.png]
+
+	@ How can make dance moves?
+	You can make a variety of movements by setting the angle of the four motors connected to the AsomeBot and the amount of time they move.
+	The following is how to make a movement that wag its feet. 
+	[image ./images/blocks/12-02.png]
+
+	@ AsomeBot is prone to damage, especially when you fall down it
+	You can make a variety of movements by setting the angle of the four motors connected to the AsomeBot and the amount of time they move. If you think the AsomeBot’s feet are twisted, put [Attention] on between movements.
+	[image ./images/blocks/12-03.png]
+
+
+3. Learn which blocks to use
+	@ Attention ([BASIC] group)
+	If AsomeBot move its feet a lot as like [Balet] and connect other movements right away,
+	it can fall over. Put on [Attention] between movements for AsomeBot not to fall down.
+	[block_image ./images/blocks/04-04.png
+		asomebot.home()
+	]
+	
+	@ Dance moves without option ([DANCE] group)
+	[block_image ./images/blocks/12-04.png
+		asomebot.ballet()
+	]
+	AsomeBot do ballet-like movement by lift their foot.
+
+	[block_image ./images/blocks/12-05.png
+		asomebot.wiggle()
+	]
+	AsomeBot marches in place.
+
+	[block_image ./images/blocks/12-06.png
+		asomebot.flap()
+	]
+	AsomeBot flaps its feet.
+
+	[block_image ./images/blocks/12-07.png
+		asomebot.warigari()
+	]
+	AsomeBot rubs its feet.
+
+	[block_image ./images/blocks/12-08.png
+		asomebot.yaho()
+	]
+	AsomeBot lifts its tiptoes. Yaho is reverse action of [Ballet].
+
+	[block_image ./images/blocks/12-09.png
+		asomebot.moonwalk()
+	]
+	AsomeBot dances moon-walk.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_eng.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Ballet only moves the tiptoe. Connect and try a different action to let the robot to perform ballet-like movement.</p>
+		<p class="main_text">② Combine dance moves that don’t require an option and create a dance program.</p>
+		</div>
+	]
+
+	@ Optional dance moves ([DANCE] group)
+	Select the which side foot of the AsomeBot to move in options.
+	[block_image ./images/blocks/12-10.png
+		asomebot.mouse(1)
+	]
+	[Mouse] is to lift and move AsomeBot’s one foot.
+
+	[block_image ./images/blocks/12-11.png
+		asomebot.swing(1)
+	]
+	Lift one foot of the AsomeBot and turn it back.
+
+	[block_image ./images/blocks/12-12.png
+		asomebot.tick_tock(1)
+	]
+	turn back the foot of the Asomebot and bob up and down once.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_eng.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">* Using the Mouse, Swing, and TickTock motions, create a program that moves both feet at a time.</p>
+		</div>
+	]
+
+	@ Repaeat ([ADVANCE] group)
+	Repeat as many times as you want
+	[block_image ./images/blocks/12-13.png
+		for count in range(1):
+  		  pass
+	]
+	① Enter the number of times to repeat an movement
+	② Add blocks to repeat.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_eng.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Create a dance program by assembling blocks as shown.</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/12-14.png"></div>
+		<p class="main_text">② What blocks do you need to assemble to make an AsomeBot dance like a B-boying with lifting a foot?</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/12-15.png"></div>
+		<p class="main_text">③ Create a program that uses minimum [Attention] and executes all blocks in the group [DANCE] once without the robot falling down.</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/12-16.png"></div>
+		</div>
+	]
+
+
+4. Play activity
+	@ Game rules
+	① Choice which song to use for the dance competition and which part to use (less than 30 seconds).
+	② Make a great performance stage by drawing on paper with friends.
+	③ Create a program to dance to the music.
+	④ Tree to five robots dance to music at a time.
+	⑤ The robot that danced the most to the beat of music wins.
+
+	@ Algorithm
+	It's cool to assemble the dance moves well, but AsomeBot doesn't dance to the beat of the music. To dance to the beat, you need to know the time it takes to execute each action, and you need to be able to use [Delay] commands well.
+
+	Step 01. How many seconds does a bar of music take?
+	Step 02. How long it takes to execute each dance move?
+	Step 03. dance moves to music and check if movement and music is not in tune
+	Step 04. dance to the beat by placing the [Delay] command on the part where beat and move don't match the beat.
+
+
+	@ Play game
+	[image ./images/blocks/12-17.png]
+	
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]

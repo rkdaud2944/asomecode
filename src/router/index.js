@@ -111,13 +111,6 @@ const routes = [
             },
         ]
     },
-
-    
-    // Block
-    {
-        path: '/blockCoding',
-        component: () => import('../views/blockCoding/AsomeBlock.vue')
-    },
 ]
 
 const router = createRouter({

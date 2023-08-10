@@ -1,0 +1,1143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<head>
+<!-- AsomeHeader Start -->
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>AsomeCode</title>
+    <meta name="Robots" content="all" />
+    <meta name="reply-to" content="" />
+    <meta name="date" content="" />
+
+    <link rel="stylesheet" href="./css/AsomeCODE.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/highlight.css">
+    <link rel="stylesheet" href="./css/vs2015.css">
+
+    <script src="./js/jquery-3.2.1.min.js"></script>
+
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <script src="./js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="./css/jodit.min.css"/>
+    <link rel="stylesheet" href="./css/prism.css"/>
+    <script src="./js/jodit.min.js"></script>
+    <script src="./js/prism.js"></script>
+
+    <script src="./js/AsomeCODE-web.js"></script>
+    <script src="./js/AsomeCodeCommand.js"></script>
+    <script src="./js/AsomeCodeUpdate.js"></script>
+    <script src="./js/board.js"></script>
+    <script src="./js/board.js"></script>
+    <script src="./js/highlight.pack.js"></script>
+    <script src="./js/highlightjs-line-numbers.min.js"></script>
+
+    <script src="./ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./ace/ext-static_highlight.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./ace/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+    
+<!-- AsomeHeader End -->
+</head>
+
+<body class="p3">
+
+    <div class="modal fade" id="video_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <video id="video_player" width="100%" controls>
+                        <source id="video_src" type="video/webm" src=""/>
+                        <track id="video_subtitle" kind="subtitles" srclang="en" label="english" src="" default>
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="wrap">
+        <ul class="blind">
+            <li><a href="#contents">본문 바로가기(Skip Contents)</a></li>
+        </ul>
+        <div id="header">
+            <ul class="left">
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeConnect')"><img src="./images/button_kor/top_01.png"></a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')"><img src="./images/button_kor/top_02.png"></a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=ShowEditor')"><img src="./images/button_kor/top_03.png"></a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=Stop')"><img src="./images/button_kor/top_05.png"></a></li>
+            </ul>
+            <ul class="right">
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeReboot')"><img src="./images/button_kor/top_04.png"></a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeFormat')"><img src="./images/button_kor/top_06.png"></a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeUpdate')"><img src="./images/button_kor/top_07.png"></a></li>
+                <li><a href="../AsomeCode-Student/Korean/help_pin.html" target="help"><img src="./images/button_kor/top_08.png"></a></li>
+            </ul>
+        </div>
+        <div id="mobile">
+            <div class="logo">
+                <a href="javascript:void(0);"><img src="./images/logom.png"></a>
+                <div class="m"><a><img src="./images/mobile_m.png"></a></div>
+            </div>
+            <div class="mobile_top">
+                <div class="top_m">
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')"><img src="./images/mobile_01.png"></a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeConnect')"><img src="./images/mobile_02.png"></a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=ShowEditor')"><img src="./images/mobile_03.png"></a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=Stop')"><img src="./images/mobile_04.png" class="last"></a>
+                </div>
+                <div class="top_m">
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeReboot')"><img src="./images/mobile_05.png"></a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeFormat')"><img src="./images/mobile_06.png"></a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeUpdate')"><img src="./images/mobile_07.png"></a>
+                    <a href="../AsomeCode-Student/Korean/help_pin.html" target="help"><img src="./images/mobile_08.png" class="last"></a>
+                </div>
+            </div>
+        </div>
+        <div class="mobile_nav3"></div>
+        <div id="p3_header">
+            <ul>
+                <li class="headleft"><a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')"><img src="./images/logo.png"></a></li>
+                <li class="headright"></li>
+            </ul>
+        </div>
+
+        <br>
+
+<div class="row">
+	<div class="container main">
+        <div class="row">
+            <div class="container main">
+
+              <div class="col-sm-12">
+                <div class="title_no_video">
+                  어썸봇 테스트
+                </div>
+                <div class="col-sm-12">
+                        <p class="main_text">
+                            <ul>
+                                <li>어썸봇을 컴퓨터에 연결하고 [실행하기] 버튼을 클릭하세요.</li>
+                                <li>어썸봇이 앞으로 4번 움직입니다. 모든 모터가 돌아가는 지 확인하세요.</li>
+                                <li>초음파 센서 거리 측정값이 결과창에 표시됩니다. 0보다 큰 값인지 확인하세요.</li>
+                                <li>부저소리가 들리는지 확인하세요.</li>
+                            </ul>
+                        </p>
+        
+<div id="code02" class="editor">import asomebot
+import hcsr04
+import music
+import asomebot_align
+
+# 수동부저 테스트
+asomebot.turn_off()     
+music.open(1)             #  1번핀에 수동 부저를 연결 합니다.
+music.note("C4", 500)     # C4로 0.5초동안 부저 소리를 냅니다.
+music.note("D4", 500)     #  D4로 0.5초동안 부저 소리를 냅니다.
+
+# 초음파 센서 거리측정
+hcsr04.open(3, 2)                                     # 2번 3번 핀에 초음파 센서를 연결합니다.
+cm = hcsr04.get_distance()                            # cm라는 변수 안에 측정한 거리를 넣어줍니다.
+print("base =",asomebot_align.base,"/ cm =",cm)       # 현재의 중심각도들과 거리를 출력합니다.
+asomebot.ready(5, 6, 7, 8)                            # 5,6,7,8번 핀에  어썸봇 다리, 발을 연결합니다.
+asomebot.home()                                       # 어썸봇 차렷 자세를 유지시킵니다.
+
+# 3번 걷기
+for i in range(3):                                    # 3번 앞으로 걷기 동작을 실행합니다.   
+    asomebot.forward()
+asomebot.home()                                       
+            
+
+
+# 초음파 5cm 이상일 경우 다리 중심값 , 초음파 거리 출력
+# 초음파 5cm 이하일 경우 수동부저 소리내고 2걸음 앞으로 걷기
+while True:                                                         # 무한 반복문을 실행 시킵니다.
+    hcsr04.open(3, 2)                                                   
+    cm = hcsr04.get_distance()                                        
+    if cm != 0:                                                     # 측정한 cm의 값이 0인지 확인합니다. 0이 아니면 아래의 코드를 실행합니다.
+        if cm > 5:                                                  # 측정한 cm 값이 5 초과면
+            print("base =",asomebot_align.base,"/ cm =",cm)         # 현재의 중심각도와 거리를 출력합니다,
+            delay(0.5)                                              # 0.5 초 기다립니다.
+        if cm <= 5:                                                 # 측정한 cm의 값이 이하면
+            print("base =",asomebot_align.base,"/ cm =",cm)         # 현재의 중심각도와 거리를 출력합니다,
+            asomebot.turn_off()                                              
+            music.open(1)                                           # 수동부저를 연결하여 소리를 실행 시킵니다.
+            music.note("C4", 500)
+            music.note("D4", 500)
+            asomebot.ready(5, 6, 7, 8)                              # 어썸봇을 연결하여 차렷자세 - 앞으로 걷기 2회 - 차렷자세 동작을 실행합니다.  
+            asomebot.home()                                     
+            for i in range(2):
+                asomebot.forward()
+            asomebot.home()
+      </div>
+        <div style="width: 100%; height: 32px;">
+            <a href="javascript:void(0);" onclick="run_editor(code02)">
+                <div class="editor_run_button"><span class="editor_button_text">실행하기</span></div>
+            </a>
+            <a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+                <div class="editor_stop_button"><span class="editor_button_text">멈추기</span></div>
+            </a>
+        </div>
+        
+      </div>
+            </div>
+              <div class="col-sm-12">
+                <br><br><br>
+              </div>
+        
+              <div class="col-sm-12">
+                  <div class="title_no_video">
+                      어썸봇 중심잡기
+                  </div>
+                  <div class="col-sm-12">
+                    <h4>
+                      가. 중심잡기
+                  </h4>
+                  <hr>
+                  <h5>
+                      <p class="main_text">
+                          어썸봇이 똑바로 걷거나 이동하기 위해서는 중심이 정확하게 잡혀있어야 합니다. 하지만 모터 안의 기어가 공장에서 나올 때 조금씩 다를 수 있기 때문에 각 모터의 중심 각도를 찾아서 asomebot 모듈에 적용하시면 보다 정확하게 걷게 됩니다.
+                      </p>
+                      <p class="main_text">
+                          어썸봇을 컴퓨터에 연결하고 [연결하기] 버튼을 클릭하세요. 그리고 아래 버튼의 숫자를 조정하며 정확한 차렷 자세를 만들어 보세요 [▲] [▼] 버튼을 클릭하거나 원하는 숫자를 입력하여 [차렷자세 테스트 하기] 버튼을 클릭하면 어썸봇 모터들이 중심으로 이동합니다. 조금 삐뚤어져 있다면 숫자를 조금씩 변경해보세요.
+                      </p>
+                      
+                      <p class="main_text">
+                        <b>완벽한 차렷 자세의 각도를 찾아 그 아래 버튼 [어썸봇에 적용시키기]을 클릭하면 작성 되어 있는 모터 값이 적용됩니다.</b>
+                    </p>
+                    <br>
+                      <div class="col-sm-2"  style="text-align: center;">
+                          <p><b> 0번 모터 (Pin5)</b></p><br>
+                          <div type= "button" class="btn btn-primary" onclick="plus(align01)">
+                              ▲
+                          </div>
+                          <br><br>
+                          <input class="form-control" type="text" id='align01' value="90" placeholder="0번 모터 중심 값"/> 
+                          <br>
+                          <div type= "button" class="btn btn-primary" onclick="minus(align01)">
+                              ▼
+                          </div>
+                      </div>
+                      <div class="col-sm-2"  style="text-align: center;">
+                          <p><b> 1번 모터 (Pin6)</b></p><br>
+                          <div type= "button" class="btn btn-primary" onclick="plus(align02)">
+                            ▲
+                        </div>
+                          <br><br>
+                          <input class="form-control" type="text" id='align02' value="90" placeholder="1번 모터 중심 값"/>  
+                          <br>
+                          <div type= "button" class="btn btn-primary" onclick="minus(align02)">
+                            ▼
+                        </div>
+                      </div>
+                      <div class="col-sm-2"  style="text-align: center;">
+                          <p><b> 2번 모터 (Pin7)</b></p><br>
+                          <div type= "button" class="btn btn-primary" onclick="plus(align03)">
+                            ▲
+                        </div>
+                          <br><br>
+                          <input class="form-control" type="text" id='align03' value="90" placeholder="2번 모터 중심 값"/>  
+                          <br>
+                          <div type= "button" class="btn btn-primary" onclick="minus(align03)">
+                            ▼
+                        </div>
+                      </div>
+                      <div class="col-sm-2"  style="text-align: center;">
+                        <p><b> 3번 모터 (Pin8)</b></p><br>
+                        <div type= "button" class="btn btn-primary" onclick="plus(align04)">
+                          ▲
+                      </div>
+                      <br><br>
+                      <input class="form-control" type="text" id='align04' value="90" placeholder="3번 모터 중심 값"/>
+                      <br>
+                      <div type= "button" class="btn btn-primary" onclick="minus(align04)">
+                        ▼
+                      </div>
+                          <script type="text/javascript">
+                              function plus(mynum) {
+                                  var num = mynum.value;
+                                  if (num < 180) {
+                                    if (num >= 0) {
+                                      mynum.value = Number(num) + 1; 
+                                    } else {
+                                        mynum.value = 0;  
+                                    }
+                                  }else{
+                                    mynum.value = 180;
+                                  }
+
+                              };
+                              function minus(mynum) {
+                                  var num = mynum.value;
+                                  if (num > 0) {
+                                    if (num <= 180) {
+                                        mynum.value = Number(num) - 1;    
+                                    } else {
+                                          mynum.value = 180;
+                                    }
+                                  }else{
+                                    mynum.value = 0;
+                                  }                                                                        
+                              }
+                              function asomebot_attention() {
+                                  var text = String.format(
+                                      $("#code11").text(),
+                                      align01.value,
+                                      align02.value,
+                                      align03.value,
+                                      align04.value
+                                  );
+      
+                                  run_code(text);
+                              }
+                              function save_asomebot_align() {
+                                  var text = String.format(
+                                      $("#code12").text(),
+                                      align01.value,
+                                      align02.value,
+                                      align03.value,
+                                      align04.value
+                                  );
+      
+                                  run_code(text);
+                              }
+                              function show_asomebot_align() {
+                                  var text = String.format(
+                                      $("#code13").text(),
+                                      align01.value,
+                                      align02.value,
+                                      align03.value,
+                                      align04.value
+                                  );
+      
+                                  run_code(text);
+                                  $("#align-code").text();
+                              }
+                          </script>
+                      </div>
+                        <div class="col-sm-4">
+                          <br>
+                          <button class="btn btn-primary" onclick="asomebot_attention()">차렷자세 테스트 하기</button>
+                          <br><br>
+                          <button class="btn btn-primary" onclick="save_asomebot_align()">어썸봇에 적용 시키기 </button>
+                          <br><br>
+                          <button class="btn btn-danger" onclick="show_asomebot_align()">현재 중심각도 확인하기</button>
+                      </div>
+      
+                        
+                    <div class="col-sm-12">
+                        <br><br><br>
+                    </div>
+<div id="code11" style="display: none;">import asomebot
+asomebot.ready(5, 6, 7, 8)
+f = open("asomebot_align.py", "w")
+f.write("### AsomeCODE.Version: asomebot_align.py=1 :End.")
+f.write("base = ({0}, {1}, {2}, {3})")
+asomebot.align({0}, {1}, {2}, {3})
+print("pin5 = {0}, pin6 ={1}, pin7 ={2}, pin8 = {3}")
+
+while True:
+    asomebot.home()
+</div>
+<div id="code12" style="display: none;">f = open("asomebot_align.py", "w")
+f.write("### AsomeCODE.Version: asomebot_align.py=1 :End.")
+f.write(chr(0x0A))
+f.write("base = ({0}, {1}, {2}, {3})")
+f.write(chr(0x0A))
+f.write("############")
+f.close()
+
+import machine
+machine.reset()
+print("pin5 = {0}, pin6 ={1}, pin7 ={2}, pin8 = {3}")</div>
+
+<div id="code13" style="display: none;">import asomebot_align
+print("pin5 =",asomebot_align.base[0], "pin6 =",asomebot_align.base[1], "pin7 =",asomebot_align.base[2], "pin8 =",asomebot_align.base[3],)
+</div>
+        
+<div id="asomebot-walk" style="display: none;">import asomebot
+asomebot.ready(5, 6, 7, 8)
+for i in range(10):
+\tasomebot.forward()</div>
+                      
+                      <div class="col-sm-12">
+                        <br><br><br>
+                      </div>
+
+                      <div class="col-sm-12">
+                        <h4>
+                          나. 코드로 중심잡기 테스트 해보기
+                        </h4>
+                        <h5></h5>
+                      
+                      <p class="main_text">
+                        어썸봇을 컴퓨터에 연결하고 [연결하기] 버튼을 클릭하세요. 그리고 아래 코드를 [실행하기] 버튼을 클릭해서 실행하면 어썸봇 모터들이 중심으로 이동합니다. 조금씩 삐뚤어져있다면 숫자를 조금씩 변경해보세요.
+                    </p>
+<div id="code15" class="editor">import asomebot
+asomebot.ready(5, 6, 7, 8)
+
+asomebot.align(90, 90, 90, 90)
+
+while True:
+    asomebot.home()
+</div>
+<div style="width: 100%; height: 32px;">
+    <a href="javascript:void(0);" onclick="run_editor(code15)">
+        <div class="editor_run_button"><span class="editor_button_text">실행하기</span></div>
+    </a>
+    <a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+        <div class="editor_stop_button"><span class="editor_button_text">멈추기</span></div>
+    </a>
+</div>
+        
+                    </div>
+                    <div>
+                        <br><br><br>
+                    </div>
+                    <div class="col-sm-12">
+                        <h4>
+                            다. 어썸봇이 왼쪽 또는 오른쪽으로 기울어져서 걸어간다면?
+                        </h4>
+                        <h5>
+                            <p class="main_text">
+                                아래 블록을 클릭하면 어썸봇이 열 걸음 걸어가게 됩니다. 좌우 한 쪽으로 기울어져서 움직이는 지 확인할 때 사용하세요.
+                            </p>
+                            <p class="main_text">
+                                <div class="blockcode" onclick="run_code($('#asomebot-walk').text())">
+                                    <div class="block_while_header">10번 반복하기</div>
+                                    <div class="block_while_body">
+                                        <div class="block_child"><div class="block_execute">앞으로 전진</div></div>
+                                    </div>
+                                    <div class="block_while_footer"></div>
+                                </div>
+                            </p>
+                            <br>
+        
+                            <p class="main_text">
+                                어썸봇이 한쪽으로 기울어서 걸어가면 제일먼저 해야 할 것은 "중심잡기" 입니다. 하지만, 중심잡기 이후에도 기울어져서 간다면 기울어져 있는 쪽의 발바닥을 조금 더 기울어주시면 됩니다. 중심잡기의 네 개의 숫자 중에서 뒤의 두 개 숫자는 발바닥 기울기를 조절하는 숫자입니다.
+                            </p>
+                            <p class="main_text">
+                                <div class="content_image_box"><img class="content_image" src="./images/asomebot_servo_3.png"></div>
+                            </p>
+                            <p class="main_text">
+                                만약에 어썸봇이 왼쪽으로 기울어져서 걸어간다면 아래 코드처럼 세 번째 숫자를 하나씩 줄여보세요. 그러면 위의 어썸봇 그림에서 2번에 해당하는 발바닥이 아래로 기울어지기 시작합니다.
+                            </p>
+        
+        <pre style="width: 98%;"><code class="python codearea">asomebot.align(90, 90, 90-1, 90)</code></pre>
+        
+                            <p class="main_text">
+                                만약에 어썸봇이 오른쪽으로 기울어져서 걸어간다면 아래 코드처럼 네 번째 숫자를 하나씩 키워보세요. 그러면 위의 어썸봇 그림에서 3번에 해당하는 발바닥이 아래로 기울어지기 시작합니다. 왼발과 오른발은 각도의 방향이 각각 반대인 것에 주의하세요.
+                            </p>
+        
+        <pre style="width: 98%;"><code class="python codearea">asomebot.align(90, 90, 90, 90+1)</code></pre>
+        
+                        </h5>
+                    </div>
+                </div>
+              </div>
+
+                <div class="col-sm-12">
+                  <br><br><br>
+              </div>
+      
+
+                <div class="col-sm-12">
+                    <div class="title_no_video">
+                        어썸키트 테스트 (Pro 보드)
+                    </div>
+                    <div class="col-sm-12">
+                        <p class="main_text">
+                            <ul>
+                                <li>어썸키트를 컴퓨터에 연결하고 [실행하기] 버튼을 클릭하세요.</li>
+                                <li>Pro 버전의 어썸보드에서만 테스트가 가능합니다. (보드를 어썸코드와[연결하기]한 후 상단에 보면 Pro / Zet 확인 가능합니다.)</li>
+                                <li>테스트의 순서는 아래와 같습니다. </li>
+                                <li>초음파 센서 -> LED ,RGB -> 조도센서 -> 온습도센서 -> 로터리 인코더 -> 능동부저 -> 수동부저 -> 진동센서 </li>
+                                <li>테스트를 원하지 않는 부분은 코드의 가장 앞에 # 을 붙이거나 드래그 한후 [ctrl+ /] 단축키를 이용하시면 주석 처리 하면 무시하고 코드 실행이 가능합니다. </li>
+                            </ul>
+                        </p>
+        
+<div id="code00" class="editor">import hcsr04
+import tm1637
+import dht11
+import music
+import button
+import rotary
+import vibration_sensor
+
+hcsr04.open(7, 8)
+tm1637.open(3, 4)
+
+# 1. 초음파 센서 테스트 - tm1637 부품에 초음파센서의 측정값이 나타납니다
+# 3cm 이하에 손을 가져두면 다음 단계로 넘어갈 수 있습니다.
+while True:
+    tm1637.number(hcsr04.get_distance())
+    delay(0.5)
+    if hcsr04.get_distance() != -1:
+        if hcsr04.get_distance() < 3: break
+
+vibration = vibration_sensor.create(1, 1000)
+
+# LED 테스트 - 코드가 입력되면 모든 불이 켜집니다.
+pin = OutputPin(13)
+pin.on()
+pin = OutputPin(14)
+pin.on()
+pin = OutputPin(15)
+pin.on()
+pin = OutputPin(20)
+pin.on()
+
+# RGB - 코드가 입력되면 RGB 램프에 랜덤한 색이 켜집니다.
+red = ServoPin(17)
+green = ServoPin(18)
+blue = ServoPin(19)
+red.duty( random(1024) )
+green.duty( random(1024) )
+blue.duty( random(1024) )
+
+encoder = rotary.create(9, 10)
+
+bt1 = button.create(6)
+bt2 = button.create(2)
+
+dht = dht11.create(5)
+dht.measure()
+
+# 2. 조도센서 - tm1637 에 조도센서 측정값을 보여줍니다. 
+# 조도센서를 손으로 가리면 값이 변경되는것을 확인 할 수 있습니다.
+# 다음단계로 넘어가기 위해서는 버튼을 한번 클릭합니다.
+pin = AnalogPin(1)
+while True:
+    tm1637.number(pin.read())
+    delay(0.3)
+    if bt1.is_clicked(): break
+
+# 3. 온습도센서 - tm1637에 현재 온도값을 보여줍니다.
+# 다음단계로 넘어가기 위해서는 버튼을 한번 클릭합니다.
+while True:
+    tm1637.number(dht.temperature())
+    delay(0.3)
+    if bt1.is_clicked(): break
+
+# 4. 로터리인코더 - 로터리 인코더를 오른쪽, 왼쪽으로 돌리면 tm1637의 값이 변합니다.
+# 다음단계로 넘어가기 위해서는 로터리 인코더를 클릭합니다.
+while True:
+    encoder.update()
+    tm1637.number(encoder.value())
+    if bt2.is_clicked(): break
+
+# 5. 능동부저 - 자동으로 소리가 울립니다.
+pin = OutputPin(11)
+pin.on()
+delay(1)
+pin.off()
+
+# 6 . 수동부저 - 자동으로 소리가 울립니다.
+music.open(12)
+music.note("C4", 300)
+music.close()
+
+# 7. 진동센서 - 진동센서를 테스트합니다. 어섬키트를 흔들면 다음단계로 넘어갈 수 있습니다.
+while True:
+    if vibration.is_active(): break
+
+turnoff_pins()
+
+red = OutputPin(13)
+# 8. 소리센서 - 소리를 측정하여 소리가 들리면 빨간색 불을 켭니다.
+pin = AnalogPin(2)
+while True:
+    tm1637.number(pin.read())
+    if pin.read() < 4000:
+        red.on()
+        delay(1)
+    else:
+        red.off()    
+</div>  
+<div style="width: 100%; height: 32px;">
+    <a href="javascript:void(0);" onclick="run_editor(code00)">
+        <div class="editor_run_button"><span class="editor_button_text">실행하기</span></div>
+    </a>
+    <a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+        <div class="editor_stop_button"><span class="editor_button_text">멈추기</span></div>
+    </a>
+</div>
+        <div class="col-sm-12">
+            <br><br><br>
+        </div>
+
+		<div class="col-sm-12">
+			<div class="title_no_video">
+				어썸카 테스트
+			</div>
+			<div class="col-sm-12">
+                <p class="main_text">
+                    <ul>
+                        <li>어썸카를 컴퓨터에 연결하고 [실행하기] 버튼을 클릭하세요.</li>
+                        <li>어썸카가 3초간 앞으로 움직입니다. 모든 바퀴가 돌아가는지 확인하세요.</li>
+                        <li>초음파 센서 거리 측정값이 결과창에 표시됩니다. 0보다 큰 값인지 확인하세요.</li>
+                        <li>라인 센서의 현재 값이 결과 창에 표시됩니다. 센서를 검은 바닥과 흰 바닥을 오갈 때 변하는지 확인하세요.</li>
+                    </ul>
+                </p>
+
+<div id="code01" class="editor"># 어썸카, 초음파 센서, 라인 센서의 모듈을 불러오고, 동작을 준비합니다.
+import asomecar
+import hcsr04
+import line_sensor
+
+asomecar.ready(1, 2, 7, 8)
+hcsr04.open(5, 6)
+line_sensor.ready()
+
+# 어썸카를 앞으로 3초, 뒤로 3초 움직인 후 정지합니다.
+asomecar.forward()
+delay(3)
+asomecar.backward()
+delay(3)
+asomecar.stop()
+delay(1)
+
+# 초음파 센서를 사용하여 장애물과의 거리를 측정합니다.
+cm = hcsr04.get_distance()
+print("cm = ", cm)
+
+
+# 라인센서의 현재 값을 결과 창에 출력합니다.
+old = -999
+while True:
+  new = line_sensor.read()
+  if new != old:
+    if new == line_sensor.LEFT: print("line = LEFT")
+    if new == line_sensor.RIGHT: print("line = RIGHT")
+    if new == line_sensor.BOTH: print("line = BOTH")
+    if new == line_sensor.NOTHING: print("line = NOTHING")
+  old = new
+</div>
+<div style="width: 100%; height: 32px;">
+    <a href="javascript:void(0);" onclick="run_editor(code01)">
+        <div class="editor_run_button"><span class="editor_button_text">실행하기</span></div>
+    </a>
+    <a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+        <div class="editor_stop_button"><span class="editor_button_text">멈추기</span></div>
+    </a>
+</div>
+
+			</div>
+		</div>
+
+    	<div class="col-sm-12">
+    		<br><br><br>
+      </div>
+    
+        <div class="col-sm-12">
+            <div class="title_no_video">
+                전원 공급 테스트 (어썸킷 일부 부품)
+            </div>
+            <div class="col-sm-12">
+                <p class="main_text">
+                    아래 테스트는 전원 공급만으로 테스트 할 수 있는 일부 부품을 위한 프로그램입니다. 전원 공급 테스트로 불량을 알아 볼 수 있는 부품들은 아래와 같습니다.
+                    <ul>
+                        <li>LED 종류(초룩, 노랑, 빨강, 고휘도, RGB)</li>
+                        <li>부저 (수동부저, 능동부저)</li>
+                    </ul>
+                </p>
+                <p class="main_text">
+                    양극과 음극에 상관없이 점퍼선 하나는 1번 디지털(노란색) 핀에 다른 하나는 2번 디지털 핀에 연결하기만 하면 됩니다. LED는 불이 들어오는 것을 확인하고 부저는 소리나는 것을 확인하면 됩니다.
+                </p>
+                <p class="main_text">
+                    RGB LED의 경우에는 RGB의 음극 점퍼선을 1번이나 2번에 연결하고 나머지 세 개 점퍼선을 다른 핀에 번갈아서 꽂아서 빨간색, 초록색, 파란색으로 변하는 지 확인하세요.
+                </p>
+
+<div id="code03" class="editor">p1 = OutputPin(1)
+p2 = OutputPin(2)
+while True:
+    p1.on()
+    p2.off()
+    p2.on()
+    p1.off()
+</div>
+<div style="width: 100%; height: 32px;">
+    <a href="javascript:void(0);" onclick="run_editor(code03)">
+        <div class="editor_run_button"><span class="editor_button_text">실행하기</span></div>
+    </a>
+    <a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+        <div class="editor_stop_button"><span class="editor_button_text">멈추기</span></div>
+    </a>
+</div>
+<br>
+
+                <p class="main_text">
+                   자동프로그램을 등록하면 컴퓨터 없이 어썸보드에 전원만 넣고 테스트를 진행할 수 있습니다. 자동 실행 프로그램으로 등록하고 난 뒤에 재부팅해서 사용하세요.
+                </p>
+                <p>
+                    <button class="btn btn-primary" onclick="run_cmd('Code=UploadAs/Filename=examples\\qc_led.py/As=main.py')">자동 실행 프로그램으로 등록</button>
+                </p>
+                <p class="main_text">
+                    <button class="btn btn-danger" onclick="run_text('import os; os.remove(\'main.py\')')">자동 실행 프로그램 삭제</button>
+                </p>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <br><br><br>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="title_no_video">
+                초음파 센서 테스트
+            </div>
+            <div class="col-sm-12">
+                <p class="main_text">
+                    컴퓨터 없이 사용하기 위해서 LED 튜브를 (CLK, DIO, VCC, GND)를 (5, 6, 양극, 음극) 핀에 연결합니다. LED 튜브는 계속 연결상태로 초음파 센서가 제대로 동작하는 지 확인하는 용도로 사용합니다.
+                </p>
+                <p class="main_text">
+                    점퍼선 4개를 왼쪽 사진처럼 테잎으로 묶어주고 다른 쪽 (빨강, 노랑, 흰색, 검정) 선을  (양극, 음극, 7, 8) 핀에 연결합니다.
+                </p>
+                <p class="main_text">
+                    아래 프로그램을 실행하거나 자동 프로그램으로 등록 하고 초음파 센서를 오른쪽 사진처럼 점퍼에 연결하고 LED 튜브에 0보다 큰 숫자가 나타나나는 지 확인합니다.
+                </p>
+                <p class="main_text">
+                    초음파 센서 연결은 느슨하게 해도 됩니다.
+                </p>
+                <p class="main_text">
+                    <img src="./images/qc/jumperx4.png" style="width:49%;">
+                    <img src="./images/qc/sonic_sensor.png" style="width:49%;">
+                </p>
+
+<div id="code04" class="editor">import tm1637
+import hcsr04
+
+tm1637.open(5, 6)
+
+while True:
+    hcsr04.open(7, 8)
+    tm1637.number( hcsr04.get_distance() )
+</div>
+<div style="width: 100%; height: 32px;">
+    <a href="javascript:void(0);" onclick="run_editor(code04)">
+        <div class="editor_run_button"><span class="editor_button_text">실행하기</span></div>
+    </a>
+    <a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+        <div class="editor_stop_button"><span class="editor_button_text">멈추기</span></div>
+    </a>
+</div>
+<br>
+
+                <p class="main_text">
+                   자동프로그램을 등록하면 컴퓨터 없이 어썸보드에 전원만 넣고 테스트를 진행할 수 있습니다. 자동 실행 프로그램으로 등록하고 난 뒤에 재부팅해서 사용하세요.
+                </p>
+                <p>
+                    <button class="btn btn-primary" onclick="run_cmd('Code=UploadAs/Filename=examples\\qc_hcsr04.py/As=main.py')">자동 실행 프로그램으로 등록</button>
+                </p>
+                <p class="main_text">
+                    <button class="btn btn-danger" onclick="run_text('import os; os.remove(\'main.py\')')">자동 실행 프로그램 삭제</button>
+                </p>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <br><br><br>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="title_no_video">
+                조도 센서 테스트
+            </div>
+            <div class="col-sm-12">
+                <p class="main_text">
+                    컴퓨터 없이 사용하기 위해서 LED 튜브를 (CLK, DIO, VCC, GND)를 (5, 6, 양극, 음극) 핀에 연결합니다. LED 튜브는 계속 연결상태로 센서가 제대로 동작하는 지 확인하는 용도로 사용합니다.
+                </p>
+                <p class="main_text">
+                    점퍼선 3개를 왼쪽 사진처럼 테잎으로 묶어주고 다른 쪽 (파랑, 노랑, 빨강) 선을  (아날로그 A, 양극, 음극) 핀에 연결합니다. 점퍼선 색상은 편한대로 사용하세요.
+                </p>
+                <p class="main_text">
+                    아래 프로그램을 실행하거나 자동 프로그램으로 등록 하고 조도 센서를 오른쪽 사진처럼 점퍼에 연결하고 LED 튜브에 숫자가 나타나는 지 확인합니다. 조도 센서를 손으로 가리거나 하면 숫자가 변하는 지도 확인합니다.
+                </p>
+                <p class="main_text">
+                    센서 연결은 느슨하게 해도 됩니다.
+                </p>
+                <p class="main_text">
+                    <img src="./images/qc/jumperx3.png" style="width:49%;">
+                    <img src="./images/qc/cds_sensor.png" style="width:49%;">
+                </p>
+
+<div id="code05" class="editor">import tm1637
+sensor = AnalogPin()
+
+tm1637.open(5, 6)
+
+while True:
+    tm1637.number( sensor.read() )
+</div>
+<div style="width: 100%; height: 32px;">
+    <a href="javascript:void(0);" onclick="run_editor(code05)">
+        <div class="editor_run_button"><span class="editor_button_text">실행하기</span></div>
+    </a>
+    <a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+        <div class="editor_stop_button"><span class="editor_button_text">멈추기</span></div>
+    </a>
+</div>
+<br>
+
+                <p class="main_text">
+                   자동프로그램을 등록하면 컴퓨터 없이 어썸보드에 전원만 넣고 테스트를 진행할 수 있습니다. 자동 실행 프로그램으로 등록하고 난 뒤에 재부팅해서 사용하세요.
+                </p>
+                <p>
+                    <button class="btn btn-primary" onclick="run_cmd('Code=UploadAs/Filename=examples\\qc_cds.py/As=main.py')">자동 실행 프로그램으로 등록</button>
+                </p>
+                <p class="main_text">
+                    <button class="btn btn-danger" onclick="run_text('import os; os.remove(\'main.py\')')">자동 실행 프로그램 삭제</button>
+                </p>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <br><br><br>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="title_no_video">
+                워터 센서 테스트
+            </div>
+            <div class="col-sm-12">
+                <p class="main_text">
+                    컴퓨터 없이 사용하기 위해서 LED 튜브를 (CLK, DIO, VCC, GND)를 (5, 6, 양극, 음극) 핀에 연결합니다. LED 튜브는 계속 연결상태로 센서가 제대로 동작하는 지 확인하는 용도로 사용합니다.
+                </p>
+                <p class="main_text">
+                    점퍼선 3개를 왼쪽 사진처럼 테잎으로 묶어주고 다른 쪽 (파랑, 노랑, 빨강) 선을  (아날로그 A, 양극, 음극) 핀에 연결합니다. 점퍼선 색상은 편한대로 사용하세요.
+                </p>
+                <p class="main_text">
+                    아래 프로그램을 실행하거나 자동 프로그램으로 등록 하고 워터 센서를 오른쪽 사진처럼 점퍼에 연결하고 LED 튜브에 숫자가 나타나는 지 확인합니다. 워터 센서에 손가락이나 물티슈를 가져다 대면 숫자가 변하는 지 확인하세요.
+                </p>
+                <p class="main_text">
+                    센서 연결은 느슨하게 해도 됩니다.
+                </p>
+                <p class="main_text">
+                    <img src="./images/qc/jumperx3.png" style="width:49%;">
+                    <img src="./images/qc/rain_sensor.png" style="width:49%;">
+                </p>
+
+<div id="code05" class="editor">import tm1637
+sensor = AnalogPin()
+
+tm1637.open(5, 6)
+
+while True:
+    tm1637.number( sensor.read() )
+</div>
+<div style="width: 100%; height: 32px;">
+    <a href="javascript:void(0);" onclick="run_editor(code05)">
+        <div class="editor_run_button"><span class="editor_button_text">실행하기</span></div>
+    </a>
+    <a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+        <div class="editor_stop_button"><span class="editor_button_text">멈추기</span></div>
+    </a>
+</div>
+<br>
+
+                <p class="main_text">
+                   자동프로그램을 등록하면 컴퓨터 없이 어썸보드에 전원만 넣고 테스트를 진행할 수 있습니다. 자동 실행 프로그램으로 등록하고 난 뒤에 재부팅해서 사용하세요.
+                </p>
+                <p>
+                    <button class="btn btn-primary" onclick="run_cmd('Code=UploadAs/Filename=examples\\qc_cds.py/As=main.py')">자동 실행 프로그램으로 등록</button>
+                </p>
+                <p class="main_text">
+                    <button class="btn btn-danger" onclick="run_text('import os; os.remove(\'main.py\')')">자동 실행 프로그램 삭제</button>
+                </p>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <br><br><br>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="title_no_video">
+                소리 센서 테스트
+            </div>
+            <div class="col-sm-12">
+                <p class="main_text">
+                    컴퓨터 없이 사용하기 위해서 LED 튜브를 (CLK, DIO, VCC, GND)를 (5, 6, 양극, 음극) 핀에 연결합니다. LED 튜브는 계속 연결상태로 센서가 제대로 동작하는 지 확인하는 용도로 사용합니다.
+                </p>
+                <p class="main_text">
+                    점퍼선 3개를 왼쪽 사진처럼 테잎으로 묶어주고 다른 쪽 (파랑, 노랑, 빨강) 선을  (아날로그 A, 음극, 양극) 핀에 연결합니다. 점퍼선 색상은 편한대로 사용하세요.
+                </p>
+                <p class="main_text">
+                    아래 프로그램을 실행하거나 자동 프로그램으로 등록 하고 소리 센서를 오른쪽 사진처럼 점퍼에 연결하고 LED 튜브에 숫자가 나타나는 지 확인합니다. 소리 센서 근처에서 물건을 두드려 소리를 내고 숫자가 변하는 지 확인하세요.
+                </p>
+                <p class="main_text">
+                    센서 연결은 느슨하게 해도 됩니다.
+                </p>
+                <p class="main_text">
+                    <img src="./images/qc/jumperx3.png" style="width:49%;">
+                    <img src="./images/qc/sound_sensor.png" style="width:49%;">
+                </p>
+
+<div id="code05" class="editor">import tm1637
+sensor = AnalogPin()
+
+tm1637.open(5, 6)
+
+while True:
+    tm1637.number( sensor.read() )
+</div>
+<div style="width: 100%; height: 32px;">
+    <a href="javascript:void(0);" onclick="run_editor(code05)">
+        <div class="editor_run_button"><span class="editor_button_text">실행하기</span></div>
+    </a>
+    <a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+        <div class="editor_stop_button"><span class="editor_button_text">멈추기</span></div>
+    </a>
+</div>
+<br>
+
+                <p class="main_text">
+                   자동프로그램을 등록하면 컴퓨터 없이 어썸보드에 전원만 넣고 테스트를 진행할 수 있습니다. 자동 실행 프로그램으로 등록하고 난 뒤에 재부팅해서 사용하세요.
+                </p>
+                <p>
+                    <button class="btn btn-primary" onclick="run_cmd('Code=UploadAs/Filename=examples\\qc_cds.py/As=main.py')">자동 실행 프로그램으로 등록</button>
+                </p>
+                <p class="main_text">
+                    <button class="btn btn-danger" onclick="run_text('import os; os.remove(\'main.py\')')">자동 실행 프로그램 삭제</button>
+                </p>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <br><br><br>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="title_no_video">
+                토양 습도 센서 테스트
+            </div>
+            <div class="col-sm-12">
+                <p class="main_text">
+                    컴퓨터 없이 사용하기 위해서 LED 튜브를 (CLK, DIO, VCC, GND)를 (5, 6, 양극, 음극) 핀에 연결합니다. LED 튜브는 계속 연결상태로 센서가 제대로 동작하는 지 확인하는 용도로 사용합니다.
+                </p>
+                <p class="main_text">
+                    점퍼선 4개를 왼쪽 사진처럼 테잎으로 묶어주고 다른 쪽 (검정, 흰색, 노랑, 빨강) 선을  (아날로그 A, 1, 음극, 양극) 핀에 연결합니다. 점퍼선 색상은 편한대로 사용하세요.
+                </p>
+                <p class="main_text">
+                    아래 프로그램을 실행하거나 자동 프로그램으로 등록 하고 토양 습도 센서를 오른쪽 사진처럼 점퍼에 연결하고 LED 튜브에 숫자가 나타나는 지 확인합니다. 토양 습도 센서에 손가락이나 물티슈를 가져다 대면 숫자가 변하는 지 확인하세요.
+                </p>
+                <p class="main_text">
+                    센서 연결은 느슨하게 해도 됩니다.
+                </p>
+                <p class="main_text">
+                    <img src="./images/qc/jumperx4.png" style="width:49%;">
+                    <img src="./images/qc/soil_sensor.png" style="width:49%;">
+                </p>
+
+<div id="code05" class="editor">import tm1637
+sensor = AnalogPin()
+
+tm1637.open(5, 6)
+
+while True:
+    tm1637.number( sensor.read() )
+</div>
+<div style="width: 100%; height: 32px;">
+    <a href="javascript:void(0);" onclick="run_editor(code05)">
+        <div class="editor_run_button"><span class="editor_button_text">실행하기</span></div>
+    </a>
+    <a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+        <div class="editor_stop_button"><span class="editor_button_text">멈추기</span></div>
+    </a>
+</div>
+<br>
+
+                <p class="main_text">
+                   자동프로그램을 등록하면 컴퓨터 없이 어썸보드에 전원만 넣고 테스트를 진행할 수 있습니다. 자동 실행 프로그램으로 등록하고 난 뒤에 재부팅해서 사용하세요.
+                </p>
+                <p>
+                    <button class="btn btn-primary" onclick="run_cmd('Code=UploadAs/Filename=examples\\qc_cds.py/As=main.py')">자동 실행 프로그램으로 등록</button>
+                </p>
+                <p class="main_text">
+                    <button class="btn btn-danger" onclick="run_text('import os; os.remove(\'main.py\')')">자동 실행 프로그램 삭제</button>
+                </p>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <br><br><br>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="title_no_video">
+                온습도 센서 테스트
+            </div>
+            <div class="col-sm-12">
+                <p class="main_text">
+                    컴퓨터 없이 사용하기 위해서 LED 튜브를 (CLK, DIO, VCC, GND)를 (5, 6, 양극, 음극) 핀에 연결합니다. LED 튜브는 계속 연결상태로 온습도 센서가 제대로 동작하는 지 확인하는 용도로 사용합니다.
+                </p>
+                <p class="main_text">
+                    점퍼선 3개를 왼쪽 사진처럼 테잎으로 묶어주고 다른 쪽 (파랑, 노랑, 빨강)선을  (음극, 8, 양극) 핀에 연결합니다. 점퍼선 색상은 편한대로 사용하세요.
+                </p>
+                <p class="main_text">
+                    아래 프로그램을 실행하거나 자동 프로그램으로 등록 하고 온습도 센서를 오른쪽 사진처럼 점퍼에 연결하고 LED 튜브에 숫자가 나타나는 지 확인합니다. 앞의 두 자리가 온도, 뒤의 두 자리가 습도입니다.
+                </p>
+                <p class="main_text">
+                    온습도 센서 연결은 느슨하게 해도 됩니다.
+                </p>
+                <p class="main_text">
+                    <img src="./images/qc/jumperx3.png" style="width:49%;">
+                    <img src="./images/qc/dht11.png" style="width:49%;">
+                </p>
+
+<div id="code06" class="editor">import tm1637
+import dht11
+
+tm1637.open(5, 6)
+sensor = dht11.create(8)
+
+while True:
+    sensor.measure()
+    tm1637.number( sensor.temperature() * 100 + sensor.humidity() )
+    delay(0.2)
+</div>
+<div style="width: 100%; height: 32px;">
+    <a href="javascript:void(0);" onclick="run_editor(code06)">
+        <div class="editor_run_button"><span class="editor_button_text">실행하기</span></div>
+    </a>
+    <a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+        <div class="editor_stop_button"><span class="editor_button_text">멈추기</span></div>
+    </a>
+</div>
+<br>
+
+                <p class="main_text">
+                   자동프로그램을 등록하면 컴퓨터 없이 어썸보드에 전원만 넣고 테스트를 진행할 수 있습니다. 자동 실행 프로그램으로 등록하고 난 뒤에 재부팅해서 사용하세요.
+                </p>
+                <p>
+                    <button class="btn btn-primary" onclick="run_cmd('Code=UploadAs/Filename=examples\\qc_dht11.py/As=main.py')">자동 실행 프로그램으로 등록</button>
+                </p>
+                <p class="main_text">
+                    <button class="btn btn-danger" onclick="run_text('import os; os.remove(\'main.py\')')">자동 실행 프로그램 삭제</button>
+                </p>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <br><br><br>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="title_no_video">
+                로터리 인코더 테스트
+            </div>
+            <div class="col-sm-12">
+                <p class="main_text">
+                    컴퓨터 없이 사용하기 위해서 LED 튜브를 (CLK, DIO, VCC, GND)를 (5, 6, 양극, 음극) 핀에 연결합니다. LED 튜브는 계속 연결상태로 센서가 제대로 동작하는 지 확인하는 용도로 사용합니다.
+                </p>
+                <p class="main_text">
+                    점퍼선 5개를 왼쪽 사진처럼 테잎으로 묶어주고 다른 쪽 (검정, 흰색, 노랑, 빨강, 보라) 선을 (음극, 양극, 1, 2, 3) 핀에 연결합니다. 점퍼선 색상은 편한대로 사용하세요.
+                </p>
+                <p class="main_text">
+                    아래 프로그램을 실행하거나 자동 프로그램으로 등록 하고 아래와 같이 테스트 합니다.
+                    <ul>
+                        <li>로터리 인코더를 클릭하고 숫자가 100이 되는 지 확인하세요.</li>
+                        <li>로터리 인코더를 좌우로 돌려서 숫자가 변하는 지 확인하세요.</li>
+                    </ul>
+                </p>
+                <p class="main_text">
+                    <img src="./images/qc/jumperx5.png" style="width:49%;">
+                    <img src="./images/qc/rotary.png" style="width:49%;">
+                </p>
+
+<div id="code07" class="editor">import tm1637
+import rotary
+import button
+
+tm1637.open(5, 6)
+encoder = rotary.create(2, 3)
+bt = button.create(1)
+
+while True:
+    encoder.update()
+    if bt.is_clicked():
+        encoder.set(100)
+    tm1637.number( encoder.value() )
+</div>
+<div style="width: 100%; height: 32px;">
+    <a href="javascript:void(0);" onclick="run_editor(code07)">
+        <div class="editor_run_button"><span class="editor_button_text">실행하기</span></div>
+    </a>
+    <a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+        <div class="editor_stop_button"><span class="editor_button_text">멈추기</span></div>
+    </a>
+</div>
+<br>
+
+                <p class="main_text">
+                   자동프로그램을 등록하면 컴퓨터 없이 어썸보드에 전원만 넣고 테스트를 진행할 수 있습니다. 자동 실행 프로그램으로 등록하고 난 뒤에 재부팅해서 사용하세요.
+                </p>
+                <p>
+                    <button class="btn btn-primary" onclick="run_cmd('Code=UploadAs/Filename=examples\\qc_rotary.py/As=main.py')">자동 실행 프로그램으로 등록</button>
+                </p>
+                <p class="main_text">
+                    <button class="btn btn-danger" onclick="run_text('import os; os.remove(\'main.py\')')">자동 실행 프로그램 삭제</button>
+                </p>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <br><br><br>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="title_no_video">
+                LED 튜브 테스트
+            </div>
+            <div class="col-sm-12">
+                <p class="main_text">
+                    점퍼선 4개를 왼쪽 사진처럼 테잎으로 묶어주고 다른 쪽 (검정, 흰색, 노랑, 빨강) 선을  (음극, 양극, 6, 5) 핀에 연결합니다. 점퍼선 색상은 편한대로 사용하세요.
+                </p>
+                <p class="main_text">
+                    아래 프로그램을 실행하거나 자동 프로그램으로 등록 하고 LED 튜브를 오른쪽 사진처럼 점퍼에 연결하고 LED 튜브에 숫자가 나타나는 지 확인합니다.
+                </p>
+                <p class="main_text">
+                    LED 튜브 연결은 느슨하게 해도 됩니다.
+                </p>
+                <p class="main_text">
+                    <img src="./images/qc/jumperx4.png" style="width:49%;">
+                    <img src="./images/qc/tm1637.png" style="width:49%;">
+                </p>
+
+<div id="code08" class="editor">import tm1637
+while True:
+    tm1637.open(5, 6)
+    tm1637.number(1234)
+</div>
+<div style="width: 100%; height: 32px;">
+    <a href="javascript:void(0);" onclick="run_editor(code08)">
+        <div class="editor_run_button"><span class="editor_button_text">실행하기</span></div>
+    </a>
+    <a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+        <div class="editor_stop_button"><span class="editor_button_text">멈추기</span></div>
+    </a>
+</div>
+<br>
+
+                <p class="main_text">
+                   자동프로그램을 등록하면 컴퓨터 없이 어썸보드에 전원만 넣고 테스트를 진행할 수 있습니다. 자동 실행 프로그램으로 등록하고 난 뒤에 재부팅해서 사용하세요.
+                </p>
+                <p>
+                    <button class="btn btn-primary" onclick="run_cmd('Code=UploadAs/Filename=examples\\qc_tm1637.py/As=main.py')">자동 실행 프로그램으로 등록</button>
+                </p>
+                <p class="main_text">
+                    <button class="btn btn-danger" onclick="run_text('import os; os.remove(\'main.py\')')">자동 실행 프로그램 삭제</button>
+                </p>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <br><br><br>
+        </div>
+
+</div>
+
+</body>
+
+</html>

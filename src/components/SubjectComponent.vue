@@ -24,7 +24,7 @@ export default {
 
     data() {
         return {
-            imgSrc: require(`@/assets/images/page${this.index % 5 + 1}.png`)
+            imgSrc: `/images/common/page${this.index % 5 + 1}.png`
         }
     },
 }

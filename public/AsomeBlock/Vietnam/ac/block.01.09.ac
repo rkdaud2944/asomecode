@@ -1,0 +1,128 @@
+Hãy làm cho robot hát
+
+1. Mục tiêu bài học
+	[video ./video/block/01/09.execute.webm]
+	* Tìm hiểu cách tạo âm thanh bằng cách sử dụng bộ chuông của AsomeBot.
+	* Chơi một bài hát sử dụng các nốt có sẵn.
+
+
+2. Preview
+	@ Cách truyền âm thanh
+	Âm thanh là sự rung động gây ra các vật thể, dụng cụ hoặc con người
+	di chuyển đến không khí xung quanh chúng ta và truyền đến tai của chúng ta.
+	[image ./images/blocks/09-01.png]
+
+	@ Làm thế nào máy tính bắt chước âm thanh
+	Nó có thể bắt chước cao độ bằng cách sử dụng tần số âm thanh.
+	Nó có thể bắt chước cường độ và hình dạng của âm thanh, khi bắt chước âm thanh chính xác hơn.
+
+	3 yếu tố của âm thanh
+	* điểm mạnh: cường độ và điểm yếu của âm thanh
+	* Chiều cao: Mức độ cao và thấp của âm thanh
+	* hình: Nó cũng được gọi là giai điệu
+			Để được phân biệt bởi dạng sóng
+			Lý do mọi người có tiếng nói khác nhau
+	[image ./images/blocks/09-02.png]
+
+	@ Ai đã làm ra thang đo?
+	Thang đo tám nốt, Do-Re-Mi-Fa-Sol-La-Si-Do, được thực hiện bởi Pythagoras, một nhà toán học nổi tiếng. Pythagoras, người đi ngang qua thợ rèn, nghe người ta đập sắt bằng những chiếc búa khác nhau, có công thức cho âm thanh, và tạo ra thang âm tám nốt mà chúng ta sử dụng.
+	[image ./images/blocks/09-03.png]
+
+	@ Lưu ý và mã
+	Nếu bạn sử dụng tất cả các cách viết của ghi chú, các chữ cái quá nhiều, vì vậy chương trình sử dụng một mã bao gồm một ký tự và quãng tám.
+	Thang đo chúng tôi sử dụng thường xuyên nhất là ba quãng tám.
+	[image ./images/blocks/09-04.png]
+
+
+3. Tìm hiểu những khối để sử dụng
+	@ Chuông mở (Nhóm SOUND(Âm thanh)
+	Khối này làm cho chuông có sẵn để sử dụng. Khối này phải được sử dụng trước khi chuông phát ra âm thanh.
+	THẬN TRỌNG. Không thể sử dụng bộ chuông trừ khi bạn sử dụng khối này trước.
+	[block_image ./images/blocks/09-05.png
+		turnoff_pins( (1, 5, 6, 7, 8) )
+		import music
+		music.open(1)
+	]
+
+	@ Chuông đóng (Nhóm SOUND)
+	Nó cho phép bạn hoàn thành việc sử dụng bộ chuông và sử dụng lại các bộ phận khác.
+	Bạn có thể sử dụng các bộ phận khác trong quá trình sử dụng bộ chuông.
+	Sau khi chơi xong, bạn phải sử dụng khối này để sử dụng các phần khác.
+	[block_image ./images/blocks/09-06.png
+		turnoff_pins( (1, 5, 6, 7, 8) )
+		import asomebot
+		asomebot.ready(5, 6, 7, 8)
+	]
+
+	@ Tạo ra âm thanh (Nhóm SOUND)
+	Bạn có thể tạo âm thanh bạn muốn theo tần số với khối này.
+	[block_image ./images/blocks/09-07.png
+		music.tone(0)
+		delay(1)
+		music.mute()
+	]
+	① Nhập tần số bạn muốn phát ra âm thanh
+	② Nhập thời gian chơi
+	[image ./images/blocks/09-09.png]
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_veitnam.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">• Nhập 196 vào tần số và nghe âm thanh. Những âm thanh nào tương ứng với quy mô bạn có thể nghe được?<br>
+		</p>
+		</div>
+	]
+
+	@ Chơi cho(Nhóm SOUND)
+	Bạn có thể tạo âm thanh bạn muốn theo tần số với khối này.
+	[block_image ./images/blocks/09-08.png
+		music.note("C1",1*1000)
+	]
+	① Chọn ghi chú bạn muốn chơi.
+	② Chọn quãng tám.
+	③ Nhập thời gian chơi
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_veitnam.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">• Chơi Fa 3 quãng tám trong 0,5 giây.<br>
+		</p>
+		</div>
+	]
+
+	@ Nhịp và thời gian
+	Đây là thời gian chơi của từng nhịp mà chúng tôi sử dụng.
+	Tạo một chương trình phản ánh thời gian chơi của từng nhịp khi bạn phát nhạc.
+	[image ./images/blocks/09-10.png]
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_veitnam.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Âm thanh phát ra 3 quãng tám G trong một bộ lọc.<br>
+		② Sử dụng khối [Make Sound of in Secs](Tạo âm thanh trong giây), tạo chương trình tăng 50 từ 0 đến 1000 và kiểm tra cách âm thanh thay đổi.<br>
+		</p>
+		</div>
+	]
+
+
+4. Chơi trò chơi
+	@ Luật chơi
+	① Sử dụng các ghi chú nhịp điệu, tạo ra một chương trình phát nhạc mẫu giáo.
+	② Sử dụng các khối âm thanh bạn đã học trước đó và tạo một chương trình để phát nhạc bạn muốn.
+
+	@ Thuật toán
+	Để phát nhạc, trước tiên bạn phải chuẩn bị sử dụng chuông. Và sau đó, bố trí các khối theo từng thang âm và nhịp, và khi kết thúc màn trình diễn, bạn bố trí các khối để tắt chuông.
+	[image ./images/blocks/09-11.png]
+
+	@ Chơi trò chơi
+	Nghe nhạc và xem âm nhạc của ai nghe hay hơn.
+	[image ./images/blocks/09-12.png]
+	
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]

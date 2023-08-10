@@ -1,5 +1,3 @@
-import image from "@/assets/image";
-
 export default [
     {
         id: 1,
@@ -9,7 +7,7 @@ export default [
         author: 'AsomeIT',
         created_at: '2020-01-01',
         views: 100,
-        images: image.page1
+        images: require("../../public/images/common/page1.png"),
     },
     {
         id: 2,
@@ -19,7 +17,7 @@ export default [
         author: 'AsomeIT',
         created_at: '2020-01-01',
         views: 100,
-        images: image.page2
+        images: require("../../public/images/common/page2.png"),
     },
     {
         id: 3,
@@ -29,7 +27,7 @@ export default [
         author: 'AsomeIT',
         created_at: '2020-01-01',
         views: 100,
-        images: image.page3
+        images: require("../../public/images/common/page3.png"),
     },
     {
         id: 4,
@@ -39,7 +37,7 @@ export default [
         author: 'AsomeIT',
         created_at: '2020-01-01',
         views: 100,
-        images: image.page4
+        images: require("../../public/images/common/page4.png"),
     },
     {
         id: 5,
@@ -47,8 +45,7 @@ export default [
         author: '목동초',
         created_at: '2020-01-01',
         views: 100,
-        images: image.page5
-        // images: require("../../public/images/common/page4.png"),
+        images: require("../../public/images/common/page5.png"),
     },
     {
         id: 6,

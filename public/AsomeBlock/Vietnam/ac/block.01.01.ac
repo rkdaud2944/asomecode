@@ -1,0 +1,71 @@
+Lập trình là gì?
+
+1. Mục tiêu bài học
+	[video ./video/block/01/01.execute.webm]
+	* Ý nghĩa của lập trình
+	* Những thứ bạn có thể tạo ra khi lập trình
+	* Di chuyển AsomeBot bằng cách sử dụng AsomeController
+
+
+2. Preview
+	@ Lập trình là gì?
+	Tạo ra 1 chương trình khiến máy tính có thể hoạt động
+	[image ./images/blocks/01-01.png]
+
+	@ Lập trình có thể khiến robot di chuyển không?
+	Máy tính được gắn vào trong robot, ô tô, thậm chí trong các thiết bị. Do đó, bạn bắt buộc pải lập trình để đặt lệnh khiến di chuyển robot.
+	[image ./images/blocks/01-02.png]
+
+	@ Nhưng chương trình phần mềm có thể làm được những gì?
+	Ô tô và máy bay tự lái đang trở nên an toàn hơn nhờ sử dụng phần mềm.
+	[image ./images/blocks/01-03.png ./images/blocks/01-04.png]
+
+	Robot giao bánh pizza hoặc máy bay không người lái để chuyển bưu kiện được sử dụng phần mềm.
+	[image ./images/blocks/01-05.png ./images/blocks/01-06.png]
+
+
+3. Tìm hiểu những khối cần sử dụng
+	@ AsomeBot là loại robot gì?
+	AsomeBot là một robot đi bằng hai chân và nhảy bằng bốn động cơ.
+	AsomeBot cũng có thể đo khoảng cách với cảm biến siêu âm giống như đôi mắt và phát nhạc đơn giản.
+	[youtube https://www.youtube.com/embed/FkorGFg4_t0]
+
+	@ Kết nối với AsomeBot
+	Khi Asomebot được bật, hãy chọn tên robot của tôi từ danh sách WiFi trên điện thoại thông minh của bạn.
+	Danh sách WiFi sẽ hiển thị khác nhau tùy thuộc vào điện thoại thông minh của bạn.
+	AsomeBots của chúng tôi có các tên khác nhau.
+	Hỏi giáo viên tên robot của bạn trước và chọn nó từ danh sách WiFi.
+	[image ./images/blocks/01-07.png]
+
+	@ Asome Controller
+	Khi được kết nối với WiFi, ứng dụng Asome Controller có thể được sử dụng để điều khiển AsomeBot không dây.
+	[image ./images/blocks/01-08.png]
+	① Phím điều hướng: Bạn chạm vào phím một lần, AsomeBot đi theo hướng đó.
+	② Phím đứng nghiêm: Làm cho AsomeBot đứng ở vị trí ban đầu (đứng nghiêm).
+	③ Phím chuyển động: Mỗi lần bạn chạm vào mỗi số, một hành động đã lưu được thực thi.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_veitnam.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">• Kiểm tra xem AsomeBot và AsomeController có được kết nối đúng không, chạm vào phím điều hướng để di chuyển robot và chạm vào phím hành động để xem những điệu nhảy nào có sẵn.<br>
+		</p>
+		</div>
+	]
+
+
+4. Chơi trò chơi
+	@ Di chuyển đến vị trí được chỉ định
+	Trong số các tòa nhà trên bản đồ, tìm ra ai đang di chuyển nhanh hơn đến tòa nhà mà bên kia mong muốn trên bản đồ mà không rời khỏi đường.
+	Ví dụ) Dừng lại ở bưu điện và đến nhà thờ.
+	[image ./images/blocks/01-09.png]
+
+	@ Cuộc thi nhảy
+	Kiểm tra xem ai là người nhảy đẹp hơn.
+	[image ./images/blocks/01-10.png]
+
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]

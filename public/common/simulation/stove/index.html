@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	<title>AsomeIT</title>
+
+	<link rel="stylesheet" href="../../../common/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../common/css/AsomeCODE.css">
+
+	<script src="../../../common/js/AsomeCODE.js"></script>
+    <script src="../../../common/js/jquery-1.9.1.js"></script>
+	<script src="../../../common/js/bootstrap.min.js"></script>
+</head>
+
+<body style="overflow-x: hidden; overflow-y: hidden;">
+	<div style="position: relative;">
+		<img src="back.png" style="position: absolute;">
+		<img id="img_stove" src="stove_off.png" onclick="stove_on()" style="position: absolute;">
+	</div>	
+
+	<script type="text/javascript">
+		window.onload = function() {
+			App.run_cmd("Code=Input/Text=### Simulation started");
+		}
+
+		function stove_off() {
+			$("#img_stove").attr("src", "stove_off.png");
+		}
+
+		function stove_on() {
+			$("#img_stove").attr("src", "stove_on.png");
+		}
+	</script>	
+</body>
+</html>

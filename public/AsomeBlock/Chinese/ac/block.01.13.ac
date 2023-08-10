@@ -1,0 +1,116 @@
+沿着跑道行走的机器人
+
+1. 学习目标
+	[video ./video/block/01/13.execute.webm]
+	* 使用Asome控制器编制您想要的动作并运行一下。
+	* 试着让AsomeBot在跑道上赛跑。
+
+
+2. 预览
+	@ 编制您想要的动作并直接控制AsomeBot。
+	利用Asome控制器，我们就能编制和运行我们想要的新动作。
+	[image ./images/blocks/13-01.png]
+
+	@ 作一个在跑道上行走的机器人
+	编制一个结合Asomebot的动作，开发可以在跑道上快速行走的动作程序并进行赛跑。
+	[image ./images/blocks/13-02.png]
+
+
+3. 了解要用的程序块
+	@ access point mode（接入点模式）（[INTERNET（互联网）]组）
+	设定用智能手机控制的AsomeBot名称。
+	[block_image ./images/blocks/11-04.png
+		import internet
+		internet.open_ap("")
+	]
+	① 输入要用的名称。只能用英文和数字。
+	
+	@ Open UDP socket（打开UDP socket）（[INTERNET（互联网）]组）
+	打开AsomeBot可通过互联网进行通信的端口。
+	[block_image ./images/blocks/11-06.png
+		import udp_socket
+		udp_socket.open(1234)
+	]
+	① 这是要用的端口号。不要做任何的改动，原封不动地使用端口号。
+	
+	@ Read Messages（读取信息）（[INTERNET（互联网）]组）
+	读取智能手机发送的信息。
+	[block_image ./images/blocks/11-07.png
+		msg = udp_socket.read_text()
+	]
+
+	@ Repeat infinitely（无限重复）（[ADVANCE（逻辑条件）]组）
+	[Repeat infinity]持续按顺序运行区块中的程序块。此时，等待智能手机应用程序发送的指令，接到指令信息就执行信息中的命令。
+	[block_image ./images/blocks/07-04.png
+		while True:
+		  pass
+	]
+
+	@ Repaeat（重复）（[ADVANCE（条件逻辑）]组）
+	根据需要多次重复区块中的命令。
+	[block_image ./images/blocks/12-13.png
+		for count in range(1):
+  		  pass
+	]
+	① 指定重复的次数。
+	② 添加重复的程序块。
+
+	@ if（如果）（[ADVANCE（逻辑条件）]组）
+	[if]所输入的条件正确时，运行区块中的程序块。如果条件不正确，则运行[if]之后的程序块。
+	[block_image ./images/blocks/07-05.png
+		if i == :
+	]
+	① 输入用于条件语句的变量。默认值为“i”,添加传感器区块,就添加相关变量供您选择。
+	② 选择比较条件的标准不等式。
+	③ 输入用于条件的标准值。在此，需要您添加指定条件值的区块。
+	④ 添加条件正确时运行的程序块。
+
+	@ Letter value（字母值）（[ADVANCE（逻辑条件）]组）
+	用于表示输入的字母，而不是变量或数字。
+	[block_image ./images/blocks/11-09.png
+		''
+	]
+	① 输入用作条件的字母。
+
+	@ 能用Asome控制器（Asome Controller）发送指令
+	利用Asome控制器就能让AsomeBot做出各种动作。
+	[image ./images/blocks/01-08.png]
+	① 箭头键：发送F、B、L、R信息，使Asomebot向相应方向行走。
+	② Attention（立正）：发送H信息，使Asomebot立正。
+	③ 动作键：发送1～12的数字信息，运行想要的动作组合。
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_china.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① 编制程序：按一下Asome控制器上的“1”键，AsomeBot则三次重复向左转一次并向前走一步的动作。</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/13-03.png"></div>
+		<p class="main_text">② 当Asomebot沿着跑道行走的时候，有哪些漂亮的舞蹈动作可以配合行走命令一起运行呢?</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/13-04.png"></div>
+		</div>
+	]
+
+
+4. 线下游戏活动
+	@ 游戏规则
+	① 两个AsomeBots沿着跑道赛跑的游戏，先到达终点线的获胜。
+	② 用Asome控制器控制AsomeBot（可在1～12号使用属于自己的变轨功能））。
+	③ 跑步时可以跑到对手的跑道上。
+	④ 如果Asomebot越过跑道最内侧线，就是则被淘汰。
+
+	@ 算法
+	① 跑道赛跑时尽量要靠内侧奔跑。使用AsomeBot的哪些动作才能使之迅速靠到内侧呢？
+	[image ./images/blocks/13-05.png]
+
+	② 传送向左转命令，AsomeBot就在原地旋转，这样就会缩短跑步距离。如何编制一个绕着跑道迅速跑步的动作？
+	[image ./images/blocks/13-06.png]
+
+	@ 玩游戏
+	玩一场游戏，看一看谁绕着跑道首先跑到终点线。
+	[image ./images/blocks/13-07.png]
+	
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]

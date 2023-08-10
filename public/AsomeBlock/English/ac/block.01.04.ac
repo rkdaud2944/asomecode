@@ -1,0 +1,100 @@
+Let’s make AsomeBot walk straight
+
+1. Learning objectives
+	[video ./video/block/01/04.execute.webm]
+	* Adjust the angle of each motor of the AsomeBot legs.
+
+
+2. Preview
+	@ Why the AsomeBot can't walk straight
+	This is because the basic angles of the four motors of AsomeBot are incorrect. Also, it cannot walk straight because of the degree of slippage on the floor or the center of gravity of the AsomeBot.  If so, change the angles of AsomeBot legs slightly. 
+	[image ./images/blocks/04-01.png]
+
+	@ Number of motors
+	The four motors of AsomeBot are numbered as shown in the following image: When changing the angle to the block, remember the motor number and change the angle of the desired motor.
+	[image ./images/blocks/04-02.png]
+
+
+3. Learn which blocks to use
+	@ Set alignment (BASIC Group)
+	You may adjust the value of the angles of the four motors connected to AsomeBot. The angle changes by adjusting the angle with the Set align block and adding the Attention block, and then execute the robot. Make sure to remember the angle as the changed angle will be reset if disconnected.
+	[block_image ./images/blocks/04-03.png
+		asomebot.align(90,90,90,90)
+	]
+	① Adjust the angle of No.1 motor. The motor is basically set at 90 degrees. 
+	② Adjust the angle of No.2 motor. The motor is basically set at 90 degrees. 
+	③ Adjust the angle of No.3 motor. The motor is basically set at 90 degrees. 
+	④ Adjust the angle of No.4 motor. The motor is basically set at 90 degrees.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_eng.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Adjust the angle of each motor more than 90 degrees and readjust to less than 90 degrees. See how each motor changes the direction.<br>
+		② Adjust the angle so that all the legs of AsomeBot are at right angles.
+		</p>
+		</div>
+	]
+
+	@ Attention (BASIC Group)
+	The legs of the AsomeBot are aligned (attention).
+	[block_image ./images/blocks/attention.png
+		asomebot.home()
+	]
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_eng.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">• Create a block program that AsomeBot walks forward 3 steps and stands at attention.<br>
+		</p>
+		</div>
+	]
+
+	@ Delay (ADVANCE Group)
+	Wait for the specified number of seconds to function.
+	[block_image ./images/blocks/delay.png
+		delay(1)
+	]
+	① Input the number of seconds to wait after a click. 
+
+	@ Problems caused when the angles are different
+	[image ./images/blocks/04-07.png]
+	If the angles of No. 0 and No. 1 are different,  the moving distance between the left and right is different.
+
+	[image ./images/blocks/04-08.png]
+	If the angles of No. 2 and No. 3 are different,   the height of the lifting its feet is different. 
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_eng.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Set the angle of one foot to lift a lot, as the below picture, and let the AsomeBot walk forward. How does it walk?<br>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/04-05.png"></div>
+		</p>
+		<p class="main_text">② How do you set the angles of AsomeBot's foot to let it walk in a circle as below?<br>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/04-06.png"></div>
+		</p>
+		</div>
+	]
+
+
+4. Play activity
+	@ Game rules
+	① Adjust the angles of the four motors of AsomeBot to walk straight.
+	② Race to see who runs fast without leaving the sideline a running ground to the point of goal. (The robot is disqualified if leaving the sideline.)
+	[image ./images/blocks/04-10.jpg]
+
+	@ Algorithm
+	① Adjust the angle slightly at 90 degrees to let AsomeBot walk straight.
+	② Delay for 5 seconds with the Delay block, and then let the robot walk 50 steps forward.
+	[image ./images/blocks/04-09.png]
+
+	@ Play game
+	Execute the block and play a game at the starting line.
+	
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]	

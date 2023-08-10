@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>AsomeBlock</title>
+    <link rel="apple-touch-icon" sizes="57x57" href="../common/images/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="../common/images/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="../common/images/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="../common/images/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="../common/images/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="../common/images/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="../common/images/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="../common/images/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../common/images/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="../common/images/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../common/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="../common/images/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../common/images/favicon/favicon-16x16.png">
+
+    <script src="../common/js/jquery-3.4.0.min.js"></script>
+    <script src="../common/blockly/blockly_compressed.js"></script>
+    <script src="../common/blockly/blocks_compressed.js"></script>
+    <script src="../common/blockly/javascript_compressed.js"></script>
+    <script src="../common/blockly/python_compressed.js"></script>
+    <script src="../common/js/blockly_predefined_vars.js"></script>
+
+    <script src="../common/js/blocks/common.js?-2019120201-"></script>
+    <script src="../common/js/blocks/common_python.js?-2019120201-"></script>
+    <script src="../common/js/blocks/asomebot.js?-2019120201-"></script>
+    <script src="../common/js/blocks/asomebot_python.js?-2019120201-"></script>
+    <script src="../common/js/blocks/asomekit.js?-2019120201-"></script>
+    <script src="../common/js/blocks/asomekit_python.js?-2019120201-"></script>
+    <script src="../common/js/blocks/asomecar.js?-2019120201-"></script>
+    <script src="../common/js/blocks/asomecar_python.js?-2019120201-"></script>
+    <script src="../common/js/blocks/deprecated.js?-2019120201-"></script>
+    <script src="../common/js/blocks/deprecated_python.js?-2019120201-"></script>
+
+
+    <script src="../common/blockly/msg/js/en.js?-2019120201-"></script>
+    <script src="../common/js/global.js?-2019120201-" type="text/javascript" charset="utf-8"></script>
+    <script src="../common/js/util.js?-2019120201-" type="text/javascript" charset="utf-8"></script>
+    <script src="../common/js/ace/src-min/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../common/js/ace/src-min/ext-language_tools.js"></script>
+    <script src="../common/js/AsomeCODE-web.js?-2019120201-"></script>
+    <script src="../common/js/simulation.js"></script>
+
+    <link rel="stylesheet" href="../common/js/confirm/jquery-confirm.min.css">
+    <script src="../common/js/confirm/jquery-confirm.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../common/css/global.css?-2019120201-" />
+</head>
+<body>
+    <script>
+        loadLanguage();
+    </script>
+    <div id="header-area">
+        <div class="top-menu-div">
+            <div href="/blockeditor" class="top-menu-logo cursor-pointer">
+                <img src="../common/images/asomeit_logo.png"  onclick="go_url('../AsomeBlock/Korean/free.html');"/>
+            </div>
+            <div class="menu-item-div">
+                <div class="btn btn-image" onclick="runCode()" style="margin-top: -7px;"><img src="../common/images/icons/play-button.png" style="width: 35px; height: 35px; margin-right: 15px;" /></div>
+                <span class="delimiter"></span>
+                <div class="btn btn-image" onclick="stopCode();" style="margin-top: -7px;"><img src="../common/images/icons/stop-button.png" style="width: 35px; height: 35px;" /></div>
+                <span class="delimiter">|</span>
+                <span class="delimiter">|</span>
+                <div class="btn btn-image" onclick="exportBlocksToFile();"><img src="../common/images/icons/save.png" style="width: 65px; height: 17px;"/></div>
+                <span class="delimiter">|</span>
+                <div class="btn btn-image" onclick="importBlocksFromFile();"><img src="../common/images/icons/load.png" style="width: 66px; height: 17px;"/></div>
+                <span class="delimiter">|</span>
+
+                <div class="btn btn-image dropdown">
+                    <img src="../common/images/icons/custom%20block.png" style="width: 82px; height: 17px;" onclick="openPopupMenuCustom()" class="dropbtn">
+                    <div id="dropdown_menu_custom" class="dropdown-content">
+                        <a href="#" onclick="importCustomBlocksFromFile();">Import Customs</a>
+                        <a href="../blockmaker/index.html" target="_blank">New Custom</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="content-area">
+        <div id="block-controller-container">
+            <div id="block-menu-tab-div">
+                <a href="#asomebot" class="menu-tab-item js--tab-asomebot" onclick="changeToolboxCategory('asomebot')"><img src="../common/images/asomekit/asomebot.png"><img src="../common/images/asomekit/asomebot_click.png" style="display: none;">Asomebot</a>
+                <a href="#asomekit" class="menu-tab-item js--tab-asomekit" onclick="changeToolboxCategory('asomekit')"><img src="../common/images/asomekit/asomekit.png"><img src="../common/images/asomekit/asomekit_click.png" style="display: none;">Asomekit</a>
+                <a href="#asomecar" class="menu-tab-item js--tab-asomecar" onclick="changeToolboxCategory('asomecar')"><img src="../common/images/asomekit/asomecar.png"><img src="../common/images/asomekit/asomecar_click.png" style="display: none;">Asomecar</a>
+            </div>
+            <div id="block-source-editor-controller-div">
+                <div class="js--toggle-source-editor cursor-pointer" onclick="toggleSourceEditor()"><img src="../common/images/icons/source.png" style="width: 43px; height: 33px; margin-right: 0;"/></div>
+            </div>
+
+        </div>
+        <div id="blockly-area">
+            <div class="block-category-div">
+            </div>
+            <div id="blockly-div">
+            </div>
+            <div id="block-source-div">
+                <div id="block-source-editor"></div>
+            </div>
+        </div>
+    </div>
+    <div class="blockly-block-data">
+        <xml id="toolbox_basic">
+        </xml>
+    </div>
+
+    <div class="onscreenKeyboard" style="display: none; z-index: 99999;"></div>
+</body>
+</html>
+
+<xml id="toolbox_custom">
+</xml>

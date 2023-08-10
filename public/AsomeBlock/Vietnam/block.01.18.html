@@ -1,0 +1,434 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<head>
+<!-- AsomeHeader Start -->
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>AsomeCode</title>
+    <meta name="Robots" content="all" />
+    <meta name="reply-to" content="" />
+    <meta name="date" content="" />
+
+    <link rel="stylesheet" href="../../common/css/AsomeCODE.css">
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/highlight.css">
+    <link rel="stylesheet" href="../../common/css/vs2015.css">
+    <link rel="stylesheet" href="../../common/css/quiz_css.css">
+
+    <script src="../../common/js/jquery-3.2.1.min.js"></script>
+
+    <link rel="stylesheet" href="../../common/css/bootstrap.min.css">
+    <script src="../../common/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="../../common/css/jodit.min.css"/>
+    <link rel="stylesheet" href="../../common/css/prism.css"/>
+    <script src="../../common/js/jodit.min.js"></script>
+    <script src="../../common/js/prism.js"></script>
+
+    <script src="../../common/js/AsomeCODE.js"></script>
+    <script src="../../common/js/board.js"></script>
+    <script src="../../common/js/highlight.pack.js"></script>
+    <script src="../../common/js/highlightjs-line-numbers.min.js"></script>
+
+    <script src="../../common/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../common/ace/ext-static_highlight.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../common/ace/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+<!-- AsomeHeader End -->
+</head>
+
+<body class="p3">    
+
+    <div class="modal fade" id="video_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <video id="video_player" width="100%" controls>
+                        <source id="video_src" type="video/webm" src=""/>
+                        <track id="video_subtitle" kind="subtitles" srclang="en" label="english" src="" default>
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="wrap">
+        <ul class="blind">
+            <li><a href="#contents">본문 바로가기(Skip Contents)</a></li>
+        </ul>
+        <div id="mobile">
+            <div class="logo">
+                <a href="javascript:void(0);"><img src="../../common/images/logom.png"></a>
+                <div class="m"><a><img src="../../common/images/mobile_m.png"></a></div>
+            </div>
+            <div class="mobile_top">
+                <div class="top_m">
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')">
+                        <img class="image-btn" filename="../../common/images/mobile_01.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeConnect')">
+                        <img class="image-btn" filename="../../common/images/mobile_02.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=ShowEditor')">
+                        <img class="image-btn" filename="../../common/images/mobile_03.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+                        <img class="image-btn last" filename="../../common/images/mobile_04.png">
+                    </a>
+                </div>
+                <div class="top_m">
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeReboot')">
+                        <img class="image-btn" filename="../../common/images/mobile_05.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeFormat')">
+                        <img class="image-btn" filename="../../common/images/mobile_06.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeUpdate')">
+                        <img class="image-btn" filename="../../common/images/mobile_07.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeBlock')">
+                        <img class="image-btn last" filename="../../common/images/blockcoding.png">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="header">
+            <ul class="left">
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeConnect')">
+                    <img class="image-btn" filename="../../common/images/top_01.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')">
+                    <img class="image-btn" filename="../../common/images/top_02.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=ShowEditor')">
+                    <img class="image-btn" filename="../../common/images/top_03.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+                    <img class="image-btn" filename="../../common/images/top_05.png">
+                </a></li>
+            </ul>
+            <ul class="right">
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeReboot')">
+                    <img class="image-btn" filename="../../common/images/top_04.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeFormat')">
+                    <img class="image-btn" filename="../../common/images/top_06.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeUpdate')">
+                    <img class="image-btn" filename="../../common/images/top_07.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeBlock')">
+                    <img class="image-btn" filename="../../common/images/blockcoding.png">
+                </a></li>
+                <li> &nbsp; </li>
+                <a href="javascript:void(0);" onclick="logout()"><img src="../../common/images/logout.png" id="bt_logout" class="last"></a>
+            </ul>
+        </div>
+        <div class="mobile_nav3"></div>
+        <div id="p3_header">
+            <ul>
+                <li class="headleft"><a href="javascript:void(0);"><img src="../../common/images/logo.png"></a></li>
+                <li class="headright"></li>
+            </ul>
+        </div>
+
+        <div id="p3_container">
+            <div class="left">
+                <div class="top">
+                    <div class="link_list"><a href="javascript:void(0);" onclick="run_cmd('Code=GoBack')"><img src="../../common/images/p3_list.png" alt="강의목록"></a></div>
+                    <div class="header_text"><div id="chapter" class="chapter">Unit {0}</div>
+                        <br>
+
+                        Robot dự báo thời tiết
+                    </div>
+                </div>
+                <div class="beg">
+                    <ul>
+                        <li><a href="javascript:fnMove('pn1')">1. Mục tiêu bài học</a></li>
+<li><a href="javascript:fnMove('pn2')">2. Preview</a></li>
+<li><a href="javascript:fnMove('pn3')">3. Học những khối sử dụng trong bài</a></li>
+<li><a href="javascript:fnMove('pn4')">4. Chơi trò chơi</a></li>
+
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="right">
+                <div class="contents">
+                    <br>
+
+<li class="lefts bold" id="pn1">1. Mục tiêu bài học<span class="video_button" level="block" filename="01.ch01"></span></li>
+<div style="max-width: 600px;"><video width="100%" controls>
+<source id="video_src" type="video/webm" src="./video/block/01/18.execute.webm"/>
+Your browser does not support HTML5 video.</video></div>
+<p class="main_text">• Hiểu cách mang dữ liệu thời tiết từ Internet.<br>
+• Chia sẻ dữ liệu quan trọng giữa các dữ liệu thời tiết.<br>
+• Bạn có thể thực hiện các chuyển động khác nhau tùy thuộc vào thời tiết và sử dụng AsomeBot để dự báo thời tiết.<br>
+</p>
+<br>
+<br>
+
+<li class="lefts bold" id="pn2">2. Preview<span class="video_button" level="block" filename="01.ch02"></span></li>
+<p class="main_text"><strong>A. Làm thế nào bạn có thể dự báo thời tiết?</strong></p>
+<p class="main_text">Vệ tinh theo dõi chuyển động của đám mây và liên tục đo nhiệt độ và độ ẩm để dự báo thời tiết sẽ thay đổi như thế nào hôm nay hoặc ngày mai.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/18-01.png"></div>
+<br>
+<p class="main_text"><strong>B. AsomeBot có thể dự báo thời tiết không?</strong></p>
+<p class="main_text">Thảo luận với bạn bè và giáo viên của bạn về cách bạn có thể dự báo thời tiết với AsomeBot.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/18-02.png"></div>
+<br>
+<p class="main_text"><strong>C. AsomeBot có thể tải xuống dữ liệu từ Internet, như thời tiết, nhiệt độ và độ ẩm. Chúng ta có thể sử dụng điều này để nói về thời tiết trong chuyển động và âm thanh của AsomeBot?</strong></p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/18-03.png"></div>
+<br>
+<p class="main_text"><strong>D. Khi nào, ở đâu và làm thế nào chúng ta có thể dự báo thời tiết?</strong></p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/18-04.png"></div>
+<br>
+<br>
+
+<li class="lefts bold" id="pn3">3. Học những khối sử dụng trong bài<span class="video_button" level="block" filename="01.ch03"></span></li>
+<p class="main_text"><strong>A. Kết nối với internet (nhóm [INTERNET])</strong></p>
+<p class="main_text">Xác định tên và mật khẩu của bộ định tuyến không dây mà AsomeBot sẽ được kết nối. Robot tải dữ liệu từ Internet, do đó, bộ định tuyến phải được kết nối với Internet.</p>
+<div id="src_1" style="display: none;">import internet
+internet.connect("","")
+</div>
+<img class="block_image" src="./images/blocks/18-05.png" onclick="run_code($('#src_1').text())">
+<p class="main_text">① Nhập tên của bộ định tuyến Internet.</p>
+<p class="main_text">② Nhập mật khẩu của bộ định tuyến Internet.</p>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_veitnam.png">
+<p class="quiz_line"></p>
+<p class="main_text">Bạn có thể tìm tên của bộ định tuyến không dây bạn muốn sử dụng trong danh sách WiFi của máy tính bảng và kết nối với máy tính bảng của bạn.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/18-06.png"></div>
+</div>
+
+<br>
+<p class="main_text"><strong>B. Mở ổ cắm UDP (nhóm [INTERNET])</strong></p>
+<p class="main_text">AsomeBot mở một cổng để giao tiếp qua Internet.</p>
+<div id="src_2" style="display: none;">import udp_socket
+udp_socket.open(1234)
+</div>
+<img class="block_image" src="./images/blocks/18-07.png" onclick="run_code($('#src_2').text())">
+<p class="main_text">① Số cổng được sử dụng. Use the number as is without modification.</p>
+<br>
+<p class="main_text"><strong>C. Lấy dữ liệu thời tiết (nhóm [INTERNET])</strong></p>
+<p class="main_text">Tải xuống dữ liệu liên quan đến thời tiết từ Internet.</p>
+<div id="src_3" style="display: none;">import internet
+internet.get_weather("Hanoi, VN")
+</div>
+<img class="block_image" src="./images/blocks/18-08.png" onclick="run_code($('#src_3').text())">
+<p class="main_text">① Nhập tên của thành phố và quốc gia để tải xuống dữ liệu thời tiết.</p>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/reference_vietnam.png">
+<p class="quiz_line"></p>
+<p class="main_text">Tên giá trị cho mỗi thành phố</p>
+<p class="main_text">Hà Nội Việt Nam: Hà Nội, VN</p>
+<p class="main_text">Seoul, Hàn Quốc: Seoul, KR</p>
+<p class="main_text">Los Angeles (Hoa Kỳ): LA, US</p>
+</div>
+
+<br>
+<p class="main_text"><strong>D. Đo khoảng cách (nhóm [SENSOR])</strong></p>
+<p class="main_text">Với cảm biến siêu âm, robot đo khoảng cách của chướng ngại vật phía trước. Giá trị của khoảng cách đo được lưu trữ trong một tên biến ‘Cm’. Các cảm biến có thể báo cáo thời tiết khi một người đứng hoặc đi ở một khoảng cách vừa phải.</p>
+<div id="src_4" style="display: none;">cm = hcsr04.get_distance()
+</div>
+<img class="block_image" src="./images/blocks/18-09.png" onclick="run_code($('#src_4').text())">
+<br>
+<p class="main_text"><strong>E. Lặp lại (nhóm [ADVANCE])</strong></p>
+<p class="main_text">Lặp lại các lệnh trong khối nhiều lần mà bạn muốn.</p>
+<div id="src_5" style="display: none;">for count in range(1):
+  pass
+</div>
+<img class="block_image" src="./images/blocks/18-10.png" onclick="run_code($('#src_5').text())">
+<p class="main_text">① Xác định số lần lặp lại.</p>
+<p class="main_text">② Thêm các khối để lặp lại.</p>
+<br>
+<p class="main_text"><strong>F. Repeat infinitely (nhóm [ADVANCE])</strong></p>
+<p class="main_text">Chạy thứ tự các khối bên trong khối.</p>
+<div id="src_6" style="display: none;">while True:
+  pass
+</div>
+<img class="block_image" src="./images/blocks/18-11.png" onclick="run_code($('#src_6').text())">
+<br>
+<p class="main_text"><strong>G. Nếu (nhóm [ADVANCE])</strong></p>
+<p class="main_text">Thực thi khối bên trong khối khi điều kiện đầu vào là chính xác. Nếu điều kiện không chính xác, khối theo sau khối if sẽ được thực thi.</p>
+<div id="src_7" style="display: none;">if i == :
+</div>
+<img class="block_image" src="./images/blocks/18-12.png" onclick="run_code($('#src_7').text())">
+<p class="main_text">① Nhập một biến được sử dụng trong câu lệnh điều kiện. Giá trị mặc định là 'i' và thay đổi thành 'cm' khi sử dụng cảm biến siêu âm. </p>
+<p class="main_text">② Chọn bất đẳng thức mặc định để so sánh các điều kiện.</p>
+<p class="main_text">③ Nhập giá trị mặc định để sử dụng trong điều kiện. Bạn cần thêm các khối để xác định giá trị có điều kiện.</p>
+<p class="main_text">④ Thêm các khối được thực thi khi điều kiện đúng.</p>
+<br>
+<p class="main_text"><strong>H. Data Block Character Value Block (nhóm [ADVANCE])</strong></p>
+<p class="main_text">Bạn có thể sử dụng một trong hai khối sau cho giá trị có điều kiện của câu lệnh điều kiện.</p>
+<div id="src_8" style="display: none;">1
+</div>
+<img class="block_image" src="./images/blocks/18-13.png" onclick="run_code($('#src_8').text())">
+<p class="main_text">Đối với khối dữ liệu, nhập và sử dụng giá trị bạn muốn so sánh.</p>
+<p class="main_text">① Nhập giá trị dữ liệu để so sánh với biến của câu lệnh điều khiển.</p>
+<br>
+<div id="src_9" style="display: none;">''
+</div>
+<img class="block_image" src="./images/blocks/18-14.png" onclick="run_code($('#src_9').text())">
+<p class="main_text">khối giá trị ký tự nên được sử dụng khi sử dụng giá trị ký tự cho giá trị có điều kiện hoặc sử dụng giá trị ký tự hoặc ký tự đầu vào nhận được từ Internet làm giá trị có điều kiện.</p>
+<p class="main_text">① Nhập các ký tự được sử dụng làm điều kiện.</p>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/reference_vietnam.png">
+<p class="quiz_line"></p>
+<p class="main_text">Giá trị ký tự liên quan đến thời tiết</p>
+<p class="main_text">Giá trị ký tự liên quan đến thời tiết bạn có thể tải xuống từ Internet như sau:</p>
+<p class="main_text">Những ngày mưa: rain</p>
+<p class="main_text">Ngày nắng: sunny</p>
+<p class="main_text">Ngày tuyết rơi: snow</p>
+</div>
+
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_veitnam.png">
+<p class="quiz_line"></p>
+<p class="main_text">Tạo một chương trình phát ‘Do’ ‘Re’ ‘Mi’ theo thứ tự từng giây một nếu hôm nay giá trị thời tiết được tải xuống từ Internet là ‘sunny’.</p>
+</div>
+
+<br>
+<p class="main_text"><strong>I. Break (nhóm [ADVANCE])</strong></p>
+<p class="main_text">Khi bạn gặp khối trong chương trình vòng lặp Vô hạn, dừng vòng lặp vô hạn và thực thi đoạn mã sau.</p>
+<div id="src_10" style="display: none;">break;
+</div>
+<img class="block_image" src="./images/blocks/18-15.png" onclick="run_code($('#src_10').text())">
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_veitnam.png">
+<p class="quiz_line"></p>
+<p class="main_text">Tạo một chương trình thực hiện [Flap] 3 lần khi có một người hoặc vật có khoảng cách 50 cm trước AsomeBot.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/18-16.png"></div>
+</div>
+
+<br>
+<p class="main_text"><strong>J. Đứng nghiêm (nhóm [BASIC])</strong></p>
+<p class="main_text">AsomeBot có thể ngã nếu chân của robot phải thực hiện các bước di chuyển quá nhiều. Đặt câu lệnh [Attention] giữa mỗi chuyển động sẽ giúp AsomeBot đứng nghiêm để tránh bị ngã.</p>
+<div id="src_11" style="display: none;">asomebot.home()
+</div>
+<img class="block_image" src="./images/blocks/18-17.png" onclick="run_code($('#src_11').text())">
+<br>
+<p class="main_text"><strong>K. Các điệu nhảy không có tùy chọn (nhóm [DANCE])</strong></p>
+<div id="src_12" style="display: none;">asomebot.ballet()
+</div>
+<img class="block_image" src="./images/blocks/18-18.png" onclick="run_code($('#src_12').text())">
+<p class="main_text">Thực hiện các động tác múa ba lê bằng cách Asomebot đứng các ngón chân.</p>
+<br>
+<div id="src_13" style="display: none;">asomebot.wiggle()
+</div>
+<img class="block_image" src="./images/blocks/18-19.png" onclick="run_code($('#src_13').text())">
+<p class="main_text">AsomeBot ngọ nguậy tại chỗ.</p>
+<br>
+<div id="src_14" style="display: none;">asomebot.flap()
+</div>
+<img class="block_image" src="./images/blocks/18-20.png" onclick="run_code($('#src_14').text())">
+<p class="main_text">AsomeBot vỗ chân.</p>
+<br>
+<div id="src_15" style="display: none;">asomebot.warigari()
+</div>
+<img class="block_image" src="./images/blocks/18-21.png" onclick="run_code($('#src_15').text())">
+<p class="main_text">AsomeBot thực hiện Warigari bằng đôi chân của mình.</p>
+<br>
+<div id="src_16" style="display: none;">asomebot.yaho()
+</div>
+<img class="block_image" src="./images/blocks/18-22.png" onclick="run_code($('#src_16').text())">
+<p class="main_text">AsomeBot nâng ngón chân lên. Nó là sự ngược lại của điệu nhảy ba lê.</p>
+<br>
+<div id="src_17" style="display: none;">asomebot.moonwalk()
+</div>
+<img class="block_image" src="./images/blocks/18-23.png" onclick="run_code($('#src_17').text())">
+<p class="main_text">AsomeBot biểu diễn điệu nhảy moonwalk.</p>
+<br>
+<p class="main_text"><strong>L. Các điệu nhảy có tùy chọn (nhóm [DANCE])</strong></p>
+<p class="main_text">Chọn hướng để di chuyển hướng chân AsomeBot trong tùy chọn của tất cả các bước nhảy.</p>
+<div id="src_18" style="display: none;">asomebot.mouse(1)
+</div>
+<img class="block_image" src="./images/blocks/18-24.png" onclick="run_code($('#src_18').text())">
+<p class="main_text">Nâng một chân của AsomeBot và thực hiện chuyển động.</p>
+<br>
+<div id="src_19" style="display: none;">asomebot.swing(1)
+</div>
+<img class="block_image" src="./images/blocks/18-25.png" onclick="run_code($('#src_19').text())">
+<p class="main_text">Nâng lên và gập lại một chân của AsomeBot.</p>
+<br>
+<div id="src_20" style="display: none;">asomebot.tick_tock(1)
+</div>
+<img class="block_image" src="./images/blocks/18-26.png" onclick="run_code($('#src_20').text())">
+<p class="main_text">Gấp một chân AsomeBot lại và vẫy một lần.</p>
+<br>
+<p class="main_text"><strong>M. Chuông bật (nhóm [SOUND])</strong></p>
+<p class="main_text">Làm cho chuông không thể sử dụng. Để tạo âm thanh với chuông, bạn phải sử dụng khối này. Lưu ý rằng nếu khối này không được sử dụng trước tiên, bạn không thể phát nhạc.</p>
+<div id="src_21" style="display: none;">turnoff_pins( (1, 5, 6, 7, 8) )
+import music
+music.open(1)
+</div>
+<img class="block_image" src="./images/blocks/18-27.png" onclick="run_code($('#src_21').text())">
+<br>
+<p class="main_text"><strong>N. Chuông tắt (nhóm [SOUND])</strong></p>
+<p class="main_text">Điều này cho phép bạn sử dụng các bộ phận khác một lần nữa sau khi sử dụng chuông. Bạn không thể sử dụng các bộ phận khác trong khi sử dụng chuông. Sau khi phát nhạc, khối phải được sử dụng để chạy các thành phần khác.</p>
+<div id="src_22" style="display: none;">turnoff_pins( (1, 5, 6, 7, 8) )
+import asomebot
+asomebot.ready(5, 6, 7, 8)
+</div>
+<img class="block_image" src="./images/blocks/18-28.png" onclick="run_code($('#src_22').text())">
+<br>
+<p class="main_text"><strong>O. Play for (nhóm [SOUND])</strong></p>
+<p class="main_text">Sử dụng khối này, bạn có thể tạo ra âm thanh bạn muốn bằng tần số.</p>
+<div id="src_23" style="display: none;">music.note("C1",1*1000)
+</div>
+<img class="block_image" src="./images/blocks/18-29.png" onclick="run_code($('#src_23').text())">
+<p class="main_text">① Chọn thang âm từ danh sách mà bạn muốn chơi.</p>
+<p class="main_text">② Chọn quãng của thang âm mà bạn muốn chơi.</p>
+<p class="main_text">③ Xác định thời gian phát nhạc trong bao lâu.</p>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_veitnam.png">
+<p class="quiz_line"></p>
+<p class="main_text">Tạo âm thanh các âm Do, Mi và Sol trong quãng 4 trong khoảng thời gian 0.3 giây mỗi âm.</p>
+</div>
+
+<br>
+<br>
+
+<li class="lefts bold" id="pn4">4. Chơi trò chơi<span class="video_button" level="block" filename="01.ch04"></span></li>
+<p class="main_text"><strong>A. Luật chơi</strong></p>
+<p class="main_text">① Hãy nói về cách thức và thời điểm bắt đầu dự báo thời tiết. </p>
+<p class="main_text">② Hãy nói về cách AsomeBot có thể dự báo thời tiết.</p>
+<p class="main_text">③ Bên cạnh thời tiết, hãy nói về những thông tin khác (nhiệt độ, độ ẩm và bụi) có thể được dự báo.</p>
+<p class="main_text">④ Ngoài nước, hãy nói về những dịch vụ dữ liệu khác mà bạn có thể tải xuống và dự báo từ Internet.</p>
+<br>
+<p class="main_text"><strong>B. Thuật toán</strong></p>
+<p class="main_text">① Tải xuống dữ liệu thời tiết từ Internet.</p>
+<p class="main_text">② Phát triển các chuyển động để chạy dựa theo thời tiết.</p>
+<p class="main_text">③ Quyết định những điều kiện nên được dự báo khi điều kiện được đáp ứng và phát triển một chương trình.</p>
+<p class="main_text">④ Phát triển một chương trình thực hiện chuyển động cho thời tiết ngày hôm nay khi điều kiện được đáp ứng.</p>
+<p class="main_text">⑤ Thêm các chương trình để làm cho nó thú vị hơn.</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/18-30.png"></div>
+<br>
+<p class="main_text"><strong>C. Tạo và hiển thị một chương trình dự báo thời tiết</strong></p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/18-31.png"></div>
+<br>
+<script type="text/javascript">
+    $(".video_button").css("display", "none");
+</script>
+
+
+
+                </div>
+            </div>
+
+        </div>
+        <!-- //container -->
+    </div>
+    <!-- //wrap -->
+</body>
+
+</html>

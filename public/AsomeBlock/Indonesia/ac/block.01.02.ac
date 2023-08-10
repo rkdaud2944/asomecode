@@ -1,0 +1,137 @@
+Robot ini digerakkan oleh motor
+
+1. Tujuan pembelajaran
+	[video ./video/block/01/02.execute.webm]
+	* Anda akan mempelajari prinsip pergerakan kaki robot.
+	* Anda dapat memerintahkan  AsomeBot berjalan maju atau mundur atau ke samping.
+	* Mempelajari tentang kisaran rotasi motor 180 derajat.
+
+
+2. Pratinjau
+	@ Sendi dan otot robot
+	Sama seperti sendi dan otot untuk menggerakkan tubuh seseorang, motor adalah masing-masing sendi dari robot dan dengan memberi daya ke motor, robot digerakkan.
+	[image ./images/blocks/02-00.png]
+
+	@ Sudut rotasi motor servo 
+	* Motor-motor servo yang akan kita gunakan di AsomeBot hanya dapat berputar hingga 180 derajat.
+	* AsomeBot menggunakan empat motor untuk berjalan dan menari.
+	* Keempat motor servo itu semuanya diatur pada 90 derajat ketika AsomeBot berdiri tegak.
+	[image ./images/blocks/02-0000.png]
+
+	@ Menghubungkan program blok-coding
+	Untuk membuat program agar AsomeBot bergerak dengan blok-coding, Anda harus menghubungkan AsomeBot dan PC (atau perangkat pintar) dengan kabel USB sebagai berikut.
+
+	① Sambungkan sisi kecil USB
+	kabel ke port di belakang AsomeBot
+	[image ./images/blocks/02-00-01.png]
+
+	(Perangkat pintar)
+	② Sambungkan sisi lain kabel USB ke jenis kelamin OTG dan kemudian ke port koneksi pada perangkat pintar.
+	[image ./images/blocks/02-00-02.png ./images/blocks/02-00-03.png]
+
+	(PC & Notebook)
+	③ Sambungkan sisi lain kabel USB ke port USB pada PC.
+	[image ./images/blocks/02-00-04.png]
+
+	④ Klik tombol [Connect] di bagian atas layar blok kode. Jika jendela baru muncul dan menampilkan "Connected," PC Anda (perangkat pintar) terhubung ke AsomeBot.
+	[image ./images/blocks/02-01.png]
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/note_indonesia.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">1. Menutup jendela koneksi mengakhiri koneksi dengan AsomeBot.</p>
+		<p class="main_text">2. Jika Anda melepaskan dan menghubungkan kembali kabel USB untuk menjalankan AsomeBot, Anda perlu mengklik [Connect] untuk menghubungkan kembali.</p>
+		</div>
+	]
+
+
+3. Pelajari blok mana yang akan digunakan
+	@ Mempelajari layar blok coding
+	[image ./images/blocks/02-02.png]
+	① Connect : Terhubung dengan alat pembelajaran.
+	② Execute : Jalankan blok.
+	③ Pause : Menjeda blok dari eksekusi.
+	④ Save : Menyimpan blok.
+	⑤ Load : Impor file blok yang telah disimpan.
+	⑥ Tab pemilihan alat belajar : Pilih alat belajar yang diinginkan. Blok ini ditampilkan untuk setiap alat pembelajaran.
+	⑦ Tab Grup Blok : Blok dibedakan dan dikumpulkan berdasarkan jenis.
+	⑧ Block: Blok perintah untuk memindahkan alat belajar.
+	⑨ Area Operasi : Seret dan jatuhkan blok untuk dieksekusi.
+	⑩ Kode Python : Menampilkan blok yang ditambahkan dalam bahasa Python.
+	⑪ Tombol hide/show : Menampilkan atau menyembunyikan jendela tampilan kode Python.
+	⑫ Waste bin : Anda dapat menghapus blok dengan menyeret dan menjatuhkannya ke tempat sampah.
+
+	@ Pelajari blok mana yang akan digunakan
+	(1) Grup Ready (BASIC)
+	Sebelum memulai semua program, harus ada blok [Ready]. Dengan menambahkan blok [Ready] di area kerja, perintah yang bersiap untuk memindahkan AsomeBot akan dijalankan secara otomatis.
+	[block_image ./images/blocks/ready.png
+		import asomebot
+		import hcsr04
+		hcsr04.open(3, 2)
+		asomebot.ready(5, 6, 7, 8)
+	]
+	* Bersiaplah untuk menggunakan sensor ultrasonik yang dipasang di AsomeBot
+	* Bersiaplah untuk menggunakan empat motor servo yang terpasang di AsomeBot
+
+	(2) Grup Attention (BASIC)
+	* Buat AsomeBot berdiri tegak.
+	* Pada saat ini, sudut semua motor diatur ke 90 derajat.
+	[image ./images/blocks/02-04.jpg]
+	[block_image ./images/blocks/attention.png
+		asomebot.home()
+	]
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_indonesia.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">• Sambungkan AsomeBot dan tambahkan blok Ready dan Attention secara berurutan. Apakah robot itu berdiri tegak?<br>
+		</p>
+		</div>
+	]
+
+	(3) Atur sudut motor (Grup WALK)
+	Anda dapat memilih motor yang ingin Anda atur sudutnya dan atur sudutnya dan waktu yang dibutuhkan motor untuk mengubah sudutnya.
+	[block_image ./images/blocks/angles.png
+		asomebot.angles([0],[90-90],1*1000)
+	]
+	① pilih motor yang ingin Anda atur sudutnya.
+	② Masukkan sudut di mana motor yang dipilih itu akan diatur.
+	③ Masukkan waktu yang dibutuhkan motor untuk mengatur sudutnya.
+
+	* Jumlah motor
+	Setiap motor AsomeBot diberi nomor seperti di bawah ini.
+	[image ./images/blocks/02-07.png]
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_indonesia.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">Buat Bentuk kaki AsomeBot seperti gambar di bawah ini dengan memutar motornya.<br>
+		</p>
+		<div class="content_image_box"><img src="./images/blocks/02-08.jpg" style="width:49%;"><img src="./images/blocks/02-09.jpg" style="width:49%;"></div>
+		<div class="content_image_box"><img src="./images/blocks/02-10.jpg" style="width:49%;"><img src="./images/blocks/02-11.jpg" style="width:49%;"></div>
+		</div>
+	]
+
+
+4. Aktivitas bermain
+	@ Aturan main
+	① Letakkan panah di bagian bawah kaki kiri AsomeBot.
+	② Tulis dan gambar aktifitas Anda di papan dibagi dengan empat ruang seperti gambar.
+	③ Buat program untuk menunjukkan aktifitas anda dengan memutar motor No.0 dari AsomeBot.
+	[image ./images/blocks/02-12.png]
+
+	@ Algoritma
+	[image ./images/blocks/02-13.png]
+
+	@ Mainkan game
+	Mainkan bersama teman untuk menebak apa yang akan Anda pilih.
+	[image ./images/blocks/02-14.jpg]
+	
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]	

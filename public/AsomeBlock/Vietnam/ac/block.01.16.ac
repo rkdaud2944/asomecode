@@ -1,0 +1,236 @@
+Tạo ra 1 điệu nhảy mới
+
+1. Mục tiêu học tập
+	[video ./video/block/01/16.execute.webm]
+	* Học cách tạo ra 1 điệu nhảy mới.
+	* Học cách kết nối và thực thi các chuyển động với Asomebot Controller.
+	* Học cách giải thích và chứng minh các chuyển động mới được tạo ra.
+
+
+2. Preview
+	@ Làm thế nào để bạn thực hiện một điệu nhảy?
+	Bạn có thể tạo các chuyển động khác nhau bằng cách điều chỉnh góc và thời gian di chuyển của 4 động cơ được kết nối với AsomeBot. Bạn có thể tạo chuyển động để vẫy chân như sau:
+	[image ./images/blocks/16-01.png]
+
+	@ Tạo 1 điệu nhảy mới
+	Bạn có thể sử dụng 3 phương pháp để tạo ra những điệu nhảy mới.
+	1. Đầu tiên, kết hợp các chuyển động hiện có thành một chuyển động duy nhất. Chuyển động này có thể được gộp lại với nhau như một chuyển động đơn
+	[image ./images/blocks/16-02.png]
+	2. Thứ hai, chỉ định một góc động cơ và thời gian chuyển động tại một thời điểm. Bạn phải chỉ định động cơ nào cần di chuyển.
+	[image ./images/blocks/16-03.png]
+	3. Cuối cùng, chỉ định nhiều góc động cơ và thời gian chuyển động tại một thời điểm. Chỉ định góc và tốc độ di chuyển của từng động cơ tại một thời điểm. Tạo một chuyển động như bên dưới sẽ mất 2 giây để nâng và hạ hai chân.
+	[image ./images/blocks/16-04.png]
+
+	@ Điều chỉnh thời gian di chuyển
+	Thời gian di chuyển của động cơ được đặt thành 1 giây và 0,1 giây sẽ thể hiện các chuyển động hoàn toàn khác nhau do sự khác biệt của tốc độ di chuyển ngay cả khi cùng một chuyển động được tạo ra như dưới đây.
+	[image ./images/blocks/16-05.png]
+
+
+3. Học các khối sử dụng trong bài
+	@ Change to access point mode ([INTERNET] Group)
+	Gán tên của AsomeBot để được điều khiển bằng máy tính bảng.
+	[block_image ./images/blocks/16-06.png
+		import internet
+		internet.open_ap("")
+	]
+	① Nhập tên bạn muốn sử dụng. Chỉ có tiếng Anh và số có thể được sử dụng.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_veitnam.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Đặt tên cho AsomeBot. Chỉ có tiếng Anh và số có thể được sử dụng để đặt tên AsomeBot. Khi bạn đã gán tên, tên sẽ được giữ lại ngay cả khi bật và tắt nguồn.</p>
+		<p class="main_text">② Kiểm tra tên bạn đã chỉ định và thử kết nối. Đầu tiên, tìm tên AsomeBot bạn đã nhập từ danh sách WiFi và kết nối với điện thoại thông minh của bạn. Nếu một thông báo bật lên nói rằng kết nối Internet không ổn định, không nhấn bất kỳ nút nào và đợi tin nhắn biến mất.</p>
+		<div class="content_image_box"><img src="./images/blocks/16-07.png" style="width:49%;"><img src="./images/blocks/16-08.png" style="width:49%;"></div>
+		</div>
+	]
+
+	@ Mở ổ cắm UDP (nhóm [INTERNET])
+	AsomeBot mở một cổng để giao tiếp qua Internet.
+	[block_image ./images/blocks/16-09.png
+		import udp_socket
+		udp_socket.open(1234)
+	]
+	① Số cổng được sử dụng. Use the number as is without modification.
+
+	@ Đọc tin nhắn ([INTERNET] Group)
+	Đọc tin nhắn được gửi từ máy tính bảng.
+	[block_image ./images/blocks/16-10.png
+		msg = udp_socket.read_text()
+	]
+
+	@ Lặp lại vô tận (nhóm [ADVANCE])
+	Chạy khối bên trong khối để chạy theo thứ tự. Tại đây, bạn sẽ đợi ứng dụng máy tính bảng của mình gửi tin nhắn và thực hiện lệnh theo tin nhắn.
+	[block_image ./images/blocks/16-11.png
+		while True:
+		  pass
+	]
+
+	@ nếu (nhóm [ADVANCE])
+	Thực thi khối bên trong khối khi điều kiện đầu vào là chính xác. Nếu điều kiện không chính xác, khối theo sau khối if sẽ được thực thi.
+	[block_image ./images/blocks/16-12.png
+		if i == :
+	]
+	① Nhập một biến được sử dụng trong câu lệnh điều kiện. Giá trị mặc định là ‘i’.
+	② Chọn bất đẳng thức mặc định để so sánh các điều kiện.
+	③ Nhập giá trị mặc định để sử dụng trong điều kiện. Bạn cần thêm các khối để xác định giá trị có điều kiện.
+	④ Thêm các khối được thực thi khi điều kiện đúng.
+
+	@ Giá trị kí tự (nhóm [ADVANCE])
+	Giá trị được sử dụng để thể hiện các ký tự được nhập thay vì các biến hoặc số.
+	[block_image ./images/blocks/16-13.png
+		''
+	]
+	① Nhập các ký tự được sử dụng làm điều kiện.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_veitnam.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Nếu bạn đã tạo các khối như bên dưới, hãy nói về cách chúng di chuyển:</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/16-14.png"></div>
+		</div>
+	]
+
+	@ Chú ý (nhóm [BASIC])
+	AsomeBot có thể ngã nếu bàn chân thực hiện nhiều chuyển động liên tiếp. Đặt [Attention] giữa mỗi chuyển động sẽ giúp AsomeBot đứng ở vị trí chú ý để tránh bị ngã.
+	[block_image ./images/blocks/16-15.png
+		asomebot.home()
+	]
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_veitnam.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">Tạo và chạy một chương trình mà robot đứng nghiêm sau khi thực hiện động tác múa ba lê.</p>
+		</div>
+	]
+
+	@ Các điệu nhảy không có tùy chọn (nhóm [DANCE])
+	[block_image ./images/blocks/16-16.png
+		asomebot.ballet()
+	]
+	Thực hiện các động tác múa ba lê bằng cách Asomebot đứng các ngón chân.
+
+	[block_image ./images/blocks/16-17.png
+		asomebot.wiggle()
+	]
+	AsomeBot ngọ nguậy tại chỗ.
+
+	[block_image ./images/blocks/16-18.png
+		asomebot.flap()
+	]
+	AsomeBot vỗ chân.
+
+	[block_image ./images/blocks/16-19.png
+		asomebot.warigari()
+	]
+	AsomeBot thực hiện Warigari bằng đôi chân của nó.
+
+	[block_image ./images/blocks/16-20.png
+		asomebot.yaho()
+	]
+	AsomeBot nâng ngón chân lên. Nó là sự ngược lại của chuyển động ba lê.
+
+	[block_image ./images/blocks/16-21.png
+		asomebot.moonwalk()
+	]
+	AsomeBot biểu diễn điệu nhảy moonwalk.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_veitnam.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">Ba lê là một chuyển động chỉ đứng ở mũi chân. Do đó, hãy kết hợp với các chuyển động khác và tạo ra nhiều động tác thú vị hơn.</p>
+		</div>
+	]
+
+	@ Điệu nhảy với các tùy chọn (nhóm [DANCE])
+	Chọn hướng để di chuyển hướng chân AsomeBot trong tùy chọn của tất cả các bước nhảy.
+	[block_image ./images/blocks/16-22.png
+		asomebot.mouse(1)
+	] 
+	Nâng một chân của AsomeBot và thực hiện chuyển động.
+
+	[block_image ./images/blocks/16-23.png
+		asomebot.swing(1)
+	]
+	Nâng lên và gập lại một chân của AsomeBot.
+
+	[block_image ./images/blocks/16-24.png
+		asomebot.tick_tock(1)
+	]
+	Gấp một chân AsomeBot lại và vẫy một lần.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_veitnam.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① ’Mouse’ được làm bởi học sinh tiểu học Hàn Quốc. Học sinh bắt chước cảnh huýt sáo với đôi chân di chuyển trong hoạt hình chuột Mickey và đặt tên cho dự án của mình là ‘Mouse’.</p>
+		<p class="main_text">② Sử dụng chuyển động của Swing và TickTock, tạo một chương trình di chuyển bàn chân cùng một lúc.</p>
+		</div>
+	]
+
+	@ Đặt góc của động cơ (nhóm [WALK])
+	Khối điều khiển 1 động cơ. Chọn một động cơ và chỉ định góc và tốc độ di chuyển của động cơ đã chọn.
+	[block_image ./images/blocks/16-25.png
+		asomebot.angles([0],[90-90],1*1000)
+	]
+	① Chọn số lượng động cơ sẽ được di chuyển.
+	② Nhập góc để di chuyển động cơ đã chọn.
+	③ Nhập thời gian cần thiết để động cơ di chuyển.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_veitnam.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">Sử dụng số động cơ của AsomeBot trong hình, tạo một chương trình cho phép góc phải (động cơ 3) của AsomeBot duy trì ở 30 độ trong 1 giây và 90 độ sau 1 giây .</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/16-26.png"></div>
+		</div>
+	]
+
+	@ Đặt các góc (nhóm [WALK])
+	Khối điều khiển các góc của 4 động cơ cùng một lúc. Bạn có thể chỉ định góc bạn muốn của 4 động cơ và xoay và đặt thời gian di chuyển của chúng.
+	[block_image ./images/blocks/16-27.png
+		asomebot.angles([0],[90-90],1*1000)
+	]
+	① Chỉ định các góc của 0, 1, 2 và 3 động cơ theo thứ tự từ bên trái.
+	② Nhập thời gian cần thiết để động cơ di chuyển.
+
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_veitnam.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">Using the AsomeBot motor number in the figure, create a program that lets AsomeBot to lift up and down of the left and right feet alternatively.<br>
+		Hint. Left foot angle 150 degrees / Right foot angle 30 degrees</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/16-28.png"></div>
+		</div>
+	]
+
+
+4. Chơi trò chơi
+	@ Luật chơi
+	① Tạo 1 chương trình dùng Asome Controller để điều khiển Asomebot.
+	② Tạo 3 điệu nhảy mới theo lựa chọn của bạn.
+	- Chuyển động được tạo ra bằng cách kết hợp các chuyển động hiện có
+	- Chuyển động được tạo ra bằng cách di chuyển từng động cơ một.
+	- Chuyển động được tạo ra bằng cách di chuyển nhiều động cơ cùng 1 lúc.
+	③ Tạo một chương trình để thực hiện các chuyển động mới bằng các nút số trên Asome Controller.
+
+	@ Thuật toán
+	Bạn đã tạo ra những điệu nhảy tuyệt vời? Hãy thể hiện những điệu nhảy bạn đã tạo bằng phương pháp dưới đây:
+	① Thể hiện điệu nhảy của robot và cho khán giả biết tên của điệu nhảy đó.
+	② Cũng giải thích lý do tại sao bạn tạo ra các điệu nhảy.
+	③ Listen to your friends’ dance move story.
+	④ Phát nhạc và để robot thực hiện điệu nhảy tuyệt vời theo điệu nhảy mà bạn đã tạo.
+	[image ./images/blocks/16-29.png]
+
+	@ 게임하기
+	[image ./images/blocks/16-30.png]
+
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]

@@ -1,0 +1,157 @@
+Phát triển robot đá bóng
+
+1. Mục tiêu bài học
+	[video ./video/block/01/15.execute.webm]
+	* Hiểu về bóng đá robot
+	* AsomeBot có thể được điều chỉnh phù hợp với bóng đá robot.
+	* Tạo và kiểm soát các hành động cần thiết cho bóng đá
+
+
+2. Preview
+	@ Bóng đá
+	Bóng đá là một trò chơi trong đó hai đội đá bóng vào khung thành của đối phương. Đây là một môn thể thao rất phổ biến trên toàn thế giới.
+	[image ./images/blocks/15-01.png]
+
+	@ Robot đá bóng
+	Kể cả robot cũng có thể đá bóng. Nhiều trò chơi bóng đá robot được tổ chức trên khắp thế giới.
+	[image ./images/blocks/15-02.jpg]
+	Chúng ta có thể sử dụng robot mà nó có thể chơi bóng đá dễ dàng hơn.
+	[image ./images/blocks/15-03.jpg]
+
+	@ AsomeBot đá bóng
+	Chúng ta có thể chơi bóng đá với AsomeBot không?
+
+	@ Mặc quần áo cho AsomeBot
+	AsomeBot có thể chơi bóng đá bằng cách đá bóng bằng chân, nhưng thay đổi thân của AsomeBot như hình ở trên giúp bạn dễ dàng thưởng thức bóng đá AsomeBot hơn. Biến đổi AsomeBot với cốc giấy, hộp các tông, hộp sữa và nhiều thứ khác.
+
+	@ Tạo các hành động được sử dụng cho một trận bóng đá
+	Sẽ rất hữu ích khi kết nối các số trước với các động tác cần thiết để chơi bóng đá với AsomeBot. Ví dụ: nhấn 1 trong Asome Controller sẽ khiến Moonwalk thực thi 3 lần.
+	Với vải không dệt ở một chân, AsomeBot sẽ di chuyển sang một bên và chặn bóng, hoặc lái bóng ở nơi bạn muốn.
+	[image ./images/blocks/15-04.png]
+	Sử dụng cùng một phương pháp, tạo các hành động bổ sung. Chúng ta nên thực hiện một động tác ăn mừng nào khi ghi bàn thắng?
+
+
+3. Học về các khối được sử dụng
+	@ Thay đổi chế độ điểm truy cập (nhóm [INTERNET])
+	Gán tên của AsomeBot để được điều khiển bằng máy tính bảng.
+	[block_image ./images/blocks/15-05.png
+		import internet
+		internet.open_ap("")
+	]
+	① Nhập tên bạn muốn sử dụng. Chỉ có tiếng Anh và số có thể được sử dụng.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_veitnam.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Đặt tên cho AsomeBot. Chỉ có tiếng Anh và số có thể được sử dụng để đặt tên AsomeBot. Khi bạn đã gán tên, tên sẽ được giữ lại ngay cả khi bật và tắt nguồn.</p>
+		<p class="main_text">② Kiểm tra tên bạn đã chỉ định và thử kết nối. Đầu tiên, tìm tên AsomeBot bạn đã nhập từ danh sách WiFi và kết nối với máy tính bảng của bạn. Nếu một thông báo bật lên nói rằng kết nối Internet không ổn định, không nhấn bất kỳ nút nào và đợi tin nhắn biến mất.</p>
+		<div class="content_image_box"><img src="./images/blocks/15-06.png" style="width:49%;"><img src="./images/blocks/15-07.png" style="width:49%;"></div>
+		</div>
+	]
+
+	@ Mở ổ cắm UDP (nhóm [INTERNET])
+	AsomeBot mở một cổng để giao tiếp qua Internet.
+	[block_image ./images/blocks/15-08.png
+		import udp_socket
+		udp_socket.open(1234)
+	]
+	① Đây là một cổng được sử dụng. Sử dụng 1 số mà không sửa đổi.
+
+	@ Đọc tin nhắn (nhóm [INTERNET])
+	Đọc tin nhắn được gửi từ máy tính bảng.
+	[block_image ./images/blocks/15-09.png
+		msg = udp_socket.read_text()
+	]
+
+	@ Lặp lại vô tận (nhóm [ADVANCE])
+	Chạy thứ tự khối bên trong khối. Tại đây, bạn sẽ đợi ứng dụngtrên máy tính bảng của mình gửi tin nhắn và thực hiện lệnh dựa theo tin nhắn đó.
+	[block_image ./images/blocks/15-10.png
+		while True:
+		  pass
+	]
+
+	@ Lặp lại (nhóm [ADVANCE])
+	Lặp lại các lệnh trong khối nhiều lần mà bạn muốn.
+	[block_image ./images/blocks/15-11.png
+		for count in range(1):
+		  pass
+	]
+	① Xác định số lần lặp lại.
+	② Thêm các khối để lặp lại.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_veitnam.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">[Tick Tock] Làm thế nào bạn có thể tạo một câu lệnh lặp lại mà nó thực thi lệnh 3 lần, xoay 1 lần và lặp lại chuyển động 3 lần? Hãy làm và thực thi lệnh đó.</p>
+		</div>
+	]
+
+	@ nếu (nhóm [ADVANCE])
+	Thực hiện khối bên trong khối khi điều kiện đầu vào là chính xác. Nếu điều kiện không chính xác, khối theo sau khối if sẽ được thực thi.
+	[block_image ./images/blocks/15-12.png
+		if i == :
+	]
+	① Nhập một biến được sử dụng trong câu lệnh điều kiện. Giá trị mặc định là ‘i’, và sử dụng‘msg’ khi nhận được tin nhắn.
+	② Chọn bất đẳng thức mặc định để so sánh các điều kiện.
+	③ Nhập giá trị mặc định để sử dụng trong điều kiện. Bạn cần thêm các khối để xác định giá trị có điều kiện.
+	④ Thêm các khối được thực thi khi điều kiện đúng.
+
+	@ Giá trị ký tự (nhóm [ADVANCE])
+	Giá trị được sử dụng để thể hiện các ký tự được nhập thay vì các biến hoặc số.
+	[block_image ./images/blocks/15-13.png
+		''
+	]
+	① Nhập các ký tự được sử dụng làm điều kiện.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_veitnam.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Nếu bạn đã tạo các khối như bên dưới, hãy nói về cách chúng di chuyển:</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/15-14.png"></div>
+		<p class="main_text">② Tạo một chương trình mã hóa khối cho phép AsomeBot đi theo hướng khi nhấn phím điều hướng của Asome Controller.</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/15-15.png"></div>
+		</div>
+	]
+
+	@ Cài đặt Asome Controller
+	Để kiểm soát AsomeBot không dây, hãy cài đặt ứng dụng AsomeController. Với ứng dụng này, bạn có thể gửi tin nhắn mà bạn muốn kiểm soát AsomeBot. Tìm ‘asomeit’ trên App Store và cài đặt ‘Asome Controller’. Cài đặt ứng dụng cho phép bạn điều khiển AsomeBot không dây.
+	[image ./images/blocks/15-16.jpg ./images/blocks/15-17.jpg]
+
+	@ Tin nhắn bạn có thể gửi với Asome Controller
+	Bạn có thể thực thi các chuyển động khác nhau bằng ứng dụng Asome Controller.
+	[image ./images/blocks/15-18.png]
+	① Phím điều hướng: Cung cấp các tin nhắn F, B, L và R để AsomeBot đi bộ
+	② Phím chú ý: Cung cấp tin nhắn H để AsomeBot được đứng nghiêm
+	③ Phím chuyển động: Cung cấp các số từ 1 đến 12 dưới dạng tin nhắn để thực hiện chuyển động bạn muốn
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_veitnam.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Tạo chương trình xoay AsomeBot 1 lần sang trái và di chuyển về phía trước 3 lần khi chạm vào nút “2” trên Asome Controller.</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/15-19.png"></div>
+		<p class="main_text">Đáp án</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/15-20.png"></div>
+		</div>
+	]
+
+
+4. Chơi trò chơi
+	@ Luật chơi
+	① 1 đội gồm có 2 robot
+	② Đội nào ghi bàn trước sẽ thắng.
+	③ 2 robot có thể tấn công và phòng thủ.
+	④ 1 số luật khác có thể được thêm vào.
+	[image ./images/blocks/15-21.png]
+
+	@ Chơi trò chơi
+	[image ./images/blocks/15-22.jpg]
+
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]

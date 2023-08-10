@@ -1,0 +1,101 @@
+让AsomeBot直行
+
+1. 学习目标
+	[video ./video/block/01/04.execute.webm]
+	* 调整AsomeBot 腿的每个电机的角度.
+	* 调整腿的角度使AsomeBot直行.
+
+
+2. 预习
+	@ 为什么 AsomeBot 不能直行
+	这是因为AsomeBot的四个电机的角度不正。 也有可能是地面太滑或者AsomeBot 的重心偏移而不能直行。这种情况需要改变AsomeBot电机的角度。
+	[image ./images/blocks/04-01.png]
+
+	@ Asomebot电机编号
+	AsomeBot的4个电机编号如下图: 请记住电机的编号，对应的调整角度。
+	[image ./images/blocks/04-02.png]
+
+
+3. 学习模块指令
+	@ 对齐Set alignment ([BASIC] 组)
+	可以输入角度值来调整AsomeBot 四个电机的角度。 首先在Set alignment模块输入角度值，再加Attention模块，然后执行，角度就被修改了。 请记住角度值，当连接断开时需要重置。
+	[block_image ./images/blocks/04-03.png
+		asomebot.align(90,90,90,90)
+	]
+	① 调整No.1电机的角度。一般设定为 90度。 
+	② 调整No.2电机的角度。一般设定为 90度。
+	③ 调整No.3电机的角度。一般设定为 90度。
+	④ 调整No.4电机的角度。一般设定为 90度。
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_china.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① 调整每个电机的角度值超过90度，再调整小于 90度，看每个电机的方向如何变化。<br>
+		② 仔细观察AsomeBot的腿的方向，将所有的腿都被调整为90度。
+		</p>
+		</div>
+	]
+
+	@ 立正Attention ([BASIC] 组)
+	使AsomeBot处于立正状态。
+	[block_image ./images/blocks/attention.png
+		asomebot.home()
+	]
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_china.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">• 创建一个模块程序，使 AsomeBot 向前步行 3 步，然后立正。<br>
+		</p>
+		</div>
+	]
+
+	@ 延迟 Delay ([ADVANCE] 组)
+	等待设定的时间后开始执行。
+	[block_image ./images/blocks/delay.png
+		delay(1)
+	]
+	① 点击后，输入需要等待的时间值（秒）。
+
+	@ 如果Asomebot角度不正时会发生的问题
+	[image ./images/blocks/04-07.png]
+	如果No.0和No.1的角度不同, 左右的移动距离将不同
+
+	[image ./images/blocks/04-08.png]
+	如果No.2和No.3的角度不同, 举起脚步的高度将不同
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_china.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① 请调整Asomebot的电机角度如下图一样。<br>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/04-05.png"></div>
+		</p>
+		<p class="main_text">② AsomeBot 如果想如下图一样左转行走，应如何设置角度?<br>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/04-06.png"></div>
+		</p>
+		</div>
+	]
+
+
+4. 互动游戏
+	@ 活动规则
+	① 调整AsomeBot 四个电机的角度使其直行。
+	② 跑步比赛，在不偏离跑道的情况下看谁跑得快最先到达终点。(机器人偏离赛道即为不合格)
+	[image ./images/blocks/04-10.jpg]
+
+	@ 算法
+	① 在90度左右调整各电机的角度使 AsomeBot 直行。
+	② 用Delay模块延迟5秒钟, 然后向前步行 50 步。
+	[image ./images/blocks/04-09.png]
+
+	@ 开始游戏
+	起点站好，执行程序，开始比赛。
+	
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]	

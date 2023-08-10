@@ -1,0 +1,235 @@
+새로운 춤 동작을 만들어봐요
+
+1. 학습 목표
+	[video ./video/block/01/16.execute.webm]
+	* 새로운 춤 동작을 개발해 봅니다.
+	* 새로운 동작을 Asome Controller와 연결하여 실행해 봅니다.
+	* 새로운 동작을 설명하고 시연해 봅니다.
+
+
+2. 먼저 알아보기
+	@ 춤 동작은 어떻게 만드나요?
+	어썸봇에 연결된 4개 모터의 각도와 움직이는 시간을 조절하면 다양한 동작을 만들 수 있어요. 발을 까딱거리는 동작은 이렇게 만들면 됩니다.
+	[image ./images/blocks/16-01.png]
+
+	@ 새로운 춤 동작 만들기
+	새로운 춤 동작을 만들기 위해 세 가지 방법을 사용할 수 있습니다.
+	1. 첫번째로 기존의 동작들을 조합하여 하나의 동작으로 만드는 방법이 있습니다. 이렇게 만든 동작을 하나의 동작처럼 묶어서 사용할 수 있습니다.
+	[image ./images/blocks/16-02.png]
+	2. 두번째로 한 번에 하나의 서보모터 각도와 움직이는 시간을 지정하는 방법이 있습니다. 이 때는 움직일 서보모터를 정해야 합니다.
+	[image ./images/blocks/16-03.png]
+	3. 마지막으로 한 번에 여러 개의 서보모터 각도와 움직이는 시간을 지정하는 방법도 있습니다. 각 모터의 각도와 움직이는 속도를 한 번에 지정할 수 있어요. 아래처럼 동작을 만들면 두 발을 들었다가 내리는데 2초가 걸리는 동작이 만들어집니다.
+	[image ./images/blocks/16-04.png]
+
+	@ 움직이는 시간 조절하기
+	아래와 같이 똑같은 동작을 만들더라도 모터의 움직이는 시간을 1초로 했을 때와 0.1초로 했을 때는 움직이는 속도의 차이 때문에 완전히 다른 동작처럼 보이게 됩니다.
+	[image ./images/blocks/16-05.png]
+
+
+3. 사용 블록 알아보기
+	@ 비밀번호 없는 와이파이 연결하기 ([INTERNET] 그룹)
+	스마트폰으로 조종할 어썸봇의 이름을 지정합니다.
+	[block_image ./images/blocks/16-06.png
+		import internet
+		internet.open_ap("")
+	]
+	① 사용할 이름을 입력합니다. 영어와 숫자만 사용할 수 있습니다.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① 어썸봇에게 이름을 지어주세요. 어썸봇의 이름으로는 영어와 숫자만 사용할 수 있습니다. 또 한번 이름을 정하면 전원을 껐다 켜도 이름이 유지됩니다.</p>
+		<p class="main_text">② 지정한 이름을 확인하고 연결해 봐요. 먼저 WiFi 목록에서 입력한 어썸봇 이름을 찾아서 스마트폰과 연결할 수 있어요. 인터넷 연결이 이상하다는 메시지가 나타나면 아무 버튼도 누르지 말고 메시지가 사라질 때까지 기다려요.</p>
+		<div class="content_image_box"><img src="./images/blocks/16-07.png" style="width:49%;"><img src="./images/blocks/16-08.png" style="width:49%;"></div>
+		</div>
+	]
+
+	@ 메시지 받을 준비 포트 ([INTERNET] 그룹)
+	어썸봇이 인터넷으로 통신할 수 있는 포트를 열어줍니다.
+	[block_image ./images/blocks/16-09.png
+		import udp_socket
+		udp_socket.open(1234)
+	]
+	① 사용할 포트 번호입니다. 수정하지 않고 그대로 사용합니다.
+
+	@ 메시지 읽어오기 ([INTERNET] 그룹)
+	스마트폰에서 보내는 메시지를 읽어들입니다.
+	[block_image ./images/blocks/16-10.png
+		msg = udp_socket.read_text()
+	]
+
+	@ 무한 반복 ([ADVANCE] 그룹)
+	블록 안의 블록을 순서대로 계속 실행되도록 합니다. 여기에서는 스마트폰 앱에서 메시지를 보낼 때까지 기다리다가 메시지가 오면 메시지에 따른 명령을 실행하기 위해 사용합니다.
+	[block_image ./images/blocks/16-11.png
+		while True:
+		  pass
+	]
+
+	@ 만약에(if) ([ADVANCE] 그룹)
+	조건으로 입력한 내용이 맞을 때 블록 안의 블록을 실행시킵니다. 조건이 틀리다면 [만약에(if)] 블록 뒤에 있는 블록이 실행됩니다.
+	[block_image ./images/blocks/16-12.png
+		if i == :
+	]
+	① 조건문에 사용할 변수를 입력합니다. 기본 값은 ‘i’입니다.
+	② 조건을 비교할 기준 부등호를 선택합니다.
+	③ 조건에 사용할 기준 값을 입력합니다. 이때 조건 값을 지정할 블록을 추가해야 합니다.
+	④ 조건에 맞을 때 실행할 블록들을 추가합니다.
+
+	@ 문자 값 ([ADVANCE] 그룹)
+	변수나 숫자가 아니라 입력된 문자 그대로를 표현할 때 사용합니다.
+	[block_image ./images/blocks/16-13.png
+		''
+	]
+	① 조건으로 사용 할 문자를 입력합니다.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① 다음과 같이 블록을 만들었다면 어떻게 동작하는지 얘기해 보세요.</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/16-14.png"></div>
+		</div>
+	]
+
+	@ 차렷 ([BASIC] 그룹)
+	발을 많이 움직인 상태에서 다른 동작을 바로 연결하면 어썸봇이 넘어질 수 있어요. 각 동작 사이에 [차렷] 블록을 넣어두면 어썸봇이 차렷 자세를 취해 넘어지지 않게 할 수 있어요.
+	[block_image ./images/blocks/16-15.png
+		asomebot.home()
+	]
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">발레 동작 뒤에 차렷 자세를 취하는 프로그램을 만들고 실행해보세요.</p>
+		</div>
+	]
+
+	@ 옵션이 없는 춤동작들 ([DANCE] 그룹)
+	[block_image ./images/blocks/16-16.png
+		asomebot.ballet()
+	]
+	어썸봇의 발가락 부분을 세워서 발레 같은 동작을 취합니다.
+
+	[block_image ./images/blocks/16-17.png
+		asomebot.wiggle()
+	]
+	어썸봇이 제자리 걸음을 합니다.
+
+	[block_image ./images/blocks/16-18.png
+		asomebot.flap()
+	]
+	두 발을 파닥거리는 동작을 합니다.
+
+	[block_image ./images/blocks/16-19.png
+		asomebot.warigari()
+	]
+	두 발을 비비는 동작을 합니다.
+
+	[block_image ./images/blocks/16-20.png
+		asomebot.yaho()
+	]
+	두 발의 발끝을 들어 올립니다. Ballet 동작의 반대입니다.
+
+	[block_image ./images/blocks/16-21.png
+		asomebot.moonwalk()
+	]
+	문워크 춤동작을 합니다.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">Ballet은 발끝을 세우는 동작만 합니다. 다른 동작들과 조합하여 더 재미있는 동작을 만들어보세요.</p>
+		</div>
+	]
+
+	@ 옵션이 있는 춤동작들 ([DANCE] 그룹)
+	모든 춤 동작의 옵션은 어썸봇의 움직일 발 방향을 선택합니다.
+	[block_image ./images/blocks/16-22.png
+		asomebot.mouse(1)
+	] 
+	어썸봇의 한 발을 들어서 움직이는 동작을 실행합니다.
+
+	[block_image ./images/blocks/16-23.png
+		asomebot.swing(1)
+	]
+	어썸봇의 한 발을 들어올리면서 뒤로 꺽는 동작을 합니다.
+
+	[block_image ./images/blocks/16-24.png
+		asomebot.tick_tock(1)
+	]
+	어썸봇의 한 발을 뒤로 꺽은 후 한 번 까딱입니다.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Mouse는 한국의 초등학생이 만든 동작이에요. 미키마우스 애니메이션에서 발을 움직이며 휘파람을 부는장면을 흉내내서 만들어 이름을 Mouse로 붙였다고 합니다.</p>
+		<p class="main_text">② Swing과 TickTock 동작을 이용하여 양 발을 한 번씩 움직이는 프로그램을 만들어보세요.</p>
+		</div>
+	]
+
+	@ Set angle of motor ([WALK] 그룹)
+	1개 모터를 제어하는 블록입니다. 원하는 하나의 모터를 선택하고, 선택된 모터의 각도와 움직이는 속도를 지정할 수 있습니다.
+	[block_image ./images/blocks/16-25.png
+		asomebot.angles([0],[90-90],1*1000)
+	]
+	① 움직일 모터의 번호를 선택합니다.
+	② 선택한 모터의 움직일 각도를 입력합니다.
+	③ 모터가 움직이는데 걸릴 시간을 입력합니다.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">그림 속 어썸봇 모터 번호를 참고해서 어썸봇의 오른발(3번 모터) 각도를 1초 동안 30도로 만들었다가 1초 후에 다시 90도로 만드는 프로그램을 만들어보세요.</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/16-26.png"></div>
+		</div>
+	]
+
+	@ Set angles ([WALK] 그룹)
+	4개의 모터 각도를 동시에 제어하는 블록입니다. 4개 모터 중 회전시키고 싶은 모터 각도와 움직일 시간을 지정할 수 있습니다.
+	[block_image ./images/blocks/16-27.png
+		asomebot.angles([0],[90-90],1*1000)
+	]
+	① 왼쪽부터 순서대로 0, 1, 2, 3번 모터 각도를 지정합니다.
+	② 모터가 움직이는데 걸릴 시간을 입력합니다.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">그림 속 어썸봇 모터 번호를 참고해서 왼발과 오른발을 번갈아 들었다 내렸다하는 프로그램을 만들어보세요.<br>
+		힌트. 왼발각도 150도/ 오른발 각도 30도</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/16-28.png"></div>
+		</div>
+	]
+
+
+4. 플레이 액티비티
+	@ 게임 규칙
+	① 어썸봇을 Asome Controller로 조종할 수 있는 프로그램을 만듭니다.
+	② 나만의 새로운 춤 동작을 3개 이상 만듭니다.
+	- 기존 동작을 조합하여 만든 동작
+	- 모터를 하나씩 움직여서 만든 동작
+	- 여러 모터를 한 번에 움직여서 만든 동작
+	③ 새로 만든 동작을 Asome Controller의 숫자 버튼으로 실행하도록 프로그램을 만듭니다.
+
+	@ 알고리즘
+	멋진 춤 동작들을 잘 만들었나요? 그럼 밑의 방법으로 내가 만든 춤 동작을 뽐내봐요.
+	① 내가 만든 춤 동작을 보여주고, 춤 동작의 이름을 말해주세요.
+	② 이 춤 동작을 왜 만들었는지도 설명해주세요.
+	③ 다른 친구들의 춤 동작 이야기도 잘 들어주세요.
+	④ 음악을 틀고 각자 만든 춤 동작을 이용해서 멋진 춤을 춰보세요.
+	[image ./images/blocks/16-29.png]
+
+	@ 게임하기
+	[image ./images/blocks/16-30.png]
+
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]

@@ -1,0 +1,151 @@
+Membuat robot pengatur waktu memasak
+
+1. Tujuan Pembelajaran
+	[video ./video/block/01/17.execute.webm]
+	* Memahami prinsip timer
+	* Menjalankan gerakan tertentu pada waktu yang tetap.
+	* Buat dan jelaskan program pengatur waktu memasak
+
+
+2. Pratinjau
+	@ Pengatur waktu (Timer) memasak
+	Saat kita memasak makanan, kita menggunakan alat yang disebut "timer memasak" untuk mengukur waktu memasak dengan tepat.
+	[image ./images/blocks/17-01.png]
+	① Anda juga dapat menggunakan timer tidak hanya untuk memasak tetapi juga saat belajar.
+	② Penghitung waktu juga dapat digunakan untuk mencegah insiden.
+	③ Timer Pengatur waktu sangat nyaman karena Anda dapat mengontrol waktu dengan tepat.
+
+	@ AsomeBot memiliki arloji di dalam.
+	Di dalam AsomeBot ada jam yang sangat canggih yang mengukur waktu dalam milidetik. Oleh karena itu, Anda dapat membuat timer memasak menggunakan fungsi jam AsomeBot.
+	[image ./images/blocks/17-02.png]
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_indonesia.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">AsomeBot tidak memiliki tampilan angka atau arloji untuk ditampilkan. Bagaimana AsomeBot dapat mengekspresikan waktu yang diukur ?</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/17-03.png"></div>
+		<p class="main_text">AsomeBot dapat membuat suara dan juga bergerak. Oleh karena itu, dapat mengekspresikan waktu dengan cara berikut:</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/17-04.png"></div>
+		<p class="main_text">Mari cari tahu lebih lanjut jika ada cara lain untuk berekspresi.</p>
+		</div>
+	]
+
+
+3. Pelajari tentang blok yang akan digunakan
+	@ Tunda/Delay (grup [ADVANCE])
+	Menunggu tanpa bergerak selama detik yang ditentukan. Dengan menggunakan blok ini, robot dapat bergerak sesuai keinginan dalam interval 10 detik, 30 detik, dan 60 detik.
+	[block_image ./images/blocks/17-05.png
+		delay(1)
+	]
+	① Masukkan jumlah detik untuk menunggu setelah klik.
+
+	@ Ulangi/repeat (Grup [ADVANCE])
+	 Ulangi perintah di dalam blok ini sebanyak yang Anda inginkan.
+	[block_image ./images/blocks/17-06.png
+		for count in range(1):
+		  pass
+	]
+	① Tentukan berapa kali untuk mengulangi.
+	② Tambahkan blok untuk mengulang.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_indonesia.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">Dengan menggunakan blok repeat dan blok [Delay], buatlah program yang memungkinkan robot untuk Mengepak setiap 30 detik.</p>
+		</div>
+	]
+
+	@ Gerakan tari Tanpa Opsi (Ggup [DANCE])
+	[block_image ./images/blocks/17-07.png
+		asomebot.ballet()
+	]
+	Lakukan gerakan balet dengan menggerakkan jari kaki AsomeBot.
+
+	[block_image ./images/blocks/17-08.png
+		asomebot.wiggle()
+	]
+	AsomeBot bergoyang-goyang di tempat.
+
+	[block_image ./images/blocks/17-09.png
+		asomebot.flap()
+	]
+	AsomeBot mengepakkan kakinya.
+
+	[block_image ./images/blocks/17-10.png
+		asomebot.warigari()
+	]
+	AsomeBot melakukan Warigari dengan kakinya.
+
+	[block_image ./images/blocks/17-11.png
+		asomebot.yaho()
+	]
+	AsomeBot mengangkat ujung jari kaki.Kebalikan dari gerak balet.
+
+	[block_image ./images/blocks/17-12.png
+		asomebot.moonwalk()
+	]
+	AsomeBot melakukan tarian moonwalk.
+
+	@ Bel menyala/Buzzer on (grup [SOUND])
+	Membuat bel dapat digunakan. Untuk membuat suara dengan bel, Anda harus menggunakan blok ini. Perhatikan bahwa jika blok ini tidak digunakan terlebih dahulu, Anda tidak dapat menggunakan blok.
+	[block_image ./images/blocks/17-13.png
+		turnoff_pins( (1, 5, 6, 7, 8) )
+		import music
+		music.open(1)
+	]
+
+	@ Bel mati/Buzzer off (grup [SOUND])
+	Ini memungkinkan Anda untuk menggunakan komponen lain lagi setelah menggunakan bel. Anda tidak dapat menggunakan komponen lain saat menggunakan bel. Setelah memutar musik, blok harus digunakan untuk menjalankan komponen lain.
+	[block_image ./images/blocks/17-14.png
+		turnoff_pins( (1, 5, 6, 7, 8) )
+		import asomebot
+		asomebot.ready(5, 6, 7, 8)
+	]
+
+	@ Bermain untuk/Play for (grup [SOUND])
+	Dengan menggunakan blok ini, Anda dapat membuat suara yang Anda inginkan menggunakan frekuensi.
+	[block_image ./images/blocks/17-15.png
+		music.note("C1",1*1000)
+	]
+	① Pilih skala dari daftar yang ingin Anda mainkan.
+	② Pilih oktaf skala dari daftar yang akan diputar.
+	③ Tentukan waktu untuk membuat suara.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_indonesia.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">Buat catatan untuk 3-oktaf Fa selama 0,5 detik.</p>
+		</div>
+	]
+
+	@ Ketukan dan tempo
+	Waktu putar untuk setiap ketukan skor musik yang kami gunakan adalah sebagai berikut: Saat memainkan musik, buat program yang mencerminkan waktu pemutaran untuk setiap ketukan.
+	[image ./images/blocks/17-16.png]
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_indonesia.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">① Buat suara pada 3-oktaf G dalam ketukan 8 not.</p>
+		<p class="main_text">② Tunggu 1 menit, dan buat program untuk memutar musik dengan bel.</p>
+		<div class="content_image_box"><img class="content_image" src="./images/blocks/17-17.png"></div>
+		</div>
+	]
+
+
+4. Mainkan Aktivitas
+	@ Algoritma
+	Anda dapat membuat penghitung waktu memasak dengan metode berikut: Mari mencari tahu bersama apakah ada cara lain untuk membuatnya.
+	[image ./images/blocks/17-18.png]
+
+	@ Membuat pengatur waktu memasak pilihan Anda
+	[image ./images/blocks/17-19.png]
+
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]

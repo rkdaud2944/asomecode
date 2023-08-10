@@ -1,0 +1,315 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<head>
+<!-- AsomeHeader Start -->
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>AsomeCode</title>
+    <meta name="Robots" content="all" />
+    <meta name="reply-to" content="" />
+    <meta name="date" content="" />
+
+    <link rel="stylesheet" href="../../common/css/AsomeCODE.css">
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/highlight.css">
+    <link rel="stylesheet" href="../../common/css/vs2015.css">
+    <link rel="stylesheet" href="../../common/css/quiz_css.css">
+
+    <script src="../../common/js/jquery-3.2.1.min.js"></script>
+
+    <link rel="stylesheet" href="../../common/css/bootstrap.min.css">
+    <script src="../../common/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="../../common/css/jodit.min.css"/>
+    <link rel="stylesheet" href="../../common/css/prism.css"/>
+    <script src="../../common/js/jodit.min.js"></script>
+    <script src="../../common/js/prism.js"></script>
+
+    <script src="../../common/js/AsomeCODE.js"></script>
+    <script src="../../common/js/board.js"></script>
+    <script src="../../common/js/highlight.pack.js"></script>
+    <script src="../../common/js/highlightjs-line-numbers.min.js"></script>
+
+    <script src="../../common/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../common/ace/ext-static_highlight.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../common/ace/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+<!-- AsomeHeader End -->
+</head>
+
+<body class="p3">    
+
+    <div class="modal fade" id="video_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <video id="video_player" width="100%" controls>
+                        <source id="video_src" type="video/webm" src=""/>
+                        <track id="video_subtitle" kind="subtitles" srclang="en" label="english" src="" default>
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="wrap">
+        <ul class="blind">
+            <li><a href="#contents">본문 바로가기(Skip Contents)</a></li>
+        </ul>
+        <div id="mobile">
+            <div class="logo">
+                <a href="javascript:void(0);"><img src="../../common/images/logom.png"></a>
+                <div class="m"><a><img src="../../common/images/mobile_m.png"></a></div>
+            </div>
+            <div class="mobile_top">
+                <div class="top_m">
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')">
+                        <img class="image-btn" filename="../../common/images/mobile_01.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeConnect')">
+                        <img class="image-btn" filename="../../common/images/mobile_02.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=ShowEditor')">
+                        <img class="image-btn" filename="../../common/images/mobile_03.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+                        <img class="image-btn last" filename="../../common/images/mobile_04.png">
+                    </a>
+                </div>
+                <div class="top_m">
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeReboot')">
+                        <img class="image-btn" filename="../../common/images/mobile_05.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeFormat')">
+                        <img class="image-btn" filename="../../common/images/mobile_06.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeUpdate')">
+                        <img class="image-btn" filename="../../common/images/mobile_07.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeBlock')">
+                        <img class="image-btn last" filename="../../common/images/blockcoding.png">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="header">
+            <ul class="left">
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeConnect')">
+                    <img class="image-btn" filename="../../common/images/top_01.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')">
+                    <img class="image-btn" filename="../../common/images/top_02.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=ShowEditor')">
+                    <img class="image-btn" filename="../../common/images/top_03.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+                    <img class="image-btn" filename="../../common/images/top_05.png">
+                </a></li>
+            </ul>
+            <ul class="right">
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeReboot')">
+                    <img class="image-btn" filename="../../common/images/top_04.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeFormat')">
+                    <img class="image-btn" filename="../../common/images/top_06.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeUpdate')">
+                    <img class="image-btn" filename="../../common/images/top_07.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeBlock')">
+                    <img class="image-btn" filename="../../common/images/blockcoding.png">
+                </a></li>
+                <li> &nbsp; </li>
+                <a href="javascript:void(0);" onclick="logout()"><img src="../../common/images/logout.png" id="bt_logout" class="last"></a>
+            </ul>
+        </div>
+        <div class="mobile_nav3"></div>
+        <div id="p3_header">
+            <ul>
+                <li class="headleft"><a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')"><img src="../../common/images/logo.png"></a></li>
+                <li class="headright"></li>
+            </ul>
+        </div>
+
+        <div id="p3_container">
+            <div class="left">
+                <div class="top">
+                    <div class="link_list"><a href="javascript:void(0);" onclick="run_cmd('Code=GoBack')"><img src="../../common/images/p3_list.png" alt="강의목록"></a></div>
+                    <div class="header_text"><div id="chapter" class="chapter">Unit {0}</div>
+                        <br>
+
+                        AsomeBot 飞镖游戏
+                    </div>
+                </div>
+                <div class="beg">
+                    <ul>
+                        <li><a href="javascript:fnMove('pn1')">1. 学习目标</a></li>
+<li><a href="javascript:fnMove('pn2')">2. 预习</a></li>
+<li><a href="javascript:fnMove('pn3')">3. 学习使用模块</a></li>
+<li><a href="javascript:fnMove('pn4')">4. 互动游戏</a></li>
+
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="right">
+                <div class="contents">
+                    <br>
+
+<li class="lefts bold" id="pn1">1. 学习目标<span class="video_button" level="block" filename="01.ch01"></span></li>
+<div style="max-width: 600px;"><video width="100%" controls>
+<source id="video_src" type="video/webm" src="./video/block/01/08.execute.webm"/>
+Your browser does not support HTML5 video.</video></div>
+<p class="main_text">• 了解游戏规则，与 AsomeBot玩飞镖。<br>
+• 设置一个防守和攻击策略用程序完成。<br>
+</p>
+<br>
+<br>
+
+<li class="lefts bold" id="pn2">2. 预习<span class="video_button" level="block" filename="01.ch02"></span></li>
+<p class="main_text"><strong>A. 飞镖游戏</strong></p>
+<p class="main_text">这是英国士兵在中世纪玩的游戏, 最早是向一个空桶盖子上投掷箭头. 现在, 飞镖已经发展成为一项世界级的休闲运动。</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/08-01.png"></div>
+<br>
+<p class="main_text"><strong>B. 飞镖的分数</strong></p>
+<p class="main_text">飞镖在每投三次以后计分，分数用下列方法计算。</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/08-02.png"></div>
+<p class="main_text">① 单倍 : 对应本扇形区域的分数。</p>
+<p class="main_text">② 双倍 : 击中扇形最外侧圈，获基本分数两倍的分数。</p>
+<p class="main_text">③ 三倍 : 击中第2道扇形外圈，获基本分三倍的分数.</p>
+<p class="main_text">④ 中心 : 击中靶心的外圈，获得50分.</p>
+<br>
+<br>
+
+<li class="lefts bold" id="pn3">3. 学习使用模块<span class="video_button" level="block" filename="01.ch03"></span></li>
+<p class="main_text"><strong>A. 向前移动 Move forward ([WALK] 组)</strong></p>
+<p class="main_text">按照设定的步数向前步行。</p>
+<div id="src_1" style="display: none;">for i in range(1): asomebot.forward()
+</div>
+<img class="block_image" src="./images/blocks/03-07.png" onclick="run_code($('#src_1').text())">
+<p class="main_text">点击后，输入前行的步数. 输入1则左脚和右脚各走一步。</p>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_china.png">
+<p class="quiz_line"></p>
+<p class="main_text">• 查看机器人如果要走到靶中心需要多少步。<br>
+</p>
+</div>
+
+<br>
+<p class="main_text"><strong>B. 向后移动 Move backward ([WALK] 组)</strong></p>
+<p class="main_text">按照设定的步数向后步行。</p>
+<div id="src_2" style="display: none;">for i in range(1): asomebot.backward()
+</div>
+<img class="block_image" src="./images/blocks/03-08.png" onclick="run_code($('#src_2').text())">
+<p class="main_text">点击后，输入后退的步数. 输入1则左脚和右脚各走一步。</p>
+<br>
+<p class="main_text"><strong>C. 左转Turn Left ([WALK] 组)</strong></p>
+<p class="main_text">按照输入的步数左转行走。</p>
+<div id="src_3" style="display: none;">for i in range(1): asomebot.turn_left()
+</div>
+<img class="block_image" src="./images/blocks/03-09.png" onclick="run_code($('#src_3').text())">
+<p class="main_text">点击后，输入左转的步数。要旋转90度, 机器人需要转3 ~ 4 次。</p>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_china.png">
+<p class="quiz_line"></p>
+<p class="main_text">• 创建一个程序，在原地旋转180度。<br>
+</p>
+</div>
+
+<br>
+<p class="main_text"><strong>D. 右转 Turn Right ([WALK] 组)</strong></p>
+<p class="main_text">按照输入的步数右转行走。</p>
+<div id="src_4" style="display: none;">for i in range(1): asomebot.turn_right()
+</div>
+<img class="block_image" src="./images/blocks/03-10.png" onclick="run_code($('#src_4').text())">
+<p class="main_text">点击后，输入右转的步数。要旋转90度, 机器人需要转3 ~ 4 次。</p>
+<br>
+<p class="main_text"><strong>E. 延迟 Delay ([ADVANCE] 组)</strong></p>
+<p class="main_text">等待指定的时间。</p>
+<div id="src_5" style="display: none;">delay(1)
+</div>
+<img class="block_image" src="./images/blocks/delay.png" onclick="run_code($('#src_5').text())">
+<p class="main_text">点击后，输入等待的时间，单位为秒。</p>
+<br>
+<p class="main_text"><strong>F. 测距 Measure distance ([SENSOR] 组)</strong></p>
+<p class="main_text">用超声波传感器测量与前方障碍物间的距离. 测量值保存在变量‘Cm’中。</p>
+<div id="src_6" style="display: none;">cm = hcsr04.get_distance()
+</div>
+<img class="block_image" src="./images/blocks/07-03.png" onclick="run_code($('#src_6').text())">
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_china.png">
+<p class="quiz_line"></p>
+<p class="main_text">• 创建一个程序使 AsomeBot 一直向前行走，如果想停止，按上方 Stop 键停止。<br>
+</p>
+</div>
+
+<br>
+<p class="main_text"><strong>G. 无限重复 Repeat infinity ([ADVANCE] 组)</strong></p>
+<p class="main_text">使这个模块中的模块指令，无限重复执行。</p>
+<div id="src_7" style="display: none;">while True:
+  pass
+</div>
+<img class="block_image" src="./images/blocks/07-04.png" onclick="run_code($('#src_7').text())">
+<br>
+<p class="main_text"><strong>H. 如果if ([ADVANCE] 组)</strong></p>
+<p class="main_text">如果输入的条件是正确的，模块中的模块程序将会被执行；如果条件是错误的, if模块后面的模块程序将会被执行。</p>
+<div id="src_8" style="display: none;"></div>
+<img class="block_image" src="./images/blocks/07-05.png" onclick="run_code($('#src_8').text())">
+<p class="main_text">① 按照条件语句输入变量。默认值为 ‘i’, 增加传感器模块, 变量会增加且可被选择。</p>
+<p class="main_text">② 选择条件语句的不等号。</p>
+<p class="main_text">③ 输入作为条件的参考值。 这里, 你需要增加一个条件模块。</p>
+<p class="main_text">④ 当条件符合时，增加想要执行的模块。</p>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_china.png">
+<p class="quiz_line"></p>
+<p class="main_text">① 创建一个程序，使 AsomeBot 向前行走 10 步, 然后在原地旋转向后看。<br>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/08-03.png"></div>
+</p>
+<p class="main_text">② 创建一个程序，向前移动8步, AsomeBot用超声波传感器测距，如果与其他Asomebot距离小于5cm, 继续向前移动5步。<br>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/08-04.png"></div>
+</p>
+</div>
+
+<br>
+<br>
+
+<li class="lefts bold" id="pn4">4. 互动游戏<span class="video_button" level="block" filename="01.ch04"></span></li>
+<p class="main_text"><strong>A. 活动规则</strong></p>
+<p class="main_text">① 三个机器人为一个队。</p>
+<p class="main_text">② 用石头、剪刀和布的方式决定哪个组先开始。</p>
+<p class="main_text">③ 提前编好程序，1号机器人先移动。</p>
+<p class="main_text">④ 当1号机器人停止, 另一个队的1号机器人开始行走。</p>
+<p class="main_text">⑤ 当两个队的机器人按顺序行走完后, 合计得分数高的队为获胜。</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/08-05.png"></div>
+<br>
+<p class="main_text"><strong>B. 算法</strong></p>
+<p class="main_text">① 在飞镖游戏里, 有两个主要策略。第一个策略是让你的机器人占据较好的位置。根据想要得到的分数选择一个位置，让机器人走到那个位置。 第二个是防守，阻止对手到达较好的位置。</p>
+<p class="main_text">② 如果你想要的位置上已经被对方机器人占据，或者对方想要占领我的位置时，编一个程序攻击对方机器人来保护自己。</p>
+<br>
+<p class="main_text"><strong>C. 玩游戏</strong></p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/08-06.jpg"></div>
+<br>
+<script type="text/javascript">
+    $(".video_button").css("display", "none");
+</script>
+
+
+
+                </div>
+            </div>
+
+        </div>
+        <!-- //container -->
+    </div>
+    <!-- //wrap -->
+</body>
+
+</html>

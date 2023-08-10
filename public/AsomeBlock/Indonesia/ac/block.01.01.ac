@@ -1,0 +1,70 @@
+Apa itu coding?
+
+1. Tujuan pembelajaran
+	[video ./video/block/01/01.execute.webm]
+	* Arti coding
+	* Hal yang dapat Anda lakukan dengan coding
+	* Pindahkan AsomeBot menggunakan AsomeController
+
+
+2. Pratinjau
+	@ Apa itu coding?
+	Coding atau pengkodean adalah aktifitas membuat program agar komputer dapat bekerja
+	[image ./images/blocks/01-01.png]
+
+	@ Apakah coding untuk menggerakkan robot?
+	Komputer tertanam dalam robot, mobil, bahkan dalam peralatan. Karenanya, pengkodean diperlukan karena Anda harus memberikan perintah untuk menggerakkan robot.
+	[image ./images/blocks/01-02.png]
+
+	@ Apa yang dilakukan oleh SW (perangkat lunak) dengan pemrograman?
+	Mobil otonom dan pesawat terbang semakin aman menggunakan SW.
+	[image ./images/blocks/01-03.png ./images/blocks/01-04.png]
+
+	Robot untuk pengiriman pizza atau drone untuk pengiriman paket didukung oleh SW.
+	[image ./images/blocks/01-05.png ./images/blocks/01-06.png]
+
+
+3. Pelajari blok mana yang akan digunakan
+	@ Robot apa yang dimaksud dengan AsomeBot?
+	AsomeBot adalah robot yang berjalan dengan dua kaki dan menari menggunakan empat motor.
+	AsomeBot juga dapat mengukur jarak dengan sensor ultrasonik yang berbentuk seperti mata dan memainkan musik sederhana.
+	[youtube https://www.youtube.com/embed/FkorGFg4_t0]
+
+	@ Hubungkan ke AsomeBot
+	Dengan Asomebot dihidupkan, pilih nama robot anda dari daftar WiFi di ponsel cerdas Anda.
+	Tampilan daftar WiFi tergantung pada ponsel cerdas Anda.
+	AsomeBot semuanya memiliki nama yang berbeda.
+	Periksa dengan guru nama robot Anda terlebih dahulu dan pilih dari daftar WiFi.
+	[image ./images/blocks/01-07.png]
+
+	@ Asome Controller
+	Saat terhubung ke WiFi, aplikasi Asome Controller dapat dijalankan untuk mengontrol AsomeBot secara nirkabel.
+	[image ./images/blocks/01-08.png]
+	① Tombol arah: Anda menyentuh tombol sekali, AsomeBot berjalan ke arah tersebut.
+	② Tombol Attention: Buat AsomeBot untuk berdiri tegap.
+	③ Tombol aksi: Setiap kali Anda menyentuh setiap nomor, aksi  yang disimpan di nomor tersebut akan dijalankan.
+
+	[html
+		<div class="quiz_outline">
+		<img src="../../common/images/quiz_indonesia.png">
+		<p class="quiz_line"></p>
+		<p class="main_text">• Periksa apakah AsomeBot dan AsomeController terhubung dengan benar, sentuh tombol arah untuk menggerakkan robot, dan sentuh tombol aksi untuk melihat gerakan tarian apa yang tersedia.<br>
+		</p>
+		</div>
+	]
+
+
+4. Aktivitas bermain
+	@ Dari bangunan yang ada di peta, tentukan siapa yang bergerak lebih cepat ke gedung yang diinginkan oleh pihak lain di peta tanpa meninggalkan jalan.
+	Contoh) Singgah di kantor pos kemudian pergi ke gereja.
+	[image ./images/blocks/01-09.png]
+
+	@ Kompetisi dansa
+	Lihat siapa yang menari dengan lebih indah.
+	[image ./images/blocks/01-10.png]
+
+	[html
+		<script type="text/javascript">
+			$(".video_button").css("display", "none");
+		</script>
+	]

@@ -1,0 +1,334 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<head>
+<!-- AsomeHeader Start -->
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>AsomeCode</title>
+    <meta name="Robots" content="all" />
+    <meta name="reply-to" content="" />
+    <meta name="date" content="" />
+
+    <link rel="stylesheet" href="../../common/css/AsomeCODE.css">
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/highlight.css">
+    <link rel="stylesheet" href="../../common/css/vs2015.css">
+    <link rel="stylesheet" href="../../common/css/quiz_css.css">
+
+    <script src="../../common/js/jquery-3.2.1.min.js"></script>
+
+    <link rel="stylesheet" href="../../common/css/bootstrap.min.css">
+    <script src="../../common/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="../../common/css/jodit.min.css"/>
+    <link rel="stylesheet" href="../../common/css/prism.css"/>
+    <script src="../../common/js/jodit.min.js"></script>
+    <script src="../../common/js/prism.js"></script>
+
+    <script src="../../common/js/AsomeCODE.js"></script>
+    <script src="../../common/js/board.js"></script>
+    <script src="../../common/js/highlight.pack.js"></script>
+    <script src="../../common/js/highlightjs-line-numbers.min.js"></script>
+
+    <script src="../../common/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../common/ace/ext-static_highlight.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../common/ace/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+<!-- AsomeHeader End -->
+</head>
+
+<body class="p3">    
+
+    <div class="modal fade" id="video_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <video id="video_player" width="100%" controls>
+                        <source id="video_src" type="video/webm" src=""/>
+                        <track id="video_subtitle" kind="subtitles" srclang="en" label="english" src="" default>
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="wrap">
+        <ul class="blind">
+            <li><a href="#contents">본문 바로가기(Skip Contents)</a></li>
+        </ul>
+        <div id="mobile">
+            <div class="logo">
+                <a href="javascript:void(0);"><img src="../../common/images/logom.png"></a>
+                <div class="m"><a><img src="../../common/images/mobile_m.png"></a></div>
+            </div>
+            <div class="mobile_top">
+                <div class="top_m">
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')">
+                        <img class="image-btn" filename="../../common/images/mobile_01.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeConnect')">
+                        <img class="image-btn" filename="../../common/images/mobile_02.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=ShowEditor')">
+                        <img class="image-btn" filename="../../common/images/mobile_03.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+                        <img class="image-btn last" filename="../../common/images/mobile_04.png">
+                    </a>
+                </div>
+                <div class="top_m">
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeReboot')">
+                        <img class="image-btn" filename="../../common/images/mobile_05.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeFormat')">
+                        <img class="image-btn" filename="../../common/images/mobile_06.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeUpdate')">
+                        <img class="image-btn" filename="../../common/images/mobile_07.png">
+                    </a>
+                    <a href="javascript:void(0);" onclick="run_cmd('Code=AsomeBlock')">
+                        <img class="image-btn last" filename="../../common/images/blockcoding.png">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="header">
+            <ul class="left">
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeConnect')">
+                    <img class="image-btn" filename="../../common/images/top_01.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')">
+                    <img class="image-btn" filename="../../common/images/top_02.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=ShowEditor')">
+                    <img class="image-btn" filename="../../common/images/top_03.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=Stop')">
+                    <img class="image-btn" filename="../../common/images/top_05.png">
+                </a></li>
+            </ul>
+            <ul class="right">
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeReboot')">
+                    <img class="image-btn" filename="../../common/images/top_04.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeFormat')">
+                    <img class="image-btn" filename="../../common/images/top_06.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeCodeUpdate')">
+                    <img class="image-btn" filename="../../common/images/top_07.png">
+                </a></li>
+                <li><a href="javascript:void(0);" onclick="run_cmd('Code=AsomeBlock')">
+                    <img class="image-btn" filename="../../common/images/blockcoding.png">
+                </a></li>
+                <li> &nbsp; </li>
+                <a href="javascript:void(0);" onclick="logout()"><img src="../../common/images/logout.png" id="bt_logout" class="last"></a>
+            </ul>
+        </div>
+        <div class="mobile_nav3"></div>
+        <div id="p3_header">
+            <ul>
+                <li class="headleft"><a href="javascript:void(0);" onclick="run_cmd('Code=GoHome')"><img src="../../common/images/logo.png"></a></li>
+                <li class="headright"></li>
+            </ul>
+        </div>
+
+        <div id="p3_container">
+            <div class="left">
+                <div class="top">
+                    <div class="link_list"><a href="javascript:void(0);" onclick="run_cmd('Code=GoBack')"><img src="../../common/images/p3_list.png" alt="강의목록"></a></div>
+                    <div class="header_text"><div id="chapter" class="chapter">Unit {0}</div>
+                        <br>
+
+                        逃出迷宫
+                    </div>
+                </div>
+                <div class="beg">
+                    <ul>
+                        <li><a href="javascript:fnMove('pn1')">1. 学习目标</a></li>
+<li><a href="javascript:fnMove('pn2')">2. 预览</a></li>
+<li><a href="javascript:fnMove('pn3')">3. 了解要用的程序块</a></li>
+<li><a href="javascript:fnMove('pn4')">4. 线下游戏活动</a></li>
+
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="right">
+                <div class="contents">
+                    <br>
+
+<li class="lefts bold" id="pn1">1. 学习目标<span class="video_button" level="block" filename="01.ch01"></span></li>
+<div style="max-width: 600px;"><video width="100%" controls>
+<source id="video_src" type="video/webm" src="./video/block/01/14.execute.webm"/>
+Your browser does not support HTML5 video.</video></div>
+<p class="main_text">• 了解一下逃出迷宫的算法。<br>
+• 在各种情况下能控制AsomeBot的动作。<br>
+• 了解迷宫各路段的特点，并编制逃出方法。<br>
+</p>
+<br>
+<br>
+
+<li class="lefts bold" id="pn2">2. 预览<span class="video_button" level="block" filename="01.ch02"></span></li>
+<p class="main_text"><strong>A. 逃出迷宫</strong></p>
+<p class="main_text">您可以编制一个用AsomeBot的超声波传感器识别墙壁，并绕开其障碍逃出迷宫的程序。</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/14-01.png"></div>
+<br>
+<p class="main_text"><strong>B. 编制转弯顺序</strong></p>
+<p class="main_text">可以编制一个AsomeBot自己逃出迷宫的程序。但是，其编制方法对我们来说非常复杂。如图所示的路程是逃出迷宫的最短路线，AsomeBot沿着这一路线就可以迅速逃出迷宫。我们研究一下控制AsomeBot沿着这一路线逃出迷宫的方法。</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/14-02.png"></div>
+<br>
+<p class="main_text"><strong>C. 用超声波传感器转弯的简单路段</strong></p>
+<p class="main_text">如图所示，不管AsomeBot行走多远，只要提示其遇到障碍时转弯的方向，AsomeBot就会朝着出口行走。</p>
+<p class="main_text">1. 说明一下AsomeBot在各个路段向哪个方向转弯。</p>
+<p class="main_text">2. 说明一下AsomeBot和障碍物的间距为多少时转弯最好。</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/14-03.png"></div>
+<br>
+<p class="main_text"><strong>D. 靠超声波传感器转弯的综合性路段</strong></p>
+<p class="main_text">在这一路段，AsomeBot遇到墙壁就要按“ㄷ”形轨迹转弯。此时需要比转一次弯更多、更复杂的操作。说明一下AsomeBot在④路段上如何行走才能到达正确位置。</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/14-04.png"></div>
+<br>
+<p class="main_text"><strong>E. 需要按步数行走的路段</strong></p>
+<p class="main_text">在这一路段，AsomeBot要按“ㄷ”形轨迹转弯。此时需要比转一次弯更多、更复杂的操作。</p>
+<p class="main_text">1. 测量并说明到达各个地点所需的步数。</p>
+<p class="main_text">2. 如果AsomeBot只靠步数不能正确地沿着路线行走，那么，说明一下如何才能逃出迷宫。</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/14-05.png"></div>
+<br>
+<br>
+
+<li class="lefts bold" id="pn3">3. 了解要用的程序块<span class="video_button" level="block" filename="01.ch03"></span></li>
+<p class="main_text"><strong>A. Delay（延迟）（[ADVANCE（逻辑条件）]组）</strong></p>
+<p class="main_text">在指定的秒数内不作出动作并原地等待。</p>
+<div id="src_1" style="display: none;">delay(1)
+</div>
+<img class="block_image" src="./images/blocks/14-06.png" onclick="run_code($('#src_1').text())">
+<p class="main_text">输入单击后等待的秒数。</p>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_china.png">
+<p class="quiz_line"></p>
+<p class="main_text">编制一个程序运行5秒后向前走3步的程序。</p>
+</div>
+
+<br>
+<p class="main_text"><strong>B. Attention（立正）（[BASIC（基础）]组）</strong></p>
+<p class="main_text"> AsomeBot采取立正姿势。</p>
+<div id="src_2" style="display: none;">asomebot.home()
+</div>
+<img class="block_image" src="./images/blocks/14-07.png" onclick="run_code($('#src_2').text())">
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_china.png">
+<p class="quiz_line"></p>
+<p class="main_text">编制一个让AsomeBot等待2秒、向前走3步并立正的程序。</p>
+</div>
+
+<br>
+<p class="main_text"><strong>C. Set align（设置对齐）（[BASIC（基础）]组）</strong></p>
+<p class="main_text">您可以调整连接到AsomeBot四个电机的角度值。先用Set align（设置对齐）程序块调整角度，再添加Attention（立正）程序块后运行，才能重置角度。调整的角度在连接断开时会被重置，因此，要保存好其角度。</p>
+<div id="src_3" style="display: none;">asomebot.align(90,90,90,90)
+</div>
+<img class="block_image" src="./images/blocks/14-08.png" onclick="run_code($('#src_3').text())">
+<p class="main_text">① 调整1号电机的角度。默认值为90度。</p>
+<p class="main_text">② 调整2号电机的角度。默认值为90度。</p>
+<p class="main_text">③ 调整3号电机的角度。默认值为90度。</p>
+<p class="main_text">④ 调整4号电机的角度。默认值为90度。</p>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_china.png">
+<p class="quiz_line"></p>
+<p class="main_text">调整每个电机角度，使之走向前直线行走。机器人能够直线行走，才能逃出迷宫。</p>
+</div>
+
+<br>
+<p class="main_text"><strong>D. Measure distance（测量距离）（[SENSOR（传感器）]组）</strong></p>
+<p class="main_text">用超声波传感器测量与前方障碍物的距离。测量的距离存储在变量名目“Cm”中。</p>
+<div id="src_4" style="display: none;">cm = hcsr04.get_distance()
+</div>
+<img class="block_image" src="./images/blocks/14-09.png" onclick="run_code($('#src_4').text())">
+<br>
+<p class="main_text"><strong>E. Repaeat（重复）（[ADVANCE（逻辑条件）]组）</strong></p>
+<p class="main_text">根据需要多次重复区块中的命令。</p>
+<div id="src_5" style="display: none;">for count in range(1):
+  pass
+</div>
+<img class="block_image" src="./images/blocks/14-10.png" onclick="run_code($('#src_5').text())">
+<p class="main_text">① 指定重复的次数。</p>
+<p class="main_text">② 添加重复的程序块。</p>
+<br>
+<p class="main_text"><strong>F. Repeat infinitely（无限重复）（[ADVANCE（逻辑条件）]组）</strong></p>
+<p class="main_text">按顺序持续运行区块中的程序块。</p>
+<div id="src_6" style="display: none;">while True:
+  pass
+</div>
+<img class="block_image" src="./images/blocks/14-11.png" onclick="run_code($('#src_6').text())">
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_china.png">
+<p class="quiz_line"></p>
+<p class="main_text">编制一个让AsomeBot持续前行的程序。</p>
+</div>
+
+<br>
+<p class="main_text"><strong>G. if（如果）（[ADVANCE（逻辑条件）]组）</strong></p>
+<p class="main_text">所输入的条件正确时，运行区块中的程序块。如果条件不正确，就运行if区块之后的程序块。</p>
+<div id="src_7" style="display: none;">if i == :
+</div>
+<img class="block_image" src="./images/blocks/14-12.png" onclick="run_code($('#src_7').text())">
+<p class="main_text">① 输入用于条件语句的变量。默认值为“i”，使用超声波传感器时更改为“cm”。</p>
+<p class="main_text">② 选择比较条件的标准不等式</p>
+<p class="main_text">③ 输入用于条件的默认值。在此，需要您添加指定条件值</p>
+<p class="main_text">④ 添加条件正确时要运行的程序块。</p>
+<br>
+<p class="main_text"><strong>H. Data Value（数据值）（[ADVANCE（逻辑条件）]组）</strong></p>
+<p class="main_text">用于指定变量、数字等Data Value（数据值）。</p>
+<div id="src_8" style="display: none;">1
+</div>
+<img class="block_image" src="./images/blocks/14-13.png" onclick="run_code($('#src_8').text())">
+<p class="main_text">① 输入用于条件的默认值。</p>
+<br>
+<div class="quiz_outline">
+<img src="../../common/images/quiz_china.png">
+<p class="quiz_line"></p>
+<p class="main_text">① 编制一个超声波传感器测量的距离值小于5cm则向后走3步的程序。</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/14-14.png"></div>
+<p class="main_text">② 编制一个继续前行的AsomeBot遇到障碍物（3厘米内的障碍物）则向左绕弯3次以逃出重复语句的程序。</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/14-15.png"></div>
+</div>
+
+<br>
+<br>
+
+<li class="lefts bold" id="pn4">4. 线下游戏活动<span class="video_button" level="block" filename="01.ch04"></span></li>
+<p class="main_text"><strong>A. 游戏规则</strong></p>
+<p class="main_text">① 谁能编制出在最短时间内逃出迷宫的程序，谁就赢得比赛。</p>
+<p class="main_text">② 编制一个让AsomeBot沿着如下路线或用其他创新方法逃出迷宫的程序。</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/14-16.png"></div>
+<br>
+<p class="main_text"><strong>B. 算法</strong></p>
+<p class="main_text">① 红色路段：AsomeBot行走时遇到障碍物，就要绕着行走。</p>
+<p class="main_text">② 绿色路段：AsomeBot遇到障碍物，就要按“ㄷ”形轨迹行走。</p>
+<p class="main_text">③ 蓝色路段：每个AsomeBot根据自己特性，按正确的步数移动后转弯，以走出路段。</p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/14-17.png"></div>
+<br>
+<p class="main_text"><strong>C. 玩游戏</strong></p>
+<div class="content_image_box"><img class="content_image" src="./images/blocks/14-18.png"></div>
+<br>
+<script type="text/javascript">
+    $(".video_button").css("display", "none");
+</script>
+
+
+
+                </div>
+            </div>
+
+        </div>
+        <!-- //container -->
+    </div>
+    <!-- //wrap -->
+</body>
+
+</html>

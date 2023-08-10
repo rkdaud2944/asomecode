@@ -53,11 +53,10 @@ const bridge = {
             `import http_utils; http_utils.send_msg('${connectCode}', '${msg}')`;
     },
 
-    // presentSession(present, language) {
-    //     console.log("present : "+present)
-    //     localStorage.setItem("stage", present);
-    //     window.open(`/AsomeBlock/BlockCoding.html?language=${language}`)
-    // }
+    presentSession(present, language) {
+        localStorage.setItem("stage", present);
+        window.open(`/AsomeBlock/BlockCoding.html?language=${language}`)
+    }
 };
 
 window.refresh = bridge.refresh;
