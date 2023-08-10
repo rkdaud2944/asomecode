@@ -23,7 +23,7 @@
 
 <script>
 import eventbus from "@/globals/eventbus";
-import serial from "@/globals/serial";
+// import serial from "@/globals/serial";
 
 export default {
     
@@ -115,18 +115,18 @@ export default {
         send() {
 
             if (this.text.startsWith("/list")) {
-                serial.listFiles();
+                // serial.listFiles();
                 this.text = "";
                 return;
             }
 
             if (this.text.startsWith("/view")) {
-                serial.viewFile(this.text.split(" ")[1]);
+                // serial.viewFile(this.text.split(" ")[1]);
                 this.text = "";
                 return;
             }
 
-            serial.writeLn(this.text);
+            // serial.writeLn(this.text);
             this.text = "";
         },
     },

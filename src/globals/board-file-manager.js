@@ -4,7 +4,7 @@
 
 import axios from "axios";
 import config from "@/globals/config";
-import serial from "@/globals/serial";
+// import serial from "@/globals/serial";
 import eventbus from "@/globals/eventbus";
 
 eventbus.on("onSerialReceived", (data) => {
@@ -20,12 +20,12 @@ let currentFile = {};
 const boardFileManager = {
     async download(filenames) {
         tobeDowndloads = filenames;
-        serial.writeLn('print("### Next File")');
+        // serial.writeLn('print("### Next File")');
     },
 
     async nextFile() {
         if (tobeDowndloads.length == 0) {
-            serial.reboot();
+            // serial.reboot();
             return;
         }
 
@@ -43,25 +43,24 @@ const boardFileManager = {
             name: filename,
             lines: lines,
         }
-        serial.writeLn('print("### Next Line")');
+        // serial.writeLn('print("### Next Line")');
     },
 
     nextLine() {
         if (currentFile.lines.length == 0) {
-            serial.writeLn("f.close()");
-            serial.writeLn("f = None");
-            serial.writeLn('print("### Next File")');
+            // serial.writeLn("f.close()");
+            // serial.writeLn("f = None");
+            // serial.writeLn('print("### Next File")');
             return;
         }
 
         if (!currentFile.opened) {
             currentFile.opened = true;
-            serial.writeLn(`f = open("${currentFile.name}", "w")`);
+            // serial.writeLn(`f = open("${currentFile.name}", "w")`);
         }
 
-        const line = currentFile.lines.shift();
-        serial.writeLn(`f.write("${line}\\n")`);
-        serial.writeLn('print("### Next Line")');
+        // const line = currentFile.lines.shift();
+        // serial.writeLn(`f.write("${line}\\n")`);
     },
 };
 
