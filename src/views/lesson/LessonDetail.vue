@@ -1,6 +1,6 @@
 <template>
     <div class="header nav-padding">
-        <a @click="goTo('/')">
+        <a href="/">
             <img src="/images/common/logom.png" class="logo" />
         </a>
     </div>
@@ -32,8 +32,6 @@ import markdown from "@/utils/markdown";
 import apiLesson from "@/api/lesson";
 
 export default {
-    mixins: [VueBase],
-    
     data() {
         return {
             lesson: {},
