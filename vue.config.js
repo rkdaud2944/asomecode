@@ -10,9 +10,5 @@ module.exports = defineConfig({
             importStrategy: 'kebab',
             rtlSupport: false
         },
-        electronBuilder: {
-            nodeIntegration: true,
-            externals: ['serialport'],
-        }
     }
 })

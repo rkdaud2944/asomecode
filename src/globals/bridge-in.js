@@ -1,4 +1,4 @@
-import serial from "@/globals/serial";
+// import serial from "@/globals/serial";
 import router from "@/router";
 import windows from "@/globals/windows";
 
@@ -29,9 +29,9 @@ const bridge = {
         return element.textContent;
     },
 
-    runCode(code) {
-        serial.runCode(code);
-    },
+    // runCode(code) {
+    //     // serial.runCode(code);
+    // },
 
     openEditor(code) {
         console.log(code);

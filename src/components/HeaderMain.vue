@@ -114,7 +114,7 @@
 </template>
 
 <script>
-import serial from "@/globals/serial";
+// import serial from "@/globals/serial";
 import VueBase from "@/mixin/vue-base";
 import bridgeIn from "@/globals/bridge-in";
 import eventbus from "@/globals/eventbus";
@@ -163,7 +163,7 @@ menu.addEventListener("click",slide_menu);
     },
 
     methods: {
-        ...serial,
+        // ...serial,
 
         update() {
             boardUpdater.start();

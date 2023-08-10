@@ -6,16 +6,10 @@
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint",
-    "e:prod": "vue-cli-service electron:serve --mode e-prod",
-    "e:dev": "vue-cli-service electron:serve --mode e-dev",
-    "eb:prod": "vue-cli-service electron:build --mode e-prod",
-    "eb:dev": "vue-cli-service electron:build --mode e-dev",
-    "rebuild": "electron-rebuild -f -w serialport",
-    "postinstall": "electron-builder install-app-deps",
-    "postuninstall": "electron-builder install-app-deps",
-    "prod": "vue-cli-service serve --mode prod"
+    "prod": "vue-cli-service serve --mode prod",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
   },
-  "main": "background.js",
   "dependencies": {
     "@quasar/extras": "^1.0.0",
     "aws-sdk": "^2.1097.0",
@@ -44,6 +38,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
+    "@babel/plugin-transform-private-methods": "^7.22.5",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-e2e-cypress": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
@@ -54,20 +49,11 @@
     "@vue/vue3-jest": "^27.0.0-alpha.1",
     "babel-jest": "^27.0.6",
     "cypress": "^9.7.0",
-    "electron": "^13.6.9",
-    "electron-devtools-installer": "^3.1.0",
-    "electron-rebuild": "^3.2.9",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
     "jest": "^27.0.5",
     "sass": "1.32.12",
     "sass-loader": "^12.0.0",
-    "vue-cli-plugin-electron-builder": "~2.1.1",
     "vue-cli-plugin-quasar": "~5.0.1"
-  },
-  "overrides": {
-    "vue-cli-plugin-electron-builder": {
-      "electron-builder": "^23.0.3"
-    }
   }
 }
