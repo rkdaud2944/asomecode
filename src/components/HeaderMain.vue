@@ -7,7 +7,7 @@
         <div class="menulist">
             <ul class="ui-left">
                 <li class="ui-left-bt" @click="connect()">
-                    <img :src="connect"  class="ui-img"/>
+                    <img :src="connectImg"  class="ui-img"/>
                     <p class="ui-left-font" id="fs-four">연결하기</p>
                 </li>
                 <!-- <li class="ui-left-bt" @click="goTo('/')"> -->
@@ -63,7 +63,7 @@
                     </li>
                     <li class="mobile-top" @click="connect()">
                         <div>
-                            <img :src="connect" class="ui-img2"/>
+                            <img :src="connectImg" class="ui-img2"/>
                             <p class="ui-left-font" id="fs-four">연결하기</p>
                         </div>
                     </li>          
@@ -128,7 +128,7 @@ export default {
             btConnectColor: "grey",
 
             logom: images.logom,
-            connect: images.connect,
+            connectImg: images.connect,
             editor: images.editor,
             home: images.home,
             format: images.format,
