@@ -1,26 +1,19 @@
 <template>
-    <div class="header nav-padding">
-        <a @click="goTo('/')">
-            <img :src="logom" class="logo" />
-        </a>
-    </div>
-
     <div class="row">
-        <div class="col-3 scroll" :class="{sidefixed: scrollPosition > 10}">
+        <div class="col-3 backsidefixed">
             <div class="flex flex-center title-box">
                 <a href="javascript:history.back()" class="gohome" >
-                    <!-- <img src="../../../public/images/common/p3_list.png"> -->
-                    <img :src="contentsList"/>
-                    <lectureList/>
+                    <img src="../../../public/images/common/p3_list.png">
                 </a>
-                <p class="title-style">목차</p>
+                <p class="title-style">목차
+                </p>
             </div>
             <div @click="moveTo(title.tag)" :class="`title`" v-for="(title, index) in titles" :key="index">
                 {{title.name}}
-            </div>
+            </div>  
         </div>
 
-        <div class="col-9 contents" :class="{c9contents: scrollPosition > 10}"><br>
+        <div class="col-9 contents c9contents"><br>
             <div class="markdown_output" v-html="output"></div>
         </div>
     </div>
@@ -28,25 +21,20 @@
 
 <script>
 /* eslint-disable */
-import VueBase from '@/mixin/vue-base';
 import markdown from "@/utils/markdown";
 import apiLesson from "@/api/lesson";
-import images from "@/assets/images"
+import {  mapMutations  } from 'vuex'
 
 export default {
-    mixins: [VueBase],
-    
     data() {
         return {
             lesson: {},
             titles: [],
             output: null,
-            scrollPosition: null,
-
-            logom: images.logom,
-            lectureList: images.lectureList,
-            contentsList: images.contentsList
         };
+    },
+
+    computed: {
     },
 
     mounted() {
@@ -54,17 +42,22 @@ export default {
         window.addEventListener('scroll', this.updateScroll);
     },
 
+    beforeUnmount() {
+        this.SetBoViewTitle(null)
+    },
+
     updated() {
         hljs.highlightAll();
     },
 
     methods: {
-        updateScroll(){
-            this.scrollPosition = window.scrollY
-        },
+        ...mapMutations({
+            SetBoViewTitle :'setBoViewTitle',
+        }),
+
         moveTo(tag) {
             const element = window.document.getElementById(tag);
-            console.log(tag, element);
+            // console.log(tag, element);
             const top = element.offsetTop - 100; // 헤더 길이만큼 낮추기
 
             window.scrollTo({
@@ -78,7 +71,10 @@ export default {
                 .then((response) => {
                     this.lesson = response.data;
                     this.output = markdown.parse(this.lesson.content)
-
+                    
+                    // ##################
+                    this.SetBoViewTitle(this.lesson.title)
+                    
                     let domparser = new DOMParser()
                     let doc = domparser.parseFromString(this.output, 'text/html')
                     const elements = doc.getElementsByTagName("h2");
@@ -89,7 +85,7 @@ export default {
                         });
                     }
                 })
-            .catch(this.showError);
+                .catch(this.showError);
         },
     },
 };
@@ -97,3 +93,7 @@ export default {
 
 <style scoped src="@/assets/css/component/lesson.css"/>
 <style src="@/assets/css/component/markdown_content.css"/>
+
+<style>
+
+</style>

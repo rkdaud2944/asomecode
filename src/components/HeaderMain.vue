@@ -44,7 +44,10 @@
                 <li  @click="openRouterPath('/blockCoding')">
                     Block
                 </li>
-                <li @click="openRouterPath('/backOffice')">
+                <!-- <li @click="openUrl('metaverse', 'http://www.metalive.be:13300/')">
+                    M
+                </li> -->
+                <li @click="openRouterPath('/backOffice/lessons')">
                     BO
                 </li>
             </ul>
@@ -148,30 +151,26 @@ export default {
             this.$q.notify('어썸보드 연결이 끊어졌습니다.');
         });
         
-
-
         const menu=document.querySelector(".toggle");
         const subBar=document.querySelector(".menu>.sub");
 
-        let subToggle=true
+let subToggle=true
 
-        function slide_menu(){
-        if(subToggle){
-            subBar.style.display="block";
-            subBar.classList.remove("up");
-            subBar.classList.add("down");
-            subToggle=!subToggle;
-            
-        }else{
-            subBar.classList.remove("down");
-            subBar.classList.add("up");
-            subToggle=!subToggle;
-        }
-        console.log(subBar.classList);
-        }
-        menu.addEventListener("click",slide_menu);
-
-        
+function slide_menu(){
+  if(subToggle){
+    subBar.style.display="block";
+    subBar.classList.remove("up");
+    subBar.classList.add("down");
+    subToggle=!subToggle;
+    
+  }else{
+    subBar.classList.remove("down");
+    subBar.classList.add("up");
+    subToggle=!subToggle;
+  }
+  console.log(subBar.classList);
+}
+menu.addEventListener("click",slide_menu);
     },
 
     methods: {

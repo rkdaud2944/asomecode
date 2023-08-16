@@ -1,14 +1,16 @@
 <template>
-    <div style="width: auto">
+    <div>
         <div>
             <q-table :rows="rows" :columns="columns" :pagination="paginationOption"
                 :row-key="rowKey" hide-bottom>
                 <template v-slot:header="props">
                     <q-tr :props="props">
-                        <q-th @click="onColumnClick(col)" v-for="col in props.cols" :key="col.name" :props="props" >
-                            <div v-html="getColumnHeader(col)"></div>
+                        <q-th @click="onColumnClick(col)" v-for="col in props.cols" :key="col.name" :props="props">
+                           <div v-html="getColumnHeader(col)">
+                           </div>
                         </q-th>
-
+                        <q-th>
+                        </q-th>
                     </q-tr>
                 </template>
 
@@ -23,8 +25,9 @@
                         </q-td>
 
                         <q-td>
-                            <q-btn @click="goTo('/lesson/detail', { id: props.row.id})" flat style="color: #FF0080" label="보기" />
-                            <q-btn  @click="goTo('/backOffice/edit/lesson', { id: props.row.id})" flat style="color: #FF0080" label="수정" />
+                            <q-btn @click="goTo('/backOffice/lesson/detail', { id: props.row.id})" flat style="color: #FF0080" label="보기" />
+                            
+                            <q-btn @click="goTo('/backOffice/edit/lesson', { id: props.row.id})" flat style="color: #FF0080" label="수정" />
                         </q-td>
                     </q-tr>
                 </template>
@@ -33,7 +36,7 @@
         <br />
 
         <div>
-            <q-pagination @update:model-value="onPageChanged" v-model="page" :max="pageCount" :max-pages="10"
+            <q-pagination @update:model-value="onPageChanged" v-model="page" :max="pageCount" :max-pages="13"
                 boundary-numbers color="purple" />
         </div>
     </div>
@@ -126,3 +129,10 @@ const columns = [
     { name: 'defaultSubjectTitle', align: 'left', label: '과목명', field: 'defaultSubjectTitle', style: 'width: 100px' },
 ];
 </script>
+
+<!-- <style>
+.q-table--horizontal-separator thead th,
+.q-table--horizontal-separator tbody tr:not(:last-child) > td {
+  border-bottom: 2px solid red; /* 예시 */
+}
+</style> -->
