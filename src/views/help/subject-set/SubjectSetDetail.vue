@@ -1,33 +1,31 @@
 <template>
     <Header />
     <br>
-
     <div class="q-pa-md">
         <div>
-            <h4>
-                <span v-if="selected">{{ subjectSet.title }} (선택됨)</span>
-            </h4>
+            <div>
+            <p class="help-detail-font-style">Help 
+                <img class="help-detail-title-img-style" src="../../../../public/images/common/arrow.png">
+                <span class="color--999899">Custom Curriculum Set</span>
+            </p>
+            <input class="help-detail-title-font-style" filled readonly v-model="subjectSet.title"/><br>
         </div>
-        <br>
-
-        <div class="q-ma-md">과목 목록</div>
-        <q-table :rows="subjectSet.subjects" :columns="columns" row-key="id" hide-bottom/><br>
-
-        <div class="row">
-            <div class="col q-pr-md">
-                <q-input filled v-model="subjectSet.title" label="제목" stack-label readonly /><br>
-            </div>
-            <div class="col q-pl-md">
-                <q-input filled v-model="subjectSet.writer" label="작성자" stack-label readonly /><br>
-            </div>
+            <input class="help-detail-writer-font-style" filled readonly v-model="subjectSet.writer"/>
         </div>
 
-        <div class="row flex flex-center">
-            <q-btn @click="selectSubjetSet" color="primary" label="적용" />
-            <q-btn @click="clearSelection" color="primary" label="적용 취소" class="q-ml-md" />
+        <div class="hr">
+        </div>
+
+        <div class="q-ma-md margin-left--5">과목 목록</div>
+        <q-table class="help-detail-table-style" :rows="subjectSet.subjects" :columns="columns" row-key="id" hide-bottom/><br>
+
+        <div class="margin-right--5 text-align--right">
+            <q-btn @click="selectSubjetSet" color="primary" label="어썸코드 적용" />
+            <!-- <q-btn @click="clearSelection" color="primary" label="적용 취소" class="q-ml-md" /> -->
 
             <q-btn @click="onclickUpdateBtn" color="secondary" label="수정" class="q-ml-md" />
-            <q-btn @click="onclickDeleteBtn" color="deep-orange" label="삭제" class="q-ml-md" />
+            <q-btn @click="onclickDeleteBtn" color="red" label="삭제" class="q-ml-md" />
+            <q-btn class="q-ml-md" @click="goBack()" color="green" label="뒤로가기"  />
         </div>
     </div>
 
@@ -128,10 +126,20 @@ export default {
 }
 
 const columns = [
-{ name: 'id', align: 'center', label: 'ID', field: 'id', style: 'width: 30px' },
-    { name: 'writer', align: 'center', label: '작성자', field: 'writer', style: 'width: 150px' },
+    // { name: 'id', align: 'center', label: 'ID', field: 'id', style: 'width: 30px' },
     { name: 'title', align: 'left', label: '제목', field: 'title', style: 'width: 250px' },
     { name: 'subTitle', align: 'left', label: '부제목', field: 'subTitle', style: 'width: 200px' },
-    { name: 'description', align: 'left', label: '설명', field: 'description', style: 'width: 300px' },
+    { name: 'description', align: 'left', label: '설명', field: 'description', style: 'width: 300px',
+        format: (value) => {
+            if (value.length > 15) {
+                return value.substring(0, 15) + '...';
+            }
+            return value;
+        },
+    },
+    { name: 'writer', align: 'center', label: '작성자', field: 'writer', style: 'width: 150px' },
 ];
+
 </script>
+<style scoped src="@/assets/css/component/common.css"/>
+<style src="@/assets/css/component/SubjectDetail.css"/>
