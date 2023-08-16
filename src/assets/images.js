@@ -57,6 +57,8 @@ import asomekitIcon from "@/assets/images/blockCoding/asomekit-icon.png";
 import asomecarIconClick from "@/assets/images/blockCoding/asomecar-icon-click.png";
 import asomecarIcon from "@/assets/images/blockCoding/asomecar-icon-click.png";
 
+import arrow from "@/assets/images/arrow.png";
+
 export default {
     logom,
     logo2,
@@ -115,5 +117,7 @@ export default {
     asomekitIcon,
     asomecarIconClick,
     asomecarIcon,
+    
+    arrow,
 
 };

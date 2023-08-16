@@ -3,7 +3,7 @@
     <div>
         <div>
             <p class="help-detail-font-style">Help 
-                <img class="help-detail-title-img-style" src="../../../../public/images/common/arrow.png">
+                <img class="help-detail-title-img-style" :src="arrow">
                 <span class="color--999899">Custom Curriculum</span>
             </p>
             <input class="help-detail-title-font-style" filled readonly v-model="subject.title"/><br>
@@ -54,7 +54,9 @@
 <script>
 import VueBase from "@/mixin/vue-base";
 import Header from "@/components/HeaderHelp.vue";
-import apiSubject from '@/api/subject';
+import apiSubject from "@/api/subject";
+import images from "@/assets/images";
+
 export default {
     mixins: [VueBase],
 
@@ -67,6 +69,8 @@ export default {
             subject: "",
             password: "",
             columns: columns,
+
+            arrow: images.arrow
         };
     },
 

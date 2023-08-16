@@ -5,7 +5,7 @@
         <div>
             <div>
             <p class="help-detail-font-style">Help 
-                <img class="help-detail-title-img-style" src="../../../../public/images/common/arrow.png">
+                <img class="help-detail-title-img-style" :src="arrow">
                 <span class="color--999899">Custom Curriculum Set</span>
             </p>
             <input class="help-detail-title-font-style" filled readonly v-model="subjectSet.title"/><br>
@@ -56,6 +56,7 @@
 import VueBase from '@/mixin/vue-base';
 import Header from '@/components/HeaderHelp.vue';
 import apiSubjectSet from '@/api/subjectSet';
+import images from "@/assets/images";
 
 export default {
     mixins: [VueBase],
@@ -70,6 +71,8 @@ export default {
             password: "",
             columns: columns,
             selected: "",
+
+            arrow: images.arrow
         }
     },
 
