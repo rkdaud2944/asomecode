@@ -3,7 +3,7 @@
         <div class="col-3 backsidefixed">
             <div class="flex flex-center title-box">
                 <a href="javascript:history.back()" class="gohome" >
-                    <img src="../../../public/images/common/p3_list.png">
+                    <img :src="lectureList">
                 </a>
                 <p class="title-style">목차
                 </p>
@@ -23,7 +23,8 @@
 /* eslint-disable */
 import markdown from "@/utils/markdown";
 import apiLesson from "@/api/lesson";
-import {  mapMutations  } from 'vuex'
+import {  mapMutations  } from 'vuex';
+import images from "@/assets/images";
 
 export default {
     data() {
@@ -31,6 +32,8 @@ export default {
             lesson: {},
             titles: [],
             output: null,
+
+            lectureList: images.lectureList
         };
     },
 
