@@ -55,7 +55,7 @@ import asomebotIcon from "@/assets/images/blockCoding/asomebot-icon.png";
 import asomekitIconClick from "@/assets/images/blockCoding/asomekit-icon-click.png";
 import asomekitIcon from "@/assets/images/blockCoding/asomekit-icon.png";
 import asomecarIconClick from "@/assets/images/blockCoding/asomecar-icon-click.png";
-import asomecarIcon from "@/assets/images/blockCoding/asomecar-icon-click.png";
+import asomecarIcon from "@/assets/images/blockCoding/asomecar-icon.png";
 
 import arrow from "@/assets/images/arrow.png";
 
