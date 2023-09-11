@@ -1,4 +1,4 @@
-// import serial from '@/globals/serial';
+import serial from '@/globals/serial';
 import boardFileSaver from '@/globals/board-file-saver';
 import otp from "@/globals/otp";
 
@@ -13,11 +13,11 @@ window.addEventListener('message', (msg) => {
     }
 
     switch (message.type) {
-        // case 'connect': serial.connect(); break;
-        // case 'disconnect': serial.disconnect(); break;
-        // case 'stop': serial.stop(); break;
-        // case 'reboot': serial.reboot(); break;
-        // case 'runCode': serial.runCode(message.params); break;
+        case 'connect': serial.connect(); break;
+        case 'disconnect': serial.disconnect(); break;
+        case 'stop': serial.stop(); break;
+        case 'reboot': serial.reboot(); break;
+        case 'runCode': serial.runCode(message.params); break;
         case 'uploadTextToBoard': boardFileSaver.save(message.filename, message.text); break;
         case 'verifyOtp': otp.start(message.params); break;
     }

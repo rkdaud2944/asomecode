@@ -5,7 +5,7 @@
 
 import config from "@/globals/config";
 import axios from "axios";
-// import serial from "./serial";
+import serial from "./serial";
 import eventbus from "@/globals/eventbus";
 import boardFileManager from "@/globals/board-file-manager";
 
@@ -26,8 +26,8 @@ let tobeDowndloads = [];
  */
 const boardUpdater = {
     start() {
-        // serial.runCode(codeGetVersion);
-        // serial.writeLn('print("### Get Remote File List")');
+        serial.runCode(codeGetVersion);
+        serial.writeLn('print("### Get Remote File List")');
     },
 
     async getRemoteFileList() {
@@ -61,8 +61,8 @@ const boardUpdater = {
             return;
         }
 
-        // const filename = filenameQue.shift();
-        // getFileVersion(filename);
+        const filename = filenameQue.shift();
+        getFileVersion(filename);
     },
 };
 
@@ -78,21 +78,21 @@ async function getRemoteFileList() {
     return {};
 }
 
-// function getFileVersion(filename) {
-//     // serial.writeLn(`getVersion("${filename}")`);
-// }
+function getFileVersion(filename) {
+    serial.writeLn(`getVersion("${filename}")`);
+}
 
-// const codeGetVersion = `
-// def getVersion(filename):
-//     global f
-//     try:
-//         f = open(filename)
-//         line = f.readline()
-//         if line == "":
-//             raise Exception("파일이 비어있습니다.")
-//         print(line)
-//         f.close()
-//     except:
-//         print("### AsomeCODE.Version: %s=x: End." % filename)
-//     f = None
-// `;
+const codeGetVersion = `
+def getVersion(filename):
+    global f
+    try:
+        f = open(filename)
+        line = f.readline()
+        if line == "":
+            raise Exception("파일이 비어있습니다.")
+        print(line)
+        f.close()
+    except:
+        print("### AsomeCODE.Version: %s=x: End." % filename)
+    f = None
+`;

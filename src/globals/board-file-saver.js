@@ -2,7 +2,7 @@
  * 텍스트 데이터를 보드의 파일로 저장한다.
  */
 
-// import serial from "@/globals/serial";
+import serial from "@/globals/serial";
 import eventbus from "@/globals/eventbus";
 
 eventbus.on("onSerialReceived", (data) => {
@@ -16,21 +16,21 @@ const boardFileSaver = {
         this.filename = filename;
         this.lines = text.replaceAll("\r", "").replaceAll("\t", "    ").replaceAll('"', '\\"').split("\n");
 
-        // serial.writeLn(`f = open("${filename}", "w")`);
-        // serial.writeLn('print("### Saver Next Line")');
+        serial.writeLn(`f = open("${filename}", "w")`);
+        serial.writeLn('print("### Saver Next Line")');
     },
 
     nextLine() {
         if (this.lines.length == 0) {
-            // serial.writeLn("f.close()");
-            // serial.writeLn("f = None");
-            // serial.writeLn('print("### Saver Next File")');
+            serial.writeLn("f.close()");
+            serial.writeLn("f = None");
+            serial.writeLn('print("### Saver Next File")');
             return;
         }
 
-        // const line = this.lines.shift();
-        // serial.writeLn(`f.write("${line}\\n")`);
-        // serial.writeLn('print("### Saver Next Line")');
+        const line = this.lines.shift();
+        serial.writeLn(`f.write("${line}\\n")`);
+        serial.writeLn('print("### Saver Next Line")');
     },
 };
 
