@@ -6,27 +6,27 @@
                 <img :src="logom" />
             </div>
             <div class="menu-item-div">
-                <div class="btn btn-image" onclick="runCode()" style="margin-top: -7px;">
+                <div class="btn btn-image" @click="send($store.state.viewcode)" style="margin-top: -7px;">
                     <img :src="playBlock" style="width: 35px; height: 35px; margin-right: 15px;" />
                     <img :src="playBlockHover" style="width: 35px; height: 35px; margin-right: 15px;" />
                 </div>
                 <span class="delimiter"></span>
-                <div class="btn btn-image" onclick="stopCode();" style="margin-top: -7px;">
+                <div class="btn btn-image" @click="stopCode()" style="margin-top: -7px;">
                     <img :src="stopBlock" style="width: 35px; height: 35px;" />
                     <img :src="stopBlockHover" style="width: 35px; height: 35px;" />
                 </div>
                 <span class="delimiter">|</span>
-                <div class="btn btn-image" onclick="connect();">
+                <div class="btn btn-image" @click="connect()">
                     <img :src="connectBlock" style="width: 96px; height: 17px;" />
                     <img :src="connectBlockHover" style="width: 96px; height: 17px;" />
                 </div>
                 <span class="delimiter">|</span>
-                <div class="btn btn-image" onclick="exportBlocksToFile();">
+                <div class="btn btn-image" @click="exportBlocksToFile()">
                     <img :src="saveBlock" style="width: 65px; height: 17px;"/>
                     <img :src="saveBlockHover" style="width: 65px; height: 17px;"/>
                 </div>
                 <span class="delimiter">|</span>
-                <div class="btn btn-image" onclick="importBlocksFromFile();">
+                <div class="btn btn-image" @click="importBlocksFromFile()">
                     <img :src="loadBlock" style="width: 66px; height: 17px;"/>
                     <img :src="loadBlockHover" style="width: 66px; height: 17px;"/>
                 </div>
@@ -36,8 +36,16 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import images from "@/assets/images";
+// import serial from "@/globals/serial";
+
 export default {
+    components: {
+        ...mapState([
+            'viewcode'
+        ])
+    },
     data() {
         return {
             logom: images.logom,
@@ -54,6 +62,26 @@ export default {
             stopBlockHover: images.stopBlockHover,
         }
     },
+
+    methods:{
+        send(codes){
+            
+            // window.opener.postMessage(JSON.stringify(codes));
+            window.opener.postMessage(codes);
+            console.log("code " + codes)
+            // this.setViewCode(''); // viewcode 상태를 초기화합니다
+            // serial.runCode(code)
+            // window.opener.runCode(code)
+            // opener.runCode()
+            // let code = generateCode(codes);
+            // const msg = {
+            //     type: "runCode",
+            //     params: code,
+            // };
+            // window.opener.postMessage(JSON.stringify(msg));
+        }
+
+    }
 }
 </script>
 

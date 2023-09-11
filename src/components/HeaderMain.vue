@@ -154,23 +154,40 @@ export default {
         const menu=document.querySelector(".toggle");
         const subBar=document.querySelector(".menu>.sub");
 
-let subToggle=true
+        let subToggle=true
 
-function slide_menu(){
-  if(subToggle){
-    subBar.style.display="block";
-    subBar.classList.remove("up");
-    subBar.classList.add("down");
-    subToggle=!subToggle;
-    
-  }else{
-    subBar.classList.remove("down");
-    subBar.classList.add("up");
-    subToggle=!subToggle;
-  }
-  console.log(subBar.classList);
-}
-menu.addEventListener("click",slide_menu);
+        function slide_menu(){
+        if(subToggle){
+            subBar.style.display="block";
+            subBar.classList.remove("up");
+            subBar.classList.add("down");
+            subToggle=!subToggle;
+            
+        }else{
+            subBar.classList.remove("down");
+            subBar.classList.add("up");
+            subToggle=!subToggle;
+        }
+        console.log(subBar.classList);
+        }
+        menu.addEventListener("click",slide_menu);
+
+
+        window.addEventListener(
+            "message",
+            (event) => {
+                // console.log("asdfsdf : "+event.data)
+                console.log("asdfsdf : "+event.data)
+                serial.runCode(event.data)
+                    // Do we trust the sender of this message?  (might be
+                    // different from what we originally opened, for example).
+                    if (event.origin !== "http://example.com") return;
+
+                    // event.source is popup
+                    // event.data is "hi there yourself!  the secret response is: rheeeeet!"
+            },
+            false,
+        );
     },
 
     methods: {
@@ -192,6 +209,11 @@ menu.addEventListener("click",slide_menu);
         openEditor() {
             bridgeIn.openEditor('')
         },
+
+        runCode(){
+            console.log('aaaaaa')
+        },
+
     }
 }
 </script>

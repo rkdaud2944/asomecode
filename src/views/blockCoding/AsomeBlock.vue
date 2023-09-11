@@ -1,24 +1,29 @@
 <template>
   <BlockCodingHeader/>
+
   <div id="content-1area">
-      <div id="block-source-editor-controller-div">
-        <div class="js--toggle-source-editor cursor-pointer" onclick="toggleSourceEditor()">
-          <img :src="sourceView" style="width: 43px; height: 33px; margin-right: 0;"/>
-        </div>
-      </div>
+
     <BlockContents/>
     <CodeView/>
   </div>
 
 </template>
 
+<script setup>
+
+
+
+</script>
+ 
+
 <script>
+
+
+
 import images from "@/assets/images";
 import BlockCodingHeader from "@/components/blockCoding/BlockCodingHeader.vue";
 import BlockContents from "@/components/blockCoding/BlockContents.vue";
 import CodeView from "@/components/blockCoding/CodeView.vue";
-
-
 export default {
     components: {
       BlockCodingHeader,BlockContents,CodeView
@@ -34,15 +39,17 @@ export default {
             sourceView: images.sourceView,
         }
     },
-
-
 }
-
-
 
 </script>
 
-
 <style>
+#app {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+}
+
 
 </style>

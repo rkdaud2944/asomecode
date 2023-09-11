@@ -18,6 +18,7 @@
   "main": "background.js",
   "dependencies": {
     "@quasar/extras": "^1.0.0",
+    "ace-builds": "^1.24.1",
     "aws-sdk": "^2.1097.0",
     "axios": "^0.27.2",
     "blockly": "^9.3.3",
@@ -37,7 +38,10 @@
     "swiper": "^8.2.6",
     "uuid": "^8.3.2",
     "vue": "^3.2.13",
+    "vue-ace-editor": "^1.0.3",
     "vue-router": "^4.0.3",
+    "vue2-ace-editor": "^0.0.15",
+    "vue3-ace": "^0.0.1",
     "vue3-ace-editor": "^2.2.2",
     "vuedraggable": "^4.1.0",
     "vuex": "^4.1.0",
