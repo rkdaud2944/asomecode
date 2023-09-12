@@ -18,7 +18,7 @@
   "main": "background.js",
   "dependencies": {
     "@quasar/extras": "^1.0.0",
-    "ace-builds": "^1.24.1",
+    "ace-builds": "^1.24.2",
     "aws-sdk": "^2.1097.0",
     "axios": "^0.27.2",
     "blockly": "^9.3.3",

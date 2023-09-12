@@ -10,7 +10,7 @@ export { BotToolbox };
             {
                 "kind": "category",
                 "name": "BASIC",
-                "filed" : "BOT",
+                "field" : "BOT",
                 "colour": "14A2FF",
                 "contents": [
                     { "kind": "block", "gap": "8", "type": "basic_ready", "name" : "ready"},
@@ -21,7 +21,7 @@ export { BotToolbox };
             {
                 "kind": "category",
                 "name": "WALK",
-                "filed" : "BOT",
+                "field" : "BOT",
                 "colour": "FF9A00",
                 "contents": [
                     { "kind": "block", "gap": "8", "type": "walk_step_forward" },
@@ -40,7 +40,7 @@ export { BotToolbox };
             {
                 "kind": "category",
                 "name": "DANCE",
-                "filed" : "BOT",
+                "field" : "BOT",
                 "colour": "FF61FF",
                 "contents": [
                     { "kind": "block", "gap": "8", "type": "dance_ballet" },
@@ -59,7 +59,7 @@ export { BotToolbox };
             {
                 "kind": "category",
                 "name": "SENSOR",
-                "filed" : "BOT",
+                "field" : "BOT",
                 "colour": "FFCD00",
                 "contents": [
                     { "kind": "block", "gap": "8", "type": "sensor_ultrasonic" },
@@ -70,7 +70,7 @@ export { BotToolbox };
             {
                 "kind": "category",
                 "name": "SOUND",
-                "filed" : "BOT",
+                "field" : "BOT",
                 "colour": "EC1961",
                 "contents": [
                     { "kind": "block", "gap": "8", "type": "sound_buzzer_on" },
@@ -82,7 +82,7 @@ export { BotToolbox };
             {
                 "kind": "category",
                 "name": "ADVANCE",
-                "filed" : "BOT",
+                "field" : "BOT",
                 "colour": "55A55B",
                 "contents": [
                     { "kind": "block", "gap": "8", "type": "advance_waiting" },
@@ -101,7 +101,7 @@ export { BotToolbox };
             {
                 "kind": "category",
                 "name": "INTERNET",
-                "filed" : "BOT",
+                "field" : "BOT",
                 "colour": "B666FC",
                 "contents": [
                     { "kind": "block", "gap": "8", "type": "internet_connect" },

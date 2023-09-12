@@ -10,7 +10,7 @@ const CarToolbox = {
         {
             "kind": "category",
             "name": "BASIC",
-            "filed" : "CAR",
+            "field" : "CAR",
             "colour": "14A2FF",
             "contents": [
                 { "kind": "block", "gap": "8", "type": "basic_ready" }
@@ -19,7 +19,7 @@ const CarToolbox = {
         {
             "kind": "category",
             "name": "MOVE",
-            "filed" : "CAR",
+            "field" : "CAR",
             "colour": "FF9A00",
             "contents": [
                 { "kind": "block", "gap": "8", "type": "move_stop" },
@@ -36,7 +36,7 @@ const CarToolbox = {
         {
             "kind": "category",
             "name": "SENSOR",
-            "filed" : "CAR",
+            "field" : "CAR",
             "colour": "FFCD00",
             "contents": [
                 { "kind": "block", "gap": "8", "type": "sensor_ultrasonic" },
@@ -47,7 +47,7 @@ const CarToolbox = {
         {
             "kind": "category",
             "name": "ADVENCE",
-            "filed" : "CAR",
+            "field" : "CAR",
             "colour": "55A55B",
             "contents": [
                 { "kind": "block", "gap": "8", "type": "advance_waiting" },
@@ -65,7 +65,7 @@ const CarToolbox = {
         {
             "kind": "category",
             "name": "INTERNET",
-            "filed" : "CAR",
+            "field" : "CAR",
             "colour": "B666FC",
             "contents": [
                 { "kind": "block", "gap": "8", "type": "internet_connect" },

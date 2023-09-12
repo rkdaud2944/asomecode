@@ -4,7 +4,6 @@
   <div id="content-1area">
 
     <BlockContents/>
-    <CodeView/>
   </div>
 
 </template>
@@ -23,10 +22,9 @@
 import images from "@/assets/images";
 import BlockCodingHeader from "@/components/blockCoding/BlockCodingHeader.vue";
 import BlockContents from "@/components/blockCoding/BlockContents.vue";
-import CodeView from "@/components/blockCoding/CodeView.vue";
 export default {
     components: {
-      BlockCodingHeader,BlockContents,CodeView
+      BlockCodingHeader,BlockContents
     },
     data() {
         return {

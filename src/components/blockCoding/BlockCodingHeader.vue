@@ -68,7 +68,7 @@ export default {
             
             // window.opener.postMessage(JSON.stringify(codes));
             window.opener.postMessage(codes);
-            console.log("code " + codes)
+            console.log(codes)
             // this.setViewCode(''); // viewcode 상태를 초기화합니다
             // serial.runCode(code)
             // window.opener.runCode(code)

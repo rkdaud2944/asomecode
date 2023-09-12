@@ -10,7 +10,7 @@ export { KitToolbox };
             {
               "kind": "category",
               "name": "BASIC",
-              "filed" : "KIT",
+              "field" : "KIT",
               "colour": "14A2FF",
               "contents": [
                 { "kind": "block", "gap": "8", "type": "basic_kit_ready" },
@@ -20,7 +20,7 @@ export { KitToolbox };
           {
               "kind": "category",
               "name": "PREPARE",
-              "filed" : "KIT",
+              "field" : "KIT",
               "colour": "FF9A00",
               "contents": [
                 { "kind": "block", "gap": "8", "type": "prepare_led_ready" },
@@ -37,7 +37,7 @@ export { KitToolbox };
           {
               "kind": "category",
               "name": "LED",
-              "filed" : "KIT",
+              "field" : "KIT",
               "colour": "FF61FF",
               "contents": [
                 { "kind": "block", "gap": "8", "type": "led_ready" },
@@ -49,7 +49,7 @@ export { KitToolbox };
           {
               "kind": "category",
               "name": "BUTTON",
-              "filed" : "KIT",
+              "field" : "KIT",
               "colour": "4CC1B9",
               "contents": [
                 { "kind": "block", "gap": "8", "type": "button_push" },
@@ -59,7 +59,7 @@ export { KitToolbox };
           {
               "kind": "category",
               "name": "SENSOR",
-              "filed" : "KIT",
+              "field" : "KIT",
               "colour": "FFCD00",
               "contents": [
                 { "kind": "block", "gap": "8", "type": "sensor_ultrasonic" },
@@ -75,7 +75,7 @@ export { KitToolbox };
           {
               "kind": "category",
               "name": "SOUND",
-              "filed" : "KIT",
+              "field" : "KIT",
               "colour": "EC1961",
               "contents": [
                 { "kind": "block", "gap": "8", "type": "sound_buzzer_onoff" },
@@ -86,7 +86,7 @@ export { KitToolbox };
           {
               "kind": "category",
               "name": "ADVANCE",
-              "filed" : "KIT",
+              "field" : "KIT",
               "colour": "55A55B",
               "contents": [
                 { "kind": "block", "gap": "8", "type": "advance_waiting" },
@@ -104,7 +104,7 @@ export { KitToolbox };
           {
               "kind": "category",
               "name": "INTERNET",
-              "filed" : "KIT",
+              "field" : "KIT",
               "colour": "B666FC",
               "contents": [
                 { "kind": "block", "gap": "8", "type": "internet_connect" },
