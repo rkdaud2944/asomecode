@@ -233,7 +233,7 @@ export default {
         // 블록코드 워크스페이스 코드(점박이 백그라운드 넣은곳)
         this.$nextTick(() => {
             this.workspace = Blockly.inject(this.$refs.blocklyDiv, {
-                toolbox: this.getFilteredToolboxByField('BOT'),
+                toolbox: this.field('BOT'),
                 grid:
                     {spacing: 25,
                     length: 2,
@@ -266,7 +266,7 @@ export default {
 
         },
         // 에이스 에디터 코드(소스편집에서 따온거)
-        getFilteredToolboxByField(field) {
+        field(field) {
             return {
                 kind: "categoryToolbox",
                 contents: BotToolbox.contents.filter(category => category.field === field)
