@@ -46,7 +46,7 @@ const CarToolbox = {
         },
         {
             "kind": "category",
-            "name": "ADVENCE",
+            "name": "ADVANCE",
             "field" : "CAR",
             "colour": "55A55B",
             "contents": [

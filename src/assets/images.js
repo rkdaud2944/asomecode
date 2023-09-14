@@ -57,6 +57,31 @@ import asomekitIcon from "@/assets/images/blockCoding/asomekit-icon.png";
 import asomecarIconClick from "@/assets/images/blockCoding/asomecar-icon-click.png";
 import asomecarIcon from "@/assets/images/blockCoding/asomecar-icon.png";
 
+//blockCoding toolbox
+import advance from "@/assets/images/blockCoding/toolbox/advance.png";
+import advanceClick from "@/assets/images/blockCoding/toolbox/advance-click.png";
+import basic from "@/assets/images/blockCoding/toolbox/basic.png";
+import basicClick from "@/assets/images/blockCoding/toolbox/basic-click.png"
+import button from "@/assets/images/blockCoding/toolbox/button.png";
+import buttonClick from "@/assets/images/blockCoding/toolbox/button-click.png"
+import dance from "@/assets/images/blockCoding/toolbox/dance.png";
+import danceClick from "@/assets/images/blockCoding/toolbox/dance-click.png"
+import internet from "@/assets/images/blockCoding/toolbox/internet.png";
+import internetClick from "@/assets/images/blockCoding/toolbox/internet-click.png"
+import led from "@/assets/images/blockCoding/toolbox/led.png";
+import ledClick from "@/assets/images/blockCoding/toolbox/led-click.png"
+import move from "@/assets/images/blockCoding/toolbox/move.png";
+import moveClick from "@/assets/images/blockCoding/toolbox/move-click.png"
+import prepare from "@/assets/images/blockCoding/toolbox/prepare.png";
+import prepareClick from "@/assets/images/blockCoding/toolbox/prepare-click.png"
+import sensor from "@/assets/images/blockCoding/toolbox/sensor.png";
+import sensorClick from "@/assets/images/blockCoding/toolbox/sensor-click.png"
+import sound from "@/assets/images/blockCoding/toolbox/sound.png";
+import soundClick from "@/assets/images/blockCoding/toolbox/sound-click.png"
+import walk from "@/assets/images/blockCoding/toolbox/walk.png";
+import walkClick from "@/assets/images/blockCoding/toolbox/walk-click.png"
+
+
 import arrow from "@/assets/images/arrow.png";
 
 export default {
@@ -119,5 +144,28 @@ export default {
     asomecarIcon,
     
     arrow,
+
+    advance,
+    advanceClick,
+    basic,
+    basicClick,
+    button,
+    buttonClick,
+    dance,
+    danceClick,
+    internet,
+    internetClick,
+    led,
+    ledClick,
+    move,
+    moveClick,
+    prepare,
+    prepareClick,
+    sensor,
+    sensorClick,
+    sound,
+    soundClick,
+    walk,
+    walkClick
 
 };

@@ -57,8 +57,8 @@
 /* 코드창,에이스에디터 간격 */
 
 .blocklyToolboxDiv .blocklyTreeRow {
-    height: 70px;
     width: 70px;
+    height: 70px;
     padding: 0px !important;
     border-left: 1px solid #D6E9F4 !important;
     border-right: 1px solid #D6E9F4 !important;
@@ -66,6 +66,21 @@
     background-color: #F1FAFF;
     margin: 0;
 }
+
+/* 카테고리 박스 안에 있는 blockly icon 제거 */
+.blocklyTreeIcon{
+    display: none !important;
+}
+
+/* toolbox 콘텐츠 중앙정렬을 위함 */
+.blocklyTreeRowContentContainer{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 /* 카테고리-박스크기 */
 
 .blocklyToolboxDiv{
@@ -80,7 +95,6 @@
     margin-right: auto;
     display: block;
     font-size: 12px;
-    line-height: 75px;
 }
 /* 카테고리-폰트 */
 

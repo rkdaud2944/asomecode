@@ -25,11 +25,11 @@
         <!-- 에이스 에디터 -->
         <div v-if="isCodeVisible" class="code-container">
             <VAceEditor
-            class="code-preview"
-            lang="python"
-            v-model:value="code" 
-            :options="editorOptions"
-            :style="{height: '100%', width: '90%'}">
+                class="code-preview"
+                lang="python"
+                v-model:value="code" 
+                :options="editorOptions"
+                :style="{height: '100%', width: '90%'}">
             </VAceEditor>
         </div>
     </div>
@@ -101,6 +101,30 @@ export default {
             asomecarIcon: images.asomecarIcon,
             asomecarIconClick: images.asomecarIconClick,
             sourceView: images.sourceView,
+            
+            advance: images.advance,
+            advanceClick: images.advanceClick,
+            basic: images.basic,
+            basicClick: images.basicClick,
+            button: images.button,
+            buttonClick: images.buttonClick,
+            dance: images.dance,
+            danceClick: images.danceClick,
+            internet: images.internet,
+            internetClick: images.internetClick,
+            led: images.led,
+            ledClick: images.ledClick,
+            move: images.move,
+            moveClick: images.moveClick,
+            prepare: images.prepare,
+            prepareClick: images.prepareClick,
+            sensor: images.sensor,
+            sensorClick: images.sensorClick,
+            sound: images.sound,
+            soundClick: images.soundClick,
+            walk: images.walk,
+            walkClick: images.walkClick,
+            
             // 에이스 에디터 기본값 : null
             workspace: null,
             // 교구 선택 버튼 기본값 : BOT
@@ -108,13 +132,6 @@ export default {
             // 에이스 에디터 초기값
             isCodeVisible: true
         }
-    },
-    beforeUnmount() {
-        // 에이스에디터 코드 뷰엑스로 넘겨줌
-        this.SetCode(null)
-    },
-    mounted() {
-        this.toggleCodeVisibility();
     },
     beforeMount() {
         // 타이핑 자동완성
@@ -229,11 +246,13 @@ export default {
                 callback(null, completions);
             }
         })
-
+        
         // 블록코드 워크스페이스 코드(점박이 백그라운드 넣은곳)
         this.$nextTick(() => {
             this.workspace = Blockly.inject(this.$refs.blocklyDiv, {
-                toolbox: this.field('BOT'),
+                toolbox: 
+                    {kind: "categoryToolbox",
+                    contents: BotToolbox.contents},
                 grid:
                     {spacing: 25,
                     length: 2,
@@ -255,6 +274,20 @@ export default {
                 this.showCode(); 
             });
         });
+        
+        this.$nextTick(() => {
+            this.insertIcon();
+        });
+
+    },
+    
+    mounted() {
+        this.toggleCodeVisibility();
+    },
+    
+    beforeUnmount() {
+        // 에이스에디터 코드 뷰엑스로 넘겨줌
+        this.SetCode(null)
     },
 
     methods: {
@@ -264,13 +297,6 @@ export default {
         }),
         handleWorkspaceChange() {
 
-        },
-        // 에이스 에디터 코드(소스편집에서 따온거)
-        field(field) {
-            return {
-                kind: "categoryToolbox",
-                contents: BotToolbox.contents.filter(category => category.field === field)
-            };
         },
         // 교구 선택 버튼들
         getToolboxByField(field) {
@@ -293,7 +319,67 @@ export default {
             this.workspace.updateToolbox(toolbox);
             console.log("KitToolbox" + KitToolbox)
             console.log("CarToolbox" + CarToolbox)
+            this.insertIcon()
         },
+        
+        insertIcon() {
+            const toolboxes = document.querySelectorAll(".blocklyTreeLabel");
+            let prevSelectedElement = null;
+
+            toolboxes.forEach((toolbox) => {
+                const img = document.createElement("img");
+                const imgName = toolbox.textContent.toLowerCase()
+                
+                img.src = this[imgName]
+                
+                img.style.width = '70%';
+                img.style.display = 'block';
+                img.style.margin = '0 auto';
+                toolbox.parentNode.insertBefore(img, toolbox);
+            });
+
+            const toolboxContents = document.querySelector('.blocklyToolboxContents');
+            
+            if (toolboxContents) {
+                // Dom 변화를 감지하는 observer 생성
+                const observer = new MutationObserver((mutationsList) => {
+                    for (const mutation of mutationsList) {
+                        // 반환 유형이 'attributes'이고 변환된 속성 이름이 'class'인 경우
+                        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                            // 이전에 선택된 요소가 있으면
+                            if (prevSelectedElement) {
+                                const imgElement = prevSelectedElement.querySelector('img');
+                                const spanElement = prevSelectedElement.querySelector('.blocklyTreeRowContentContainer .blocklyTreeLabel');
+                                if (imgElement) {
+                                    const clickName = spanElement.textContent.toLowerCase();
+                                    imgElement.src = this[clickName];
+                                }
+                            }
+
+                            // 현재 선택된 요소를 찾음
+                            const selectedElement = toolboxContents.querySelector('.blocklyTreeSelected');
+                            if (selectedElement) {
+                                const imgElement = selectedElement.querySelector('img');
+                                const spanElement = selectedElement.querySelector('.blocklyTreeRowContentContainer .blocklyTreeLabel');
+
+                                console.log("atd : "+spanElement.textContent)
+                                if (imgElement) {
+                                    const clickName = spanElement.textContent.toLowerCase() + "Click";
+                                    imgElement.src = this[clickName];
+                                }
+                            }
+                            
+                            // 현재 선택된 요소를 변수에 저장 (이것은 위의 이전에 선택된 요소에서 활용)
+                            prevSelectedElement = selectedElement;
+                        }
+                    }
+                });
+
+                observer.observe(toolboxContents, { attributes: true, subtree: true });
+            }
+        }
+
+
     },
 }
 </script>

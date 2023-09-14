@@ -176,8 +176,6 @@ export default {
         window.addEventListener(
             "message",
             (event) => {
-                // console.log("asdfsdf : "+event.data)
-                console.log("asdfsdf : "+event.data)
                 serial.runCode(event.data)
                     // Do we trust the sender of this message?  (might be
                     // different from what we originally opened, for example).
