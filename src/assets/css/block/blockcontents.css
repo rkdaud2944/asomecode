@@ -67,6 +67,11 @@
     margin: 0;
 }
 
+.blocklyTreeRow:first-child{
+    border-top: 1px solid #D6E9F4 !important;
+
+}
+
 /* 카테고리 박스 안에 있는 blockly icon 제거 */
 .blocklyTreeIcon{
     display: none !important;
