@@ -136,12 +136,27 @@ button.selected {
 }
 /* 교구버튼 디자인-이미지,폰트 간격 */
 
-.blockly-container, .code-container {
-    flex: 1;
+.blockly-container{
     height: 600px;
+    transition: flex 0.3s ease;
 }
+.code-container {
+    height: 600px;
+    transition: flex 0.3s ease;
+}
+/* .code-container[style*="display: none"] {
+    flex: 0;
+} */
 .blocklyNonSelectable {
     background-color: #ffffff !important;
     border-right: 1px solid #DCDCDC;
 }
 /* container 표시용 */
+
+.injectionDiv{
+    display: flex;
+}
+
+.blocklySvg{
+    flex:1;
+}

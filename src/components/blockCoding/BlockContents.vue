@@ -1,4 +1,4 @@
-<template>
+<template>BOT
 <div class="pre-setting">
     <!-- 교구 선택 버튼, 에이스에디터 여닫이버튼 -->
     <div>
@@ -12,18 +12,19 @@
         <button class="c-button" :class="{ selected: selectedField === 'CAR' }" @click="showAndClearCategoriesByField('CAR')">
             <img class="img-button" :src="selectedField === 'CAR' ? asomecarIconClick : asomecarIcon"/> Asomecar
         </button>
+        <!-- 아래 코드 주석해도 영향 없음. options 변수 없음. 확인 바람 -->
+        <!-- <BlocklyComponent id="blockly2" :options="options" ref="foo"></BlocklyComponent> -->
         <!-- 에이스에디터 버튼 -->
-        <BlocklyComponent id="blockly2" :options="options" ref="foo"></BlocklyComponent>
         <div id="code" class="cursor-pointer">
             <img :src="sourceView" @click="toggleCodeVisibility" />
         </div>
     </div>
-    <!-- 어썸블록, 에이스에디터 -->
     <div class="container">
-        <div ref="blocklyDiv" class="blockly-container">
+        <!-- Blockly -->
+        <div ref="blocklyDiv" class="blockly-container" :style="{flex: flexValue1}">
         </div>
         <!-- 에이스 에디터 -->
-        <div v-if="isCodeVisible" class="code-container">
+        <div class="code-container" :style="{flex: flexValue2}"> 
             <VAceEditor
                 class="code-preview"
                 lang="python"
@@ -37,60 +38,28 @@
 
 </template>
 
-<script setup>
-// 에이스 에디터 선언
-import { VAceEditor } from "vue3-ace-editor";
-import 'ace-builds/src-noconflict/mode-python';
-
-const showCode = () => (code.value = javascriptGenerator.workspaceToCode(foo.value.workspace));
-const foo = ref();
-const code = ref();
-const isCodeVisible = ref(false);
-const store = useStore();
-
-// 아래 toggleCodeVisibility는 수정해야하는 코드
-// 이 버튼은 에이스에디터를 여닫는 버튼인데, 단순히 display를 none,block하는게 아니라,
-// 에디터 자체를 숨겨버리는 기능이라 에디터를 숨기고 블록을 생성하면,
-// 코드 자체가 만들어지지 않음.
-const toggleCodeVisibility = () => {
-  isCodeVisible.value = !isCodeVisible.value;
-  if (isCodeVisible.value) {
-    showCode();
-  }
-};
-
-// 에이스 에디터 옵션 설정하는곳
-const editorOptions = ref({
-    enableBasicAutocompletion: true,
-    enableLiveAutocompletion: true
-});
-
-// 에이스 에디터 값 바뀌면 뮤테이션 호출해서 코드 업뎃하는곳
-watch(code, (newCode) => {
-  if (isCodeVisible.value) {
-    store.commit('setCode', newCode);
-  }
-});
-
-</script>
 
 <script>
 
 // 각종 선언코드
 import {  mapMutations  } from 'vuex';
-import { useStore } from 'vuex';
-import { ref , watch  } from "vue";
+// import { useStore } from 'vuex';
+// import {  watch  } from "vue";
 import "../../blocks/stocks";
-import { javascriptGenerator } from "blockly/javascript";
+// import { javascriptGenerator } from "blockly/javascript";
 import images from "@/assets/images";
 import Blockly from "blockly";
 import { BotToolbox } from "@/blocks/B_BlockContents";
 import { KitToolbox } from "@/blocks/K_BlockContents";
 import { CarToolbox } from "@/blocks/C_BlockContents";
+import { VAceEditor } from 'vue3-ace-editor';
+import 'ace-builds/src-noconflict/mode-python';
 
 
 export default {
-    
+    components: {
+        VAceEditor
+    },
     data() {
         return {
             // 이미지 호출코드들
@@ -130,7 +99,17 @@ export default {
             // 교구 선택 버튼 기본값 : BOT
             selectedField: 'BOT',
             // 에이스 에디터 초기값
-            isCodeVisible: true
+            isCodeVisible: true,
+
+            
+            code: null,
+            // isCodeVisible: true,
+            flexValue1: 3,
+            flexValue2: 0,
+            editorOptions: {
+                enableBasicAutocompletion: true,
+                enableLiveAutocompletion: true
+            }
         }
     },
     beforeMount() {
@@ -266,7 +245,9 @@ export default {
                     minScale: 0.3,
                     scaleSpeed: 1.2,
                     pinch: true},
-                trashcan: true
+                trashcan: true,
+                width:"100%",
+                height:"100%"
             });
             // 에이스에디터 변경 감지용 코드
             this.workspace.addChangeListener(() => {
@@ -282,7 +263,7 @@ export default {
     },
     
     mounted() {
-        this.toggleCodeVisibility();
+        // this.toggleCodeVisibility();
     },
     
     beforeUnmount() {
@@ -321,7 +302,7 @@ export default {
             console.log("CarToolbox" + CarToolbox)
             this.insertIcon()
         },
-        
+
         insertIcon() {
             const toolboxes = document.querySelectorAll(".blocklyTreeLabel");
             let prevSelectedElement = null;
@@ -377,9 +358,48 @@ export default {
 
                 observer.observe(toolboxContents, { attributes: true, subtree: true });
             }
-        }
+        },
+
+        
+        toggleCodeVisibility() {
+            console.log("test");
+            this.flexValue1 = this.flexValue1 === 3 ? 2 : 3;
+            this.flexValue2 = this.flexValue2 === 0 ? 1 : 0;
+            this.isCodeVisible = !this.isCodeVisible;
+            
+            Blockly.svgResize(this.workspace)
+
+            // this.$nextTick(() => {
+            //     console.log(11)
+            //     if (this.workspace) {
+            //         // Blockly.svgResize(this.workspace);
+            //         Blockly.svgResize(this.workspace)
+            //     }
+            // });
+        },
 
 
+    },
+    
+    setup() {
+        // const store = useStore();
+
+        // watch(() => this.code, (newCode) => {
+        //     if (this.isCodeVisible) {
+        //         store.commit('setCode', newCode);
+        //     }
+        // });
+        // watch(
+        //     () => [this.isCodeVisible],
+        //     () => {
+        //         console.log("변경됨")
+        //         this.$nextTick(() => {
+        //             if (this.workspace) {
+        //                 Blockly.svgResize(this.workspace);
+        //             }
+        //         });
+        //     }
+        // );
     },
 }
 </script>
