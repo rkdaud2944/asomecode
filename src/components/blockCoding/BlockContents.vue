@@ -1,6 +1,7 @@
-<template>BOT
+<template>
 <div class="pre-setting">
-    <!-- 교구 선택 버튼, 에이스에디터 여닫이버튼 -->
+
+     <!-- 교구 선택 버튼, 에이스에디터 여닫이버튼 -->
     <div>
         <!-- 교구선택버튼 -->
         <button class="b-button" :class="{ selected: selectedField === 'BOT' }" @click="showAndClearCategoriesByField('BOT')">
@@ -10,10 +11,10 @@
             <img class="img-button" :src="selectedField === 'KIT' ? asomekitIconClick : asomekitIcon"/> Asomekit
         </button>
         <button class="c-button" :class="{ selected: selectedField === 'CAR' }" @click="showAndClearCategoriesByField('CAR')">
-            <img class="img-button" :src="selectedField === 'CAR' ? asomecarIconClick : asomecarIcon"/> Asomecar
+            <img class="img-button" :src="selectedField === 'CAR' ? asomecarIconClick : asomecarIcon"  :style="{ height: '16px', width: '14px' }"/> Asomecar
         </button>
         <!-- 아래 코드 주석해도 영향 없음. options 변수 없음. 확인 바람 -->
-        <!-- <BlocklyComponent id="blockly2" :options="options" ref="foo"></BlocklyComponent> -->
+        <BlocklyComponent id="blockly2" :options="options" ref="foo"></BlocklyComponent>
         <!-- 에이스에디터 버튼 -->
         <div id="code" class="cursor-pointer">
             <img :src="sourceView" @click="toggleCodeVisibility" />
@@ -21,18 +22,24 @@
     </div>
     <div class="container">
         <!-- Blockly -->
-        <div ref="blocklyDiv" class="blockly-container" :style="{flex: flexValue1}">
-        </div>
+        <div
+            class="blockly-container"
+            ref="blocklyDiv"
+            :style="{ width: isCodeVisible ? '70%' : '100%' }"
+        ></div>
         <!-- 에이스 에디터 -->
-        <div class="code-container" :style="{flex: flexValue2}"> 
+        <div
+            class="code-container"
+            :style="{ width: isCodeVisible ? '30%' : '0%' }"
+        >
             <VAceEditor
+                v-if="isCodeVisible"
                 class="code-preview"
                 lang="python"
-                v-model:value="code" 
+                v-model:value="code"
                 :options="editorOptions"
-                :style="{height: '100%', width: '90%'}">
-            </VAceEditor>
-        </div>
+                :style="{ height: '100%', width: '100%' }"/>
+      </div>
     </div>
 </div>
 
@@ -43,8 +50,8 @@
 
 // 각종 선언코드
 import {  mapMutations  } from 'vuex';
-// import { useStore } from 'vuex';
-// import {  watch  } from "vue";
+import { useStore } from 'vuex';
+import {  watch  } from "vue";
 import "../../blocks/stocks";
 // import { javascriptGenerator } from "blockly/javascript";
 import images from "@/assets/images";
@@ -94,18 +101,13 @@ export default {
             walk: images.walk,
             walkClick: images.walkClick,
             
-            // 에이스 에디터 기본값 : null
+            // 블록배치 기본값 : null
             workspace: null,
             // 교구 선택 버튼 기본값 : BOT
             selectedField: 'BOT',
             // 에이스 에디터 초기값
-            isCodeVisible: true,
-
-            
+            isCodeVisible: false,
             code: null,
-            // isCodeVisible: true,
-            flexValue1: 3,
-            flexValue2: 0,
             editorOptions: {
                 enableBasicAutocompletion: true,
                 enableLiveAutocompletion: true
@@ -250,20 +252,20 @@ export default {
                 height:"100%"
             });
             // 에이스에디터 변경 감지용 코드
-            this.workspace.addChangeListener(() => {
-                this.handleWorkspaceChange(this.workspace);
-                this.showCode(); 
-            });
         });
         
         this.$nextTick(() => {
             this.insertIcon();
         });
-
     },
     
     mounted() {
         // this.toggleCodeVisibility();
+        // window.addEventListener('resize', function () {
+        //     console.log("resize")
+            
+        //     // window.dispatchEvent(new Event('resize'));
+        // });
     },
     
     beforeUnmount() {
@@ -342,8 +344,6 @@ export default {
                             if (selectedElement) {
                                 const imgElement = selectedElement.querySelector('img');
                                 const spanElement = selectedElement.querySelector('.blocklyTreeRowContentContainer .blocklyTreeLabel');
-
-                                console.log("atd : "+spanElement.textContent)
                                 if (imgElement) {
                                     const clickName = spanElement.textContent.toLowerCase() + "Click";
                                     imgElement.src = this[clickName];
@@ -359,47 +359,33 @@ export default {
                 observer.observe(toolboxContents, { attributes: true, subtree: true });
             }
         },
-
-        
         toggleCodeVisibility() {
-            console.log("test");
-            this.flexValue1 = this.flexValue1 === 3 ? 2 : 3;
-            this.flexValue2 = this.flexValue2 === 0 ? 1 : 0;
             this.isCodeVisible = !this.isCodeVisible;
+            const codeContainer = document.querySelector(".code-container");
+            if (codeContainer) {
+                if (this.isCodeVisible) {
+                    codeContainer.classList.add("show"); // 코드 창을 보이도록 클래스를 추가합니다.
+                } else {
+                    codeContainer.classList.remove("show"); // 코드 창을 숨기도록 클래스를 제거합니다.
+                }
+            }
             
-            Blockly.svgResize(this.workspace)
-
-            // this.$nextTick(() => {
-            //     console.log(11)
-            //     if (this.workspace) {
-            //         // Blockly.svgResize(this.workspace);
-            //         Blockly.svgResize(this.workspace)
-            //     }
-            // });
+            this.$nextTick(() => {
+                setTimeout(() => {
+                    window.dispatchEvent(new Event('resize'));
+                }, 0);
+            });
         },
-
-
     },
     
     setup() {
-        // const store = useStore();
+        const store = useStore();
 
-        // watch(() => this.code, (newCode) => {
-        //     if (this.isCodeVisible) {
-        //         store.commit('setCode', newCode);
-        //     }
-        // });
-        // watch(
-        //     () => [this.isCodeVisible],
-        //     () => {
-        //         console.log("변경됨")
-        //         this.$nextTick(() => {
-        //             if (this.workspace) {
-        //                 Blockly.svgResize(this.workspace);
-        //             }
-        //         });
-        //     }
-        // );
+        watch(() => this.code, (newCode) => {
+            if (this.isCodeVisible) {
+                store.commit('setCode', newCode);
+            }
+        });
     },
 }
 </script>

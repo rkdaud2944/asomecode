@@ -38,7 +38,6 @@
 
 .cursor-pointer{
     width: 43px;
-    margin-right:2.5%;
     height: 33px;
     float: right; 
 }
@@ -138,25 +137,32 @@ button.selected {
 
 .blockly-container{
     height: 600px;
-    transition: flex 0.3s ease;
+    width: auto;
 }
+
 .code-container {
-    height: 600px;
-    transition: flex 0.3s ease;
+    transform: translateX(100%);
 }
-/* .code-container[style*="display: none"] {
-    flex: 0;
-} */
+  
+.code-container.show {
+    transform: translateX(0); 
+    transition: width 0.5s, transform 0.5s;
+}
+
 .blocklyNonSelectable {
     background-color: #ffffff !important;
     border-right: 1px solid #DCDCDC;
 }
 /* container 표시용 */
 
-.injectionDiv{
+/* .injectionDiv{
     display: flex;
 }
 
 .blocklySvg{
     flex:1;
-}
+} */
+/* .container {
+    width: 100%;
+    height: 100%;
+  } */
