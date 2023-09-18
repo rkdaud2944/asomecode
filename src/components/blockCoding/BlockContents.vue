@@ -22,16 +22,9 @@
     </div>
     <div class="container">
         <!-- Blockly -->
-        <div
-            class="blockly-container"
-            ref="blocklyDiv"
-            :style="{ width: isCodeVisible ? '70%' : '100%' }"
-        ></div>
+        <div class="blockly-container" ref="blocklyDiv" :style="{ width: isCodeVisible ? '70%' : '100%' }"></div>
         <!-- 에이스 에디터 -->
-        <div
-            class="code-container"
-            :style="{ width: isCodeVisible ? '30%' : '0%' }"
-        >
+        <div class="code-container" :style="{ width: isCodeVisible ? '30%' : '0%' }">
             <VAceEditor
                 v-if="isCodeVisible"
                 class="code-preview"
@@ -53,7 +46,7 @@ import {  mapMutations  } from 'vuex';
 import { useStore } from 'vuex';
 import {  watch  } from "vue";
 import "../../blocks/stocks";
-// import { javascriptGenerator } from "blockly/javascript";
+import { javascriptGenerator } from "blockly/javascript";
 import images from "@/assets/images";
 import Blockly from "blockly";
 import { BotToolbox } from "@/blocks/B_BlockContents";
@@ -251,7 +244,13 @@ export default {
                 width:"100%",
                 height:"100%"
             });
+
+            // 에이스 에디터 코드 초기화
+            this.workspace.addChangeListener(this.handleWorkspaceChange);
+
             // 에이스에디터 변경 감지용 코드
+            this.updateAceEditorCode();
+
         });
         
         this.$nextTick(() => {
@@ -279,8 +278,16 @@ export default {
             setCode :'setCode',
         }),
         handleWorkspaceChange() {
-
+            this.updateAceEditorCode();
         },
+
+        updateAceEditorCode() {
+        // 워크스페이스에서 코드 추출
+        const code = javascriptGenerator.workspaceToCode(this.workspace);
+
+        // Ace Editor에 코드를 넣기
+        this.code = code;
+    },
         // 교구 선택 버튼들
         getToolboxByField(field) {
             switch (field) {
