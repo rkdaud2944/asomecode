@@ -43,8 +43,8 @@
 
 // 각종 선언코드
 import {  mapMutations  } from 'vuex';
-import { useStore } from 'vuex';
-import {  watch  } from "vue";
+// import { useStore } from 'vuex';
+// import {  watch  } from "vue";
 import "../../blocks/stocks";
 import { javascriptGenerator } from "blockly/javascript";
 import images from "@/assets/images";
@@ -57,6 +57,13 @@ import 'ace-builds/src-noconflict/mode-python';
 
 
 export default {
+    watch: {
+        // 에이스 에디터의 내용(code)을 감시
+        code(newCode) {
+            // 에이스 에디터의 내용이 변경될 때마다 Vuex 스토어의 code 상태를 업데이트
+            this.setCode(newCode);
+        },
+    },
     components: {
         VAceEditor
     },
@@ -287,6 +294,7 @@ export default {
 
         // Ace Editor에 코드를 넣기
         this.code = code;
+        this.setCode(code);
     },
         // 교구 선택 버튼들
         getToolboxByField(field) {
@@ -385,15 +393,7 @@ export default {
         },
     },
     
-    setup() {
-        const store = useStore();
-
-        watch(() => this.code, (newCode) => {
-            if (this.isCodeVisible) {
-                store.commit('setCode', newCode);
-            }
-        });
-    },
+   
 }
 </script>
 
