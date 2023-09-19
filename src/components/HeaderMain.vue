@@ -11,7 +11,7 @@
                     <p class="ui-left-font" id="fs-four">연결하기</p>
                 </li>
                 <!-- <li class="ui-left-bt" @click="goTo('/')"> -->
-                <li class="ui-left-bt" @click="playAudio('src/assets/sound/hi_asomebot.wav')">
+                <li class="ui-left-bt" @click="audioWrite('audioTemp3333','src/assets/sound/wait.wav')">
                     <img :src="home"  class="ui-img"/>
                     <p class="ui-left-font" id="fs-one">홈</p>
                 </li>
