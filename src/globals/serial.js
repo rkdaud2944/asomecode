@@ -1,5 +1,6 @@
 import { SerialPort, ReadlineParser } from "serialport";
 import eventbus from "@/globals/eventbus";
+import speakerManager from "@/globals/speaker-manager";
 import { Notify } from 'quasar'
 
 eventbus.on("onSerialReceived", (data) => {
@@ -9,6 +10,7 @@ eventbus.on("onSerialReceived", (data) => {
 
 let serialUnit = null;
 let boardType = "Zet";
+const fs = require('fs');
 
 class SerialUnit {
     async open(portName) {
@@ -119,9 +121,7 @@ const seiral = {
 
         console.log("연결 완료")
     },
-
-
-
+    
     disconnect() {
         if (serialUnit == null) return;
 
@@ -190,7 +190,15 @@ const seiral = {
             textColor: "white",
             message: msg,
         });
-    }
+    },
+
+    audioWrite(filename, path) {
+        fs.readFile(path, (err, data) => {
+            if (err) throw err;
+            data = data.slice(44);
+            speakerManager.save(filename,data.toString('base64'));
+        }); 
+    },
 }
 
 export default seiral;
