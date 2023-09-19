@@ -153,6 +153,26 @@ button.selected {
     background-color: #ffffff !important;
     border-right: 1px solid #DCDCDC;
 }
+
+.blocklyFlyoutBackground {
+    fill: #f0f0f0 !important;
+    /* width: 300px !important; */
+    /* display: flex; */
+    /* position: absolute; */
+}
+.blocklyFlyout {
+    /* width: 300px !important; */
+    /* transform: translate(71px, 0px) scale(1) !important; */
+}
+.blocklyFlyout .blocklyBlockCanvas {
+    transform: scale(1);
+    position: relative;
+}
+
+/* .blocklyFlyoutBackground {   
+    width: 500px !important;
+} */
+
 /* container 표시용 */
 
 /* .injectionDiv{

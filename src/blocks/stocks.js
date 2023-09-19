@@ -2,7 +2,6 @@ import * as Blockly from "blockly/core";
 import { javascriptGenerator } from "blockly/javascript";
 
 // BOT BASIC CODE
-
 Blockly.Blocks["basic_ready"] = {
   init: function () {  
     this.appendDummyInput()

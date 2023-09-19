@@ -6,14 +6,16 @@ export { BotToolbox };
 
     const BotToolbox  = {
         "kind": "categoryToolbox",
+
         "contents": [
             {
                 "kind": "category",
                 "name": "BASIC",
                 "field" : "BOT",
                 "colour": "14A2FF",
+                "autoClose": "true",
                 "contents": [
-                    { "kind": "block", "gap": "8", "type": "basic_ready", "name" : "ready"},
+                    { "kind": "block", "gap": "8", "type": "basic_ready"},
                     { "kind": "block", "gap": "8", "type": "basic_attention" },
                     { "kind": "block", "gap": "8", "type": "basic_motor_angle" },
                 ],
@@ -21,7 +23,7 @@ export { BotToolbox };
             {
                 "kind": "category",
                 "name": "WALK",
-                "field" : "BOT",
+                "field" : "BOT",    
                 "colour": "FF9A00",
                 "contents": [
                     { "kind": "block", "gap": "8", "type": "walk_step_forward" },

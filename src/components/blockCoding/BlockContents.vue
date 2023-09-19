@@ -241,7 +241,7 @@ export default {
                     snap: true},
                 zoom:
                     {controls: true,
-                    wheel: true,
+                    wheel: true, 
                     startScale: 1.0,
                     maxScale: 3,
                     minScale: 0.3,
@@ -249,14 +249,24 @@ export default {
                     pinch: true},
                 trashcan: true,
                 width:"100%",
-                height:"100%"
+                height:"100%",
             });
-
+            // if (this.workspace && this.workspace.toolbox_) {
+            //     this.workspace.toolbox_.flyout_.width_ = 200;
+            //     this.workspace.toolbox_.flyout_.updateWidth();
+            // }
             // 에이스 에디터 코드 초기화
             this.workspace.addChangeListener(this.handleWorkspaceChange);
+            // this.workspace.addChangeListener(this.flyoutWidthFix);
+            // this.workspace.toolbox_.flyout_.width_ = 200;
 
             // 에이스에디터 변경 감지용 코드
             this.updateAceEditorCode();
+            Blockly.Flyout.prototype.getFlyoutScale = function() {
+                // 반환값은 예시로, 실제 scale 값을 반환하도록 코드를 수정해야 합니다.
+                return 1.0; 
+            };
+            
 
         });
         
@@ -266,17 +276,13 @@ export default {
     },
     
     mounted() {
-        // this.toggleCodeVisibility();
-        // window.addEventListener('resize', function () {
-        //     console.log("resize")
-            
-        //     // window.dispatchEvent(new Event('resize'));
-        // });
+        
     },
     
     beforeUnmount() {
         // 에이스에디터 코드 뷰엑스로 넘겨줌
         this.SetCode(null)
+        
     },
 
     methods: {
@@ -286,6 +292,9 @@ export default {
         }),
         handleWorkspaceChange() {
             this.updateAceEditorCode();
+            this.workspace.toolbox_.flyout_.autoClose = false;
+            // this.workspace.toolbox_.flyout_.width_ = 50;
+            // this.workspace.toolbox_.flyout_.updateWidth();
         },
 
         updateAceEditorCode() {
@@ -311,14 +320,19 @@ export default {
         },
         // 교구 선택 버튼을 눌렀을 때 데이터 초기화 후 누른버튼 카테고리 불러온다는 내용
         showAndClearCategoriesByField(field) {
+            // flyout 초기화
+            this.workspace.toolbox_.clearSelection();
+
             this.workspace.clear();
             this.selectedField = field;
             const toolbox = this.getToolboxByField(field);
             this.workspace.updateToolbox(toolbox);
-            console.log("KitToolbox" + KitToolbox)
-            console.log("CarToolbox" + CarToolbox)
-            this.insertIcon()
+
+            console.log("KitToolbox" + KitToolbox);
+            console.log("CarToolbox" + CarToolbox);
+            this.insertIcon();
         },
+
 
         insertIcon() {
             const toolboxes = document.querySelectorAll(".blocklyTreeLabel");
@@ -372,6 +386,8 @@ export default {
                 });
 
                 observer.observe(toolboxContents, { attributes: true, subtree: true });
+                
+                // this.flyoutWidthFix()
             }
         },
         toggleCodeVisibility() {
@@ -391,6 +407,47 @@ export default {
                 }, 0);
             });
         },
+        flyoutWidthFix(){
+            console.log("실행은됩니다")
+            const elements = document.querySelectorAll('.blocklyFlyout');
+            console.log(elements.length)
+            const secondElement = elements[1];
+
+            let initialDValue = secondElement.getAttribute('width'); // 초기값 저장
+
+            if (secondElement) {
+                console.log("유효요소")
+                const observer = new MutationObserver(mutations => {
+                    mutations.forEach(mutation => {
+                        if (mutation.attributeName === 'width') {
+                            let currentDValue = secondElement.getAttribute('width'); // 현재값 저장
+                            if (initialDValue !== currentDValue) { // 초기값과 현재값 비교
+                                observer.disconnect();
+                                this.workspace.toolbox_.flyout_.autoClose = false;
+                                // this.workspace.toolbox_.flyout_.tabWidth_  = 100;
+                                // this.workspace.toolbox_.flyout_.getFlyoutScale().
+                                Blockly.Flyout.prototype.getFlyoutScale = function() {
+                                    // 반환값은 예시로, 실제 scale 값을 반환하도록 코드를 수정해야 합니다.
+                                    return 1.0; 
+                                };
+                                console.log("aaaa : "+this.workspace.toolbox_.flyout_.getFlyoutScale());                       
+                                observer.observe(secondElement, config);
+
+                                initialDValue = currentDValue; // 초기값 업데이트
+                            }
+                        }
+                    });
+                });
+
+                const config = {
+                    attributes: true,
+                    attributeFilter: ['width']
+                };
+
+                observer.observe(secondElement, config);
+            }
+        }
+
     },
     
    
