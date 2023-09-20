@@ -71,7 +71,7 @@ Blockly.Blocks["walk_step_forward"] = {
   init: function () {
     
     this.appendDummyInput()
-      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/clarify.png', 23, 23, '*'))
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomebot/move_forward.png', 23, 23, '*'))
       .appendField(new Blockly.FieldNumber(1))
       .appendField("걸음 앞으로 걷기")
     this.setPreviousStatement(true, null);
@@ -93,7 +93,7 @@ Blockly.Blocks["walk_step_back"] = {
   init: function () {
     
     this.appendDummyInput()
-      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/clarify.png', 23, 23, '*'))
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/move_backward.png', 23, 23, '*'))
       .appendField(new Blockly.FieldNumber(1))
       .appendField("걸음 뒤로 걷기")
     this.setPreviousStatement(true, null);
@@ -114,7 +114,7 @@ Blockly.Blocks["walk_step_left"] = {
   init: function () {
     
     this.appendDummyInput()
-      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/clarify.png', 23, 23, '*'))
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/turn_left.png', 23, 23, '*'))
       .appendField(new Blockly.FieldNumber(1))
       .appendField("걸음 왼쪽으로 회전")
     this.setPreviousStatement(true, null);
@@ -142,7 +142,7 @@ javascriptGenerator["walk_step_left"] = function (block) {
 Blockly.Blocks["walk_step_right"] = {
   init: function () {
     this.appendDummyInput()
-      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/clarify.png', 23, 23, '*'))
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/turn_right.png', 23, 23, '*'))
       .appendField(new Blockly.FieldNumber(1))
       .appendField("걸음 오른쪽으로 회전")
     this.setPreviousStatement(true, null);
@@ -170,7 +170,7 @@ javascriptGenerator["walk_step_right"] = function (block) {
 Blockly.Blocks["walk_motor_angle"] = {
   init: function () {
     this.appendDummyInput()
-      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/clarify.png', 23, 23, '*'))
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/turn_right.png', 23, 23, '*'))
       .appendField(new Blockly.FieldNumber(1))
       .appendField("번 모터")
     this.appendDummyInput()
@@ -204,7 +204,7 @@ javascriptGenerator["walk_motor_angle"] = function (block) {
 Blockly.Blocks["walk_all_motor_angle"] = {
   init: function () {
     this.appendDummyInput()
-      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/clarify.png', 23, 23, '*'))
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/turn_right.png', 23, 23, '*'))
       .appendField("각 모터의 각도")
     this.appendDummyInput()
       .appendField(new Blockly.FieldNumber(90))
@@ -242,7 +242,7 @@ javascriptGenerator["walk_all_motor_angle"] = function (block) {
 Blockly.Blocks["walk_forward"] = {
   init: function () {
     this.appendDummyInput()
-      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/clarify.png', 23, 23, '*'))
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomebot/move_forward.png', 23, 23, '*'))
       .appendField("앞으로 걷기")
     this.appendDummyInput()
       .appendField("속도")
@@ -272,7 +272,7 @@ javascriptGenerator["walk_forward"] = function (block) {
 Blockly.Blocks["walk_back"] = {
   init: function () {
     this.appendDummyInput()
-      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/clarify.png', 23, 23, '*'))
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/move_backward.png', 23, 23, '*'))
       .appendField("뒤로 걷기")
     this.appendDummyInput()
       .appendField("속도")
@@ -302,7 +302,7 @@ javascriptGenerator["walk_back"] = function (block) {
 Blockly.Blocks["walk_left"] = {
   init: function () {
     this.appendDummyInput()
-      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/clarify.png', 23, 23, '*'))
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/turn_left.png', 23, 23, '*'))
       .appendField("왼쪽으로 회전")
     this.appendDummyInput()
       .appendField("속도")
@@ -331,7 +331,7 @@ javascriptGenerator["walk_left"] = function (block) {
 Blockly.Blocks["walk_right"] = {
   init: function () {
     this.appendDummyInput()
-      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/clarify.png', 23, 23, '*'))
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/turn_right.png', 23, 23, '*'))
       .appendField("오른쪽으로 회전")
     this.appendDummyInput()
       .appendField("속도")
