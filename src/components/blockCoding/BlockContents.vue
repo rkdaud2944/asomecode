@@ -43,8 +43,6 @@
 
 // 각종 선언코드
 import {  mapMutations  } from 'vuex';
-// import { useStore } from 'vuex';
-// import {  watch  } from "vue";
 import "../../blocks/stocks";
 import { javascriptGenerator } from "blockly/javascript";
 import images from "@/assets/images";
@@ -100,12 +98,8 @@ export default {
             soundClick: images.soundClick,
             walk: images.walk,
             walkClick: images.walkClick,
-            
-            // 블록배치 기본값 : null
             workspace: null,
-            // 교구 선택 버튼 기본값 : BOT
             selectedField: 'BOT',
-            // 에이스 에디터 초기값
             isCodeVisible: false,
             code: null,
             editorOptions: {
@@ -251,23 +245,14 @@ export default {
                 width:"100%",
                 height:"100%",
             });
-            // if (this.workspace && this.workspace.toolbox_) {
-            //     this.workspace.toolbox_.flyout_.width_ = 200;
-            //     this.workspace.toolbox_.flyout_.updateWidth();
-            // }
             // 에이스 에디터 코드 초기화
             this.workspace.addChangeListener(this.handleWorkspaceChange);
-            // this.workspace.addChangeListener(this.flyoutWidthFix);
-            // this.workspace.toolbox_.flyout_.width_ = 200;
-
             // 에이스에디터 변경 감지용 코드
             this.updateAceEditorCode();
+            // zoom 시 카테고리(flyout) 영역 영향 안받게하는 코드
             Blockly.Flyout.prototype.getFlyoutScale = function() {
-                // 반환값은 예시로, 실제 scale 값을 반환하도록 코드를 수정해야 합니다.
                 return 1.0; 
             };
-            
-
         });
         
         this.$nextTick(() => {
@@ -292,19 +277,29 @@ export default {
         }),
         handleWorkspaceChange() {
             this.updateAceEditorCode();
+
+            // 카테고리(flyout) 선택 후 다른 곳 클릭해도 안꺼지는 코드
             this.workspace.toolbox_.flyout_.autoClose = false;
-            // this.workspace.toolbox_.flyout_.width_ = 50;
-            // this.workspace.toolbox_.flyout_.updateWidth();
         },
 
+        // 에이스 에디터에 그려지게하는 코드 (준비블록에 붙여야만 표시하는 코드 포함)
         updateAceEditorCode() {
-        // 워크스페이스에서 코드 추출
-        const code = javascriptGenerator.workspaceToCode(this.workspace);
+            const targetBlockType = "basic_ready";
+            // Blockly 워크스페이스에서 특정 블록을 찾습니다.
+            const targetBlock = this.workspace.getAllBlocks().find(block => block.type === targetBlockType);
+ 
+            if (targetBlock) {
+                const codeForTargetBlock = javascriptGenerator.blockToCode(targetBlock);
+                // Ace Editor와 뮤테이션에 코드를 넣기
+                this.code = codeForTargetBlock;
+                this.setCode(codeForTargetBlock);
+            } else {
+                this.code = "";
+                this.setCode("");
+            }
 
-        // Ace Editor에 코드를 넣기
-        this.code = code;
-        this.setCode(code);
-    },
+        },
+
         // 교구 선택 버튼들
         getToolboxByField(field) {
             switch (field) {
@@ -318,6 +313,7 @@ export default {
                     return {};
             }
         },
+        
         // 교구 선택 버튼을 눌렀을 때 데이터 초기화 후 누른버튼 카테고리 불러온다는 내용
         showAndClearCategoriesByField(field) {
             // flyout 초기화
@@ -333,7 +329,7 @@ export default {
             this.insertIcon();
         },
 
-
+        //카테고리에 이미지 넣는 부분
         insertIcon() {
             const toolboxes = document.querySelectorAll(".blocklyTreeLabel");
             let prevSelectedElement = null;
@@ -367,7 +363,6 @@ export default {
                                     imgElement.src = this[clickName];
                                 }
                             }
-
                             // 현재 선택된 요소를 찾음
                             const selectedElement = toolboxContents.querySelector('.blocklyTreeSelected');
                             if (selectedElement) {
@@ -378,26 +373,23 @@ export default {
                                     imgElement.src = this[clickName];
                                 }
                             }
-                            
                             // 현재 선택된 요소를 변수에 저장 (이것은 위의 이전에 선택된 요소에서 활용)
                             prevSelectedElement = selectedElement;
                         }
                     }
                 });
-
                 observer.observe(toolboxContents, { attributes: true, subtree: true });
-                
-                // this.flyoutWidthFix()
             }
         },
+        
         toggleCodeVisibility() {
             this.isCodeVisible = !this.isCodeVisible;
             const codeContainer = document.querySelector(".code-container");
             if (codeContainer) {
                 if (this.isCodeVisible) {
-                    codeContainer.classList.add("show"); // 코드 창을 보이도록 클래스를 추가합니다.
+                    codeContainer.classList.add("show");
                 } else {
-                    codeContainer.classList.remove("show"); // 코드 창을 숨기도록 클래스를 제거합니다.
+                    codeContainer.classList.remove("show");
                 }
             }
             
@@ -407,50 +399,8 @@ export default {
                 }, 0);
             });
         },
-        flyoutWidthFix(){
-            console.log("실행은됩니다")
-            const elements = document.querySelectorAll('.blocklyFlyout');
-            console.log(elements.length)
-            const secondElement = elements[1];
-
-            let initialDValue = secondElement.getAttribute('width'); // 초기값 저장
-
-            if (secondElement) {
-                console.log("유효요소")
-                const observer = new MutationObserver(mutations => {
-                    mutations.forEach(mutation => {
-                        if (mutation.attributeName === 'width') {
-                            let currentDValue = secondElement.getAttribute('width'); // 현재값 저장
-                            if (initialDValue !== currentDValue) { // 초기값과 현재값 비교
-                                observer.disconnect();
-                                this.workspace.toolbox_.flyout_.autoClose = false;
-                                // this.workspace.toolbox_.flyout_.tabWidth_  = 100;
-                                // this.workspace.toolbox_.flyout_.getFlyoutScale().
-                                Blockly.Flyout.prototype.getFlyoutScale = function() {
-                                    // 반환값은 예시로, 실제 scale 값을 반환하도록 코드를 수정해야 합니다.
-                                    return 1.0; 
-                                };
-                                console.log("aaaa : "+this.workspace.toolbox_.flyout_.getFlyoutScale());                       
-                                observer.observe(secondElement, config);
-
-                                initialDValue = currentDValue; // 초기값 업데이트
-                            }
-                        }
-                    });
-                });
-
-                const config = {
-                    attributes: true,
-                    attributeFilter: ['width']
-                };
-
-                observer.observe(secondElement, config);
-            }
-        }
 
     },
-    
-   
 }
 </script>
 
