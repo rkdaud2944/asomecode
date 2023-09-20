@@ -31,9 +31,14 @@ export default {
         },
 
         openRouterPath(path) {
-            let route = router.resolve({ path: path });
-            window.open(route.href);
-        },
+            if (this.boWindow && !this.boWindow.closed) {
+              window.alert('창이 이미 열려 있습니다.');
+              this.boWindow.focus();
+            } else {
+              let route = this.$router.resolve({ path: path });
+              this.boWindow = window.open(route.href);
+            }
+          },
 
         openUrl(name, url) {
             windows.open(name, url);

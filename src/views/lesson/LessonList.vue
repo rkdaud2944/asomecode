@@ -1,7 +1,7 @@
 <template>
     <div class="header nav-padding">
-        <a href="/">
-            <img src="/images/common/logom.png" class="subject-logo"/>
+        <a @click="goTo('/')">
+            <img :src="logom" class="subject-logo"/>
         </a>
     </div>
 
@@ -10,7 +10,8 @@
             <h4 class="subject-in-title">{{ subject.title }}</h4>
             <br>
             <h4 class="subject-in-title_eng">{{ subject.subTitle }}</h4>
-            <img src="../../../public/images/common/asomebot.png" class="asomebot">
+            <!-- <img src="../../../public/images/common/asomebot.png" class="asomebot"> -->
+            <img :src="asomebot" class="asomebot"/>
         </div>
 
         <div class="subject-size subject-margin">
@@ -31,6 +32,7 @@
 </template>
 
 <script>
+import images from "@/assets/images";
 import VueBase from '@/mixin/vue-base';
 import apiSubject from "@/api/subject";
 
@@ -40,6 +42,9 @@ export default {
     data() {
         return {
             subject: {},
+
+            logom: images.logom,
+            asomebot: images.asomebot
         }
     },
 

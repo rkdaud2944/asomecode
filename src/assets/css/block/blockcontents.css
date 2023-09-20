@@ -1,0 +1,164 @@
+/* 설명은 코드 하단에 */
+
+.pre-setting{
+    margin: 2%;  
+}
+/* 페이지 전체 공통마진 */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+/* 에이스 에디터-폰트 선언 */
+
+.ace_editor {
+    font-family: 'Roboto Mono', monospace !important;
+    font-size: 14px !important;
+}
+/* 에이스 에디터-폰트 */
+
+.container {
+    display: flex;
+    align-items: stretch;
+}
+/* 에이스에디터 고정용 */
+
+.code-preview {
+  width: 100%; 
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-top: 0;
+  white-space: pre-wrap;
+  font-family: monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-x: auto; 
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+/* 에이스 에디터 내부 스타일 */
+
+.cursor-pointer{
+    width: 43px;
+    height: 33px;
+    float: right; 
+}
+/* 에이스 에디터 여닫이 버튼 */
+
+.code-preview {
+    position: relative;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    padding: 10px;
+    white-space: pre-wrap;
+    font-family: monospace;
+    font-size: 14px;
+    margin-left: 5%;
+}
+/* 코드창,에이스에디터 간격 */
+
+.blocklyToolboxDiv .blocklyTreeRow {
+    width: 70px;
+    height: 70px;
+    padding: 0px !important;
+    border-left: 1px solid #D6E9F4 !important;
+    border-right: 1px solid #D6E9F4 !important;
+    border-bottom: 1px solid #D6E9F4 !important;
+    background-color: #F1FAFF;
+    margin: 0;
+}
+
+.blocklyTreeRow:first-child{
+    border-top: 1px solid #D6E9F4 !important;
+
+}
+
+/* 카테고리 박스 안에 있는 blockly icon 제거 */
+.blocklyTreeIcon{
+    display: none !important;
+}
+
+/* toolbox 콘텐츠 중앙정렬을 위함 */
+.blocklyTreeRowContentContainer{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 카테고리-박스크기 */
+
+.blocklyToolboxDiv{
+    padding: 0px !important;
+}
+/* 카테고리-상단패딩뜸 */
+
+.blocklyTreeLabel {
+    color: black;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    font-size: 12px;
+}
+/* 카테고리-폰트 */
+
+button {
+    transition: background-color 0.1s;
+    height: 35px;
+    width: 110px;
+    border: 1px solid #44ADF3 ;
+    background-color: #F1FAFF;
+    margin-bottom: 7px;
+    color: #95C8EA;
+    cursor: pointer;
+}
+/* 교구버튼 디자인-평소 */
+
+button.selected {
+    background-color: #FCD102;
+    color: white;
+    border: 1px solid #9E8302 ;
+    text-shadow: 3px 3px 15px gray;
+}
+/* 교구버튼 디자인-눌림 */
+
+.b-button {
+    border-top-left-radius: 10px;
+}
+.c-button {
+    border-top-right-radius: 10px;
+}
+/* 교구버튼 디자인-상단 둥글게 */
+
+.img-button {
+    margin-right: 3%;
+}
+/* 교구버튼 디자인-이미지,폰트 간격 */
+
+.blockly-container{
+    height: 600px;
+    width: auto;
+}
+
+.code-container {
+    transform: translateX(100%);
+}
+  
+.code-container.show {
+    transform: translateX(0); 
+    transition: width 0.5s, transform 0.5s;
+}
+
+.blocklyNonSelectable {
+    background-color: #ffffff !important;
+    border-right: 1px solid #DCDCDC;
+}
+
+.blocklyFlyoutBackground {
+    fill: #f0f0f0 !important;
+}
+
+.blocklyFlyout .blocklyBlockCanvas {
+    transform: scale(1);
+    position: relative;
+}

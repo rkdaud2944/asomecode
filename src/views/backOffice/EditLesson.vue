@@ -17,7 +17,7 @@
                 <textarea ref="inputTextarea" class="inputText" :value="lesson.content" @input="update"></textarea>
             </q-card>
 
-            <div class="markdown_output" v-html="output"></div>
+            <div class="markdown_output edit_mark" v-html="output"></div>
         </div>
 
         <q-dialog v-model="imageUploadDialog">
@@ -281,7 +281,7 @@ export default {
     box-sizing: border-box;
 }
 
-.markdown_output {
+.edit_mark {
     overflow: auto;
     width: 50%;
     height: 100%;

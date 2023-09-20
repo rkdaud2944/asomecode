@@ -1,0 +1,22 @@
+/* 페이지 고유값 */
+
+.img {
+    display: block;
+    max-width: 449px;
+    height: 200px;
+}
+
+body {
+    background-color: white;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* 페이지 고유 스타일 */
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}

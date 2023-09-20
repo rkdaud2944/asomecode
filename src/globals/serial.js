@@ -12,6 +12,7 @@ let boardType = "Zet";
 
 class SerialUnit {
     async open(portName) {
+
         this.port = new SerialPort({
             path: portName,
             baudRate: 115200,
@@ -35,7 +36,7 @@ class SerialUnit {
         try {
             await this.port.open();            
             this.onOpened();
-            this.writeLn("import os; os.uname()");
+            // this.writeLn("import os; os.uname()");
         } catch (error) {
             console.log(error);
             this.onError("어썸보드에 연결할 수가 없습니다.");
@@ -43,6 +44,7 @@ class SerialUnit {
         }
     }
 
+    
     close() {
         if (!this.port) return;
 
@@ -114,7 +116,11 @@ const seiral = {
         serialUnit.onReceived = (msg) => eventbus.emit("onSerialReceived", msg);
         serialUnit.onError = (error) => this.fireErrorEvent(error);
         serialUnit.open(asomeboard.path);
+
+        console.log("연결 완료")
     },
+
+
 
     disconnect() {
         if (serialUnit == null) return;

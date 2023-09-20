@@ -107,6 +107,10 @@
     position: fixed;
     top: 80px;
 }
+.backsidefixed{
+    position: fixed;
+    height: 100%;
+}
 .c9contents{
     width: 100%;
     height: auto;

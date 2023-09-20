@@ -109,7 +109,19 @@ const routes = [
                 props: true,
                 component: () => import('../views/backOffice/EditLesson.vue')
             },
+            {
+                path: '/backOffice/lesson/detail',
+                props: true,
+                component: () => import('../views/backOffice/backLessonDetail.vue')
+            },
         ]
+    },
+
+    
+    // Block
+    {
+        path: '/blockCoding',
+        component: () => import('../views/blockCoding/AsomeBlock.vue')
     },
 ]
 

@@ -1,11 +1,13 @@
 import eventbus from "@/globals/eventbus";
 import windows from "@/globals/windows";
+import serial from "@/globals/serial";
 
 eventbus.on("onSerialReceived", (data) => {
     if (!data) return;
 
-    console.log("jsControl", data);
+    // console.log("jsControl", data);
     if (data.startsWith("### System.Line.RunJS")) jsControl.run(data);
+    if (data.startsWith("### Sound Streaming")) jsControl.sound(data);
 });
 
 window.run_cmd = function (cmd) {
@@ -35,6 +37,25 @@ const jsControl = {
             console.log(error);            
         }
         windows.runJS("simulator", line);
+    },
+
+    sound(data) {
+        try {
+            data = data.split(":");
+            data = data[1].trim();
+            data = data.split(",");
+        } catch (error) {
+            console.log(error);
+            return;
+        }
+
+        try {
+            serial.readNextChunk(data[0],data[1],data[2],data[3]); 
+            // console.log(1)//
+            // serial.readNextChunk('test',0,1000);            
+        } catch (error) {
+            console.log(error);            
+        }
     },
 
 };
