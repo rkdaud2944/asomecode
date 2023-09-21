@@ -1,7 +1,7 @@
 <template>
     <div class="header nav-padding">
         <a @click="goTo('/')">
-            <img src="/images/common/logom.png" class="subject-logo"/>
+            <img :src="logom" class="subject-logo"/>
         </a>
     </div>
 

@@ -1,4 +1,17 @@
-
+.preview{
+    color: #1f487e;
+    font-weight: bold;
+    background-color: #c7d2ff;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #1f487e;
+}
+.subject-style{
+    padding-left: 30px;
+}
+.title-style{
+    padding-left: 20px;
+}
 .testColor{
     color: orange;
     font-weight: bold;

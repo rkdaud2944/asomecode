@@ -7,7 +7,7 @@
             <div class="col-3" v-for="subject in defaultSubjects" :key="subject.id">
                 <div class="q-px-md">{{ subject.title }}</div><br>
 
-                <q-virtual-scroll style="max-height: 300px;"
+                <q-virtual-scroll class="max-height--300px"
                     :items="lessons.filter(e => e.defaultSubjectId == subject.id)" separator v-slot="{ item, index }">
                     <q-item :key="index" dense>
                         <q-item-section>
@@ -41,16 +41,18 @@
                 <q-input filled v-model="writer" label="작성자" stack-label />
             </div>
             <div class="col q-pl-md">
-                <q-input filled v-model="password" label="비밀먼호" type="password" stack-label />
+                <q-input filled v-model="password" label="비밀번호" type="password" stack-label />
             </div>
         </div>
         <br>
 
         <q-input v-model="description" label="과목 설명" filled type="textarea" />
         <br>
-
-        <q-btn @click="createSubject" color="primary" label="생성" />
-        <q-btn class="q-mx-md" @click="clearForm" color="warning" label="초기화" />
+        <div class="text-align--right">
+            <q-btn @click="createSubject" color="primary" label="생성" />
+            <!-- <q-btn class="q-ml-md" @click="clearForm" color="warning" label="초기화" /> -->
+            <q-btn class="q-ml-md" @click="goBack()" color="green" label="뒤로가기"  />
+        </div>
     </div>
 </template>
 
@@ -149,3 +151,4 @@ export default {
     },
 };
 </script>
+<style scoped src="@/assets/css/component/common.css"/>

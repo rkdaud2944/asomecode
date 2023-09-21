@@ -1,31 +1,27 @@
 <!-- 페이징 처리가 된 그리트 콤포넌트 -->
 <template>
     <div>
-        <div>
-            <q-table :rows="rows" :columns="columns" :pagination="paginationOption"
-                row-key="name" hide-bottom>
-
-            <template v-slot:body="props">
-                <q-tr @click="onRowClick(props.row)" :props="props">
-                    <q-td v-for="col in props.cols" :key="col.name" :props="props">
-                        <div>{{ col.value }}</div>
-                    </q-td>
-                </q-tr>
-            </template>
+        <div class="width--90 text-align--center margin--auto padding--0">
+            <q-table class="GridPage-table-tr" :rows="rows" :columns="columns" :pagination="paginationOption" row-key="name" hide-bottom>
+                <template v-slot:body="props">
+                    <q-tr class="GridPage-table-td" @click="onRowClick(props.row)" :props="props">
+                        <q-td v-for="col in props.cols" :key="col.name" :props="props">
+                            <div>{{ col.value }}</div>
+                        </q-td>
+                    </q-tr>
+                </template>
             </q-table>
         </div>
-        <br />
-
-        <div>
-            <q-pagination @update:model-value="onPageChanged" v-model="page" :max="pageCount" :max-pages="10"
-                boundary-numbers color="purple"
-                direction-links
-                boundary-links
-                icon-first="skip_previous"
-                icon-last="skip_next"
-                icon-prev="fast_rewind"
-                icon-next="fast_forward"/>
-        </div>
+        <q-pagination
+            class="page-center"
+            @update:model-value="onPageChanged" v-model="page" :max="pageCount" :max-pages="10"
+            boundary-numbers color="blue"
+            direction-links
+            boundary-links
+            icon-first="skip_previous"
+            icon-last="skip_next"
+            icon-prev="fast_rewind"
+            icon-next="fast_forward"/>
     </div>
 </template>
 
@@ -50,6 +46,7 @@ export default {
     },
 
     computed: {
+
         params() {
             return {
                 page: this.page - 1,
@@ -113,3 +110,5 @@ export default {
     },
 };
 </script>
+<style scoped src="@/assets/css/component/common.css"/>
+<style src="@/assets/css/component/GridPage.css"/>

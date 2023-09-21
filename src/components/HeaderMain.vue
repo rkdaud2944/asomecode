@@ -10,8 +10,7 @@
                     <img :src="connectImg"  class="ui-img"/>
                     <p class="ui-left-font" id="fs-four">연결하기</p>
                 </li>
-                <!-- <li class="ui-left-bt" @click="goTo('/')"> -->
-                <li class="ui-left-bt" @click="audioWrite('audioTemp3333','src/assets/sound/wait.wav')">
+                <li class="ui-left-bt" @click="goTo('/')">
                     <img :src="home"  class="ui-img"/>
                     <p class="ui-left-font" id="fs-one">홈</p>
                 </li>
@@ -45,7 +44,10 @@
                 <li  @click="openRouterPath('/blockCoding')">
                     Block
                 </li>
-                <li @click="openRouterPath('/backOffice')">
+                <!-- <li @click="openUrl('metaverse', 'http://www.metalive.be:13300/')">
+                    M
+                </li> -->
+                <li @click="openRouterPath('/backOffice/lessons')">
                     BO
                 </li>
             </ul>
@@ -149,30 +151,26 @@ export default {
             this.$q.notify('어썸보드 연결이 끊어졌습니다.');
         });
         
-
-
         const menu=document.querySelector(".toggle");
         const subBar=document.querySelector(".menu>.sub");
 
         let subToggle=true
 
-        function slide_menu(){
-        if(subToggle){
-            subBar.style.display="block";
-            subBar.classList.remove("up");
-            subBar.classList.add("down");
-            subToggle=!subToggle;
-            
-        }else{
-            subBar.classList.remove("down");
-            subBar.classList.add("up");
-            subToggle=!subToggle;
-        }
-        console.log(subBar.classList);
-        }
-        menu.addEventListener("click",slide_menu);
-
-        
+function slide_menu(){
+  if(subToggle){
+    subBar.style.display="block";
+    subBar.classList.remove("up");
+    subBar.classList.add("down");
+    subToggle=!subToggle;
+    
+  }else{
+    subBar.classList.remove("down");
+    subBar.classList.add("up");
+    subToggle=!subToggle;
+  }
+  console.log(subBar.classList);
+}
+menu.addEventListener("click",slide_menu);
     },
 
     methods: {
@@ -193,7 +191,7 @@ export default {
 
         openEditor() {
             bridgeIn.openEditor('')
-        },
+        }
     }
 }
 </script>

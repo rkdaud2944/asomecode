@@ -1,7 +1,7 @@
 <template>
     <div class="header nav-padding">
         <a @click="goTo('/')">
-            <img src="/images/common/logom.png" class="logo" />
+            <img :src="logom" class="logo" />
         </a>
     </div>
 
@@ -28,8 +28,10 @@
 
 <script>
 /* eslint-disable */
+import VueBase from '@/mixin/vue-base';
 import markdown from "@/utils/markdown";
 import apiLesson from "@/api/lesson";
+import images from "@/assets/images"
 
 export default {
     mixins: [VueBase],
@@ -87,7 +89,7 @@ export default {
                         });
                     }
                 })
-                .catch(this.showError);
+            .catch(this.showError);
         },
     },
 };
