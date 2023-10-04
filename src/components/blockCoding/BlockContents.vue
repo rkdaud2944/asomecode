@@ -13,9 +13,8 @@
         <button class="c-button" :class="{ selected: selectedField === 'CAR' }" @click="showAndClearCategoriesByField('CAR')">
             <img class="img-button" :src="selectedField === 'CAR' ? asomecarIconClick : asomecarIcon"  :style="{ height: '16px', width: '14px' }"/> Asomecar
         </button>
-        <!-- 아래 코드 주석해도 영향 없음. options 변수 없음. 확인 바람 -->
         <BlocklyComponent id="blockly2" :options="options" ref="foo"></BlocklyComponent>
-        <!-- 에이스에디터 버튼 -->
+        <!-- 에이스에디터 띄우는 버튼 -->
         <div id="code" class="cursor-pointer">
             <img :src="sourceView" @click="toggleCodeVisibility" />
         </div>
@@ -31,7 +30,7 @@
                 lang="python"
                 v-model:value="code"
                 :options="editorOptions"
-                :style="{ height: '100%', width: '100%' }"/>
+                :style="{ height: '100%', width: '95%' }"/>
       </div>
     </div>
 </div>
@@ -47,9 +46,9 @@ import "../../blocks/stocks";
 import { javascriptGenerator } from "blockly/javascript";
 import images from "@/assets/images";
 import Blockly from "blockly";
-import { BotToolbox } from "@/blocks/B_BlockContents";
-import { KitToolbox } from "@/blocks/K_BlockContents";
-import { CarToolbox } from "@/blocks/C_BlockContents";
+import { BotToolbox } from "@/blocks/blockcontents_bot";
+import { KitToolbox } from "@/blocks/blockcontents_kit";
+import { CarToolbox } from "@/blocks/blockcontents_car";
 import { VAceEditor } from 'vue3-ace-editor';
 import 'ace-builds/src-noconflict/mode-python';
 
@@ -291,11 +290,15 @@ export default {
             if (targetBlock) {
                 const codeForTargetBlock = javascriptGenerator.blockToCode(targetBlock);
                 // Ace Editor와 뮤테이션에 코드를 넣기
-                this.code = codeForTargetBlock;
-                this.setCode(codeForTargetBlock);
+                if (this.code !== codeForTargetBlock) {
+                    this.code = codeForTargetBlock;
+                    this.setCode(codeForTargetBlock);
+                }
             } else {
-                this.code = "";
-                this.setCode("");
+                if (this.code !== "") {
+                    this.code = "";
+                    this.setCode("");
+                }
             }
 
         },
@@ -313,7 +316,7 @@ export default {
                     return {};
             }
         },
-        
+
         // 교구 선택 버튼을 눌렀을 때 데이터 초기화 후 누른버튼 카테고리 불러온다는 내용
         showAndClearCategoriesByField(field) {
             // flyout 초기화

@@ -72,19 +72,18 @@ Blockly.Blocks["walk_step_forward"] = {
     
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomebot/move_forward.png', 23, 23, '*'))
-      .appendField(new Blockly.FieldNumber(1))
+      .appendField(new Blockly.FieldNumber(1), "number")
       .appendField("걸음 앞으로 걷기")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF9A00");
-    this.setTooltip("buy id");
-    this.setHelpUrl("https://example.com");
-    
+    this.setTooltip("입력한 걸음 수 만큼 앞으로 걷는 블록");
   },
 };
 
-javascriptGenerator["walk_step_forward"] = function () {
-  var code = 'for i in range(1): asomebot.forward()\n';
+javascriptGenerator["walk_step_forward"] = function (block) {
+  let number = block.getFieldValue('number');
+  let code = 'for i in range(' + number + '): asomebot.forward()\n';
   return code;
 };
 
@@ -94,112 +93,90 @@ Blockly.Blocks["walk_step_back"] = {
     
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/move_backward.png', 23, 23, '*'))
-      .appendField(new Blockly.FieldNumber(1))
+      .appendField(new Blockly.FieldNumber(1), "number")
       .appendField("걸음 뒤로 걷기")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF9A00");
-    this.setTooltip("buy id");
-    this.setHelpUrl("https://example.com");
-    
+    this.setTooltip("입력한 걸음 수 만큼 뒤로 걷는 블록");
   },
 };
 
-javascriptGenerator["walk_step_back"] = function () {
-  var code = 'for i in range(1): asomebot.backward()\n';
+javascriptGenerator["walk_step_back"] = function (block) {
+  let number = block.getFieldValue('number');
+  let code = 'for i in range(' + number + '): asomebot.backward()\n';
   return code;
 };
+
 
 Blockly.Blocks["walk_step_left"] = {
   init: function () {
     
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/turn_left.png', 23, 23, '*'))
-      .appendField(new Blockly.FieldNumber(1))
+      .appendField(new Blockly.FieldNumber(1), "number")
       .appendField("걸음 왼쪽으로 회전")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF9A00");
-    this.setTooltip("buy id");
-    this.setHelpUrl("https://example.com");
-    
+    this.setTooltip("입력한 걸음 수 만큼 왼쪽으로 회전하는 블록");    
   },
 };
 
 javascriptGenerator["walk_step_left"] = function (block) {
-  var number_id = block.getFieldValue("ID");
-  var number_amount = block.getFieldValue("Amount");
-  var number_price = block.getFieldValue("Price");
-  var value_number = javascriptGenerator.valueToCode(
-    block,
-    "Number",
-    javascriptGenerator.ORDER_ATOMIC
-  );
-  var code = `buy(${number_id},${number_amount},${number_price},${value_number});\n`;
+  let number = block.getFieldValue('number');
+  let code = 'for i in range(' + number + '): asomebot.turn_left()\n';
   return code;
 };
+
 
 Blockly.Blocks["walk_step_right"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/turn_right.png', 23, 23, '*'))
-      .appendField(new Blockly.FieldNumber(1))
+      .appendField(new Blockly.FieldNumber(1), "number")
       .appendField("걸음 오른쪽으로 회전")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF9A00");
-    this.setTooltip("buy id");
-    this.setHelpUrl("https://example.com");
-    
+    this.setTooltip("입력한 걸음 수 만큼 오른쪽으로 회전하는 블록");
   },
 };
 
 javascriptGenerator["walk_step_right"] = function (block) {
-  var number_id = block.getFieldValue("ID");
-  var number_amount = block.getFieldValue("Amount");
-  var number_price = block.getFieldValue("Price");
-  var value_number = javascriptGenerator.valueToCode(
-    block,
-    "Number",
-    javascriptGenerator.ORDER_ATOMIC
-  );
-  var code = `buy(${number_id},${number_amount},${number_price},${value_number});\n`;
+  let number = block.getFieldValue('number');
+  let code = 'for i in range(' + number + '): asomebot.turn_right()\n';
   return code;
 };
+
 
 Blockly.Blocks["walk_motor_angle"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/turn_right.png', 23, 23, '*'))
-      .appendField(new Blockly.FieldNumber(1))
+      .appendField(new Blockly.FieldNumber(1), "count")
       .appendField("번 모터")
     this.appendDummyInput()
       .appendField("각도")
-      .appendField(new Blockly.FieldNumber(90))
+      .appendField(new Blockly.FieldNumber(90), "angle")
       .appendField(", 회전시간")
-      .appendField(new Blockly.FieldNumber(1))
+      .appendField(new Blockly.FieldNumber(1), "secs")
       .appendField("초")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF9A00");
-    this.setTooltip("buy id");
-    this.setHelpUrl("https://example.com");
-    
+    this.setTooltip("buy id");    
   },
 };
 
 javascriptGenerator["walk_motor_angle"] = function (block) {
-  var number_id = block.getFieldValue("ID");
-  var number_amount = block.getFieldValue("Amount");
-  var number_price = block.getFieldValue("Price");
-  var value_number = javascriptGenerator.valueToCode(
-    block,
-    "Number",
-    javascriptGenerator.ORDER_ATOMIC
-  );
-  var code = `buy(${number_id},${number_amount},${number_price},${value_number});\n`;
+  let number_count = block.getFieldValue('count');
+  let number_angle = block.getFieldValue('angle');
+  let number_secs = block.getFieldValue('secs');
+  let code = 'asomebot.angles(['+number_count+'],['+number_angle+'-90],'+number_secs+'*1000)\n';
   return code;
 };
+
 
 Blockly.Blocks["walk_all_motor_angle"] = {
   init: function () {
@@ -207,35 +184,31 @@ Blockly.Blocks["walk_all_motor_angle"] = {
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/turn_right.png', 23, 23, '*'))
       .appendField("각 모터의 각도")
     this.appendDummyInput()
-      .appendField(new Blockly.FieldNumber(90))
+      .appendField(new Blockly.FieldNumber(90), "angle1")
       .appendField(",")
-      .appendField(new Blockly.FieldNumber(90))
+      .appendField(new Blockly.FieldNumber(90), "angle2")
       .appendField(",")
-      .appendField(new Blockly.FieldNumber(90))
+      .appendField(new Blockly.FieldNumber(90), "angle3")
       .appendField(",")
-      .appendField(new Blockly.FieldNumber(90))
+      .appendField(new Blockly.FieldNumber(90), "angle4")
     this.appendDummyInput()
       .appendField("회전시간")
-      .appendField(new Blockly.FieldNumber(1))
+      .appendField(new Blockly.FieldNumber(1), "secs")
       .appendField("초")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF9A00");
     this.setTooltip("buy id");
-    this.setHelpUrl("https://example.com");
   },
 };
 
 javascriptGenerator["walk_all_motor_angle"] = function (block) {
-  var number_id = block.getFieldValue("ID");
-  var number_amount = block.getFieldValue("Amount");
-  var number_price = block.getFieldValue("Price");
-  var value_number = javascriptGenerator.valueToCode(
-    block,
-    "Number",
-    javascriptGenerator.ORDER_ATOMIC
-  );
-  var code = `buy(${number_id},${number_amount},${number_price},${value_number});\n`;
+  let number_angle1 = block.getFieldValue('angle1');
+  let number_angle2 = block.getFieldValue('angle2');
+  let number_angle3 = block.getFieldValue('angle3');
+  let number_angle4 = block.getFieldValue('angle4');
+  let number_secs = block.getFieldValue('secs');
+  let code = 'asomebot.angles([0,1,2,3],['+number_angle1+'-90,'+number_angle2+'-90,'+number_angle3+'-90,'+number_angle4+'-90],'+number_secs+'*1000)\n';
   return code;
 };
 
@@ -246,26 +219,19 @@ Blockly.Blocks["walk_forward"] = {
       .appendField("앞으로 걷기")
     this.appendDummyInput()
       .appendField("속도")
-      .appendField(new Blockly.FieldNumber(150))
-      .appendField(new Blockly.FieldNumber(300))
+      .appendField(new Blockly.FieldNumber(150), "speed1")
+      .appendField(new Blockly.FieldNumber(300), "speed2")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF9A00");
-    this.setTooltip("buy id");
-    this.setHelpUrl("https://example.com");
+    this.setTooltip("모터 움직임 속도를 제어하여 1회 전진하는 코드 [허리모터,발모터]");
   },
 };
 
 javascriptGenerator["walk_forward"] = function (block) {
-  var number_id = block.getFieldValue("ID");
-  var number_amount = block.getFieldValue("Amount");
-  var number_price = block.getFieldValue("Price");
-  var value_number = javascriptGenerator.valueToCode(
-    block,
-    "Number",
-    javascriptGenerator.ORDER_ATOMIC
-  );
-  var code = `buy(${number_id},${number_amount},${number_price},${value_number});\n`;
+  let number_speed1 = block.getFieldValue('speed1');
+  let number_speed2 = block.getFieldValue('speed2');
+  let code = 'for i in range(1): asomebot.forward(20,30,40,0,'+number_speed1+','+ number_speed2+')\n';
   return code;
 };
 
@@ -276,28 +242,23 @@ Blockly.Blocks["walk_back"] = {
       .appendField("뒤로 걷기")
     this.appendDummyInput()
       .appendField("속도")
-      .appendField(new Blockly.FieldNumber(150))
-      .appendField(new Blockly.FieldNumber(300))
+      .appendField(new Blockly.FieldNumber(150), "speed1")
+      .appendField(new Blockly.FieldNumber(300), "speed2")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF9A00");
-    this.setTooltip("buy id");
+    this.setTooltip("모터 움직임 속도를 제어하여 1회 후진하는 코드 [허리모터,발모터]");
     this.setHelpUrl("https://example.com");
   },
 };
 
 javascriptGenerator["walk_back"] = function (block) {
-  var number_id = block.getFieldValue("ID");
-  var number_amount = block.getFieldValue("Amount");
-  var number_price = block.getFieldValue("Price");
-  var value_number = javascriptGenerator.valueToCode(
-    block,
-    "Number",
-    javascriptGenerator.ORDER_ATOMIC
-  );
-  var code = `buy(${number_id},${number_amount},${number_price},${value_number});\n`;
+  let number_speed1 = block.getFieldValue('speed1');
+  let number_speed2 = block.getFieldValue('speed2');
+  let code = 'for i in range(1): asomebot.backward(20,30,40,0,'+number_speed1+','+ number_speed2+')\n';
   return code;
 };
+
 
 Blockly.Blocks["walk_left"] = {
   init: function () {
@@ -306,25 +267,18 @@ Blockly.Blocks["walk_left"] = {
       .appendField("왼쪽으로 회전")
     this.appendDummyInput()
       .appendField("속도")
-      .appendField(new Blockly.FieldNumber(300))
+      .appendField(new Blockly.FieldNumber(300), "speed")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF9A00");
-    this.setTooltip("buy id");
+    this.setTooltip("모터 움직임 속도를 제어하여 1회 좌회전하는 코드 [허리모터,발모터]");
     this.setHelpUrl("https://example.com");
   },
 };
 
 javascriptGenerator["walk_left"] = function (block) {
-  var number_id = block.getFieldValue("ID");
-  var number_amount = block.getFieldValue("Amount");
-  var number_price = block.getFieldValue("Price");
-  var value_number = javascriptGenerator.valueToCode(
-    block,
-    "Number",
-    javascriptGenerator.ORDER_ATOMIC
-  );
-  var code = `buy(${number_id},${number_amount},${number_price},${value_number});\n`;
+  let number_speed = block.getFieldValue('speed');
+  let code = 'for i in range(1): asomebot.turn_left(20,30,40,'+number_speed+')\n';
   return code;
 };
 
@@ -335,25 +289,18 @@ Blockly.Blocks["walk_right"] = {
       .appendField("오른쪽으로 회전")
     this.appendDummyInput()
       .appendField("속도")
-      .appendField(new Blockly.FieldNumber(300))
+      .appendField(new Blockly.FieldNumber(300), "speed")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF9A00");
-    this.setTooltip("buy id");
+    this.setTooltip("모터 움직임 속도를 제어하여 1회 우회전하는 코드 [허리모터,발모터]");
     this.setHelpUrl("https://example.com");
   },
 };
 
 javascriptGenerator["walk_right"] = function (block) {
-  var number_id = block.getFieldValue("ID");
-  var number_amount = block.getFieldValue("Amount");
-  var number_price = block.getFieldValue("Price");
-  var value_number = javascriptGenerator.valueToCode(
-    block,
-    "Number",
-    javascriptGenerator.ORDER_ATOMIC
-  );
-  var code = `buy(${number_id},${number_amount},${number_price},${value_number});\n`;
+  let number_speed = block.getFieldValue('speed');
+  let code = 'for i in range(1): asomebot.turn_right(20,30,40,'+number_speed+')\n';
   return code;
 };
 
@@ -361,65 +308,46 @@ javascriptGenerator["walk_right"] = function (block) {
 
 Blockly.Blocks["dance_ballet"] = {
   init: function () {
-    
     this.appendDummyInput()
-      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/clarify.png', 23, 23, '*'))
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/ballet.png', 23, 23, '*'))
       .appendField("발레")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF61FF");
     this.setTooltip("buy id");
     this.setHelpUrl("https://example.com");
-    
   },
 };
 
-javascriptGenerator["dance_ballet"] = function (block) {
-  var number_id = block.getFieldValue("ID");
-  var number_amount = block.getFieldValue("Amount");
-  var number_price = block.getFieldValue("Price");
-  var value_number = javascriptGenerator.valueToCode(
-    block,
-    "Number",
-    javascriptGenerator.ORDER_ATOMIC
-  );
-  var code = `buy(${number_id},${number_amount},${number_price},${value_number});\n`;
+javascriptGenerator["dance_ballet"] = function () {
+  let code = 'asomebot.ballet()\n';
   return code;
 };
 
 Blockly.Blocks["dance_wiggle"] = {
   init: function () {
-    
     this.appendDummyInput()
-      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/clarify.png', 23, 23, '*'))
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/wiggle.png', 23, 23, '*'))
       .appendField("위글")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF61FF");
     this.setTooltip("buy id");
     this.setHelpUrl("https://example.com");
-    
   },
 };
 
-javascriptGenerator["dance_wiggle"] = function (block) {
-  var number_id = block.getFieldValue("ID");
-  var number_amount = block.getFieldValue("Amount");
-  var number_price = block.getFieldValue("Price");
-  var value_number = javascriptGenerator.valueToCode(
-    block,
-    "Number",
-    javascriptGenerator.ORDER_ATOMIC
-  );
-  var code = `buy(${number_id},${number_amount},${number_price},${value_number});\n`;
+javascriptGenerator["dance_wiggle"] = function () {
+  let code = 'asomebot.wiggle()\n';
   return code;
 };
+
 
 Blockly.Blocks["dance_flap"] = {
   init: function () {
     
     this.appendDummyInput()
-      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/clarify.png', 23, 23, '*'))
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/flap.png', 23, 23, '*'))
       .appendField("플랩")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -430,54 +358,39 @@ Blockly.Blocks["dance_flap"] = {
   },
 };
 
-javascriptGenerator["dance_flap"] = function (block) {
-  var number_id = block.getFieldValue("ID");
-  var number_amount = block.getFieldValue("Amount");
-  var number_price = block.getFieldValue("Price");
-  var value_number = javascriptGenerator.valueToCode(
-    block,
-    "Number",
-    javascriptGenerator.ORDER_ATOMIC
-  );
-  var code = `buy(${number_id},${number_amount},${number_price},${value_number});\n`;
+javascriptGenerator["dance_flap"] = function () {
+  let code = 'asomebot.flap()\n';
   return code;
 };
 
 Blockly.Blocks["dance_mouse"] = {
   init: function () {
-    
     this.appendDummyInput()
-      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/clarify.png', 23, 23, '*'))
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/mouse.png', 23, 23, '*'))
       .appendField("마우스")
-      .appendField(new Blockly.FieldTextInput("left"))
+      .appendField(new Blockly.FieldDropdown([["left", "left"], ["right", "right"]]), "MOUSE_BUTTON");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF61FF");
-    this.setTooltip("buy id");
+    this.setTooltip("마우스 클릭");
     this.setHelpUrl("https://example.com");
-    
   },
 };
 
 javascriptGenerator["dance_mouse"] = function (block) {
-  var number_id = block.getFieldValue("ID");
-  var number_amount = block.getFieldValue("Amount");
-  var number_price = block.getFieldValue("Price");
-  var value_number = javascriptGenerator.valueToCode(
-    block,
-    "Number",
-    javascriptGenerator.ORDER_ATOMIC
-  );
-  var code = `buy(${number_id},${number_amount},${number_price},${value_number});\n`;
+  const mouseButton = block.getFieldValue("MOUSE_BUTTON");
+  let code = `asomebot.mouse(${mouseButton === 'left' ? '1' : '-1'})\n`;
   return code;
 };
+
+
 
 Blockly.Blocks["dance_warigari"] = {
   init: function () {
     
     this.appendDummyInput()
-      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/clarify.png', 23, 23, '*'))
-      .appendField("와리가기")
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/warigari.png', 23, 23, '*'))
+      .appendField("와리가리")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF61FF");
@@ -487,16 +400,8 @@ Blockly.Blocks["dance_warigari"] = {
   },
 };
 
-javascriptGenerator["dance_warigari"] = function (block) {
-  var number_id = block.getFieldValue("ID");
-  var number_amount = block.getFieldValue("Amount");
-  var number_price = block.getFieldValue("Price");
-  var value_number = javascriptGenerator.valueToCode(
-    block,
-    "Number",
-    javascriptGenerator.ORDER_ATOMIC
-  );
-  var code = `buy(${number_id},${number_amount},${number_price},${value_number});\n`;
+javascriptGenerator["dance_warigari"] = function () {
+  let code = 'asomebot.warigari()\n';
   return code;
 };
 
@@ -504,7 +409,7 @@ Blockly.Blocks["dance_swing"] = {
   init: function () {
     
     this.appendDummyInput()
-      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/clarify.png', 23, 23, '*'))
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/swing.png', 23, 23, '*'))
       .appendField("스윙")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -515,16 +420,8 @@ Blockly.Blocks["dance_swing"] = {
   },
 };
 
-javascriptGenerator["dance_swing"] = function (block) {
-  var number_id = block.getFieldValue("ID");
-  var number_amount = block.getFieldValue("Amount");
-  var number_price = block.getFieldValue("Price");
-  var value_number = javascriptGenerator.valueToCode(
-    block,
-    "Number",
-    javascriptGenerator.ORDER_ATOMIC
-  );
-  var code = `buy(${number_id},${number_amount},${number_price},${value_number});\n`;
+javascriptGenerator["dance_swing"] = function () {
+  let code = 'asomebot.swing()\n';
   return code;
 };
 
@@ -532,7 +429,7 @@ Blockly.Blocks["dance_right_swing"] = {
   init: function () {
     
     this.appendDummyInput()
-      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/clarify.png', 23, 23, '*'))
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/right_swing.png', 23, 23, '*'))
       .appendField("오른쪽 스윙")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -543,16 +440,8 @@ Blockly.Blocks["dance_right_swing"] = {
   },
 };
 
-javascriptGenerator["dance_right_swing"] = function (block) {
-  var number_id = block.getFieldValue("ID");
-  var number_amount = block.getFieldValue("Amount");
-  var number_price = block.getFieldValue("Price");
-  var value_number = javascriptGenerator.valueToCode(
-    block,
-    "Number",
-    javascriptGenerator.ORDER_ATOMIC
-  );
-  var code = `buy(${number_id},${number_amount},${number_price},${value_number});\n`;
+javascriptGenerator["dance_right_swing"] = function () {
+  let code = 'asomebot.right_swing()\n';
   return code;
 };
 
@@ -560,7 +449,7 @@ Blockly.Blocks["dance_left_swing"] = {
   init: function () {
     
     this.appendDummyInput()
-      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/clarify.png', 23, 23, '*'))
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/left_swing.png', 23, 23, '*'))
       .appendField("왼쪽 스윙")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -571,16 +460,8 @@ Blockly.Blocks["dance_left_swing"] = {
   },
 };
 
-javascriptGenerator["dance_left_swing"] = function (block) {
-  var number_id = block.getFieldValue("ID");
-  var number_amount = block.getFieldValue("Amount");
-  var number_price = block.getFieldValue("Price");
-  var value_number = javascriptGenerator.valueToCode(
-    block,
-    "Number",
-    javascriptGenerator.ORDER_ATOMIC
-  );
-  var code = `buy(${number_id},${number_amount},${number_price},${value_number});\n`;
+javascriptGenerator["dance_left_swing"] = function () {
+  let code = 'asomebot.left_swing()\n';
   return code;
 };
 
@@ -588,7 +469,7 @@ Blockly.Blocks["dance_tick_tock"] = {
   init: function () {
     
     this.appendDummyInput()
-      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/clarify.png', 23, 23, '*'))
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/tick_tock.png', 23, 23, '*'))
       .appendField("틱톡")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -599,16 +480,8 @@ Blockly.Blocks["dance_tick_tock"] = {
   },
 };
 
-javascriptGenerator["dance_tick_tock"] = function (block) {
-  var number_id = block.getFieldValue("ID");
-  var number_amount = block.getFieldValue("Amount");
-  var number_price = block.getFieldValue("Price");
-  var value_number = javascriptGenerator.valueToCode(
-    block,
-    "Number",
-    javascriptGenerator.ORDER_ATOMIC
-  );
-  var code = `buy(${number_id},${number_amount},${number_price},${value_number});\n`;
+javascriptGenerator["dance_tick_tock"] = function () {
+  let code = 'asomebot.tick_tock()\n';
   return code;
 };
 
@@ -616,7 +489,7 @@ Blockly.Blocks["dance_yaho"] = {
   init: function () {
     
     this.appendDummyInput()
-      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/clarify.png', 23, 23, '*'))
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/yaho.png', 23, 23, '*'))
       .appendField("야호")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -627,16 +500,8 @@ Blockly.Blocks["dance_yaho"] = {
   },
 };
 
-javascriptGenerator["dance_yaho"] = function (block) {
-  var number_id = block.getFieldValue("ID");
-  var number_amount = block.getFieldValue("Amount");
-  var number_price = block.getFieldValue("Price");
-  var value_number = javascriptGenerator.valueToCode(
-    block,
-    "Number",
-    javascriptGenerator.ORDER_ATOMIC
-  );
-  var code = `buy(${number_id},${number_amount},${number_price},${value_number});\n`;
+javascriptGenerator["dance_yaho"] = function () {
+  var code = 'asomebot.yaho()\n';
   return code;
 };
 
@@ -644,7 +509,7 @@ Blockly.Blocks["dance_moonwalk"] = {
   init: function () {
     
     this.appendDummyInput()
-      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/clarify.png', 23, 23, '*'))
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/moonwalk.png', 23, 23, '*'))
       .appendField("문워크")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -655,16 +520,8 @@ Blockly.Blocks["dance_moonwalk"] = {
   },
 };
 
-javascriptGenerator["dance_moonwalk"] = function (block) {
-  var number_id = block.getFieldValue("ID");
-  var number_amount = block.getFieldValue("Amount");
-  var number_price = block.getFieldValue("Price");
-  var value_number = javascriptGenerator.valueToCode(
-    block,
-    "Number",
-    javascriptGenerator.ORDER_ATOMIC
-  );
-  var code = `buy(${number_id},${number_amount},${number_price},${value_number});\n`;
+javascriptGenerator["dance_moonwalk"] = function () {
+  var code = 'asomebot.moonwalk()\n';
   return code;
 };
 
@@ -685,16 +542,8 @@ Blockly.Blocks["sensor_ultrasonic"] = {
   },
 };
 
-javascriptGenerator["sensor_ultrasonic"] = function (block) {
-  var number_id = block.getFieldValue("ID");
-  var number_amount = block.getFieldValue("Amount");
-  var number_price = block.getFieldValue("Price");
-  var value_number = javascriptGenerator.valueToCode(
-    block,
-    "Number",
-    javascriptGenerator.ORDER_ATOMIC
-  );
-  var code = `buy(${number_id},${number_amount},${number_price},${value_number});\n`;
+javascriptGenerator["sensor_ultrasonic"] = function () {
+  let code = 'cm = hcsr04.get_distance()\n';
   return code;
 };
 
@@ -771,16 +620,8 @@ Blockly.Blocks["sound_buzzer_on"] = {
   },
 };
 
-javascriptGenerator["sound_buzzer_on"] = function (block) {
-  var number_id = block.getFieldValue("ID");
-  var number_amount = block.getFieldValue("Amount");
-  var number_price = block.getFieldValue("Price");
-  var value_number = javascriptGenerator.valueToCode(
-    block,
-    "Number",
-    javascriptGenerator.ORDER_ATOMIC
-  );
-  var code = `buy(${number_id},${number_amount},${number_price},${value_number});\n`;
+javascriptGenerator["sound_buzzer_on"] = function () {
+  let code = 'asomebot.turn_off()\nimport music\nmusic.open(1)\n';
   return code;
 };
 
@@ -789,7 +630,7 @@ Blockly.Blocks["sound_buzzer_off"] = {
     
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/clarify.png', 23, 23, '*'))
-      .appendField("부저 켜기")
+      .appendField("부저 끄기")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("EC1961");
@@ -799,16 +640,8 @@ Blockly.Blocks["sound_buzzer_off"] = {
   },
 };
 
-javascriptGenerator["sound_buzzer_off"] = function (block) {
-  var number_id = block.getFieldValue("ID");
-  var number_amount = block.getFieldValue("Amount");
-  var number_price = block.getFieldValue("Price");
-  var value_number = javascriptGenerator.valueToCode(
-    block,
-    "Number",
-    javascriptGenerator.ORDER_ATOMIC
-  );
-  var code = `buy(${number_id},${number_amount},${number_price},${value_number});\n`;
+javascriptGenerator["sound_buzzer_off"] = function () {
+  let code = '\nmusic.close()\nimport asomebot\nasomebot.ready(5, 6, 7, 8)\n';
   return code;
 };
 
@@ -820,9 +653,9 @@ Blockly.Blocks["sound_bot_hz"] = {
       .appendField("주파수로 소리내기")
     this.appendDummyInput()
       .appendField("주파수")
-      .appendField(new Blockly.FieldNumber(0))
+      .appendField(new Blockly.FieldNumber(0), "tone")
       .appendField("Hz, 연주시간")
-      .appendField(new Blockly.FieldNumber(1))
+      .appendField(new Blockly.FieldNumber(1), "secs")
       .appendField("초")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -834,15 +667,9 @@ Blockly.Blocks["sound_bot_hz"] = {
 };
 
 javascriptGenerator["sound_bot_hz"] = function (block) {
-  var number_id = block.getFieldValue("ID");
-  var number_amount = block.getFieldValue("Amount");
-  var number_price = block.getFieldValue("Price");
-  var value_number = javascriptGenerator.valueToCode(
-    block,
-    "Number",
-    javascriptGenerator.ORDER_ATOMIC
-  );
-  var code = `buy(${number_id},${number_amount},${number_price},${value_number});\n`;
+  let number_tone = block.getFieldValue('tone');
+  let number_secs = block.getFieldValue('secs');
+  let code = 'music.tone('+number_tone+')\ndelay('+number_secs+')\nmusic.mute()\n';
   return code;
 };
 
@@ -853,11 +680,20 @@ Blockly.Blocks["sound_bot_scale"] = {
       .appendField("음계로 소리내기")
     this.appendDummyInput()
       .appendField("음계")
-      .appendField(new Blockly.FieldNumber(0))
+      .appendField(new Blockly.FieldDropdown([
+        ["C", "C"],["C#", "D#"],
+        ["D", "D"],["D#", "D#"],
+        ["Db", "Db"],["E", "E"],
+        ["Eb", "Eb"],["F", "F"],
+        ["F#", "F#"],["G", "G"],
+        ["G#", "G#"],["Gb", "Gb"],
+        ["A", "A"],["A#", "A#"],
+        ["Ab", "Ab"],["B", "B"],
+        ["Bb", "Bb"]]), "scale_button")
       .appendField(",옥타브")
-      .appendField(new Blockly.FieldNumber(1))
+      .appendField(new Blockly.FieldNumber(1), "octave")
       .appendField(",연주시간")
-      .appendField(new Blockly.FieldNumber(1))
+      .appendField(new Blockly.FieldNumber(1), "secs")
       .appendField("초")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -868,17 +704,70 @@ Blockly.Blocks["sound_bot_scale"] = {
 };
 
 javascriptGenerator["sound_bot_scale"] = function (block) {
-  var number_id = block.getFieldValue("ID");
-  var number_amount = block.getFieldValue("Amount");
-  var number_price = block.getFieldValue("Price");
-  var value_number = javascriptGenerator.valueToCode(
-    block,
-    "Number",
-    javascriptGenerator.ORDER_ATOMIC
-  );
-  var code = `buy(${number_id},${number_amount},${number_price},${value_number});\n`;
+  const mouseButton = block.getFieldValue("scale_button");
+  const number_octave = block.getFieldValue('octave');
+  const number_secs = block.getFieldValue('secs');
+  let note = '';
+
+  switch (mouseButton) {
+    case 'C':
+      note = 'C';
+      break;
+    case 'C#':
+      note = 'C#';
+      break;
+    case 'D':
+      note = 'D';
+      break;
+    case 'D#':
+      note = 'D#';
+      break;
+    case 'Db':
+      note = 'Db';
+      break;
+    case 'E':
+      note = 'E';
+      break;
+    case 'Eb':
+      note = 'Eb';
+      break;
+    case 'F':
+      note = 'F';
+      break;
+    case 'F#':
+      note = 'F#';
+      break;
+    case 'G':
+      note = 'G';
+      break;
+    case 'G#':
+      note = 'G#';
+      break;
+    case 'Gb':
+      note = 'Gb';
+      break;
+    case 'A':
+      note = 'A';
+      break;
+    case 'A#':
+      note = 'A#';
+      break;
+    case 'Ab':
+      note = 'Ab';
+      break;
+    case 'B':
+      note = 'B';
+      break;
+    case 'Bb':
+      note = 'Bb';
+      break;
+    default:
+  }
+  const code = `music.note("${note}${number_octave}", ${number_secs} * 1000)\n`;
+
   return code;
 };
+
 
 // BOT ADVANCE CODE
 
@@ -887,7 +776,7 @@ Blockly.Blocks["advance_waiting"] = {
     
     this.appendDummyInput()
       .appendField("기다리기")
-      .appendField(new Blockly.FieldNumber(1))
+      .appendField(new Blockly.FieldNumber(1), "secs")
       .appendField("초")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -899,15 +788,8 @@ Blockly.Blocks["advance_waiting"] = {
 };
 
 javascriptGenerator["advance_waiting"] = function (block) {
-  var number_id = block.getFieldValue("ID");
-  var number_amount = block.getFieldValue("Amount");
-  var number_price = block.getFieldValue("Price");
-  var value_number = javascriptGenerator.valueToCode(
-    block,
-    "Number",
-    javascriptGenerator.ORDER_ATOMIC
-  );
-  var code = `buy(${number_id},${number_amount},${number_price},${value_number});\n`;
+  let number_secs = block.getFieldValue('secs');
+  let code = 'delay(' + number_secs + ')\n';
   return code;
 };
 
@@ -915,28 +797,58 @@ Blockly.Blocks["advance_repeat"] = {
   init: function () {
     this.appendDummyInput()
       .appendField('반복하기')
-      .appendField(new Blockly.FieldNumber(1))
-      .appendField('번')
-    this.appendStatementInput('DO')
-      .appendField('');
+      .appendField(new Blockly.FieldNumber(1), "repeat_times")
+      .appendField('번');
+    this.appendStatementInput('do_state')
+      .setCheck(null);
     this.setColour("55A55B");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
-  },
+  }
 };
 
+
 javascriptGenerator["advance_repeat"] = function (block) {
-  var number_id = block.getFieldValue("ID");
-  var number_amount = block.getFieldValue("Amount");
-  var number_price = block.getFieldValue("Price");
-  var value_number = javascriptGenerator.valueToCode(
-    block,
-    "Number",
-    javascriptGenerator.ORDER_ATOMIC
-  );
-  var code = `buy(${number_id},${number_amount},${number_price},${value_number});\n`;
+
+  console.log(block)
+  // repeat_times에 설정된 횟수를 가져오기
+  let repeat_times = block.getFieldValue('repeat_times');
+  console.log(repeat_times)
+  // if (Blockly.isNumber(repeat_times)) {
+  //   repeat_times = parseInt(repeat_times, 10);
+  // } else {
+  //   repeat_times = 'int(' + repeat_times + ')';
+  // }
+  
+  var branch = Blockly.JavaScript.statementToCode(block, 'do_state');
+
+  let code = '';
+  code += 'for (var i = 0; i < ' + repeat_times + '; i++) {\n';
+  code += branch; // 내부 코드 블록 추가
+  code += '}\n';
+    
   return code;
 };
+
+
+// javascriptGenerator["advance_repeat"] = function (block) {
+//   // repeat_times에 설정된 횟수를 가져오기
+//   let repeatTimes = block.getFieldValue('repeat_times');
+  
+//   // 반복할 코드 블록을 가져오기
+//   let doBlock = Blockly.JavaScript.statementToCode(block, 'do_state');
+
+//   // console.log("doBlock:", doBlock);
+//   // 생성한 JavaScript 코드 반환
+//   let code = '';
+//   code += 'for (var i = 0; i < ' + repeatTimes + '; i++) {\n';
+//   // code += doBlock; // 내부 코드 블록 추가
+//   code += '}\n';
+  
+//   return code;
+// };
+
+
 
 Blockly.Blocks["advance_endless_repeat"] = {
   init: function () {

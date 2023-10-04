@@ -64,11 +64,14 @@ export default {
     },
 
     methods:{
-        send(codes){
-            
-            // window.opener.postMessage(JSON.stringify(codes));
+        send(){
+            const codes = this.$store.state.viewcode; // $store.state.viewcode를 직접 참조
+
+            // codes 변수를 확인하기 위해 로그를 출력
+            console.log(codes);
+
+            // 이후 코드를 수행
             window.opener.postMessage(codes);
-            console.log(codes)
             // this.setViewCode(''); // viewcode 상태를 초기화합니다
             // serial.runCode(code)
             // window.opener.runCode(code)
