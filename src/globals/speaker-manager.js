@@ -1,5 +1,7 @@
 import serial from "@/globals/serial";
 import eventbus from "@/globals/eventbus";
+// import axios from 'axios'
+// import rest from "@/globals/rest";
 
 eventbus.on("onSerialReceived", (data) => {
     if (!data) return;
@@ -7,10 +9,27 @@ eventbus.on("onSerialReceived", (data) => {
     if (data.startsWith("### audio Next Line")) speakerManager.nextLine();
 });
 
+
+
 /**
  * base64로 변환된 wav파일을 보드에 txt파일로 저장
  */
 const speakerManager = {
+    // async postText(text){
+    //     return new Promise((resolve, reject) =>{
+    //         rest.get(`polly/save/${text}`)
+    //             .then(response => {
+    //                 if (response.data.resultCode) {
+    //                     reject(response);
+    //                     return;
+    //                 }
+    //                 resolve(response);
+    //             }).catch(error => {
+    //                 console.log(error);
+    //             });
+    //     })
+    // },
+
     save(fileName,data){
         fileName = "/fc/"+fileName+".txt"
         this.lines = [];

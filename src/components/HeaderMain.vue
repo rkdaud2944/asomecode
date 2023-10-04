@@ -10,7 +10,8 @@
                     <img :src="connectImg"  class="ui-img"/>
                     <p class="ui-left-font" id="fs-four">연결하기</p>
                 </li>
-                <li class="ui-left-bt" @click="goTo('/')">
+                <li class="ui-left-bt" @click="goTo('/')" id="tts">
+                <!-- <li class="ui-left-bt" @getPolly="getPolly"> -->
                     <img :src="home"  class="ui-img"/>
                     <p class="ui-left-font" id="fs-one">홈</p>
                 </li>
@@ -120,6 +121,7 @@ import VueBase from "@/mixin/vue-base";
 import bridgeIn from "@/globals/bridge-in";
 import eventbus from "@/globals/eventbus";
 import boardUpdater from "@/globals/board-updater";
+// import speakerManager from "@/globals/speaker-manager";
 // import sound from "@/globals/sound";
 
 export default {
@@ -156,21 +158,29 @@ export default {
 
         let subToggle=true
 
-function slide_menu(){
-  if(subToggle){
-    subBar.style.display="block";
-    subBar.classList.remove("up");
-    subBar.classList.add("down");
-    subToggle=!subToggle;
-    
-  }else{
-    subBar.classList.remove("down");
-    subBar.classList.add("up");
-    subToggle=!subToggle;
-  }
-  console.log(subBar.classList);
-}
-menu.addEventListener("click",slide_menu);
+        function slide_menu(){
+        if(subToggle){
+            subBar.style.display="block";
+            subBar.classList.remove("up");
+            subBar.classList.add("down");
+            subToggle=!subToggle;
+            
+        }else{
+            subBar.classList.remove("down");
+            subBar.classList.add("up");
+            subToggle=!subToggle;
+        }
+        console.log(subBar.classList);
+        }
+        menu.addEventListener("click",slide_menu);
+
+        // const tts = document.getElementById('tts');
+        // if (tts) {
+        //     tts.addEventListener('click', function() {
+        //         this.getPolly()
+        //         console.log('Element clicked!');
+        //     });
+        // }
     },
 
     methods: {
@@ -191,7 +201,10 @@ menu.addEventListener("click",slide_menu);
 
         openEditor() {
             bridgeIn.openEditor('')
-        }
+        },
+        
+
+        
     }
 }
 </script>

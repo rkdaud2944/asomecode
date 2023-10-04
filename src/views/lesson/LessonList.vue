@@ -1,5 +1,6 @@
 <template>
     <div class="header nav-padding">
+        <button @click="getPolly">123</button>
         <a @click="goTo('/')">
             <img :src="logom" class="subject-logo"/>
         </a>
@@ -35,6 +36,7 @@
 import images from "@/assets/images";
 import VueBase from '@/mixin/vue-base';
 import apiSubject from "@/api/subject";
+import apiTTS from "@/api/tts"
 
 export default {
     mixins: [VueBase],
@@ -60,6 +62,39 @@ export default {
                 })
                 .catch(this.showError);
         },
+        
+        // getPolly(){            
+        //     apiTTS.getPolly("가나다라")
+        //         .then(response => {
+        //             this.$refs.grid.setData(response.data);
+        //         })
+        //         .catch((response) => {
+        //             this.$q.notify({
+        //                 color: "deep-orange",
+        //                 textColor: "white",
+        //                 // message: response.data.message,
+        //                 message: response.data,
+        //             });
+        //         });
+        // },
+
+        getPolly(){      
+            apiTTS.getPolly("가나다라")
+                .then(response => {
+                    // 바이트 배열을 Blob으로 변환
+                    const blob = new Blob([response.data], { type: 'audio/mpeg' });  // 'audio/mpeg'는 예시이므로 서버에서 제공하는 실제 포맷에 맞게 변경해야 합니다.
+                    
+                    // Blob을 URL로 변환
+                    const url = window.URL.createObjectURL(blob);
+                    
+                    // Audio 객체 생성 및 재생
+                    const audio = new Audio(url);
+                    audio.play();
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
     },
 
 }

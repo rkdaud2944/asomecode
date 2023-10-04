@@ -45,6 +45,7 @@ export default {
         classOfRow(row) {
             return row.selected ? ["row", "selected"] : ["row"];
         },
+        
     },
 };
 </script>

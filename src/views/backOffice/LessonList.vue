@@ -5,6 +5,7 @@
                 <Filter @onFilterChanged="onFilterChanged" />
             </template>
             <template v-slot:main>
+                <button>123</button>
                 <Grid ref="grid" rowKey="id" @onPageChanged="onPageChanged" />
             </template>
         </FilterFrame>
@@ -38,7 +39,7 @@ export default {
                 ...this.paramsList,
                 ...this.paramsFilter,
             }
-        },
+        }, 
     },
 
     methods: {
@@ -59,6 +60,7 @@ export default {
                 })
                 .catch(this.showError);
         },
+        
     },
 }
 </script>

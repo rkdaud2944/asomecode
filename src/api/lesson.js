@@ -32,7 +32,7 @@ export default {
                 console.log(error);
             });
         });
-    },
+    }, 
 
     lessonDetail: async function (id) {
         // var url = `/lesson/${id}`;
