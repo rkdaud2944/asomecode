@@ -807,20 +807,15 @@ Blockly.Blocks["advance_repeat"] = {
   }
 };
 
-
 javascriptGenerator["advance_repeat"] = function (block) {
-
-  console.log(block)
-  // repeat_times에 설정된 횟수를 가져오기
   let repeat_times = block.getFieldValue('repeat_times');
   console.log(repeat_times)
-  // if (Blockly.isNumber(repeat_times)) {
-  //   repeat_times = parseInt(repeat_times, 10);
-  // } else {
-  //   repeat_times = 'int(' + repeat_times + ')';
-  // }
-  
-  var branch = Blockly.JavaScript.statementToCode(block, 'do_state');
+  if (typeof javascriptGenerator === 'undefined' || javascriptGenerator === null) {
+    console.error("javascriptGenerator is not defined!");
+    return;
+  }
+
+  var branch = javascriptGenerator.statementToCode(block, 'do_state');
 
   let code = '';
   code += 'for (var i = 0; i < ' + repeat_times + '; i++) {\n';
@@ -829,26 +824,6 @@ javascriptGenerator["advance_repeat"] = function (block) {
     
   return code;
 };
-
-
-// javascriptGenerator["advance_repeat"] = function (block) {
-//   // repeat_times에 설정된 횟수를 가져오기
-//   let repeatTimes = block.getFieldValue('repeat_times');
-  
-//   // 반복할 코드 블록을 가져오기
-//   let doBlock = Blockly.JavaScript.statementToCode(block, 'do_state');
-
-//   // console.log("doBlock:", doBlock);
-//   // 생성한 JavaScript 코드 반환
-//   let code = '';
-//   code += 'for (var i = 0; i < ' + repeatTimes + '; i++) {\n';
-//   // code += doBlock; // 내부 코드 블록 추가
-//   code += '}\n';
-  
-//   return code;
-// };
-
-
 
 Blockly.Blocks["advance_endless_repeat"] = {
   init: function () {
