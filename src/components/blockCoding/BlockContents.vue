@@ -283,10 +283,11 @@ export default {
 
         // 에이스 에디터에 그려지게하는 코드 (준비블록에 붙여야만 표시하는 코드 포함)
         updateAceEditorCode() {
-            const targetBlockType = "basic_ready";
+            const targetBlockTypes = ["basic_ready", "basic_kit_ready", "basic_car_ready"];
+            
             // Blockly 워크스페이스에서 특정 블록을 찾습니다.
-            const targetBlock = this.workspace.getAllBlocks().find(block => block.type === targetBlockType);
- 
+            const targetBlock = this.workspace.getAllBlocks().find(block => targetBlockTypes.includes(block.type));
+
             if (targetBlock) {
                 const codeForTargetBlock = javascriptGenerator.blockToCode(targetBlock);
                 // Ace Editor와 뮤테이션에 코드를 넣기
@@ -300,7 +301,6 @@ export default {
                     this.setCode("");
                 }
             }
-
         },
 
         // 교구 선택 버튼들

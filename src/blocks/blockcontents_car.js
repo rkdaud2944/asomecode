@@ -13,7 +13,7 @@ const CarToolbox = {
             "field" : "CAR",
             "colour": "14A2FF",
             "contents": [
-                { "kind": "block", "gap": "8", "type": "basic_ready" }
+                { "kind": "block", "gap": "8", "type": "basic_car_ready" }
             ],
         },
         {

@@ -32,6 +32,8 @@ export { KitToolbox };
                 { "kind": "block", "gap": "8", "type": "prepare_ledtube_ready" },
                 { "kind": "block", "gap": "8", "type": "prepare_vibration_ready" },
                 { "kind": "block", "gap": "8", "type": "prepare_ultrasonic_ready" },
+                { "kind": "block", "gap": "8", "type": "prepare_photoresistor_ready" },
+                { "kind": "block", "gap": "8", "type": "prepare_photoresistor2_ready" },
               ],
           },
           {
@@ -68,6 +70,8 @@ export { KitToolbox };
                 { "kind": "block", "gap": "8", "type": "sensor_water_level" },
                 { "kind": "block", "gap": "8", "type": "sensor_brightness" },
                 { "kind": "block", "gap": "8", "type": "sensor_sound" },
+                { "kind": "block", "gap": "8", "type": "sensor_brightness_complete" },
+                { "kind": "block", "gap": "8", "type": "sensor_sound_complete" },
                 { "kind": "block", "gap": "8", "type": "sensor_soil_humidity" },
                 { "kind": "block", "gap": "8", "type": "sensor_vibration_sensor" },
               ],
