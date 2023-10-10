@@ -288,7 +288,7 @@ export default {
         updateAceEditorCode() {
             let initCodes = new Set();  // 중복값 허용하지 않는 Set 객체 사용
             const allBlocks = this.workspace.getAllBlocks();
-            const targetBlockTypesToCheck = ["advance_if", "advance_elseif", "screen", "variable"];
+            const targetBlockTypesToCheck = ["advance_if", "advance_elseif", "screen", "variable", "led_ledtube_ready", "led_ledtube_time"];
 
             const targetBlockTypes = ["basic_ready", "basic_kit_ready", "basic_car_ready"];
 
@@ -300,8 +300,14 @@ export default {
 
                     if (isConnectedToTarget) {
                         const variableFieldValue = targetBlock.getFieldValue("variable");
+                        const variable2FieldValue = targetBlock.getFieldValue("variable2");
+                        
                         if (variableFieldValue) {
                             initCodes.add(`${variableFieldValue} = None\n`);
+                        }
+
+                        if (variable2FieldValue) {
+                            initCodes.add(`${variable2FieldValue} = None\n`);
                         }
                     }
                 });

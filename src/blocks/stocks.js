@@ -1633,7 +1633,7 @@ Blockly.Blocks["led_ledtube_ready"] = {
 javascriptGenerator["led_ledtube_ready"] = function (block) {
   const variable = block.getFieldValue("variable");
   let vari = '';
-  const initCode = `${variable} = None;`;
+  // const initCode = `${variable} = None;`;/
 
   switch (variable) {
     case 'bt':
@@ -1660,7 +1660,7 @@ javascriptGenerator["led_ledtube_ready"] = function (block) {
     default:
   }
 
-  const code = `${initCode}\ntm1637.number(${vari})` + ':\n';
+  const code = `tm1637.number(${vari})` + ':\n';
   return code;
 };
 
@@ -1690,7 +1690,7 @@ javascriptGenerator["led_ledtube_time"] = function (block) {
   let vari = '';
   let vari2 = '';
   let tog = '';
-  const initCode = `${variable} = None;\n${variable2} = None`;
+  // const initCode = `${variable} = None\n${variable2} = None`;
 
   switch (variable) {
     case 'bt':
@@ -1752,7 +1752,7 @@ javascriptGenerator["led_ledtube_time"] = function (block) {
     default:
   }
 
-  const code = `${initCode}\ntm1637.time(${vari},${vari2},${tog})` + ':\n';
+  const code = `tm1637.time(${vari},${vari2},${tog})` + ':\n';
   return code;
 };
 
