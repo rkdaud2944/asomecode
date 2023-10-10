@@ -264,8 +264,6 @@ export default {
             
             apiSubjectSet.getSubjectSets()
                 .then((response) => {
-                    console.log("Aaaa123123")
-                    console.log("Aaaa : "+JSON.parse(response))
                     this.defaultSubjectSet = response.data;
                 })
                 .catch(this.showError);

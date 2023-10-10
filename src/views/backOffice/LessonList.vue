@@ -5,7 +5,6 @@
                 <Filter @onFilterChanged="onFilterChanged" />
             </template>
             <template v-slot:main>
-                <button>123</button>
                 <Grid ref="grid" rowKey="id" @onPageChanged="onPageChanged" />
             </template>
         </FilterFrame>
