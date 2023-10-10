@@ -274,35 +274,69 @@ export default {
         ...mapMutations({
             setCode :'setCode',
         }),
+
         handleWorkspaceChange() {
             this.updateAceEditorCode();
+            // this.appendInitCode();
 
             // 카테고리(flyout) 선택 후 다른 곳 클릭해도 안꺼지는 코드
             this.workspace.toolbox_.flyout_.autoClose = false;
         },
 
         // 에이스 에디터에 그려지게하는 코드 (준비블록에 붙여야만 표시하는 코드 포함)
+        // 변수선언 관련 블록들 선언문 최상단에 선언하게 하는거
         updateAceEditorCode() {
-            const targetBlockTypes = ["basic_ready", "basic_kit_ready", "basic_car_ready"];
-            
-            // Blockly 워크스페이스에서 특정 블록을 찾습니다.
-            const targetBlock = this.workspace.getAllBlocks().find(block => targetBlockTypes.includes(block.type));
+            let initCodes = new Set();  // 중복값 허용하지 않는 Set 객체 사용
+            const allBlocks = this.workspace.getAllBlocks();
+            const targetBlockTypesToCheck = ["advance_if", "advance_elseif", "screen", "variable"];
 
-            if (targetBlock) {
-                const codeForTargetBlock = javascriptGenerator.blockToCode(targetBlock);
-                // Ace Editor와 뮤테이션에 코드를 넣기
-                if (this.code !== codeForTargetBlock) {
-                    this.code = codeForTargetBlock;
-                    this.setCode(codeForTargetBlock);
+            const targetBlockTypes = ["basic_ready", "basic_kit_ready", "basic_car_ready"];
+
+            targetBlockTypesToCheck.forEach(blockType => {
+                const blocks = allBlocks.filter(block => block.type === blockType);
+
+                blocks.forEach(targetBlock => {
+                    const isConnectedToTarget = this.isConnectedToBlocks(targetBlock, targetBlockTypes);
+
+                    if (isConnectedToTarget) {
+                        const variableFieldValue = targetBlock.getFieldValue("variable");
+                        if (variableFieldValue) {
+                            initCodes.add(`${variableFieldValue} = None\n`);
+                        }
+                    }
+                });
+            });
+
+            let codeForTargetBlock = "";
+            allBlocks.forEach(block => {
+                if (targetBlockTypes.includes(block.type)) {
+                    codeForTargetBlock += javascriptGenerator.blockToCode(block);
                 }
-            } else {
-                if (this.code !== "") {
-                    this.code = "";
-                    this.setCode("");
-                }
+            });
+
+            // 생성된 초기화 코드들을 시작 부분에 추가
+            let combinedInitCode = [...initCodes].join('');
+            if (!codeForTargetBlock.startsWith(combinedInitCode)) {
+                codeForTargetBlock = combinedInitCode + codeForTargetBlock;
+            }
+
+            if (this.code !== codeForTargetBlock) {
+                this.code = codeForTargetBlock;
+                this.setCode(codeForTargetBlock);
             }
         },
 
+        // 연결된 블록 확인을 위한 추가 메서드
+        isConnectedToBlocks(block, targetTypes) {
+            let parent = block.getParent();
+            while (parent) {
+                if (targetTypes.includes(parent.type)) {
+                    return true;
+                }
+                parent = parent.getParent();
+            }
+            return false;
+        },
         // 교구 선택 버튼들
         getToolboxByField(field) {
             switch (field) {

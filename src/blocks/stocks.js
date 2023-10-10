@@ -847,7 +847,7 @@ Blockly.Blocks["advance_if"] = {
     this.appendDummyInput()
       .appendField('만약에')
       .appendField(new Blockly.FieldDropdown([
-        ["i", "i"],["count", "count"]]), "variable")
+        ["i", "i"],["count", "count"],["cm", "cm"]]), "variable")
       .appendField(new Blockly.FieldDropdown([
         ["==", "=="],[">", ">"],["<", "<"],[">=", ">="],["<=", "<="],["!=", "!="]]), "inequality")
     this.appendValueInput("if_value")
@@ -865,12 +865,8 @@ javascriptGenerator["advance_if"] = function (block) {
   
   const variable = block.getFieldValue("variable");
   const inq = block.getFieldValue('inequality');
-  let vari = '';
-  let ineq = '';
-  let value_if_value = javascriptGenerator.valueToCode(block, 'if_value', javascriptGenerator.ORDER_ATOMIC);
-  let branch = javascriptGenerator.statementToCode(block, 'if_state');
-
-  const initCode = `var ${variable} = null;`;
+  let vari = variable;
+  let ineq = inq;
 
   switch (variable) {
     case 'i':
@@ -878,6 +874,9 @@ javascriptGenerator["advance_if"] = function (block) {
       break;
     case 'count':
       vari = 'count';
+      break;
+    case 'cm':
+      vari = 'cm';
       break;
     default:
   }
@@ -904,7 +903,7 @@ javascriptGenerator["advance_if"] = function (block) {
     default:
   }
 
-  const code = `${initCode}\nif ${vari} ${ineq} ` + value_if_value + ':\n' + branch;
+  const code = `if ${vari} ${ineq} ` + javascriptGenerator.valueToCode(block, 'if_value', javascriptGenerator.ORDER_ATOMIC) + ':\n' + javascriptGenerator.statementToCode(block, 'if_state');
 
   return code;
 };
@@ -916,7 +915,7 @@ Blockly.Blocks["advance_elseif"] = {
     this.appendDummyInput()
     .appendField('만약에')
     .appendField(new Blockly.FieldDropdown([
-      ["i", "i"],["count", "count"]]), "variable")
+      ["i", "i"],["count", "count"],["cm", "cm"]]), "variable")
     .appendField(new Blockly.FieldDropdown([
       ["==", "=="],[">", ">"],["<", "<"],[">=", ">="],["<=", "<="],["!=", "!="]]), "inequality")
     this.appendValueInput("if_value")
@@ -941,14 +940,15 @@ javascriptGenerator["advance_elseif"] = function (block) {
   let value_if_value = javascriptGenerator.valueToCode(block, 'if_value', javascriptGenerator.ORDER_ATOMIC);
   let branch = javascriptGenerator.statementToCode(block, 'if_state');
 
-  const initCode = `var ${variable} = null;`;
-
   switch (variable) {
     case 'i':
       vari = 'i';
       break;
     case 'count':
       vari = 'count';
+      break;
+    case 'cm':
+      vari = 'cm';
       break;
     default:
   }
@@ -975,7 +975,7 @@ javascriptGenerator["advance_elseif"] = function (block) {
     default:
   }
 
-  const code = `${initCode}\nif ${vari} ${ineq} ` + value_if_value + ':\n' + branch;
+  const code = `if ${vari} ${ineq} ` + value_if_value + ':\n' + branch;
 
   return code;
 };
@@ -1014,7 +1014,8 @@ Blockly.Blocks["screen"] = {
   init: function () {
     this.appendDummyInput()
     .appendField("화면 표시")
-    .appendField(new Blockly.FieldNumber(1))
+    .appendField(new Blockly.FieldDropdown([
+      ["i", "i"],["count", "count"],["cm", "cm"],["j","j"],["k","k"],["m","m"],["n","n"]]), "variable")
   this.setPreviousStatement(true, null);
   this.setNextStatement(true, "String");
   this.setColour("55A55B");
@@ -1024,15 +1025,38 @@ Blockly.Blocks["screen"] = {
 };
 
 javascriptGenerator["screen"] = function (block) {
-  var number_id = block.getFieldValue("ID");
-  var number_amount = block.getFieldValue("Amount");
-  var number_price = block.getFieldValue("Price");
-  var value_number = javascriptGenerator.valueToCode(
-    block,
-    "Number",
-    javascriptGenerator.ORDER_ATOMIC
-  );
-  var code = `buy(${number_id},${number_amount},${number_price},${value_number});\n`;
+  
+  const variable = block.getFieldValue("variable");
+  let vari = '';
+
+
+  switch (variable) {
+    case 'i':
+      vari = 'i';
+      break;
+    case 'count':
+      vari = 'count';
+      break;
+    case 'cm':
+      vari = 'cm';
+      break;
+    case 'j':
+      vari = 'j';
+      break;
+    case 'k':
+      vari = 'k';
+      break;
+    case 'm':
+      vari = 'm';
+      break;
+    case 'n':
+      vari = 'n';
+      break;
+    default:
+  }  
+  
+  const code = `print(${vari})` + javascriptGenerator.valueToCode(block, 'if_value', javascriptGenerator.ORDER_ATOMIC) + '\n' + javascriptGenerator.statementToCode(block, 'if_state');
+
   return code;
 };
 
@@ -1057,10 +1081,11 @@ Blockly.Blocks["variable"] = {
   init: function () {
   this.appendDummyInput()
     .appendField('변수')
-    .appendField(new Blockly.FieldVariable("i"))
+    .appendField(new Blockly.FieldDropdown([
+      ["i", "i"],["j","j"],["k","k"],["m","m"],["n","n"]]), "variable")
     .appendField('=')
-  this.appendValueInput("Fetch")
-    .setCheck("Number")
+  this.appendValueInput("if_value")
+    .setCheck("null")
   this.setColour("55A55B");
   this.setPreviousStatement(true, null);
   this.setNextStatement(true, "String");
@@ -1069,15 +1094,33 @@ Blockly.Blocks["variable"] = {
 };
 
 javascriptGenerator["variable"] = function (block) {
-  var number_id = block.getFieldValue("ID");
-  var number_amount = block.getFieldValue("Amount");
-  var number_price = block.getFieldValue("Price");
-  var value_number = javascriptGenerator.valueToCode(
-    block,
-    "Number",
-    javascriptGenerator.ORDER_ATOMIC
-  );
-  var code = `buy(${number_id},${number_amount},${number_price},${value_number});\n`;
+
+  let value_if_value = javascriptGenerator.valueToCode(block, 'if_value', javascriptGenerator.ORDER_ATOMIC);
+  const variable = block.getFieldValue("variable");
+
+  let vari = '';
+
+  switch (variable) {
+    case 'i':
+      vari = 'i';
+      break;
+    case 'j':
+      vari = 'j';
+      break;
+    case 'k':
+      vari = 'k';
+      break;
+    case 'm':
+      vari = 'm';
+      break;
+    case 'n':
+      vari = 'n';
+      break;
+    default:
+  }
+
+  const code = `${vari}=`+value_if_value+'\n' ;
+
   return code;
 };
 
