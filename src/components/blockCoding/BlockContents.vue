@@ -97,8 +97,8 @@ export default {
             soundClick: images.soundClick,
             walk: images.walk,
             walkClick: images.walkClick,
-            workspace: null,
             selectedField: 'BOT',
+            workspaces: {},
             isCodeVisible: false,
             code: null,
             editorOptions: {
@@ -275,9 +275,21 @@ export default {
             setCode :'setCode',
         }),
 
+        //카테고리(flyout 변경해도 데이터 유지)
+        loadWorkspace(field) {
+            const xmlText = this.workspaces[field];
+                if (xmlText) {
+                const xml = Blockly.Xml.textToDom(xmlText);
+                Blockly.Xml.domToWorkspace(xml, this.workspace);
+            }
+        },
+        saveWorkspace(field) {
+            const xml = Blockly.Xml.workspaceToDom(this.workspace);
+            this.workspaces[field] = Blockly.Xml.domToText(xml);
+        },
+
         handleWorkspaceChange() {
             this.updateAceEditorCode();
-            // this.appendInitCode();
 
             // 카테고리(flyout) 선택 후 다른 곳 클릭해도 안꺼지는 코드
             this.workspace.toolbox_.flyout_.autoClose = false;
@@ -359,17 +371,20 @@ export default {
 
         // 교구 선택 버튼을 눌렀을 때 데이터 초기화 후 누른버튼 카테고리 불러온다는 내용
         showAndClearCategoriesByField(field) {
-            // flyout 초기화
-            this.workspace.toolbox_.clearSelection();
 
-            this.workspace.clear();
+            // 현재 workspace의 상태 저장
+            this.saveWorkspace(this.selectedField);
+            Blockly.getMainWorkspace().clear();
             this.selectedField = field;
             const toolbox = this.getToolboxByField(field);
-            this.workspace.updateToolbox(toolbox);
+            Blockly.getMainWorkspace().updateToolbox(toolbox);
+            this.loadWorkspace(this.selectedField);
 
-            console.log("KitToolbox" + KitToolbox);
-            console.log("CarToolbox" + CarToolbox);
+            // 카테고리(flyout 이미지 추가)
             this.insertIcon();
+
+            // 카테고리(flyout) 닫기
+            Blockly.getMainWorkspace().toolbox_.flyout_.hide();
         },
 
         //카테고리에 이미지 넣는 부분
