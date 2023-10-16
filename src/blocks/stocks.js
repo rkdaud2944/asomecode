@@ -562,22 +562,13 @@ Blockly.Blocks["sensor_hand_detection"] = {
   },
 };
 
-javascriptGenerator["sensor_hand_detection"] = function (block) {
-  var number_id = block.getFieldValue("ID");
-  var number_amount = block.getFieldValue("Amount");
-  var number_price = block.getFieldValue("Price");
-  var value_number = javascriptGenerator.valueToCode(
-    block,
-    "Number",
-    javascriptGenerator.ORDER_ATOMIC
-  );
-  var code = `buy(${number_id},${number_amount},${number_price},${value_number});\n`;
+javascriptGenerator["sensor_hand_detection"] = function () {
+  let code = 'import motion_detect\nmotion_detect.start()\n';
   return code;
 };
 
 Blockly.Blocks["sensor_hand_check"] = {
   init: function () {
-    
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/common/measure_distance.png', 23, 23, '*'))
       .appendField("손동작 체크")
@@ -590,16 +581,8 @@ Blockly.Blocks["sensor_hand_check"] = {
   },
 };
 
-javascriptGenerator["sensor_hand_check"] = function (block) {
-  var number_id = block.getFieldValue("ID");
-  var number_amount = block.getFieldValue("Amount");
-  var number_price = block.getFieldValue("Price");
-  var value_number = javascriptGenerator.valueToCode(
-    block,
-    "Number",
-    javascriptGenerator.ORDER_ATOMIC
-  );
-  var code = `buy(${number_id},${number_amount},${number_price},${value_number});\n`;
+javascriptGenerator["sensor_hand_check"] = function () {
+  let code = 'cm = hcsr04.get_distance()\nmotion = motion_detect.get(cm)\n';
   return code;
 };
 
