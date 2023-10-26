@@ -1,9 +1,6 @@
 <template>
     <div class="header nav-padding">
-        <button @click="getPolly">123</button>
-        <a @click="goTo('/')">
-            <img :src="logom" class="subject-logo"/>
-        </a>
+        <button @click="getTTS('음성 테스트')">폴리 테스트</button>
     </div>
 
     <div class="row q-pa-md" style="padding: 0px;">
@@ -63,38 +60,29 @@ export default {
                 .catch(this.showError);
         },
         
-        // getPolly(){            
-        //     apiTTS.getPolly("가나다라")
-        //         .then(response => {
-        //             this.$refs.grid.setData(response.data);
-        //         })
-        //         .catch((response) => {
-        //             this.$q.notify({
-        //                 color: "deep-orange",
-        //                 textColor: "white",
-        //                 // message: response.data.message,
-        //                 message: response.data,
-        //             });
-        //         });
-        // },
-
-        getPolly(){      
-            apiTTS.getPolly("가나다라")
-                .then(response => {
-                    // 바이트 배열을 Blob으로 변환
-                    const blob = new Blob([response.data], { type: 'audio/mpeg' });  // 'audio/mpeg'는 예시이므로 서버에서 제공하는 실제 포맷에 맞게 변경해야 합니다.
-                    
-                    // Blob을 URL로 변환
-                    const url = window.URL.createObjectURL(blob);
-                    
-                    // Audio 객체 생성 및 재생
-                    const audio = new Audio(url);
-                    audio.play();
-                })
-                .catch(error => {
-                    console.log(error);
-                });
+        getTTS(text){
+            apiTTS.getTTS(text);
         }
+        
+        // getTTS(){      
+        //     apiTTS.getPolly("박강명조경찬 메에에롱")
+        //         .then(response => {
+                    
+        //             const audio = new Audio();
+                    
+        //             audio.src = "data:audio/mp3;base64," + response.data;
+
+        //             audio.play().then(() => {
+        //                 console.log('음악이 재생되고 있습니다.');
+        //             }).catch(error => {
+        //                 console.error('음악 재생 중 오류 발생:', error);
+        //             });
+
+        //         })
+        //         .catch(error => {
+        //             console.log(error);
+        //         });
+        // }
     },
 
 }
