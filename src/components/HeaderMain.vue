@@ -143,6 +143,8 @@ export default {
     },
 
     mounted() {
+        eventbus.on('triggerConnect', this.connect);
+
         eventbus.on("onSerialConnected", () => {
             this.btConnectColor = "primary";
         });
@@ -156,33 +158,27 @@ export default {
 
         let subToggle=true
 
-        function slide_menu(){
-        if(subToggle){
-            subBar.style.display="block";
-            subBar.classList.remove("up");
-            subBar.classList.add("down");
-            subToggle=!subToggle;
-            
-        }else{
-            subBar.classList.remove("down");
-            subBar.classList.add("up");
-            subToggle=!subToggle;
-        }
-        console.log(subBar.classList);
+        function slide_menu() {
+            if (subToggle){
+                subBar.style.display="block";
+                subBar.classList.remove("up");
+                subBar.classList.add("down");
+                subToggle=!subToggle;
+            } else {
+                subBar.classList.remove("down");
+                subBar.classList.add("up");
+                subToggle=!subToggle;
+            }
+            console.log(subBar.classList);
         }
         menu.addEventListener("click",slide_menu);
-
 
         window.addEventListener(
             "message",
             (event) => {
                 serial.runCode(event.data)
-                    // Do we trust the sender of this message?  (might be
-                    // different from what we originally opened, for example).
-                    if (event.origin !== "http://example.com") return;
-
-                    // event.source is popup
-                    // event.data is "hi there yourself!  the secret response is: rheeeeet!"
+                    if (event.origin !== "http://example.com")
+                    return;
             },
             false,
         );

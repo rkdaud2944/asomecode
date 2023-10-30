@@ -826,82 +826,169 @@ javascriptGenerator["advance_endless_repeat"] = function (block) {
 };
 
 Blockly.Blocks["advance_if"] = {
-  init: function () {
+  init: function() {
+     var dropdownGenerator = function() {
+        let dropdownOptions = [
+          ["i", "i"],["k", "k"],["j", "j"],["l", "l"]
+        ];
+        let addlightOption = false;
+        let addsoundOption = false;
+
+        const workspaceBlocks = Blockly.mainWorkspace.getAllBlocks();
+        for(let i = 0; i < workspaceBlocks.length; i++) {
+          if(workspaceBlocks[i].type === 'sensor_ultrasonic') {
+            dropdownOptions.push(["cm", "cm"]);
+          } else if(workspaceBlocks[i].type === 'sensor_hand_detection') {
+            dropdownOptions.push(["motion", "motion"]);
+          } else if(workspaceBlocks[i].type === 'advance_repeat') {
+            dropdownOptions.push(["count", "count"]);
+          } else if(workspaceBlocks[i].type === 'message') {
+            dropdownOptions.push(["msg", "msg"]);
+          } else if(workspaceBlocks[i].type === 'get_weather') {
+            dropdownOptions.push(["humidity", "humidity"],["temp", "temp"]["weather", "weather"]);
+          } else if(workspaceBlocks[i].type === 'prepare_button_ready') {
+            dropdownOptions.push(["bt", "bt"]);
+          } else if(workspaceBlocks[i].type === 'prepare_buzzer_ready') {
+            dropdownOptions.push(["buzzer", "buzzer"]);
+          } else if(workspaceBlocks[i].type === 'prepare_tm_ready') {
+            dropdownOptions.push(["bt", "bt"]);
+          } else if(workspaceBlocks[i].type === 'prepare_vibration_ready') {
+            dropdownOptions.push(["vs", "vs"]);
+          } else if(workspaceBlocks[i].type === 'led_ledtube_time') {
+            dropdownOptions.push(["h", "h"],["m", "m"]);
+          } else if(workspaceBlocks[i].type === 'button_push') {
+            dropdownOptions.push(["clicked", "clicked"]);
+          } else if(workspaceBlocks[i].type === 'button_info') {
+            dropdownOptions.push(["bt_value", "bt_value"]);
+          } else if(workspaceBlocks[i].type === 'sensor_humidity') {
+            dropdownOptions.push(["humidity", "humidity"]);
+          } else if(workspaceBlocks[i].type === 'sensor_temperature') {
+            dropdownOptions.push(["temperature", "temperature"]);
+          } else if(workspaceBlocks[i].type === 'sensor_water_level') {
+            dropdownOptions.push(["water", "water"]);
+          } else if(workspaceBlocks[i].type === 'sensor_brightness' ||  workspaceBlocks[i].type === 'sensor_brightness_complete') {
+            addlightOption = true;
+          } else if(workspaceBlocks[i].type === 'sensor_sound' ||  workspaceBlocks[i].type === 'sensor_sound_complete') {
+            addsoundOption = true;
+          } else if(workspaceBlocks[i].type === 'sensor_soil_humidity') {
+            dropdownOptions.push(["moisture", "moisture"]);
+          } else if(workspaceBlocks[i].type === 'sensor_vibration_sensor') {
+            dropdownOptions.push(["vibration", "vibration"]);
+          }
+        }
+      if(addsoundOption) {
+        dropdownOptions.push(["sound", "sound"]);
+      }
+      if(addlightOption) {
+        dropdownOptions.push(["light", "light"]);
+      }
+      return dropdownOptions;
+    };
+
     this.appendDummyInput()
       .appendField('만약에')
+      .appendField(new Blockly.FieldDropdown(dropdownGenerator), "variable")
       .appendField(new Blockly.FieldDropdown([
-        ["i", "i"],["count", "count"],["cm", "cm"]]), "variable")
-      .appendField(new Blockly.FieldDropdown([
-        ["==", "=="],[">", ">"],["<", "<"],[">=", ">="],["<=", "<="],["!=", "!="]]), "inequality")
+        ["==", "=="],
+        [">", ">"],
+        ["<", "<"],
+        [">=", ">="],
+        ["<=", "<="],
+        ["!=", "!="]
+      ]), "inequality")
     this.appendValueInput("if_value")
-      .setCheck("null")
+      .setCheck("null");
     this.appendStatementInput('if_state')
-      .appendField('')
+      .appendField('');
     this.setColour("55A55B");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setInputsInline(true);
-  },
+  }
 };
 
-javascriptGenerator["advance_if"] = function (block) {
-  
-  const variable = block.getFieldValue("variable");
-  const inq = block.getFieldValue('inequality');
-  let vari = variable;
-  let ineq = inq;
+javascriptGenerator["advance_if"] = function(block) {
+const variable = block.getFieldValue("variable");
+const ineq = block.getFieldValue('inequality');
 
-  switch (variable) {
-    case 'i':
-      vari = 'i';
-      break;
-    case 'count':
-      vari = 'count';
-      break;
-    case 'cm':
-      vari = 'cm';
-      break;
-    default:
-  }
+const code = `if ${variable} ${ineq} ` + javascriptGenerator.valueToCode(block, 'if_value', javascriptGenerator.ORDER_ATOMIC) + ':\n' + javascriptGenerator.statementToCode(block, 'if_state') + '\n';
 
-  switch (inq) {
-    case '==':
-      ineq = '==';
-      break;
-    case '>':
-      ineq = '>';
-      break;
-    case '<':
-      ineq = '<';
-      break;
-    case '>=':
-      ineq = '>=';
-      break;
-    case '<=':
-      ineq = '<=';
-      break;
-    case '!=':
-      ineq = '!=';
-      break;
-    default:
-  }
-
-  const code = `if ${vari} ${ineq} ` + javascriptGenerator.valueToCode(block, 'if_value', javascriptGenerator.ORDER_ATOMIC) + ':\n' + javascriptGenerator.statementToCode(block, 'if_state');
-
-  return code;
+return code;
 };
-
 
 
 Blockly.Blocks["advance_elseif"] = {
-  init: function () {
+  init: function() {
+     var dropdownGenerator = function() {
+        let dropdownOptions = [
+          ["i", "i"],["k", "k"],["j", "j"],["l", "l"]
+        ];
+        let addlightOption = false;
+        let addsoundOption = false;
+
+        const workspaceBlocks = Blockly.mainWorkspace.getAllBlocks();
+        for(let i = 0; i < workspaceBlocks.length; i++) {
+          if(workspaceBlocks[i].type === 'sensor_ultrasonic') {
+            dropdownOptions.push(["cm", "cm"]);
+          } else if(workspaceBlocks[i].type === 'sensor_hand_detection') {
+            dropdownOptions.push(["motion", "motion"]);
+          } else if(workspaceBlocks[i].type === 'advance_repeat') {
+            dropdownOptions.push(["count", "count"]);
+          } else if(workspaceBlocks[i].type === 'message') {
+            dropdownOptions.push(["msg", "msg"]);
+          } else if(workspaceBlocks[i].type === 'get_weather') {
+            dropdownOptions.push(["humidity", "humidity"],["temp", "temp"]["weather", "weather"]);
+          } else if(workspaceBlocks[i].type === 'prepare_button_ready') {
+            dropdownOptions.push(["bt", "bt"]);
+          } else if(workspaceBlocks[i].type === 'prepare_buzzer_ready') {
+            dropdownOptions.push(["buzzer", "buzzer"]);
+          } else if(workspaceBlocks[i].type === 'prepare_tm_ready') {
+            dropdownOptions.push(["bt", "bt"]);
+          } else if(workspaceBlocks[i].type === 'prepare_vibration_ready') {
+            dropdownOptions.push(["vs", "vs"]);
+          } else if(workspaceBlocks[i].type === 'led_ledtube_time') {
+            dropdownOptions.push(["h", "h"],["m", "m"]);
+          } else if(workspaceBlocks[i].type === 'button_push') {
+            dropdownOptions.push(["clicked", "clicked"]);
+          } else if(workspaceBlocks[i].type === 'button_info') {
+            dropdownOptions.push(["bt_value", "bt_value"]);
+          } else if(workspaceBlocks[i].type === 'sensor_humidity') {
+            dropdownOptions.push(["humidity", "humidity"]);
+          } else if(workspaceBlocks[i].type === 'sensor_temperature') {
+            dropdownOptions.push(["temperature", "temperature"]);
+          } else if(workspaceBlocks[i].type === 'sensor_water_level') {
+            dropdownOptions.push(["water", "water"]);
+          } else if(workspaceBlocks[i].type === 'sensor_brightness' ||  workspaceBlocks[i].type === 'sensor_brightness_complete') {
+            addlightOption = true;
+          } else if(workspaceBlocks[i].type === 'sensor_sound' ||  workspaceBlocks[i].type === 'sensor_sound_complete') {
+            addsoundOption = true;
+          } else if(workspaceBlocks[i].type === 'sensor_soil_humidity') {
+            dropdownOptions.push(["moisture", "moisture"]);
+          } else if(workspaceBlocks[i].type === 'sensor_vibration_sensor') {
+            dropdownOptions.push(["vibration", "vibration"]);
+          }
+        }
+      if(addsoundOption) {
+        dropdownOptions.push(["sound", "sound"]);
+      }
+      if(addlightOption) {
+        dropdownOptions.push(["light", "light"]);
+      }
+      return dropdownOptions;
+    };
+
     this.appendDummyInput()
-    .appendField('만약에')
-    .appendField(new Blockly.FieldDropdown([
-      ["i", "i"],["count", "count"],["cm", "cm"]]), "variable")
-    .appendField(new Blockly.FieldDropdown([
-      ["==", "=="],[">", ">"],["<", "<"],[">=", ">="],["<=", "<="],["!=", "!="]]), "inequality")
-    this.appendValueInput("if_value")
+      .appendField('만약에')
+      .appendField(new Blockly.FieldDropdown(dropdownGenerator), "variable")
+      .appendField(new Blockly.FieldDropdown([
+        ["==", "=="],
+        [">", ">"],
+        ["<", "<"],
+        [">=", ">="],
+        ["<=", "<="],
+        ["!=", "!="]
+      ]), "inequality")
+      this.appendValueInput("if_value")
       .setCheck("null")
     this.appendStatementInput('if_state')
       .appendField('')
@@ -911,57 +998,87 @@ Blockly.Blocks["advance_elseif"] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setInputsInline(true);
-  },
+  }
 };
 
-javascriptGenerator["advance_elseif"] = function (block) {
+javascriptGenerator["advance_elseif"] = function(block) {
+const variable = block.getFieldValue("variable");
+const ineq = block.getFieldValue('inequality');
+
+const code = `if ${variable} ${ineq} ` + javascriptGenerator.valueToCode(block, 'if_value', javascriptGenerator.ORDER_ATOMIC) + ' {\n' + javascriptGenerator.statementToCode(block, 'if_state') + '}\n';
+
+return code;
+};
+
+// Blockly.Blocks["advance_elseif"] = {
+//   init: function () {
+//     this.appendDummyInput()
+//     .appendField('만약에')
+//     .appendField(new Blockly.FieldDropdown([
+//       ["i", "i"],["count", "count"],["cm", "cm"]]), "variable")
+//     .appendField(new Blockly.FieldDropdown([
+//       ["==", "=="],[">", ">"],["<", "<"],[">=", ">="],["<=", "<="],["!=", "!="]]), "inequality")
+//     this.appendValueInput("if_value")
+//       .setCheck("null")
+//     this.appendStatementInput('if_state')
+//       .appendField('')
+//     this.appendStatementInput('if_state')
+//       .appendField('아니라면');
+//     this.setColour("55A55B");
+//     this.setPreviousStatement(true, null);
+//     this.setNextStatement(true, "String");
+//     this.setInputsInline(true);
+//   },
+// };
+
+// javascriptGenerator["advance_elseif"] = function (block) {
   
-  const variable = block.getFieldValue("variable");
-  const inq = block.getFieldValue('inequality');
-  let vari = '';
-  let ineq = '';
-  let value_if_value = javascriptGenerator.valueToCode(block, 'if_value', javascriptGenerator.ORDER_ATOMIC);
-  let branch = javascriptGenerator.statementToCode(block, 'if_state');
+//   const variable = block.getFieldValue("variable");
+//   const inq = block.getFieldValue('inequality');
+//   let vari = '';
+//   let ineq = '';
+//   let value_if_value = javascriptGenerator.valueToCode(block, 'if_value', javascriptGenerator.ORDER_ATOMIC);
+//   let branch = javascriptGenerator.statementToCode(block, 'if_state');
 
-  switch (variable) {
-    case 'i':
-      vari = 'i';
-      break;
-    case 'count':
-      vari = 'count';
-      break;
-    case 'cm':
-      vari = 'cm';
-      break;
-    default:
-  }
+//   switch (variable) {
+//     case 'i':
+//       vari = 'i';
+//       break;
+//     case 'count':
+//       vari = 'count';
+//       break;
+//     case 'cm':
+//       vari = 'cm';
+//       break;
+//     default:
+//   }
 
-  switch (inq) {
-    case '==':
-      ineq = '==';
-      break;
-    case '>':
-      ineq = '>';
-      break;
-    case '<':
-      ineq = '<';
-      break;
-    case '>=':
-      ineq = '>=';
-      break;
-    case '<=':
-      ineq = '<=';
-      break;
-    case '!=':
-      ineq = '!=';
-      break;
-    default:
-  }
+//   switch (inq) {
+//     case '==':
+//       ineq = '==';
+//       break;
+//     case '>':
+//       ineq = '>';
+//       break;
+//     case '<':
+//       ineq = '<';
+//       break;
+//     case '>=':
+//       ineq = '>=';
+//       break;
+//     case '<=':
+//       ineq = '<=';
+//       break;
+//     case '!=':
+//       ineq = '!=';
+//       break;
+//     default:
+//   }
 
-  const code = `if ${vari} ${ineq} ` + value_if_value + ':\n' + branch;
+//   const code = `if ${vari} ${ineq} ` + value_if_value + ':\n' + branch;
 
-  return code;
-};
+//   return code;
+// };
 
 Blockly.Blocks["int"] = {
   init: function () {
@@ -995,50 +1112,77 @@ javascriptGenerator["mark_int"] = function (block) {
 
 Blockly.Blocks["screen"] = {
   init: function () {
+    var dropdownGenerator = function() {
+      let dropdownOptions = [
+        ["i", "i"],["k", "k"],["j", "j"],["l", "l"]
+      ];
+      let addlightOption = false;
+      let addsoundOption = false;
+      const workspaceBlocks = Blockly.mainWorkspace.getAllBlocks();
+      for(let i = 0; i < workspaceBlocks.length; i++) {
+        if(workspaceBlocks[i].type === 'sensor_ultrasonic') {
+          dropdownOptions.push(["cm", "cm"]);
+        } else if(workspaceBlocks[i].type === 'sensor_hand_detection') {
+          dropdownOptions.push(["motion", "motion"]);
+        } else if(workspaceBlocks[i].type === 'advance_repeat') {
+          dropdownOptions.push(["count", "count"]);
+        } else if(workspaceBlocks[i].type === 'message') {
+          dropdownOptions.push(["msg", "msg"]);
+        } else if(workspaceBlocks[i].type === 'get_weather') {
+          dropdownOptions.push(["humidity", "humidity"],["temp", "temp"]["weather", "weather"]);
+        } else if(workspaceBlocks[i].type === 'prepare_button_ready') {
+          dropdownOptions.push(["bt", "bt"]);
+        } else if(workspaceBlocks[i].type === 'prepare_buzzer_ready') {
+          dropdownOptions.push(["buzzer", "buzzer"]);
+        } else if(workspaceBlocks[i].type === 'prepare_tm_ready') {
+          dropdownOptions.push(["bt", "bt"]);
+        } else if(workspaceBlocks[i].type === 'prepare_vibration_ready') {
+          dropdownOptions.push(["vs", "vs"]);
+        } else if(workspaceBlocks[i].type === 'led_ledtube_time') {
+          dropdownOptions.push(["h", "h"],["m", "m"]);
+        } else if(workspaceBlocks[i].type === 'button_push') {
+          dropdownOptions.push(["clicked", "clicked"]);
+        } else if(workspaceBlocks[i].type === 'button_info') {
+          dropdownOptions.push(["bt_value", "bt_value"]);
+        } else if(workspaceBlocks[i].type === 'sensor_humidity') {
+          dropdownOptions.push(["humidity", "humidity"]);
+        } else if(workspaceBlocks[i].type === 'sensor_temperature') {
+          dropdownOptions.push(["temperature", "temperature"]);
+        } else if(workspaceBlocks[i].type === 'sensor_water_level') {
+          dropdownOptions.push(["water", "water"]);
+        } else if(workspaceBlocks[i].type === 'sensor_brightness' ||  workspaceBlocks[i].type === 'sensor_brightness_complete') {
+          addlightOption = true;
+        } else if(workspaceBlocks[i].type === 'sensor_sound' ||  workspaceBlocks[i].type === 'sensor_sound_complete') {
+          addsoundOption = true;
+        } else if(workspaceBlocks[i].type === 'sensor_soil_humidity') {
+          dropdownOptions.push(["moisture", "moisture"]);
+        } else if(workspaceBlocks[i].type === 'sensor_vibration_sensor') {
+          dropdownOptions.push(["vibration", "vibration"]);
+        }
+      }
+    if(addsoundOption) {
+      dropdownOptions.push(["sound", "sound"]);
+    }
+    if(addlightOption) {
+      dropdownOptions.push(["light", "light"]);
+    }
+    return dropdownOptions;
+  };
+
     this.appendDummyInput()
-    .appendField("화면 표시")
-    .appendField(new Blockly.FieldDropdown([
-      ["i", "i"],["count", "count"],["cm", "cm"],["j","j"],["k","k"],["m","m"],["n","n"]]), "variable")
-  this.setPreviousStatement(true, null);
-  this.setNextStatement(true, "String");
-  this.setColour("55A55B");
-  this.setTooltip("buy id");
-  this.setHelpUrl("https://example.com");
+      .appendField('만약에')
+      .appendField(new Blockly.FieldDropdown(dropdownGenerator), "variable")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("55A55B");
+    this.setTooltip("buy id");
+    this.setHelpUrl("https://example.com");
   },
 };
 
-javascriptGenerator["screen"] = function (block) {
-  
+javascriptGenerator["screen"] = function(block) {
   const variable = block.getFieldValue("variable");
-  let vari = '';
-
-
-  switch (variable) {
-    case 'i':
-      vari = 'i';
-      break;
-    case 'count':
-      vari = 'count';
-      break;
-    case 'cm':
-      vari = 'cm';
-      break;
-    case 'j':
-      vari = 'j';
-      break;
-    case 'k':
-      vari = 'k';
-      break;
-    case 'm':
-      vari = 'm';
-      break;
-    case 'n':
-      vari = 'n';
-      break;
-    default:
-  }  
-  
-  const code = `print(${vari})` + javascriptGenerator.valueToCode(block, 'if_value', javascriptGenerator.ORDER_ATOMIC) + '\n' + javascriptGenerator.statementToCode(block, 'if_state');
+  const code = `print(${variable})` + javascriptGenerator.valueToCode(block, 'if_value', javascriptGenerator.ORDER_ATOMIC) + '\n' + javascriptGenerator.statementToCode(block, 'if_state');
 
   return code;
 };
@@ -1062,10 +1206,66 @@ javascriptGenerator["break"] = function () {
 
 Blockly.Blocks["variable"] = {
   init: function () {
+    var dropdownGenerator = function() {
+      let dropdownOptions = [
+        ["i", "i"],["k", "k"],["j", "j"],["l", "l"]
+      ];
+      let addlightOption = false;
+      let addsoundOption = false;
+      const workspaceBlocks = Blockly.mainWorkspace.getAllBlocks();
+      for(let i = 0; i < workspaceBlocks.length; i++) {
+        if(workspaceBlocks[i].type === 'sensor_ultrasonic') {
+          dropdownOptions.push(["cm", "cm"]);
+        } else if(workspaceBlocks[i].type === 'sensor_hand_detection') {
+          dropdownOptions.push(["motion", "motion"]);
+        } else if(workspaceBlocks[i].type === 'advance_repeat') {
+          dropdownOptions.push(["count", "count"]);
+        } else if(workspaceBlocks[i].type === 'message') {
+          dropdownOptions.push(["msg", "msg"]);
+        } else if(workspaceBlocks[i].type === 'get_weather') {
+          dropdownOptions.push(["humidity", "humidity"],["temp", "temp"]["weather", "weather"]);
+        } else if(workspaceBlocks[i].type === 'prepare_button_ready') {
+          dropdownOptions.push(["bt", "bt"]);
+        } else if(workspaceBlocks[i].type === 'prepare_buzzer_ready') {
+          dropdownOptions.push(["buzzer", "buzzer"]);
+        } else if(workspaceBlocks[i].type === 'prepare_tm_ready') {
+          dropdownOptions.push(["bt", "bt"]);
+        } else if(workspaceBlocks[i].type === 'prepare_vibration_ready') {
+          dropdownOptions.push(["vs", "vs"]);
+        } else if(workspaceBlocks[i].type === 'led_ledtube_time') {
+          dropdownOptions.push(["h", "h"],["m", "m"]);
+        } else if(workspaceBlocks[i].type === 'button_push') {
+          dropdownOptions.push(["clicked", "clicked"]);
+        } else if(workspaceBlocks[i].type === 'button_info') {
+          dropdownOptions.push(["bt_value", "bt_value"]);
+        } else if(workspaceBlocks[i].type === 'sensor_humidity') {
+          dropdownOptions.push(["humidity", "humidity"]);
+        } else if(workspaceBlocks[i].type === 'sensor_temperature') {
+          dropdownOptions.push(["temperature", "temperature"]);
+        } else if(workspaceBlocks[i].type === 'sensor_water_level') {
+          dropdownOptions.push(["water", "water"]);
+        } else if(workspaceBlocks[i].type === 'sensor_brightness' ||  workspaceBlocks[i].type === 'sensor_brightness_complete') {
+          addlightOption = true;
+        } else if(workspaceBlocks[i].type === 'sensor_sound' ||  workspaceBlocks[i].type === 'sensor_sound_complete') {
+          addsoundOption = true;
+        } else if(workspaceBlocks[i].type === 'sensor_soil_humidity') {
+          dropdownOptions.push(["moisture", "moisture"]);
+        } else if(workspaceBlocks[i].type === 'sensor_vibration_sensor') {
+          dropdownOptions.push(["vibration", "vibration"]);
+        }
+      }
+    if(addsoundOption) {
+      dropdownOptions.push(["sound", "sound"]);
+    }
+    if(addlightOption) {
+      dropdownOptions.push(["light", "light"]);
+    }
+    return dropdownOptions;
+  };
+
   this.appendDummyInput()
     .appendField('변수')
-    .appendField(new Blockly.FieldDropdown([
-      ["i", "i"],["j","j"],["k","k"],["m","m"],["n","n"]]), "variable")
+    .appendField(new Blockly.FieldDropdown(dropdownGenerator), "variable")
     .appendField('=')
   this.appendValueInput("if_value")
     .setCheck("null")
@@ -1077,32 +1277,9 @@ Blockly.Blocks["variable"] = {
 };
 
 javascriptGenerator["variable"] = function (block) {
-
   let value_if_value = javascriptGenerator.valueToCode(block, 'if_value', javascriptGenerator.ORDER_ATOMIC);
   const variable = block.getFieldValue("variable");
-
-  let vari = '';
-
-  switch (variable) {
-    case 'i':
-      vari = 'i';
-      break;
-    case 'j':
-      vari = 'j';
-      break;
-    case 'k':
-      vari = 'k';
-      break;
-    case 'm':
-      vari = 'm';
-      break;
-    case 'n':
-      vari = 'n';
-      break;
-    default:
-  }
-
-  const code = `${vari}=`+value_if_value+'\n' ;
+  const code = `${variable}=`+value_if_value+'\n' ;
 
   return code;
 };
@@ -1533,16 +1710,16 @@ javascriptGenerator["led_ready"] = function (block) {
 
   switch (variable) {
     case 'Red':
-      vari = 'Red';
+      vari = 'red';
       break;
     case 'Yellow':
-      vari = 'Yellow';
+      vari = 'yellow';
       break;
     case 'Green':
-      vari = 'Green';
+      vari = 'green';
       break;
     case 'Bright':
-      vari = 'Bright';
+      vari = 'bright';
       break;
     default:
   }
@@ -1557,7 +1734,7 @@ javascriptGenerator["led_ready"] = function (block) {
     default:
   }
 
-  const code = `${vari}.${pow}() `+ ':\n';
+  const code = `${vari}.${pow}() `+ '\n';
 
   return code;
 };
@@ -1586,27 +1763,83 @@ javascriptGenerator["led_setting"] = function (block) {
     case 'Red':
       vari = 'r';
       break;
-    case 'Yellow':
-      vari = 'y';
+    case 'Green':
+      vari = 'g';
       break;
     case 'Blue':
       vari = 'b';
       break;
     default:
   }
-  const code = `${vari}.duty` + "("+int_key+")" + ':\n';
+  const code = `${vari}.duty` + "("+int_key+")" + '\n';
 
   return code;
 };
 
 Blockly.Blocks["led_ledtube_ready"] = {
   init: function () {
-    this.appendDummyInput()
+    var dropdownGenerator = function() {
+    let dropdownOptions = [
+      ["i", "i"],["k", "k"],["j", "j"],["l", "l"]
+    ];
+    let addlightOption = false;
+    let addsoundOption = false;
+    const workspaceBlocks = Blockly.mainWorkspace.getAllBlocks();
+    for(let i = 0; i < workspaceBlocks.length; i++) {
+      if(workspaceBlocks[i].type === 'sensor_ultrasonic') {
+        dropdownOptions.push(["cm", "cm"]);
+      } else if(workspaceBlocks[i].type === 'sensor_hand_detection') {
+        dropdownOptions.push(["motion", "motion"]);
+      } else if(workspaceBlocks[i].type === 'advance_repeat') {
+        dropdownOptions.push(["count", "count"]);
+      } else if(workspaceBlocks[i].type === 'message') {
+        dropdownOptions.push(["msg", "msg"]);
+      } else if(workspaceBlocks[i].type === 'get_weather') {
+        dropdownOptions.push(["humidity", "humidity"],["temp", "temp"]["weather", "weather"]);
+      } else if(workspaceBlocks[i].type === 'prepare_button_ready') {
+        dropdownOptions.push(["bt", "bt"]);
+      } else if(workspaceBlocks[i].type === 'prepare_buzzer_ready') {
+        dropdownOptions.push(["buzzer", "buzzer"]);
+      } else if(workspaceBlocks[i].type === 'prepare_tm_ready') {
+        dropdownOptions.push(["bt", "bt"]);
+      } else if(workspaceBlocks[i].type === 'prepare_vibration_ready') {
+        dropdownOptions.push(["vs", "vs"]);
+      } else if(workspaceBlocks[i].type === 'led_ledtube_time') {
+        dropdownOptions.push(["h", "h"],["m", "m"]);
+      } else if(workspaceBlocks[i].type === 'button_push') {
+        dropdownOptions.push(["clicked", "clicked"]);
+      } else if(workspaceBlocks[i].type === 'button_info') {
+        dropdownOptions.push(["bt_value", "bt_value"]);
+      } else if(workspaceBlocks[i].type === 'sensor_humidity') {
+        dropdownOptions.push(["humidity", "humidity"]);
+      } else if(workspaceBlocks[i].type === 'sensor_temperature') {
+        dropdownOptions.push(["temperature", "temperature"]);
+      } else if(workspaceBlocks[i].type === 'sensor_water_level') {
+        dropdownOptions.push(["water", "water"]);
+      } else if(workspaceBlocks[i].type === 'sensor_brightness' ||  workspaceBlocks[i].type === 'sensor_brightness_complete') {
+        addlightOption = true;
+      } else if(workspaceBlocks[i].type === 'sensor_sound' ||  workspaceBlocks[i].type === 'sensor_sound_complete') {
+        addsoundOption = true;
+      } else if(workspaceBlocks[i].type === 'sensor_soil_humidity') {
+        dropdownOptions.push(["moisture", "moisture"]);
+      } else if(workspaceBlocks[i].type === 'sensor_vibration_sensor') {
+        dropdownOptions.push(["vibration", "vibration"]);
+      }
+    }
+      if(addsoundOption) {
+        dropdownOptions.push(["sound", "sound"]);
+      }
+      if(addlightOption) {
+        dropdownOptions.push(["light", "light"]);
+      }
+      return dropdownOptions;
+    };
+
+      this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led_tube.png', 23, 23, '*'))
       .appendField("LED 튜브에 표시")
-      .appendField(new Blockly.FieldDropdown([
-        ["i", "i"],["buzzer", "buzzer"],["h", "h"],["ht", "ht"],["bt", "bt"],["m", "m"],["vs", "vs"]]), "variable")
-    this.setPreviousStatement(true, null);
+      .appendField(new Blockly.FieldDropdown(dropdownGenerator), "variable")
+     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF61FF");
     this.setHelpUrl("https://example.com");
@@ -1615,35 +1848,7 @@ Blockly.Blocks["led_ledtube_ready"] = {
 
 javascriptGenerator["led_ledtube_ready"] = function (block) {
   const variable = block.getFieldValue("variable");
-  let vari = '';
-  // const initCode = `${variable} = None;`;/
-
-  switch (variable) {
-    case 'bt':
-      vari = 'bt';
-      break;
-    case 'buzzer':
-      vari = 'buzzer';
-      break;
-    case 'h':
-      vari = 'h';
-      break;
-    case 'ht':
-      vari = 'ht';
-      break;
-    case 'i':
-      vari = 'i';
-      break;
-    case 'm':
-      vari = 'm';
-      break;
-    case 'vs':
-      vari = 'vs';
-      break;
-    default:
-  }
-
-  const code = `tm1637.number(${vari})` + ':\n';
+  const code = `tm1637.number(${variable})` + '\n';
   return code;
 };
 
@@ -1735,7 +1940,7 @@ javascriptGenerator["led_ledtube_time"] = function (block) {
     default:
   }
 
-  const code = `tm1637.time(${vari},${vari2},${tog})` + ':\n';
+  const code = `tm1637.time(${vari},${vari2},${tog})` + '\n';
   return code;
 };
 
@@ -1978,7 +2183,7 @@ Blockly.Blocks["basic_car_ready"] = {
 };
 
 javascriptGenerator["basic_car_ready"] = function () {
-  var code = 'import asomecar\nimport hcsr04\nimport line_sensor\nasomebot.ready(1, 2, 7, 8)\nhcsr04.open(5, 6)\nline_sensor.ready()\n';
+  var code = 'import asomecar\nimport hcsr04\nimport line_sensor\nasomecar.ready(1, 2, 7, 8)\nhcsr04.open(5, 6)\nline_sensor.ready()\n';
   return code;
 };
 
