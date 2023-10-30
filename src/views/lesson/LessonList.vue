@@ -1,6 +1,9 @@
 <template>
     <div class="header nav-padding">
-        <button @click="getTTS('음성 테스트')">폴리 테스트</button>
+        <button @click="saveToBoard('test','테스트')">보드 저장</button>
+        <button @click="play('test')">지정 재생</button>
+        <button @click="remove('test')">지정 삭제</button>
+        <button @click="tempAudio('두번째 음성 테스트')">보드에 임시 저장 후 실행 - 삭제</button>
     </div>
 
     <div class="row q-pa-md" style="padding: 0px;">
@@ -62,27 +65,23 @@ export default {
         
         getTTS(text){
             apiTTS.getTTS(text);
-        }
+        },
+
+        saveToBoard(fileName,text){
+            apiTTS.saveToBoard(fileName,text);
+        },
+
+        tempAudio(text){
+            apiTTS.tempAudio(text);
+        },
+
+        play(text){            
+            apiTTS.play(text);
+        },
         
-        // getTTS(){      
-        //     apiTTS.getPolly("박강명조경찬 메에에롱")
-        //         .then(response => {
-                    
-        //             const audio = new Audio();
-                    
-        //             audio.src = "data:audio/mp3;base64," + response.data;
-
-        //             audio.play().then(() => {
-        //                 console.log('음악이 재생되고 있습니다.');
-        //             }).catch(error => {
-        //                 console.error('음악 재생 중 오류 발생:', error);
-        //             });
-
-        //         })
-        //         .catch(error => {
-        //             console.log(error);
-        //         });
-        // }
+        remove(text){            
+            apiTTS.remove(text);
+        }
     },
 
 }
