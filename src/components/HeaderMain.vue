@@ -23,6 +23,10 @@
                     <img :src="stop" class="ui-img"/>
                     <p class="ui-left-font" id="fs-three">멈추기</p>
                 </li>
+                <li class="ui-left-bt" @click="handleClick()">
+                    <img src="../../public/images/common/stop.png" class="ui-img">
+                    <p class="ui-left-font" id="fs-three"> {{ isRecording ? 'Stop' : 'Start' }} </p>
+                </li>
             </ul>
 
             <ul class="ui-right">
@@ -121,8 +125,8 @@ import VueBase from "@/mixin/vue-base";
 import bridgeIn from "@/globals/bridge-in";
 import eventbus from "@/globals/eventbus";
 import boardUpdater from "@/globals/board-updater";
-// import speakerManager from "@/globals/speaker-manager";
-// import sound from "@/globals/sound";
+import {stt} from '@/globals/stt.js';
+const fs = require('fs');
 
 export default {
     mixins: [VueBase, bridgeIn],
@@ -140,7 +144,11 @@ export default {
             reboot: images.reboot,
             stop: images.stop,
             updateImg: images.update,
-            help: images.help
+            help: images.help,
+                  
+            mediaRecorder: null,
+            audioChunks: [],
+            isRecording: false,  // 녹음 상태를 추적하는 데이터 속성
         }
     },
 
@@ -173,14 +181,6 @@ export default {
         console.log(subBar.classList);
         }
         menu.addEventListener("click",slide_menu);
-
-        // const tts = document.getElementById('tts');
-        // if (tts) {
-        //     tts.addEventListener('click', function() {
-        //         this.getPolly()
-        //         console.log('Element clicked!');
-        //     });
-        // }
     },
 
     methods: {
@@ -197,13 +197,58 @@ export default {
             this.openUrl('BO', 'app://./index.html?goto=backOffice');
         },
 
-        
-
         openEditor() {
             bridgeIn.openEditor('')
-        },
-        
+        },   
 
+        // stt 테스트 코드
+        async handleClick() {
+            if (this.isRecording) {
+                this.stopRecording();
+            } else {
+                this.startRecording();
+            }
+        },
+
+        async startRecording() {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            this.mediaRecorder = new MediaRecorder(stream);
+            this.mediaRecorder.ondataavailable = event => {
+                this.audioChunks.push(event.data);
+            };
+            this.mediaRecorder.start();
+            this.isRecording = true;  // 녹음 시작을 표시
+        },
+
+        async stopRecording() {
+            if (!this.mediaRecorder) return;
+
+            this.mediaRecorder.onstop = async () => {
+                const audioBlob = new Blob(this.audioChunks, { type: 'audio/wav' });
+                const filePath = '/sttaudiofile.wav'; // 실제 저장 경로로 변경하세요
+                fs.writeFile(filePath, Buffer.from(await audioBlob.arrayBuffer()), (err) => {
+                    if (err) {
+                        console.error(err);
+                        return;
+                    }
+                    
+                    // stt 함수 호출
+                    stt('Kor', filePath).then(() => {
+                        // STT 호출이 완료되면 파일 삭제
+                        fs.unlink(filePath, (err) => {
+                            if (err) {
+                                console.error('Error deleting the file:', err);
+                                return;
+                            }
+                            console.log('File deleted successfully');
+                        });
+                    });
+                });
+        };
+        this.mediaRecorder.stop();
+        this.isRecording = false;  // 녹음 중지를 표시
+    },
+        
         
     }
 }
