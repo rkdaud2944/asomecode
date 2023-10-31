@@ -1,5 +1,5 @@
 import mitt from 'mitt';
 
-const eventbus = mitt();
+const istance = mitt();
 
-export default eventbus;
+export default istance;

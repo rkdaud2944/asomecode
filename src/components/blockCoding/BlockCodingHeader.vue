@@ -16,7 +16,7 @@
                     <img :src="stopBlockHover" style="width: 35px; height: 35px;" />
                 </div>
                 <span class="delimiter">|</span>
-                <div class="btn btn-image" @click="onButtonClick()">
+                <div class="btn btn-image" @click="connect()">
                     <img :src="connectBlock" style="width: 96px; height: 17px;" />
                     <img :src="connectBlockHover" style="width: 96px; height: 17px;" />
                 </div>
@@ -38,8 +38,6 @@
 <script>
 import { mapState } from 'vuex'
 import images from "@/assets/images";
-import eventbus from "@/globals/eventbus";
-
 // import serial from "@/globals/serial";
 
 export default {
@@ -67,9 +65,6 @@ export default {
     },
 
     methods:{
-        onButtonClick() {
-            eventbus.emit('triggerConnect');
-        },
         send(){
             const codes = this.$store.state.viewcode; // $store.state.viewcode를 직접 참조
 

@@ -143,8 +143,6 @@ export default {
     },
 
     mounted() {
-        eventbus.on('triggerConnect', this.connect);
-
         eventbus.on("onSerialConnected", () => {
             this.btConnectColor = "primary";
         });
