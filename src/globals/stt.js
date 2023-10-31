@@ -27,7 +27,7 @@ export function stt(language, filePath) {
         }
 
         console.log(response.statusCode);
-        var text = JSON.parse(body).text
+        let text = JSON.parse(body).text
         console.log(text);
 
         if(text.includes('준비')){

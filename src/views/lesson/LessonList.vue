@@ -1,9 +1,13 @@
 <template>
     <div class="header nav-padding">
+        <p>tts</p>
         <button @click="saveToBoard('test','테스트')">보드 저장</button>
         <button @click="play('test')">지정 재생</button>
         <button @click="remove('test')">지정 삭제</button>
         <button @click="tempAudio('두번째 음성 테스트')">보드에 임시 저장 후 실행 - 삭제</button>
+        
+        <p>stt</p>
+        <button class="ui-left-font" id="fs-three" @click="handleClick()"> {{ isRecording ? 'Stop' : 'Start' }} </button>
     </div>
 
     <div class="row q-pa-md" style="padding: 0px;">
@@ -37,6 +41,8 @@ import images from "@/assets/images";
 import VueBase from '@/mixin/vue-base';
 import apiSubject from "@/api/subject";
 import apiTTS from "@/api/tts"
+import {stt} from '@/globals/stt.js';
+const fs = require('fs');
 
 export default {
     mixins: [VueBase],
@@ -46,7 +52,12 @@ export default {
             subject: {},
 
             logom: images.logom,
-            asomebot: images.asomebot
+            asomebot: images.asomebot,
+
+            //stt            
+            mediaRecorder: null,
+            audioChunks: [],
+            isRecording: false,  // 녹음 상태를 추적하는 데이터 속성
         }
     },
 
@@ -63,10 +74,7 @@ export default {
                 .catch(this.showError);
         },
         
-        getTTS(text){
-            apiTTS.getTTS(text);
-        },
-
+        //tts
         saveToBoard(fileName,text){
             apiTTS.saveToBoard(fileName,text);
         },
@@ -81,7 +89,48 @@ export default {
         
         remove(text){            
             apiTTS.remove(text);
-        }
+        },
+        
+        //stt
+        async handleClick() {
+            if (this.isRecording) {
+                this.stopRecording();
+            } else {
+                this.startRecording();
+            }
+        },
+
+        async startRecording() {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            this.mediaRecorder = new MediaRecorder(stream);
+            this.mediaRecorder.ondataavailable = event => {
+                this.audioChunks.push(event.data);
+            };
+            this.mediaRecorder.start();
+            this.isRecording = true;  // 녹음 시작을 표시
+        },
+
+        async stopRecording() {
+            if (!this.mediaRecorder) return;
+
+            this.mediaRecorder.onstop = async () => {
+                const audioBlob = new Blob(this.audioChunks, { type: 'audio/wav' });
+                const filePath = '/sttaudiofile.wav'; // 실제 저장 경로로 변경하세요
+                
+                try {
+                    const buffer = Buffer.from(await audioBlob.arrayBuffer());
+                    await fs.promises.writeFile(filePath, buffer);
+                    await stt('Kor', filePath);
+                    await fs.promises.unlink(filePath);
+                    console.log('File deleted successfully');
+                } catch (err) {
+                    console.error('Error during recording process:', err);
+                }
+                this.audioChunks = [];
+            };
+            this.mediaRecorder.stop();
+            this.isRecording = false;
+        },
     },
 
 }
