@@ -46,7 +46,6 @@ export default {
             'viewcode'
         ])
     },
-    
     data() {
         return {
             logom: images.logom,
@@ -65,11 +64,14 @@ export default {
     },
 
     methods:{
+        connect() {
+        window.opener.postMessage('connect');
+    },
         send(){
             const codes = this.$store.state.viewcode; // $store.state.viewcode를 직접 참조
 
             // codes 변수를 확인하기 위해 로그를 출력
-
+            console.log(codes);
 
             // 이후 코드를 수행
             window.opener.postMessage(codes);
@@ -83,7 +85,6 @@ export default {
             //     params: code,
             // };
             // window.opener.postMessage(JSON.stringify(msg));
-            console.log(codes);
         }
 
     }
