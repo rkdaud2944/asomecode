@@ -27,9 +27,9 @@ class SerialUnit {
         this.port.on('close', () => {
             if (this.port != null) this.onClosed()
         });
-        this.port.on('error', (error) => {
+        this.port.on('error', async (error) => {
             console.log(error);
-            this.close();
+            await this.close(); // 포트를 닫고 다시 열기 위해 await 사용
             this.onError("어썸보드에서 오류가 감지되었습니다.");
         });
 

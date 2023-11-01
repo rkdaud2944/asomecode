@@ -170,7 +170,11 @@ export default {
             console.log(subBar.classList);
         }
         menu.addEventListener("click",slide_menu);
-
+        window.addEventListener("message", (event) => {
+            if (event.data === 'connect') { // 'connect' 문자열을 팝업에서 보냈다고 가정
+                this.connect();
+            }
+        });
         window.addEventListener(
             "message",
             (event) => {

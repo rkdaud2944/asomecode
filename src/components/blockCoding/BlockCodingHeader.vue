@@ -65,8 +65,8 @@ export default {
 
     methods:{
         connect() {
-        window.opener.postMessage('connect');
-    },
+            window.opener.postMessage('connect');
+        },
         send(){
             const codes = this.$store.state.viewcode; // $store.state.viewcode를 직접 참조
 
