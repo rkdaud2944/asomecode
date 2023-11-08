@@ -1,5 +1,5 @@
-import mitt from 'mitt';
+import mitt from 'mitt'
 
-const istance = mitt();
+const instance = mitt();
 
-export default istance;
+export default instance;

@@ -1,8 +1,7 @@
 <template>
     <div class="resizer" @mousedown="startResize"></div>
         <div>
-            <div :style="{ height: consoleHeight + 'px' }" ref="console" class="q-pa-md" id="console">
-
+            <div :style="{ height: consoleHeight + 'px' }" ref="console resizable" class="q-pa-md" id="console">
                 <q-page-sticky :offset="[20, -40]">
                     <q-expansion-item v-model="arrow" class="shadow-1 overflow-hidden" dense
                         style="border-radius: 30px; width: 40px;"
@@ -70,6 +69,13 @@ export default {
             if (this.rows.length > 256) {
                 this.rows = this.rows.slice(-256);
             }
+
+            this.$nextTick(() => {
+                if (this.$refs.console) {
+                    this.$refs.console.scrollTop = this.$refs.console.scrollHeight;
+                }
+            });
+
         }, 500);
     },
 
@@ -78,14 +84,6 @@ export default {
     },
 
     methods: {
-        scrollToBottom() {
-            this.$nextTick(() => {
-                const consoleElement = this.$refs.console;
-                if (consoleElement) {
-                    consoleElement.scrollTop = consoleElement.scrollHeight;
-                }
-            });
-        },
         onConsoleWindowControl() {
             if (this.consoleHeight >= 51) {
                 this.consoleEnabled = true;
@@ -133,13 +131,7 @@ export default {
         },
     },
 
-    watch: {   
-        rows: {
-            handler() {
-                this.scrollToBottom();
-            },
-            deep: true 
-        },
+    watch: {
         consoleHeight : function(value){
             if (value >= 51) this.arrow = false;
         },

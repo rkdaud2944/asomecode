@@ -10,7 +10,8 @@
                     <img :src="connectImg"  class="ui-img"/>
                     <p class="ui-left-font" id="fs-four">연결하기</p>
                 </li>
-                <li class="ui-left-bt" @click="goTo('/')">
+                <li class="ui-left-bt" @click="goTo('/')" id="tts">
+                <!-- <li class="ui-left-bt" @getPolly="getPolly"> -->
                     <img :src="home"  class="ui-img"/>
                     <p class="ui-left-font" id="fs-one">홈</p>
                 </li>
@@ -155,34 +156,21 @@ export default {
 
         let subToggle=true
 
-        function slide_menu() {
-            if (subToggle){
-                subBar.style.display="block";
-                subBar.classList.remove("up");
-                subBar.classList.add("down");
-                subToggle=!subToggle;
-            } else {
-                subBar.classList.remove("down");
-                subBar.classList.add("up");
-                subToggle=!subToggle;
-            }
-            console.log(subBar.classList);
+        function slide_menu(){
+        if(subToggle){
+            subBar.style.display="block";
+            subBar.classList.remove("up");
+            subBar.classList.add("down");
+            subToggle=!subToggle;
+            
+        }else{
+            subBar.classList.remove("down");
+            subBar.classList.add("up");
+            subToggle=!subToggle;
+        }
+        console.log(subBar.classList);
         }
         menu.addEventListener("click",slide_menu);
-        window.addEventListener("message", (event) => {
-            if (event.data === 'connect') { // 'connect' 문자열을 팝업에서 보냈다고 가정
-                this.connect();
-            }
-        });
-        window.addEventListener(
-            "message",
-            (event) => {
-                serial.runCode(event.data)
-                    if (event.origin !== "http://example.com")
-                    return;
-            },
-            false,
-        );
     },
 
     methods: {
@@ -201,12 +189,7 @@ export default {
 
         openEditor() {
             bridgeIn.openEditor('')
-        },
-
-        runCode(){
-            console.log('aaaaaa')
-        },
-
+        },           
     }
 }
 </script>

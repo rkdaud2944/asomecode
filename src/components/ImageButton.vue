@@ -1,5 +1,5 @@
 <template>
-    <q-img class="image-button" :src="imageSource" />
+    <q-img class="image-button" :src="imageSource" @mouseover="isMouseOver = true" @mouseleave="isMouseOver = false" />
 </template>
 
 <script>
