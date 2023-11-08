@@ -6,10 +6,10 @@
             </a>
         </div>
         <div class="col menu">
-            <ImageButton :src="notice" @click="onClickNotice"/>
-            <ImageButton :src="library" />
-            <ImageButton :src="community" />
-            <ImageButton :src="faq" />
+            <ImageButton :src="noticeImage" @mouseover="onMouseOver('notice')" @mouseleave="onMouseLeave('notice')" @click="onClickNotice"/>
+            <ImageButton :src="communityImage" @mouseover="onMouseOver('community')" @mouseleave="onMouseLeave('community')"/>
+            <ImageButton :src="libraryImage" @mouseover="onMouseOver('library')" @mouseleave="onMouseLeave('library')"/>
+            <ImageButton :src="faqImage" @mouseover="onMouseOver('faq')" @mouseleave="onMouseLeave('faq')"/>
         </div>
     </div> 
 
@@ -52,7 +52,10 @@ export default {
     data() {
         return {
             subjects: {},
-
+            isMouseOverNotice: false,
+            isMouseOverCommunity: false,
+            isMouseOverLibrary: false,
+            isMouseOverFaq: false,
             logo2: images.logo2,
             notice: images.notice,
             noticeHover: images.noticeHover,
@@ -65,12 +68,39 @@ export default {
             asomeitQuestionMark: images.asomeitQuestionMark,
         }
     },
+    computed: {
+        noticeImage() {
+            return this.isMouseOverNotice ? this.noticeHover : this.notice;
+        },
+        communityImage() {
+            return this.isMouseOverCommunity ? this.communityHover : this.community;
+        },
+        libraryImage() {
+            return this.isMouseOverLibrary ? this.libraryHover : this.library;
+        },
+        faqImage() {
+            return this.isMouseOverFaq ? this.faqHover : this.faq;
+        }
+    },
 
     mounted() {
         this.getSubjectSet()
     },
 
     methods: {
+        onMouseOver(type) {
+            if(type === 'notice') this.isMouseOverNotice = true;
+            if(type === 'community') this.isMouseOverCommunity = true;
+            if(type === 'library') this.isMouseOverLibrary = true;
+            if(type === 'faq') this.isMouseOverFaq = true;
+        },
+
+        onMouseLeave(type) {
+            if(type === 'notice') this.isMouseOverNotice = false;
+            if(type === 'community') this.isMouseOverCommunity = false;
+            if(type === 'library') this.isMouseOverLibrary = false;
+            if(type === 'faq') this.isMouseOverFaq = false;
+        },
         onClickNotice() {
             this.$router.push({ path: '/notice/list'});
         },

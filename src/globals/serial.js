@@ -15,53 +15,58 @@ const fs = require('fs');
 class SerialUnit {
     async open(portName) {
 
+        this.close();
+        await this.close();
+    
         this.port = new SerialPort({
             path: portName,
             baudRate: 115200,
             autoOpen: false,
             lock: false,
         });
-
+    
         this.parser = new ReadlineParser({ delimiter: '\r\n' });
         this.port.pipe(this.parser);
-
+    
         this.parser.on('data', (msg) => this.onReceived(msg));
         this.port.on('close', () => {
-            if (this.port != null) this.onClosed()
+            if (this.port != null) this.onClosed();
         });
         this.port.on('error', (error) => {
             console.log(error);
             this.close();
             this.onError("어썸보드에서 오류가 감지되었습니다.");
         });
-
+    
         try {
             await this.port.open();            
             this.onOpened();
-            // this.writeLn("import os; os.uname()");
         } catch (error) {
             console.log(error);
             this.onError("어썸보드에 연결할 수가 없습니다.");
             return;
         }
     }
-
     
     close() {
         if (!this.port) return;
-
-        const port = this.port;
-
-        this.port = null;
-        this.parser = null;
-
-        try {
-            port.close();            
-        } catch (error) {
-            console.log(error);
+    
+        if (this.parser) {
+            this.parser.removeAllListeners('data');
+            this.parser = null;
         }
+        
+        if (this.port.isOpen) {
+            try {
+                this.port.close();            
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    
+        this.port = null;
     }
-
+    
     write(text) {
         if (this.port == null) return;
         try {

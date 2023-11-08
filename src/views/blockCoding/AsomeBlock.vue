@@ -9,17 +9,9 @@
 </template>
 
 <script setup>
-
-
-
 </script>
- 
-
 <script>
-
-
-
-import images from "@/assets/images"; 
+import images from "@/assets/images";
 import BlockCodingHeader from "@/components/blockCoding/BlockCodingHeader.vue";
 import BlockContents from "@/components/blockCoding/BlockContents.vue";
 export default {
@@ -38,7 +30,6 @@ export default {
         }
     },
 }
-
 </script>
 
 <style>
@@ -48,6 +39,4 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
-
-
 </style>
