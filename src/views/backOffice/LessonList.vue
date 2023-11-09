@@ -38,7 +38,7 @@ export default {
                 ...this.paramsList,
                 ...this.paramsFilter,
             }
-        }, 
+        },
     },
 
     methods: {
@@ -59,7 +59,6 @@ export default {
                 })
                 .catch(this.showError);
         },
-        
     },
 }
 </script>

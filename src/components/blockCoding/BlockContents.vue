@@ -13,9 +13,8 @@
         <button class="c-button" :class="{ selected: selectedField === 'CAR' }" @click="showAndClearCategoriesByField('CAR')">
             <img class="img-button" :src="selectedField === 'CAR' ? asomecarIconClick : asomecarIcon"  :style="{ height: '16px', width: '14px' }"/> Asomecar
         </button>
-        <!-- 아래 코드 주석해도 영향 없음. options 변수 없음. 확인 바람 -->
         <BlocklyComponent id="blockly2" :options="options" ref="foo"></BlocklyComponent>
-        <!-- 에이스에디터 버튼 -->
+        <!-- 에이스에디터 띄우는 버튼 -->
         <div id="code" class="cursor-pointer">
             <img :src="sourceView" @click="toggleCodeVisibility" />
         </div>
@@ -31,7 +30,7 @@
                 lang="python"
                 v-model:value="code"
                 :options="editorOptions"
-                :style="{ height: '100%', width: '100%' }"/>
+                :style="{ height: '100%', width: '95%' }"/>
       </div>
     </div>
 </div>
@@ -47,9 +46,9 @@ import "../../blocks/stocks";
 import { javascriptGenerator } from "blockly/javascript";
 import images from "@/assets/images";
 import Blockly from "blockly";
-import { BotToolbox } from "@/blocks/B_BlockContents";
-import { KitToolbox } from "@/blocks/K_BlockContents";
-import { CarToolbox } from "@/blocks/C_BlockContents";
+import { BotToolbox } from "@/blocks/blockcontents_bot";
+import { KitToolbox } from "@/blocks/blockcontents_kit";
+import { CarToolbox } from "@/blocks/blockcontents_car";
 import { VAceEditor } from 'vue3-ace-editor';
 import 'ace-builds/src-noconflict/mode-python';
 
@@ -98,8 +97,8 @@ export default {
             soundClick: images.soundClick,
             walk: images.walk,
             walkClick: images.walkClick,
-            workspace: null,
             selectedField: 'BOT',
+            workspaces: {},
             isCodeVisible: false,
             code: null,
             editorOptions: {
@@ -275,6 +274,20 @@ export default {
         ...mapMutations({
             setCode :'setCode',
         }),
+
+        //카테고리(flyout 변경해도 데이터 유지)
+        loadWorkspace(field) {
+            const xmlText = this.workspaces[field];
+                if (xmlText) {
+                const xml = Blockly.Xml.textToDom(xmlText);
+                Blockly.Xml.domToWorkspace(xml, this.workspace);
+            }
+        },
+        saveWorkspace(field) {
+            const xml = Blockly.Xml.workspaceToDom(this.workspace);
+            this.workspaces[field] = Blockly.Xml.domToText(xml);
+        },
+
         handleWorkspaceChange() {
             this.updateAceEditorCode();
 
@@ -283,23 +296,65 @@ export default {
         },
 
         // 에이스 에디터에 그려지게하는 코드 (준비블록에 붙여야만 표시하는 코드 포함)
+        // 변수선언 관련 블록들 선언문 최상단에 선언하게 하는거
         updateAceEditorCode() {
-            const targetBlockType = "basic_ready";
-            // Blockly 워크스페이스에서 특정 블록을 찾습니다.
-            const targetBlock = this.workspace.getAllBlocks().find(block => block.type === targetBlockType);
- 
-            if (targetBlock) {
-                const codeForTargetBlock = javascriptGenerator.blockToCode(targetBlock);
-                // Ace Editor와 뮤테이션에 코드를 넣기
-                this.code = codeForTargetBlock;
-                this.setCode(codeForTargetBlock);
-            } else {
-                this.code = "";
-                this.setCode("");
+            let initCodes = new Set();  // 중복값 허용하지 않는 Set 객체 사용
+            const allBlocks = this.workspace.getAllBlocks();
+            const targetBlockTypesToCheck = ["advance_if", "advance_elseif", "screen", "variable", "led_ledtube_ready", "led_ledtube_time"];
+
+            const targetBlockTypes = ["basic_ready", "basic_kit_ready", "basic_car_ready"];
+
+            targetBlockTypesToCheck.forEach(blockType => {
+                const blocks = allBlocks.filter(block => block.type === blockType);
+
+                blocks.forEach(targetBlock => {
+                    const isConnectedToTarget = this.isConnectedToBlocks(targetBlock, targetBlockTypes);
+
+                    if (isConnectedToTarget) {
+                        const variableFieldValue = targetBlock.getFieldValue("variable");
+                        const variable2FieldValue = targetBlock.getFieldValue("variable2");
+                        
+                        if (variableFieldValue) {
+                            initCodes.add(`${variableFieldValue} = None\n`);
+                        }
+
+                        if (variable2FieldValue) {
+                            initCodes.add(`${variable2FieldValue} = None\n`);
+                        }
+                    }
+                });
+            });
+
+            let codeForTargetBlock = "";
+            allBlocks.forEach(block => {
+                if (targetBlockTypes.includes(block.type)) {
+                    codeForTargetBlock += javascriptGenerator.blockToCode(block);
+                }
+            });
+
+            // 생성된 초기화 코드들을 시작 부분에 추가
+            let combinedInitCode = [...initCodes].join('');
+            if (!codeForTargetBlock.startsWith(combinedInitCode)) {
+                codeForTargetBlock = combinedInitCode + codeForTargetBlock;
             }
 
+            if (this.code !== codeForTargetBlock) {
+                this.code = codeForTargetBlock;
+                this.setCode(codeForTargetBlock);
+            }
         },
 
+        // 연결된 블록 확인을 위한 추가 메서드
+        isConnectedToBlocks(block, targetTypes) {
+            let parent = block.getParent();
+            while (parent) {
+                if (targetTypes.includes(parent.type)) {
+                    return true;
+                }
+                parent = parent.getParent();
+            }
+            return false;
+        },
         // 교구 선택 버튼들
         getToolboxByField(field) {
             switch (field) {
@@ -313,20 +368,23 @@ export default {
                     return {};
             }
         },
-        
+
         // 교구 선택 버튼을 눌렀을 때 데이터 초기화 후 누른버튼 카테고리 불러온다는 내용
         showAndClearCategoriesByField(field) {
-            // flyout 초기화
-            this.workspace.toolbox_.clearSelection();
 
-            this.workspace.clear();
+            // 현재 workspace의 상태 저장
+            this.saveWorkspace(this.selectedField);
+            Blockly.getMainWorkspace().clear();
             this.selectedField = field;
             const toolbox = this.getToolboxByField(field);
-            this.workspace.updateToolbox(toolbox);
+            Blockly.getMainWorkspace().updateToolbox(toolbox);
+            this.loadWorkspace(this.selectedField);
 
-            console.log("KitToolbox" + KitToolbox);
-            console.log("CarToolbox" + CarToolbox);
+            // 카테고리(flyout 이미지 추가)
             this.insertIcon();
+
+            // 카테고리(flyout) 닫기
+            Blockly.getMainWorkspace().toolbox_.flyout_.hide();
         },
 
         //카테고리에 이미지 넣는 부분
