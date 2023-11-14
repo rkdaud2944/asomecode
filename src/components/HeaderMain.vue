@@ -174,15 +174,6 @@ export default {
                 this.connect();
             }
         });
-        window.addEventListener(
-            "message",
-            (event) => {
-                serial.runCode(event.data)
-                    if (event.origin !== "http://example.com")
-                    return;
-            },
-            false,
-        );
     },
 
     methods: {

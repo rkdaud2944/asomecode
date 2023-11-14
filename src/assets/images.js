@@ -80,6 +80,8 @@ import sound from "@/assets/images/blockCoding/toolbox/sound.png";
 import soundClick from "@/assets/images/blockCoding/toolbox/sound-click.png"
 import walk from "@/assets/images/blockCoding/toolbox/walk.png";
 import walkClick from "@/assets/images/blockCoding/toolbox/walk-click.png"
+import ai from "@/assets/images/blockCoding/toolbox/ai.png"
+import aiClick from "@/assets/images/blockCoding/toolbox/ai-click.png"
 
 
 import arrow from "@/assets/images/arrow.png";
@@ -166,6 +168,8 @@ export default {
     sound,
     soundClick,
     walk,
-    walkClick
+    walkClick,
+    ai,
+    aiClick
 
 };

@@ -114,5 +114,19 @@ export { BotToolbox };
                     { "kind": "block", "gap": "8", "type": "get_weather" },
                 ],
             },
+            {
+                "kind": "category",
+                "name": "AI",
+                "field" : "BOT",
+                "colour": "5058D1",
+                "contents": [
+                    { "kind": "block", "gap": "8", "type": "internet_connect" },
+                    { "kind": "block", "gap": "8", "type": "nonpass_wifi" },
+                    { "kind": "block", "gap": "8", "type": "get_message" },
+                    { "kind": "block", "gap": "8", "type": "message" },
+                    { "kind": "block", "gap": "8", "type": "send_message" },
+                    { "kind": "block", "gap": "8", "type": "get_weather" },
+                ],
+            },
         ]
     };

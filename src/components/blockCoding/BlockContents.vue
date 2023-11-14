@@ -97,6 +97,8 @@ export default {
             soundClick: images.soundClick,
             walk: images.walk,
             walkClick: images.walkClick,
+            ai: images.ai,
+            aiClick: images.aiClick,
             selectedField: 'BOT',
             workspaces: {},
             isCodeVisible: false,
