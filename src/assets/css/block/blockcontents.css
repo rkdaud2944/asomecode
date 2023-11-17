@@ -157,7 +157,9 @@ button.selected {
     transform: scale(1);
     position: relative;
 } */
-
+.stt-box {
+    color: black;
+}
 body{
     
     overflow: hidden; /* 스크롤 바 숨김 */

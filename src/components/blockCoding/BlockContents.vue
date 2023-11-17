@@ -1,7 +1,9 @@
 <template>
+    <Modal :isVisible="showModal"/>
 <div class="pre-setting">
+    
 
-     <!-- 교구 선택 버튼, 에이스에디터 여닫이버튼 -->
+  <!-- 교구 선택 버튼, 에이스에디터 여닫이버튼 -->
     <div>
         <!-- 교구선택버튼 -->
         <button class="b-button" :class="{ selected: selectedField === 'BOT' }" @click="showAndClearCategoriesByField('BOT')">
@@ -13,6 +15,13 @@
         <button class="c-button" :class="{ selected: selectedField === 'CAR' }" @click="showAndClearCategoriesByField('CAR')">
             <img class="img-button" :src="selectedField === 'CAR' ? asomecarIconClick : asomecarIcon"  :style="{ height: '16px', width: '14px' }"/> Asomecar
         </button>
+
+        <div class="stt-box">
+            <button class="ui-left-font" id="fs-three" @click="handleClick()"> {{ isRecording ? 'Stop' : 'Start' }} </button>
+   
+            <p>{{ recognizedText }}</p>
+        </div>
+
         <BlocklyComponent id="blockly2" :options="options" ref="foo"></BlocklyComponent>
         <!-- 에이스에디터 띄우는 버튼 -->
         <div id="code" class="cursor-pointer">
@@ -51,6 +60,9 @@ import { KitToolbox } from "@/blocks/blockcontents_kit";
 import { CarToolbox } from "@/blocks/blockcontents_car";
 import { VAceEditor } from 'vue3-ace-editor';
 import 'ace-builds/src-noconflict/mode-python';
+import {stt} from '@/globals/stt.js';
+import Modal from '@/components/SttModal.vue';
+const fs = require('fs');
 
 
 export default {
@@ -62,7 +74,8 @@ export default {
         },
     },
     components: {
-        VAceEditor
+        VAceEditor,
+        Modal
     },
     data() {
         return {
@@ -106,7 +119,11 @@ export default {
             editorOptions: {
                 enableBasicAutocompletion: true,
                 enableLiveAutocompletion: true
-            }
+            },
+            isRecording: false,  // 녹음 상태를 추적하는 데이터 속성
+            recognizedText: '',  // 인식된 텍스트를 저장할 새로운 속성
+            mediaRecorder: null,
+            audioChunks: [],
         }
     },
     beforeMount() {
@@ -458,6 +475,58 @@ export default {
                     window.dispatchEvent(new Event('resize'));
                 }, 0);
             });
+        },
+        
+        //stt
+        async handleClick() {
+            if (this.isRecording) {
+                this.stopRecording();
+            } else {
+                this.startRecording();
+            }
+        },
+
+        async startRecording() {
+            this.showModal = true;
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            this.mediaRecorder = new MediaRecorder(stream);
+            this.mediaRecorder.ondataavailable = (event) => {
+                this.audioChunks.push(event.data);
+            };
+            this.mediaRecorder.start();
+
+            setTimeout(() => {
+                this.stopRecording();
+                this.showModal = false;
+            }, 3000);
+            this.isRecording = true; // 녹음이 시작됨
+        },
+
+        async stopRecording() {
+            if (!this.mediaRecorder) return;
+
+            this.mediaRecorder.onstop = async () => {
+            const audioBlob = new Blob(this.audioChunks, { type: 'audio/wav' });
+            const filePath = '/sttaudiofile.wav';
+
+            try {
+                const buffer = Buffer.from(await audioBlob.arrayBuffer());
+                await fs.promises.writeFile(filePath, buffer);
+
+                // stt 함수를 호출하고 인식된 텍스트를 받아옴
+                const recognizedText = await stt('Kor', filePath);
+
+                // Vue.nextTick을 사용하여 데이터 갱신
+                this.recognizedText = recognizedText;
+                await fs.promises.unlink(filePath);
+                console.log('파일 삭제 성공');
+            } catch (err) {
+                    console.error('녹음 프로세스 중 오류:', err);
+            }
+                this.audioChunks = [];
+            };
+            this.mediaRecorder.stop();
+            this.isRecording = false;
         },
 
     },
