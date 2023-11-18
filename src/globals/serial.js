@@ -145,10 +145,14 @@ const seiral = {
     },
 
     write(text) {
+        // 한글만 인코딩하여 전송
+        text = text.replace(/[ㄱ-ㅎㅏ-ㅣ가-힣]/g, (match) => `{{${encodeURIComponent(match)}}}`);
         if (serialUnit) serialUnit.write(text);
     },
 
     writeLn(text) {
+        // 한글만 인코딩하여 전송
+        text = text.replace(/[ㄱ-ㅎㅏ-ㅣ가-힣]/g, (match) => `{{${encodeURIComponent(match)}}}`);
         this.write(text +"\r\n");
     },
 

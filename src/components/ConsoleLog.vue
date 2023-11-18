@@ -58,6 +58,9 @@ export default {
             data = data.replaceAll(" ", "&nbsp;");
             data = data.replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;");
 
+            // 한글 디코딩
+            data = this.decodeKoreanCharacters(data)
+            
             this.buffer.push(data);
         });
 
@@ -112,8 +115,7 @@ export default {
             this.resizing = false
             window.removeEventListener('mousemove', this.resizeHandler)
             window.removeEventListener('mouseup', this.stopResize)
-        }
-        ,
+        },
         send() {
 
             if (this.text.startsWith("/list")) {
@@ -131,6 +133,17 @@ export default {
             serial.writeLn(this.text);
             this.text = "";
         },
+        decodeKoreanCharacters(str) {
+            const koreanEncodedRegex = /{{(.*?)}}/g;
+            return str.replace(koreanEncodedRegex, (match, p1) => {
+                try {
+                    return decodeURIComponent(p1);
+                } catch (e) {
+                    console.error('Decode error:', e);
+                    return match; // 디코딩 실패 시 원본 반환
+                }
+            });
+        }
     },
 
     watch: {   
