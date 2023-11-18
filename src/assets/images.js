@@ -85,7 +85,9 @@ import aiClick from "@/assets/images/blockCoding/toolbox/ai-click.png"
 
 
 import arrow from "@/assets/images/arrow.png";
-import sttmodal from "@/assets/images/sttmodal.png";
+import sttmodalon from "@/assets/images/sttmodalon.png";
+import sttmodaloff from "@/assets/images/sttmodaloff.png";
+import sttmodalcheck from "@/assets/images/sttmodalcheck.png";
 
 export default {
     logom,
@@ -147,7 +149,9 @@ export default {
     asomecarIcon,
     
     arrow,
-    sttmodal,
+    sttmodalon,
+    sttmodaloff,
+    sttmodalcheck,
 
     advance,
     advanceClick,

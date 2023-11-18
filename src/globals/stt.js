@@ -31,6 +31,8 @@ export function stt(language, filePath) {
             console.log(response.statusCode);
             let text = JSON.parse(body).text;
             console.log(text);
+            console.log(clientId);
+            console.log(clientSecret);
 
             if (text.includes('준비')) {
                 serial.writeLn('import asomebot;asomebot.ready(5,6,7,8);')

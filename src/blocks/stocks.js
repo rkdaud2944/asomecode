@@ -1419,6 +1419,43 @@ javascriptGenerator["get_weather"] = function (block) {
   return code;
 };
 
+// BOT INTERNET CODE
+
+Blockly.Blocks["ai_stt"] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/common/internet.png', 23, 23, '*'))
+      .appendField("stt생성")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("5058D1");
+    this.setTooltip("인터넷 접속하기");
+    this.setHelpUrl("https://example.com");
+  },
+};
+
+javascriptGenerator["ai_stt"] = function () {
+  let code = 'import stt;\nstt.start()\n';
+  return code;
+};
+
+Blockly.Blocks["ai_stt2"] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/common/internet.png', 23, 23, '*'))
+      .appendField("stt생성")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("5058D1");
+    this.setTooltip("인터넷 접속하기");
+    this.setHelpUrl("https://example.com");
+  },
+};
+
+javascriptGenerator["ai_stt2"] = function () {
+  let code = 'import stt;\nstt.start()\n';
+  return code;
+};
 // KIT BASIC CODE
 
 Blockly.Blocks["basic_kit_ready"] = {

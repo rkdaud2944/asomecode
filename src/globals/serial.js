@@ -5,7 +5,18 @@ import { Notify } from 'quasar'
 
 eventbus.on("onSerialReceived", (data) => {
     if (!data) return;
-    if (data.startsWith("(sysname=")) seiral.setBoardType(data);
+    
+    if (data.startsWith("(sysname=")) {
+        seiral.setBoardType(data);
+    }
+
+    if (data.startsWith("### Spesch to text")) {
+        console.log("성공2");
+        localStorage.setItem("stt", "OK");
+        console.log("성공3");
+        localStorage.removeItem("stt");
+        eventbus.emit("sttReceived"); // 이벤트 발생시키기
+    }
 });
 
 let serialUnit = null;

@@ -137,7 +137,8 @@ export default {
             reboot: images.reboot,
             stop: images.stop,
             updateImg: images.update,
-            help: images.help
+            help: images.help,
+        codes: null, // or initialize it with some default value
         }
     },
 
@@ -169,9 +170,16 @@ export default {
             console.log(subBar.classList);
         }
         menu.addEventListener("click",slide_menu);
+
         window.addEventListener("message", (event) => {
             if (event.data === 'connect') { // 'connect' 문자열을 팝업에서 보냈다고 가정
                 this.connect();
+            }
+        });
+        window.addEventListener("message", (event) => {
+            if (event.data && typeof event.data === 'string' && event.data.includes('import')) {
+                serial.runCode(event.data);
+                return;
             }
         });
     },

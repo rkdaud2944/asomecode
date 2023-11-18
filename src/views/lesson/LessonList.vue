@@ -6,9 +6,8 @@
         <button @click="remove('test')">지정 삭제</button>
         <button @click="tempAudio('두번째 음성 테스트')">보드에 임시 저장 후 실행 - 삭제</button>
         
-        <!-- <p>stt</p>
-        <p style="color: black;">{{ recognizedText }}</p>
-        <button class="ui-left-font" id="fs-three" @click="handleClick()"> {{ isRecording ? 'Stop' : 'Start' }} </button> -->
+        <p>stt</p>
+        <button class="ui-left-font" id="fs-three" @click="handleClick()"> {{ isRecording ? 'Stop' : 'Start' }} </button>
     </div>
 
     <div class="row q-pa-md" style="padding: 0px;">
@@ -42,8 +41,8 @@ import images from "@/assets/images";
 import VueBase from '@/mixin/vue-base';
 import apiSubject from "@/api/subject";
 import apiTTS from "@/api/tts"
-// import {stt} from '@/globals/stt.js';
-// const fs = require('fs');
+import {stt} from '@/globals/stt.js';
+const fs = require('fs');
 
 export default {
     mixins: [VueBase],
@@ -54,13 +53,11 @@ export default {
 
             logom: images.logom,
             asomebot: images.asomebot,
-    
 
             //stt            
-            // mediaRecorder: null,
-            // audioChunks: [],
-            // isRecording: false,  // 녹음 상태를 추적하는 데이터 속성
-            // recognizedText: '',  // 인식된 텍스트를 저장할 새로운 속성
+            mediaRecorder: null,
+            audioChunks: [],
+            isRecording: false,  // 녹음 상태를 추적하는 데이터 속성
         }
     },
 
@@ -95,50 +92,45 @@ export default {
         },
         
         //stt
-        // async handleClick() {
-        //     if (this.isRecording) {
-        //         this.stopRecording();
-        //     } else {
-        //         this.startRecording();
-        //     }
-        // },
+        async handleClick() {
+            if (this.isRecording) {
+                this.stopRecording();
+            } else {
+                this.startRecording();
+            }
+        },
 
-        // async startRecording() {
-        //     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        //     this.mediaRecorder = new MediaRecorder(stream);
-        //     this.mediaRecorder.ondataavailable = event => {
-        //         this.audioChunks.push(event.data);
-        //     };
-        //     this.mediaRecorder.start();
-        //     this.isRecording = true;  // 녹음 시작을 표시
-        // },
+        async startRecording() {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            this.mediaRecorder = new MediaRecorder(stream);
+            this.mediaRecorder.ondataavailable = event => {
+                this.audioChunks.push(event.data);
+            };
+            this.mediaRecorder.start();
+            this.isRecording = true;  // 녹음 시작을 표시
+        },
 
-        // async stopRecording() {
-        //     if (!this.mediaRecorder) return;
+        async stopRecording() {
+            if (!this.mediaRecorder) return;
 
-        //     this.mediaRecorder.onstop = async () => {
-        // const audioBlob = new Blob(this.audioChunks, { type: 'audio/wav' });
-        // const filePath = '/sttaudiofile.wav';
-
-        // try {
-        //     const buffer = Buffer.from(await audioBlob.arrayBuffer());
-        //     await fs.promises.writeFile(filePath, buffer);
-
-        //     // stt 함수를 호출하고 인식된 텍스트를 받아옴
-        //     const recognizedText = await stt('Kor', filePath);
-
-        //     // Vue.nextTick을 사용하여 데이터 갱신
-        //     this.recognizedText = recognizedText;
-        //     await fs.promises.unlink(filePath);
-        //     console.log('파일 삭제 성공');
-        // } catch (err) {
-        //     console.error('녹음 프로세스 중 오류:', err);
-        // }
-        //         this.audioChunks = [];
-        //     };
-        //     this.mediaRecorder.stop();
-        //     this.isRecording = false;
-        // },
+            this.mediaRecorder.onstop = async () => {
+                const audioBlob = new Blob(this.audioChunks, { type: 'audio/wav' });
+                const filePath = '/sttaudiofile.wav'; // 실제 저장 경로로 변경하세요
+                
+                try {
+                    const buffer = Buffer.from(await audioBlob.arrayBuffer());
+                    await fs.promises.writeFile(filePath, buffer);
+                    await stt('Kor', filePath);
+                    await fs.promises.unlink(filePath);
+                    console.log('File deleted successfully');
+                } catch (err) {
+                    console.error('Error during recording process:', err);
+                }
+                this.audioChunks = [];
+            };
+            this.mediaRecorder.stop();
+            this.isRecording = false;
+        },
     },
 
 }

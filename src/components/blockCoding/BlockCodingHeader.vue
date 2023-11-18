@@ -38,6 +38,8 @@
 <script>
 import { mapState } from 'vuex'
 import images from "@/assets/images";
+// import eventbus from "@/globals/eventbus";
+
 // import serial from "@/globals/serial";
 
 export default {
