@@ -911,7 +911,7 @@ javascriptGenerator["advance_if"] = function(block) {
 const variable = block.getFieldValue("variable");
 const ineq = block.getFieldValue('inequality');
 
-const code = `if ${variable} ${ineq} ` + javascriptGenerator.valueToCode(block, 'if_value', javascriptGenerator.ORDER_ATOMIC) + ':\n' + javascriptGenerator.statementToCode(block, 'if_state') + '\n';
+const code = `if ${variable} ${ineq} ` + javascriptGenerator.valueToCode(block, 'if_value', javascriptGenerator.ORDER_ATOMIC) + ':\n' + javascriptGenerator.statementToCode(block, 'if_state');
 
 return code;
 };
@@ -992,7 +992,7 @@ Blockly.Blocks["advance_elseif"] = {
       .setCheck("null")
     this.appendStatementInput('if_state')
       .appendField('')
-    this.appendStatementInput('if_state')
+    this.appendStatementInput('if_state_else')
       .appendField('아니라면');
     this.setColour("55A55B");
     this.setPreviousStatement(true, null);
@@ -1005,7 +1005,7 @@ javascriptGenerator["advance_elseif"] = function(block) {
 const variable = block.getFieldValue("variable");
 const ineq = block.getFieldValue('inequality');
 
-const code = `if ${variable} ${ineq} ` + javascriptGenerator.valueToCode(block, 'if_value', javascriptGenerator.ORDER_ATOMIC) + ' {\n' + javascriptGenerator.statementToCode(block, 'if_state') + '}\n';
+const code = `if ${variable} ${ineq} ` + javascriptGenerator.valueToCode(block, 'if_value', javascriptGenerator.ORDER_ATOMIC) + ':\n' + javascriptGenerator.statementToCode(block, 'if_state') + 'else:\n' + javascriptGenerator.statementToCode(block, 'if_state_else');
 
 return code;
 };
