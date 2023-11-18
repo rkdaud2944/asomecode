@@ -11,9 +11,7 @@ eventbus.on("onSerialReceived", (data) => {
     }
 
     if (data.startsWith("### Speech to text")) {
-        console.log("성공2");
         localStorage.setItem("stt", "OK");
-        console.log("성공3");
         localStorage.removeItem("stt");
         eventbus.emit("sttReceived"); // 이벤트 발생시키기
     }
