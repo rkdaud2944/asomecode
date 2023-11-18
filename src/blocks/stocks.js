@@ -1424,11 +1424,11 @@ Blockly.Blocks["ai_stt"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/common/internet.png', 23, 23, '*'))
-      .appendField("STT생성")
+      .appendField("음성인식 시작")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("5058D1");
-    this.setTooltip("STT를 생성하는 블록");
+    this.setTooltip("음성을 녹음하는 블록");
     this.setHelpUrl("https://example.com");
   },
 };
@@ -1438,39 +1438,43 @@ javascriptGenerator["ai_stt"] = function () {
   return code;
 };
 
-Blockly.Blocks["ai_tts"] = {
-  init: function () {
-    this.appendDummyInput()
-      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/common/internet.png', 23, 23, '*'))
-      .appendField("TTS저장")
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, "String");
-    this.setColour("5058D1");
-    this.setTooltip("TTS를 저장하는 블록");
-    this.setHelpUrl("https://example.com");
-  },
-};
+// Blockly.Blocks["ai_tts"] = {
+//   init: function () {
+//     this.appendDummyInput()
+//       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/common/internet.png', 23, 23, '*'))
+//       .appendField("TTS저장")
+//     this.setPreviousStatement(true, null);
+//     this.setNextStatement(true, "String");
+//     this.setColour("5058D1");
+//     this.setTooltip("TTS를 저장하는 블록");
+//     this.setHelpUrl("https://example.com");
+//   },
+// };
 
-javascriptGenerator["ai_tts"] = function () {
-  let code = 'import stt;\nstt.start()\n';
-  return code;
-};
+// javascriptGenerator["ai_tts"] = function () {
+//   let code = 'import stt;\nstt.start()\n';
+//   return code;
+// };
 
 Blockly.Blocks["ai_tts_play"] = {
   init: function () {
     this.appendDummyInput()
-      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/common/internet.png', 23, 23, '*'))
-      .appendField("TTS지정 재생")
+    .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/common/internet.png', 23, 23, '*'))
+    .appendField("음성파일 재생")
+    this.appendValueInput("tts_text")
+    .setCheck("null")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
+    this.setInputsInline(true);
     this.setColour("5058D1");
     this.setTooltip("TTS 지정 재생 블록");
     this.setHelpUrl("https://example.com");
   },
 };
 
-javascriptGenerator["ai_tts_play"] = function () {
-  let code = 'import stt;\nstt.start()\n';
+javascriptGenerator["ai_tts_play"] = function (block) {
+  let asd = javascriptGenerator.valueToCode(block, 'tts_text', javascriptGenerator.ORDER_ATOMIC);
+  const code = `import tts;\ntts.play(${asd})`+'\n' ;
   return code;
 };
 
@@ -1478,7 +1482,7 @@ Blockly.Blocks["ai_tts_delete"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/common/internet.png', 23, 23, '*'))
-      .appendField("TTS 지정 삭제")
+      .appendField("음성파일 삭제")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("5058D1");
