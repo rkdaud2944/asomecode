@@ -827,9 +827,9 @@ javascriptGenerator["advance_endless_repeat"] = function (block) {
 
 Blockly.Blocks["advance_if"] = {
   init: function() {
-      var dropdownGenerator = function() {
+     var dropdownGenerator = function() {
         let dropdownOptions = [
-          ["i", "i"],["k", "k"],["j", "j"],["l", "l"],["sttMSG", "sttMSG"]
+          ["k", "k"],["j", "j"],["l", "l"],["q", "q"],["sttMSG", "sttMSG"]
         ];
         let addlightOption = false;
         let addsoundOption = false;
@@ -921,7 +921,7 @@ Blockly.Blocks["advance_elseif"] = {
   init: function() {
      var dropdownGenerator = function() {
         let dropdownOptions = [
-          ["i", "i"],["k", "k"],["j", "j"],["l", "l"],["sttMSG", "sttMSG"]
+          ["k", "k"],["j", "j"],["l", "l"],["q", "q"],["sttMSG", "sttMSG"]
         ];
         let addlightOption = false;
         let addsoundOption = false;
@@ -1114,7 +1114,7 @@ Blockly.Blocks["screen"] = {
   init: function () {
     var dropdownGenerator = function() {
       let dropdownOptions = [
-        ["i", "i"],["k", "k"],["j", "j"],["l", "l"],["sttMSG", "sttMSG"]
+        ["k", "k"],["j", "j"],["l", "l"],["q", "q"],["sttMSG", "sttMSG"]
       ];
       let addlightOption = false;
       let addsoundOption = false;
@@ -1208,7 +1208,7 @@ Blockly.Blocks["variable"] = {
   init: function () {
     var dropdownGenerator = function() {
       let dropdownOptions = [
-        ["i", "i"],["k", "k"],["j", "j"],["l", "l"]
+        ["k", "k"],["j", "j"],["l", "l"],["q", "q"],["sttMSG", "sttMSG"]
       ];
       let addlightOption = false;
       let addsoundOption = false;
@@ -1419,17 +1419,16 @@ javascriptGenerator["get_weather"] = function (block) {
   return code;
 };
 
-// BOT INTERNET CODE
-
+// BOT ai CODE
 Blockly.Blocks["ai_stt"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/common/internet.png', 23, 23, '*'))
-      .appendField("stt생성")
+      .appendField("STT생성")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("5058D1");
-    this.setTooltip("인터넷 접속하기");
+    this.setTooltip("STT를 생성하는 블록");
     this.setHelpUrl("https://example.com");
   },
 };
@@ -1439,20 +1438,55 @@ javascriptGenerator["ai_stt"] = function () {
   return code;
 };
 
-Blockly.Blocks["ai_stt2"] = {
+Blockly.Blocks["ai_tts"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/common/internet.png', 23, 23, '*'))
-      .appendField("stt생성")
+      .appendField("TTS저장")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("5058D1");
-    this.setTooltip("인터넷 접속하기");
+    this.setTooltip("TTS를 저장하는 블록");
     this.setHelpUrl("https://example.com");
   },
 };
 
-javascriptGenerator["ai_stt2"] = function () {
+javascriptGenerator["ai_tts"] = function () {
+  let code = 'import stt;\nstt.start()\n';
+  return code;
+};
+
+Blockly.Blocks["ai_tts_play"] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/common/internet.png', 23, 23, '*'))
+      .appendField("TTS지정 재생")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("5058D1");
+    this.setTooltip("TTS 지정 재생 블록");
+    this.setHelpUrl("https://example.com");
+  },
+};
+
+javascriptGenerator["ai_tts_play"] = function () {
+  let code = 'import stt;\nstt.start()\n';
+  return code;
+};
+
+Blockly.Blocks["ai_tts_delete"] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/common/internet.png', 23, 23, '*'))
+      .appendField("TTS 지정 삭제")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("5058D1");
+    this.setHelpUrl("https://example.com");
+  },
+};
+
+javascriptGenerator["ai_tts_delete"] = function () {
   let code = 'import stt;\nstt.start()\n';
   return code;
 };
@@ -1817,7 +1851,7 @@ Blockly.Blocks["led_ledtube_ready"] = {
   init: function () {
     var dropdownGenerator = function() {
     let dropdownOptions = [
-      ["i", "i"],["k", "k"],["j", "j"],["l", "l"]
+      ["k", "k"],["j", "j"],["l", "l"],["q", "q"]
     ];
     let addlightOption = false;
     let addsoundOption = false;
@@ -1895,9 +1929,9 @@ Blockly.Blocks["led_ledtube_time"] = {
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led_tube.png', 23, 23, '*'))
       .appendField("LED 튜브에 시간표시")
       .appendField(new Blockly.FieldDropdown([
-        ["h", "h"],["buzzer", "buzzer"],["bt", "bt"],["ht", "ht"],["i", "i"],["m", "m"],["vs", "vs"]]), "variable")
+        ["h", "h"],["buzzer", "buzzer"],["bt", "bt"],["ht", "ht"],["q", "q"],["m", "m"],["vs", "vs"]]), "variable")
       .appendField(new Blockly.FieldDropdown([
-        ["m", "m"],["buzzer", "buzzer"],["h", "h"],["ht", "ht"],["i", "i"],["bt", "bt"],["vs", "vs"]]), "variable2")
+        ["m", "m"],["buzzer", "buzzer"],["h", "h"],["ht", "ht"],["q", "q"],["bt", "bt"],["vs", "vs"]]), "variable2")
       .appendField(new Blockly.FieldDropdown([
         ["True", "True"],["False", "False"]]), "toggle")
     this.setPreviousStatement(true, null);
