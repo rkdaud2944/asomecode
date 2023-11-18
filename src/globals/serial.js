@@ -16,7 +16,7 @@ eventbus.on("onSerialReceived", (data) => {
         eventbus.emit("sttReceived"); // 이벤트 발생시키기
     }
 });
- 
+
 let serialUnit = null;
 let boardType = "Zet";
 const fs = require('fs');
