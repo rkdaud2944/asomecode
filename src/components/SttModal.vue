@@ -35,7 +35,7 @@ export default {
       sttmodalon: images.sttmodalon,
       sttmodalcheck: images.sttmodalcheck,
       showModal: false,
-      modalMessage: "녹음준비되면 스타트 누르셈",
+      modalMessage: "아래 버튼 클릭 시 녹음 시작",
       isRecording: false, // 녹음 상태를 추적하는 데이터 속성
       recognizedText: "", // 인식된 텍스트를 저장할 새로운 속성
       mediaRecorder: null,

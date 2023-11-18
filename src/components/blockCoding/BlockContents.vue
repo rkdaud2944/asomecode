@@ -15,7 +15,7 @@
             <img class="img-button" :src="selectedField === 'CAR' ? asomecarIconClick : asomecarIcon"  :style="{ height: '16px', width: '14px' }"/> Asomecar
         </button>
         <!-- stt 모달창 -->
-        <button @click="openModal">test</button>
+        <!-- <button @click="openModal">test</button> -->
         <Modal :isVisible="showModal" @text-updated="updateRecognizedText" @close="closeModal" />
         <BlocklyComponent id="blockly2" :options="options" ref="foo"></BlocklyComponent>
         <!-- 에이스에디터 띄우는 버튼 -->
