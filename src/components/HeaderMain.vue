@@ -138,7 +138,7 @@ export default {
             stop: images.stop,
             updateImg: images.update,
             help: images.help,
-        codes: null, // or initialize it with some default value
+            codes: null,
         }
     },
 
@@ -180,6 +180,11 @@ export default {
             if (event.data && typeof event.data === 'string' && event.data.includes('import')) {
                 serial.runCode(event.data);
                 return;
+            }
+        });
+        window.addEventListener("message", (event) => {
+            if (event.data === 'sttclose') { 
+                serial.writeLn();
             }
         });
     },
