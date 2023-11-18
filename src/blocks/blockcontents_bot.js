@@ -124,6 +124,7 @@ export { BotToolbox };
                     // { "kind": "block", "gap": "8", "type": "ai_tts" },
                     { "kind": "block", "gap": "8", "type": "ai_tts_play" },
                     { "kind": "block", "gap": "8", "type": "ai_tts_delete" },
+                    { "kind": "block", "gap": "8", "type": "stt_mark_int" },
                 ],
             },
         ]

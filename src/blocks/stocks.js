@@ -1170,7 +1170,7 @@ Blockly.Blocks["screen"] = {
   };
 
     this.appendDummyInput()
-      .appendField('만약에')
+      .appendField('화면 표시')
       .appendField(new Blockly.FieldDropdown(dropdownGenerator), "variable")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -1488,6 +1488,21 @@ Blockly.Blocks["ai_tts_delete"] = {
     this.setColour("5058D1");
     this.setHelpUrl("https://example.com");
   },
+};
+
+Blockly.Blocks["stt_mark_int"] = {
+  init: function () {
+    this.appendDummyInput('VALUE')
+      .appendField(new Blockly.FieldTextInput("가"), "string_key")
+    this.setOutput(true);
+    this.setColour("5058D1");
+  },
+};
+
+javascriptGenerator["stt_mark_int"] = function (block) {
+  let string_key = block.getFieldValue('string_key');
+  let code = "'" + string_key + "'";
+  return [code, javascriptGenerator.ORDER_ATOMIC];
 };
 
 javascriptGenerator["ai_tts_delete"] = function () {

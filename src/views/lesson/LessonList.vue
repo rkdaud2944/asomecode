@@ -1,8 +1,8 @@
 <template>
     <div class="header nav-padding">
         <p>tts</p>
-        <button @click="saveToBoard('하이','저도반갑습니다')">보드 저장</button>
-        <button @click="play('하이')">지정 재생</button>
+        <button @click="saveToBoard('춤','네 춤출게요')">보드 저장</button>
+        <button @click="play('인사')">지정 재생</button>
         <button @click="remove('하이')">지정 삭제</button>
         <button @click="tempAudio('두번째 음성 테스트')">보드에 임시 저장 후 실행 - 삭제</button>
         
