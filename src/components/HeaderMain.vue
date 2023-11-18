@@ -183,10 +183,11 @@ export default {
             }
         });
         window.addEventListener("message", (event) => {
-            if (event.data === 'sttclose') { 
-                serial.writeLn();
+            if (event.data.type === 'sttclose') { 
+                serial.writeLn(event.data.text);
             }
         });
+
     },
 
     methods: {

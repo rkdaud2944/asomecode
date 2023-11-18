@@ -62,7 +62,9 @@ export default {
       this.$emit("close");
       this.buttonState = "start";
       this.modalMessage = "아래 버튼 클릭 시 녹음 시작";
-      window.opener.postMessage("sttclose");
+      
+      let message = { type: "sttclose", text: this.recognizedText };
+      window.opener.postMessage(message, "*");
     },
     //stt
     async handleClick() {

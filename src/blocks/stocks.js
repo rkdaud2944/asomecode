@@ -827,9 +827,9 @@ javascriptGenerator["advance_endless_repeat"] = function (block) {
 
 Blockly.Blocks["advance_if"] = {
   init: function() {
-     var dropdownGenerator = function() {
+      var dropdownGenerator = function() {
         let dropdownOptions = [
-          ["i", "i"],["k", "k"],["j", "j"],["l", "l"]
+          ["i", "i"],["k", "k"],["j", "j"],["l", "l"],["sttMSG", "sttMSG"]
         ];
         let addlightOption = false;
         let addsoundOption = false;
@@ -921,7 +921,7 @@ Blockly.Blocks["advance_elseif"] = {
   init: function() {
      var dropdownGenerator = function() {
         let dropdownOptions = [
-          ["i", "i"],["k", "k"],["j", "j"],["l", "l"]
+          ["i", "i"],["k", "k"],["j", "j"],["l", "l"],["sttMSG", "sttMSG"]
         ];
         let addlightOption = false;
         let addsoundOption = false;
@@ -1114,7 +1114,7 @@ Blockly.Blocks["screen"] = {
   init: function () {
     var dropdownGenerator = function() {
       let dropdownOptions = [
-        ["i", "i"],["k", "k"],["j", "j"],["l", "l"]
+        ["i", "i"],["k", "k"],["j", "j"],["l", "l"],["sttMSG", "sttMSG"]
       ];
       let addlightOption = false;
       let addsoundOption = false;
@@ -1435,7 +1435,7 @@ Blockly.Blocks["ai_stt"] = {
 };
 
 javascriptGenerator["ai_stt"] = function () {
-  let code = 'import stt;\nstt.start()\n';
+  let code = 'import stt;\nsttMSG=stt.start()\n';
   return code;
 };
 

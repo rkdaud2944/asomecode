@@ -10,7 +10,7 @@ eventbus.on("onSerialReceived", (data) => {
         seiral.setBoardType(data);
     }
 
-    if (data.startsWith("### Spesch to text")) {
+    if (data.startsWith("### Speech to text")) {
         console.log("성공2");
         localStorage.setItem("stt", "OK");
         console.log("성공3");
@@ -146,13 +146,17 @@ const seiral = {
 
     write(text) {
         // 한글만 인코딩하여 전송
-        text = text.replace(/[ㄱ-ㅎㅏ-ㅣ가-힣]/g, (match) => `{{${encodeURIComponent(match)}}}`);
+        if (text !== undefined && text !== null){
+            text = text.replace(/[ㄱ-ㅎㅏ-ㅣ가-힣]/g, (match) => `{{${encodeURIComponent(match)}}}`);
+        }
         if (serialUnit) serialUnit.write(text);
     },
 
     writeLn(text) {
         // 한글만 인코딩하여 전송
-        text = text.replace(/[ㄱ-ㅎㅏ-ㅣ가-힣]/g, (match) => `{{${encodeURIComponent(match)}}}`);
+        if (text !== undefined && text !== null){
+            text = text.replace(/[ㄱ-ㅎㅏ-ㅣ가-힣]/g, (match) => `{{${encodeURIComponent(match)}}}`);
+        }
         this.write(text +"\r\n");
     },
 
