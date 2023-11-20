@@ -53,7 +53,7 @@ export default {
             logom: images.logom,
             connectBlock: images.connectBlock,
             connectBlockHover: images.connectBlockHover,
-            customBlock: images.customBlock,
+            customBlock: images.customBlock,    
             loadBlock: images.loadBlock,
             loadBlockHover: images.loadBlockHover,
             playBlock: images.playBlock,
