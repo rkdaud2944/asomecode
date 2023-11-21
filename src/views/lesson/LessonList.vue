@@ -106,7 +106,6 @@ export default {
             this.mediaRecorder.ondataavailable = event => {
                 this.audioChunks.push(event.data);
             };
-            // test
             this.mediaRecorder.start();
             this.isRecording = true;  // 녹음 시작을 표시
         },
