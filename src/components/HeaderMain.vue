@@ -172,7 +172,7 @@ export default {
         menu.addEventListener("click",slide_menu);
 
         window.addEventListener("message", (event) => {
-            if (event.data === 'connect') { // 'connect' 문자열을 팝업에서 보냈다고 가정
+            if (event.data === 'connect') {
                 this.connect();
             }
         });
@@ -185,6 +185,11 @@ export default {
         window.addEventListener("message", (event) => {
             if (event.data.type === 'sttclose') { 
                 serial.writeLn(event.data.text);
+            }
+        });
+        window.addEventListener("message", (event) => {
+            if (event.data === 'stop') {
+                this.connect();
             }
         });
 
