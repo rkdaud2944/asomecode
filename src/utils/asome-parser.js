@@ -119,10 +119,21 @@ class Scanner {
     }
 }
 
+const path = require('path');
+
 class Parser {
     constructor() {
-        this.lessonContentBaseUrl = process.env.VUE_APP_LESSON_CONTENT_BASEURL,
-            this.result = "";
+        // const lessonContentBaseUrl = process.env.VUE_APP_PLATFORM === "FLUTTER"
+        //     ? './src/api/staticData/'
+        //     : process.env.VUE_APP_LESSON_CONTENT_BASEURL;
+
+        // lessonContentBaseUrl(this.$route.query.id);
+
+        // **이미지 로드 경로 수정 필요
+        this.lessonContentBaseUrl = path.join(__dirname, '../../../../../../src/api/staticData/')
+        console.log("lessonContentBaseUrl: "+this.lessonContentBaseUrl)
+        // this.lessonContentBaseUrl = process.env.VUE_APP_LESSON_CONTENT_BASEURL,
+        this.result = "";
         this.markType = "";
         this.buffer = "";
     }
@@ -174,9 +185,10 @@ class Parser {
         const firstLine = text.split("\n")[0]
         const imageTitle = firstLine.substring(firstLine.indexOf('(') + 1, firstLine.indexOf(')'))
         let imageSrc = text.replace(`[image (${imageTitle}) `, "").slice(0, -1) // 로컬 파일
-        if (imageSrc.charAt(0) != '/')
+        if (imageSrc.charAt(0) != '/'){
             imageSrc = this.lessonContentBaseUrl + "lesson/images/" + text.replace(`[image (${imageTitle}) `, "").slice(0, -1) // S3 파일
-
+            console.log("imageSrc 2: "+imageSrc)
+        }
         if (imageTitle == '')
             return `<figure class="img_content_box"><img src="${imageSrc}"></figure>`
         else

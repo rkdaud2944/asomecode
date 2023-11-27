@@ -1,5 +1,8 @@
 import rest from "@/globals/rest";
 
+const fs = require('fs');
+const path = require('path');
+
 export default {
     async create(body) {
         return new Promise((resolve, reject) => {
@@ -33,6 +36,39 @@ export default {
             });
         });
     }, 
+
+    async lessonDetailLocal(id) {
+        return new Promise((resolve, reject) => {
+            fs.readFile(path.join('./src/api/staticData/lessonAll.json'), 'utf8', (err, data) => {
+                if (err) {
+                    console.error(err);
+                    reject(err);
+                    return;
+                }
+    
+                try {
+                    const jsonData = JSON.parse(data);
+                    // jsonData 배열의 각 객체를 순회하면서 그 내용을 출력
+                    let lesson = null;
+                    jsonData.forEach((item) => {
+                        if(item.id == id){
+                            lesson = item;
+                        }
+                    });
+                    if (lesson == null) {
+                        reject(new Error('Lesson not found'));
+                        return;
+                    }
+    
+                    resolve(lesson);
+                } catch (parseErr) {
+                    console.error(parseErr);
+                    reject(parseErr);
+                }
+            });
+        });
+    },
+    
 
     lessonDetail: async function (id) {
         // var url = `/lesson/${id}`;

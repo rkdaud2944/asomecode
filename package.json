@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint",
     "e:prod": "vue-cli-service electron:serve --mode e-prod",
     "e:dev": "vue-cli-service electron:serve --mode e-dev",
+    "local": "vue-cli-service electron:serve --mode local",
     "eb:prod": "vue-cli-service electron:build --mode e-prod",
     "eb:dev": "vue-cli-service electron:build --mode e-dev",
     "rebuild": "electron-rebuild -f -w serialport",

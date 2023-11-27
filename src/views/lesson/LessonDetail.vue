@@ -50,7 +50,13 @@ export default {
     },
 
     mounted() {
-        this.getLesson(this.$route.query.id)
+        console.log("lessonDetail id : "+this.$route.query.id)
+        const lessonMethod = process.env.VUE_APP_PLATFORM === "FLUTTER"
+            ? this.getLessonLocal
+            : this.getLesson;
+
+        lessonMethod(this.$route.query.id);
+
         window.addEventListener('scroll', this.updateScroll);
     },
 
@@ -77,6 +83,26 @@ export default {
             apiLesson.lessonDetail(id)
                 .then((response) => {
                     this.lesson = response.data;
+                    this.output = markdown.parse(this.lesson.content)
+
+                    let domparser = new DOMParser()
+                    let doc = domparser.parseFromString(this.output, 'text/html')
+                    const elements = doc.getElementsByTagName("h2");
+                    for (let i = 0; i < elements.length; i++) {
+                        this.titles.push({
+                            name: elements[i].innerText,
+                            tag: elements[i].id,
+                        });
+                    }
+                })
+            .catch(this.showError);
+        },
+
+        getLessonLocal(id) {
+            apiLesson.lessonDetailLocal(id)
+                .then((response) => {
+                    // this.lesson = response.data;
+                    this.lesson = response;
                     this.output = markdown.parse(this.lesson.content)
 
                     let domparser = new DOMParser()
