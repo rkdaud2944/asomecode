@@ -6,10 +6,20 @@
 
         <div class="menulist">
             <ul class="ui-left">
-                <li class="ui-left-bt" @click="connect()">
+                <!-- <li class="ui-left-bt" @click="connect()">
                     <img :src="connectImg"  class="ui-img"/>
                     <p class="ui-left-font" id="fs-four">연결하기</p>
+                </li> -->
+                <li class="ui-left-bt" @mouseover="showDropdown()" @mouseleave="hideDropdown()">
+                    <img :src="connectImg" class="ui-img"/>
+                    <p class="ui-left-font" id="fs-four">연결하기</p>
+                    <div id="dropdown" style="display:none;">
+                        <button>블루투스</button>
+                        <button @click="connect()">USB 연결</button>
+                    </div>
                 </li>
+
+
                 <li class="ui-left-bt" @click="goTo('/')">
                     <img :src="home"  class="ui-img"/>
                     <p class="ui-left-font" id="fs-one">홈</p>
@@ -213,7 +223,15 @@ export default {
 
         openEditor() {
             bridgeIn.openEditor('')
-        },           
+        },  
+        
+        showDropdown() {
+            document.getElementById('dropdown').style.display = 'block';
+        },
+
+        hideDropdown() {
+            document.getElementById('dropdown').style.display = 'none';
+        },
     }
 }
 </script>
