@@ -18,7 +18,8 @@ async function createWindow() {
     webPreferences: {
       enableRemoteModule: true,
       nodeIntegration: true,
-      contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
+      contextIsolation: false,
+      // contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
       preload: path.join(__dirname, '..', 'src', 'preload.js'),
     }
   })

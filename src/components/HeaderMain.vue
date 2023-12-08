@@ -14,8 +14,9 @@
                     <img :src="connectImg" class="ui-img"/>
                     <p class="ui-left-font" id="fs-four">연결하기</p>
                     <div id="dropdown" style="display:none;">
-                        <button>블루투스</button>
-                        <button @click="connect()">USB 연결</button>
+                        <button @click="bleConnect()">블루투스</button>
+                        <button @click="bleSendData()">데이터</button>
+                        <!-- <button @click="connect()">USB 연결</button> -->
                     </div>
                 </li>
 
@@ -130,6 +131,7 @@ import VueBase from "@/mixin/vue-base";
 import bridgeIn from "@/globals/bridge-in";
 import eventbus from "@/globals/eventbus";
 import boardUpdater from "@/globals/board-updater";
+import ble from "@/globals/ble";
 
 export default {
     mixins: [VueBase, bridgeIn],
@@ -203,6 +205,13 @@ export default {
             }
         });
 
+        
+        // window.addEventListener("message", (event) => {
+        //     if (event.data === 'bleConnect') {
+        //         ble.bleConnect();
+        //     }
+        // });
+
     },
 
     methods: {
@@ -232,6 +241,14 @@ export default {
         hideDropdown() {
             document.getElementById('dropdown').style.display = 'none';
         },
+
+        bleConnect() {
+            ble.connect();
+        },
+
+        // bleSendData() {
+        //     ble.sendData('red = OutputPin(11);red.on();');
+        // },
     }
 }
 </script>
