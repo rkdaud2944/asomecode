@@ -243,7 +243,8 @@ export default {
         },
 
         bleConnect() {
-            ble.connect();
+            // ble.connect();
+            ble.serviceScan();
         },
 
         // bleSendData() {
