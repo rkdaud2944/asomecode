@@ -43,7 +43,7 @@ export default {
     },
     mounted() {
         eventbus.on("onSerialConnected", () => {
-            this.rows = [];
+            this.rows = []; 
         });
         eventbus.on("onSerialClosed", () => {
             this.rows = [];
