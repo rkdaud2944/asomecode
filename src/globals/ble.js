@@ -1,8 +1,14 @@
+
+
 const noble = require('@abandonware/noble');
 // const noble = require('noble');
+// 쓰기
 const UUID_RX = '6e400002b5a3f393e0a9e50e24dcca9e'; // RX 캐릭터리스틱 UUID
+// 읽기
+const UUID_TX = '6e400003b5a3f393e0a9e50e24dcca9e'; // RX 캐릭터리스틱 UUID
 // 전역 변수로 캐릭터리스틱 저장
-let connectedCharacteristic = null;
+let connectedCharacteristic = null; //rx
+let TX_characteristic = null; //tx
 
 
 class BleUnit {
@@ -12,7 +18,7 @@ class BleUnit {
             if (state === 'poweredOn') {
                 noble.startScanning([], false); // 모든 서비스에 대해 스캔
                 this.connect();
-            } else {
+            } else { 
                 noble.stopScanning();
             }
         });
@@ -25,62 +31,73 @@ class BleUnit {
 
                 peripheral.connect((error) => {
                     if (error) {
-                    console.error('연결 실패:', error);
-                    return;
+                        console.error('연결 실패:', error);
+                        return;
                     }
-        
-                    console.log('연결 완료됨');
-                    this.discoverService(peripheral);
+                    try {
+                        this.discoverService(peripheral);
+                    } catch (error) {
+                        console.log(error);
+                    } finally {
+                        console.log('연결 완료됨');
+                    }
+
+                    // 연결 끊김
+                    peripheral.once('disconnect', () => {
+                        console.log('연결이 끊어졌습니다.');
+                    });
                 });
             }
         });
-
     }
 
     discoverService(peripheral){
         
         peripheral.discoverServices([], (error, services) => {
-            console.log(`발견된 서비스 수: ${services.length}`);
             services.forEach((service) => {
-                console.log(`서비스 UUID: ${service.uuid}`);
                 this.discoverChar(service);
             })
         });
-
-
     }
 
     discoverChar(service){
         
         service.discoverCharacteristics([], (error, characteristics) => {
-            console.log(`발견된 캐릭터리스틱 수 (${service.uuid}): ${characteristics.length}`);
             characteristics.forEach((char) => {
-                console.log(`캐릭터리스틱 UUID: ${char.uuid}`);
-
+                // 쓰기 UUID
                 if (char.uuid === UUID_RX.replace(/-/g, '')) {
-                    connectedCharacteristic = char; // 캐릭터리스틱 저장
-                    
+                    connectedCharacteristic = char;
                 }
+
+                // 읽기 UUID
+                if (char.uuid === UUID_TX.replace(/-/g, '')) {
+                    TX_characteristic = char
+
+                    this.readData()
+                }
+                
             });
         })
     }
 
+    readData(){
+        TX_characteristic.subscribe((error) => {
+            if(!error){
+                TX_characteristic.on('data', (data, isNotification) => {
+                    if(isNotification)
+                    console.log(data.toString());
+                });
+            }
+        })
+    }
 
     sendData(text){
         const data = Buffer.from(text, 'utf-8');
         connectedCharacteristic.write(data, false, (error) => {
-            if (error) {
-                console.error('데이터 전송 실패:', error);
-            } else {
-                console.log('데이터 전송 완료');
-            }
+            if (error) console.error('보내기 실패:', error);
         });
         connectedCharacteristic.write(Buffer.from([13], 'utf-8'), false, (error) => {
-            if (error) {
-                console.error('보내기 실패:', error);
-            } else {
-                console.log('보내기');
-            }
+            if (error) console.error('보내기 실패:', error);
         });
     }
 
@@ -132,6 +149,7 @@ const bleConnect = {
         }
         this.writeLn(`exec(_codes_)`);
     },
+
 }
 
 
