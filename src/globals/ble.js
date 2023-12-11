@@ -4,7 +4,8 @@ const UUID_RX = '6e400002b5a3f393e0a9e50e24dcca9e'; // RX 캐릭터리스틱 UUI
 // 전역 변수로 캐릭터리스틱 저장
 let connectedCharacteristic = null;
 
-const bleConnect = {
+
+class BleUnit {
     
     serviceScan() {
         noble.on('stateChange', (state) => {
@@ -14,8 +15,8 @@ const bleConnect = {
             } else {
                 noble.stopScanning();
             }
-            });
-    },
+        });
+    }
 
     connect(){
         noble.on('discover', (peripheral) => {
@@ -34,7 +35,7 @@ const bleConnect = {
             }
         });
 
-    },
+    }
 
     discoverService(peripheral){
         
@@ -47,7 +48,7 @@ const bleConnect = {
         });
 
 
-    },
+    }
 
     discoverChar(service){
         
@@ -59,11 +60,10 @@ const bleConnect = {
                 if (char.uuid === UUID_RX.replace(/-/g, '')) {
                     connectedCharacteristic = char; // 캐릭터리스틱 저장
                     
-                    this.sendData('red = OutputPin(11);red.on();')
                 }
             });
         })
-    },
+    }
 
 
     sendData(text){
@@ -83,6 +83,55 @@ const bleConnect = {
             }
         });
     }
+
+}
+
+const bleConnect = {
+    bleUnit: new BleUnit(),
+
+    connect(){
+        
+        this.bleUnit = new BleUnit();
+        this.bleUnit.serviceScan();
+        
+    },
+
+    write(text) {
+        // 한글만 인코딩하여 전송
+        if (text !== undefined && text !== null){
+            text = text.replace(/[ㄱ-ㅎㅏ-ㅣ가-힣]/g, (match) => `{{${encodeURIComponent(match)}}}`);
+        }
+        if (this.bleUnit) this.bleUnit.sendData(text);
+    },
+
+    writeLn(text) {
+        // 한글만 인코딩하여 전송
+        if (text !== undefined && text !== null){
+            text = text.replace(/[ㄱ-ㅎㅏ-ㅣ가-힣]/g, (match) => `{{${encodeURIComponent(match)}}}`);
+        }
+        this.write(text +"\r\n");
+    },
+
+    runCode(codes) {
+        console.log("runCode", codes);
+
+        this.writeLn( `_codes_ = ""`);
+        for (let code of codes.replaceAll("\r", "").split("\n")) {
+            // TODO: 파이썬 코드의 주석을 삭제한다. 특히 한글 주석은 보드에 에러를 유발할 수 있다.
+            // sLine := RemoveComment(sLine);
+
+            // TODO: 델파이와 달라서 필요 없을 듯. 확인 후  삭제
+            // sLine := Space2Tab(Lines[Loop]);
+            // sLine := StringReplace(sLine, #9, '\t', [rfReplaceAll]);
+            // code = code.replace(/{mod}/gi, "%");
+            // code = code.replace(/@@NOW/gi, "CurrentTime");
+
+            code = code.replace(/\\/gi, '\\\\');
+            code = code.replace(/'/gi, "\\'");
+            this.writeLn(`_codes_ = _codes_ + '${code}\\n'`);
+        }
+        this.writeLn(`exec(_codes_)`);
+    },
 }
 
 

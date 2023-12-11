@@ -16,7 +16,7 @@
                     <div id="dropdown" style="display:none;">
                         <button @click="bleConnect()">블루투스</button>
                         <button @click="bleSendData()">데이터</button>
-                        <!-- <button @click="connect()">USB 연결</button> -->
+                        <button @click="connect()">USB 연결</button>
                     </div>
                 </li>
 
@@ -244,12 +244,24 @@ export default {
 
         bleConnect() {
             // ble.connect();
-            ble.serviceScan();
+            ble.connect();
         },
 
-        // bleSendData() {
-        //     ble.sendData('red = OutputPin(11);red.on();');
-        // },
+        bleSendData() {
+            ble.runCode(`import hcsr04
+hcsr04.open(3, 2)
+red = OutputPin(11)
+yellow = OutputPin(14)
+green = OutputPin(15)
+bright = OutputPin(20)
+while True:
+  cm = hcsr04.get_distance()
+  print(cm)
+  if cm <= 1:
+    red.on()
+  delay(1)
+  red.off()`);
+        },
     }
 }
 </script>
