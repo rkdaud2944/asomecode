@@ -47,7 +47,7 @@ class BleUnit {
                         console.log('연결이 끊어졌습니다.');
                     });
                 }); 
-            }   
+            } 
         }); 
     }
 
