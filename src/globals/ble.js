@@ -42,7 +42,7 @@ class BleUnit {
                         console.log('연결 완료됨');
                     }
 
-                    // 연결 끊김
+                    // 연결 끊김 
                     peripheral.once('disconnect', () => {
                         console.log('연결이 끊어졌습니다.');
                     });
