@@ -46,7 +46,7 @@ class BleUnit {
                     peripheral.once('disconnect', () => {
                         console.log('연결이 끊어졌습니다.');
                     });
-                });
+                }); 
             }  
         });
     }
