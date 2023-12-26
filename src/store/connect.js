@@ -18,7 +18,7 @@ export const useConnectStore = defineStore("connect",  {
         }, 
         disconnect() {
             this.connectionState = 'disconnected';
-        },
+        }, 
         handleError() {
             this.connectionState = 'error';
         }
