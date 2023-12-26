@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 
 export const useConnectStore = defineStore("connect",  {
-    id: "connect",
+    id: "connect", 
 
     state: () => ({
         mode: 'serial', //'serial', 'ble'
