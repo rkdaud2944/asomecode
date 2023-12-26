@@ -8,7 +8,7 @@ export const useConnectStore = defineStore("connect",  {
         connectionState: 'disconnected', // 초기 연결 상태
     }),
 
-    actions: { 
+    actions: {
         setMode(newMode) {
             this.mode = newMode; 
         },
