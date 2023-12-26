@@ -7,7 +7,7 @@ export const useConnectStore = defineStore("connect",  {
         mode: 'serial', //'serial', 'ble'
         connectionState: 'disconnected', // 초기 연결 상태
     }),
-
+ 
     actions: {
         setMode(newMode) {
             this.mode = newMode; 
