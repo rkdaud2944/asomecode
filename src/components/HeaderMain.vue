@@ -234,7 +234,7 @@ export default {
             bridgeIn.openEditor('')
         },  
         
-        showDropdown() {
+        showDropdown() { 
             document.getElementById('dropdown').style.display = 'block';
         },
 
