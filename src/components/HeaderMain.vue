@@ -243,12 +243,24 @@ export default {
         },
 
         bleConnect() {
-            // ble.connect();
             ble.connect();
         },
-
+        
         bleSendData() {
-            ble.runCode(`print('hello');red = OutputPin(11);red.on();`);
+            ble.runCode(`import hcsr04
+hcsr04.open(3, 2)
+red = OutputPin(11)
+yellow = OutputPin(14)
+green = OutputPin(15)
+bright = OutputPin(20)
+while True:
+    cm = hcsr04.get_distance()
+    if cm <= 5:
+        red.on()
+        delay(1)
+        red.off()
+    else :
+        delay(0.5)`);
         },
     }
 }

@@ -126,7 +126,8 @@ const bleConnect = {
         if (text !== undefined && text !== null){
             text = text.replace(/[ㄱ-ㅎㅏ-ㅣ가-힣]/g, (match) => `{{${encodeURIComponent(match)}}}`);
         }
-        this.write(text +"\r\n");
+        // this.write(text +"\r\n");
+        this.write(text);
     },
 
     runCode(codes) {
@@ -134,15 +135,6 @@ const bleConnect = {
 
         this.writeLn( `_codes_ = ""`);
         for (let code of codes.replaceAll("\r", "").split("\n")) {
-            // TODO: 파이썬 코드의 주석을 삭제한다. 특히 한글 주석은 보드에 에러를 유발할 수 있다.
-            // sLine := RemoveComment(sLine);
-
-            // TODO: 델파이와 달라서 필요 없을 듯. 확인 후  삭제
-            // sLine := Space2Tab(Lines[Loop]);
-            // sLine := StringReplace(sLine, #9, '\t', [rfReplaceAll]);
-            // code = code.replace(/{mod}/gi, "%");
-            // code = code.replace(/@@NOW/gi, "CurrentTime");
-
             code = code.replace(/\\/gi, '\\\\');
             code = code.replace(/'/gi, "\\'");
             this.writeLn(`_codes_ = _codes_ + '${code}\\n'`);
