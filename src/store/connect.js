@@ -10,7 +10,7 @@ export const useConnectStore = defineStore("connect",  {
 
     actions: {
         setMode(newMode) { 
-            this.mode = newMode;
+            this.mode = newMode; 
         },
         connect() {
             this.connectionState = 'connecting';
