@@ -25,8 +25,16 @@
 <script>
 import eventbus from "@/globals/eventbus";
 import serial from "@/globals/serial";
+import ble from "@/globals/ble";
+import { mapState } from 'pinia'
+import {useConnectStore} from '@/store/connect'
 
 export default {
+    
+    computed: {
+        ...mapState(useConnectStore,['mode','connectionState']),
+    },
+
     
     data() {
         return {
@@ -42,6 +50,34 @@ export default {
         };
     },
     mounted() {
+        //ble
+        eventbus.on("onBleConnected", () => {
+            console.log("onBleConnected");
+            this.rows = [];
+        });
+        eventbus.on("onBleDisconnected", () => {
+            console.log("onBleDisconnected");
+            this.rows = [];
+        });
+        eventbus.on("onBleReceived", (data) => {
+            console.log("onBleReceived");
+            // TODO: 디버깅을 위해서 임시 주석 처리
+            // if (data && (data.startsWith("###") || data.startsWith(">>> ###"))) {
+            //     // console.log(data);
+            //     return;
+            // }
+
+            data = data.replaceAll(" ", "&nbsp;");
+            data = data.replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;");
+
+            // 한글 디코딩
+            data = this.decodeKoreanCharacters(data)
+            
+            this.buffer.push(data);
+        });
+
+
+        //serial
         eventbus.on("onSerialConnected", () => {
             this.rows = [];
         });
@@ -130,8 +166,14 @@ export default {
                 return;
             }
 
-            serial.writeLn(this.text);
-            this.text = "";
+            if(this.mode == 'ble'){
+                ble.runCode(this.text);
+                this.text = "";
+                return;
+            }else{
+                serial.writeLn(this.text);
+                this.text = "";
+            }
         },
         decodeKoreanCharacters(str) {
             const koreanEncodedRegex = /{{(.*?)}}/g;

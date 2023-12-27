@@ -29,10 +29,16 @@
                     <img :src="editor" class="ui-img"/>
                     <p class="ui-left-font" id="fs-four">소스편집</p>
                 </li>
-                <li class="ui-left-bt" @click="stop()">
+                <!-- <li class="ui-left-bt" @click="stop()"> -->
+                <li class="ui-left-bt" @click="this.mode=='ble'? bleStop():stop()">
                     <img :src="stop" class="ui-img"/>
                     <p class="ui-left-font" id="fs-three">멈추기</p>
                 </li>
+                <li>
+                    <p>상태 : {{ this.mode }}</p>
+                    <p>state : {{ this.connectionState }}</p>
+                </li>
+                
             </ul>
 
             <ul class="ui-right">
@@ -132,9 +138,22 @@ import bridgeIn from "@/globals/bridge-in";
 import eventbus from "@/globals/eventbus";
 import boardUpdater from "@/globals/board-updater";
 import ble from "@/globals/ble";
+import { mapState } from 'pinia'
+import {useConnectStore} from '@/store/connect'
 
 export default {
     mixins: [VueBase, bridgeIn],
+
+    // setup() {
+    //     const connectStore = useConnectStore();
+    //     return {
+    //         connectStore,
+    //     }
+    // },
+
+    computed: {
+        ...mapState(useConnectStore,['mode','connectionState']),
+    },
 
     data() {
         return {
@@ -228,8 +247,6 @@ export default {
             this.openUrl('BO', 'app://./index.html?goto=backOffice');
         },
 
-        
-
         openEditor() {
             bridgeIn.openEditor('')
         },  
@@ -262,6 +279,10 @@ while True:
     else :
         delay(0.5)`);
         },
+        bleStop(){
+            console.log('bleStop');
+            ble.runCode(String.fromCharCode(3))
+        }
     }
 }
 </script>

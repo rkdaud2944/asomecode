@@ -2,6 +2,7 @@ import { SerialPort, ReadlineParser } from "serialport";
 import eventbus from "@/globals/eventbus";
 import speakerManager from "@/globals/speaker-manager";
 import { Notify } from 'quasar'
+import {useConnectStore} from '@/store/connect'
 
 eventbus.on("onSerialReceived", (data) => {
     if (!data) return;
@@ -23,6 +24,7 @@ const fs = require('fs');
 
 class SerialUnit {
     async open(portName) {
+        useConnectStore.connecting();
 
         this.port = new SerialPort({
             path: portName,
@@ -41,15 +43,19 @@ class SerialUnit {
         this.port.on('error', (error) => {
             console.log(error);
             this.close();
+            useConnectStore.handleError();
             this.onError("어썸보드에서 오류가 감지되었습니다.");
         });
 
         try {
             await this.port.open();            
             this.onOpened();
+            useConnectStore.connected();
             // this.writeLn("import os; os.uname()");
         } catch (error) {
             console.log(error);
+            
+            useConnectStore.handleError();
             this.onError("어썸보드에 연결할 수가 없습니다.");
             return;
         }
