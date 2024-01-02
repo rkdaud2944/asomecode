@@ -14,7 +14,7 @@ export const useConnectStore = defineStore("connect",  {
         }
     },
 
-    actions: { 
+    actions: {
         setMode(newMode) {
             this.mode = newMode; 
         },
