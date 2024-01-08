@@ -126,6 +126,41 @@ export default {
     },
 
     methods: {
+        scrollToBottom() {
+            // this.$nextTick(() => {
+            //     const consoleElement = this.$refs.console;
+            //     if (consoleElement) {
+            //         consoleElement.scrollTop = consoleElement.scrollHeight;
+            //     }
+            // });
+        },
+        onConsoleWindowControl() {
+            if (this.consoleHeight >= 51) {
+                this.consoleEnabled = true;
+            } 
+            else {
+                this.consoleEnabled = false;
+            }
+            this.consoleHeight = this.consoleEnabled ? 50 : 220;
+        },
+        startResize(e) {
+            this.resizing = true
+            this.startY = e.clientY
+            window.addEventListener('mousemove', this.resizeHandler)
+            window.addEventListener('mouseup', this.stopResize)
+        },
+        resizeHandler(e) {
+            if (this.resizing) {
+                const consoleHeight = this.consoleHeight - (e.clientY - this.startY)
+                this.consoleHeight = Math.max(100, consoleHeight)
+                this.startY = e.clientY
+            }
+        },
+        stopResize() {
+            this.resizing = false
+            window.removeEventListener('mousemove', this.resizeHandler)
+            window.removeEventListener('mouseup', this.stopResize)
+        },
         send() {
 
             if (this.text.startsWith("/list")) {
@@ -168,6 +203,9 @@ export default {
                 this.scrollToBottom();
             },
             deep: true 
+        },
+        consoleHeight : function(value){
+            if (value >= 51) this.arrow = false;
         },
     },
 };
