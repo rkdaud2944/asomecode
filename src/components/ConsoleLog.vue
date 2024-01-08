@@ -69,10 +69,7 @@ export default {
             // 한글 디코딩
             data = this.decodeKoreanCharacters(data)
             
-            console.log("data : "+ data);
             this.buffer.push(await data);
-            console.log(this.buffer)
-            // this.consolePush(await data);
         });
 
 
@@ -127,12 +124,12 @@ export default {
 
     methods: {
         scrollToBottom() {
-            // this.$nextTick(() => {
-            //     const consoleElement = this.$refs.console;
-            //     if (consoleElement) {
-            //         consoleElement.scrollTop = consoleElement.scrollHeight;
-            //     }
-            // });
+            this.$nextTick(() => {
+                const consoleElement = this.$refs.console;
+                if (consoleElement) {
+                    consoleElement.scrollTop = consoleElement.scrollHeight;
+                }
+            });
         },
         onConsoleWindowControl() {
             if (this.consoleHeight >= 51) {

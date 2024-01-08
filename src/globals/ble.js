@@ -96,41 +96,12 @@ class BleUnit {
         })
     }
 
-    // readData() {
-    //     TX_characteristic.subscribe((error) => {
-    //         if (!error) {
-    //             TX_characteristic.on('data', (data, isNotification) => {
-    //                 if (isNotification){
-    //                     const lines = data.toString().split('/\r?\n/'); // 데이터를 줄별로 분할
-    //                     lines.forEach((line, index) => {
-    //                         // 줄의 끝에 `>>>`가 있는 경우, 이는 누적된 텍스트의 끝을 의미함
-    //                         if(line.includes('>>>')){
-    //                             // 누적된 텍스트와 현재 줄까지의 내용을 전송
-    //                             text += line;
-    //                             eventbus.emit("onBleReceived", text);
-    //                             text = ""; // 누적된 텍스트를 초기화
-    //                         } else {
-    //                             // 아직 메시지가 완전하지 않으므로, 누적된 텍스트에 현재 줄을 추가
-    //                             text += line;
-    //                             console.log(index + " : " + data.toString());
-    //                             // 마지막 줄이 아니면 개행 문자를 추가
-    //                             // if(index !== lines.length - 1) text += '\n';
-    //                         }
-    //                     });
-    //                 }
-    //             });
-    //         }
-    //     })
-    // }
-
-
     readData() {
         TX_characteristic.subscribe((error) => {
             if (!error) {
                 TX_characteristic.on('data', (data, isNotification) => {
                     if (isNotification){
                         eventbus.emit("onBleReceived", data.toString());
-                        console.log('ble : '+data.toString());
                     }
                 });
             }
