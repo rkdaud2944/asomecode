@@ -13,7 +13,7 @@
                 <li class="ui-left-bt" @mouseover="showDropdown()" @mouseleave="hideDropdown()">
                     <img :src="connectImg" class="ui-img"/>
                     <p class="ui-left-font" id="fs-four">연결하기</p>
-                    <div id="dropdown" style="display:none;">
+                    <div id="dropdown" style="display:none;"> 
                         <button @click="bleConnect()">블루투스</button>
                         <button @click="bleSendData()">데이터</button>
                         <button @click="connect()">USB 연결</button>
@@ -278,10 +278,14 @@ while True:
         red.off()
     else :
         delay(0.5)`);
+
+//     ble.runCode(`
+// while True:
+//     print(1)`);
         },
         bleStop(){
             console.log('bleStop');
-            ble.runCode(String.fromCharCode(3))
+            ble.writeLn(String.fromCharCode(3))
         }
     }
 }

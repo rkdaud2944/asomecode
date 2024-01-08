@@ -12,7 +12,7 @@ export const useConnectStore = defineStore("connect",  {
         modeTest: (state)=> {
             return state.mode;
         }
-    },
+    }, 
 
     actions: {
         setMode(newMode) {

@@ -59,21 +59,20 @@ export default {
             console.log("onBleDisconnected");
             this.rows = [];
         });
-        eventbus.on("onBleReceived", (data) => {
+        eventbus.on("onBleReceived", async(data) => {
             console.log("onBleReceived");
-            // TODO: 디버깅을 위해서 임시 주석 처리
-            // if (data && (data.startsWith("###") || data.startsWith(">>> ###"))) {
-            //     // console.log(data);
-            //     return;
-            // }
 
-            data = data.replaceAll(" ", "&nbsp;");
+            data = data.replaceAll(" ", "&nbsp;"); 
             data = data.replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;");
+            data = data.replaceAll(/\r?\n/g, "<br>");
 
             // 한글 디코딩
             data = this.decodeKoreanCharacters(data)
             
-            this.buffer.push(data);
+            console.log("data : "+ data);
+            this.buffer.push(await data);
+            console.log(this.buffer)
+            // this.consolePush(await data);
         });
 
 
@@ -81,9 +80,9 @@ export default {
         eventbus.on("onSerialConnected", () => {
             this.rows = [];
         });
-        eventbus.on("onSerialClosed", () => {
-            this.rows = [];
-        });
+        // eventbus.on("onSerialClosed", () => {
+        //     this.rows = [];
+        // });
         eventbus.on("onSerialReceived", (data) => {
             // TODO: 디버깅을 위해서 임시 주석 처리
             // if (data && (data.startsWith("###") || data.startsWith(">>> ###"))) {
@@ -103,12 +102,22 @@ export default {
         this.timer = setInterval(() => {
             if (this.buffer.length == 0) return;
 
-            this.rows = this.rows.concat(this.buffer);
+            for (let i = 0; i < this.buffer.length; i++) {
+                if (this.buffer[0].trim() === '>>>') {
+                    // 기존에 버퍼에 데이터가 있으면 출력후 비운뒤, 받은 데이터 출력
+                    this.rows = this.rows.concat(this.buffer[i]);
+                } else {
+                    this.rows[this.rows.length - 1] += this.buffer[i];
+                }
+            }
+            
             this.buffer = [];
 
+            
             if (this.rows.length > 256) {
                 this.rows = this.rows.slice(-256);
             }
+
         }, 500);
     },
 
@@ -117,41 +126,6 @@ export default {
     },
 
     methods: {
-        scrollToBottom() {
-            this.$nextTick(() => {
-                const consoleElement = this.$refs.console;
-                if (consoleElement) {
-                    consoleElement.scrollTop = consoleElement.scrollHeight;
-                }
-            });
-        },
-        onConsoleWindowControl() {
-            if (this.consoleHeight >= 51) {
-                this.consoleEnabled = true;
-            } 
-            else {
-                this.consoleEnabled = false;
-            }
-            this.consoleHeight = this.consoleEnabled ? 50 : 220;          
-        },
-        startResize(e) {
-            this.resizing = true
-            this.startY = e.clientY
-            window.addEventListener('mousemove', this.resizeHandler)
-            window.addEventListener('mouseup', this.stopResize)
-        },
-        resizeHandler(e) {
-            if (this.resizing) {
-                const consoleHeight = this.consoleHeight - (e.clientY - this.startY)
-                this.consoleHeight = Math.max(100, consoleHeight)
-                this.startY = e.clientY
-            }
-        },
-        stopResize() {
-            this.resizing = false
-            window.removeEventListener('mousemove', this.resizeHandler)
-            window.removeEventListener('mouseup', this.stopResize)
-        },
         send() {
 
             if (this.text.startsWith("/list")) {
@@ -167,7 +141,7 @@ export default {
             }
 
             if(this.mode == 'ble'){
-                ble.runCode(this.text);
+                ble.writeLn(this.text);
                 this.text = "";
                 return;
             }else{
@@ -185,7 +159,7 @@ export default {
                     return match; // 디코딩 실패 시 원본 반환
                 }
             });
-        }
+        },
     },
 
     watch: {   
@@ -194,9 +168,6 @@ export default {
                 this.scrollToBottom();
             },
             deep: true 
-        },
-        consoleHeight : function(value){
-            if (value >= 51) this.arrow = false;
         },
     },
 };
