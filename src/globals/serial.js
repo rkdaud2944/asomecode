@@ -2,7 +2,7 @@ import { SerialPort, ReadlineParser } from "serialport";
 import eventbus from "@/globals/eventbus";
 import speakerManager from "@/globals/speaker-manager";
 import { Notify } from 'quasar'
-import {useConnectStore} from '@/store/connect'
+import {useConnectStore} from '@/store/connect-store'
 
 eventbus.on("onSerialReceived", (data) => {
     if (!data) return;

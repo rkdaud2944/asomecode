@@ -50,10 +50,17 @@ import LatencyTimer from "@/utils/latency-timer";
 import 'ace-builds/src-noconflict/mode-python';
 import 'ace-builds/src-noconflict/theme-monokai';
 import 'ace-builds/src-noconflict/ext-language_tools';
+import ble from "@/globals/ble";
+import { mapState } from 'pinia'
+import {useConnectStore} from '@/store/connect-store'
 
 
 export default {
     mixins: [VueBase],
+    
+    computed: {
+        ...mapState(useConnectStore,['mode','connectionState']),
+    },
 
     components: { VAceEditor },
 
@@ -192,8 +199,14 @@ export default {
         ...remoteSerial,
 
         run() {
-            this.runCode(this.content);
-            this.saveToLocalStorage();
+            console.log("this.mode : "+this.mode)
+            if(this.mode == 'ble'){
+                ble.writeLn(this.content);
+                return;
+            }else{
+                // this.runCode(this.content);
+                // this.saveToLocalStorage();
+            }
         },
 
         upload() {

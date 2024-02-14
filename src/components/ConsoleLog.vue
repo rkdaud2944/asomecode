@@ -27,7 +27,7 @@ import eventbus from "@/globals/eventbus";
 import serial from "@/globals/serial";
 import ble from "@/globals/ble";
 import { mapState } from 'pinia'
-import {useConnectStore} from '@/store/connect'
+import {useConnectStore} from '@/store/connect-store'
 
 export default {
     

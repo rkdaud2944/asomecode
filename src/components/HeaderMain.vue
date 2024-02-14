@@ -139,7 +139,7 @@ import eventbus from "@/globals/eventbus";
 import boardUpdater from "@/globals/board-updater";
 import ble from "@/globals/ble";
 import { mapState } from 'pinia'
-import {useConnectStore} from '@/store/connect'
+import {useConnectStore} from '@/store/connect-store'
 
 export default {
     mixins: [VueBase, bridgeIn],

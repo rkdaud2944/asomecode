@@ -1,4 +1,4 @@
-import { useConnectStore } from '@/store/connect'
+import { useConnectStore } from '@/store/connect-store'
 import eventbus from "@/globals/eventbus";
 
 const noble = require('@abandonware/noble');
