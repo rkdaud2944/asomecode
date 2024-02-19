@@ -31,7 +31,7 @@
                 </li>
                 <!-- <li class="ui-left-bt" @click="stop()"> -->
                 <li class="ui-left-bt" @click="this.mode=='ble'? bleStop():stop()">
-                    <img :src="stop" class="ui-img"/>
+                    <img :src="stopImg" class="ui-img"/>
                     <p class="ui-left-font" id="fs-three">멈추기</p>
                 </li>
                 <li>
@@ -43,11 +43,11 @@
 
             <ul class="ui-right">
                 <li class="ui-right-bt" @click="reboot()">
-                    <img :src="reboot" class="ui-img"/>
+                    <img :src="rebootImg" class="ui-img"/>
                     <p class="ui-right-font" id="fs-three">재부팅</p>
                 </li>
                 <li class="ui-right-bt" @click="format()">
-                    <img :src="format" class="ui-img"/>
+                    <img :src="formatImg" class="ui-img"/>
                     <p class="ui-right-font" id="fs-two">포맷</p>
                 </li>
                 <li class="ui-right-bt" @click="update()">
@@ -94,7 +94,7 @@
                     </li>
                     <li class="mobile-top" @click="stop()">
                         <div>
-                            <img :src="stop" class="ui-img2 mobile-top-margin"/>
+                            <img :src="stopImg" class="ui-img2 mobile-top-margin"/>
                             <p class="ui-left-font" id="fs-three">멈추기</p>
                         </div>
                     </li>
@@ -102,13 +102,13 @@
                 <div>
                     <li class="mobile-bottom" @click="reboot()">
                         <div>
-                            <img :src="reboot" class="ui-img2 mobile-top-margin"/>
+                            <img :src="rebootImg" class="ui-img2 mobile-top-margin"/>
                             <p class="ui-bottom-font" id="fs-three">재부팅</p>
                         </div>
                     </li>
                     <li class="mobile-bottom" @click="format()">
                         <div>
-                            <img :src="format" class="ui-img2 mobile-top-margin"/>
+                            <img :src="formatImg" class="ui-img2 mobile-top-margin"/>
                             <p class="ui-bottom-font" id="fs-two">포맷</p>
                         </div>
                     </li>
@@ -163,14 +163,14 @@ export default {
             connectImg: images.connect,
             editor: images.editor,
             home: images.home,
-            format: images.format,
+            formatImg: images.format,
             mobileM: images.mobileM,
-            reboot: images.reboot,
-            stop: images.stop,
+            rebootImg: images.reboot,
+            stopImg: images.stop,
             updateImg: images.update,
             help: images.help,
             codes: null,
-        }
+        } 
     },
 
     mounted() {

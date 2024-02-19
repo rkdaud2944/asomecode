@@ -18,6 +18,7 @@
   "main": "background.js",
   "dependencies": {
     "@abandonware/noble": "^1.9.2-23",
+    "@electron/remote": "^2.1.2",
     "@quasar/extras": "^1.0.0",
     "ace-builds": "^1.24.2",
     "aws-sdk": "^2.1097.0",

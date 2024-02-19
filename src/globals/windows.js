@@ -6,7 +6,6 @@ import ble from "@/globals/ble";
 let windows = [];
 
 window.addEventListener('message', (msg) => {
-    console.log("나도함")
     let message = {};
     try {
         message = JSON.parse(msg.data);
