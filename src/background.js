@@ -1,11 +1,14 @@
 'use strict'
 
-import { app, protocol, BrowserWindow } from 'electron'
+import { app, protocol, BrowserWindow, ipcMain } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
 const path = require('path');
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
+
+const ipc = ipcMain; // titlebar
+
 
 protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
@@ -13,16 +16,19 @@ protocol.registerSchemesAsPrivileged([
 
 async function createWindow() {
   const win = new BrowserWindow({
-    width: 1024,
-    height: 768,
+    width: 1280,
+    height: 1024,
     webPreferences: {
       enableRemoteModule: true,
       nodeIntegration: true,
       contextIsolation: false,
       // contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
       preload: path.join(__dirname, '..', 'src', 'preload.js'),
-    }
+    },
+    backgroundColor: '#FFF',
+    frame: false
   })
+  
   win.setMenu(null)
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
@@ -32,7 +38,25 @@ async function createWindow() {
     createProtocol('app')
     win.loadURL('app://./index.html')
   }
+
+  // titlebar
+  ipc.on('minimizeApp', ()=>{
+    win.minimize();
+  })
+  
+  ipc.on('maximizeApp', ()=>{
+    if(win.isMaximized()){
+      win.restore();
+    } else {
+      win.maximize();
+    }
+  })
+  
+  ipc.on('closeApp', ()=>{
+    win.close();
+  })
 }
+
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {

@@ -6,6 +6,9 @@
 @media (min-width: 883px) {
 
 }
+.nav{
+    margin-right:30px;
+}
 .mobile-top{
     display: inline-block;
     margin: 5px;
@@ -66,29 +69,29 @@
     animation-name:slide_up;
     animation-duration:0.5s;  
     
-  }
-  
-  .menu>.sub.down{
+}
+
+.menu>.sub.down{
     height:81px;
     animation-name:slide_down;
     animation-duration:0.5s;
-  }
-  
-  @keyframes slide_up{
+}
+
+@keyframes slide_up{
     0%{
-      height:81px;
+        height:81px;
     }
     100%{
-      height:0px;
+        height:0px;
     }
-  }
-  
-  @keyframes slide_down{
+}
+
+@keyframes slide_down{
     0%{
-      height:0px;
+        height:0px;
     }
     100%{
-      height:81px;
+        height:81px;
     }
 }
 
@@ -96,10 +99,11 @@
     display : flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 12px;
-    background: #353543;
+    /* padding: 8px 12px; */
+    top: 36px;
+    background: #ffffff;
     width: 100%;
-    height: 80px;
+    height: 94px;
     position: fixed;
     z-index: 200;
 
@@ -155,7 +159,7 @@ ul li {
     display: none;
 }
 .main-logo{
-    display: none;
+    margin-left:30px;
 }
 
 .ui-left-bt{

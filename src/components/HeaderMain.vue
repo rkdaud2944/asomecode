@@ -1,15 +1,23 @@
 <template>
     <nav class="header-nav">
-        <div class="logo_box">
+        <!-- <div class="logo_box">
             <img :src="logom" class="main-logo"/>
+        </div> -->
+
+        <div class="main-logo">로고</div>
+        <div class="nav">
+            <span class="Pretendard-Light">자료실</span>
+            <span class="Pretendard-Light">도움말</span>
+            <span class="Pretendard-Light">토글</span>
         </div>
 
-        <div class="menulist">
+
+        <!-- <div class="menulist">
             <ul class="ui-left">
-                <!-- <li class="ui-left-bt" @click="connect()">
-                    <img :src="connectImg"  class="ui-img"/>
-                    <p class="ui-left-font" id="fs-four">연결하기</p>
-                </li> -->
+                //li class="ui-left-bt" @click="connect()">
+                //    <img :src="connectImg"  class="ui-img"/>
+                //    <p class="ui-left-font" id="fs-four">연결하기</p>
+                //</li>
                 <li class="ui-left-bt" @mouseover="showDropdown()" @mouseleave="hideDropdown()">
                     <img :src="connectImg" class="ui-img"/>
                     <p class="ui-left-font" id="fs-four">연결하기</p>
@@ -29,14 +37,14 @@
                     <img :src="editor" class="ui-img"/>
                     <p class="ui-left-font" id="fs-four">소스편집</p>
                 </li>
-                <!-- <li class="ui-left-bt" @click="stop()"> -->
+                //<li class="ui-left-bt" @click="stop()">
                 <li class="ui-left-bt" @click="this.mode=='ble'? bleStop():stop()">
                     <img :src="stopImg" class="ui-img"/>
                     <p class="ui-left-font" id="fs-three">멈추기</p>
                 </li>
-                <li>
-                    <p>상태 : {{ this.mode }}</p>
-                    <p>state : {{ this.connectionState }}</p>
+                //<li>
+                //    <p>상태 : {{ this.mode }}</p>
+                //    <p>state : {{ this.connectionState }}</p>
                 </li>
                 
             </ul>
@@ -61,16 +69,16 @@
                 <li  @click="openRouterPath('/blockCoding')">
                     Block
                 </li>
-                <!-- <li @click="openUrl('metaverse', 'http://www.metalive.be:13300/')">
-                    M
-                </li> -->
+                //<li @click="openUrl('metaverse', 'http://www.metalive.be:13300/')">
+                //    M
+                //</li> 
                 <li @click="openRouterPath('/backOffice/lessons')">
                     BO
                 </li>
             </ul>
         </div>
 
-    <div class="menu widht-100">
+        <div class="menu widht-100">
             <img :src="mobileM" class="toggle toggle-img"/>
             <ul class="align-center sub">
                 <div>
@@ -126,7 +134,7 @@
                     </li>
                 </div>
             </ul>
-        </div>
+        </div> -->
     </nav>
 </template>
 
@@ -143,13 +151,6 @@ import {useConnectStore} from '@/store/connect-store'
 
 export default {
     mixins: [VueBase, bridgeIn],
-
-    // setup() {
-    //     const connectStore = useConnectStore();
-    //     return {
-    //         connectStore,
-    //     }
-    // },
 
     computed: {
         ...mapState(useConnectStore,['mode','connectionState']),
@@ -292,3 +293,4 @@ while True:
 </script>
 
 <style scoped src="@/assets/css/component/nav_bar.css"/>
+<style scoped src="@/assets/css/font.css"/>
