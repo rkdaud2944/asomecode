@@ -1,5 +1,6 @@
 import logom from "@/assets/images/logo/logom.png";
 import logo2 from "@/assets/images/logo/logo2.png";
+import logo from "@/assets/images/logo/logo.png";
 
 import connect from "@/assets/images/controls/connect.png";
 import editor from "@/assets/images/controls/editor.png";
@@ -92,6 +93,7 @@ import sttmodalcheck from "@/assets/images/sttmodalcheck.png";
 export default {
     logom,
     logo2,
+    logo,
 
     connect,
     editor,

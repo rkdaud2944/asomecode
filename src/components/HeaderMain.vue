@@ -1,140 +1,13 @@
 <template>
     <nav class="header-nav">
-        <!-- <div class="logo_box">
-            <img :src="logom" class="main-logo"/>
-        </div> -->
-
-        <div class="main-logo">로고</div>
+        <div class="main-logo">
+            <img :src="logo" alt="logo" class="logo"/>
+        </div>
         <div class="nav">
-            <span class="Pretendard-Light">자료실</span>
-            <span class="Pretendard-Light">도움말</span>
+            <span class="Pretendard-Light nav-txt">자료실</span>
+            <span class="Pretendard-Light nav-txt">도움말</span>
             <span class="Pretendard-Light">토글</span>
         </div>
-
-
-        <!-- <div class="menulist">
-            <ul class="ui-left">
-                //li class="ui-left-bt" @click="connect()">
-                //    <img :src="connectImg"  class="ui-img"/>
-                //    <p class="ui-left-font" id="fs-four">연결하기</p>
-                //</li>
-                <li class="ui-left-bt" @mouseover="showDropdown()" @mouseleave="hideDropdown()">
-                    <img :src="connectImg" class="ui-img"/>
-                    <p class="ui-left-font" id="fs-four">연결하기</p>
-                    <div id="dropdown" style="display:none;"> 
-                        <button @click="bleConnect()">블루투스</button>
-                        <button @click="bleSendData()">데이터</button>
-                        <button @click="connect()">USB 연결</button>
-                    </div>
-                </li>
-
-
-                <li class="ui-left-bt" @click="goTo('/')">
-                    <img :src="home"  class="ui-img"/>
-                    <p class="ui-left-font" id="fs-one">홈</p>
-                </li>
-                <li class="ui-left-bt" @click="openEditor()">
-                    <img :src="editor" class="ui-img"/>
-                    <p class="ui-left-font" id="fs-four">소스편집</p>
-                </li>
-                //<li class="ui-left-bt" @click="stop()">
-                <li class="ui-left-bt" @click="this.mode=='ble'? bleStop():stop()">
-                    <img :src="stopImg" class="ui-img"/>
-                    <p class="ui-left-font" id="fs-three">멈추기</p>
-                </li>
-                //<li>
-                //    <p>상태 : {{ this.mode }}</p>
-                //    <p>state : {{ this.connectionState }}</p>
-                </li>
-                
-            </ul>
-
-            <ul class="ui-right">
-                <li class="ui-right-bt" @click="reboot()">
-                    <img :src="rebootImg" class="ui-img"/>
-                    <p class="ui-right-font" id="fs-three">재부팅</p>
-                </li>
-                <li class="ui-right-bt" @click="format()">
-                    <img :src="formatImg" class="ui-img"/>
-                    <p class="ui-right-font" id="fs-two">포맷</p>
-                </li>
-                <li class="ui-right-bt" @click="update()">
-                    <img :src="updateImg" class="ui-img"/>
-                    <p class="ui-right-font" id="fs-four">업데이트</p>
-                </li>
-                <li class="ui-right-bt" @click="openRouterPath('/help')">
-                    <img :src="help" class="ui-img"/>
-                    <p class="ui-right-font" id="fs-three">HELP</p>
-                </li>
-                <li  @click="openRouterPath('/blockCoding')">
-                    Block
-                </li>
-                //<li @click="openUrl('metaverse', 'http://www.metalive.be:13300/')">
-                //    M
-                //</li> 
-                <li @click="openRouterPath('/backOffice/lessons')">
-                    BO
-                </li>
-            </ul>
-        </div>
-
-        <div class="menu widht-100">
-            <img :src="mobileM" class="toggle toggle-img"/>
-            <ul class="align-center sub">
-                <div>
-                    <li class="mobile-top" @click="goTo('/')">
-                        <div>
-                            <img :src="home" class="ui-img"/>
-                            <p class="ui-left-font" id="fs-one">홈</p>
-                        </div>
-                    </li>
-                    <li class="mobile-top" @click="connect()">
-                        <div>
-                            <img :src="connectImg" class="ui-img2"/>
-                            <p class="ui-left-font" id="fs-four">연결하기</p>
-                        </div>
-                    </li>          
-                    <li class="mobile-top" @click="openEditor()">
-                        <div>
-                            <img :src="editor" class="ui-img2"/>
-                            <p class="ui-left-font" id="fs-four">소스편집</p>
-                        </div>
-                    </li>
-                    <li class="mobile-top" @click="stop()">
-                        <div>
-                            <img :src="stopImg" class="ui-img2 mobile-top-margin"/>
-                            <p class="ui-left-font" id="fs-three">멈추기</p>
-                        </div>
-                    </li>
-                </div>
-                <div>
-                    <li class="mobile-bottom" @click="reboot()">
-                        <div>
-                            <img :src="rebootImg" class="ui-img2 mobile-top-margin"/>
-                            <p class="ui-bottom-font" id="fs-three">재부팅</p>
-                        </div>
-                    </li>
-                    <li class="mobile-bottom" @click="format()">
-                        <div>
-                            <img :src="formatImg" class="ui-img2 mobile-top-margin"/>
-                            <p class="ui-bottom-font" id="fs-two">포맷</p>
-                        </div>
-                    </li>
-                    <li class="mobile-bottom" @click="update()">
-                        <div>
-                            <img :src="updateImg" class="ui-img2 mobile-top-margin"/>
-                            <p class="ui-bottom-font" id="fs-four">업데이트</p>
-                        </div>
-                    </li>
-                    <li class="mobile-bottom" @click="openUrl('help', '/help')">
-                        <div>
-                            <img :src="help" class="ui-img2 mobile-top-margin"/>
-                            <p class="ui-bottom-font" id="fs-three">HELP</p>
-                        </div>
-                    </li>
-                </div>
-            </ul>
-        </div> -->
     </nav>
 </template>
 
@@ -160,7 +33,7 @@ export default {
         return {
             btConnectColor: "grey",
 
-            logom: images.logom,
+            logo: images.logo,
             connectImg: images.connect,
             editor: images.editor,
             home: images.home,
@@ -292,5 +165,6 @@ while True:
 }
 </script>
 
-<style scoped src="@/assets/css/component/nav_bar.css"/>
+<!-- <style scoped src="@/assets/css/component/nav_bar.css"/> -->
+<style scoped src="@/assets/css/component/header.css"/>
 <style scoped src="@/assets/css/font.css"/>

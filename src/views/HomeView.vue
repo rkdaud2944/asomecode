@@ -1,46 +1,108 @@
 <template>
-    <div class="row q-pa-md nav-padding" style="padding-left: 0px; padding-right: 0px;">
-        <div>
 
-            <a @click="goTo('/')"><img :src="logo2" class="img">
-            </a>
-        </div>
-        <div class="col menu">
-            <ImageButton :src="noticeImage" @mouseover="onMouseOver('notice')" @mouseleave="onMouseLeave('notice')" @click="onClickNotice"/>
-            <ImageButton :src="communityImage" @mouseover="onMouseOver('community')" @mouseleave="onMouseLeave('community')"/>
-            <ImageButton :src="libraryImage" @mouseover="onMouseOver('library')" @mouseleave="onMouseLeave('library')"/>
-            <ImageButton :src="faqImage" @mouseover="onMouseOver('faq')" @mouseleave="onMouseLeave('faq')"/>
-        </div>
-    </div> 
-
-    <div class="what-is-asomeit" style="height: 170px;">
-        <img :src="asomeitQuestionMark">
-        <p class="what-is-asomeit-font">
-            SW 코딩교육을 통해 <b>논리적인 사고</b>와 <b>창의력</b>을 길러 줄 수 있는 프로그램으로
-            <br>흥미있는 놀잇감형 교구를 활용해 어렵지 않게 배울 수 있습니다.
-        </p>
-    </div>
-
-    <div style="background:rgb(224,230,235);">
-        <div class="row subject_box">
-            <div class="col-3 subject-box-interval" v-for="(subject, index) in subjects" :key="index">
-                <div class="q-ma-md subject">
-                    <Subject :subject="subject" :index="index" />
-                </div>
+    <div class="main-wrap">
+        <div class="main-mid">
+            <div>
+                <h3>AsomeIT</h3>
+                <p>어썸코드는 어썸아이티만의 코딩 학습 전용 프로그램입니다.</p>
             </div>
         </div>
+
+        <div class="cts-wrap">
+            <div > 
+                <!-- 여기는 원래 위에 main-mid가 217이어야 하는데 이부분 때문에 177로함, 폰트사이즈 20 상하 여백 10 -->
+                <div class="curriculum-title Pretendard-Medium">Curriculum</div>
+                <div class="curriculum">
+                    <div class="card-wrap"
+                        v-for="(card, index) in cards"
+                        :key="index"
+                        @mousedown="clicked = true"
+                        @mouseup ="clicked = false"
+                    >
+                        <div class="card">
+                            <div class="card-front"
+                                :style="{ 
+                                    'background': card.bgColor,
+                                    'color': hoverIndex === index ? card.hoverTxtAge : '#000',
+                                    transition: 'background-color 0.5s ease, color 0.5s ease',
+                                    'backgroundImage': `url(${card.image})`
+                            }">
+                                <p class="age"
+                                    :style="{'color': card.txtAge,
+                                    'border': `1px solid ${card.txtAge}`
+                                }">
+                                    {{ card.age }}
+                                </p>
+                                <h4 class="title">{{ card.title }}</h4>
+                                <p class="description">{{ card.description }}</p>
+                                <div class="chapter" 
+                                    :style="{
+                                        'color': card.txtChapter,
+                                        'background-color': card.bgChapter,
+
+                                }">
+                                    {{ card.chapter }}
+                                </div>
+                            </div>
+
+                            <!-- hover -->
+                            <div class="card-back"
+                                :style="{ 
+                                    'background': clicked === true ? card.clickBgColor : card.hoverBgColor,
+                                    'color': hoverIndex === index ? card.hoverTxtAge : '#000',
+                                    transition: 'background-color 0.5s ease, color 0.5s ease',
+                                    'backgroundImage': `url(${card.image})`
+                            }">
+                                <p class="age"
+                                    :style="{'color': clicked === true ? card.clickTxtAge : card.hoverTxtAge,
+                                    'border': `1px solid ${clicked === true ? card.clickTxtAge : card.hoverTxtAge}`
+                                }">
+                                    {{ card.age }}
+                                </p>
+                                <h4 class="title"
+                                    :style="{
+                                        'color': clicked === true ? card.clickTxtTitle : card.hoverTxtTitle
+                                    }
+                                    ">
+                                    {{ card.title }}
+                                </h4>
+                                <p class="description">{{ card.description }}</p>
+                                <div class="chapter" 
+                                    :style="{
+                                        'color': card.hoverTxtChapter,
+                                        'background-color': card.hoverBgChapter,
+                                }">
+                                    {{ card.chapter }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="tip-title Pretendard-Medium">TIP</div>
+                <div class="tip">
+                    <div>1</div>
+                    <div>2</div>
+                    <div>3</div>
+                </div>
+            </div>
+
+        </div>
     </div>
+
 </template>
 
 <script>
 import images from "@/assets/images";
 import apiSubjectSet from "@/api/subjectSet";
-import ImageButton from '@/components/ImageButton.vue';
-import Subject from '@/components/SubjectComponent.vue'
+// import Subject from '@/components/SubjectComponent.vue'
+import { cards } from "@/data/main-cards";
 
 export default {
     components: {
-        ImageButton, Subject,
+        // Subject,
     },
 
     setup() {
@@ -66,6 +128,10 @@ export default {
             faq: images.faq,
             faqHover: images.faqHover,
             asomeitQuestionMark: images.asomeitQuestionMark,
+
+            
+            cards: cards,
+            clicked: false, // 클릭 상태 초기화
         }
     },
     computed: {
@@ -111,6 +177,10 @@ export default {
                     this.subjects = response.data.subjects
                 })
                 .catch(this.showError);
+        },
+        
+        handleCardClick(card) {
+            card.clicked = !card.clicked; // 클릭 상태 토글
         },
     }
 }
