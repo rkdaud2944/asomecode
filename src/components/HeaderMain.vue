@@ -6,7 +6,13 @@
         <div class="nav">
             <span class="NotoSansKR-Regular nav-txt">자료실</span>
             <span class="NotoSansKR-Regular nav-txt">도움말</span>
-            <span class="NotoSansKR-Regular">토글</span>
+            <span class="NotoSansKR-Regular hamburger-wrap nav-txt">
+                <div class="hamburger-icon">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+            </span>
         </div>
     </nav>
 </template>
