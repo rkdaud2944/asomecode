@@ -4,9 +4,9 @@
             <img :src="logo" alt="logo" class="logo"/>
         </div>
         <div class="nav">
-            <span class="Pretendard-Light nav-txt">자료실</span>
-            <span class="Pretendard-Light nav-txt">도움말</span>
-            <span class="Pretendard-Light">토글</span>
+            <span class="NotoSansKR-Regular nav-txt">자료실</span>
+            <span class="NotoSansKR-Regular nav-txt">도움말</span>
+            <span class="NotoSansKR-Regular">토글</span>
         </div>
     </nav>
 </template>
