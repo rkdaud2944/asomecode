@@ -4,13 +4,14 @@ import logo from "@/assets/images/logo/logo.png";
 
 import connect from "@/assets/images/controls/connect.png";
 import editor from "@/assets/images/controls/editor.png";
-import format from "@/assets/images/controls/format.png";
+import reset from "@/assets/images/controls/reset.png";
 import home from "@/assets/images/controls/home.png";
 import mobileM from "@/assets/images/controls/mobile_m.png";
-import reboot from "@/assets/images/controls/reboot.png";
+import restart from "@/assets/images/controls/restart.png";
 import stop from "@/assets/images/controls/stop.png";
 import update from "@/assets/images/controls/update.png";
 import help from "@/assets/images/controls/help.png";
+import setting from "@/assets/images/controls/setting.png";
 
 import runEdt from "@/assets/images/editor/run.png";
 import openEdt from "@/assets/images/editor/open.png";
@@ -97,13 +98,14 @@ export default {
 
     connect,
     editor,
-    format,
+    reset,
     home,
     mobileM,
-    reboot,
+    restart,
     stop,
     update,
     help,
+    setting,
 
     runEdt,
     openEdt,

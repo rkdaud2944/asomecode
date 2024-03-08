@@ -12,9 +12,54 @@
                     <div class="bar"></div>
                     <div class="bar"></div>
                 </div>
+                
+                <!-- <img src="@/assets/images/common/hamburger_menu.png"/> -->
+                
+                <!-- 드롭다운 메뉴 -->
+                <div class="dropdown-menu">
+                <!-- 메뉴 항목 -->
+                    <ul>
+                        <li class="li menu-title">
+                            <p>MENU</p>
+                        </li>
+                        <li class="li">
+                            <img :src="connectImg"/>
+                            <p>연결하기</p>
+                        </li>
+                        <li class="li">
+                            <img :src="stopImg"/>
+                            <p>멈추기</p>
+                        </li>
+                        <li class="li">
+                            <img :src="editorImg"/>
+                            <p>소스편집</p>
+                        </li>
+                        <li class="li">
+                            <img :src="updateImg"/>
+                            <p>업데이트</p>
+                        </li>
+                        <li class="li">
+                            <img :src="restartImg"/>
+                            <p>재부팅</p>
+                        </li>
+                        <li class="li">
+                            <img :src="resetImg"/>
+                            <p>포맷</p>
+                        </li>
+                        <li class="li">
+                            <img :src="settingImg"/>
+                            <p>설정</p>
+                        </li>
+                    </ul>
+                </div>
+                
             </span>
+            
+            <div class="darken-background"></div>
         </div>
     </nav>
+    
+    <!-- 어두운 배경, v-show로 표시 여부 결정 -->
 </template>
 
 <script>
@@ -41,15 +86,15 @@ export default {
 
             logo: images.logo,
             connectImg: images.connect,
-            editor: images.editor,
-            home: images.home,
-            formatImg: images.format,
-            mobileM: images.mobileM,
-            rebootImg: images.reboot,
+            editorImg: images.editor,
+            resetImg: images.reset,
+            restartImg: images.restart,
             stopImg: images.stop,
             updateImg: images.update,
-            help: images.help,
+            settingImg: images.setting,
             codes: null,
+
+            isMenuOpen: false
         } 
     },
 
@@ -110,6 +155,7 @@ export default {
         //         ble.bleConnect();
         //     }
         // });
+        
 
     },
 
@@ -166,8 +212,16 @@ while True:
         bleStop(){
             console.log('bleStop');
             ble.writeLn(String.fromCharCode(3))
+        },
+        test(){
+            this.isMenuOpen = !this.isMenuOpen;
+            document.querySelector('.darken-background').style.display = 'block';
         }
-    }
+    },
+    
+    // toggleMenu() {
+    //     this.isMenuOpen = !this.isMenuOpen;
+    // }
 }
 </script>
 
