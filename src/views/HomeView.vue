@@ -84,35 +84,28 @@
 
                 <div>
                     <div class="tip-title Pretendard-Medium">TIP</div>
-                    <div class="tip">
-                        <div class="tip-box box1">
-                            <div>
-                                <p class="NotoSansKR-Regular p1">어썸코드 사용법</p>
-                                <p class="Pretendard-Regular p2">올인원 학습 프로그램</p>
+                    <div class="tip-wrap">
+                        <div class="tip" 
+                        v-for="(card, index) in tipCards"
+                        :key="index"
+                        @mouseover="hoveredStates[index] = true"
+                        @mouseleave="hoveredStates[index] = false"
+                        @mousedown="clickedStates[index] = true"
+                        @mouseup="clickedStates[index] = false"
+                        >
+                        <a :href="card.href" target="_blank" class="tip-link" :style="{'text-decoration': 'none'}">
+                            <div :class="`tip-box box${index+1}`"
+                                :style="tipComputeStyle(card, index)">
+                                <div>
+                                    <p class="NotoSansKR-Regular p1">{{card.title}}</p>
+                                    <p class="Pretendard-Regular p2">{{card.description}}</p>
+                                </div>
+                                <div>
+                                    <img :src="card.image"/>
+                                </div>
                             </div>
-                            <div>
-                                <img src="@/assets/images/common/main_tip_1.png"/>
-                            </div>
+                        </a>
                         </div>
-
-                        <div class="tip-box box2">
-                            <div>
-                                <p class="NotoSansKR-Regular p1">커리큘럼 가이드</p>
-                                <p class="Pretendard-Regular p2">코딩을 재밌게!</p>
-                            </div>
-                            <div>
-                                <img src="@/assets/images/common/main_tip_2.png"/>
-                            </div>
-                        </div>
-
-                        <div class="tip-box box3">
-                            <div>
-                                <p class="NotoSansKR-Regular p1">어썸아이티</p>
-                                <p class="Pretendard-Regular p2">홈페이지 바로가기</p>
-                            </div>
-                            <div>
-                                <img src="@/assets/images/common/main_tip_3.png"/>
-                            </div></div>
                     </div>
                 </div>
             </div>
@@ -126,6 +119,7 @@ import images from "@/assets/images";
 import apiSubjectSet from "@/api/subjectSet";
 // import Subject from '@/components/SubjectComponent.vue'
 import { cards } from "@/data/main-cards";
+import { tipCards } from "@/data/main-tip-cards";
 
 export default {
     components: {
@@ -158,7 +152,13 @@ export default {
 
             
             cards: cards,
+            tipCards: tipCards,
+            // tipCards: this.tipCards.map(card => ({ ...card, hovered: false })),
+            // hovered: false,
+            hoveredStates: {},
+            clickedStates: {},
             clicked: false, // 클릭 상태 초기화
+            
         }
     },
     computed: {
@@ -205,10 +205,23 @@ export default {
                 })
                 .catch(this.showError);
         },
-        
-        handleCardClick(card) {
-            card.clicked = !card.clicked; // 클릭 상태 토글
-        },
+        tipComputeStyle(card, index) {
+            // 클릭
+            if (this.clickedStates[index]) {
+                return { background: card.clickBgColor,
+                    color: card.clickTxtColor,};
+            } 
+            // 호버
+            else if (this.hoveredStates[index]) {
+                return { background: card.hoverBgColor,
+                    color: card.hoverTxtColor,};
+            } 
+            // 기본
+            else {
+                return { background: card.bgColor,
+                    color: card.txtColor,};
+            }
+        }
     }
 }
 </script>

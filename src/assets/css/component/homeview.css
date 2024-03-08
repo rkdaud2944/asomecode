@@ -148,14 +148,15 @@
 /* 끝 */
 
 
-
+.tip-wrap{
+    height: 430px;
+    border-left: 1px solid #dedee2
+}
 
 .tip{
     display: flex;
-    height: 430px;
     flex-direction: column;
     padding-left: 30px;
-    border-left: 1px solid #dedee2
 }
 
 .tip-title{
@@ -167,7 +168,7 @@
 }
 
 .tip>div{
-    background-color: #f5f5f5;
+    /* background-color: #f5f5f5; */
     width: 100%;
 }
 
@@ -209,19 +210,19 @@
 
 .box1{
     margin-bottom: 20px;
-    color: #5C5C5C;
-    background-color: #EDEDED !important;
+    /* color: #5C5C5C; */
+    /* background-color: #EDEDED !important; */
 }
 
 .box2{
     margin-bottom: 20px;
-    color: #fff;
-    background-color: #83A5C8 !important;
+    /* color: #fff;
+    background-color: #83A5C8 !important; */
 }
 
 .box3{
     color: #fff;
-    background-color: #828282 !important;
+    /* background-color: #828282 !important; */
 }
 
 .p1, .p2{
