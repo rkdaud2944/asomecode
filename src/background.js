@@ -26,7 +26,6 @@ async function createWindow() {
       preload: path.join(__dirname, '..', 'src', 'preload.js'),
     },
     backgroundColor: '#FFF',
-    frame: false
   })
   
   win.setMenu(null)
