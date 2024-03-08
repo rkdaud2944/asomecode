@@ -1,5 +1,5 @@
 <template>
-    <q-layout view="hHh lpr fFf" style=" overflow: auto; height: calc(100vh - 36px);">
+    <q-layout view="hHh lpr fFf" style=" overflow: auto; height: calc(100vh - 36px);" class="body-scroll">
 
         <div v-if="showHeaderMain">
             <HeaderMain />
@@ -81,3 +81,9 @@ export default {
     
 };
 </script>
+
+<style scoped>
+    .body-scroll::-webkit-scrollbar {
+        display: none;
+    }
+</style>
