@@ -12,6 +12,7 @@
   overflow-y: scroll;
   /* -ms-overflow-style: none; 인터넷 익스플로러 */
   scrollbar-width: none; /* 파이어폭스 */
+  background-color: #29282D;
 }
 
 ::-webkit-scrollbar {
@@ -33,4 +34,31 @@
 
 #console {
   overflow-y: auto;
+}
+
+.console-input{
+  height : 55px;
+  display: flex;
+  align-items: center;
+  /* background-color: #fff; */
+  background-color: #201F24;
+}
+
+.console-input > p {
+  display: inline-block;
+  width: 70px;
+  color: #fff;
+  margin: 0;
+  text-align: center;
+}
+
+.input{
+  display: inline-block;
+  width:calc(100% - 80px);
+  height: 44px;
+  background-color: #29282D;
+}
+
+::v-deep .q-field__native {
+  color: #fff !important;
 }

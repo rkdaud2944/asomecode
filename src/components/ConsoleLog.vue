@@ -1,25 +1,25 @@
 <template>
     <div class="resizer" @mousedown="startResize"></div>
-        <div>
-            <div :style="{ height: consoleHeight + 'px' }" ref="console" class="q-pa-md" id="console">
+    <div>
+        <div :style="{ height: consoleHeight + 'px' }" ref="console" class="q-pa-md" id="console">
 
-                <q-page-sticky :offset="[20, -40]">
-                    <q-expansion-item v-model="arrow" class="shadow-1 overflow-hidden" dense
-                        style="border-radius: 30px; width: 40px;"
-                        switch-toggle-side
-                        header-class="bg-white text-black"
-                        @click="onConsoleWindowControl">
-                    </q-expansion-item>
-                </q-page-sticky>
-                <div v-for="(row, index) in rows" :key="index" v-html="row">
-                </div>
+            <q-page-sticky :offset="[20, -40]">
+                <q-expansion-item v-model="arrow" class="shadow-1 overflow-hidden" dense
+                    style="border-radius: 30px; width: 40px;"
+                    switch-toggle-side
+                    header-class="bg-white text-black"
+                    @click="onConsoleWindowControl">
+                </q-expansion-item>
+            </q-page-sticky>
+            <div v-for="(row, index) in rows" :key="index" v-html="row">
             </div>
         </div>
-    <q-input @keydown.enter.prevent="send" filled v-model="text">
-        <template v-slot:prepend>
-            <q-icon name="keyboard_arrow_right" />
-        </template>
+    </div>
+    <div class="console-input">
+        <p>입력</p>
+        <q-input @keydown.enter.prevent="send" filled v-model="text" class="input">
     </q-input>
+    </div>
 </template>
 
 <script>
@@ -44,7 +44,7 @@ export default {
             text: "",
             consoleEnabled: true,
             resizing: false,
-            consoleHeight: 220,
+            consoleHeight: 100,
             startY: 0,
             arrow: false,
         };
@@ -116,6 +116,7 @@ export default {
             }
 
         }, 500);
+
     },
 
     unmounted() {
@@ -138,7 +139,7 @@ export default {
             else {
                 this.consoleEnabled = false;
             }
-            this.consoleHeight = this.consoleEnabled ? 50 : 220;
+            this.consoleHeight = this.consoleEnabled ? 50 : 100;
         },
         startResize(e) {
             this.resizing = true
