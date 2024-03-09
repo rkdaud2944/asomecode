@@ -18,6 +18,53 @@
 .main-logo{
     margin-left:30px;
 }
+.connect-false-wrap,
+.connect-true-wrap {
+    display: flex; 
+    gap: 10px; 
+    background-color: #DEDEE2;
+    border-radius: 20px;
+}
+
+.connect-false-wrap > .connect {
+    display: flex; 
+    align-items: center;
+    background-color: #E4007F; 
+    padding: 6px 15px;
+    border-radius: 20px;
+    color: #fff;
+}
+
+.connect-false-wrap > .stop {
+    display: flex; 
+    align-items: center;
+    padding: 6px 15px;
+    border-radius: 20px;
+    color: #7E7E83;
+}
+
+.connect-true-wrap > .connect {
+    display: flex; 
+    align-items: center;
+    padding: 6px 15px;
+    border-radius: 20px;
+    color: #7E7E83;
+}
+
+.connect-true-wrap > .stop {
+    display: flex; 
+    align-items: center;
+    background-color: #7E7E83; 
+    padding: 6px 15px;
+    border-radius: 20px;
+    color: #fff;
+}
+
+
+.connect > img,
+.stop > img {
+    margin-right: 8px; /* 이미지와 텍스트 사이의 간격 */
+}
 
 .nav{
     margin-right:30px;

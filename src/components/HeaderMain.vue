@@ -3,6 +3,30 @@
         <div class="main-logo" @click="this.$router.push({ path: `/`})">
             <img :src="logo" alt="logo" class="logo"/>
         </div>
+        <div>
+            <!-- 현재 클릭만 하면 변경됨, 연결여부에 따라 표시하도록 수정 필요 (새로고침해도 유지되게)-->
+            <div class="connect-false-wrap" v-show="this.connected === false" @click="this.connected = true">
+                <span class="connect">
+                    <img :src="connectImg"/>
+                    연결하기
+                </span>
+                <span class="stop">
+                    <img :src="stopImg"/>
+                    멈추기
+                </span>
+            </div>
+            
+            <div class="connect-true-wrap" v-show="this.connected === true" @click="this.connected = false">
+                <span class="connect">
+                    <img :src="connectImg"/>
+                    연결하기
+                </span>
+                <span class="stop">
+                    <img :src="stopImg"/>
+                    멈추기
+                </span>
+            </div>
+        </div>
         <div class="nav">
             <span class="NotoSansKR-Regular nav-txt">자료실</span>
             <span class="NotoSansKR-Regular nav-txt">도움말</span>
@@ -94,7 +118,8 @@ export default {
             settingImg: images.setting,
             codes: null,
 
-            isMenuOpen: false
+            isMenuOpen: false,
+            connected: false
         } 
     },
 
