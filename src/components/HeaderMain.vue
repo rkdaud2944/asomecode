@@ -1,6 +1,6 @@
 <template>
     <nav class="header-nav">
-        <div class="main-logo">
+        <div class="main-logo" @click="this.$router.push({ path: `/`})">
             <img :src="logo" alt="logo" class="logo"/>
         </div>
         <div class="nav">

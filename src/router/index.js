@@ -123,11 +123,21 @@ const routes = [
         path: '/blockCoding',
         component: () => import('../views/blockCoding/AsomeBlock.vue')
     },
+
+    // Curriculum
+    {
+        path: '/curriculum/:id',
+        name: 'curriculum',
+        props: true,
+        component: () => import('../views/lesson/SelectCurriculum.vue')
+
+    }
+
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes
+    history: createWebHistory(process.env.BASE_URL),
+    routes
 })
 
 export default router

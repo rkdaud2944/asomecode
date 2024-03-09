@@ -1,0 +1,210 @@
+.main-wrap {
+    max-width: 1079px;
+    height: 714px;
+    margin-top: 130px !important;
+    text-align: center;
+    margin: auto;
+}
+
+.main-mid {
+    width: 100%;
+    height: 177px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.main-mid>div>h3 {
+    font-size: 30px;
+    font-weight: 700;
+    color: #000;
+    margin: 0;
+}
+
+.main-mid>div>p {
+    color: #7e7e83;
+    margin-top: 5px;
+}
+
+.cts-wrap {
+    display: inline-block;
+}
+
+.cts {
+    max-width: 1220px;
+    grid-template-columns: 3fr 1fr;
+}
+
+.curriculum {
+    display: flex;
+    flex-direction: row;
+}
+
+.curriculum>div {
+    width: 280px;
+}
+
+/* 카드 뒤집기 */
+.card-wrap {
+    position: relative;
+    perspective: 1100px;
+    /* width: 1079px; */
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.card>div {
+    width: 100%;
+    height: 430px;
+    /* margin-left: 30px;
+    margin-right: 15px; */
+    border-radius: 40px;
+
+}
+
+.card {
+    position: relative;
+    transition: 1.5s;
+    transform-style: preserve-3d;
+}
+
+.card-front,
+.card-back {
+    width: 100%;
+    /* 또는 실제 카드의 너비 */
+    height: 100%;
+    /* 또는 실제 카드의 높이 */
+    position: absolute;
+    backface-visibility: hidden;
+    /* 카드가 뒤집힐 때 뒷면을 숨김 */
+
+}
+
+.card-back {
+    transform: rotateY(180deg);
+}
+
+.card-wrap:hover .card {
+    transform: rotateY(180deg);
+}
+
+/* 카드 뒤집기 끝 */
+.card-wrap>div {
+    text-align: center;
+}
+
+.age {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 1.5px 5px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+}
+
+.title {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.title-num{
+    margin-left: 5px;
+}
+
+.description {
+    margin-top: 7px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.chapter {
+    display: inline-block;
+    width: 50px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.hoverTxt{
+    position: absolute;
+    width: 100%;
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    margin-top: 15px;
+}
+
+.btn-info{
+    position: absolute;
+    width: 150px;
+    height: 53px;
+    bottom: 14px;
+    background-color: #29292C;
+    color: #fff;
+    border-radius: 25px;
+    left: 50%;
+    transform: translateX(-50%); 
+    display: flex;
+    align-items: center;  
+    justify-content: center; 
+}
+
+/* 슬라이더 */
+.arrow-wrap{
+    margin-top: 150px;
+}
+
+.arrow-prev{
+    position: relative;
+    float:left;
+    border-radius: 50%;
+    background-color: #29292C;
+    width:70px;
+    height:70px;
+}
+
+.arrow-next {
+    position: relative;
+    float:right;
+    border-radius: 50%;
+    background-color: #29292C;
+    width:70px;
+    height:70px;
+}
+
+.arrow-prev::after {
+    position: absolute;
+    left: 31px; 
+    top: 28px;
+    content: '';
+    width: 15px; /* 사이즈 */
+    height: 15px; /* 사이즈 */
+    border-top: 3px solid #fff; /* 선 두께 */
+    border-right: 3px solid #fff; /* 선 두께 */
+    transform: rotate(225deg); /* 각도 */
+}
+
+.arrow-next::after {
+    position: absolute;
+    left: 25px; 
+    top: 28px;
+    content: '';
+    width: 15px; /* 사이즈 */
+    height: 15px; /* 사이즈 */
+    border-top: 3px solid #fff; /* 선 두께 */
+    border-right: 3px solid #fff; /* 선 두께 */
+    transform: rotate(45deg); /* 각도 */
+}
+
+.arrow-prev:hover,
+.arrow-next:hover{
+    background-color: #7E7E83;
+}
+
+.arrow-prev:active,
+.arrow-next:active{
+    background-color: #E4007F !important;
+}
