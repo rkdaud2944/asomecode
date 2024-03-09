@@ -70,7 +70,7 @@
 
 .card {
     position: relative;
-    transition: 1.5s;
+    /* transition: 1.5s; */
     transform-style: preserve-3d;
 }
 
