@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, protocol, BrowserWindow, ipcMain } from 'electron'
+import { app, protocol, BrowserWindow, ipcMain, Menu } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
 const path = require('path');
@@ -54,6 +54,16 @@ async function createWindow() {
   ipc.on('closeApp', ()=>{
     win.close();
   })
+
+  const contextMenu = Menu.buildFromTemplate([
+    { label: '뒤로 가기', click: () => win.webContents.goBack() },
+    { label: '앞으로 가기', click: () => win.webContents.goForward() },
+    { label: '새로고침', click: () => win.webContents.reload() }
+  ]);
+
+  win.webContents.on('context-menu', () => {
+    contextMenu.popup({ window: win });
+  });
 }
 
 
