@@ -19,7 +19,7 @@
                             @mousedown="clicked = true"
                             @mouseup ="clicked = false"
                         >
-                            <div class="card" @click="goSelectCurriculum(card.title)">
+                            <div class="card" @click="goSelectCurriculum(card.id, card.title)">
                                 <div class="card-front"
                                     :style="{ 
                                         'background': card.bgColor,
@@ -223,12 +223,14 @@ export default {
             }
         },
 
-        goSelectCurriculum(txt){
+        goSelectCurriculum(id, title){
             this.$router.push({ 
                 path: `/curriculum`,
-                name: 'curriculum',
-                params:{id: `${txt}`}
+                // name: 'curriculum',
+                query:{id: `${id}`,title: `${title}`}
             });
+            
+            // this.$router.push({ path: '/lesson/list', query: { id: 4 } });
         }
     }
 }

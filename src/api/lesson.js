@@ -16,7 +16,7 @@ export default {
                 });
         })
     },
-
+ 
     async getLessons(params) {
         return new Promise((resolve, reject) => {
             rest.get("lessons", {params})

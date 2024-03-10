@@ -126,8 +126,8 @@ const routes = [
 
     // Curriculum
     {
-        path: '/curriculum/:id',
-        name: 'curriculum',
+        path: '/curriculum',
+        // name: 'curriculum',
         props: true,
         component: () => import('../views/lesson/SelectCurriculum.vue')
 

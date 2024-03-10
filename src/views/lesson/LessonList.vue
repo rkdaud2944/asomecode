@@ -9,7 +9,7 @@
         <p>stt</p>
         <button class="ui-left-font" id="fs-three" @click="handleClick()"> {{ isRecording ? 'Stop' : 'Start' }} </button>
     </div>
-
+ 
     <div class="row q-pa-md" style="padding: 0px;">
         <div class="col-4 left">
             <h4 class="subject-in-title">{{ subject.title }}</h4>
@@ -62,6 +62,7 @@ export default {
     },
 
     mounted() {
+        console.log("ddd :"+this.$route.query.id);
         this.getSubject(this.$route.query.id)
     },
 

@@ -1,6 +1,7 @@
 export const cards = [
     // Asomekit
     {
+        id: 1,
         age: "초등 이상", 
         title: "Asomekit",
         titleNum:"1",
@@ -26,6 +27,7 @@ export const cards = [
         hoverTxtColor: '#4F4F53'
     },
     {
+        id: 2,
         age: "초등 이상", 
         title: "Asomekit", 
         titleNum:"2",
@@ -52,6 +54,7 @@ export const cards = [
     },
     // Asomebot
     {
+        id: 3,
         age: "초등 이상", 
         title: "Asomebot", 
         titleNum:"1",
@@ -78,6 +81,7 @@ export const cards = [
     },
     // Asomecar
     {
+        id: 4,
         age: "초등 이상", 
         title: "Asomecar", 
         titleNum:"1",

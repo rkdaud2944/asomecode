@@ -10,6 +10,7 @@
                         :key="index"
                         @mousedown="clicked = true"
                         @mouseup ="clicked = false"
+                        @click="goToLesson(card.id)"
                     >
                         <div class="card">
                             <div class="card-front"
@@ -100,14 +101,17 @@ export default {
     },
     computed: {
         filteredCards() {
-            return this.cards.filter(card => card.title === this.$route.params.id);
+            return this.cards.filter(card => card.title === this.$route.query.title);
         }
-    },
+    }, 
 
     mounted() {
     },
 
     methods: {
+        goToLesson(id){
+            this.$router.push({ path: '/lesson/list', query: { id: `${id}`} });
+        }
     }
 
 }
