@@ -1,18 +1,23 @@
 .markdown_output {
-    padding-top: 80px;
+    /* padding-top: 80px; */
     margin: 0px 22px 0px 22px;
 }
 
 .markdown_output h2 {
-    padding-top: 15px;
-    border-top: 2px solid #ff8123;
+    /* padding-top: 15px; */
+    border-bottom: 2px solid #F3F3F5;
     font-size: 23px;
     font-weight: bold;
     line-height: 30px;
-    color: #ff8123;
+    color: #E4007F;
     margin: 0px;
     margin-top: 50px;
     margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+.markdown_output h2:nth-child(1){
+    margin-top: 0;
 }
 
 .markdown_output h3 {
@@ -24,6 +29,7 @@
     margin-bottom: 10px;
     margin-left: 10px;
     line-height: normal;
+    color: #4F4F53;
 }
 
 .markdown_output p {
@@ -34,10 +40,12 @@
     margin: 0px;
     margin-bottom: 10px;
     margin-left: 10px;
+    color: #4F4F53;
 }
 
 .markdown_output ul {
     font-size: 1.2em;
+    color: #4F4F53;
 }
 
 .markdown_output img {
@@ -128,8 +136,12 @@
     font-size: 1.3em;
     text-align: center;
     border-radius: 3em;
-    color: white;
+    color: white !important;
     background-color: #7d7d7d;
+}
+
+.parts_qty > p{
+    color: #fff;
 }
 
 .markdown_output .parts_comment_bar {

@@ -1,27 +1,33 @@
 <template>
-    <div class="header nav-padding">
-        <a @click="goTo('/')">
-            <img :src="logom" class="logo" />
-        </a>
-    </div>
 
-    <div class="row">
-        <div class="col-3 scroll" :class="{sidefixed: scrollPosition > 10}">
-            <div class="flex flex-center title-box">
-                <a href="javascript:history.back()" class="gohome" >
-                    <!-- <img src="../../../public/images/common/p3_list.png"> -->
-                    <img :src="contentsList"/>
-                    <lectureList/>
-                </a>
-                <p class="title-style">목차</p>
-            </div>
-            <div @click="moveTo(title.tag)" :class="`title`" v-for="(title, index) in titles" :key="index">
-                {{title.name}}
-            </div>
-        </div>
+    <div class="container-wrap">
+        <div class="container">
+            <!-- <div class="col-3 scroll" :class="{sidefixed: scrollPosition > 10}"> -->
 
-        <div class="col-9 contents" :class="{c9contents: scrollPosition > 10}"><br>
-            <div class="markdown_output" v-html="output"></div>
+            <div class="container-top">
+                <div class="back-button" @click="historyBack">
+                    <div class="ico_arrow"></div>
+                </div>
+
+                <div class="container-top-txt">                    
+                    <p class="subject-title Pretendard-Medium"> {{ this.$route.query.subjectTitle }} </p>
+                    <p class="chapter Pretendard-Regular"> {{ this.$route.query.index }}차시 </p>
+                    <p class="chapter-title Pretendard-Medium"> {{ this.$route.query.title }} </p>
+                </div>
+            </div>
+
+            <div class="cts-wrap">
+                <!-- <div class="objectives" :class="{sidefixed: scrollPosition > 10}"> -->
+                <div class="objectives Pretendard-Medium">
+                    <div @click="moveTo(title.tag)" :class="`title`" v-for="(title, index) in titles" :key="index">
+                        {{title.name}}
+                    </div>
+                </div>
+
+                <div class="cts" :class="{c9contents: scrollPosition > 10}"><br>
+                    <div class="markdown_output" v-html="output"></div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -64,8 +70,9 @@ export default {
         },
         moveTo(tag) {
             const element = window.document.getElementById(tag);
-            console.log(tag, element);
-            const top = element.offsetTop - 100; // 헤더 길이만큼 낮추기
+            console.log("111" + tag, element);
+            // const top = element.offsetTop - 100; // 헤더 길이만큼 낮추기
+            // const top = element.offsetTop - 100; // 헤더 길이만큼 낮추기
 
             window.scrollTo({
                 top: top,
@@ -91,9 +98,16 @@ export default {
                 })
             .catch(this.showError);
         },
+        
+        historyBack(){
+            this.$router.go(-1);
+
+        }
     },
 };
 </script>
 
-<style scoped src="@/assets/css/component/lesson.css"/>
+<!-- <style scoped src="@/assets/css/component/lesson.css"/> -->
 <style src="@/assets/css/component/markdown_content.css"/>
+<style src="@/assets/css/component/lesson_detail.css"/>
+<style scoped src="@/assets/css/font.css"/>

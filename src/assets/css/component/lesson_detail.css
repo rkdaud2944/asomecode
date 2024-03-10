@@ -1,0 +1,138 @@
+.container-wrap{
+    top: 79px;
+    position: relative;
+    background-color: #F3F3F5;
+}
+
+.container{
+    width: 1200px;
+    margin: auto;
+    /* background-color: pink; */
+    padding-top: 35px;
+}
+
+.back-button {
+    display: inline-block;
+    position: relative;
+    width: 50px; 
+    height: 50px; 
+    border-radius: 50%; 
+    background-color: #fff;
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);  */
+    font-size: 0; 
+    margin-bottom: 15px;
+}
+
+.ico_arrow{
+    width:80px;
+    height:50px;
+    position:relative;
+    text-indent:-9999px;
+    cursor: pointer;
+
+}
+
+.ico_arrow:before{
+    content:'';
+    width:15px;
+    height:15px;
+    position:absolute;
+    left:30%;
+    top:50%;
+    border-left:2px solid #000;
+    border-top:2px solid #000;
+    transform:translate(-50%,-50%) rotate(-45deg);
+}
+
+.ico_arrow:after{
+    content:'';
+    width:20px;
+    height:2px;
+    position:absolute;
+    left:16px;
+    top:50%;
+    transform:translateY(-50%);
+    background:#000
+}
+
+.container-top{
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.container-top-txt{
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.subject-title{
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.chapter{
+    min-width: 70px;
+    border: 1px solid #E4007F;
+    background-color: #E4007F;
+    color: #fff;
+    padding: 3px 0 3px 0;
+    text-align: center;
+    border-radius: 25px; 
+    font-size: 1rem;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.chapter-title{
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.cts-wrap{
+    max-width: 1150px;
+    display: flex;
+    margin: auto;
+    position: relative;
+}
+
+.objectives{
+    min-width: 300px;
+    /* position: absolute; */
+    margin-top: 20px;
+    margin-right: -50px; /* 오른쪽으로부터 10px 겹치게 만들기 */
+    display: fixed;
+    top: 100px;
+    
+}
+
+.title{
+    /* border: 1px solid #E4007F; */
+    border-radius: 45px 0 0 45px;
+    padding: 10px 0 10px 30px;
+    font-size: 1.1rem;
+    color: #4F4F53;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    white-space: nowrap; 	
+}
+
+.title:hover{
+    color: #4F4F53;
+    background-color: #D9D9D9;
+}
+
+/* 임시 */
+
+.title:active{
+    color: #fff;
+    background-color: #E4007F;
+
+}
+
+.cts{
+    background-color: #fff;
+    border-radius: 50px 0 0 0;
+    margin-right: -50px; /* 오른쪽으로부터 10px 겹치게 만들기 */
+    padding-left: 30px;
+}
