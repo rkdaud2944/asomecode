@@ -110,7 +110,10 @@ export default {
 
     methods: {
         goToLesson(id){
-            this.$router.push({ path: '/lesson/list', query: { id: `${id}`} });
+            this.$router.push({ path: '/lesson/list', 
+            query: { 
+                id: `${id}`
+            } });
         }
     }
 

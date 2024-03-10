@@ -1,5 +1,5 @@
 <template>
-    <div class="header nav-padding">
+    <!-- <div class="header nav-padding">
         <p>tts</p>
         <button @click="saveToBoard('춤','네 춤출게요')">보드 저장</button>
         <button @click="play('춤')">지정 재생</button>
@@ -8,28 +8,24 @@
         
         <p>stt</p>
         <button class="ui-left-font" id="fs-three" @click="handleClick()"> {{ isRecording ? 'Stop' : 'Start' }} </button>
-    </div>
- 
-    <div class="row q-pa-md" style="padding: 0px;">
-        <div class="col-4 left">
-            <h4 class="subject-in-title">{{ subject.title }}</h4>
-            <br>
-            <h4 class="subject-in-title_eng">{{ subject.subTitle }}</h4>
-            <!-- <img src="../../../public/images/common/asomebot.png" class="asomebot"> -->
-            <img :src="asomebot" class="asomebot"/>
-        </div>
-
-        <div class="subject-size subject-margin">
-            <div class="row list-header">
-                <p class="description-text">{{ subject.description }}</p>
+    </div> -->
+    <div class="list-page-wrap">
+        <div class="list-wrap">
+            <img :src="listImg"/>
+            <div class="list-top">
+                <div class="back-button" @click="historyBack">
+                    <div class="ico_arrow"></div>
+                </div>
+                <div class="title Pretendard-Medium">{{ subject.title }}</div>
+                <div class="description Pretendard-Regular" v-html="subject.description" ></div>
             </div>
-            <div class="list-top-bar"></div>
-            <div @click="goTo('/lesson/detail', { id: lesson.id })" class="list-left rounded q-ma-sm q-pa-md" v-for="(lesson, index) in subject.lessons" :key="index" style="cursor: pointer" >
-                <div class="subject-div-size">
-                    <div class="subject-number">
-                        <p class="subject-number-text"> <span class="testColor">{{ index + 1 }}</span> 차시</p>
+
+            <div class="list-container">
+                <div class="list-item" v-for="(item, index) in subject.lessons" :key="index" @click="goTo('/lesson/detail', { id: item.id })">
+                    <div class="list-content">
+                        <span class="list-number Pretendard-Medium">{{ index + 1 }}차시</span>
+                        <span class="list-title Pretendard-Regular">{{ item.title }}</span>
                     </div>
-                    <p class="subject-title-text">{{ lesson.title }}</p>
                 </div>
             </div>
         </div>
@@ -52,17 +48,38 @@ export default {
             subject: {},
 
             logom: images.logom,
-            asomebot: images.asomebot,
+            listAsomebot: images.listAsomebot,
+            listAsomekit: images.listAsomekit,
+            listAsomecar: images.listAsomecar,
 
             //stt            
             mediaRecorder: null,
             audioChunks: [],
             isRecording: false,  // 녹음 상태를 추적하는 데이터 속성
+
+            title: null,
+            titleNum: null,
         }
     },
 
+    computed: {
+        listImg() {
+            const title = this.$route.query.title;
+            switch (title) {
+                case 'Asomebot':
+                    return this.listAsomebot;
+                case 'Asomekit':
+                    return this.listAsomekit;
+                case 'Asomecar':
+                    return this.listAsomecar;
+                default:
+                    return this.listAsomekit;
+            }
+        }
+    },
+
+
     mounted() {
-        console.log("ddd :"+this.$route.query.id);
         this.getSubject(this.$route.query.id)
     },
 
@@ -132,9 +149,17 @@ export default {
             this.mediaRecorder.stop();
             this.isRecording = false;
         },
+
+        // 디자인 수정
+        historyBack(){
+            this.$router.go(-1);
+
+        }
     },
 
 }
 </script>
 
-<style scoped src="@/assets/css/component/lesson_list.css"/>
+<!-- <style scoped src="@/assets/css/component/lesson_list.css"/> -->
+<style scoped src="@/assets/css/component/lesson_list2.css"/>
+<style scoped src="@/assets/css/font.css"/>

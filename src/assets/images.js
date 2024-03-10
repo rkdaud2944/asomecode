@@ -37,6 +37,10 @@ import faqHover from "@/assets/images/faq-hover.png";
 import asomeitQuestionMark from "@/assets/images/asomeit-question-mark.png";
 import contentsList from "@/assets/images/contents-list.png";
 
+import listAsomebot from "@/assets/images/common/list-Asomebot.png";
+import listAsomekit from "@/assets/images/common/list-Asomekit.png";
+import listAsomecar from "@/assets/images/common/list-Asomecar.png";
+
 //blockCoding
 import connectBlock from "@/assets/images/blockCoding/connect-block.png";
 import connectBlockHover from "@/assets/images/blockCoding/connect-block-hover.png";
@@ -130,6 +134,9 @@ export default {
     faqHover,
     asomeitQuestionMark,
     contentsList,
+    listAsomebot,
+    listAsomekit,
+    listAsomecar,
 
     connectBlock,
     connectBlockHover,
