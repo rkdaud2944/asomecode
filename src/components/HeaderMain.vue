@@ -6,7 +6,7 @@
         <div>
             <!-- 현재 클릭만 하면 변경됨, 연결여부에 따라 표시하도록 수정 필요 (새로고침해도 유지되게)-->
             <div class="connect-false-wrap" v-show="this.connected === false" @click="this.connected = true">
-                <span class="connect">
+                <span class="connect" @click="connect()">
                     <img :src="connectImg"/>
                     연결하기
                 </span>
@@ -18,7 +18,7 @@
             
             <div class="connect-true-wrap" v-show="this.connected === true" @click="this.connected = false">
                 <span class="connect">
-                    <img :src="connectImg"/>
+                    <img :src="connectImg" @click="connect()"/>
                     연결하기
                 </span>
                 <span class="stop">

@@ -76,7 +76,7 @@ export default {
                 this.$router.push({ path: path });
             }
         };
-        this.setTitleBar()
+        // this.setTitleBar()
     },
     
 };
