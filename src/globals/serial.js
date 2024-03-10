@@ -121,8 +121,7 @@ const seiral = {
 
     async connect() {
         this.disconnect();
-        console.log("aaa")
-
+        
         const asomeboard = await this.getAsomeboard();
         if (asomeboard == null) {
             this.fireErrorEvent("어썸보드를 찾을 수 없습니다.");
