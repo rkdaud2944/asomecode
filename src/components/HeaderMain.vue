@@ -54,7 +54,7 @@
                             <img :src="stopImg"/>
                             <p>멈추기</p>
                         </li>
-                        <li class="li">
+                        <li class="li" @click="openEditor()">
                             <img :src="editorImg"/>
                             <p>소스편집</p>
                         </li>
@@ -199,7 +199,9 @@ export default {
         },
 
         openEditor() {
-            bridgeIn.openEditor('')
+            // bridgeIn.openEditor()
+            // this.$router.push("/editor");
+            window.open('/editor', '_blank');
         },  
         
         showDropdown() { 
