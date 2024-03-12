@@ -11,7 +11,7 @@
 
                 <div class="container-top-txt">                    
                     <p class="subject-title Pretendard-Medium"> {{ this.$route.query.subjectTitle }} </p>
-                    <p class="chapter Pretendard-Regular"> {{ this.$route.query.index }}차시 </p>
+                    <p class="lesson-chapter Pretendard-Regular"> {{ this.$route.query.index }}차시 </p>
                     <p class="chapter-title Pretendard-Medium"> {{ this.$route.query.title }} </p>
                 </div>
             </div>
