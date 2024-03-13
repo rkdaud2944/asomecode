@@ -26,11 +26,11 @@
     margin-top: 5px;
 }
 
-.cts-wrap {
+.main-cts-wrap {
     display: inline-block;
 }
 
-.cts {
+.main-cts {
     display: grid;
     max-width: 1220px;
     grid-template-columns: 3fr 1fr;
@@ -196,7 +196,7 @@
     margin-bottom: 20px;
 }
 
-.box3 {
+.box3 { 
     color: #fff;
 }
 

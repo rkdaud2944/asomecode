@@ -7,8 +7,8 @@
                 <p class="Pretendard-Regular">어썸코드는 어썸아이티만의 코딩 학습 전용 프로그램입니다.</p>
             </div>
         </div>
-        <div class="cts-wrap">
-            <div class="cts">
+        <div class="main-cts-wrap">
+            <div class="main-cts">
                 <div > 
                     <!-- 여기는 원래 위에 main-mid가 217이어야 하는데 이부분 때문에 177로함, 폰트사이즈 20 상하 여백 10 -->
                     <div class="curriculum-title Pretendard-Medium">Curriculum</div>

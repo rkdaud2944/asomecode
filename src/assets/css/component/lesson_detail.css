@@ -106,7 +106,7 @@
     
 }
 
-.title{
+.detail-title{
     /* border: 1px solid #E4007F; */
     border-radius: 45px 0 0 45px;
     padding: 10px 0 10px 30px;
@@ -117,14 +117,14 @@
     white-space: nowrap; 	
 }
 
-.title:hover{
+.detail-title:hover{
     color: #4F4F53;
     background-color: #D9D9D9;
 }
 
 /* 임시 */
 
-.title:active{
+.detail-title:active{
     color: #fff;
     background-color: #E4007F;
 

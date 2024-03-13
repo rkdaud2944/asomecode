@@ -19,7 +19,7 @@
             <div class="cts-wrap">
                 <!-- <div class="objectives" :class="{sidefixed: scrollPosition > 10}"> -->
                 <div class="objectives Pretendard-Medium">
-                    <div @click="moveTo(title.tag)" :class="`title`" v-for="(title, index) in titles" :key="index">
+                    <div @click="moveTo(title.tag)" :class="`detail-title`" v-for="(title, index) in titles" :key="index">
                         {{title.name}}
                     </div>
                 </div>
