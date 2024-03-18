@@ -776,6 +776,139 @@ javascriptGenerator["advance_waiting"] = function (block) {
   return code;
 };
 
+Blockly.Blocks["advance_waiting_0.5"] = {
+  init: function () {
+    
+    this.appendDummyInput()
+      .appendField("기다리기")
+      .appendField(new Blockly.FieldNumber(0.5), "secs")
+      .appendField("초")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("55A55B");
+    this.setTooltip("buy id");
+    this.setHelpUrl("https://example.com");
+    
+  },
+};
+
+javascriptGenerator["advance_waiting_0.5"] = function (block) {
+  let number_secs = block.getFieldValue('secs');
+  let code = 'delay(' + number_secs + ')\n';
+  return code;
+};
+
+Blockly.Blocks["advance_waiting_0.1"] = {
+  init: function () {
+    
+    this.appendDummyInput()
+      .appendField("기다리기")
+      .appendField(new Blockly.FieldNumber(0.1), "secs")
+      .appendField("초")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("55A55B");
+    this.setTooltip("buy id");
+    this.setHelpUrl("https://example.com");
+    
+  },
+};
+
+javascriptGenerator["advance_waiting_0.1"] = function (block) {
+  let number_secs = block.getFieldValue('secs');
+  let code = 'delay(' + number_secs + ')\n';
+  return code;
+};
+
+Blockly.Blocks["advance_waiting_5"] = {
+  init: function () {
+    
+    this.appendDummyInput()
+      .appendField("기다리기")
+      .appendField(new Blockly.FieldNumber(5), "secs")
+      .appendField("초")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("55A55B");
+    this.setTooltip("buy id");
+    this.setHelpUrl("https://example.com");
+    
+  },
+};
+
+javascriptGenerator["advance_waiting_5"] = function (block) {
+  let number_secs = block.getFieldValue('secs');
+  let code = 'delay(' + number_secs + ')\n';
+  return code;
+};
+
+
+Blockly.Blocks["advance_waiting_0.01"] = {
+  init: function () {
+    
+    this.appendDummyInput()
+      .appendField("기다리기")
+      .appendField(new Blockly.FieldNumber(0.01), "secs")
+      .appendField("초")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("55A55B");
+    this.setTooltip("buy id");
+    this.setHelpUrl("https://example.com");
+    
+  },
+};
+
+javascriptGenerator["advance_waiting_0.01"] = function (block) {
+  let number_secs = block.getFieldValue('secs');
+  let code = 'delay(' + number_secs + ')\n';
+  return code;
+};
+
+Blockly.Blocks["advance_waiting_0.02"] = {
+  init: function () {
+    
+    this.appendDummyInput()
+      .appendField("기다리기")
+      .appendField(new Blockly.FieldNumber(0.02), "secs")
+      .appendField("초")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("55A55B");
+    this.setTooltip("buy id");
+    this.setHelpUrl("https://example.com");
+    
+  },
+};
+
+javascriptGenerator["advance_waiting_0.02"] = function (block) {
+  let number_secs = block.getFieldValue('secs');
+  let code = 'delay(' + number_secs + ')\n';
+  return code;
+};
+
+Blockly.Blocks["advance_waiting_0.2"] = {
+  init: function () {
+    
+    this.appendDummyInput()
+      .appendField("기다리기")
+      .appendField(new Blockly.FieldNumber(0.2), "secs")
+      .appendField("초")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("55A55B");
+    this.setTooltip("buy id");
+    this.setHelpUrl("https://example.com");
+    
+  },
+};
+
+javascriptGenerator["advance_waiting_0.2"] = function (block) {
+  let number_secs = block.getFieldValue('secs');
+  let code = 'delay(' + number_secs + ')\n';
+  return code;
+};
+
 Blockly.Blocks["advance_repeat"] = {
   init: function () {
     this.appendDummyInput()
@@ -982,7 +1115,7 @@ Blockly.Blocks["advance_elseif"] = {
       .appendField(new Blockly.FieldDropdown(dropdownGenerator), "variable")
       .appendField(new Blockly.FieldDropdown([
         ["==", "=="],
-        [">", ">"],
+        [">", ">"], 
         ["<", "<"],
         [">=", ">="],
         ["<=", "<="],
@@ -2066,7 +2199,7 @@ Blockly.Blocks["button_info"] = {
 };
 
 javascriptGenerator["button_info"] = function () {
-  let code = 'bt_value = bt.value()';
+  let code = 'bt_value = bt.value()\n';
   return code;
 };
 
@@ -2501,3 +2634,602 @@ javascriptGenerator["sensor_linesensor"] = function () {
   var code = 'line = line_sensor.read()\n';
   return code;
 };
+
+
+// LESSON KIT
+
+// Session 01.03
+
+Blockly.Blocks["pro_kit1_3_13pin_led_connect"] = {
+  init: function () {
+    this.appendDummyInput()
+      // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
+      .appendField("13번 핀에 LED 연결하기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["pro_kit1_3_13pin_led_connect"] = function () {
+  let code = 'led = OutputPin(13)\n';
+  return code;
+};
+
+Blockly.Blocks["pro_kit1_3_13pin_led_on"] = {
+  init: function () {
+    this.appendDummyInput()
+      // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
+      .appendField("13번 핀에 전기 공급하기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["pro_kit1_3_13pin_led_on"] = function () {
+  let code = 'led.on()\n';
+  return code;
+};
+
+Blockly.Blocks["pro_kit1_3_13pin_led_off"] = {
+  init: function () {
+    this.appendDummyInput()
+      // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
+      .appendField("13번 핀에 전기 중단하기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["pro_kit1_3_13pin_led_off"] = function () {
+  let code = 'led.off()\n';
+  return code;
+};
+
+
+// Session 01.04
+
+Blockly.Blocks["pro_kit1_4_ready"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("핀 연결하기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("14A2FF");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["pro_kit1_4_ready"] = function () {
+  let code = 'red = OutputPin(13)\nyellow = OutputPin(14)\ngreen = OutputPin(15)\n';
+  return code;
+};
+
+Blockly.Blocks["zet_kit1_4_red_led_on"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
+    .appendField("빨강 LED 켜기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["zet_kit1_4_red_led_on"] = function () {
+  let code = 'red.on()\n';
+  return code;
+};
+
+Blockly.Blocks["zet_kit1_4_red_led_off"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
+    .appendField("빨강 LED 끄기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["zet_kit1_4_red_led_off"] = function () {
+  let code = 'red.off()\n';
+  return code;
+};
+
+Blockly.Blocks["zet_kit1_4_yellow_led_on"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
+    .appendField("노랑 LED 켜기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["zet_kit1_4_yellow_led_on"] = function () {
+  let code = 'yellow.on()\n';
+  return code;
+};
+
+Blockly.Blocks["zet_kit1_4_yellow_led_off"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
+    .appendField("노랑 LED 끄기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["zet_kit1_4_yellow_led_off"] = function () {
+  let code = 'yellow.off()\n';
+  return code;
+};
+
+Blockly.Blocks["zet_kit1_4_green_led_on"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
+    .appendField("초록 LED 켜기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["zet_kit1_4_green_led_on"] = function () {
+  let code = 'green.on()\n';
+  return code;
+};
+
+Blockly.Blocks["zet_kit1_4_green_led_off"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
+    .appendField("초록 LED 끄기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["zet_kit1_4_green_led_off"] = function () {
+  let code = 'green.off()\n';
+  return code;
+};
+
+// Session 01.05
+
+Blockly.Blocks["zet_kit1_5_ready"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("핀 연결하기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("14A2FF");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["zet_kit1_5_ready"] = function () {
+  let code = 'import dice\nimport button\nbt = button.create(6)\n';
+  return code;
+};
+
+Blockly.Blocks["zet_kit1_5_dice_show"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("주사위 화면 표시")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["zet_kit1_5_dice_show"] = function () {
+  let code = 'dice.show()\n';
+  return code;
+};
+
+Blockly.Blocks["zet_kit1_5_dice_roll"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("주사위 굴리기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["zet_kit1_5_dice_roll"] = function () {
+  let code = 'dice.roll()\n';
+  return code;
+};
+
+Blockly.Blocks["zet_kit1_5_button_clicked"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("버튼이 눌러지면")
+    this.appendStatementInput('while_state')
+    .appendField('');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("55A55B");
+  },
+};  
+
+javascriptGenerator["zet_kit1_5_button_clicked"] = function (block) {
+  let branch = javascriptGenerator.statementToCode(block, 'while_state');
+  var code = 'if bt.value() == 0:\n' + branch;
+  return code;
+};
+
+// Session 01.06
+
+Blockly.Blocks["pro_kit1_6_ready"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("핀 연결하기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("14A2FF");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["pro_kit1_6_ready"] = function () {
+  let code = 'import music\nmusic.open(12)\n';
+  return code;
+};
+
+Blockly.Blocks["zet_kit1_6_do"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('"도" 소리 내기')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["zet_kit1_6_do"] = function () {
+  let code = 'music.note("C4", 300)\n';
+  return code;
+};
+
+Blockly.Blocks["zet_kit1_6_re"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('"레" 소리 내기')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["zet_kit1_6_re"] = function () {
+  let code = 'music.note("D4", 300)\n';
+  return code;
+};
+
+Blockly.Blocks["zet_kit1_6_mi"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('"미" 소리 내기')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["zet_kit1_6_mi"] = function () {
+  let code = 'music.note("E4", 300)\n';
+  return code;
+};
+
+Blockly.Blocks["zet_kit1_6_fa"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('"파" 소리 내기')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["zet_kit1_6_fa"] = function () {
+  let code = 'music.note("F4", 300)\n';
+  return code;
+};
+
+Blockly.Blocks["zet_kit1_6_so"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('"솔" 소리 내기')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["zet_kit1_6_so"] = function () {
+  let code = 'music.note("G4", 300)\n';
+  return code;
+};
+
+Blockly.Blocks["zet_kit1_6_la"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('"라" 소리 내기')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["zet_kit1_6_la"] = function () {
+  let code = 'music.note("A4", 300)\n';
+  return code;
+};
+
+Blockly.Blocks["zet_kit1_6_ti"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('"시" 소리 내기')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["zet_kit1_6_ti"] = function () {
+  let code = 'music.note("B4", 300)\n';
+  return code;
+};
+
+Blockly.Blocks["zet_kit1_6_h_do"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('"높은 도" 소리 내기')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["zet_kit1_6_h_do"] = function () {
+  let code = 'music.note("C5", 300)\n';
+  return code;
+};
+
+
+// Session 01.07
+
+Blockly.Blocks["pro_kit1_7_ready"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("핀 연결하기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("14A2FF");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["pro_kit1_7_ready"] = function () {
+  let code = 'red = ServoPin(17)\ngreen = ServoPin(18)\nblue = ServoPin(19)\n';
+  return code;
+};
+
+Blockly.Blocks["zet_kit1_7_rgb_red_random"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('빨간색 LED 밝기 무작위 변경')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["zet_kit1_7_rgb_red_random"] = function () {
+  let code = 'red.duty( random(1024) )\n';
+  return code;
+};
+
+
+Blockly.Blocks["zet_kit1_7_rgb_green_random"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('초록색 LED 밝기 무작위 변경')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["zet_kit1_7_rgb_green_random"] = function () {
+  let code = 'green.duty( random(1024) )\n';
+  return code;
+};
+
+Blockly.Blocks["zet_kit1_7_rgb_blue_random"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('파란색 LED 밝기 무작위 변경')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["zet_kit1_7_rgb_blue_random"] = function () {
+  let code = 'blue.duty( random(1024) )\n';
+  return code;
+};
+
+// Session 01.08
+
+Blockly.Blocks["pro_kit1_8_ready"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("핀 연결하기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("14A2FF");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["pro_kit1_8_ready"] = function () {
+  let code = 'import water_sensor\nbuzzer = OutputPin(11)\n';
+  return code;
+};
+
+Blockly.Blocks["zet_kit1_8_active_buzzer_on"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('능동부저 소리내기')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["zet_kit1_8_active_buzzer_on"] = function () {
+  let code = 'buzzer.on()\n';
+  return code;
+};
+
+Blockly.Blocks["zet_kit1_8_active_buzzer_off"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('능동부저 소리끄기')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["zet_kit1_8_active_buzzer_off"] = function () {
+  let code = 'buzzer.off()\n';
+  return code;
+};
+
+Blockly.Blocks["pro_kit1_8_water_sensor_show"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('워터 센서 화면 보이기')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["pro_kit1_8_water_sensor_show"] = function () {
+  let code = 'water_sensor.show()\n';
+  return code;
+};
+
+Blockly.Blocks["pro_kit1_8_water_sensor_read"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('워터센서 값 읽기')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["pro_kit1_8_water_sensor_read"] = function () {
+  let code = 'value = water_sensor.read()\n';
+  return code;
+};
+
+
+Blockly.Blocks["pro_kit1_8_sensor_20_if_else"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('센서 값이 50이 넘는가?')
+    this.setPreviousStatement(true, null);
+    // this.setNextStatement(true, "String");
+    this.setColour("55A55B");
+    this.setHelpUrl("https://example.com");
+    
+    // this.appendValueInput("if_value")
+    //   .setCheck("센서 값이 50이 넘는가?")
+    this.appendStatementInput('if_state')
+      .appendField('')
+    this.appendStatementInput('if_state_else')
+      .appendField('아니라면');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setInputsInline(true);
+  },
+};  
+
+javascriptGenerator["pro_kit1_8_sensor_20_if_else"] = function (block) {
+  const variable = javascriptGenerator.statementToCode(block, 'if_state');
+  const ineq = javascriptGenerator.statementToCode(block, 'if_state_else');
+  var code = 'if value > 50:\n'+variable+'else:\n'+ineq;
+
+  
+  return code;
+  
+};
+
+

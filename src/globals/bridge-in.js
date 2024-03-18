@@ -5,6 +5,7 @@ import windows from "@/globals/windows";
 /**
  * App to Web 브릿지 메시지
  */
+
 const bridge = {
     init() {
         //
@@ -53,11 +54,12 @@ const bridge = {
             `import http_utils; http_utils.send_msg('${connectCode}', '${msg}')`;
     },
 
-    // presentSession(present, language) {
-    //     console.log("present : "+present)
-    //     localStorage.setItem("stage", present);
-    //     window.open(`/AsomeBlock/BlockCoding.html?language=${language}`)
-    // }
+    // 기능블록
+    presentSession(present, language) {
+        console.log("lessonBlock : "+present + " language : "+language)
+        localStorage.setItem("lessonBlock", present);
+        window.open('/blockCoding','_blank')
+    }
 };
 
 window.refresh = bridge.refresh;

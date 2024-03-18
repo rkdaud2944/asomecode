@@ -53,6 +53,7 @@ import Blockly from "blockly";
 import { BotToolbox } from "@/blocks/blockcontents_bot";
 import { KitToolbox } from "@/blocks/blockcontents_kit";
 import { CarToolbox } from "@/blocks/blockcontents_car";
+import { LessonToolbox } from "@/blocks/lessonBlock";
 import { VAceEditor } from 'vue3-ace-editor';
 import 'ace-builds/src-noconflict/mode-python';
 import Modal from '@/components/SttModal.vue';
@@ -239,38 +240,78 @@ export default {
             }
         })
         
-        // 블록코드 워크스페이스 코드(점박이 백그라운드 넣은곳)
-        this.$nextTick(() => {
-            this.workspace = Blockly.inject(this.$refs.blocklyDiv, {
-                toolbox: 
-                    {kind: "categoryToolbox",
-                    contents: BotToolbox.contents},
-                grid:
-                    {spacing: 25,
-                    length: 2,
-                    colour: '#ccc',
-                    snap: true},
-                zoom:
-                    {controls: true,
-                    wheel: true, 
-                    startScale: 1.0,
-                    maxScale: 3,
-                    minScale: 0.3,
-                    scaleSpeed: 1.2,
-                    pinch: true},
-                trashcan: true,
-                width:"100%",
-                height:"100%",
+        if (localStorage.getItem("lessonBlock")){
+            console.log("lessonBlock : "+localStorage.getItem("lessonBlock"))
+            // 블록코드 워크스페이스 코드(점박이 백그라운드 넣은곳)
+            this.$nextTick(() => {
+                this.workspace = Blockly.inject(this.$refs.blocklyDiv, {
+                    toolbox: 
+                        {kind: "categoryToolbox",
+                        contents: LessonToolbox[localStorage.getItem("lessonBlock")]},
+                    grid:
+                        {spacing: 25,
+                        length: 2,
+                        colour: '#ccc',
+                        snap: true},
+                    zoom:
+                        {controls: true,
+                        wheel: true, 
+                        startScale: 1.0,
+                        maxScale: 3,
+                        minScale: 0.3,
+                        scaleSpeed: 1.2,
+                        pinch: true},
+                    trashcan: true,
+                    width:"100%",
+                    height:"100%",
+                });
+                // 에이스 에디터 코드 초기화
+                this.workspace.addChangeListener(this.handleWorkspaceChange);
+                // 에이스에디터 변경 감지용 코드
+                this.updateAceEditorCode();
+                // zoom 시 카테고리(flyout) 영역 영향 안받게하는 코드
+                Blockly.Flyout.prototype.getFlyoutScale = function() {
+                    return 1.0; 
+                };
             });
-            // 에이스 에디터 코드 초기화
-            this.workspace.addChangeListener(this.handleWorkspaceChange);
-            // 에이스에디터 변경 감지용 코드
-            this.updateAceEditorCode();
-            // zoom 시 카테고리(flyout) 영역 영향 안받게하는 코드
-            Blockly.Flyout.prototype.getFlyoutScale = function() {
-                return 1.0; 
-            };
-        });
+        }else{
+            // 블록코드 워크스페이스 코드(점박이 백그라운드 넣은곳)
+            this.$nextTick(() => {
+                this.workspace = Blockly.inject(this.$refs.blocklyDiv, {
+                    toolbox: 
+                        {kind: "categoryToolbox",
+                        contents: BotToolbox.contents},
+                    grid:
+                        {spacing: 25,
+                        length: 2,
+                        colour: '#ccc',
+                        snap: true},
+                    zoom:
+                        {controls: true,
+                        wheel: true, 
+                        startScale: 1.0,
+                        maxScale: 3,
+                        minScale: 0.3,
+                        scaleSpeed: 1.2,
+                        pinch: true},
+                    trashcan: true,
+                    width:"100%",
+                    height:"100%",
+                });
+                // 에이스 에디터 코드 초기화
+                this.workspace.addChangeListener(this.handleWorkspaceChange);
+                // 에이스에디터 변경 감지용 코드
+                this.updateAceEditorCode();
+                // zoom 시 카테고리(flyout) 영역 영향 안받게하는 코드
+                Blockly.Flyout.prototype.getFlyoutScale = function() {
+                    return 1.0; 
+                };
+            });
+
+        }
+
+
+        
         
         this.$nextTick(() => {
             this.insertIcon();
@@ -298,6 +339,8 @@ export default {
     beforeUnmount() {
         // 에이스에디터 코드 뷰엑스로 넘겨줌
         this.SetCode(null)
+        
+        localStorage.removeItem("lessonBlock");
         
     },
 
@@ -399,6 +442,8 @@ export default {
                     return KitToolbox;
                 case 'CAR':
                     return CarToolbox;
+                case 'LESSON':
+                    return LessonToolbox;
                 default:
                     return {};
             }

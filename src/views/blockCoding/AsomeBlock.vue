@@ -13,7 +13,7 @@
 
 
 </script>
- 
+
 
 <script>
 
@@ -37,6 +37,7 @@ export default {
             sourceView: images.sourceView,
         }
     },
+
 }
 
 </script>
