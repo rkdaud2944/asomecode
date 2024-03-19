@@ -7,10 +7,15 @@ let windows = [];
 
 window.addEventListener('message', (msg) => {
     let message = {};
-    try {
-        message = JSON.parse(msg.data);
-    } catch (error) {
-        console.log(error, msg);
+    
+    // 데이터가 문자열인지 체크하여 JSON.parse()를 조건적으로 사용합니다.
+    if (typeof msg.data === 'string') {
+        try {
+            message = JSON.parse(msg.data);
+        } catch (error) {
+            console.error('Error parsing message data as JSON:', error);
+            return; // 에러 발생 시 함수 실행을 중단합니다.
+        }
     }
 
     switch (message.type) {
