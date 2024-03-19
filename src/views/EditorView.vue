@@ -204,8 +204,8 @@ export default {
                 ble.writeLn(this.content);
                 return;
             }else{
-                // this.runCode(this.content);
-                // this.saveToLocalStorage();
+                this.runCode(this.content);
+                this.saveToLocalStorage();
             }
         },
 

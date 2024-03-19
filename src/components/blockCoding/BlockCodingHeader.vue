@@ -16,7 +16,7 @@
                     <img :src="stopBlockHover" style="width: 35px; height: 35px;" />
                 </div>
                 <span class="delimiter">|</span>
-                <div class="btn btn-image" @click="connect()">
+                <div class="btn btn-image" @click="remoteConnect()">
                     <img :src="connectBlock" style="width: 96px; height: 17px;" />
                     <img :src="connectBlockHover" style="width: 96px; height: 17px;" />
                 </div>
@@ -39,6 +39,8 @@
 import { mapState } from 'vuex'
 import images from "@/assets/images";
 // import eventbus from "@/globals/eventbus";
+
+import remoteSerial from "@/globals/remote-serial";
 
 // import serial from "@/globals/serial";
 
@@ -66,11 +68,13 @@ export default {
     },
 
     methods:{
-        connect() {
-            window.opener.postMessage('connect');
+        ...remoteSerial,
+
+        remoteConnect() {
+            this.connect()
         },
         stopCode() {
-            window.opener.postMessage('stop');
+            this.stop()
         },
         send(){
             const codes = this.$store.state.viewcode; // $store.state.viewcode를 직접 참조
@@ -78,18 +82,7 @@ export default {
             // codes 변수를 확인하기 위해 로그를 출력
             console.log(codes);
 
-            // 이후 코드를 수행
-            window.opener.postMessage(codes);
-            // this.setViewCode(''); // viewcode 상태를 초기화합니다
-            // serial.runCode(code)
-            // window.opener.runCode(code)
-            // opener.runCode()
-            // let code = generateCode(codes);
-            // const msg = {
-            //     type: "runCode",
-            //     params: code,
-            // };
-            // window.opener.postMessage(JSON.stringify(msg));
+            this.runCode(codes);
         }
 
     }
