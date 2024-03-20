@@ -2,8 +2,6 @@
 
     <div class="container-wrap">
         <div class="container">
-            <!-- <div class="col-3 scroll" :class="{sidefixed: scrollPosition > 10}"> -->
-
             <div class="container-top">
                 <div class="back-button" @click="historyBack">
                     <div class="ico_arrow"></div>
@@ -17,10 +15,12 @@
             </div>
 
             <div class="cts-wrap">
-                <!-- <div class="objectives" :class="{sidefixed: scrollPosition > 10}"> -->
                 <div class="objectives Pretendard-Medium">
-                    <div @click="moveTo(title.tag)" :class="`detail-title tag-${title.tag} defaultTag`" v-for="(title, index) in titles" :key="index">
-                        {{title.name}}
+                    <div @click="moveTo(title.tag)" 
+                        :class="`detail-title tag-${title.tag} defaultTag`"
+                        v-for="(title, index) in titles" :key="index"
+                        :title="title.name">
+                        <p>{{title.name}}</p>                        
                     </div>
                 </div>
 
@@ -56,17 +56,8 @@ export default {
     },
 
     mounted() {
-        
-
         window.addEventListener('scroll', this.debounce(this.handleScroll, 100));
-
-
         this.getLesson(this.$route.query.id)
-        
-        const title = document.querySelector('.tag-0');
-        title.classList.add('tag-active');
-
-        
     },
     
     updated() {

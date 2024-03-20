@@ -101,6 +101,16 @@
     position: fixed;
     width: 300px;
     margin-top: 20px;
+    height: 65vh;
+    overflow: auto;
+}
+
+.objectives p{
+    display: block;
+    margin: 0;
+    width: 200px;    
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 @keyframes moveUp {
@@ -116,14 +126,12 @@
 .cts{
     background-color: #fff;
     border-radius: 50px 0 0 0;
-    /* margin-right: -50px; */
     padding-left: 30px;
     margin-left:250px;
     z-index: 100;
 }
 
 .detail-title{
-    /* border: 1px solid #E4007F; */
     border-radius: 45px 45px 45px 45px;
     padding: 10px 0 10px 30px;
     font-size: 1.1rem;
