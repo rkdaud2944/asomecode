@@ -100,19 +100,17 @@
 .objectives{
     position: fixed;
     width: 300px;
-    margin-top: 20px;    
-    /* transition: top 0.3s ease-in-out; 여기에 애니메이션 효과 추가 */
-    
-    transition:opacity 200ms linear 100ms, left 200ms 200ms;
-    /* min-width: 300px; */
-    /* position: absolute; */
-    /* margin-right: -50px; 오른쪽으로부터 10px 겹치게 만들기 */
-    /* top: 100px; */
-    
+    margin-top: 20px;
 }
 
-.objectives.scroll{
-    top: 100px;
+@keyframes moveUp {
+    from { transform:translateY(20px) }
+    to { transform:translateY(-100px)  } 
+}
+
+@keyframes moveDown {
+    from { transform:translateY(-100px)  } 
+    to { transform:translateY(20px) }
 }
 
 .cts{
@@ -126,7 +124,7 @@
 
 .detail-title{
     /* border: 1px solid #E4007F; */
-    border-radius: 45px 0 0 45px;
+    border-radius: 45px 45px 45px 45px;
     padding: 10px 0 10px 30px;
     font-size: 1.1rem;
     color: #4F4F53;
@@ -140,9 +138,18 @@
     background-color: #D9D9D9;
 }
 
+.detail-title:active{
+    color: #fff;
+    background-color: #E4007F;
+}
+
+.detail-title.defaultTag:nth-child(1){
+    color: #fff;
+    background-color: #E4007F;
+}
 /* 임시 */
 
-.detail-title:active{
+.tag-active{
     color: #fff;
     background-color: #E4007F;
 

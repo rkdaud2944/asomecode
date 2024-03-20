@@ -19,7 +19,7 @@
             <div class="cts-wrap">
                 <!-- <div class="objectives" :class="{sidefixed: scrollPosition > 10}"> -->
                 <div class="objectives Pretendard-Medium">
-                    <div @click="moveTo(title)" :class="`detail-title`" v-for="(title, index) in titles" :key="index">
+                    <div @click="moveTo(title.tag)" :class="`detail-title tag-${title.tag} defaultTag`" v-for="(title, index) in titles" :key="index">
                         {{title.name}}
                     </div>
                 </div>
@@ -56,11 +56,17 @@ export default {
     },
 
     mounted() {
+        
 
-        window.addEventListener('scroll', this.handleScroll);
+        window.addEventListener('scroll', this.debounce(this.handleScroll, 100));
 
 
         this.getLesson(this.$route.query.id)
+        
+        const title = document.querySelector('.tag-0');
+        title.classList.add('tag-active');
+
+        
     },
     
     updated() {
@@ -74,11 +80,13 @@ export default {
 
     methods: {
         moveTo(tag) {
-            console.log("tag", tag);
             const element = window.document.getElementById(tag);
-            // console.log("111" + tag, element);
-            // const top = element.offsetTop - 100; // 헤더 길이만큼 낮추기
-            // const top = element.offsetTop - 100; // 헤더 길이만큼 낮추기
+            const top = element.offsetTop + 60; 
+
+            // 현재 항목의 클래스를 추가
+            if (element) {
+                element.classList.add("active");
+            }
 
             window.scrollTo({
                 top: top,
@@ -96,11 +104,15 @@ export default {
                     let doc = domparser.parseFromString(this.output, 'text/html')
                     const elements = doc.getElementsByTagName("h2");
                     for (let i = 0; i < elements.length; i++) {
+                        elements[i].id = i
                         this.titles.push({
                             name: elements[i].innerText,
                             tag: elements[i].id,
                         });
                     }
+                    
+                    let serializer = new XMLSerializer();
+                    this.output = serializer.serializeToString(doc);
                 })
             .catch(this.showError);
         },
@@ -111,13 +123,61 @@ export default {
         },
 
         handleScroll(){
-            console.log( window.scrollY )
+            const h2Elements = document.querySelectorAll('h2');
+            let activeFound = false;
+            
+            h2Elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+
+                // 상단에서부터 200px 내에 있는 요소에만 .active 클래스 적용
+                if (elementTop >= 0 && elementTop <= 200 && !activeFound) {
+                const id = element.id;
+                const activeTag = document.querySelector(`.tag-${id}`);
+                if (activeTag && !activeTag.classList.contains('tag-active')) {
+                    // 첫번째 목차 활성화 제거
+                    document.querySelectorAll('.defaultTag').forEach(element => {
+                        element.classList.remove('defaultTag');
+                    });
+                    // 이전 .active 클래스 제거
+                    document.querySelectorAll('.tag-active').forEach(tag => {
+                        tag.classList.remove('tag-active');
+                    });
+                    // 현재 요소에 .active 클래스 추가
+                    activeTag.classList.add('tag-active');
+                }
+                activeFound = true; // 활성 상태 요소를 찾았음을 표시
+                }
+            });
+
+            const objectives = document.querySelector('.objectives');
+            // 목차 위치
             if(window.scrollY > 50) {
-                document.querySelector('.objectives').classList.add('scroll');
+                // 애니메이션 효과
+                if (!objectives.classList.contains('animated')) {
+                    objectives.classList.add('animated');
+                    objectives.style.animation = 'moveUp 1s forwards';
+                    objectives.classList.remove('animated');
+                }
             } else {
-                document.querySelector('.objectives').classList.remove('scroll');
+                objectives.classList.add('animated');
+                objectives.style.animation = 'moveDown 1s forwards';
+                objectives.classList.remove('animated');
             }
+        },
+
+        // 디바운스 함수
+        debounce(func, wait) {
+        let timeout;
+        return function() {
+            const context = this, args = arguments;
+            clearTimeout(timeout);
+            timeout = setTimeout(function() {
+            func.apply(context, args);
+            }, wait);
+        };
         }
+
+
     },
 };
 </script>
