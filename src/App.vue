@@ -1,5 +1,5 @@
 <template>
-    <q-layout view="hHh lpr fFf" style=" overflow: auto; height: calc(100vh - 36px);" class="body-scroll">
+    <q-layout view="hHh lpr fFf" style=" height: calc(100vh - 36px);" class="body-scroll">
 
         <div v-if="showHeaderMain">
             <HeaderMain />

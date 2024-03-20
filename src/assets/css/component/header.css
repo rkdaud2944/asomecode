@@ -12,6 +12,7 @@
     position: fixed;
     z-index: 200;
     border-bottom: #dedee2 1px solid;
+    top: 0;
 
 }
 

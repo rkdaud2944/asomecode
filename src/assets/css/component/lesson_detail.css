@@ -91,19 +91,37 @@
 
 .cts-wrap{
     max-width: 1150px;
+    width: 100vw;
     display: flex;
-    margin: auto;
+    /* margin: auto; */
     position: relative;
 }
 
 .objectives{
-    min-width: 300px;
-    /* position: absolute; */
-    margin-top: 20px;
-    margin-right: -50px; /* 오른쪽으로부터 10px 겹치게 만들기 */
-    display: fixed;
-    top: 100px;
+    position: fixed;
+    width: 300px;
+    margin-top: 20px;    
+    /* transition: top 0.3s ease-in-out; 여기에 애니메이션 효과 추가 */
     
+    transition:opacity 200ms linear 100ms, left 200ms 200ms;
+    /* min-width: 300px; */
+    /* position: absolute; */
+    /* margin-right: -50px; 오른쪽으로부터 10px 겹치게 만들기 */
+    /* top: 100px; */
+    
+}
+
+.objectives.scroll{
+    top: 100px;
+}
+
+.cts{
+    background-color: #fff;
+    border-radius: 50px 0 0 0;
+    /* margin-right: -50px; */
+    padding-left: 30px;
+    margin-left:250px;
+    z-index: 100;
 }
 
 .detail-title{
@@ -128,11 +146,4 @@
     color: #fff;
     background-color: #E4007F;
 
-}
-
-.cts{
-    background-color: #fff;
-    border-radius: 50px 0 0 0;
-    margin-right: -50px; /* 오른쪽으로부터 10px 겹치게 만들기 */
-    padding-left: 30px;
 }

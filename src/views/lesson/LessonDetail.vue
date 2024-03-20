@@ -19,7 +19,7 @@
             <div class="cts-wrap">
                 <!-- <div class="objectives" :class="{sidefixed: scrollPosition > 10}"> -->
                 <div class="objectives Pretendard-Medium">
-                    <div @click="moveTo(title.tag)" :class="`detail-title`" v-for="(title, index) in titles" :key="index">
+                    <div @click="moveTo(title)" :class="`detail-title`" v-for="(title, index) in titles" :key="index">
                         {{title.name}}
                     </div>
                 </div>
@@ -56,21 +56,27 @@ export default {
     },
 
     mounted() {
-        this.getLesson(this.$route.query.id)
-        window.addEventListener('scroll', this.updateScroll);
-    },
 
+        window.addEventListener('scroll', this.handleScroll);
+
+
+        this.getLesson(this.$route.query.id)
+    },
+    
     updated() {
         hljs.highlightAll();
     },
 
+    
+    beforeDestroy() {
+        window.removeEventListener('scroll', this.handleScroll);
+    },
+
     methods: {
-        updateScroll(){
-            this.scrollPosition = window.scrollY
-        },
         moveTo(tag) {
+            console.log("tag", tag);
             const element = window.document.getElementById(tag);
-            console.log("111" + tag, element);
+            // console.log("111" + tag, element);
             // const top = element.offsetTop - 100; // 헤더 길이만큼 낮추기
             // const top = element.offsetTop - 100; // 헤더 길이만큼 낮추기
 
@@ -102,6 +108,15 @@ export default {
         historyBack(){
             this.$router.go(-1);
 
+        },
+
+        handleScroll(){
+            console.log( window.scrollY )
+            if(window.scrollY > 50) {
+                document.querySelector('.objectives').classList.add('scroll');
+            } else {
+                document.querySelector('.objectives').classList.remove('scroll');
+            }
         }
     },
 };
