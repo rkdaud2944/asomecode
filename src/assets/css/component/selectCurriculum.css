@@ -11,7 +11,7 @@
     height: 177px;
     text-align: center;
     align-items: center;
-    justify-content: center;
+    justify-content: center; 
     display: flex;
 }
 
@@ -27,11 +27,11 @@
     margin-top: 5px;
 }
 
-.cts-wrap {
+.list-cts-wrap {
     display: inline-block;
 }
 
-.cts {
+.list-cts {
     max-width: 1220px;
     grid-template-columns: 3fr 1fr;
 }

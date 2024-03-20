@@ -1,6 +1,6 @@
 <template>
-    <div class="cts-wrap">
-        <div class="cts">
+    <div class="list-cts-wrap">
+        <div class="list-cts">
             <div> 
                 <!-- 여기는 원래 위에 main-mid가 217이어야 하는데 이부분 때문에 177로함, 폰트사이즈 20 상하 여백 10 -->
                 <div class="curriculum">
@@ -10,7 +10,7 @@
                         :key="index"
                         @mousedown="clicked = true"
                         @mouseup ="clicked = false"
-                        @click="goToLesson(card.id)"
+                        @click="goToLesson(card.id, card.title)"
                     >
                         <div class="card">
                             <div class="card-front"
@@ -109,10 +109,12 @@ export default {
     },
 
     methods: {
-        goToLesson(id){
+        goToLesson(id, title){
+            console.log("title : "+title);
             this.$router.push({ path: '/lesson/list', 
             query: { 
-                id: `${id}`
+                id: `${id}`,
+                title: `${title}`
             } });
         }
     }
