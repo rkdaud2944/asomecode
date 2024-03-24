@@ -68,7 +68,7 @@ import advance from "@/assets/images/blockCoding/toolbox/advance.png";
 import advanceClick from "@/assets/images/blockCoding/toolbox/advance-click.png";
 import basic from "@/assets/images/blockCoding/toolbox/basic.png";
 import basicClick from "@/assets/images/blockCoding/toolbox/basic-click.png"
-import button from "@/assets/images/blockCoding/toolbox/button.png";
+import button from "@/assets/images/blockCoding/toolbox/button.png"; 
 import buttonClick from "@/assets/images/blockCoding/toolbox/button-click.png"
 import dance from "@/assets/images/blockCoding/toolbox/dance.png";
 import danceClick from "@/assets/images/blockCoding/toolbox/dance-click.png"
@@ -94,6 +94,15 @@ import arrow from "@/assets/images/arrow.png";
 import sttmodalon from "@/assets/images/sttmodalon.png";
 import sttmodaloff from "@/assets/images/sttmodaloff.png";
 import sttmodalcheck from "@/assets/images/sttmodalcheck.png";
+
+// simulation - dice
+import diceBack from "@/assets/images/simulation/dice/back.png";
+import dice1 from "@/assets/images/simulation/dice/1.png";
+import dice2 from "@/assets/images/simulation/dice/2.png";
+import dice3 from "@/assets/images/simulation/dice/3.png";
+import dice4 from "@/assets/images/simulation/dice/4.png";
+import dice5 from "@/assets/images/simulation/dice/5.png";
+import dice6 from "@/assets/images/simulation/dice/6.png";
 
 export default {
     logom,
@@ -187,6 +196,15 @@ export default {
     walk,
     walkClick,
     ai,
-    aiClick
+    aiClick,
+
+    diceBack,
+    dice1,
+    dice2,
+    dice3,
+    dice4,
+    dice5,
+    dice6,
+
 
 };

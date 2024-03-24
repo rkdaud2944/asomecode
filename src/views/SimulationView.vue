@@ -1,6 +1,10 @@
 <template>
     <div>simulation</div>
-    <component :is="currentComponent"></component>
+    <!-- <component :is="currentComponent"></component> -->
+    
+    <DicePage v-if="$route.params.page === 'dice'"/>
+    <CanonPage v-if="$route.params.page === 'canon'"/>
+    <p v-if="!$route.params.page">기본 시뮬레이션 페이지입니다.</p>
 </template>
 
 
@@ -12,19 +16,25 @@ import CanonPage from '@/components/simulation/CanonPage.vue';
 export default {
     props: ['page'], // `type` 파라미터를 prop으로 받습니다.
 
+    
+    components: {
+        DicePage,
+        CanonPage
+    }, 
+
     computed: {
         // `type` 값에 따라 적절한 컴포넌트를 반환합니다.
-        currentComponent() {
-            switch (this.page) {
-                case 'dice':
-                    return DicePage;
-                case 'canon':
-                    return CanonPage;
-                // 필요한 만큼 case를 추가할 수 있습니다.
-                default:
-                    return null; // 기본값 또는 오류 컴포넌트를 반환할 수 있습니다.
-            }
-        }
+        // currentComponent() {
+        //     switch (this.page) {
+        //         case 'dice':
+        //             return DicePage;
+        //         case 'canon':
+        //             return CanonPage;
+        //         // 필요한 만큼 case를 추가할 수 있습니다.
+        //         default:
+        //             return null; // 기본값 또는 오류 컴포넌트를 반환할 수 있습니다.
+        //     }
+        // }
     },
 
     created() {

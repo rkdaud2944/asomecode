@@ -8,9 +8,10 @@
             Block 
         </p>
 
-        <p @click="simulation('dice')"> 시뮬테스트</p>
-        
-        <p @click="test2()"> test2</p>
+        <router-outlet></router-outlet>
+        <!-- dice -->
+        <p @click="openRouterPath('/simulation/dice')"> 시뮬테스트</p>
+    
         <div>
             <!-- 현재 클릭만 하면 변경됨, 연결여부에 따라 표시하도록 수정 필요 (새로고침해도 유지되게)-->
             <div class="connect-false-wrap" v-show="this.connected === false" @click="this.connected = true">
@@ -62,7 +63,8 @@
                             <img :src="stopImg"/>
                             <p>멈추기</p>
                         </li>
-                        <li class="li" @click="openEditor()">
+                        <!-- <li class="li" @click="openEditor()"> -->
+                        <li class="li" @click="openRouterPath('editor')">
                             <img :src="editorImg"/>
                             <p>소스편집</p>
                         </li>
@@ -196,23 +198,23 @@ export default {
     },
 
     methods: {
-        ...serial,
+        ...serial, 
 
         update() {
             boardUpdater.start();
         },
 
         gotoBackOffice() {
-            this.$router.push("/backOffice");
+            // this.$router.push("/backOffice");
 
             // 빌드 실행 시에 필요한 코드
             this.openUrl('BO', 'app://./index.html?goto=backOffice');
         },
 
         openEditor() {
-            // bridgeIn.openEditor()
+            bridgeIn.openEditor()
             // this.$router.push("/editor");
-            window.open('/editor', '_blank');
+            // window.open('/editor', '_blank');
         },  
         
         showDropdown() { 
@@ -251,26 +253,11 @@ while True:
             console.log('bleStop');
             ble.writeLn(String.fromCharCode(3))
         },
-        test(){
-            this.isMenuOpen = !this.isMenuOpen;
-            document.querySelector('.darken-background').style.display = 'block';
-        },
 
         simulation(page){
             // jsControl.openSimulator(page);
             windows.open('simulation', `/simulation/${page}`);
         },
-
-        test2(){
-            // windows.open('simulation', `/simulation`);
-            // window.open(`/your-route`);
-            
-            var ipcRenderer = require('electron').ipcRenderer;//ipcRenderer를 선언 후 데이터를 보내줍니다.
-            ipcRenderer.send('child', this.tweet, this.option);//ipcRenderer.send('이벤트 이름', 데이터1, 데이터2, 데이터3....)
-
-
-            // ipcRenderer.send('child', 'tweet', 'this.option');//ipcRenderer.send('이벤트 이름', 데이터1, 데이터2, 데이터3....)
-        }
     },
     
     // toggleMenu() {

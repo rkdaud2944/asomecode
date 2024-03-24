@@ -69,17 +69,14 @@ export default {
     },
 
     mounted() {
-        window.goTo = (path, params) => {
-            if (params) {
-                this.$router.push({ path: path, query: params });
-            } else {
-                this.$router.push({ path: path });
-            }
-        };
-        // this.setTitleBar()
-        
+        const goto = this.$route.query.goto;
+        if (goto) {
+            this.$router.push({ path: `/${goto}` });
+        }
         console.log(window.versions)
     },
+
+    
     
 };
 </script>
