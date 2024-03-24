@@ -1,6 +1,8 @@
 import eventbus from "@/globals/eventbus";
-import windows from "@/globals/windows";
+// import windows from "@/globals/windows";
 import serial from "@/globals/serial";
+
+// let simulator = [];
 
 eventbus.on("onSerialReceived", (data) => {
     if (!data) return;
@@ -12,8 +14,13 @@ eventbus.on("onSerialReceived", (data) => {
 
 window.run_cmd = function (cmd) {
     console.log('simulation cmd : '+cmd)
-    if (cmd.startsWith("Code=ShowSimulation")) openSimulator(cmd);
+    if (cmd.startsWith("Code=ShowSimulation"))openSimulator(cmd);
 };
+
+window.roll_dice = function () {
+    
+    simulationRunJS('roll_dice()')
+}
 
 /**
  * 코드 에디터와 관련된 Event를 처리한다.
@@ -34,11 +41,14 @@ const jsControl = {
         }
 
         try {
-            eval(line);            
+            console.log("line : "+line)
+            eval(line);      
+            // simulationRunJS(line)      
         } catch (error) {
             console.log(error);            
         }
-        windows.runJS("simulation", line);
+        // windows.runJS("simulation", line);
+        // simulationRunJS(line)
     },
 
     sound(data) {
@@ -78,4 +88,14 @@ function openSimulator(cmd) {
         return;
     }
 
+}
+
+function simulationRunJS(line){
+    console.log("simulationRunJS 안 입니다 line : "+line)
+    const params = {
+        type: "simulationJS",
+        func: line,
+    };
+
+    eventbus.emit('simulationBus', params);
 }
