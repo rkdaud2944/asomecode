@@ -204,7 +204,7 @@ const seiral = {
             code = code.replace(/'/gi, "\\'");
             this.writeLn(`_codes_ = _codes_ + '${code}\\n'`);
         }
-        this.writeLn(`exec(_codes_)`);
+        this.writeLn(`exec(_codes_)\r\n`);
     },
 
     fireErrorEvent(msg) {
