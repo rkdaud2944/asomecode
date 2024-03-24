@@ -121,21 +121,37 @@ const routes = [
     // Block
     {
         path: '/blockCoding',
+        name: 'blockCoding',
         component: () => import('../views/blockCoding/AsomeBlock.vue')
     },
 
     // Curriculum
     {
         path: '/curriculum',
-        // name: 'curriculum',
         props: true,
         component: () => import('../views/lesson/SelectCurriculum.vue')
 
+    },
+    
+    // Simulation
+    {
+        path: '/simulation/:page',
+        // path: '/simulation',
+        props: true,
+        component: () => import('../views/SimulationView.vue')
+
+    },
+    
+    {
+        path: '/your-route',
+        name: 'YourRoute',
+        component: () => import('../views/blockCoding/AsomeBlock.vue')
     }
 
 ]
 
 const router = createRouter({
+    mode: 'hash', // 이 부분을 확인하세요
     history: createWebHistory(process.env.BASE_URL),
     routes
 })

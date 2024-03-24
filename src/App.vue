@@ -57,7 +57,7 @@ export default {
 
             this.showHeaderMain = true;
             this.showFooterMain = true;
-            const skipHeaderMains = ["/editor", "/help", "/backOffice", "/blockCoding"];
+            const skipHeaderMains = ["/editor", "/help", "/backOffice", "/blockCoding", "/simulation"];
             skipHeaderMains.forEach((path) => {
                 if (to.path.startsWith(path)) {
                     this.showHeaderMain = false;
@@ -77,6 +77,8 @@ export default {
             }
         };
         // this.setTitleBar()
+        
+        console.log(window.versions)
     },
     
 };

@@ -41,6 +41,7 @@ export default {
      * @param url 팝업 윈도우의 URL
      */
     open(name, url) {
+        console.log("winodws.js 에서의 open()")
         windows[name] = window.open(url, name);
     },
 

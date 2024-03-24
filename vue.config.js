@@ -13,6 +13,7 @@ module.exports = defineConfig({
         electronBuilder: {
             nodeIntegration: true,
             externals: ['serialport'],
+            preload: 'src/preload.js',
         }
     },
     css: {

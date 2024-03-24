@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	<title>AsomeIT</title>
+
+	<link rel="stylesheet" href="../../../common/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../common/css/AsomeCODE.css">
+
+    <script src="../../../common/js/jquery-1.9.1.js"></script>
+	<script src="../../../common/js/bootstrap.min.js"></script>
+
+	<style type="text/css">
+		#bar {
+			position: absolute;
+			left: 165px; 
+			top: 196px;
+			width: 4px;
+			height: 50px;
+			z-index: 3px;
+			background-color: #A52515;
+		}
+	</style>
+</head>
+
+<body style="overflow-x: hidden; overflow-y: hidden;">
+	<div style="position: relative;">
+		<img id="background" src="back.png" style="position: absolute; width: 100%;">
+		<img id="thermometer" src="thermometer.png" style="position: absolute; width: 100%;">
+
+		<div id="bar"></div>
+
+		<div id="temperature" style="position: absolute; left: 58%; padding-top: 29%; font-size: 1.2em;">
+			00 C
+		</div>
+
+		<div id="humidity" style="position: absolute; left: 58%; padding-top: 45%; font-size: 1.2em;">
+			00 %
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		var rate_x = 1.0;
+		var rate_y = 1.0;
+		var offset = 5.0;
+		var bar_left = 165.0;
+		var bar_top = 196.0;
+		var bar_width = 4.0;
+		var bar_height = 50.0;
+
+		var increaseHeight = function() {
+		    var height = $("#bar").height();
+		    var top = (parseFloat($("#bar").css('top')) - offset);
+		    
+		    $("#bar").height(height + offset);
+		    $("#bar").css('top', top + 'px');
+		};
+
+		var decreseHeight = function() {
+		    var height = $("#bar").height();
+		    var top = (parseFloat($("#bar").css('top')) + offset);
+		    
+		    $("#bar").height(height - offset);
+		    $("#bar").css('top', top + 'px');
+		};
+
+		function dht_display(temperature, humidity) {
+			$("#temperature").text(temperature + " C");
+			$("#humidity").text(humidity + " %");
+
+			$("#bar").height(bar_height + (temperature * 0.825));
+			$("#bar").css('top', (bar_top - (temperature * 0.825)) + 'px');
+		}
+
+		window.onload = function() {
+			App.run_cmd("Code=Input/Text=### Simulation started");
+
+			rate_x = $("#background").width()  / 400;
+			rate_y = $("#background").height() / 300;
+
+			offset = offset * rate_y;
+
+			bar_width  = bar_width  * rate_x;
+			bar_height = bar_height * rate_y;
+
+			bar_left = bar_left * rate_x - (bar_width /2);
+			bar_top  = bar_top  * rate_y;
+
+			$("#bar").css('left', bar_left + 'px');
+
+			dht_display(0, 0);
+		}
+	</script>	
+
+</body>
+</html>

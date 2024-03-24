@@ -11,6 +11,7 @@ eventbus.on("onSerialReceived", (data) => {
 });
 
 window.run_cmd = function (cmd) {
+    console.log('simulation cmd : '+cmd)
     if (cmd.startsWith("Code=ShowSimulation")) openSimulator(cmd);
 };
 
@@ -23,6 +24,7 @@ const jsControl = {
     },
 
     run(line) {
+        console.log("run : "+line)
         try {
             line = line.split(":");
             line = line[1].trim();
@@ -36,7 +38,7 @@ const jsControl = {
         } catch (error) {
             console.log(error);            
         }
-        windows.runJS("simulator", line);
+        windows.runJS("simulation", line);
     },
 
     sound(data) {
@@ -63,10 +65,12 @@ const jsControl = {
 export default jsControl;
 
 function openSimulator(cmd) {
+    console.log("11111")
     let page = "";
     try {
         page = cmd.split("=")[2];
         page = page.replaceAll("/", "");
+        console.log("page : "+page)
     } catch (error) {
         // TODO: 에러 처리
         console.log(error);
@@ -74,5 +78,8 @@ function openSimulator(cmd) {
     }
 
     // TODO: 시물레이터 크기에 맞춰서 윈도우 크기 조절
-    windows.open('simulator', `/common/simulation/${page}/index.html`);
+    // windows.open('simulator', `/common/simulation/${page}/index.html`);
+    // windows.open('simulator', `@components/simulation/${page}.vue`);
+    windows.open('simulation', `/simulation/${page}`);
+    // windows.open('simulation', `/simulation`);
 }

@@ -5,8 +5,12 @@
         </div>
         
         <p  @click="openRouterPath('/blockCoding')">
-            Block
+            Block 
         </p>
+
+        <p @click="simulation('dice')"> 시뮬테스트</p>
+        
+        <p @click="test2()"> test2</p>
         <div>
             <!-- 현재 클릭만 하면 변경됨, 연결여부에 따라 표시하도록 수정 필요 (새로고침해도 유지되게)-->
             <div class="connect-false-wrap" v-show="this.connected === false" @click="this.connected = true">
@@ -14,7 +18,7 @@
                     <img :src="connectImg"/>
                     연결하기
                 </span>
-                <span class="stop">
+                <span class="stop" @click="stop()">
                     <img :src="stopImg"/>
                     멈추기
                 </span>
@@ -26,7 +30,7 @@
                     연결하기
                 </span>
                 <span class="stop">
-                    <img :src="stopImg"/>
+                    <img :src="stopImg" @click="stop()"/>
                     멈추기
                 </span>
             </div>
@@ -100,6 +104,9 @@ import boardUpdater from "@/globals/board-updater";
 import ble from "@/globals/ble";
 import { mapState } from 'pinia'
 import {useConnectStore} from '@/store/connect-store'
+
+// import jsControl from '@/globals/js-control'
+import windows from "@/globals/windows";
 
 export default {
     mixins: [VueBase, bridgeIn],
@@ -247,6 +254,22 @@ while True:
         test(){
             this.isMenuOpen = !this.isMenuOpen;
             document.querySelector('.darken-background').style.display = 'block';
+        },
+
+        simulation(page){
+            // jsControl.openSimulator(page);
+            windows.open('simulation', `/simulation/${page}`);
+        },
+
+        test2(){
+            // windows.open('simulation', `/simulation`);
+            // window.open(`/your-route`);
+            
+            var ipcRenderer = require('electron').ipcRenderer;//ipcRenderer를 선언 후 데이터를 보내줍니다.
+            ipcRenderer.send('child', this.tweet, this.option);//ipcRenderer.send('이벤트 이름', 데이터1, 데이터2, 데이터3....)
+
+
+            // ipcRenderer.send('child', 'tweet', 'this.option');//ipcRenderer.send('이벤트 이름', 데이터1, 데이터2, 데이터3....)
         }
     },
     

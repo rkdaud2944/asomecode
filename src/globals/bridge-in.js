@@ -59,7 +59,8 @@ const bridge = {
         console.log("lessonBlock : "+present + " language : "+language)
         localStorage.setItem("lessonBlock", present);
         window.open('/blockCoding','_blank')
-    }
+    },
+    
 };
 
 window.refresh = bridge.refresh;

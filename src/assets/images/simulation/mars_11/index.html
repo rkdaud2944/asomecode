@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	<title>AsomeIT</title>
+
+	<link rel="stylesheet" href="../../../common/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../common/css/AsomeCODE.css">
+
+    <script src="../../../common/js/jquery-1.9.1.js"></script>
+	<script src="../../../common/js/bootstrap.min.js"></script>
+</head>
+
+<body style="overflow-x: hidden; overflow-y: hidden;">
+	<div id="map" style="position: relative;">
+		<img src="back.png" style="position: absolute; z-index: -2;">
+		<img id="asomecar" src="asomecar.png" style="position: absolute; left: 175px; top:110px; rotate: 0deg; z-index: 1;">
+		<img id="missile" src="missile.png" style=" position: absolute; left: 180px; top:140px">
+		<img id="result" src="success.png" style="position: absolute; left: 100px; top: 50px; z-index:2; display: none;">
+	</div>	
+
+	<script type="text/javascript">
+		window.onload = function() {
+			App.run_cmd("Code=Input/Text=### Simulation started");
+		}
+
+		var angle = 10;
+		var alien_position = [
+			[0, 0],
+			[180, 0],
+			[360, 0],
+			[360, 130],
+			[360, 260],
+			[180, 260],
+			[0, 260],
+			[0, 130]
+		]
+		var alien_id = 0;
+		var stop_simulation = false
+		var speed = 3000;
+		var interval_make_alien = setInterval(function() {
+			if (alien_id > 40) {
+				stop_simulation = true
+				$(".alien").css("display", "none");
+				$(".alien").attr("class", "delete");
+			};
+			if (!stop_simulation) {
+				alien_id += 1
+				make_alien(alien_id)
+			} else {
+				$('#result').css('display', 'block')
+				clearInterval(interval_make_alien)
+			}
+		}, 1000)
+
+		function turn(value) {
+			missile_aiming(value)
+			if (value == "left") {
+				angle -= 15;
+			} else if (value == "right") {
+				angle += 15;
+			}
+			document.querySelector('#asomecar').style.transform = 'rotate(' + angle + 'deg)'
+		}
+
+		function missile_aiming(value) {
+			if (angle < 0) {
+				angle += 360;
+			} else if(angle >= 360) {
+				angle -= 360;
+			}
+		}
+
+		function missile_launch() {
+			$("#missile").css("top", 140);
+			$("#missile").css("left", 180);
+
+			$("#missile").stop().animate({
+					top: 140 - (300 * Math.cos(angle * Math.PI / 180)),
+					left: 180 + (300 * Math.sin(angle * Math.PI / 180)),
+				},
+				2000,
+				'swing',
+				function() {
+					$("#missile").css("left", 500);
+					$("#missile").css("top", 500);
+				}
+			);
+		}
+
+		function make_alien(alien_id) {
+			position = Math.floor(Math.random() * 8)
+			kind = Math.floor(Math.random() * 3) + 1
+			x = alien_position[position][0]
+			y = alien_position[position][1]
+			$('<img>', {
+				src: 'alien' + kind + '.png',
+				id: "alien_id" + alien_id,
+				class: "alien"
+			}).css({
+				position: "absolute",
+				left: x + "px",
+				top: y + "px"
+			}).appendTo("#map");
+			move_alien(alien_id);
+		}
+
+		function move_alien(alien_id) {
+			var flag = 1;
+			$("#alien_id" + alien_id).animate({
+					top: "110px",
+					left: "175px",
+				},
+				25000,
+				'swing',
+				function() {
+					if ($("#alien_id" + alien_id).attr("class") == "delete") {
+						flag = 0;
+					} else {
+						stop_simulation = true
+						$("#asomecar").attr("src", "boom.png")
+						$('#result').attr('src', 'fail.png')
+					}
+				}
+			);
+			var interval = setInterval(function() {
+				if (flag == 1) {
+					cheack_collision(alien_id);
+				} else {
+					clearInterval(interval);
+				}
+			}, 10)
+		}
+
+		function cheack_collision(alien_id) {
+			var missile_x = $("#missile").offset().left;
+			var missile_y = $("#missile").offset().top;
+			var alien_x = $("#alien_id" + alien_id).offset().left;
+			var alien_y = $("#alien_id" + alien_id).offset().top;
+			var distX = Math.abs((missile_x - alien_x));
+			var distY = Math.abs((missile_y - alien_y));
+			var dist = (distX * distX) + (distY * distY)
+			if (dist <= 700) {
+				$("#missile").css("left", 500);
+				$("#missile").css("top", 500);
+				$("#alien_id" + alien_id).css("display", "none");
+				$("#alien_id" + alien_id).attr("class", "delete");
+			}
+		}
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	<title>AsomeIT</title>
+
+	<link rel="stylesheet" href="../../../common/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../common/css/AsomeCODE.css">
+
+    <script src="../../../common/js/jquery-1.9.1.js"></script>
+	<script src="../../../common/js/bootstrap.min.js"></script>
+	<script src="../../../common/js/jQueryRotateCompressed.js"></script>
+</head>
+
+<body style="overflow-x: hidden; overflow-y: hidden;">
+	<div style="position: relative;">
+		<img src="back.png" style="position: absolute;">
+
+		<div id="info" style="position: absolute; left: 10px; top: 10px;"></div>
+
+		<img id="cannon" src="cannon.png" style="position: absolute; top: 220px;">
+		<img id="target" src="target.png" style="position: absolute; left: -100px; top:235px;">
+		<img id="bullet" src="bullet.png" style="position: absolute; left: -100px;">
+	</div>
+
+	<script type="text/javascript">
+		var angle = 0;
+		var power = 0;
+
+		String.format = function() {
+			var s = arguments[0];
+			for (var i = 0; i < arguments.length - 1; i++) {
+				var reg = new RegExp("\\{" + i + "\\}", "gm");
+				s = s.replace(reg, arguments[i + 1]);
+			}
+			return s;
+		}
+
+		window.onload = function() {
+			App.run_cmd("Code=Input/Text=### Simulation started");
+
+			target_moveto(300);
+		}
+
+		function cannon_angle(a) {
+			angle = a;
+			$("#cannon").rotate(a);
+			$("#info").html(String.format("Angle: {0} <br>Power: {1}", angle, power));
+		}
+
+		function cannon_power(p) {
+			power = p;
+			$("#info").html(String.format("Angle: {0} <br>Power: {1}", angle, power));
+		}
+
+		function bullet_moveto(x, y) {
+			$("#bullet").css("left", x + 37 -8);
+			$("#bullet").css("top",  - y + (220 + 45) -8);
+		}
+
+		function target_moveto(x) {
+			$("#target").attr("src", "target.png");
+			$("#target").css("left", x + 37 - 25);
+		}
+
+		function cannon_fire() {
+			bullet_moveto(0, 0);
+			var audio = new Audio('../../audio/fire.ogg');
+			audio.play();
+		}
+
+		function target_explode() {
+			bullet_moveto(-1000, -1000);
+			$("#target").attr("src", "boom.png");
+			var audio = new Audio('../../audio/boom.ogg');
+			audio.play();
+		}
+	</script>	
+</body>
+</html>
