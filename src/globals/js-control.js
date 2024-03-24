@@ -65,21 +65,17 @@ const jsControl = {
 export default jsControl;
 
 function openSimulator(cmd) {
-    console.log("11111")
     let page = "";
     try {
         page = cmd.split("=")[2];
         page = page.replaceAll("/", "");
         console.log("page : "+page)
+        eventbus.emit('simulationOpen', `/simulation/${page}`);
+
     } catch (error) {
         // TODO: 에러 처리
         console.log(error);
         return;
     }
 
-    // TODO: 시물레이터 크기에 맞춰서 윈도우 크기 조절
-    // windows.open('simulator', `/common/simulation/${page}/index.html`);
-    // windows.open('simulator', `@components/simulation/${page}.vue`);
-    windows.open('simulation', `/simulation/${page}`);
-    // windows.open('simulation', `/simulation`);
 }

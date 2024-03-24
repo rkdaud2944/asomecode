@@ -30,12 +30,13 @@ export default {
             }
         },
 
-        openRouterPath(path) {
-            if (this.boWindow && !this.boWindow.closed) {
-                window.alert('창이 이미 열려 있습니다.');
-                this.boWindow.focus();
-            } else {
-                let route = this.$router.resolve({ path: path });
+        openRouterPath(path) {            
+            let route = this.$router.resolve({ path: path });
+            
+            // 시뮬레이션 창 사이즈 조절
+            if (path === '/simulation/dice') {
+                this.boWindow = window.open(route.href, '_blank', 'width=420,height=360'); // 400 300
+            }else{
                 this.boWindow = window.open(route.href);
             }
         },
