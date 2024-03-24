@@ -63,7 +63,8 @@
                             <img :src="stopImg"/>
                             <p>멈추기</p>
                         </li>
-                        <li class="li" @click="openRouterPath('editor')">
+                        <!-- <li class="li" @click="openRouterPath('/editor')"> -->
+                        <li class="li" @click="openRouterPath('/editor')">
                             <img :src="editorImg"/>
                             <p>소스편집</p>
                         </li>
