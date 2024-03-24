@@ -7,6 +7,7 @@ import router from "@/router";
  */
 
 let editor = [];
+let lessonBlock = [];
 
 const bridge = {
     init() {
@@ -37,14 +38,9 @@ const bridge = {
     },
 
     openEditor(code) {
-        // let route = this.$router.resolve({ path: '/editor' });
         const route = router.resolve({ path: '/editor' });
         localStorage.setItem("code", code);
         editor['editor'] = window.open(route.href, 'editor', 'width=800,height=600'); // 400 300
-
-        // console.log(code);
-        // localStorage.setItem("code", code);
-        // windows.open("editor", "/editor");
     },
 
     setWifiInfo() {
@@ -64,8 +60,12 @@ const bridge = {
     // 기능블록
     presentSession(present, language) {
         console.log("lessonBlock : "+present + " language : "+language)
-        localStorage.setItem("lessonBlock", present);
-        window.open('/blockCoding')
+        // localStorage.setItem("lessonBlock", present);
+        // window.open('/blockCoding')
+
+        
+        const route = router.resolve({ path: '/blockCoding' });
+        lessonBlock['lessonBlock'] = window.open(route.href, 'lessonBlock', 'width=1000,height=900'); // 400 300
     },
     
 };
