@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 
 const routes = [
     {
@@ -153,7 +153,7 @@ const routes = [
 
 // 일렉트론은 내부에서 모든걸 처리하기 때문에 hash모드가 적절
 const router = createRouter({
-    history: createWebHistory(process.env.BASE_URL),
+    history: createWebHashHistory(process.env.BASE_URL),
     routes
 });
 
