@@ -63,8 +63,7 @@
                             <img :src="stopImg"/>
                             <p>멈추기</p>
                         </li>
-                        <!-- <li class="li" @click="openRouterPath('/editor')"> -->
-                        <li class="li" @click="openRouterPath('/editor')">
+                        <li class="li" @click="openEditor('')">
                             <img :src="editorImg"/>
                             <p>소스편집</p>
                         </li>
@@ -204,7 +203,7 @@ export default {
     },
 
     methods: {
-        ...serial, 
+        ...serial, ...bridgeIn,
 
         update() {
             boardUpdater.start();

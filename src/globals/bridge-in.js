@@ -1,10 +1,12 @@
 import serial from "@/globals/serial";
 import router from "@/router";
-import windows from "@/globals/windows";
+// import windows from "@/globals/windows";
 
 /**
  * App to Web 브릿지 메시지
  */
+
+let editor = [];
 
 const bridge = {
     init() {
@@ -35,9 +37,14 @@ const bridge = {
     },
 
     openEditor(code) {
-        console.log(code);
+        // let route = this.$router.resolve({ path: '/editor' });
+        const route = router.resolve({ path: '/editor' });
         localStorage.setItem("code", code);
-        windows.open("editor", "/editor");
+        editor['editor'] = window.open(route.href, 'editor', 'width=800,height=600'); // 400 300
+
+        // console.log(code);
+        // localStorage.setItem("code", code);
+        // windows.open("editor", "/editor");
     },
 
     setWifiInfo() {

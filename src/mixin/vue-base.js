@@ -31,16 +31,30 @@ export default {
             }
         },
 
-        openRouterPath(path) {            
+        openRouterPath(path, code) {            
             let route = this.$router.resolve({ path: path });
             
-            // 시뮬레이션 창 사이즈 조절
-            if (path === '/simulation/dice') {
-                simulator['simulator'] = window.open(route.href, 'simulator', 'width=420,height=360'); // 400 300
-                console.log("simulator['simulator'] 오픈라우터 안에 : "+simulator['simulator'])
-            }else{
-                window.open(route.href);
+
+            switch (path) {
+                case '/simulation/dice' : 
+                    simulator['simulator'] = window.open(route.href, 'simulator', 'width=420,height=360'); // 400 300;
+                    break;
+                case '/editor' : 
+                    localStorage.setItem("code", code);
+                    break;
+                default:
+                    window.open(route.href);
+                    break;
+
             }
+
+            // 시뮬레이션 창 사이즈 조절
+            // if (path === '/simulation/dice') {
+            //     simulator['simulator'] = window.open(route.href, 'simulator', 'width=420,height=360'); // 400 300
+            //     console.log("simulator['simulator'] 오픈라우터 안에 : "+simulator['simulator'])
+            // }else{
+            //     window.open(route.href);
+            // }
         },
 
         simulJS(params){

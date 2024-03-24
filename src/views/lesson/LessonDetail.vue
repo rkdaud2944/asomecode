@@ -37,7 +37,7 @@
 import VueBase from '@/mixin/vue-base';
 import markdown from "@/utils/markdown";
 import apiLesson from "@/api/lesson";
-import images from "@/assets/images"
+import images from "@/assets/images" 
 
 export default {
     mixins: [VueBase],
