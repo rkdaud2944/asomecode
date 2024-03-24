@@ -63,7 +63,6 @@
                             <img :src="stopImg"/>
                             <p>멈추기</p>
                         </li>
-                        <!-- <li class="li" @click="openEditor()"> -->
                         <li class="li" @click="openRouterPath('editor')">
                             <img :src="editorImg"/>
                             <p>소스편집</p>
@@ -106,9 +105,6 @@ import boardUpdater from "@/globals/board-updater";
 import ble from "@/globals/ble";
 import { mapState } from 'pinia'
 import {useConnectStore} from '@/store/connect-store'
-
-// import jsControl from '@/globals/js-control'
-import windows from "@/globals/windows";
 
 export default {
     mixins: [VueBase, bridgeIn],
@@ -203,19 +199,6 @@ export default {
         update() {
             boardUpdater.start();
         },
-
-        gotoBackOffice() {
-            // this.$router.push("/backOffice");
-
-            // 빌드 실행 시에 필요한 코드
-            this.openUrl('BO', 'app://./index.html?goto=backOffice');
-        },
-
-        openEditor() {
-            bridgeIn.openEditor()
-            // this.$router.push("/editor");
-            // window.open('/editor', '_blank');
-        },  
         
         showDropdown() { 
             document.getElementById('dropdown').style.display = 'block';
@@ -252,11 +235,6 @@ while True:
         bleStop(){
             console.log('bleStop');
             ble.writeLn(String.fromCharCode(3))
-        },
-
-        simulation(page){
-            // jsControl.openSimulator(page);
-            windows.open('simulation', `/simulation/${page}`);
         },
     },
     

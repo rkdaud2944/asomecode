@@ -38,13 +38,12 @@
 <script>
 import { mapState } from 'vuex'
 import images from "@/assets/images";
-// import eventbus from "@/globals/eventbus";
-
 import remoteSerial from "@/globals/remote-serial";
-
-// import serial from "@/globals/serial";
+import VueBase from "@/mixin/vue-base";
 
 export default {
+    mixins: [VueBase],
+
     components: {
         ...mapState([
             'viewcode'
@@ -77,9 +76,9 @@ export default {
             this.stop()
         },
         send(){
-            const codes = this.$store.state.viewcode; // $store.state.viewcode¸¦ Á÷Á¢ ÂüÁ¶
+            const codes = this.$store.state.viewcode; // $store.state.viewcodeï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-            // codes º¯¼ö¸¦ È®ÀÎÇÏ±â À§ÇØ ·Î±×¸¦ Ãâ·Â
+            // codes ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Î±×¸ï¿½ ï¿½ï¿½ï¿½
             console.log(codes);
 
             this.runCode(codes);
