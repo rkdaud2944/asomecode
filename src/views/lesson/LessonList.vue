@@ -13,7 +13,7 @@
         <div class="list-wrap">
             <img :src="listImg"/>
             <div class="list-top">
-                <div class="back-button" @click="historyBack">
+                <div class="list-back-button" @click="historyBack">
                     <div class="ico_arrow"></div>
                 </div>
                 <div class="title Pretendard-Medium">{{ subject.title }}</div>
