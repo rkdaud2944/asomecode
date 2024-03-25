@@ -19,52 +19,71 @@
 .main-logo{
     margin-left:30px;
 }
-.connect-false-wrap,
-.connect-true-wrap {
+
+.control-btn-wrap {
     display: flex; 
     gap: 10px; 
-    background-color: #DEDEE2;
-    border-radius: 20px;
 }
 
-.connect-false-wrap > .connect {
+.connect-btn {
     display: flex; 
+    gap: 5px; 
+    width: 120px;
     align-items: center;
-    background-color: #E4007F; 
-    padding: 6px 15px;
-    border-radius: 20px;
-    color: #fff;
-}
-
-.connect-false-wrap > .stop {
-    display: flex; 
-    align-items: center;
+    justify-content: center;
+    background-color: #DEDEE2; 
     padding: 6px 15px;
     border-radius: 20px;
     color: #7E7E83;
+    font-size: 1rem;
 }
 
-.connect-true-wrap > .connect {
-    display: flex; 
-    align-items: center;
-    padding: 6px 15px;
-    border-radius: 20px;
-    color: #7E7E83;
+.connect-btn > img{
+    width: 25px;
 }
 
-.connect-true-wrap > .stop {
-    display: flex; 
-    align-items: center;
+.connect-btn:hover {
     background-color: #7E7E83; 
-    padding: 6px 15px;
-    border-radius: 20px;
     color: #fff;
 }
 
+.connect-btn:hover > img{
+    content: url(../../images/controls/connect-hover.png);
+    width: 25px;
+}
 
-.connect > img,
-.stop > img {
-    margin-right: 8px; /* 이미지와 텍스트 사이의 간격 */
+.connect-btn:active {
+    background-color: #E4007F;
+}
+
+.stop-btn {
+    display: flex; 
+    width: 120px;
+    gap: 5px; 
+    align-items: center;
+    justify-content: center;
+    background-color: #DEDEE2; 
+    padding: 6px 15px;
+    border-radius: 20px;
+    color: #7E7E83;
+}
+
+.stop-btn > img{
+    width: 25px;
+}
+
+.stop-btn:hover {
+    background-color: #7E7E83; 
+    color: #fff;
+}
+
+.stop-btn:hover > img{
+    content: url(../../images/controls/stop-hover.png);
+    width: 25px;
+}
+
+.stop-btn:active {
+    background-color: #E4007F;
 }
 
 .nav{

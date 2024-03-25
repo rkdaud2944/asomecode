@@ -4,34 +4,20 @@
             <img :src="logo" alt="logo" class="logo"/>
         </div>
         
-        <p  @click="openRouterPath('/blockCoding')">
+        <!-- <p  @click="openRouterPath('/blockCoding')">
             Block 
-        </p>
-
-        <router-outlet></router-outlet>
-        <!-- dice -->
-        <p @click="openRouterPath('/simulation/dice')"> 시뮬테스트</p>
+        </p> -->
     
         <div>
             <!-- 현재 클릭만 하면 변경됨, 연결여부에 따라 표시하도록 수정 필요 (새로고침해도 유지되게)-->
-            <div class="connect-false-wrap" v-show="this.connected === false" @click="this.connected = true">
-                <span class="connect" @click="connect()">
+            <!-- <div class="connect-false-wrap" v-show="this.connected === false" @click="this.connected = true"> -->
+            <div class="control-btn-wrap">
+                <span class="connect-btn Pretendard-Medium" @click="connect()">
                     <img :src="connectImg"/>
                     연결하기
                 </span>
-                <span class="stop" @click="stop()">
+                <span class="stop-btn Pretendard-Medium" @click="stop()">
                     <img :src="stopImg"/>
-                    멈추기
-                </span>
-            </div>
-            
-            <div class="connect-true-wrap" v-show="this.connected === true" @click="this.connected = false">
-                <span class="connect">
-                    <img :src="connectImg" @click="connect()"/>
-                    연결하기
-                </span>
-                <span class="stop">
-                    <img :src="stopImg" @click="stop()"/>
                     멈추기
                 </span>
             </div>
