@@ -58,7 +58,7 @@ export default {
     },
 
     mounted() {
-        window.addEventListener('scroll', this.debounce(this.handleScroll, 100));
+        window.addEventListener('scroll', this.debounce(this.handleScroll, 50));
         this.getLesson(this.$route.query.id);
         this.markdownStyle();
     },

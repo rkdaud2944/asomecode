@@ -17,12 +17,16 @@
 .list-wrap > img{
     position: absolute;
     right: 0;
+    z-index: 1;
+    margin-right: -50px;
 }
 
 .list-top{
+    position: relative;
     left: 0;
     text-align: left;
     padding-top: 20px;
+    z-index: 100;
 }
 
 .title{
