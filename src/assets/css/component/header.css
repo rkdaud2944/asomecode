@@ -128,19 +128,20 @@
 .dropdown-menu {
     display: none;
     position: absolute;
-    width: 176px;
-    height: 580px;
+    width: 150px;
+    height: auto;
     top: 22px;
     right: -30px;
     background-color: #fff;
-    /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); */
-    border: 1px solid #000;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.35);
+    border-radius: 10px;
+    /* border: 1px solid #000; */
     z-index: 1;
 }
 
-.dropdown-menu > ul > li {
+.menu-cts {
     width: 100%;
-    line-height:72.5px;
+    line-height:60px;
     display: flex;
     align-items: center;
     justify-content: start;
@@ -149,14 +150,19 @@
 }
 
 
-.dropdown-menu > ul > li:hover {
+
+.menu-cts:nth-last-child(1){
+    border-radius: 0px 0px 10px 10px;
+}
+
+
+.menu-cts:hover {
     background-color: #3E3A39;
     color: #fff
 }
 
 .menu-title:hover {
     background-color: #fff !important;
-    color: #4f4f53 !important;
 }
 
 .menu-title {
@@ -166,6 +172,8 @@
     text-align: center; /* 텍스트 중앙 정렬 (flexbox 없이 텍스트만 중앙 정렬할 경우 사용) */
     /* height: 50px; 높이는 디자인에 맞게 조절해주세요 */
     cursor: auto !important;
+    border-radius: 10px;
+    color: #000 !important;
 }
 
 .menu-title > p {
@@ -173,12 +181,42 @@
     font-size: 1.2rem !important;
 }
 
-.dropdown-menu > ul > li > img{
+.menu-cts > img{
     padding: 0 10px 0 10px;
+    margin-left: 5px;
+    width: 45px;
 }
 
-.dropdown-menu > ul > li > p{
+.menu-cts > p{
     font-size: 15px;
+}
+
+.menu-cts:nth-child(2):hover > img{
+    content: url(../../images/controls/connect-hover.png);
+}
+
+.menu-cts:nth-child(3):hover > img{
+    content: url(../../images/controls/stop-hover.png);
+}
+
+.menu-cts:nth-child(4):hover > img{
+    content: url(../../images/controls/editor-hover.png);
+}
+
+.menu-cts:nth-child(5):hover > img{
+    content: url(../../images/controls/update-hover.png);
+}
+
+.menu-cts:nth-child(6):hover > img{
+    content: url(../../images/controls/reboot-hover.png);
+}
+
+.menu-cts:nth-child(7):hover > img{
+    content: url(../../images/controls/reset-hover.png);
+}
+
+.menu-cts:nth-child(8):hover > img{
+    content: url(../../images/controls/setting-hover.png);
 }
 
 li{

@@ -38,34 +38,34 @@
                 <div class="dropdown-menu">
                 <!-- 메뉴 항목 -->
                     <ul>
-                        <li class="li menu-title">
+                        <li class="menu-cts menu-title">
                             <p>MENU</p>
                         </li>
-                        <li class="li">
+                        <li class="menu-cts li-connect">
                             <img :src="connectImg"/>
                             <p>연결하기</p>
                         </li>
-                        <li class="li">
+                        <li class="menu-cts">
                             <img :src="stopImg"/>
                             <p>멈추기</p>
                         </li>
-                        <li class="li" @click="openEditor('')">
+                        <li class="menu-cts" @click="openEditor('')">
                             <img :src="editorImg"/>
                             <p>소스편집</p>
                         </li>
-                        <li class="li">
+                        <li class="menu-cts">
                             <img :src="updateImg"/>
                             <p>업데이트</p>
                         </li>
-                        <li class="li">
+                        <li class="menu-cts">
                             <img :src="restartImg"/>
                             <p>재부팅</p>
                         </li>
-                        <li class="li">
+                        <li class="menu-cts">
                             <img :src="resetImg"/>
                             <p>포맷</p>
                         </li>
-                        <li class="li">
+                        <li class="menu-cts">
                             <img :src="settingImg"/>
                             <p>설정</p>
                         </li>
