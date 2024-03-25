@@ -1,3 +1,8 @@
+p{
+    margin: 0;
+    padding: 0;
+}
+
 .container-wrap{
     top: 79px;
     position: relative;
@@ -8,7 +13,7 @@
     width: 1200px;
     margin: auto;
     /* background-color: pink; */
-    padding-top: 35px;
+    padding-top: 15px;
 }
 
 .back-button {
@@ -21,6 +26,8 @@
     /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);  */
     font-size: 0; 
     margin-bottom: 15px;
+    
+    float: left;
 }
 
 .ico_arrow{
@@ -56,14 +63,22 @@
 }
 
 .container-top{
-    display: flex;
+    display: inline;
+    overflow: auto;
     margin-bottom: 20px;
+    position: fixed;
+    background-color: #F3F3F5;
+    z-index: 500;
+    width: 100%;
+    padding-top: 20px;
 }
 
 .container-top-txt{
     display: flex;
     align-items: center;
     margin-left: 10px;
+    margin-top: 5px;
+    float: left;
 }
 
 .subject-title{
@@ -96,6 +111,7 @@
     display: flex;
     /* margin: auto; */
     position: relative;
+    top: 100px;
 }
 
 .objectives{
@@ -116,11 +132,11 @@
 
 @keyframes moveUp {
     from { transform:translateY(20px) }
-    to { transform:translateY(-100px)  } 
+    to { transform:translateY(-10px)  } 
 }
 
 @keyframes moveDown {
-    from { transform:translateY(-100px)  } 
+    from { transform:translateY(-10px)  } 
     to { transform:translateY(20px) }
 }
 

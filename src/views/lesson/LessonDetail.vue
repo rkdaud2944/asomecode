@@ -95,7 +95,7 @@ export default {
     methods: {
         moveTo(tag) {
             const element = window.document.getElementById(tag);
-            const top = element.offsetTop + 60; 
+            const top = element.offsetTop - 0; 
 
             // 현재 항목의 클래스를 추가
             if (element) {
@@ -143,8 +143,8 @@ export default {
             h2Elements.forEach(element => {
                 const elementTop = element.getBoundingClientRect().top;
 
-                // 상단에서부터 200px 내에 있는 요소에만 .active 클래스 적용
-                if (elementTop >= 0 && elementTop <= 200 && !activeFound) {
+                // 상단에서부터 200px~400px 내에 있는 요소에만 .active 클래스 적용
+                if (elementTop >= 200 && elementTop <= 400 && !activeFound) {
                 const id = element.id;
                 const activeTag = document.querySelector(`.tag-${id}`);
                 if (activeTag && !activeTag.classList.contains('tag-active')) {
