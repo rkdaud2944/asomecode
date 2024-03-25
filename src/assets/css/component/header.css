@@ -1,5 +1,6 @@
 .logo{
     height: 40px;
+    cursor: pointer;
 }
 
 .header-nav{
@@ -36,6 +37,7 @@
     border-radius: 20px;
     color: #7E7E83;
     font-size: 1rem;
+    cursor: pointer;
 }
 
 .connect-btn > img{
@@ -66,6 +68,7 @@
     padding: 6px 15px;
     border-radius: 20px;
     color: #7E7E83;
+    cursor: pointer;
 }
 
 .stop-btn > img{
@@ -93,6 +96,7 @@
 .nav-txt{
     font-size: 1.1rem;
     margin-right: 30px;
+    cursor: pointer;
 }
 
 .hamburger-wrap{
@@ -141,7 +145,9 @@
     align-items: center;
     justify-content: start;
     color: #4f4f53;
+    cursor: pointer;
 }
+
 
 .dropdown-menu > ul > li:hover {
     background-color: #3E3A39;
@@ -159,6 +165,7 @@
     justify-content: center; /* 가로 축 중앙 정렬 */
     text-align: center; /* 텍스트 중앙 정렬 (flexbox 없이 텍스트만 중앙 정렬할 경우 사용) */
     /* height: 50px; 높이는 디자인에 맞게 조절해주세요 */
+    cursor: auto !important;
 }
 
 .menu-title > p {
