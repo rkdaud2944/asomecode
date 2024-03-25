@@ -27,15 +27,15 @@
                                         transition: 'background-color 0.5s ease, color 0.5s ease',
                                         'backgroundImage': `url(${card.image})`
                                 }">
-                                    <p class="age"
+                                    <p class="age NotoSansKR-Regular"
                                         :style="{'color': card.txtAge,
                                         'border': `1px solid ${card.txtAge}`
                                     }">
                                         {{ card.age }}
                                     </p>
                                     <h4 class="title">{{ card.title }}</h4>
-                                    <p class="description">{{ card.description }}</p>
-                                    <div class="chapter" 
+                                    <p class="description Pretendard-Regular">{{ card.description }}</p>
+                                    <div class="chapter Pretendard-Regular" 
                                         :style="{
                                             'color': card.txtChapter,
                                             'background-color': card.bgChapter,
@@ -68,8 +68,8 @@
                                         ">
                                         {{ card.title }}
                                     </h4>
-                                    <p class="description Pretendard-Medium">{{ card.description }}</p>
-                                    <div class="chapter Pretendard-Medium" 
+                                    <p class="description Pretendard-Regular">{{ card.description }}</p>
+                                    <div class="chapter Pretendard-Regular" 
                                         :style="{
                                             'color': card.hoverTxtChapter,
                                             'background-color': card.hoverBgChapter,
@@ -88,10 +88,10 @@
                         <div class="tip" 
                         v-for="(card, index) in tipCards"
                         :key="index"
-                        @mouseover="hoveredStates[index] = true"
-                        @mouseleave="hoveredStates[index] = false"
                         @mousedown="clickedStates[index] = true"
                         @mouseup="clickedStates[index] = false"
+                        @mouseover="hoveredStates[index] = true"
+                        @mouseleave="hoveredStates[index] = false; clickedStates[index] = false"
                         >
                         <a :href="card.href" target="_blank" class="tip-link" :style="{'text-decoration': 'none'}">
                             <div :class="`tip-box box${index+1}`"
@@ -178,6 +178,11 @@ export default {
 
     mounted() {
         this.getSubjectSet()
+        window.addEventListener('mouseup', this.globalMouseUpHandler);
+    },
+
+    beforeUnmount() {
+        window.removeEventListener('mouseup', this.globalMouseUpHandler);
     },
 
     methods: {
@@ -226,12 +231,13 @@ export default {
         goSelectCurriculum(id, title){
             this.$router.push({ 
                 path: `/curriculum`,
-                // name: 'curriculum',
                 query:{id: `${id}`,title: `${title}`}
             });
-            
-            // this.$router.push({ path: '/lesson/list', query: { id: 4 } });
-        }
+        },
+        
+        globalMouseUpHandler() {
+            if (this.clicked) this.clicked = false;
+        },
     }
 }
 </script>

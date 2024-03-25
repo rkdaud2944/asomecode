@@ -80,7 +80,7 @@
     height: 100%;
     position: absolute;
     backface-visibility: hidden;
-
+    cursor: pointer;
 }
 
 .card-back {
