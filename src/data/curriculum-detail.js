@@ -24,7 +24,9 @@ export const cards = [
         교구의 비용은 줄이고<br/>
         피지컬 컴퓨팅 전반의 코딩을 체험할 수<br/>
         있도록 준비된 교육 프로그램`,
-        hoverTxtColor: '#4F4F53'
+        hoverTxtColor: '#4F4F53',
+
+        clickBgColor: '#8B1959', 
     },
     {
         id: 2,
@@ -50,7 +52,9 @@ export const cards = [
         간단한 놀잇감을 직접 개발해보면서<br/>
         생활 속에서 만나는 다양한 장치의 원리를<br/>
         이해하도록 개발된 프로그램`,
-        hoverTxtColor: '#4F4F53'
+        hoverTxtColor: '#4F4F53',
+        
+        clickBgColor: '#8B1959', 
     },
     // Asomebot
     {
@@ -77,7 +81,9 @@ export const cards = [
         이족보행로봇을 직접 개발하고<br/>
         개발한 교구를 프로그램을 통해<br/>
         개조하는 교육 프로그램`,
-        hoverTxtColor: '#4F4F53'
+        hoverTxtColor: '#4F4F53',
+        
+        clickBgColor: '#2A5927', 
     },
     // Asomecar
     {
@@ -104,6 +110,8 @@ export const cards = [
         직접 개발하고 개발한 교구를<br/>
         프로그램을 이용해 개조하는<br/>
         교육 프로그램`,
-        hoverTxtColor: '#4F4F53'
+        hoverTxtColor: '#4F4F53',
+        
+        clickBgColor: '#5B4A9C',
     },
 ];

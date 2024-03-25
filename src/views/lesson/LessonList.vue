@@ -21,9 +21,10 @@
             </div>
 
             <div class="list-container">
-                <div class="list-item" v-for="(item, index) in subject.lessons" :key="index" @click="goTo('/lesson/detail', { id: item.id, subjectTitle: subject.title, index: index+1, title: item.title})">
+                <div class="list-item" v-for="(item, index) in subject.lessons" :key="index" @click="goTo('/lesson/detail', { id: item.id, subjectTitle: subject.title, index: index+1, title: item.title, color: this.$route.query.color})">
                     <div class="list-content">
-                        <span class="list-number Pretendard-Medium">{{ index + 1 }}차시</span>
+                        <span class="list-number Pretendard-Medium"
+                        :style="defaultBorderColor">{{ index + 1 }}차시</span>
                         <span class="list-title Pretendard-Regular">{{ item.title }}</span>
                     </div>
                 </div>
@@ -76,7 +77,22 @@ export default {
                 default:
                     return this.listAsomekit;
             }
-        }
+        },
+
+        defaultBorderColor() {
+            return { borderColor: this.$route.query.color,
+                    color: this.$route.query.color,
+                    '--chapter-background-color-hover': this.$route.query.color,
+                    '--chapter-color-hover': '#fff',
+                    '--chapter-color-active': '#AEAEB4',
+                    '--chapter-background-color-active': this.$route.query.clickColor,
+                    '--chapter-border-color-active': this.$route.query.clickColor
+                };
+        },
+        
+        // defaultTextColor() {
+        //     return { color: this.$route.query.color};
+        // }
     },
 
 

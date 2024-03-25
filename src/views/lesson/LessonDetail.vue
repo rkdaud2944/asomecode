@@ -9,7 +9,8 @@
 
                 <div class="container-top-txt">                    
                     <p class="subject-title Pretendard-Medium"> {{ this.$route.query.subjectTitle }} </p>
-                    <p class="lesson-chapter Pretendard-Regular"> {{ this.$route.query.index }}차시 </p>
+                    <p class="lesson-chapter Pretendard-Regular"
+                    :style="chapterStyleHandler"> {{ this.$route.query.index }}차시 </p>
                     <p class="chapter-title Pretendard-Medium"> {{ this.$route.query.title }} </p>
                 </div>
             </div>
@@ -19,7 +20,8 @@
                     <div @click="moveTo(title.tag)" 
                         :class="`detail-title tag-${title.tag} defaultTag`"
                         v-for="(title, index) in titles" :key="index"
-                        :title="title.name">
+                        :title="title.name"
+                        :style="detailTitleStyleHandler">
                         <p>{{title.name}}</p>                        
                     </div>
                 </div>
@@ -58,6 +60,7 @@ export default {
     mounted() {
         window.addEventListener('scroll', this.debounce(this.handleScroll, 100));
         this.getLesson(this.$route.query.id);
+        this.markdownStyle();
     },
     
     updated() {
@@ -67,6 +70,26 @@ export default {
     
     beforeDestroy() {
         window.removeEventListener('scroll', this.handleScroll);
+    },
+
+    computed: {
+        chapterStyleHandler() {
+            return {
+                '--cahpter-border-color': this.$route.query.color,
+                '--cahpter-background-color': this.$route.query.color,                
+
+            }
+        },
+
+        detailTitleStyleHandler() {
+            return {        
+                '--detail-title-background-color-first': this.$route.query.color,
+                '--detail-title-background-color-active': this.$route.query.color,
+                '--detail-title-background-color-tag-active': this.$route.query.color,
+
+                '--markdown-h2': this.$route.query.color,
+            }
+        },
     },
 
     methods: {
@@ -158,15 +181,23 @@ export default {
 
         // 디바운스 함수
         debounce(func, wait) {
-        let timeout;
-        return function() {
-            const context = this, args = arguments;
-            clearTimeout(timeout);
-            timeout = setTimeout(function() {
-            func.apply(context, args);
-            }, wait);
-        };
-        }
+            let timeout;
+            return function() {
+                const context = this, args = arguments;
+                clearTimeout(timeout);
+                timeout = setTimeout(function() {
+                func.apply(context, args);
+                }, wait);
+            };
+        },
+
+        // h2 스타일 동적 변경
+        markdownStyle() {            
+            var mkColor =document.querySelectorAll('.markdown_output');
+            for ( var i = 0; i < mkColor.length; i++ ) {
+                mkColor[i].style.color = this.$route.query.color;
+            }
+        },
 
 
     },

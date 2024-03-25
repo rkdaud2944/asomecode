@@ -10,7 +10,7 @@
                         :key="index"
                         @mousedown="clicked = true"
                         @mouseup ="clicked = false"
-                        @click="goToLesson(card.id, card.title)"
+                        @click="goToLesson(card.id, card.title, card.txtAge, card.clickBgColor)"
                     >
                         <div class="card">
                             <div class="card-front"
@@ -109,13 +109,15 @@ export default {
     },
 
     methods: {
-        goToLesson(id, title){
-            console.log("title : "+title);
+        goToLesson(id, title, color, clickColor){
             this.$router.push({ path: '/lesson/list', 
-            query: { 
-                id: `${id}`,
-                title: `${title}`
-            } });
+                query: { 
+                    id: `${id}`,
+                    title: `${title}`,
+                    color: `${color}`,
+                    clickColor: `${clickColor}`
+                } 
+            });
         }
     }
 

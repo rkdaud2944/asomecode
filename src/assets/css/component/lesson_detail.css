@@ -73,8 +73,9 @@
 
 .lesson-chapter{
     min-width: 70px;
-    border: 1px solid #E4007F;
-    background-color: #E4007F;
+    border: 1px solid;
+    border-color: var(--cahpter-border-color);
+    background-color: var(--cahpter-background-color);
     color: #fff;
     padding: 3px 0 3px 0;
     text-align: center;
@@ -148,17 +149,17 @@
 
 .detail-title:active{
     color: #fff;
-    background-color: #E4007F;
+    background-color: var(--detail-title-background-color-active);
 }
 
 .detail-title.defaultTag:nth-child(1){
     color: #fff;
-    background-color: #E4007F;
+    background-color: var(--detail-title-background-color-first);
 }
 /* 임시 */
 
 .tag-active{
     color: #fff;
-    background-color: #E4007F;
+    background-color: var(--detail-title-background-color-tag-active);
 
 }

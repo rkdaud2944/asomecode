@@ -108,12 +108,11 @@
 
 .list-number {
     min-width: 80px;
-    border: 1px solid #E4007F;
+    border: 1px solid ;
     border-radius: 25px; 
     padding: 5px 0 5px 0;
     margin-right: 10px;
     font-size: 1.05rem;
-    color: #E4007F;
     transition: background-color 0.3s, color 0.3s; 
 }
 
@@ -122,8 +121,8 @@
 }
 
 .list-content:hover .list-number{
-    color: #fff ;
-    background-color: #E4007F;
+    color: var(--chapter-color-hover) !important;
+    background-color: var(--chapter-background-color-hover);
 }
 
 .list-content:active{
@@ -132,8 +131,8 @@
 }
 
 .list-content:active > .list-number{
-    color: #AEAEB4; 
-    background-color: #9D0058; 
-    border-color: #9D0058; 
+    color: var(--chapter-color-active) !important; 
+    background-color: var(--chapter-background-color-active) !important; 
+    border-color: var(--chapter-border-color-active) !important; 
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }

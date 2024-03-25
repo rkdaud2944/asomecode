@@ -10,7 +10,8 @@
     font-size: 23px;
     font-weight: bold;
     line-height: 30px;
-    color: #E4007F;
+    /* color: #E4007F; */
+    /* color: var(--markdown-h2); */
     margin: 0px;
     margin-top: 50px;
     margin-bottom: 10px;
