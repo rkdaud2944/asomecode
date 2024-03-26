@@ -3,15 +3,15 @@
 
 <!-- 교구 선택 버튼, 에이스에디터 여닫이버튼 -->
     <div>
-        <p>입력된 음성값 : {{ recognizedTextFromModal }}</p>
+        <!-- <p>입력된 음성값 : {{ recognizedTextFromModal }}</p> -->
         <!-- 교구선택버튼 -->
-        <button class="b-button" :class="{ selected: selectedField === 'BOT' }" @click="showAndClearCategoriesByField('BOT')">
+        <button v-show='lessonBlockVisible' class="b-button" :class="{ selected: selectedField === 'BOT' }" @click="showAndClearCategoriesByField('BOT')">
             <img class="img-button" :src="selectedField === 'BOT' ? asomebotIconClick : asomebotIcon"/> Asomebot
         </button>
-        <button :class="{ selected: selectedField === 'KIT' }" @click="showAndClearCategoriesByField('KIT')">
+        <button v-show='lessonBlockVisible' :class="{ selected: selectedField === 'KIT' }" @click="showAndClearCategoriesByField('KIT')">
             <img class="img-button" :src="selectedField === 'KIT' ? asomekitIconClick : asomekitIcon"/> Asomekit
         </button>
-        <button class="c-button" :class="{ selected: selectedField === 'CAR' }" @click="showAndClearCategoriesByField('CAR')">
+        <button v-show='lessonBlockVisible' class="c-button" :class="{ selected: selectedField === 'CAR' }" @click="showAndClearCategoriesByField('CAR')">
             <img class="img-button" :src="selectedField === 'CAR' ? asomecarIconClick : asomecarIcon"  :style="{ height: '16px', width: '14px' }"/> Asomecar
         </button>
         <!-- stt 모달창 -->
@@ -126,6 +126,18 @@ export default {
             recognizedTextFromModal: '',
         }
     },
+
+    computed: {
+        // 블록콘텐츠에서 레슨블록이 보이게 할지 안보이게 할지
+        lessonBlockVisible(){
+            if(localStorage.getItem("lessonBlock")){
+                return false
+            }else{
+                return true
+            }
+        }
+    },
+
     beforeMount() {
         // 타이핑 자동완성
         const keywords = [

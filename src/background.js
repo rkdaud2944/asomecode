@@ -35,7 +35,6 @@ async function createWindow() {
     await win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
     if (!process.env.IS_TEST) win.webContents.openDevTools()
   } else {
-    if (!process.env.IS_TEST) win.webContents.openDevTools()
     createProtocol('app')
     win.loadURL('app://./index.html')
   }

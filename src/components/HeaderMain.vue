@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="nav">
-            <span class="NotoSansKR-Regular nav-txt">자료실</span>
+            <span class="NotoSansKR-Regular nav-txt"><a :href="this.downloadLink" target="_blank">자료실</a></span>
             <span class="NotoSansKR-Regular nav-txt">도움말</span>
             <span class="NotoSansKR-Regular hamburger-wrap nav-txt">
                 <div class="hamburger-icon">
@@ -41,11 +41,11 @@
                         <li class="menu-cts menu-title">
                             <p>MENU</p>
                         </li>
-                        <li class="menu-cts li-connect">
+                        <li class="menu-cts li-connect" @click="connect()">
                             <img :src="connectImg"/>
                             <p>연결하기</p>
                         </li>
-                        <li class="menu-cts">
+                        <li class="menu-cts" @click="stop()">
                             <img :src="stopImg"/>
                             <p>멈추기</p>
                         </li>
@@ -53,15 +53,15 @@
                             <img :src="editorImg"/>
                             <p>소스편집</p>
                         </li>
-                        <li class="menu-cts">
+                        <li class="menu-cts" @click="update()">
                             <img :src="updateImg"/>
                             <p>업데이트</p>
                         </li>
-                        <li class="menu-cts">
+                        <li class="menu-cts" @click="reboot()">
                             <img :src="restartImg"/>
                             <p>재부팅</p>
                         </li>
-                        <li class="menu-cts">
+                        <li class="menu-cts" @click="format()">
                             <img :src="resetImg"/>
                             <p>포맷</p>
                         </li>
@@ -114,7 +114,9 @@ export default {
             codes: null,
 
             isMenuOpen: false,
-            connected: false
+            connected: false,
+            
+            downloadLink: "https://asomeit.kr/download",
         } 
     },
 
@@ -149,12 +151,6 @@ export default {
             this.simulJS(params);
             
         });
-        
-
-
-
-
-
         
         window.addEventListener("message", (event) => {
             if (event.data === 'connect') {
