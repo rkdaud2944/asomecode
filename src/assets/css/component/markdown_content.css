@@ -213,6 +213,20 @@
     background-color: #59CB52;
 }
 
+.markdown_output .driver-download-btn {
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    
+    background-color: #337ab7;
+    color: white;
+}
+
 @media all and (min-width:722px) and (max-width:8000px) {
     .markdown_output .parts_comment_bar {
         font-size: 1em;
