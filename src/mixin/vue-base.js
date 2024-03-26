@@ -33,15 +33,21 @@ export default {
 
         openRouterPath(path, code) {            
             let route = this.$router.resolve({ path: path });
-            
+            console.log("path : "+path);
             switch (path) {
                 case '/editor' : 
                     localStorage.setItem("code", code);
                     break;
                 case '/simulation/dice' : 
                     simulator['simulator'] = window.open(route.href, 'simulator', 'width=420,height=360'); // 400 300;
-                    break;
+                    break; 
                 case '/simulation/dht_screen' : 
+                    simulator['simulator'] = window.open(route.href, 'simulator', 'width=600,height=450'); // 400 300;
+                    break;
+                case '/simulation/door' :  // 사이즈 조절 필요
+                    simulator['simulator'] = window.open(route.href, 'simulator', 'width=600,height=450'); // 400 300;
+                    break;                    
+                case '/simulation/flag_game' : 
                     simulator['simulator'] = window.open(route.href, 'simulator', 'width=600,height=450'); // 400 300;
                     break;
                 default:
@@ -52,7 +58,6 @@ export default {
         },
 
         simulJS(params){
-            console.log("simulJS 오픈라우터 밑에 : "+JSON.stringify(params));
             simulator['simulator'].postMessage(JSON.stringify(params), "*");
         },
 

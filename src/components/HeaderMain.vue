@@ -134,8 +134,6 @@ export default {
         });
 
         eventbus.on('simulationBus', (params) => {
-            // simulator['simulator'].postMessage(JSON.stringify(params))
-            console.log("simulationBus 헤더안 : "+JSON.stringify(params))
             window.parent.postMessage(JSON.stringify(params), '*');
             this.simulJS(params);
             
