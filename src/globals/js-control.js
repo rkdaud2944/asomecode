@@ -18,8 +18,11 @@ window.run_cmd = function (cmd) {
 };
 
 window.roll_dice = function () {
-    
     simulationRunJS('roll_dice()')
+}
+
+window.dht_display = function (a,b) {
+    simulationRunJS(`dht_display(${a},${b})`)
 }
 
 /**

@@ -6,10 +6,8 @@
 </template>
 
 <script>
-// import { mapState } from 'vuex'
 import images from "@/assets/images";
 import remoteSerial from "@/globals/remote-serial";
-// import eventbus from "@/globals/eventbus";
 
 export default {	
 	data() {
@@ -19,28 +17,7 @@ export default {
 		}
 	},
 
-	mounted() {	
-		
-        // eventbus.on('simulationRunJS', (params) => {
-		// 	console.log("simulationRunJS 들어옴!");
-		// 	console.log("params : "+params)
-            
-        // });	
-		// window.addEventListener('message', (msg) => {
-		// 	let message = {};
-		// 	try {
-		// 		message = JSON.parse(msg.data);
-		// 	} catch (error) {
-		// 		console.log(error, msg);
-		// 	}
-
-		// 	switch (message.type) {
-		// 		case 'runJS': this.runJS(message.line); break;
-		// 	}
-		// });
-
-
-		
+	mounted() {		
 		window.addEventListener('message', (msg) => {
 			let message = {};
 			
@@ -71,7 +48,6 @@ export default {
 			document.getElementById("img_dice").src = this.dice[index-1];
 		},
 
-		
 		runJS(line) { 
 			try {
 				eval(line);
@@ -80,7 +56,6 @@ export default {
 			}    
 		}
 	}
-
 }
 </script>
 

@@ -129,20 +129,9 @@ export default {
             this.$q.notify('어썸보드 연결이 끊어졌습니다.');
         });
         
-        // let simulator = [];
-        // 시뮬레이션
         eventbus.on('simulationOpen', (path) => {
             this.openRouterPath(path);
-            // console.log("simulator['simulator'] : "+simulator['simulator'])
         });
-
-        // simulator['simulator'].onload = () => {
-        //     // 대상 창이 로드된 후 postMessage 호출
-        //     if (simulator['simulator']) {
-        //         const message = { type: 'greeting', text: 'Hello from parent!' };
-        //         simulator['simulator'].postMessage(JSON.stringify(message), '*');
-        //     }
-        // };
 
         eventbus.on('simulationBus', (params) => {
             // simulator['simulator'].postMessage(JSON.stringify(params))
