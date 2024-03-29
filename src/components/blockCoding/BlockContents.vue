@@ -10,7 +10,7 @@
         <button v-show='lessonBlockVisible' :class="{ selected: selectedField === 'KIT' }" @click="showAndClearCategoriesByField('KIT')">
             <img class="img-button" :src="selectedField === 'KIT' ? asomekitIconClick : asomekitIcon"/> Asomekit
         </button> -->
-        <button v-show='lessonBlockVisible' class="c-button" :class="{ selected: selectedField === 'CAR' }" @click="showAndClearCategoriesByField('CAR')">
+        <button class="c-button" :class="{ selected: selectedField === 'CAR' }" @click="showAndClearCategoriesByField('CAR')">
             <img class="img-button" :src="selectedField === 'CAR' ? asomecarIconClick : asomecarIcon"  :style="{ height: '16px', width: '14px' }"/> Asomecar
         </button>
         <!-- stt 모달창 -->
@@ -127,14 +127,14 @@ export default {
     },
 
     computed: {
-        // 블록콘텐츠에서 레슨블록이 보이게 할지 안보이게 할지
-        lessonBlockVisible(){
-            if(localStorage.getItem("lessonBlock")){
-                return false
-            }else{
-                return true
-            }
-        }
+        // // 블록콘텐츠에서 레슨블록이 보이게 할지 안보이게 할지
+        // lessonBlockVisible(){
+        //     if(localStorage.getItem("lessonBlock")){
+        //         return false
+        //     }else{
+        //         return true
+        //     }
+        // }
     },
 
     beforeMount() {
@@ -252,7 +252,6 @@ export default {
         })
         
         if (localStorage.getItem("lessonBlock")){
-            console.log("lessonBlock : "+localStorage.getItem("lessonBlock"))
             // 블록코드 워크스페이스 코드(점박이 백그라운드 넣은곳)
             this.$nextTick(() => {
                 this.workspace = Blockly.inject(this.$refs.blocklyDiv, {
