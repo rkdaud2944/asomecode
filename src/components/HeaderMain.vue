@@ -112,6 +112,7 @@ export default {
         eventbus.on("onSerialConnected", () => {
             this.btConnectColor = "primary";
         });
+        
         eventbus.on("onSerialClosed", () => {
             this.btConnectColor = "grey";
             this.$q.notify('어썸보드 연결이 끊어졌습니다.');

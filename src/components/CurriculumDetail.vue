@@ -10,7 +10,7 @@
                         :key="index"
                         @mousedown="clicked = true"
                         @mouseup ="clicked = false"
-                        @click="goToLesson(card.id, card.title, card.txtAge, card.clickBgColor)"
+                        @click="openRouterPath('/blockCoding')"
                     >
                         <div class="card">
                             <div class="card-front"
@@ -83,8 +83,11 @@
 
 <script>
 import { cards } from "@/data/curriculum-detail";
+import VueBase from "@/mixin/vue-base";
 
 export default {
+    mixins: [VueBase],
+    
     components: {
     },
 
