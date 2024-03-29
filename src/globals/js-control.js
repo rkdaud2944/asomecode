@@ -17,14 +17,6 @@ window.run_cmd = function (cmd) {
     if (cmd.startsWith("Code=ShowSimulation"))openSimulator(cmd);
 };
 
-window.roll_dice = function () {
-    simulationRunJS('roll_dice()')
-}
-
-window.dht_display = function (a,b) {
-    simulationRunJS(`dht_display(${a},${b})`)
-}
-
 /**
  * 코드 에디터와 관련된 Event를 처리한다.
  */
@@ -94,7 +86,6 @@ function openSimulator(cmd) {
 }
 
 function simulationRunJS(line){
-    console.log("simulationRunJS 안 입니다 line : "+line)
     const params = {
         type: "simulationJS",
         func: line,
@@ -102,3 +93,14 @@ function simulationRunJS(line){
 
     eventbus.emit('simulationBus', params);
 }
+
+// 초음파 센서 로그
+window.hcsr04_distance = function (cm) { console.log('cm = '+cm) }
+
+// 시뮬레이션 사용 함수 정의
+window.roll_dice = function () { simulationRunJS('roll_dice()') }
+window.dht_display = function (a,b) { simulationRunJS(`dht_display(${a},${b})`) }
+window.door_close = function () { simulationRunJS('door_close()') }
+window.door_open = function () { simulationRunJS('door_open()') }
+window.gunman_ready = function (count) { simulationRunJS(`gunman_ready(${count})`) }
+window.gunman_win = function (player) { simulationRunJS(`gunman_win(${player})`) }
