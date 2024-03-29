@@ -133,12 +133,12 @@ export default {
                 this.connect();
             }
         });
-        window.addEventListener("message", (event) => {
-            if (event.data && typeof event.data === 'string' && event.data.includes('import')) {
-                serial.runCode(event.data);
-                return;
-            }
-        });
+        // window.addEventListener("message", (event) => {
+        //     if (event.data && typeof event.data === 'string' && event.data.includes('import')) {
+        //         serial.runCode(event.data);
+        //         return;
+        //     }
+        // });
         window.addEventListener("message", (event) => {
             if (event.data.type === 'sttclose') { 
                 serial.writeLn(event.data.text);
