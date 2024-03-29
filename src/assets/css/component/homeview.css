@@ -18,7 +18,7 @@
     font-size: 53px;
     font-weight: 700;
     color: #e4007f;
-    margin: 0;
+    margin: 0; 
 }
 
 .main-mid>div>p {
@@ -33,7 +33,7 @@
 .main-cts {
     display: grid;
     max-width: 1220px;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 1fr 1fr;
     /* gap: 10px; */
 }
 
@@ -90,6 +90,7 @@
 .card-wrap:hover .card {
     transform: rotateY(180deg);
 }
+
 
 
 /* 카드 뒤집기 끝 */
