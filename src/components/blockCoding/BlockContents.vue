@@ -1,6 +1,6 @@
 <template>
 <div class="pre-setting">
-
+<!-- <button @click="saveTextAsFile('default')">블록코드 내보내기</button> -->
 <!-- 교구 선택 버튼, 에이스에디터 여닫이버튼 -->
     <div>
         <!-- <p>입력된 음성값 : {{ recognizedTextFromModal }}</p> -->
@@ -22,7 +22,7 @@
         <div id="code" class="cursor-pointer">
             <img :src="sourceView" @click="toggleCodeVisibility" />
         </div>
-    </div>
+    </div> 
     <div class="container">
         <!-- Blockly -->
         <div class="blockly-container" ref="blocklyDiv" :style="{ width: isCodeVisible ? '70%' : '100%' }"></div>
@@ -560,6 +560,28 @@ export default {
         updateRecognizedText(text) {
             this.recognizedTextFromModal = text;
         },
+
+        exportBlocks(){            
+            let xml = Blockly.Xml.workspaceToDom(this.workspace);
+            let xmlText = Blockly.Xml.domToPrettyText(xml);
+            console.log("xml : " + xmlText);
+            return xmlText;
+
+        },
+
+        saveTextAsFile(filename) {
+            let text = this.exportBlocks()
+            const blob = new Blob([text], { type: 'text/xml;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = url;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+
     },
 }
 </script>
