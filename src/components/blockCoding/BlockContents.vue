@@ -258,7 +258,7 @@ export default {
                 this.workspace = Blockly.inject(this.$refs.blocklyDiv, {
                     toolbox: 
                         {kind: "categoryToolbox",
-                        contents: LessonToolbox[localStorage.getItem("lessonBlock")]},
+                        contents: CarToolbox.contents},
                     grid:
                         {spacing: 25,
                         length: 2,
