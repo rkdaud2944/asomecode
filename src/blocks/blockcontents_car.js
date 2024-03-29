@@ -76,5 +76,17 @@ const CarToolbox = {
                 { "kind": "block", "gap": "8", "type": "get_weather" },
             ],
         },
+        {
+            "kind": "category",
+            "name": "LED",
+            "field" : "CAR",
+            "colour": "FF61FF",
+            "contents": [
+                { "kind": "block", "gap": "8", "type": "led_ready" },
+                { "kind": "block", "gap": "8", "type": "led_setting" },
+                { "kind": "block", "gap": "8", "type": "led_ledtube_ready" },
+                { "kind": "block", "gap": "8", "type": "led_ledtube_time" },
+            ],
+        },
     ]
 };
