@@ -52,7 +52,7 @@ class SerialUnit {
             this.onOpened();
             // useConnectStore.connected();
             this.writeLn("import os; os.uname()");
-            this.writeLn("import asomebot; asomebot.ready(5,6,7,8); asomebot.flap()");
+            this.writeLn("");
         } catch (error) {
             console.log(error);
             
