@@ -1,6 +1,5 @@
 <template>
 <div class="pre-setting">
-<!-- <button @click="saveTextAsFile('default')">블록코드 내보내기</button> -->
 <!-- 교구 선택 버튼, 에이스에디터 여닫이버튼 -->
     <div>
         <!-- <p>입력된 음성값 : {{ recognizedTextFromModal }}</p> -->
@@ -347,6 +346,16 @@ export default {
                 localStorage.removeItem("stt");
             }
         });
+
+        
+        eventbus.on("blocksSave", () =>{
+            this.saveTextAsFile('default');
+        });
+
+        
+        eventbus.on("blocksLoad", () =>{
+            this.importBlocksFromFile();
+        });
     
     },
     beforeUnmount() {
@@ -562,6 +571,7 @@ export default {
             this.recognizedTextFromModal = text;
         },
 
+        // 블록코딩 export
         exportBlocks(){            
             let xml = Blockly.Xml.workspaceToDom(this.workspace);
             let xmlText = Blockly.Xml.domToPrettyText(xml);
@@ -581,7 +591,47 @@ export default {
             link.click();
             document.body.removeChild(link);
             URL.revokeObjectURL(url);
+        },
+
+        //블록코딩 import
+        cleanBlockWorkspace() {
+            Blockly.getMainWorkspace().clear();
+        },
+
+        importBlocks(xmlText) {
+            this.cleanBlockWorkspace(); // 기존 작업 공간을 정리
+            let xml = Blockly.Xml.textToDom(xmlText); // 문자열에서 XML DOM으로 변환
+            Blockly.Xml.domToWorkspace(xml, this.workspace); // XML을 작업 공간으로 가져오기
+        },
+
+        importBlocksFromFile() {
+            this.loadTextFile(this.importBlocks.bind(this)); 
+            // this.importBlocks 함수에 현재 컨텍스트(this)를 바인딩하여 전달
+        },
+
+        loadTextFile(func) {
+            let fileInput = document.createElement("input");
+
+            fileInput.type = 'file';
+            fileInput.style.display = 'none';
+            fileInput.onchange = function(e) {
+                let file = e.target.files[0];
+                if (!file) {
+                    return;
+                }
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    let contents = e.target.result;
+                    func(contents); // 파일의 내용을 func 함수에 전달하여 호출
+                    document.body.removeChild(fileInput); // input 요소를 DOM에서 제거
+                };
+                reader.readAsText(file);
+            };
+
+            document.body.appendChild(fileInput);
+            fileInput.click(); // 사용자 대신 file input을 클릭하는 행위를 프로그래매틱하게 실행
         }
+
 
     },
 }

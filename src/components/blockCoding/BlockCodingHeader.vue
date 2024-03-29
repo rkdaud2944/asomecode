@@ -21,12 +21,12 @@
                     <img :src="connectBlockHover" style="width: 96px; height: 17px;" />
                 </div>
                 <span class="delimiter">|</span>
-                <div class="btn btn-image" @click="exportBlocksToFile()">
+                <div class="btn btn-image" @click="save()">
                     <img :src="saveBlock" style="width: 65px; height: 17px;"/>
                     <img :src="saveBlockHover" style="width: 65px; height: 17px;"/>
                 </div>
                 <span class="delimiter">|</span>
-                <div class="btn btn-image" @click="importBlocksFromFile()">
+                <div class="btn btn-image" @click="load()">
                     <img :src="loadBlock" style="width: 66px; height: 17px;"/>
                     <img :src="loadBlockHover" style="width: 66px; height: 17px;"/>
                 </div>
@@ -40,6 +40,7 @@ import { mapState } from 'vuex'
 import images from "@/assets/images";
 import remoteSerial from "@/globals/remote-serial";
 import VueBase from "@/mixin/vue-base";
+import eventbus from "@/globals/eventbus";
 
 export default {
     mixins: [VueBase],
@@ -82,6 +83,14 @@ export default {
             console.log(codes);
 
             this.runCode(codes);
+        },
+
+        save(){
+            eventbus.emit("blocksSave");
+        },
+        
+        load(){
+            eventbus.emit("blocksLoad");
         }
 
     }
