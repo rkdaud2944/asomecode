@@ -2406,7 +2406,7 @@ Blockly.Blocks["basic_car_ready"] = {
 };
 
 javascriptGenerator["basic_car_ready"] = function () {
-  var code = 'import asomecar\nimport hcsr04\nimport line_sensor\nasomecar.ready(1, 2, 7, 8)\nhcsr04.open(5, 6)\nline_sensor.ready()\n';
+  var code = '';
   return code;
 };
 
@@ -3232,4 +3232,59 @@ javascriptGenerator["pro_kit1_8_sensor_20_if_else"] = function (block) {
   
 };
 
+Blockly.Blocks["prepare_left_led_ready"] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
+      .appendField("왼쪽 방향 지시등 준비 ")
+      .appendField(new Blockly.FieldNumber(18), "pin1_number")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF61FF");
+    this.setHelpUrl("https://example.com");
+  },
+};
 
+javascriptGenerator["prepare_left_led_ready"] = function (block) {
+  let number_pin1 = block.getFieldValue('pin1_number');
+  let code = 'left_led = OutputPin('+number_pin1+')\n';
+  return code;
+};
+
+Blockly.Blocks["prepare_right_led_ready"] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
+      .appendField("오른쪽 방향 지시등 준비 ")
+      .appendField(new Blockly.FieldNumber(19), "pin1_number")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF61FF");
+    this.setHelpUrl("https://example.com");
+  },
+};
+
+javascriptGenerator["prepare_right_led_ready"] = function (block) {
+  let number_pin1 = block.getFieldValue('pin1_number');
+  let code = 'right_led = OutputPin('+number_pin1+')\n';
+  return code;
+};
+
+Blockly.Blocks["prepare_brake_led_ready"] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
+      .appendField("브레이크등 준비 ")
+      .appendField(new Blockly.FieldNumber(20), "pin1_number")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF61FF");
+    this.setHelpUrl("https://example.com");
+  },
+};
+
+javascriptGenerator["prepare_brake_led_ready"] = function (block) {
+  let number_pin1 = block.getFieldValue('pin1_number');
+  let code = 'brake_led = OutputPin('+number_pin1+')\n';
+  return code;
+};
