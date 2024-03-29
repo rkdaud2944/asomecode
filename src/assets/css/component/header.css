@@ -208,7 +208,7 @@ a{
 }
 
 .menu-cts:nth-child(5):hover > img{
-    content: url(../../images/controls/update-hover.png);
+    content: url(../../images/controls/setting-hover.png);
 }
 
 .menu-cts:nth-child(6):hover > img{
