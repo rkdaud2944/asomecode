@@ -3980,3 +3980,83 @@ javascriptGenerator["neopixel_rainbow"] = function (block) {
   return code;
 };
 
+// 서보
+Blockly.Blocks["servo_ready"] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/sensor.png', 23, 23, '*'))
+      .appendField("서보모터 준비하기")
+      .appendField(new Blockly.FieldNumber(6), "pin1_number")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FFCD00");
+    this.setHelpUrl("https://example.com");
+  },
+};
+
+javascriptGenerator["servo_ready"] = function (block) {
+  let number_pin1 = block.getFieldValue('pin1_number');
+  let code = 'import servo\nservo.ready('+number_pin1+')\n';
+  return code;
+};
+
+Blockly.Blocks["servo_setangle"] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/sensor.png', 23, 23, '*'))
+      .appendField("서보모터 각도회전")
+      .appendField(new Blockly.FieldNumber(90), "pin1_number")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FFCD00");
+    this.setHelpUrl("https://example.com");
+  },
+};
+
+javascriptGenerator["servo_setangle"] = function (block) {
+  let number_pin1 = block.getFieldValue('pin1_number');
+  let code = 'servo.set_angle('+number_pin1+')\n';
+  return code;
+};
+
+Blockly.Blocks["servo_off"] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/sensor.png', 23, 23, '*'))
+      .appendField("서보모터 끄기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FFCD00");
+    this.setHelpUrl("https://example.com");
+  },
+};
+
+javascriptGenerator["servo_off"] = function () {
+  let code = 'servo.servo_off()\n';
+  return code;
+};
+
+Blockly.Blocks["servo_for_angle"] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/sensor.png', 23, 23, '*'))
+      .appendField("서보모터 각도 변경")
+      .appendField(new Blockly.FieldNumber(6), "angle1")
+      .appendField(new Blockly.FieldNumber(6), "angle2")
+      this.appendDummyInput()
+      .appendField("1각도 변경마다 걸리는 시간")
+      .appendField(new Blockly.FieldNumber(6), "speed")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FFCD00");
+    this.setHelpUrl("https://example.com");
+  },
+};
+
+javascriptGenerator["servo_for_angle"] = function (block) {
+  let angle1 = block.getFieldValue('angle1');
+  let angle2 = block.getFieldValue('angle2');
+  let speed = block.getFieldValue('speed');
+  let code = `for pos in range(${angle1}, ${angle2}):\n\tset_angle(pos)\n\rdelay(${speed})`;
+  return code;
+};

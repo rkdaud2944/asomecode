@@ -90,6 +90,10 @@ const CarToolbox = {
                 // { "kind": "block", "gap": "8", "type": "sensor_linesensor" },
                 { "kind": "block", "gap": "8", "type": "asomecar_prepare_ultrasonic_ready" },
                 { "kind": "block", "gap": "8", "type": "asomecar_sensor_ultrasonic" },
+                { "kind": "block", "gap": "8", "type": "servo_ready" },
+                { "kind": "block", "gap": "8", "type": "servo_setangle" },
+                { "kind": "block", "gap": "8", "type": "servo_off" },
+                { "kind": "block", "gap": "8", "type": "servo_for_angle" },
             ],
         },
         {

@@ -19,7 +19,7 @@ module.exports = defineConfig({
             // }
             
             builderOptions: {
-                productName: "AsomeCode",
+                productName: "AsomeCar",
                 appId: 'bluecom.asomeIT',
                 win: {
                     "target": [
