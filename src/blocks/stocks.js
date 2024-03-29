@@ -1105,6 +1105,12 @@ Blockly.Blocks["advance_elseif"] = {
           dropdownOptions.push(["moisture", "moisture"]);
         } else if (workspaceBlocks[i].type === 'sensor_vibration_sensor') {
           dropdownOptions.push(["vibration", "vibration"]);
+        } else if (workspaceBlocks[i].type === 'asomecar_switch_ready') {
+          dropdownOptions.push(["switch", "switch"]);
+        } else if (workspaceBlocks[i].type === 'asomecar_button_ready') {
+          dropdownOptions.push(["button", "button"]);
+        } else if (workspaceBlocks[i].type === 'asomecar_sensor_ultrasonic') {
+          dropdownOptions.push(["cm", "cm"]);
         }
       }
       if (addsoundOption) {
@@ -3731,3 +3737,246 @@ javascriptGenerator["asomecar_sound_buzzer_off"] = function () {
   let code = 'music.close()\n';
   return code;
 };
+
+// 네오픽셀, led
+
+Blockly.Blocks["led_control"] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
+      .appendField(new Blockly.FieldDropdown([
+        ["왼쪽 바향 지시등", "left_led"],["오른쪽 방향 지시등", "right_led"],["브레이크등", "brake_led"]]), "variable")
+      .appendField(new Blockly.FieldDropdown([
+        ["On", "On"],["Off", "Off"]]), "on,off")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF61FF");
+    this.setHelpUrl("https://example.com");
+  },
+};
+
+javascriptGenerator["led_control"] = function (block) {
+  const variable = block.getFieldValue("variable");
+  const power = block.getFieldValue('on,off');
+  let vari = '';
+  let pow = '';
+
+  switch (variable) {
+    case 'left_led':
+      vari = 'left_led';
+      break;
+    case 'right_led':
+      vari = 'right_led';
+      break;
+    case 'brake_led':
+      vari = 'brake_led';
+      break;
+    default:
+  }
+
+  switch (power) {
+    case 'On':
+      pow = 'on';
+      break;
+    case 'Off':
+      pow = 'off';
+      break;
+    default:
+  }
+
+  const code = `${vari}.${pow}() `+ '\n';
+
+  return code;
+};
+
+Blockly.Blocks["prepare_neopixel_ready"] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
+      .appendField("네오픽셀 준비 ")
+      .appendField(new Blockly.FieldNumber(17), "pin1_number")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF61FF");
+    this.setHelpUrl("https://example.com");
+  },
+};
+
+javascriptGenerator["prepare_neopixel_ready"] = function (block) {
+  let number_pin1 = block.getFieldValue('pin1_number');
+  let code = 'import asomeneopixel\nasomeneopixel.ready('+number_pin1+')\n';
+  return code;
+};
+
+Blockly.Blocks["neopixel_turnoff"] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
+      .appendField("네오픽셀 끄기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF61FF");
+    this.setHelpUrl("https://example.com");
+  },
+};
+
+javascriptGenerator["neopixel_turnoff"] = function () {
+  let code = 'NeoPixel.fill((0,0,0))\nNeoPixel.write()\n';
+  return code;
+};
+
+Blockly.Blocks["neopixel_turnon"] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
+      .appendField("네오픽셀 ")
+      .appendField(new Blockly.FieldDropdown([
+        ["1", "1"],["2", "2"],["3", "3"],["4", "4"],["5", "5"],["6", "6"],["7", "7"],["8", "8"],["count", "count"]]), "variable")
+      .appendField("번 칸에")
+      this.appendDummyInput()
+      .appendField(new Blockly.FieldNumber(255), "red")
+      .appendField(new Blockly.FieldNumber(255), "green")
+      .appendField(new Blockly.FieldNumber(255), "blue")
+      .appendField(" 색상 켜기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF61FF");
+    this.setHelpUrl("https://example.com");
+  },
+};
+
+javascriptGenerator["neopixel_turnon"] = function (block) {
+  const variable = block.getFieldValue("variable");
+  let red = block.getFieldValue('red');
+  let green = block.getFieldValue('green');
+  let blue = block.getFieldValue('blue');
+  let vari = '';
+
+  switch (variable) {
+    case '1':
+      vari = '0';
+      break;
+    case '2':
+      vari = '1';
+      break;
+    case '3':
+      vari = '2';
+      break;
+    case '4':
+      vari = '3';
+      break;
+    case '5':
+      vari = '4';
+      break;
+    case '6':
+      vari = '5';
+      break;
+    case '7':
+      vari = '6';
+      break;
+    case '8':
+      vari = '7';
+      break;
+    case 'count':
+      vari = 'count';
+      break;
+    default:
+  }
+
+  const code = `NeoPixel[${vari}] = (${red}, ${green}, ${blue})`+ '\n';
+
+  return code;
+};
+
+Blockly.Blocks["neopixel_write"] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
+      .appendField("네오픽셀 적용하기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF61FF");
+    this.setHelpUrl("https://example.com");
+  },
+};
+
+javascriptGenerator["neopixel_write"] = function () {
+  let code = 'NeoPixel.write()\n';
+  return code;
+};
+
+Blockly.Blocks["neopixel_all_turnon"] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
+      .appendField("네오픽셀 한번에")
+      this.appendDummyInput()
+      .appendField(new Blockly.FieldNumber(255), "red")
+      .appendField(new Blockly.FieldNumber(255), "green")
+      .appendField(new Blockly.FieldNumber(255), "blue")
+      .appendField(" 색상 켜기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF61FF");
+    this.setHelpUrl("https://example.com");
+  },
+};
+
+javascriptGenerator["neopixel_all_turnon"] = function (block) {
+  let red = block.getFieldValue('red');
+  let green = block.getFieldValue('green');
+  let blue = block.getFieldValue('blue');
+  let vari = '';
+
+  const code = `for pixel in range (0, 8):\n\tNeoPixel[${vari}] = (${red}, ${green}, ${blue})\nNeoPixel.write()\n`;
+
+  return code;
+};
+
+Blockly.Blocks["neopixel_for_turnon"] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
+      .appendField("네오픽셀 차례대로")
+      this.appendDummyInput()
+      .appendField(new Blockly.FieldNumber(255), "red")
+      .appendField(new Blockly.FieldNumber(255), "green")
+      .appendField(new Blockly.FieldNumber(255), "blue")
+      .appendField(" 색상 켜기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF61FF");
+    this.setHelpUrl("https://example.com");
+  },
+};
+
+javascriptGenerator["neopixel_for_turnon"] = function (block) {
+  let red = block.getFieldValue('red');
+  let green = block.getFieldValue('green');
+  let blue = block.getFieldValue('blue');
+  let vari = '';
+
+  const code = `for pixel in range (0, 8):\n\tNeoPixel[${vari}] = (${red}, ${green}, ${blue})\n\tNeoPixel.write()\n`;
+
+  return code;
+};
+
+Blockly.Blocks["neopixel_rainbow"] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
+      .appendField("네오픽셀 무지개 켜기")
+      .appendField(new Blockly.FieldNumber(750), "pin1_number")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF61FF");
+    this.setHelpUrl("https://example.com");
+  },
+};
+
+javascriptGenerator["neopixel_rainbow"] = function (block) {
+  let number_pin1 = block.getFieldValue('pin1_number');
+  let code = 'asomeneopixel.rainbow('+number_pin1+')\n';
+  return code;
+};
+
