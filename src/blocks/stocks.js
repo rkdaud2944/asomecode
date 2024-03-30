@@ -1017,6 +1017,8 @@ Blockly.Blocks["advance_if"] = {
           dropdownOptions.push(["pt", "pt"]);
         } else if (workspaceBlocks[i].type === 'cds_check') {
           dropdownOptions.push(["cds", "cds"]);
+        } else if (workspaceBlocks[i].type === 'asome_message') {
+          dropdownOptions.push(["msg", "msg"]);
         }
       }
       if (addsoundOption) {
@@ -1119,6 +1121,8 @@ Blockly.Blocks["advance_elseif"] = {
           dropdownOptions.push(["pt", "pt"]);
         } else if (workspaceBlocks[i].type === 'cds_check') {
           dropdownOptions.push(["cds", "cds"]);
+        } else if (workspaceBlocks[i].type === 'asome_message') {
+          dropdownOptions.push(["msg", "msg"]);
         }
       }
       if (addsoundOption) {
@@ -1321,6 +1325,8 @@ Blockly.Blocks["screen"] = {
           dropdownOptions.push(["pt", "pt"]);
         } else if (workspaceBlocks[i].type === 'cds_check') {
           dropdownOptions.push(["cds", "cds"]);
+        } else if (workspaceBlocks[i].type === 'asome_message') {
+          dropdownOptions.push(["msg", "msg"]);
         }
       }
       if (addsoundOption) {
@@ -1425,6 +1431,8 @@ Blockly.Blocks["variable"] = {
           dropdownOptions.push(["pt", "pt"]);
         } else if (workspaceBlocks[i].type === 'cds_check') {
           dropdownOptions.push(["cds", "cds"]);
+        } else if (workspaceBlocks[i].type === 'asome_message') {
+          dropdownOptions.push(["msg", "msg"]);
         }
       }
       if (addsoundOption) {
@@ -2097,6 +2105,8 @@ Blockly.Blocks["led_ledtube_ready"] = {
           dropdownOptions.push(["pt", "pt"]);
         } else if (workspaceBlocks[i].type === 'cds_check') {
           dropdownOptions.push(["cds", "cds"]);
+        } else if (workspaceBlocks[i].type === 'asome_message') {
+          dropdownOptions.push(["msg", "msg"]);
         }
       }
       if (addsoundOption) {
@@ -4232,5 +4242,64 @@ Blockly.Blocks["cds_check"] = {
 
 javascriptGenerator["cds_check"] = function () {
   let code = 'cds = illu.read()\n';
+  return code;
+};
+
+// 인터넷
+Blockly.Blocks["asome_internet_connect"] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/common/internet.png', 23, 23, '*'))
+      .appendField("와이파이 만들기")
+    this.appendDummyInput()
+      .appendField("아이디")
+      .appendField(new Blockly.FieldTextInput(""), "ssid")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("B666FC");
+    this.setTooltip("인터넷 접속하기");
+    this.setHelpUrl("https://example.com");
+  },
+};
+
+javascriptGenerator["asome_internet_connect"] = function (block) {
+  let string_ssid = block.getFieldValue('ssid');
+  let code = 'import internet\ninternet.open_ap("' + string_ssid + '")\n';
+  return code;
+};
+
+Blockly.Blocks["asome_get_message"] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/common/internet.png', 23, 23, '*'))
+      .appendField("메세지 받을 준비")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("B666FC");
+    this.setTooltip("buy id");
+    this.setHelpUrl("https://example.com");
+  },
+};
+
+javascriptGenerator["asome_get_message"] = function () {
+  let code = 'import udp_socket\nudp = udp_socket.Server()\nudp.open(1234)\n';
+  return code;
+};
+
+Blockly.Blocks["asome_message"] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/common/internet.png', 23, 23, '*'))
+      .appendField("메세지 읽어오기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("B666FC");
+    this.setTooltip("buy id");
+    this.setHelpUrl("https://example.com");
+  },
+};
+
+javascriptGenerator["asome_message"] = function () {
+  let code = 'msg = udp.read_text()\n';
   return code;
 };
