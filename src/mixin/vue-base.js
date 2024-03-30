@@ -37,6 +37,9 @@ export default {
             switch (path) {
                 case '/editor' : 
                     localStorage.setItem("code", code);
+                    break;             
+                case '/blockCoding' : 
+                    window.open(route.href,'blockCoding', 'width=1024,height=900');
                     break;
                 case '/simulation/dice' : 
                     simulator['simulator'] = window.open(route.href, 'simulator', 'width=420,height=360'); // 400 300;
