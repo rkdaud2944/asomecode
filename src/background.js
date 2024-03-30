@@ -28,8 +28,8 @@ async function createWindow() {
   })
   
   // 일렉트론 상단 메뉴바 제거
-  // win.setMenu(null)
-  // win.setMenuBarVisibility(false)
+  win.setMenu(null)
+  win.setMenuBarVisibility(false)
   
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     await win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
