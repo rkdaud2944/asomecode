@@ -144,7 +144,7 @@ const CarToolbox = {
                 { "kind": "block", "gap": "8", "type": "get_message" },
                 { "kind": "block", "gap": "8", "type": "message" },
                 { "kind": "block", "gap": "8", "type": "send_message" },
-                { "kind": "block", "gap": "8", "type": "get_weather" },
+                // { "kind": "block", "gap": "8", "type": "get_weather" },
             ],
         },
     ]
