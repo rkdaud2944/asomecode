@@ -3599,7 +3599,7 @@ javascriptGenerator["asomecar_leftBack"] = function (block) {
 Blockly.Blocks["asomecar_switch_ready"] = {
   init: function () {
     this.appendDummyInput()
-      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomecar.png', 23, 23, '*'))
+    .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/button.png', 23, 23, '*'))
       .appendField("스위치 준비하기")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -3617,7 +3617,7 @@ javascriptGenerator["asomecar_switch_ready"] = function () {
 Blockly.Blocks["asomecar_switch_check"] = {
   init: function () {
     this.appendDummyInput()
-      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomecar.png', 23, 23, '*'))
+    .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/button.png', 23, 23, '*'))
       .appendField("스위치 값 체크하기")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -3636,7 +3636,7 @@ javascriptGenerator["asomecar_switch_check"] = function () {
 Blockly.Blocks["asomecar_button_ready"] = {
   init: function () {
     this.appendDummyInput()
-      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomecar.png', 23, 23, '*'))
+    .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/button.png', 23, 23, '*'))
       .appendField("버튼 준비하기")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -3654,7 +3654,7 @@ javascriptGenerator["asomecar_button_ready"] = function () {
 Blockly.Blocks["asomecar_button_check"] = {
   init: function () {
     this.appendDummyInput()
-      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomecar.png', 23, 23, '*'))
+    .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/button.png', 23, 23, '*'))
       .appendField("버튼 값 체크하기")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
