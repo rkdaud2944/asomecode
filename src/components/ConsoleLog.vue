@@ -97,34 +97,15 @@ export default {
         });
 
         this.timer = setInterval(() => {
-            // if (this.buffer.length == 0) return;
-
-            // for (let i = 0; i < this.buffer.length; i++) {
-            //     if (this.buffer[0].trim() === '>>>') {
-            //         // 기존에 버퍼에 데이터가 있으면 출력후 비운뒤, 받은 데이터 출력
-            //         this.rows = this.rows.concat(this.buffer[i]);
-            //     } else {
-            //         this.rows[this.rows.length - 1] += this.buffer[i];
-            //     }
-            // }
-            
-            // this.buffer = [];
-
-            
-            // if (this.rows.length > 256) {
-            //     this.rows = this.rows.slice(-256);
-            // }
-
             if (this.buffer.length == 0) return;
 
-            this.rows = this.rows.concat(this.buffer);
+            const filteredBuffer = this.buffer.filter(item => !item.startsWith("###"));
+            this.rows = this.rows.concat(filteredBuffer);
             this.buffer = [];
 
             if (this.rows.length > 256) {
                 this.rows = this.rows.slice(-256);
             }
-
-
         }, 500);
 
     },
