@@ -94,6 +94,12 @@ const CarToolbox = {
                 { "kind": "block", "gap": "8", "type": "servo_setangle" },
                 { "kind": "block", "gap": "8", "type": "servo_off" },
                 { "kind": "block", "gap": "8", "type": "servo_for_angle" },
+                { "kind": "block", "gap": "8", "type": "p3v3_ready" },
+                { "kind": "block", "gap": "8", "type": "potentimeter_ready" },
+                { "kind": "block", "gap": "8", "type": "cds_ready" },
+                { "kind": "block", "gap": "8", "type": "p3v3_control" },
+                { "kind": "block", "gap": "8", "type": "potentimeter_check" },
+                { "kind": "block", "gap": "8", "type": "cds_check" },
             ],
         },
         {
