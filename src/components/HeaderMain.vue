@@ -17,7 +17,7 @@
                     연결하기
                 </span>
                 <span class="stop-btn Pretendard-Medium" @click="stop()">
-                    <img :src="stopImg"/>
+                    <img :src="stopImg"/> 
                     멈추기
                 </span>
             </div>
@@ -27,9 +27,10 @@
             <span class="NotoSansKR-Regular nav-txt">도움말</span>
             <span class="NotoSansKR-Regular hamburger-wrap nav-txt">
                 <div class="hamburger-icon">
+                    <!-- <div class="bar"></div>
                     <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
+                    <div class="bar"></div> -->
+                    <img :src="menu" class="menu-img"/>
                 </div>
                 
                 <!-- <img src="@/assets/images/common/hamburger_menu.png"/> -->
@@ -99,6 +100,7 @@ export default {
             stopImg: images.stop,
             updateImg: images.update,
             settingImg: images.setting,
+            menu: images.menu,
             codes: null,
 
             isMenuOpen: false,
