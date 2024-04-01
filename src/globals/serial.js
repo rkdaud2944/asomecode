@@ -186,7 +186,7 @@ const seiral = {
         this.runCode(codeViewFile(filename));
     },
 
-    runCode(codes) {
+    async runCode(codes) {
         console.log("runCode", codes);
 
         this.writeLn( `_codes_ = ""`);
@@ -202,6 +202,9 @@ const seiral = {
 
             code = code.replace(/\\/gi, '\\\\');
             code = code.replace(/'/gi, "\\'");
+
+            await new Promise(resolve => setTimeout(resolve, 100)); 
+
             this.writeLn(`_codes_ = _codes_ + '${code}\\n'`);
         }
         this.writeLn(`exec(_codes_)\r\n`);
