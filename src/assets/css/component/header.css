@@ -131,7 +131,7 @@ a{
 /* 드롭다운 */
 /* 드롭다운 메뉴 스타일 */
 .dropdown-menu {
-    /* display: none; */
+    display: none;
     position: absolute;
     z-index: 3000;
     width: 150px;
