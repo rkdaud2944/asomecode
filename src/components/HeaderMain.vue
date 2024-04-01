@@ -53,6 +53,18 @@
                             <img :src="editorImg"/>
                             <p>소스편집</p>
                         </li>
+                        <li class="menu-cts" @click="reboot()">
+                            <img :src="restartImg"/>
+                            <p>재부팅</p>
+                        </li>
+                        <li class="menu-cts" @click="format()">
+                            <img :src="resetImg"/>
+                            <p>포맷</p>
+                        </li>
+                        <li class="menu-cts" @click="update()">
+                            <img :src="updateImg"/>
+                            <p>업데이트</p>
+                        </li>
                         <li class="menu-cts">
                             <a href="@/assets/driver/CH341SER.ZIP" download>
                                 <img :src="settingImg"/>
