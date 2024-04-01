@@ -93,7 +93,7 @@ export const cards = [
         titleNum: 1,
         titleNumColor: '#6E49F9',
         description: "스마트 자율주행 자동차", 
-        chapter: "15차", 
+        chapter: "8차", 
         image: require("@/assets/images/common/main_car.png"), 
         bgColor: '#F0F0F0', 
         bgChapter: '#3E3A39', 
