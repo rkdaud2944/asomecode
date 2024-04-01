@@ -16,7 +16,7 @@
                             <img :src="openEdt" class="button-img"/>
                         </li>
                         <li class="button" @click="save" label="Save">
-                            <img :src="stopEdt" class="button-img"/>
+                            <img :src="saveEdt" class="button-img"/>
                         </li>
                     </ul>
             </q-toolbar>
@@ -41,7 +41,7 @@
 
 <script>
 import images from "@/assets/images.js";
-import localfile from "@/globals/localfile";
+// import localfile from "@/globals/localfile";
 import { Dialog } from 'quasar'
 import { VAceEditor } from "vue3-ace-editor";
 import VueBase from "@/mixin/vue-base";
@@ -72,7 +72,8 @@ export default {
             runEdt: images.runEdt,
             stopEdt: images.stopEdt,
             updateEdt: images.updateEdt,
-            openEdt: images.openEdt
+            openEdt: images.openEdt,
+            saveEdt: images.saveEdt
         }
     },
     
@@ -229,12 +230,42 @@ export default {
             });
         },
 
-        async open() {
-            this.content = await localfile.loadFileAsText('Python', 'py');
-        },
-
         save() {
-            localfile.saveTextToFile('Python', 'py', this.content);
+            let text = this.content
+            const blob = new Blob([text], { type: 'text/plain;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.download = 'default.py';
+            link.href = url;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        },
+        
+        open() {
+            let fileInput = document.createElement("input");
+
+            fileInput.type = 'file';
+            fileInput.style.display = 'none';
+            var _this = this;
+            fileInput.onchange = function(e) {
+                let file = e.target.files[0];
+                if (!file) {
+                    return;
+                }
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    let contents = e.target.result;
+                    _this.content = contents;
+                    document.body.removeChild(fileInput); 
+                };
+                reader.readAsText(file);
+            };
+
+            document.body.appendChild(fileInput);
+            fileInput.click(); 
+            this.$forceUpdate();
         },
 
         onChanged() {
