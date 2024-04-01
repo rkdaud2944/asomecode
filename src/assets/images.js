@@ -15,7 +15,7 @@ import setting from "@/assets/images/controls/setting.png";
 
 import runEdt from "@/assets/images/editor/run.png";
 import openEdt from "@/assets/images/editor/open.png";
-import save from "@/assets/images/editor/save.png";
+import saveEdt from "@/assets/images/editor/save.png";
 import stopEdt from "@/assets/images/editor/stop.png";
 import updateEdt from "@/assets/images/editor/update.png";
 
@@ -122,7 +122,7 @@ export default {
 
     runEdt,
     openEdt,
-    save,
+    saveEdt,
     stopEdt,
     updateEdt,
 
