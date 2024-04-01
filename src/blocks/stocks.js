@@ -3793,7 +3793,7 @@ Blockly.Blocks["led_control"] = {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
       .appendField(new Blockly.FieldDropdown([
-        ["왼쪽 바향 지시등", "left_led"],["오른쪽 방향 지시등", "right_led"],["브레이크등", "brake_led"]]), "variable")
+        ["왼쪽 방향 지시등", "left_led"],["오른쪽 방향 지시등", "right_led"],["브레이크등", "brake_led"]]), "variable")
       .appendField(new Blockly.FieldDropdown([
         ["On", "On"],["Off", "Off"]]), "on,off")
     this.setPreviousStatement(true, null);
