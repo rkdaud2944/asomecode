@@ -131,7 +131,7 @@ a{
 /* 드롭다운 */
 /* 드롭다운 메뉴 스타일 */
 .dropdown-menu {
-    display: none;
+    /* display: none; */
     position: absolute;
     z-index: 3000;
     width: 150px;
@@ -212,14 +212,14 @@ a{
 }
 
 .menu-cts:nth-child(6):hover > img{
-    content: url(../../images/controls/reboot-hover.png);
-}
-
-.menu-cts:nth-child(7):hover > img{
     content: url(../../images/controls/reset-hover.png);
 }
 
-.menu-cts:nth-child(8):hover > img{
+.menu-cts:nth-child(7):hover > img{
+    content: url(../../images/controls/update-hover.png);
+}
+
+.menu-cts:nth-child(8):hover > a > img{
     content: url(../../images/controls/setting-hover.png);
 }
 
