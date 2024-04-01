@@ -53,9 +53,11 @@
                             <img :src="editorImg"/>
                             <p>소스편집</p>
                         </li>
-                        <li class="menu-cts" onclick="location.href='https://asomecode-web.s3.ap-northeast-2.amazonaws.com/driver/CH341SER.zip'">
-                            <img :src="settingImg"/>
-                            <p>드라이버 설치</p>
+                        <li class="menu-cts">
+                            <a href="@/assets/driver/CH341SER.ZIP" download>
+                                <img :src="settingImg"/>
+                                <p>드라이버 설치</p>
+                            </a>
                         </li>
                     </ul>
                 </div>

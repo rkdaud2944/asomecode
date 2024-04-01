@@ -160,7 +160,7 @@ a{
 }
 
 
-.menu-cts:hover {
+.menu-cts:hover, .menu-cts > a :hover {
     background-color: #3E3A39;
     color: #fff
 }
@@ -185,14 +185,24 @@ a{
     font-size: 1.2rem !important;
 }
 
-.menu-cts > img{
+.menu-cts > img, .menu-cts > a > img {
     padding: 0 10px 0 10px;
     margin-left: 5px;
     width: 45px;
 }
 
-.menu-cts > p{
+.menu-cts > p, .menu-cts > a > p {
     font-size: 15px;
+}
+
+.menu-cts > a{    
+    width: 100%;
+    line-height:60px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    color: #4f4f53;
+    cursor: pointer;
 }
 
 .menu-cts:nth-child(2):hover > img{
@@ -207,7 +217,7 @@ a{
     content: url(../../images/controls/editor-hover.png);
 }
 
-.menu-cts:nth-child(5):hover > img{
+.menu-cts:nth-child(5):hover > a > img{
     content: url(../../images/controls/setting-hover.png);
 }
 
