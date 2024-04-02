@@ -130,7 +130,7 @@ button.selected {
 /* 교구버튼 디자인-이미지,폰트 간격 */
 
 .blockly-container{
-    height: 700px;
+    height: 600px;
     width: auto;
     border-radius: 50px;
 }
