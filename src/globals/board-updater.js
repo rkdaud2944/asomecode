@@ -25,8 +25,8 @@ let tobeDowndloads = [];
  * 업데이트 대상의 파일을 찾아내고, 실제 업데이트는 BoardFileManager에게 위임한다.
  */
 const boardUpdater = {
-    start() {
-        serial.runCode(codeGetVersion);
+    async start() {
+        await serial.runCode(codeGetVersion);
         serial.writeLn('print("### Get Remote File List")');
     },
 
