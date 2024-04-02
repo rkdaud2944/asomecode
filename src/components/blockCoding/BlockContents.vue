@@ -4,12 +4,12 @@
     <div>
         <!-- <p>입력된 음성값 : {{ recognizedTextFromModal }}</p> -->
         <!-- 교구선택버튼 -->
-        <!-- <button v-show='lessonBlockVisible' class="b-button" :class="{ selected: selectedField === 'BOT' }" @click="showAndClearCategoriesByField('BOT')">
+        <button v-show='lessonBlockVisible' class="b-button" :class="{ selected: selectedField === 'BOT' }" @click="showAndClearCategoriesByField('BOT')">
             <img class="img-button" :src="selectedField === 'BOT' ? asomebotIconClick : asomebotIcon"/> Asomebot
         </button>
         <button v-show='lessonBlockVisible' :class="{ selected: selectedField === 'KIT' }" @click="showAndClearCategoriesByField('KIT')">
             <img class="img-button" :src="selectedField === 'KIT' ? asomekitIconClick : asomekitIcon"/> Asomekit
-        </button> -->
+        </button>
         <button v-show='lessonBlockVisible' class="c-button" :class="{ selected: selectedField === 'CAR' }" @click="showAndClearCategoriesByField('CAR')">
             <img class="img-button" :src="selectedField === 'CAR' ? asomecarIconClick : asomecarIcon"  :style="{ height: '16px', width: '14px' }"/> Asomecar
         </button>
@@ -291,7 +291,7 @@ export default {
                 this.workspace = Blockly.inject(this.$refs.blocklyDiv, {
                     toolbox: 
                         {kind: "categoryToolbox",
-                        contents: CarToolbox.contents},
+                        contents: BotToolbox.contents},
                     grid:
                         {spacing: 25,
                         length: 2,
@@ -320,23 +320,23 @@ export default {
             });
 
         }
+
+
+        
         
         this.$nextTick(() => {
             this.insertIcon();
         });
-
-        // 디싹용 어썸카 선택
-        this.showAndClearCategoriesByField('CAR');        
     },
     
     mounted() {
-        const this2 = this;
+    const this2 = this;
 
-        // eventbus를 사용하여 이벤트 수신
-        eventbus.on("sttReceived", function () {
-            this2.openModal();
-            console.log("asd sttReceived");
-        });
+    // eventbus를 사용하여 이벤트 수신
+    eventbus.on("sttReceived", function () {
+        this2.openModal();
+        console.log("asd sttReceived");
+    });
 
         // 브라우저 storage 이벤트를 추가
         window.addEventListener("storage", function (event) {
