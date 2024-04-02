@@ -3,10 +3,6 @@
         <div class="main-logo" @click="this.$router.push({ path: `/`})">
             <img :src="logo" alt="logo" class="logo"/>
         </div>
-        
-        <!-- <p  @click="openRouterPath('/blockCoding')">
-            Block 
-        </p> -->
     
         <div>
             <!-- 현재 클릭만 하면 변경됨, 연결여부에 따라 표시하도록 수정 필요 (새로고침해도 유지되게)-->

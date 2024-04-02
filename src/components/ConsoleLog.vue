@@ -28,8 +28,11 @@ import serial from "@/globals/serial";
 import ble from "@/globals/ble";
 import { mapState } from 'pinia'
 import {useConnectStore} from '@/store/connect-store'
+import VueBase from "@/mixin/vue-base";
+import bridgeIn from "@/globals/bridge-in";
 
 export default {
+    mixins: [VueBase, bridgeIn],
     
     computed: {
         ...mapState(useConnectStore,['mode','connectionState']),
@@ -162,6 +165,11 @@ export default {
                 serial.viewFile(this.text.split(" ")[1]);
                 this.text = "";
                 return;
+            }
+            
+            if (this.text.startsWith("/blockcoding") || this.text.startsWith("/blockCoding")) {
+                localStorage.removeItem("lessonBlock")
+                this.openRouterPath('/blockCoding')
             }
 
             if(this.mode == 'ble'){
