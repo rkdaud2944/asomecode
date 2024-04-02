@@ -35,28 +35,6 @@ const CarToolbox = {
         },
         {
             "kind": "category",
-            "name": "LED",
-            "field" : "CAR",
-            "colour": "FF61FF",
-            "contents": [
-              { "kind": "block", "gap": "8", "type": "prepare_left_led_ready" },
-              { "kind": "block", "gap": "8", "type": "prepare_right_led_ready" },
-              { "kind": "block", "gap": "8", "type": "prepare_brake_led_ready" },
-              { "kind": "block", "gap": "8", "type": "led_ledtube_time" },
-            ],
-        },
-        {
-            "kind": "category",
-            "name": "BUTTON",
-            "field" : "CAR",
-            "colour": "4CC1B9",
-            "contents": [
-              { "kind": "block", "gap": "8", "type": "button_push" },
-              { "kind": "block", "gap": "8", "type": "button_info" },
-            ],
-        },
-        {
-            "kind": "category",
             "name": "SENSOR",
             "field" : "CAR",
             "colour": "FFCD00",
@@ -64,17 +42,6 @@ const CarToolbox = {
                 { "kind": "block", "gap": "8", "type": "sensor_ultrasonic" },
                 { "kind": "block", "gap": "8", "type": "sensor_light" },
                 { "kind": "block", "gap": "8", "type": "sensor_linesensor" },
-            ],
-        },
-        {
-            "kind": "category",
-            "name": "SOUND",
-            "field" : "CAR",
-            "colour": "EC1961",
-            "contents": [
-              { "kind": "block", "gap": "8", "type": "sound_buzzer_onoff" },
-              { "kind": "block", "gap": "8", "type": "sound_bot_hz" },
-              { "kind": "block", "gap": "8", "type": "sound_bot_scale" },
             ],
         },
         {
@@ -107,6 +74,18 @@ const CarToolbox = {
                 { "kind": "block", "gap": "8", "type": "message" },
                 { "kind": "block", "gap": "8", "type": "send_message" },
                 { "kind": "block", "gap": "8", "type": "get_weather" },
+            ],
+        },
+        {
+            "kind": "category",
+            "name": "LED",
+            "field" : "CAR",
+            "colour": "FF61FF",
+            "contents": [
+                { "kind": "block", "gap": "8", "type": "led_ready" },
+                { "kind": "block", "gap": "8", "type": "led_setting" },
+                { "kind": "block", "gap": "8", "type": "led_ledtube_ready" },
+                { "kind": "block", "gap": "8", "type": "led_ledtube_time" },
             ],
         },
     ]
