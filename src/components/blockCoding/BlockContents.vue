@@ -25,7 +25,7 @@
             <img :src="sourceView" @click="toggleCodeVisibility" />
         </div>
     </div> 
-    <div class="container">
+    <div class="blockcoding-container">
         <!-- Blockly -->
         <div class="blockly-container" ref="blocklyDiv" :style="{ width: isCodeVisible ? '70%' : '100%' }"></div>
         <!-- 에이스 에디터 -->
