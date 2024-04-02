@@ -158,6 +158,10 @@ p{
     white-space: nowrap; 	
 }
 
+.detail-title p {    
+    font-family: 'Pretendard-Medium';
+}
+
 .detail-title:hover{
     color: #4F4F53;
     background-color: #D9D9D9;

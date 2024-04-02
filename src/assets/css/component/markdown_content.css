@@ -1,3 +1,7 @@
+div, li, ul, h2, h3, p {
+    font-family: 'Pretendard-Light';
+}
+
 .markdown_output {
     /* padding-top: 80px; */
     margin: 0px 22px 0px 22px;
@@ -59,7 +63,7 @@
 
 .markdown_output .img_content_box {
     font-size: 1.2em;
-    text-align: center
+    text-align: center;
 }
 
 .markdown_output .function_btn {

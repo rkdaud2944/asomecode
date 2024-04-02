@@ -38,15 +38,16 @@ a{
     align-items: center;
     justify-content: center;
     background-color: #DEDEE2; 
-    padding: 6px 15px;
+    padding: 5.5px 15px;
     border-radius: 20px;
     color: #7E7E83;
     font-size: 1rem;
     cursor: pointer;
+    font-size: 16px;
 }
 
 .connect-btn > img{
-    width: 25px;
+    width: 20px;
 }
 
 .connect-btn:hover {
@@ -70,10 +71,11 @@ a{
     align-items: center;
     justify-content: center;
     background-color: #DEDEE2; 
-    padding: 6px 15px;
+    padding: 5.5px 15px;
     border-radius: 20px;
     color: #7E7E83;
     cursor: pointer;
+    font-size: 16px;
 }
 
 .stop-btn > img{
