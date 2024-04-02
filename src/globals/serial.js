@@ -44,7 +44,8 @@ class SerialUnit {
             console.log(error);
             this.close();
             // useConnectStore.handleError();
-            this.onError("어썸보드에서 오류가 감지되었습니다.");
+            // this.onError("어썸보드에서 오류가 감지되었습니다.");
+            console.log("어썸보드에서 오류가 감지되었습니다.")
         });
 
         try {
