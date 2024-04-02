@@ -67,7 +67,7 @@
                             <p>업데이트</p>
                         </li>
                         <li class="menu-cts">
-                            <a href="@/assets/driver/CH341SER.ZIP" download>
+                            <a href="https://asomecode-web.s3.ap-northeast-2.amazonaws.com/driver/CH341SER.zip" download>
                                 <img :src="settingImg"/>
                                 <p>드라이버 설치</p>
                             </a>
