@@ -6,7 +6,16 @@
 </template>
 
 <script>
+import simulationImg from "@/assets/simulationImages";
+
 export default {
+	
+	data() {
+		return {
+			flag: [simulationImg.flag0, simulationImg.flag1, simulationImg.flag2, simulationImg.flag3],
+			win: [simulationImg.flagWin1, simulationImg.flagWin2]
+		}
+	},
     
     mounted() {
 		window.addEventListener('message', (msg) => {
@@ -21,7 +30,7 @@ export default {
 					return; // 에러 발생 시 함수 실행을 중단합니다.
 				}
 			}
-
+ 
 			if (message.type === 'simulationJS') {
 				eval("this."+message.func)
 			}
@@ -32,12 +41,11 @@ export default {
 
 		// 실행안됨 확인 필요
 		gunman_ready(count) {
-			document.getElementById("img_gunman").src = count + ".png";
+			document.getElementById("img_gunman").src = this.flag[count];
 		},
 
 		gunman_win(player) {
-			document.getElementById("img_gunman").src = "win-2.png";
-			console.log(player);
+			document.getElementById("img_gunman").src = this.win[player-1];
 
 			var audio = new Audio('@/assets/audio/applause.ogg');
 			audio.play();
@@ -49,6 +57,5 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
 </style>

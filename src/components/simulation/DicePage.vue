@@ -6,14 +6,14 @@
 </template>
 
 <script>
-import images from "@/assets/images";
+import simulationImg from "@/assets/simulationImages";
 import remoteSerial from "@/globals/remote-serial";
 
 export default {	
 	data() {
 		return {
-			diceBack: images.diceBack,
-			dice: [images.dice1, images.dice2, images.dice3, images.dice4, images.dice5, images.dice6]
+			diceBack: simulationImg.diceBack,
+			dice: [simulationImg.dice1, simulationImg.dice2, simulationImg.dice3, simulationImg.dice4, simulationImg.dice5, simulationImg.dice6]
 		}
 	},
 

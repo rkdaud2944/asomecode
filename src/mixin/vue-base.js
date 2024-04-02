@@ -35,7 +35,7 @@ export default {
             let route = this.$router.resolve({ path: path });
             console.log("path : "+path);
             switch (path) {
-                case '/editor' : 
+                case '/editor' :  
                     localStorage.setItem("code", code);
                     break;             
                 case '/blockCoding' : 
@@ -51,7 +51,10 @@ export default {
                     simulator['simulator'] = window.open(route.href, 'simulator', 'width=600,height=450'); // 400 300;
                     break;                    
                 case '/simulation/flag_game' : 
-                    simulator['simulator'] = window.open(route.href, 'simulator', 'width=600,height=450'); // 400 300;
+                    simulator['simulator'] = window.open(route.href, 'simulator', 'width=414,height=354'); // 400 300;
+                    break;
+                case '/simulation/spacecraft' : 
+                    simulator['simulator'] = window.open(route.href, 'simulator', 'width=414,height=354'); // 400 300;
                     break;
                 default:
                     window.open(route.href);

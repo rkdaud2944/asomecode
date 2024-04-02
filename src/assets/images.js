@@ -96,14 +96,6 @@ import sttmodalon from "@/assets/images/sttmodalon.png";
 import sttmodaloff from "@/assets/images/sttmodaloff.png";
 import sttmodalcheck from "@/assets/images/sttmodalcheck.png";
 
-// simulation - dice
-import diceBack from "@/assets/images/simulation/dice/back.png";
-import dice1 from "@/assets/images/simulation/dice/1.png";
-import dice2 from "@/assets/images/simulation/dice/2.png";
-import dice3 from "@/assets/images/simulation/dice/3.png";
-import dice4 from "@/assets/images/simulation/dice/4.png";
-import dice5 from "@/assets/images/simulation/dice/5.png";
-import dice6 from "@/assets/images/simulation/dice/6.png";
 
 export default {
     logom,
@@ -199,14 +191,6 @@ export default {
     walkClick,
     ai,
     aiClick,
-
-    diceBack,
-    dice1,
-    dice2,
-    dice3,
-    dice4,
-    dice5,
-    dice6,
 
 
 };

@@ -104,3 +104,7 @@ window.door_close = function () { simulationRunJS('door_close()') }
 window.door_open = function () { simulationRunJS('door_open()') }
 window.gunman_ready = function (count) { simulationRunJS(`gunman_ready(${count})`) }
 window.gunman_win = function (player) { simulationRunJS(`gunman_win(${player})`) }
+window.start = function () { simulationRunJS(`start()`) }
+window.move_left = function () { simulationRunJS(`move_left()`) }
+window.move_right = function () { simulationRunJS(`move_right()`) }
+window.set_speed = function (value) { simulationRunJS(`set_speed(${value})`) }
