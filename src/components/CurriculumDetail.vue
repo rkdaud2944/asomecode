@@ -10,7 +10,7 @@
                         :key="index"
                         @mousedown="clicked = true"
                         @mouseup ="clicked = false"
-                        @click="openRouterPath('/blockCoding')"
+                        @click="goToLesson(card.id, card.title, card.txtAge, card.clickBgColor)"
                     >
                         <div class="card">
                             <div class="card-front"

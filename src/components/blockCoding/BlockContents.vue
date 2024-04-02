@@ -4,6 +4,9 @@
     <div>
         <!-- <p>입력된 음성값 : {{ recognizedTextFromModal }}</p> -->
         <!-- 교구선택버튼 -->
+        <button v-show='!lessonBlockVisible' class="b-button">
+            <img class="img-button" />기능 블록
+        </button>
         <button v-show='lessonBlockVisible' class="b-button" :class="{ selected: selectedField === 'BOT' }" @click="showAndClearCategoriesByField('BOT')">
             <img class="img-button" :src="selectedField === 'BOT' ? asomebotIconClick : asomebotIcon"/> Asomebot
         </button>
