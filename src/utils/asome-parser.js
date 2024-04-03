@@ -249,11 +249,11 @@ class Parser {
 
     #get_asome_messenger_Text() {
         return `<div class="input-group">
-          <span class="input-group-addon"><i class="q-icon material-icons">wifi</i></span>
+          <span class="input-group-addon"><i class="q-icon material-icons">phone</i></span>
           <input class="form-control" type="text" id="asome_connect_code" placeholder="접속코드" onchange="setAsomeMessengerInfo()">
         </div>
         <div class="input-group">
-          <span class="input-group-addon"><i class="q-icon material-icons">lock</i></span>
+          <span class="input-group-addon"><i class="q-icon material-icons">message</i></span>
             <input class="form-control" type="text" id="asome_msg" placeholder="메시지" onchange="setAsomeMessengerInfo()">
         </div>` +
 

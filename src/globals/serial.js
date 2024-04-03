@@ -166,6 +166,10 @@ const seiral = {
         this.write(text +"\r\n");
     },
 
+    writeInput(text) {
+        if (serialUnit) serialUnit.write(text +"\r\n");
+    },
+
     stop() {
         this.write(String.fromCharCode(3));
     },
@@ -208,7 +212,7 @@ const seiral = {
 
             this.writeLn(`_codes_ = _codes_ + '${code}\\n'`);
         }
-        this.writeLn(`exec(_codes_)\r\n`);
+        this.writeLn(`exec(_codes_)`);
     },
 
     fireErrorEvent(msg) {

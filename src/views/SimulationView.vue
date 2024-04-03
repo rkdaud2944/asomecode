@@ -10,6 +10,7 @@
     <SlidingPuzzlePage v-if="$route.params.page === 'sliding_puzzle1'"/>
     <LunarLanderPage v-if="$route.params.page === 'lunar_lander'"/>
     <CanonPage v-if="$route.params.page === 'cannon'"/>
+    <SoilSensor v-if="$route.params.page === 'soil_sensor'"/>
 </template>
 
 
@@ -24,12 +25,13 @@ import MazePage from '@/components/simulation/MazePage.vue';
 import SlidingPuzzlePage from '@/components/simulation/SlidingPuzzlePage.vue';
 import LunarLanderPage from '@/components/simulation/LunarLanderPage.vue';
 import CanonPage from '@/components/simulation/CanonPage.vue';
+import SoilSensor from '@/components/simulation/SoilSensorPage.vue';
 
 export default {
 
     
     components: {
-        DicePage, DhtScreenPage, StovePage,
+        DicePage, DhtScreenPage, StovePage, SoilSensor,
         DoorPage, FlagGamePage, SpaceCraftPage, MazePage, SlidingPuzzlePage, LunarLanderPage, CanonPage
     }, 
 
