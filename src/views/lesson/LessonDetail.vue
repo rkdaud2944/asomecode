@@ -206,5 +206,5 @@ export default {
 
 <!-- <style scoped src="@/assets/css/component/lesson.css"/> -->
 <style src="@/assets/css/component/markdown_content.css"/>
-<style src="@/assets/css/component/lesson_detail.css"/>
+<style scoped src="@/assets/css/component/lesson_detail.css"/>
 <style scoped src="@/assets/css/font.css"/>

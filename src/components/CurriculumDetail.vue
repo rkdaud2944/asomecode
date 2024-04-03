@@ -31,7 +31,7 @@
                                         :style="{'color': card.titleNumColor}"> {{ card.titleNum }} </span>
                                 </div>
                                 <p class="description">{{ card.description }}</p>
-                                <div class="chapter" 
+                                <div class="curriculum-chapter" 
                                     :style="{
                                         'color': card.txtChapter,
                                         'background-color': card.bgChapter,

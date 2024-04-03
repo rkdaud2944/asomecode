@@ -35,7 +35,7 @@
                                     </p>
                                     <h4 class="title">{{ card.title }}</h4>
                                     <p class="description Pretendard-Regular">{{ card.description }}</p>
-                                    <div class="chapter Pretendard-Regular" 
+                                    <div class="home-chapter Pretendard-Regular" 
                                         :style="{
                                             'color': card.txtChapter,
                                             'background-color': card.bgChapter,
@@ -69,7 +69,7 @@
                                         {{ card.title }}
                                     </h4>
                                     <p class="description Pretendard-Regular">{{ card.description }}</p>
-                                    <div class="chapter Pretendard-Regular" 
+                                    <div class="home-chapter Pretendard-Regular" 
                                         :style="{
                                             'color': card.hoverTxtChapter,
                                             'background-color': card.hoverBgChapter,
