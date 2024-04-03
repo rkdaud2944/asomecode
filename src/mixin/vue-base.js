@@ -62,6 +62,10 @@ export default {
                 case '/simulation/lunar_lander' : 
                     simulator['simulator'] = window.open(route.href, 'simulator', 'width=414,height=354'); // 400 300;
                     break;
+                    
+                case '/simulation/cannon' : 
+                    simulator['simulator'] = window.open(route.href, 'simulator', 'width=414,height=354'); // 400 300;
+                    break;
                 default:
                     window.open(route.href);
                     break;

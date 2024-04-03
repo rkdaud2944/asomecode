@@ -23,10 +23,13 @@ import asteroid from "@/assets/images/simulation/spacecraft/asteroid.png";
 import spaceship from "@/assets/images/simulation/spacecraft/spaceship.png";
 
 // luna_lander
-
 import landerFiring from "@/assets/images/simulation/lunar_lander/lander_firing.png";
 import landerCrashed from "@/assets/images/simulation/lunar_lander/lander_crashed.png";
 import landerPlain from "@/assets/images/simulation/lunar_lander/lander_plain.png";
+
+// canon
+import target from "@/assets/images/simulation/cannon/target.png";
+import boom from "@/assets/images/simulation/cannon/boom.png";
 
 export default {
     diceBack,
@@ -52,6 +55,9 @@ export default {
 
     landerFiring,
     landerCrashed,
-    landerPlain
+    landerPlain,
+
+    target,
+    boom
 
 }
