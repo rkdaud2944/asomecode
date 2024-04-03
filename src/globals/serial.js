@@ -165,11 +165,7 @@ const seiral = {
         }
         this.write(text +"\r\n");
     },
-
-    writeInput(text) {
-        if (serialUnit) serialUnit.write(text +"\r\n");
-    },
-
+    
     stop() {
         this.write(String.fromCharCode(3));
     },
@@ -208,11 +204,23 @@ const seiral = {
             code = code.replace(/\\/gi, '\\\\');
             code = code.replace(/'/gi, "\\'");
 
+            
             await new Promise(resolve => setTimeout(resolve, 100)); 
-
+            
+            if (code.startsWith("Code=Input/Text=")) {
+                code = code.trim();
+                code = code.split("=")[2];
+                code = code.split("/")[0];
+                
+                this.writeLn(code);
+                return;
+            }
+            
             this.writeLn(`_codes_ = _codes_ + '${code}\\n'`);
         }
-        this.writeLn(`exec(_codes_)`);
+
+
+        this.writeLn(`exec(_codes_)\r\n`);
     },
 
     fireErrorEvent(msg) {

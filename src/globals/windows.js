@@ -24,8 +24,6 @@ window.addEventListener('message', (msg) => {
         case 'stop': serial.stop(); break;
         case 'reboot': serial.reboot(); break;
         case 'runCode': serial.runCode(message.params); break;
-        case 'writeInput': serial.writeInput(message.params); break;
-        case 'writeLn': serial.writeLn(message.params); break;
         case 'uploadTextToBoard': boardFileSaver.save(message.filename, message.text); break;
         case 'verifyOtp': otp.start(message.params); break;
         case 'runBle': ble.writeLn(this.content); break;

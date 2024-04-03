@@ -45,9 +45,9 @@ export default {
                 default: document.getElementById("wet").style.display = "block"; break;
             }
 
-            // var text = "Code=Input/Text={0}/";
+            var text = `Code=Input/Text=${value}/`;
             // this.run_cmd(String.format(text, value));
-            this.writeInput(value);
+            this.runCode(text);
         }
     }
 }
