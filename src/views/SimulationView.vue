@@ -8,6 +8,7 @@
     <SpaceCraftPage v-if="$route.params.page === 'spacecraft'"/>
     <MazePage v-if="$route.params.page === 'maze'"/>
     <SlidingPuzzlePage v-if="$route.params.page === 'sliding_puzzle1'"/>
+    <LunarLanderPage v-if="$route.params.page === 'lunar_lander'"/>
 
 </template>
 
@@ -21,13 +22,14 @@ import FlagGamePage from '@/components/simulation/FlagGamePage.vue';
 import SpaceCraftPage from '@/components/simulation/SpaceCraftPage.vue';
 import MazePage from '@/components/simulation/MazePage.vue';
 import SlidingPuzzlePage from '@/components/simulation/SlidingPuzzlePage.vue';
+import LunarLanderPage from '@/components/simulation/LunarLanderPage.vue';
 
 export default {
 
     
     components: {
         DicePage, DhtScreenPage, StovePage,
-        DoorPage, FlagGamePage, SpaceCraftPage, MazePage, SlidingPuzzlePage,
+        DoorPage, FlagGamePage, SpaceCraftPage, MazePage, SlidingPuzzlePage, LunarLanderPage
     }, 
 
     computed: {

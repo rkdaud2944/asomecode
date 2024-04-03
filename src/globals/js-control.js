@@ -113,3 +113,7 @@ window.blank_left = function () { simulationRunJS(`blank_left()`) }
 window.blank_right = function () { simulationRunJS(`blank_right()`) }
 window.blank_up = function () { simulationRunJS(`blank_up()`) }
 window.blank_down = function () { simulationRunJS(`blank_down()`) }
+window.lunar_lander_engine_on = function () { simulationRunJS(`lunar_lander_engine_on()`) }
+window.lunar_lander_engine_off = function () { simulationRunJS(`lunar_lander_engine_off()`) }
+window.lunar_lander_moveto = function (x, y) { simulationRunJS(`lunar_lander_moveto(${x}, ${y})`) }
+window.lunar_lander_explode = function () { simulationRunJS(`lunar_lander_explode()`) }

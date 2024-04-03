@@ -59,8 +59,7 @@ export default {
                 case '/simulation/maze' : 
                     simulator['simulator'] = window.open(route.href, 'simulator', 'width=414,height=354'); // 400 300;
                     break;
-                    
-                case '/simulation/sliding_puzzle1' : 
+                case '/simulation/lunar_lander' : 
                     simulator['simulator'] = window.open(route.href, 'simulator', 'width=414,height=354'); // 400 300;
                     break;
                 default:
