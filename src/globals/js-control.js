@@ -108,3 +108,4 @@ window.start = function () { simulationRunJS(`start()`) }
 window.move_left = function () { simulationRunJS(`move_left()`) }
 window.move_right = function () { simulationRunJS(`move_right()`) }
 window.set_speed = function (value) { simulationRunJS(`set_speed(${value})`) }
+window.move_xy = function (x, y) { simulationRunJS(`move_xy(${x}, ${y})`) }

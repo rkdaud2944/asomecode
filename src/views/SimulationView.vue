@@ -6,6 +6,7 @@
     <DoorPage v-if="$route.params.page === 'door'"/>
     <FlagGamePage v-if="$route.params.page === 'flag_game'"/>
     <SpaceCraftPage v-if="$route.params.page === 'spacecraft'"/>
+    <MazePage v-if="$route.params.page === 'maze'"/>
 
 </template>
 
@@ -17,13 +18,14 @@ import StovePage from '@/components/simulation/StovePage.vue';
 import DoorPage from '@/components/simulation/DoorPage.vue';
 import FlagGamePage from '@/components/simulation/FlagGamePage.vue';
 import SpaceCraftPage from '@/components/simulation/SpaceCraftPage.vue';
+import MazePage from '@/components/simulation/MazePage.vue';
 
 export default {
 
     
     components: {
         DicePage, DhtScreenPage, StovePage,
-        DoorPage, FlagGamePage, SpaceCraftPage
+        DoorPage, FlagGamePage, SpaceCraftPage, MazePage
     }, 
 
     computed: {
