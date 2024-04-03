@@ -6,8 +6,16 @@
 </template>
 
 <script>
-export default {
+import simulationImg from "@/assets/simulationImages";
 
+export default {	
+	data() {
+		return {
+            landerFiring: simulationImg.landerFiring,
+            landerCrashed: simulationImg.landerCrashed,
+            landerPlain: simulationImg.landerPlain,
+		}
+	},
     
     mounted() {
 		window.addEventListener('message', (msg) => {
@@ -31,11 +39,11 @@ export default {
 
     methods: {
 		lunar_lander_engine_on() {
-            document.getElementById("ship").src = "@/assets/images/simulation/lunar_lander/lander_firing.png";
+            document.getElementById("ship").src = this.landerFiring;
 		},
 
 		lunar_lander_engine_off() {
-            document.getElementById("ship").src = "@/assets/images/simulation/lunar_lander/lander_plain.png";
+            document.getElementById("ship").src = this.landerPlain;
 		},
 
 		lunar_lander_moveto(x, y) {
@@ -44,7 +52,7 @@ export default {
 		},
 
 		lunar_lander_explode() {			
-            document.getElementById("ship").src = "@/assets/images/simulation/lunar_lander/lander_crashed.png";
+            document.getElementById("ship").src = this.landerCrashed;
 
 			// var audio = new Audio('../../audio/boom.ogg');
 			// audio.play();

@@ -8,8 +8,7 @@
 <script>
 import simulationImg from "@/assets/simulationImages";
 
-export default {
-	
+export default {	
 	data() {
 		return {
 			flag: [simulationImg.flag0, simulationImg.flag1, simulationImg.flag2, simulationImg.flag3],
