@@ -20,7 +20,7 @@
         </div>
         <div class="nav">
             <span class="NotoSansKR-Regular nav-txt"><a :href="this.downloadLink" target="_blank">자료실</a></span>
-            <span class="NotoSansKR-Regular nav-txt">도움말</span>
+            <span class="NotoSansKR-Regular nav-txt"><a :href="this.qnaLink" target="_blank">도움말</a></span>
             <span class="NotoSansKR-Regular hamburger-wrap nav-txt">
                 <div class="hamburger-icon">
                     <!-- <div class="bar"></div>
@@ -73,7 +73,7 @@
                 
             </span>
             
-            <div class="darken-background"></div>
+            <!-- <div class="darken-background"></div> -->
         </div>
     </nav>
     
@@ -117,6 +117,7 @@ export default {
             connected: false,
             
             downloadLink: "https://asomeit.kr/download",
+            qnaLink: "https://asomeit.imweb.me/faq"
         } 
     },
 

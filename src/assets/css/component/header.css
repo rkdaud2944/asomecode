@@ -106,11 +106,37 @@ a{
     cursor: pointer;
 }
 
+.nav-txt > a {
+    position: relative;
+    z-index: 1;
+}
+
+.nav-txt > a::before{
+    content: '';
+    position: absolute;
+    top: -20px;
+    bottom: -20px;
+    left: -15px;
+    right: -15px;
+    z-index: -1; /* 가상 요소가 실제 요소 뒤에 오도록 함 */
+}
+
 .hamburger-wrap{
     position: relative;
     margin-top: 0;
     margin-bottom: 0;
     height: 25px;
+    z-index: 1;
+}
+
+.hamburger-wrap::before{
+    content: '';
+    position: absolute;
+    top: -20px;
+    bottom: -20px;
+    left: -15px;
+    right: -40px;
+    z-index: -1; /* 가상 요소가 실제 요소 뒤에 오도록 함 */
 }
 
 .hamburger-icon {
