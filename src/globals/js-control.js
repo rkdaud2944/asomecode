@@ -117,10 +117,11 @@ window.lunar_lander_engine_on = function () { simulationRunJS(`lunar_lander_engi
 window.lunar_lander_engine_off = function () { simulationRunJS(`lunar_lander_engine_off()`) }
 window.lunar_lander_moveto = function (x, y) { simulationRunJS(`lunar_lander_moveto(${x}, ${y})`) }
 window.lunar_lander_explode = function () { simulationRunJS(`lunar_lander_explode()`) }
-
 window.cannon_angle = function (a) { simulationRunJS(`cannon_angle(${a})`) }
 window.cannon_power = function (p) { simulationRunJS(`cannon_power(${p})`) }
 window.bullet_moveto = function (x, y) { simulationRunJS(`bullet_moveto(${x}, ${y})`) }
 window.target_moveto = function (x) { simulationRunJS(`cannon_power(${x})`) }
 window.cannon_fire = function () { simulationRunJS(`cannon_fire()`) }
 window.target_explode = function () { simulationRunJS(`target_explode()`) }
+window.stove_off = function () { simulationRunJS(`stove_off()`) }
+window.stove_on = function () { simulationRunJS(`stove_on()`) }

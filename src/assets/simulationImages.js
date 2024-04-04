@@ -31,6 +31,11 @@ import landerPlain from "@/assets/images/simulation/lunar_lander/lander_plain.pn
 import target from "@/assets/images/simulation/cannon/target.png";
 import boom from "@/assets/images/simulation/cannon/boom.png";
 
+// stove
+
+import stoveOff from "@/assets/images/simulation/stove/stove_off.png";
+import stoveOn from "@/assets/images/simulation/stove/stove_on.png";
+
 export default {
     diceBack,
     dice1,
@@ -58,6 +63,9 @@ export default {
     landerPlain,
 
     target,
-    boom
+    boom,
+
+    stoveOff,
+    stoveOn
 
 }
