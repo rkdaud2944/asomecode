@@ -19,18 +19,18 @@
                                     transition: 'background-color 0.5s ease, color 0.5s ease',
                                     'backgroundImage': `url(${card.image})`
                             }">
-                                <p class="age"
+                                <p class="age NotoSansKR-Regular"
                                     :style="{'color': card.txtAge,
                                     'border': `1px solid ${card.txtAge}`
                                 }">
                                     {{ card.age }}
                                 </p>
                                 <div class="title">
-                                    <span> {{ card.title }} </span>
-                                    <span class="title-num"
+                                    <span class="Pretendard-ExtraBold"> {{ card.title }} </span>
+                                    <span class="title-num Pretendard-ExtraBold"
                                         :style="{'color': card.titleNumColor}"> {{ card.titleNum }} </span>
                                 </div>
-                                <p class="description">{{ card.description }}</p>
+                                <p class="description Pretendard-Regular">{{ card.description }}</p>
                                 <div class="curriculum-chapter" 
                                     :style="{
                                         'color': card.txtChapter,
@@ -54,8 +54,8 @@
                                     {{ card.age }}
                                 </p>                                
                                 <div class="title">
-                                    <span> {{ card.title }} </span>
-                                    <span class="title-num"
+                                    <span class="Pretendard-ExtraBold"> {{ card.title }} </span>
+                                    <span class="title-num Pretendard-ExtraBold"
                                         :style="{'color': card.titleNumColor}"> {{ card.titleNum }} </span>
                                 </div>
                                 <p class="description Pretendard-Medium">{{ card.description }}</p>

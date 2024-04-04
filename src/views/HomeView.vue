@@ -33,7 +33,7 @@
                                     }">
                                         {{ card.age }}
                                     </p>
-                                    <h4 class="title">{{ card.title }}</h4>
+                                    <h4 class="title Pretendard-ExtraBold">{{ card.title }}</h4>
                                     <p class="description Pretendard-Regular">{{ card.description }}</p>
                                     <div class="home-chapter Pretendard-Regular" 
                                         :style="{
@@ -59,7 +59,7 @@
                                     }">
                                         {{ card.age }}
                                     </p>
-                                    <h4 class="title"
+                                    <h4 class="title Pretendard-ExtraBold"
                                         :style="{
                                             'color': clicked === true ? card.clickTxtTitle : card.hoverTxtTitle,
                                             'text-shadow': '2px 2px 2px gray',
