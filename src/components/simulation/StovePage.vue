@@ -1,7 +1,7 @@
 <template>
     <div style="position: relative;">
 		<img src="@/assets/images/simulation/stove/back.png" style="position: absolute;">
-		<img id="img_stove" src="@/assets/images/simulation/stove/stove_off.png" onclick="stove_on()" style="position: absolute;">
+		<img id="img_stove" src="@/assets/images/simulation/stove/stove_off.png" @click="this.stove_on()" style="position: absolute;">
 	</div>	
 </template>
 

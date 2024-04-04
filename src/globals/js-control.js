@@ -125,3 +125,4 @@ window.cannon_fire = function () { simulationRunJS(`cannon_fire()`) }
 window.target_explode = function () { simulationRunJS(`target_explode()`) }
 window.stove_off = function () { simulationRunJS(`stove_off()`) }
 window.stove_on = function () { simulationRunJS(`stove_on()`) }
+window.write_value = function (value) { simulationRunJS(`stove_on(${value})`) }
