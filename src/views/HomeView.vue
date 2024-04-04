@@ -3,7 +3,7 @@
     <div class="main-wrap">
         <div class="main-mid">
             <div>
-                <h3 class="Pretendard-Medium">AsomeIT</h3>
+                <h3 class="Pretendard-ExtraBold">AsomeIT</h3>
                 <p class="Pretendard-Regular">어썸코드는 어썸아이티만의 코딩 학습 전용 프로그램입니다.</p>
             </div>
         </div>
