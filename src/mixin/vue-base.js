@@ -74,6 +74,10 @@ export default {
                 case '/simulation/water_sensor' : 
                     simulator['simulator'] = window.open(route.href, 'simulator', 'width=414,height=354'); // 400 300;
                     break;
+                    
+                case '/simulation/car_race' : 
+                    simulator['simulator'] = window.open(route.href, 'simulator', 'width=414,height=354'); // 400 300;
+                    break;
                 default:
                     window.open(route.href);
                     break;

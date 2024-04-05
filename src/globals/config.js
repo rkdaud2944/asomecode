@@ -6,7 +6,9 @@ import serial from '@/globals/serial';
 export default { 
     pythonUrl() {
         if (serial.getBoardType() == "Pro") {
-            return `https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents/coding/html/common/py/Pro/asomecar/`;
+            // asomecode-web
+            // return `https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents/coding/html/common/py/Pro/asomecar/`;
+            return `https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents/coding/html/common/py/Pro/asomekit/`;
         } else {
             return `https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents/coding/html/common/py/Zet/v1.8.7/`;
         }

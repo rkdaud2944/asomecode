@@ -32,9 +32,13 @@ import target from "@/assets/images/simulation/cannon/target.png";
 import boom from "@/assets/images/simulation/cannon/boom.png";
 
 // stove
-
 import stoveOff from "@/assets/images/simulation/stove/stove_off.png";
 import stoveOn from "@/assets/images/simulation/stove/stove_on.png";
+
+// car_race
+import carRaceEnd from "@/assets/images/simulation/car_race/end.png";
+import carRaceBack from "@/assets/images/simulation/car_race/back.png";
+
 
 export default {
     diceBack,
@@ -66,6 +70,8 @@ export default {
     boom,
 
     stoveOff,
-    stoveOn
+    stoveOn,
+    carRaceEnd,
+    carRaceBack
 
 }
