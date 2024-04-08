@@ -41,8 +41,11 @@ export default {
 
     },
 
-    mounted() {
-		window.addEventListener('message', (msg) => {
+    beforeMount() {
+    },
+
+    async mounted() {
+		await window.addEventListener('message', (msg) => {
 			let message = {};
 			
 			// 데이터가 문자열인지 체크하여 JSON.parse()를 조건적으로 사용합니다.
@@ -60,10 +63,9 @@ export default {
 			}
 		});
 
-        
-        this.ctx.drawImage(this.image, 0, 0);
+        await this.ctx.drawImage(this.image, 0, 0);
         this.blank_image = this.ctx.getImageData(0, 0, 1, 1);
-        this.bullet_move();
+        await this.bullet_move();
     },
 
     
@@ -115,7 +117,7 @@ export default {
             // 현재 위치에서 흰색이 아닌 픽셀을 찾습니다.
             if (West[0] != 255) {
                 // 자동차를 왼쪽으로 이동시킵니다.
-                this.x = this.x - 1;
+                this.x = this.x - 1; 
             } else if (East[0] != 255) {
                 // 자동차를 오른쪽으로 이동시킵니다.
                 this.x = this.x + 1;
@@ -156,7 +158,8 @@ export default {
             var count = value - this.position;
             this.position = value;
             for (var i = 0; i < count; i++) {
-                if (!this.find_next_pixel());
+                // if (!this.find_next_pixel());
+                this.find_next_pixel();
             }
         }
 
