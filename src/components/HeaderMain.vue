@@ -58,7 +58,8 @@
                             <img :src="resetImg"/>
                             <p>포맷</p>
                         </li>
-                        <li class="menu-cts" @click="update()">
+                        <li class="menu-cts" @click="toggleUpdateModal()">
+                        <!-- <li class="menu-cts" @click="update()"> -->
                             <img :src="updateImg"/>
                             <p>업데이트</p>
                         </li>
@@ -73,9 +74,19 @@
                 
             </span>
             
-            <!-- <div class="darken-background"></div> -->
+            <div class="darken-background"></div>
         </div>
     </nav>
+    
+    <div class="update-modal" v-if="this.updateModal == true">
+    <!-- <div class="update-modal"> -->
+        <div @click="toggleUpdateModal()">X</div>
+        <p>업데이트할 교구를 클릭하세요.</p>
+        <div>
+            <q-btn @click="update('asomekit')" style="background-color: #E4007F; color: #fff; font-weight: 600; margin-right: 10px;">어썸킷</q-btn>
+            <q-btn @click="update('asomebot')" style="background-color: #4EA949; color: #fff; font-weight: 600;">어썸봇</q-btn>
+        </div>
+    </div>
     
     <!-- 어두운 배경, v-show로 표시 여부 결정 -->
 </template>
@@ -117,7 +128,9 @@ export default {
             connected: false,
             
             downloadLink: "https://asomeit.kr/download",
-            qnaLink: "https://asomeit.imweb.me/faq"
+            qnaLink: "https://asomeit.imweb.me/faq",
+
+            updateModal: false,
         } 
     },
 
@@ -176,8 +189,9 @@ export default {
     methods: {
         ...serial, ...bridgeIn,
 
-        update() {
-            boardUpdater.start();
+        update(mode) {
+            boardUpdater.start(mode);
+            this.toggleUpdateModal();
         },
         
         showDropdown() { 
@@ -216,11 +230,23 @@ while True:
             console.log('bleStop');
             ble.writeLn(String.fromCharCode(3))
         },
+        
+    
+        toggleUpdateModal() {
+            var bg = document.querySelector('.darken-background');
+            if (this.updateModal) {
+                this.updateModal = false;
+                bg.style.display = 'none'
+
+            } else {
+                this.updateModal = true;
+                bg.style.display = 'block'
+            }
+        }
     },
     
-    // toggleMenu() {
-    //     this.isMenuOpen = !this.isMenuOpen;
-    // }
+
+    
 }
 </script>
 

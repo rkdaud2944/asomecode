@@ -1,15 +1,15 @@
-a{
+a {
     text-decoration: none;
     color: #000;
 }
 
-.logo{
+.logo {
     height: 40px;
     cursor: pointer;
 }
 
-.header-nav{
-    display : flex;
+.header-nav {
+    display: flex;
     justify-content: space-between;
     align-items: center;
     background: #ffffff;
@@ -22,22 +22,22 @@ a{
 
 }
 
-.main-logo{
-    margin-left:30px;
+.main-logo {
+    margin-left: 30px;
 }
 
 .control-btn-wrap {
-    display: flex; 
-    gap: 10px; 
+    display: flex;
+    gap: 10px;
 }
 
 .connect-btn {
-    display: flex; 
-    gap: 5px; 
+    display: flex;
+    gap: 5px;
     width: 120px;
     align-items: center;
     justify-content: center;
-    background-color: #DEDEE2; 
+    background-color: #DEDEE2;
     padding: 5.5px 15px;
     border-radius: 20px;
     color: #7E7E83;
@@ -46,16 +46,16 @@ a{
     font-size: 16px;
 }
 
-.connect-btn > img{
+.connect-btn>img {
     width: 20px;
 }
 
 .connect-btn:hover {
-    background-color: #7E7E83; 
+    background-color: #7E7E83;
     color: #fff;
 }
 
-.connect-btn:hover > img{
+.connect-btn:hover>img {
     content: url(../../images/controls/connect-hover.png);
     width: 20px;
 }
@@ -65,12 +65,12 @@ a{
 }
 
 .stop-btn {
-    display: flex; 
+    display: flex;
     width: 120px;
-    gap: 5px; 
+    gap: 5px;
     align-items: center;
     justify-content: center;
-    background-color: #DEDEE2; 
+    background-color: #DEDEE2;
     padding: 5.5px 15px;
     border-radius: 20px;
     color: #7E7E83;
@@ -78,16 +78,16 @@ a{
     font-size: 16px;
 }
 
-.stop-btn > img{
+.stop-btn>img {
     width: 20px;
 }
 
 .stop-btn:hover {
-    background-color: #7E7E83; 
+    background-color: #7E7E83;
     color: #fff;
 }
 
-.stop-btn:hover > img{
+.stop-btn:hover>img {
     content: url(../../images/controls/stop-hover.png);
     width: 20px;
 }
@@ -96,32 +96,33 @@ a{
     background-color: #E4007F;
 }
 
-.nav{
-    margin-right:30px;
+.nav {
+    margin-right: 30px;
 }
 
-.nav-txt{
+.nav-txt {
     font-size: 1.1rem;
     margin-right: 30px;
     cursor: pointer;
 }
 
-.nav-txt > a {
+.nav-txt>a {
     position: relative;
     z-index: 1;
 }
 
-.nav-txt > a::before{
+.nav-txt>a::before {
     content: '';
     position: absolute;
     top: -20px;
     bottom: -20px;
     left: -15px;
     right: -15px;
-    z-index: -1; /* 가상 요소가 실제 요소 뒤에 오도록 함 */
+    z-index: -1;
+    /* 가상 요소가 실제 요소 뒤에 오도록 함 */
 }
 
-.hamburger-wrap{
+.hamburger-wrap {
     position: relative;
     margin-top: 0;
     margin-bottom: 0;
@@ -129,14 +130,15 @@ a{
     z-index: 1;
 }
 
-.hamburger-wrap::before{
+.hamburger-wrap::before {
     content: '';
     position: absolute;
     top: -20px;
     bottom: -20px;
     left: -15px;
     right: -40px;
-    z-index: -1; /* 가상 요소가 실제 요소 뒤에 오도록 함 */
+    z-index: -1;
+    /* 가상 요소가 실제 요소 뒤에 오도록 함 */
 }
 
 .hamburger-icon {
@@ -147,8 +149,8 @@ a{
 }
 
 .hamburger-icon .bar {
-    width: 25px; 
-    height: 3px; 
+    width: 25px;
+    height: 3px;
     background-color: #3E3A39;
 }
 
@@ -168,13 +170,13 @@ a{
     top: 30px;
     right: -30px;
     background-color: #fff;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.35);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.35);
     border-radius: 10px;
 }
 
 .menu-cts {
     width: 100%;
-    line-height:60px;
+    line-height: 60px;
     display: flex;
     align-items: center;
     justify-content: start;
@@ -184,12 +186,13 @@ a{
 
 
 
-.menu-cts:nth-last-child(1){
+.menu-cts:nth-last-child(1) {
     border-radius: 0px 0px 10px 10px;
 }
 
 
-.menu-cts:hover, .menu-cts > a :hover {
+.menu-cts:hover,
+.menu-cts>a :hover {
     background-color: #3E3A39;
     color: #fff
 }
@@ -202,30 +205,32 @@ a{
     display: block !important;
     align-items: center;
     justify-content: center;
-    text-align: center; 
+    text-align: center;
     cursor: auto !important;
     border-radius: 10px;
     color: #000 !important;
 }
 
-.menu-title > p {
+.menu-title>p {
     font-weight: 300;
     font-size: 1.2rem !important;
 }
 
-.menu-cts > img, .menu-cts > a > img {
+.menu-cts>img,
+.menu-cts>a>img {
     padding: 0 10px 0 10px;
     margin-left: 5px;
     width: 45px;
 }
 
-.menu-cts > p, .menu-cts > a > p {
+.menu-cts>p,
+.menu-cts>a>p {
     font-size: 15px;
 }
 
-.menu-cts > a{    
+.menu-cts>a {
     width: 100%;
-    line-height:60px;
+    line-height: 60px;
     display: flex;
     align-items: center;
     justify-content: start;
@@ -233,44 +238,44 @@ a{
     cursor: pointer;
 }
 
-.menu-cts:nth-child(2):hover > img{
+.menu-cts:nth-child(2):hover>img {
     content: url(../../images/controls/connect-hover.png);
 }
 
-.menu-cts:nth-child(3):hover > img{
+.menu-cts:nth-child(3):hover>img {
     content: url(../../images/controls/stop-hover.png);
 }
 
-.menu-cts:nth-child(4):hover > img{
+.menu-cts:nth-child(4):hover>img {
     content: url(../../images/controls/editor-hover.png);
 }
 
-.menu-cts:nth-child(5):hover > a > img{
+.menu-cts:nth-child(5):hover>a>img {
     content: url(../../images/controls/setting-hover.png);
 }
 
-.menu-cts:nth-child(6):hover > img{
+.menu-cts:nth-child(6):hover>img {
     content: url(../../images/controls/reset-hover.png);
 }
 
-.menu-cts:nth-child(7):hover > img{
+.menu-cts:nth-child(7):hover>img {
     content: url(../../images/controls/update-hover.png);
 }
 
-.menu-cts:nth-child(8):hover > a > img{
+.menu-cts:nth-child(8):hover>a>img {
     content: url(../../images/controls/setting-hover.png);
 }
 
-li{
+li {
     list-style-type: none;
 }
 
-ul{
+ul {
     margin: 0;
     padding: 0;
 }
 
-p{
+p {
     margin: 0;
 }
 
@@ -283,6 +288,7 @@ p{
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
+    z-index: 2999;
 }
 
 .menu-img {
@@ -291,10 +297,38 @@ p{
     pointer-events: none;
 }
 
-.hamburger-wrap:hover .dropdown-menu{
+.hamburger-wrap:hover .dropdown-menu {
     display: block;
 }
 
-.hamburger-wrap:hover + .darken-background {
+/* .hamburger-wrap:hover+.darken-background {
     display: block;
+} */
+
+.update-modal {
+    width: 260px;
+    height: 150px;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    position: fixed;
+    z-index: 3000;
+    top: 35%;
+    left: calc(50% - 130px);
+    /* text-align: center; */
+}
+
+.update-modal>p {
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 20px;
+    margin-bottom: 35px;
+}
+
+.update-modal>div {
+    display: inline;
+    /* background-color: #7E7E83; */
+    position: absolute;
+    cursor: pointer;
+    right: 15px;
 }

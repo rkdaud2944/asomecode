@@ -13,7 +13,12 @@ eventbus.on("onSerialReceived", (data) => {
     if (!data) return;
 
     if (data.startsWith("### AsomeCODE.Version:")) boardUpdater.updateFile(data);
-    if (data.startsWith("### Get Remote File List")) boardUpdater.getRemoteFileList();
+    if (data.startsWith("### Get Remote File List")) {
+        data = data.split(":");
+        data = data[1].trim();
+        localStorage.setItem('updateMode', data);
+        boardUpdater.getRemoteFileList(data);
+    }
 });
 
 let versions = [];
@@ -25,16 +30,16 @@ let tobeDowndloads = [];
  * 업데이트 대상의 파일을 찾아내고, 실제 업데이트는 BoardFileManager에게 위임한다.
  */
 const boardUpdater = {
-    async start() {
+    async start(mode) {
         await serial.runCode(codeGetVersion);
-        serial.writeLn('print("### Get Remote File List")');
+        serial.writeLn(`print("### Get Remote File List: ${mode}")`);
     },
 
-    async getRemoteFileList() {
+    async getRemoteFileList(data) {
         versions = [];
         filenameQue = [];
         tobeDowndloads = [];
-        const remoteVersions = await getRemoteFileList();
+        const remoteVersions = await getRemoteFileList(data);
         for (const filename in remoteVersions) {
             const fileInfo = remoteVersions[filename];
             versions.push(`${filename}=${fileInfo.Version}`);
@@ -68,9 +73,9 @@ const boardUpdater = {
 
 export default boardUpdater;
 
-async function getRemoteFileList() {
+async function getRemoteFileList(data) {
     try {
-        const response = await axios.request(config.pythonUrl() + "versions.json");
+        const response = await axios.request(config.pythonUrl(data) + "versions.json");
         return response.data;
     } catch (error) {
         console.log(error);
