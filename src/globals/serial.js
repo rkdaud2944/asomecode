@@ -203,7 +203,7 @@ const seiral = {
             // sLine := Space2Tab(Lines[Loop]);
             // sLine := StringReplace(sLine, #9, '\t', [rfReplaceAll]);
             // code = code.replace(/{mod}/gi, "%");
-            // code = code.replace(/@@NOW/gi, "CurrentTime");
+            code = code.replace(/@@NOW/gi, currentTime);
 
             code = code.replace(/\\/gi, '\\\\');
             code = code.replace(/'/gi, "\\'");
@@ -270,4 +270,15 @@ while True:
     print("> " + line[:-1])
 f.close()
 print("### System.End.View")`;
+}
+
+function currentTime() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    return `(${year}, ${month}, ${day}, 0, ${hours}, ${minutes}, ${seconds}, 0)`;
 }
