@@ -30,14 +30,14 @@
 }
 
 .title{
-    font-size: 1.5rem;
+    font-size: 32px;
     font-weight: 600;
 }
 
 .description{
     margin: 7px 0 7px 0;
     color: #4F4F53;
-    font-size: 1rem;
+    font-size: 20px;
     font-weight: 500;
 
 }
@@ -105,23 +105,27 @@
     display: flex;
     align-items: center;
     background: #fff; 
-    border-radius: 20px;
-    padding: 10px;
+    border-radius: 30px;
+    padding: 10px 10px 10px 11px;
     cursor: pointer;
+    max-width: 600px;
+    height: 60px;
 }
 
 .list-number {
-    min-width: 80px;
+    min-width: 90px;
     border: 1px solid ;
-    border-radius: 25px; 
-    padding: 5px 0 5px 0;
+    border-radius: 30px; 
+    padding: 5px 0px 5px 0px;
     margin-right: 10px;
-    font-size: 1.05rem;
+    font-size: 20px;
     transition: background-color 0.3s, color 0.3s; 
+    font-weight: 600;
 }
 
 .list-title {
     font-weight: bold;
+    font-size: 20px;
 }
 
 .list-content:hover .list-number{

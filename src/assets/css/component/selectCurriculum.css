@@ -16,7 +16,7 @@
 }
 
 .main-mid>div>h3 {
-    font-size: 30px;
+    font-size: 38px;
     font-weight: 700;
     color: #000;
     margin: 0;
@@ -25,6 +25,7 @@
 .main-mid>div>p {
     color: #7e7e83;
     margin-top: 5px;
+    font-size: 20px;
 }
 
 .list-cts-wrap {
@@ -108,12 +109,13 @@
 
 .title {
     margin: 0;
-    font-size: 2rem;
+    font-size: 36px;
     font-weight: 600;
 }
 
 .title-num{
     margin-left: 5px;
+    font-size: 36px;
 }
 
 .description {
@@ -131,7 +133,6 @@
     border-radius: 50%;
     font-size: 22px;
     font-weight: 600;
-    
 }
 
 .hoverTxt{
@@ -141,6 +142,7 @@
     align-items: center; 
     justify-content: center; 
     margin-top: 15px;
+    font-size: 16px;
 }
 
 .btn-info{
@@ -156,6 +158,7 @@
     display: flex;
     align-items: center;  
     justify-content: center; 
+    font-size: 15px;
 }
 
 /* 슬라이더 */

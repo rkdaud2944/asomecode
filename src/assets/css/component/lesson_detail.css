@@ -96,13 +96,13 @@ p{
     padding: 3px 0 3px 0;
     text-align: center;
     border-radius: 25px; 
-    font-size: 1rem;
+    font-size: 17px;
     margin-left: 10px;
     margin-right: 10px;
 }
 
 .chapter-title{
-    font-size: 1.8rem;
+    font-size: 32px;
     font-weight: 600;
 }
 
@@ -152,7 +152,7 @@ p{
 .detail-title{
     border-radius: 45px 45px 45px 45px;
     padding: 10px 0 10px 30px;
-    font-size: 1.1rem;
+    font-size: 18px;
     color: #4F4F53;
     overflow: hidden; 
     text-overflow: ellipsis; 

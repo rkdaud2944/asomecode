@@ -1,7 +1,7 @@
 .main-wrap {
     width: 100%;
     height: 714px;
-    margin-top: 130px;
+    margin-top: 94px;
     text-align: center;
 }
 
@@ -15,7 +15,7 @@
 }
 
 .main-mid>div>h3 {
-    font-size: 53px;
+    font-size: 44px;
     font-weight: 700;
     color: #e4007f;
     margin: 0;
@@ -24,6 +24,7 @@
 .main-mid>div>p {
     color: #7e7e83;
     margin-top: 5px;
+    font-size: 20px;
 }
 
 .main-cts-wrap {
@@ -111,7 +112,7 @@
 
 .title {
     margin: 0;
-    font-size: 2rem;
+    font-size: 36px;
     font-weight: 600;
 }
 
@@ -160,9 +161,9 @@
 }
 
 .tip-box {
-    width: 100%;
+    width: 258px;
     height: 130px;
-    border-radius: 40px;
+    border-radius: 38px;
     text-align: left;
     display: flex;
     justify-content: center;
@@ -183,7 +184,8 @@
 }
 
 .tip-box>div:first-child {
-    width: 130px;
+    width: 140px;
+    margin-left: -10px;
 }
 
 .tip-box>div>p:first-child {
@@ -203,7 +205,12 @@
     color: #fff;
 }
 
-.p1,
+.p1 {
+    font-weight: 100 !important;
+    font-size: 21px;
+}
+
 .p2 {
     font-weight: 100 !important;
+    font-size: 16px;
 }

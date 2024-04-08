@@ -23,7 +23,7 @@
             <div class="list-container">
                 <div class="list-item" v-for="(item, index) in subject.lessons" :key="index" @click="goTo('/lesson/detail', { id: item.id, subjectTitle: subject.title, index: index+1, title: item.title, color: this.$route.query.color})">
                     <div class="list-content">
-                        <span class="list-number Pretendard-Medium"
+                        <span class="list-number Pretendard-Regular"
                         :style="defaultBorderColor">{{ index + 1 }}차시</span>
                         <span class="list-title Pretendard-Regular">{{ item.title }}</span>
                     </div>
