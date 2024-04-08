@@ -1,40 +1,42 @@
-.list-page-wrap{
+.list-page-wrap {
     background-color: #F3F3F5;
     width: 100%;
     height: 100vh;
-    top:94px;
+    top: 94px;
     position: relative;
     text-align: center;
 }
 
-.list-wrap{
+.list-wrap {
     position: relative;
     max-width: 1200px;
     height: 500px;
     margin: auto;
 }
 
-.list-wrap > img{
+.list-wrap>img {
     position: absolute;
     right: 0;
     z-index: 1;
     margin-right: -150px;
 }
 
-.list-top{
+.list-top {
     position: relative;
     left: 0;
     text-align: left;
     padding-top: 20px;
     z-index: 100;
+    padding-left: 9px;
+    padding-right: 9px;
 }
 
-.title{
+.title {
     font-size: 32px;
     font-weight: 600;
 }
 
-.description{
+.description {
     margin: 7px 0 7px 0;
     color: #4F4F53;
     font-size: 20px;
@@ -45,45 +47,45 @@
 .list-back-button {
     display: inline-block;
     position: relative;
-    width: 50px; 
-    height: 50px; 
-    border-radius: 50%; 
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
     background-color: #fff;
     /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);  */
-    font-size: 0; 
+    font-size: 0;
     margin-bottom: 15px;
 }
 
-.ico_arrow{
-    width:80px;
-    height:50px;
-    position:relative;
-    text-indent:-9999px;
+.ico_arrow {
+    width: 80px;
+    height: 50px;
+    position: relative;
+    text-indent: -9999px;
     cursor: pointer;
 
 }
 
-.ico_arrow:before{
-    content:'';
-    width:15px;
-    height:15px;
-    position:absolute;
-    left:30%;
-    top:50%;
-    border-left:2px solid #000;
-    border-top:2px solid #000;
-    transform:translate(-50%,-50%) rotate(-45deg);
+.ico_arrow:before {
+    content: '';
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    left: 30%;
+    top: 50%;
+    border-left: 2px solid #000;
+    border-top: 2px solid #000;
+    transform: translate(-50%, -50%) rotate(-45deg);
 }
 
-.ico_arrow:after{
-    content:'';
-    width:20px;
-    height:2px;
-    position:absolute;
-    left:16px;
-    top:50%;
-    transform:translateY(-50%);
-    background:#000
+.ico_arrow:after {
+    content: '';
+    width: 20px;
+    height: 2px;
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #000
 }
 
 /* 리스트 컨테이너 */
@@ -92,19 +94,22 @@
     flex-wrap: wrap;
     margin: 0, 05px 0 05px;
     padding-top: 50px;
-    
+
 }
 
 .list-item {
-    flex: 0 0 50%; 
-    padding: 5px;
+    flex: 0 0 50%;
+    padding-bottom: 20px;
     z-index: 100;
+    padding-left: 9px;
+    padding-right: 9px;
 }
+
 
 .list-content {
     display: flex;
     align-items: center;
-    background: #fff; 
+    background: #fff;
     border-radius: 30px;
     padding: 10px 10px 10px 11px;
     cursor: pointer;
@@ -114,12 +119,12 @@
 
 .list-number {
     min-width: 90px;
-    border: 1px solid ;
-    border-radius: 30px; 
+    border: 1px solid;
+    border-radius: 30px;
     padding: 5px 0px 5px 0px;
     margin-right: 10px;
     font-size: 20px;
-    transition: background-color 0.3s, color 0.3s; 
+    transition: background-color 0.3s, color 0.3s;
     font-weight: 600;
 }
 
@@ -128,19 +133,19 @@
     font-size: 20px;
 }
 
-.list-content:hover .list-number{
+.list-content:hover .list-number {
     color: var(--chapter-color-hover) !important;
     background-color: var(--chapter-background-color-hover);
 }
 
-.list-content:active{
-    background-color: rgba(0, 0, 0, 0.1); 
+.list-content:active {
+    background-color: rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s;
 }
 
-.list-content:active > .list-number{
-    color: var(--chapter-color-active) !important; 
-    background-color: var(--chapter-background-color-active) !important; 
-    border-color: var(--chapter-border-color-active) !important; 
+.list-content:active>.list-number {
+    color: var(--chapter-color-active) !important;
+    background-color: var(--chapter-background-color-active) !important;
+    border-color: var(--chapter-border-color-active) !important;
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
