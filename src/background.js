@@ -45,6 +45,24 @@ async function createWindow() {
     contextMenu.popup({ window: win });
   });
 
+
+  win.webContents.on('new-window', (event, url) => {
+    event.preventDefault(); 
+    const newWin = new BrowserWindow({
+      // width: 800, 
+      // height: 600, 
+      webPreferences: {
+        nodeIntegration: true,
+        contextIsolation: false,
+      }
+    });
+    
+    newWin.loadURL(url); 
+    newWin.setMenu(null)
+    newWin.setMenuBarVisibility(false)
+    
+  });
+
 }
 
 app.on('window-all-closed', () => {
