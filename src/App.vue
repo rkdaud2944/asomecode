@@ -1,5 +1,5 @@
 <template>
-    <q-layout view="hHh lpr fFf" style=" height: calc(100vh - 36px);" class="body-scroll">
+    <q-layout view="hHh lpr fFf" style=" height: calc(100vh - 36px);">
 
         <div v-if="showHeaderMain">
             <HeaderMain />
@@ -86,8 +86,8 @@ export default {
 };
 </script>
 
-<style scoped>
-    .body-scroll::-webkit-scrollbar {
+<style>
+    body::-webkit-scrollbar {
         display: none;
     }
 </style>

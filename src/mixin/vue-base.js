@@ -42,7 +42,7 @@ export default {
                     window.open(route.href,'blockCoding', 'width=1024,height=900');
                     break;
                 case '/simulation/dice' : 
-                    simulator['simulator'] = window.open(route.href, 'simulator', 'width=420,height=360'); // 400 300;
+                    simulator['simulator'] = window.open(route.href, 'simulator', 'width=400,height=300'); // 400 300;
                     break; 
                 case '/simulation/dht_screen' : 
                     simulator['simulator'] = window.open(route.href, 'simulator', 'width=600,height=450'); // 400 300;
