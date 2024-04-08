@@ -1,5 +1,5 @@
 import eventbus from "@/globals/eventbus";
-import windows from "@/globals/windows";
+// import windows from "@/globals/windows";
 import router from "@/router";
 
 eventbus.on("onSerialReceived", (data) => {
@@ -35,7 +35,7 @@ const editorControl = {
         const route = router.resolve({ path: '/editor' });
         startToView = false;
         localStorage.setItem("code", lines.join("\n"));
-        windows.open('editor', '/editor');
+        // windows.open('editor', '/editor');
         editor['editor'] = window.open(route.href, 'editor', 'width=800,height=600'); // 400 300
 
     },

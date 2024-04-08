@@ -14,6 +14,7 @@ async function createWindow() {
   const win = new BrowserWindow({
     width: 1280,
     height: 1024,
+    autoHideMenuBar: true,
     webPreferences: {
       enableRemoteModule: true,
       nodeIntegration: true,
@@ -23,9 +24,6 @@ async function createWindow() {
     backgroundColor: '#FFF',
   })
   
-  // 일렉트론 상단 메뉴바 제거
-  win.setMenu(null)
-  win.setMenuBarVisibility(false)
   
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     await win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
@@ -44,18 +42,27 @@ async function createWindow() {
   win.webContents.on('context-menu', () => {
     contextMenu.popup({ window: win });
   });
+
+  // 렌더러에서 창 열기
+  win.webContents.setWindowOpenHandler(({ url }) => {
+    if (url) {
+      return {
+        action: 'allow',
+        overrideBrowserWindowOptions: {
+          alwaysOnTop : true, // 항상 다른 창 위에
+          autoHideMenuBar: true, // 메뉴바 숨김
+          backgroundColor: 'black',
+          webPreferences: {
+            preload: 'preload.js',
+            devTools: !process.env.IS_TEST
+          }
+        }
+      }
+    }
+    return { action: 'deny' }
+  });
 }
 
-app.on('new-window', (event, url) => {
-  event.preventDefault(); 
-  const newWin = new BrowserWindow({
-  });
-  
-  newWin.loadURL(url); 
-  newWin.setMenu(null)
-  newWin.setMenuBarVisibility(false)
-  
-})
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
