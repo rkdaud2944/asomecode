@@ -62,6 +62,7 @@ export default {
     mounted() {
         this.debouncedScrollHandler = this.debounce(this.handleScroll, 1);
         window.addEventListener('scroll', this.debouncedScrollHandler);
+        window.scrollTo(0, 0);
         this.getLesson(this.$route.query.id);
         this.markdownStyle();
     },
