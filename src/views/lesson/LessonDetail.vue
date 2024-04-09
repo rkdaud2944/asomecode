@@ -53,12 +53,15 @@ export default {
 
             logom: images.logom,
             lectureList: images.lectureList,
-            contentsList: images.contentsList
+            contentsList: images.contentsList,
+            
+            debouncedScrollHandler: null,
         };
     },
 
     mounted() {
-        window.addEventListener('scroll', this.debounce(this.handleScroll, 1));
+        this.debouncedScrollHandler = this.debounce(this.handleScroll, 1);
+        window.addEventListener('scroll', this.debouncedScrollHandler);
         this.getLesson(this.$route.query.id);
         this.markdownStyle();
     },
@@ -69,7 +72,9 @@ export default {
 
     
     beforeUnmount() {
-        window.removeEventListener('scroll', this.handleScroll);
+        if (this.debouncedScrollHandler) {
+            window.removeEventListener('scroll', this.debouncedScrollHandler);
+        }
     },
 
     computed: {
