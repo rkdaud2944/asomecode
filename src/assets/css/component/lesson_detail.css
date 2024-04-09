@@ -46,15 +46,15 @@ p{
     position:absolute;
     left:30%;
     top:50%;
-    border-left:2px solid #000;
-    border-top:2px solid #000;
+    border-left:2.5px solid #000;
+    border-top:2.5px solid #000;
     transform:translate(-50%,-50%) rotate(-45deg);
 }
 
 .ico_arrow:after{
     content:'';
     width:20px;
-    height:2px;
+    height:2.2px;
     position:absolute;
     left:16px;
     top:50%;

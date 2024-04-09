@@ -41,6 +41,8 @@ import contentsList from "@/assets/images/contents-list.png";
 import listAsomebot from "@/assets/images/common/list-Asomebot.png";
 import listAsomekit from "@/assets/images/common/list-Asomekit.png";
 import listAsomecar from "@/assets/images/common/list-Asomecar.png";
+import arrow2 from "@/assets/images/common/arrow.png";
+import arrow2Hover from "@/assets/images/common/arrow-hover.png";
 
 //blockCoding
 import connectBlock from "@/assets/images/blockCoding/connect-block.png";
@@ -140,6 +142,8 @@ export default {
     listAsomebot,
     listAsomekit,
     listAsomecar,
+    arrow2,
+    arrow2Hover,
 
     connectBlock,
     connectBlockHover,

@@ -54,6 +54,7 @@ export default {
             logom: images.logom,
             lectureList: images.lectureList,
             contentsList: images.contentsList,
+            arrow2: images.arrow2,
             
             debouncedScrollHandler: null,
         };
