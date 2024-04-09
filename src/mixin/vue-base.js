@@ -42,13 +42,13 @@ export default {
                     window.open(route.href,'blockCoding', 'width=1024,height=900');
                     break;
                 case '/simulation/dice' : 
-                    simulator['simulator'] = window.open(route.href, 'simulator', 'width=400,height=340'); // 400 300;
+                    simulator['simulator'] = window.open(route.href, 'simulator', 'width=400,height=335'); // 400 300;
                     break; 
                 case '/simulation/dht_screen' : 
-                    simulator['simulator'] = window.open(route.href, 'simulator', 'width=400,height=340'); // 400 300;
+                    simulator['simulator'] = window.open(route.href, 'simulator', 'width=400,height=335'); // 400 300;
                     break;
                 case '/simulation/door' :  // 사이즈 조절 필요
-                    simulator['simulator'] = window.open(route.href, 'simulator', 'width=400,height=340'); // 400 300;
+                    simulator['simulator'] = window.open(route.href, 'simulator', 'width=400,height=335'); // 400 300;
                     break;                    
                 case '/simulation/flag_game' : 
                     simulator['simulator'] = window.open(route.href, 'simulator', 'width=400,height=335'); // 400 300;
