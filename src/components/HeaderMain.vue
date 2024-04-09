@@ -9,11 +9,11 @@
             <!-- <div class="connect-false-wrap" v-show="this.connected === false" @click="this.connected = true"> -->
             <div class="control-btn-wrap">
                 <span class="connect-btn Pretendard-Medium" @click="connect()">
-                    <img :src="connectImg"/>
+                    <img :src="connectBtnImg"/>
                     연결하기
                 </span>
                 <span class="stop-btn Pretendard-Medium" @click="stop()">
-                    <img :src="stopImg"/> 
+                    <img :src="stopBtnImg"/> 
                     멈추기
                 </span>
             </div>
@@ -122,6 +122,8 @@ export default {
             updateImg: images.update,
             settingImg: images.setting,
             menu: images.menu,
+            connectBtnImg: images.connectBtn,
+            stopBtnImg: images.stopBtn,
             codes: null,
 
             isMenuOpen: false,

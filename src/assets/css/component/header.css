@@ -56,7 +56,7 @@ a {
 }
 
 .connect-btn:hover>img {
-    content: url(../../images/controls/connect-hover.png);
+    content: url(../../images/controls/connect-btn-hover.png);
     width: 20px;
 }
 
@@ -88,7 +88,7 @@ a {
 }
 
 .stop-btn:hover>img {
-    content: url(../../images/controls/stop-hover.png);
+    content: url(../../images/controls/stop-btn-hover.png);
     width: 20px;
 }
 

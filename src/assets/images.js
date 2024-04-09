@@ -3,12 +3,14 @@ import logo2 from "@/assets/images/logo/logo2.png";
 import logo from "@/assets/images/logo/logo.png";
 
 import connect from "@/assets/images/controls/connect.png";
+import connectBtn from "@/assets/images/controls/connect-btn.png";
 import editor from "@/assets/images/controls/editor.png";
 import reset from "@/assets/images/controls/reset.png";
 import home from "@/assets/images/controls/home.png";
 import mobileM from "@/assets/images/controls/mobile_m.png";
 import restart from "@/assets/images/controls/restart.png";
 import stop from "@/assets/images/controls/stop.png";
+import stopBtn from "@/assets/images/controls/stop-btn.png";
 import update from "@/assets/images/controls/update.png";
 import help from "@/assets/images/controls/help.png";
 import setting from "@/assets/images/controls/setting.png";
@@ -105,12 +107,14 @@ export default {
     logo,
 
     connect,
+    connectBtn,
     editor,
     reset,
     home,
     mobileM,
     restart,
     stop,
+    stopBtn,
     update,
     help,
     setting,
