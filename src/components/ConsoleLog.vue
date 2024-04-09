@@ -17,8 +17,13 @@
     </div>
     <div class="console-input">
         <p>입력</p>
-        <q-input @keydown.enter.prevent="send" filled v-model="text" class="input">
-    </q-input>
+        <q-input @keydown.enter.prevent="send" 
+                @keydown.up.prevent="codeHistory('up')"
+                @keydown.down.prevent="codeHistory('down')"
+                filled
+                v-model="text" 
+                class="input">
+        </q-input>
     </div>
 </template>
 
@@ -50,6 +55,9 @@ export default {
             consoleHeight: 100,
             startY: 0,
             arrow: false,
+            
+            inputHistory: [],
+            currentIndex: -1, 
         };
     },
     mounted() {
@@ -154,6 +162,11 @@ export default {
             window.removeEventListener('mouseup', this.stopResize)
         },
         send() {
+            // 입력 이력 추가
+            if (this.text.trim() !== "") {
+                this.inputHistory.unshift(this.text); 
+                this.currentIndex = -1; 
+            }
 
             if (this.text.startsWith("/list")) {
                 serial.listFiles();
@@ -179,6 +192,20 @@ export default {
             }else{
                 serial.writeLn(this.text);
                 this.text = "";
+            }
+        },
+        codeHistory(direction) {
+            if (direction === 'up' && this.currentIndex + 1 < this.inputHistory.length) {
+                this.currentIndex++;
+                this.text = this.inputHistory[this.currentIndex]; 
+            } else if (direction === 'down') {
+                if (this.currentIndex - 1 >= 0) {
+                this.currentIndex--;
+                this.text = this.inputHistory[this.currentIndex];
+                } else {
+                this.currentIndex = -1;
+                this.text = "";
+                }
             }
         },
         decodeKoreanCharacters(str) {
