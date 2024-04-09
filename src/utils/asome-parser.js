@@ -158,17 +158,19 @@ class Parser {
     }
 
     #get_buttonText(text) {
-        const firstLine = text.split("\n")[0]
+        const firstLine = text.split("\n")[0];
         const functionName = firstLine.replace("[button ", "");
-        const functionId = functionName.replaceAll(' ', '-').replaceAll("'", '').replaceAll('"', '')
-
-        let content = text.replace(`${firstLine}`, "").slice(0, -1)
-        const lines = content.split("\n")
-        content = lines.map(e => stripComments.stripPythonComments(e)).join('\n')
-
+        const uniqueId = Date.now();
+        const functionId = `${functionName.replaceAll(' ', '-').replaceAll("'", '').replaceAll('"', '')}-${uniqueId}`;
+    
+        let content = text.replace(`${firstLine}`, "").slice(0, -1);
+        const lines = content.split("\n");
+        content = lines.map(e => stripComments.stripPythonComments(e)).join('\n');
+    
         return `<div onclick="runCode(getCode('${functionId}'))" class="function_btn">${functionName}</div></br>` +
             `<div id="${functionId}" class="hidden">${content}</div>`;
     }
+    
 
     #get_imageText(text) {
         const firstLine = text.split("\n")[0]
