@@ -110,7 +110,7 @@ p{
     max-width: 1150px;
     width: 100vw;
     display: flex;
-    /* margin: auto; */
+    margin: auto;
     position: relative;
     top: 100px;
 }
