@@ -1,36 +1,42 @@
 <template>
-    <!-- <div class="header nav-padding">
-        <p>tts</p>
-        <button @click="saveToBoard('춤','네 춤출게요')">보드 저장</button>
-        <button @click="play('춤')">지정 재생</button>
-        <button @click="remove('하이')">지정 삭제</button>
-        <button @click="tempAudio('두번째 음성 테스트')">보드에 임시 저장 후 실행 - 삭제</button>
-        
-        <p>stt</p>
-        <button class="ui-left-font" id="fs-three" @click="handleClick()"> {{ isRecording ? 'Stop' : 'Start' }} </button>
-    </div> -->
-    <div class="list-page-wrap">
-        <div class="list-wrap">
-            <img :src="listImg"/>
-            <div class="list-top">
-                <div class="list-back-button" @click="historyBack">
-                    <div class="ico_arrow"></div>
-                </div>
-                <div class="title Pretendard-Medium">{{ subject.title }}</div>
-                <div class="description Pretendard-Regular" v-html="subject.description" ></div>
-            </div>
+    
+    <q-page>
 
-            <div class="list-container">
-                <div class="list-item" v-for="(item, index) in subject.lessons" :key="index" @click="goTo('/lesson/detail', { id: item.id, subjectTitle: subject.title, index: index+1, title: item.title, color: this.$route.query.color})">
-                    <div class="list-content">
-                        <span class="list-number Pretendard-Regular"
-                        :style="defaultBorderColor">{{ index + 1 }}차시</span>
-                        <span class="list-title Pretendard-Regular">{{ item.title }}</span>
+        <!-- <div class="header nav-padding">
+            <p>tts</p>
+            <button @click="saveToBoard('춤','네 춤출게요')">보드 저장</button>
+            <button @click="play('춤')">지정 재생</button>
+            <button @click="remove('하이')">지정 삭제</button>
+            <button @click="tempAudio('두번째 음성 테스트')">보드에 임시 저장 후 실행 - 삭제</button>
+            
+            <p>stt</p>
+            <button class="ui-left-font" id="fs-three" @click="handleClick()"> {{ isRecording ? 'Stop' : 'Start' }} </button>
+        </div> -->
+        <div class="list-page-wrap">
+            <div class="list-wrap">
+                <img :src="listImg"/>
+                <div class="list-top">
+                    <div class="list-back-button" @click="historyBack">
+                        <div class="ico_arrow"></div>
+                    </div>
+                    <div class="title Pretendard-Medium">{{ subject.title }}</div>
+                    <div class="description Pretendard-Regular" v-html="subject.description" ></div>
+                </div>
+
+                <div class="list-container">
+                    <div class="list-item" v-for="(item, index) in subject.lessons" :key="index" @click="goTo('/lesson/detail', { id: item.id, subjectTitle: subject.title, index: index+1, title: item.title, color: this.$route.query.color})">
+                        <div class="list-content">
+                            <span class="list-number Pretendard-Regular"
+                            :style="defaultBorderColor">{{ index + 1 }}차시</span>
+                            <span class="list-title Pretendard-Regular">{{ item.title }}</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    
+    </q-page>
+
 </template>
 
 <script>

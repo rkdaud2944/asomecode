@@ -1,9 +1,9 @@
 <template>
     <q-layout view="hHh lpr fFf" style=" height: calc(100vh - 36px);">
 
-        <div v-if="showHeaderMain">
+        <q-header  v-if="showHeaderMain">
             <HeaderMain />
-        </div>
+        </q-header>
 
         <q-page-container>
             <router-view />

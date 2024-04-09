@@ -151,7 +151,7 @@ export default {
                 const elementTop = element.getBoundingClientRect().top;
 
                 // 상단에서부터 200px~400px 내에 있는 요소에만 .active 클래스 적용
-                if (elementTop >= 200 && elementTop <= 400 && !activeFound) {
+                if (elementTop >= 190 && elementTop <= 400 && !activeFound) {
                 const id = element.id;
                 const activeTag = document.querySelector(`.tag-${id}`);
                 if (activeTag && !activeTag.classList.contains('tag-active')) {
@@ -165,6 +165,13 @@ export default {
                     });
                     // 현재 요소에 .active 클래스 추가
                     activeTag.classList.add('tag-active');
+                    
+                    // .objectives 스크롤 조정
+                    const objectives = document.querySelector('.objectives');
+                    const activeTagTop = activeTag.offsetTop;
+                    if (activeTagTop < 140 ){
+                        objectives.scrollTop = activeTagTop;
+                    }
                 }
                 activeFound = true; // 활성 상태 요소를 찾았음을 표시
                 }

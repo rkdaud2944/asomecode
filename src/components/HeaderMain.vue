@@ -1,5 +1,5 @@
 <template>
-    <nav class="header-nav">
+    <q-toolbar class="header-nav">
         <div class="main-logo" @click="this.$router.push({ path: `/`})">
             <img :src="logo" alt="logo" class="logo"/>
         </div>
@@ -76,7 +76,7 @@
             
             <div class="darken-background"></div>
         </div>
-    </nav>
+    </q-toolbar>
     
     <div class="update-modal" v-if="this.updateModal == true">
     <!-- <div class="update-modal"> -->

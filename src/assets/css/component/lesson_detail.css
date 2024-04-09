@@ -120,6 +120,7 @@ p{
     margin: auto;
     position: relative;
     top: 100px;
+    padding-bottom: 190px;
 }
 
 .objectives{
@@ -128,6 +129,11 @@ p{
     margin-top: 20px;
     height: 65vh;
     overflow: auto;
+    padding-bottom: 190px;
+}
+
+.objectives::-webkit-scrollbar {
+    display: none;
 }
 
 .objectives p{
