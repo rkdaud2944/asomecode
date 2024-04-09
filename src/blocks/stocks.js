@@ -10,7 +10,7 @@ Blockly.Blocks["basic_ready"] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("14A2FF");
-    this.setTooltip("어썸 봇 준비블록");
+    this.setTooltip("어썸봇 준비블록");
     this.setHelpUrl("https://example.com");
   },
 };
@@ -29,7 +29,7 @@ Blockly.Blocks["basic_attention"] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("14A2FF");
-    this.setTooltip("어썸 봇 차렷블록");
+    this.setTooltip("어썸봇 차렷블록");
   },
 };
 
