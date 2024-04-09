@@ -51,7 +51,7 @@ async function createWindow() {
         overrideBrowserWindowOptions: {
           alwaysOnTop : true, // 항상 다른 창 위에
           autoHideMenuBar: true, // 메뉴바 숨김
-          backgroundColor: 'black',
+          backgroundColor: '#fff',
           webPreferences: {
             preload: 'preload.js',
             devTools: !process.env.IS_TEST
