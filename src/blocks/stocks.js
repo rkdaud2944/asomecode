@@ -3118,7 +3118,7 @@ Blockly.Blocks["pro_kit1_8_ready"] = {
   init: function () {
     this.appendDummyInput()
     // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
-    .appendField("핀 연결하기")
+    .appendField("프로그램 준비 및 시작")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("14A2FF");
