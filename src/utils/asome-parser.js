@@ -109,6 +109,9 @@ class Scanner {
         } else if (text.startsWith("wifi")) {
             this.index = this.index + "wifi".length;
             this.onToken({ text: "[wifi", type: TokenType.BEGIN_MARK });
+        } else if (text.startsWith("openWifi")) {
+            this.index = this.index + "openWifi".length;
+            this.onToken({ text: "[openWifi", type: TokenType.BEGIN_MARK });
         } else if (text.startsWith("messenger")) {
             this.index = this.index + "messenger".length;
             this.onToken({ text: "[messenger", type: TokenType.BEGIN_MARK });
@@ -153,6 +156,7 @@ class Parser {
             case "[editor": return this.#get_editorText(this.buffer);
             case "[parts": return this.#get_partsText(this.buffer);
             case "[wifi": return this.#get_wifi_Text();
+            case "[openWifi": return this.#get_wifi_open_Text();
             case "[messenger": return this.#get_asome_messenger_Text();
         }
     }
@@ -247,6 +251,17 @@ class Parser {
 
             `<div onclick="runCode(getCode('인터넷-연결하기'))" class="function_btn">인터넷 연결하기</div></br>` +
             `<div id="인터넷-연결하기" class="hidden"></div>`;
+    }
+
+    #get_wifi_open_Text() {    // 인터넷 오픈     
+        return `<div class="input-group">
+          <span class="input-group-addon"><i class="q-icon material-icons">wifi</i></span>
+          <input class="form-control" type="text" id="wifi_open" placeholder="공유기 이름 (SSID)" onchange="openWifiInfo()">
+        </div>`+
+        
+
+            `<div onclick="runCode(getCode('asome-wifi-open'))" class="function_btn">확인</div></br>` +
+            `<div id="asome-wifi-open" class="hidden"></div>`;
     }
 
     #get_asome_messenger_Text() {

@@ -50,6 +50,12 @@ const bridge = {
             `import internet; internet.connect('${wifiName}', '${wifiPassword}')`;
     },
 
+    openWifiInfo() {
+        const wifi_open = document.getElementById('wifi_open').value;
+        document.getElementById("asome-wifi-open").innerText =
+            `import internet; internet.open_ap('${wifi_open}')`
+    },
+
     setAsomeMessengerInfo() {
         const connectCode = document.getElementById('asome_connect_code').value;
         const msg = document.getElementById('asome_msg').value;
@@ -76,6 +82,7 @@ window.getCode = bridge.getCode;
 window.runCode = bridge.runCode;
 window.openEditor = bridge.openEditor;
 window.setWifiInfo = bridge.setWifiInfo;
+window.openWifiInfo = bridge.openWifiInfo;
 window.setAsomeMessengerInfo = bridge.setAsomeMessengerInfo;
 window.presentSession = bridge.presentSession;
 
