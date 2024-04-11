@@ -191,6 +191,14 @@ const seiral = {
         this.runCode(codeViewFile(filename));
     },
 
+    runFile(filename) {
+        this.runCode(codeRunFile(filename));
+    },
+
+    deleteFile(filename) {
+        this.runCode(codeDeleteFile(filename));
+    },
+
     async runCode(codes) {
         console.log("runCode", codes);
 
@@ -271,6 +279,15 @@ while True:
 f.close()
 print("### System.End.View")`;
 }
+
+function codeRunFile(filename) {
+    return `import disk;disk.run('${filename}')\r\n`;
+}
+
+function codeDeleteFile(filename) {
+    return `import os; os.remove('${filename}')\r\n`;
+}
+
 
 function currentTime() {
     const now = new Date();

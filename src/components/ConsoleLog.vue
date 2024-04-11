@@ -179,6 +179,18 @@ export default {
                 this.text = "";
                 return;
             }
+
+            if (this.text.startsWith("/run")) {
+                serial.runFile(this.text.split(" ")[1]);
+                this.text = "";
+                return;
+            }
+
+            if (this.text.startsWith("/del")) {
+                serial.deleteFile(this.text.split(" ")[1]);
+                this.text = "";
+                return;
+            }
             
             if (this.text.startsWith("/blockcoding") || this.text.startsWith("/blockCoding")) {
                 localStorage.removeItem("lessonBlock")
