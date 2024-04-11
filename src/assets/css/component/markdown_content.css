@@ -238,6 +238,13 @@ a {
     color: white;
 }
 
+.markdown-btn-img{
+    display: inline;
+    zoom: 0.8;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
 @media all and (min-width:722px) and (max-width:8000px) {
     .markdown_output .parts_comment_bar {
         font-size: 1em;

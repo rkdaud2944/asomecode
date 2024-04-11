@@ -97,6 +97,9 @@ class Scanner {
         } else if (text.startsWith("image")) {
             this.index = this.index + "image".length;
             this.onToken({ text: "[image", type: TokenType.BEGIN_MARK });
+        }  else if (text.startsWith("imgButton")) {
+            this.index = this.index + "imgButton".length;
+            this.onToken({ text: "[imgButton", type: TokenType.BEGIN_MARK });
         } else if (text.startsWith("video")) {
             this.index = this.index + "video".length;
             this.onToken({ text: "[video", type: TokenType.BEGIN_MARK });
@@ -109,9 +112,6 @@ class Scanner {
         } else if (text.startsWith("wifi")) {
             this.index = this.index + "wifi".length;
             this.onToken({ text: "[wifi", type: TokenType.BEGIN_MARK });
-        } else if (text.startsWith("openWifi")) {
-            this.index = this.index + "openWifi".length;
-            this.onToken({ text: "[openWifi", type: TokenType.BEGIN_MARK });
         } else if (text.startsWith("messenger")) {
             this.index = this.index + "messenger".length;
             this.onToken({ text: "[messenger", type: TokenType.BEGIN_MARK });
@@ -151,12 +151,13 @@ class Parser {
     #get_markText() {
         switch (this.markType) {
             case "[button": return this.#get_buttonText(this.buffer);
+            case "[imgButton": return this.#get_buttonImg(this.buffer);
             case "[image": return this.#get_imageText(this.buffer);
             case "[video": return this.#get_videoText(this.buffer);
             case "[editor": return this.#get_editorText(this.buffer);
             case "[parts": return this.#get_partsText(this.buffer);
             case "[wifi": return this.#get_wifi_Text();
-            case "[openWifi": return this.#get_wifi_open_Text();
+            case "[wifi-open": return this.#get_wifi_open_Text();
             case "[messenger": return this.#get_asome_messenger_Text();
         }
     }
@@ -174,8 +175,24 @@ class Parser {
         return `<div onclick="runCode(getCode('${functionId}'))" class="function_btn">${functionName}</div></br>` +
             `<div id="${functionId}" class="hidden">${content}</div>`;
     }
-    
 
+    #get_buttonImg(text) {
+        const firstLine = text.split("\n")[0]
+        let functionImg = firstLine.replace("[imgButton ", "")
+        const functionName = firstLine.replace(/\[imgButton |\.png/g, "");
+        const uniqueId = Date.now();
+        const functionId = `${functionName.replaceAll(' ', '-').replaceAll("'", '').replaceAll('"', '')}-${uniqueId}`;
+        let content = text.replace(`${firstLine}`, "").slice(0, -1);
+
+        if (functionImg.charAt(0) != '/')
+        functionImg = this.lessonContentBaseUrl + "lesson/images/btn-image/" + functionImg // S3 파일
+
+        return `<div class="">
+            <img class="markdown-btn-img" src="${functionImg}"  onclick="runCode(getCode('${functionId}'))"/></div></br>` +
+        `<div id="${functionId}" class="hidden">${content}</div>`
+
+    }
+    
     #get_imageText(text) {
         const firstLine = text.split("\n")[0]
         const imageTitle = firstLine.substring(firstLine.indexOf('(') + 1, firstLine.indexOf(')'))
@@ -256,12 +273,12 @@ class Parser {
     #get_wifi_open_Text() {    // 인터넷 오픈     
         return `<div class="input-group">
           <span class="input-group-addon"><i class="q-icon material-icons">wifi</i></span>
-          <input class="form-control" type="text" id="wifi_open" placeholder="공유기 이름 (SSID)" onchange="openWifiInfo()">
+          <input class="form-control" type="text" id="wifi_open" placeholder="공유기 이름 (SSID)" onchange="openWifi()">
         </div>`+
         
 
-            `<div onclick="runCode(getCode('asome-wifi-open'))" class="function_btn">확인</div></br>` +
-            `<div id="asome-wifi-open" class="hidden"></div>`;
+            `<div onclick="runCode(getCode('asome-messenger'))" class="function_btn">g</div></br>` +
+            `<div id="asome-messenger" class="hidden"></div>`;
     }
 
     #get_asome_messenger_Text() {
