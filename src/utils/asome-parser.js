@@ -115,7 +115,10 @@ class Scanner {
         } else if (text.startsWith("messenger")) {
             this.index = this.index + "messenger".length;
             this.onToken({ text: "[messenger", type: TokenType.BEGIN_MARK });
-        } else {
+        } else if (text.startsWith("botBase")) {
+            this.index = this.index + "botBase".length;
+            this.onToken({ text: "[botBase", type: TokenType.BEGIN_MARK });
+        }else {
             this.onToken({ text: "[", type: TokenType.TEXT });
         }
         this.state = State.BASE;
@@ -159,6 +162,7 @@ class Parser {
             case "[wifi": return this.#get_wifi_Text();
             case "[wifi-open": return this.#get_wifi_open_Text();
             case "[messenger": return this.#get_asome_messenger_Text();
+            case "[botBase": return this.#get_botBase();
         }
     }
 
@@ -293,5 +297,16 @@ class Parser {
 
             `<div onclick="runCode(getCode('asome-messenger'))" class="function_btn">전송</div></br>` +
             `<div id="asome-messenger" class="hidden"></div>`;
+    }
+
+    #get_botBase() {
+        return `<div class="bot-base-from input-group" style="width: 50%;">
+                    <span class="input-group-addon"><i class="q-icon material-icons">settings</i></span>
+                    <input class="form-control" type="text" id='align01' value="90" placeholder="1번 모터 중심 값"/>  
+                    <input class="form-control" type="text" id='align02' value="90" placeholder="2번 모터 중심 값"/>  
+                    <input class="form-control" type="text" id='align03' value="90" placeholder="3번 모터 중심 값"/>  
+                    <input class="form-control" type="text" id='align04' value="90" placeholder="4번 모터 중심 값"/>  
+                </div>
+                `
     }
 }

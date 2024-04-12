@@ -220,8 +220,56 @@ a {
     border: 1px solid transparent;
     border-radius: 4px;
     cursor: pointer;
-    
+    color: #fff;
     background-color: #59CB52;
+}
+
+.markdown_output .block-coding-view-btn:hover {
+    color: #fff;
+    background-color: #449d44;
+    border-color: #398439;
+}
+
+.markdown_output .blue-color-btn {
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+.markdown_output .blue-color-btn:hover {
+    color: #fff;
+    background-color: #286090;
+    border-color: #204d74;
+}
+
+.markdown_output .red-color-btn {
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+
+.markdown_output .red-color-btn:hover {
+    color: #fff;
+    background-color: #c9302c;
+    border-color: #ac2925;
 }
 
 .markdown_output .driver-download-btn {
@@ -243,6 +291,24 @@ a {
     zoom: 0.8;
     margin-left: 20px;
     cursor: pointer;
+}
+
+.bot-base-from {
+    margin-bottom: 15px;
+    margin-left: 10px;
+    position: relative;
+    display: table;
+    border-collapse: separate;
+}
+
+.bot-base-from > .input-group-addon, .bot-base-from > .form-control {
+    display: table-cell;
+    vertical-align: middle; /* 추가된 부분 */
+}
+
+.input-group-addon {
+    margin: 0;
+    display: flex;
 }
 
 @media all and (min-width:722px) and (max-width:8000px) {
