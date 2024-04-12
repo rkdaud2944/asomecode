@@ -301,7 +301,7 @@ class Parser {
 
     #get_botBase() {
         return `<div class="bot-base-from input-group" style="width: 50%;">
-                    <span class="input-group-addon"><i class="q-icon material-icons">settings</i></span>
+                    <span class="input-group-addon bot-base"><i class="q-icon material-icons">settings</i></span>
                     <input class="form-control" type="text" id='align01' value="90" placeholder="1번 모터 중심 값"/>  
                     <input class="form-control" type="text" id='align02' value="90" placeholder="2번 모터 중심 값"/>  
                     <input class="form-control" type="text" id='align03' value="90" placeholder="3번 모터 중심 값"/>  

@@ -301,12 +301,12 @@ a {
     border-collapse: separate;
 }
 
-.bot-base-from > .input-group-addon, .bot-base-from > .form-control {
+.bot-base-from > .bot-base, .bot-base-from > .form-control {
     display: table-cell;
     vertical-align: middle; /* 추가된 부분 */
 }
 
-.input-group-addon {
+.bot-base {
     margin: 0;
     display: flex;
 }
