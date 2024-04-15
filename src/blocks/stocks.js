@@ -2711,6 +2711,23 @@ javascriptGenerator["pro_kit1_4_ready"] = function () {
   return code;
 };
 
+Blockly.Blocks["pro_kit1_4_turnoff_pins"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
+    .appendField("모든 핀 전기공급 중단")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("14A2FF");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["pro_kit1_4_turnoff_pins"] = function () {
+  let code = 'turnoff_pins()\n';
+  return code;
+};
+
 Blockly.Blocks["zet_kit1_4_red_led_on"] = {
   init: function () {
     this.appendDummyInput()
@@ -2904,6 +2921,40 @@ javascriptGenerator["pro_kit1_6_ready"] = function () {
   return code;
 };
 
+Blockly.Blocks["pro_kit1_6_mute"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('소리 멈추기')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("ec1961");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["pro_kit1_6_mute"] = function () {
+  let code = 'music.mute()\n';
+  return code;
+};
+
+Blockly.Blocks["pro_kit1_6_tone_400"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('1초당 400번 진동수 소리 내기')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("ec1961");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["pro_kit1_6_tone_400"] = function () {
+  let code = 'music.tone(400)\n';
+  return code;
+};
+
 Blockly.Blocks["zet_kit1_6_do"] = {
   init: function () {
     this.appendDummyInput()
@@ -3057,6 +3108,159 @@ Blockly.Blocks["pro_kit1_7_ready"] = {
 
 javascriptGenerator["pro_kit1_7_ready"] = function () {
   let code = 'red = ServoPin(17)\ngreen = ServoPin(18)\nblue = ServoPin(19)\n';
+  return code;
+};
+
+Blockly.Blocks["pro_kit1_7_red_max"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('빨간색 최대 밝기로 켜기')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF61FF");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["pro_kit1_7_red_max"] = function () {
+  let code = 'red.duty(1023)\n';
+  return code;
+};
+
+Blockly.Blocks["pro_kit1_7_green_max"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('초록색 최대 밝기로 켜기')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF61FF");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["pro_kit1_7_green_max"] = function () {
+  let code = 'green.duty(1023)\n';
+  return code;
+};
+
+Blockly.Blocks["pro_kit1_7_blue_max"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('파란색 최대 밝기로 켜기')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF61FF");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["pro_kit1_7_blue_max"] = function () {
+  let code = 'blue.duty(1023)\n';
+  return code;
+};
+
+Blockly.Blocks["pro_kit1_7_red_mid"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('빨간색 중간 밝기로 켜기')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF61FF");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["pro_kit1_7_red_mid"] = function () {
+  let code = 'red.duty(64)\n';
+  return code;
+};
+
+Blockly.Blocks["pro_kit1_7_green_mid"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('초록색 중간 밝기로 켜기')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF61FF");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["pro_kit1_7_green_mid"] = function () {
+  let code = 'green.duty(64)\n';
+  return code;
+};
+
+Blockly.Blocks["pro_kit1_7_blue_mid"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('파란색 중간 밝기로 켜기')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF61FF");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["pro_kit1_7_blue_mid"] = function () {
+  let code = 'blue.duty(64)\n';
+  return code;
+};
+
+Blockly.Blocks["pro_kit1_7_red_off"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('빨간색 끄기')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF61FF");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["pro_kit1_7_red_off"] = function () {
+  let code = 'red.duty(0)\n';
+  return code;
+};
+
+Blockly.Blocks["pro_kit1_7_green_off"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('초록색 끄기')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF61FF");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["pro_kit1_7_green_off"] = function () {
+  let code = 'green.duty(0)\n';
+  return code;
+};
+
+Blockly.Blocks["pro_kit1_7_blue_off"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('파란색 끄기')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF61FF");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["pro_kit1_7_blue_off"] = function () {
+  let code = 'blue.duty(0)\n';
   return code;
 };
 
@@ -3626,6 +3830,23 @@ javascriptGenerator["pro_kit1_13_ready"] = function () {
   return code;
 };
 
+Blockly.Blocks["pro_kit1_13_bibration_active"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('진동센서 값 확인')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FFCD00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["pro_kit1_13_bibration_active"] = function () {
+  let code = 'sensor.is_active()\n';
+  return code;
+};
+
 Blockly.Blocks["zet_kit1_13_vibration_detection"] = {
   init: function () {
     this.appendDummyInput()
@@ -3695,6 +3916,23 @@ Blockly.Blocks["pro_kit1_14_soil_sensor_show"] = {
 
 javascriptGenerator["pro_kit1_14_soil_sensor_show"] = function () {
   let code = 'soil_sensor.show()\n';
+  return code;
+};
+
+Blockly.Blocks["pro_kit1_14_soil_read"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('토양습도센서 값 확인')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FFCD00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["pro_kit1_14_soil_read"] = function () {
+  let code = 'soil_sensor.read()\n';
   return code;
 };
 
@@ -3945,6 +4183,25 @@ Blockly.Blocks["zet_kit2_1_for_100"] = {
 javascriptGenerator["zet_kit2_1_for_100"] = function (block) {
   let branch = javascriptGenerator.statementToCode(block, 'while_state');
   var code = 'for i in range(100):\n' + branch;
+  return code;
+};
+
+Blockly.Blocks["zet_kit2_1_for_10"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("10번 반복하기")
+    this.appendStatementInput('while_state')
+    .appendField('');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("50a560");
+  },
+};  
+
+javascriptGenerator["zet_kit2_1_for_10"] = function (block) {
+  let branch = javascriptGenerator.statementToCode(block, 'while_state');
+  var code = 'for i in range(10):\n' + branch;
   return code;
 };
 
@@ -4883,6 +5140,74 @@ javascriptGenerator["zet_kit2_9_if_bt2_clicked"] = function (block) {
   return code;
 };
 
+Blockly.Blocks["pro_kit2_9_nomal_mode"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("평상시 모드")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["pro_kit2_9_nomal_mode"] = function () {
+  let code = 'timer.set_mode(2)\n';
+  return code;
+};
+
+Blockly.Blocks["pro_kit2_9_min_mode"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("분 수정 모드")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["pro_kit2_9_min_mode"] = function () {
+  let code = 'timer.set_mode(0)\n';
+  return code;
+};
+
+Blockly.Blocks["pro_kit2_9_sec_mode"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("초 수정 모드")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["pro_kit2_9_sec_mode"] = function () {
+  let code = 'timer.set_mode(1)\n';
+  return code;
+};
+
+Blockly.Blocks["pro_kit2_9_mode_plus_1"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("현재 모드의 숫자 1만큼 더하기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["pro_kit2_9_mode_plus_1"] = function () {
+  let code = 'timer.set_value(timer.value() + 1)\n';
+  return code;
+};
+
 Blockly.Blocks["zet_kit2_9_change_mode"] = {
   init: function () {
     this.appendDummyInput()
@@ -5284,6 +5609,23 @@ javascriptGenerator["zet_kit2_12_cannon_power"] = function () {
   return code;
 };
 
+Blockly.Blocks["zet_kit2_12_cannon_angle_45"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("대포 각도 변경 (-45도)")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["zet_kit2_12_cannon_angle_45"] = function () {
+  let code = 'cannon.set_angle(-45)\n';
+  return code;
+};
+
 Blockly.Blocks["zet_kit2_12_cannon_angle"] = {
   init: function () {
     this.appendDummyInput()
@@ -5643,6 +5985,23 @@ javascriptGenerator["zet_kit2_15_rain"] = function () {
   return code;
 };
 
+Blockly.Blocks["zet_kit2_15_off"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("LED 튜브 끄기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF61FF");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["zet_kit2_15_off"] = function () {
+  let code = 'tm1637.write([0, 0, 0, 0])\n';
+  return code;
+};
+
 Blockly.Blocks["pro_kit2_15_water_sensor_show"] = {
   init: function () {
     this.appendDummyInput()
@@ -5775,6 +6134,23 @@ Blockly.Blocks["zet_kit2_16_distance"] = {
 
 javascriptGenerator["zet_kit2_16_distance"] = function () {
   let code = 'cm = hcsr04.get_distance()\n';
+  return code;
+};
+
+Blockly.Blocks["zet_kit2_16_change_value"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("변화량 측정하기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FFCD00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["zet_kit2_16_change_value"] = function () {
+  let code = 'cm = hcsr04.get_distance()\nprint(abs(cm - old_cm))\nold_cm = cm\n';
   return code;
 };
 
@@ -6587,6 +6963,57 @@ javascriptGenerator["code_bot_1_cm_angle"] = function () {
   return code;
 };
 
+Blockly.Blocks["code_bot_1_left"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("왼쪽으로 회전")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["code_bot_1_left"] = function () {
+  let code = 's.angle(0)\n';
+  return code;
+};
+
+Blockly.Blocks["code_bot_1_right"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("오른쪽으로 회전")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["code_bot_1_right"] = function () {
+  let code = 's.angle(180)\n';
+  return code;
+};
+
+Blockly.Blocks["code_bot_1_stop"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("멈추기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["code_bot_1_stop"] = function () {
+  let code = 's.duty(0)\n';
+  return code;
+};
+
 Blockly.Blocks["code_bot_1_distance"] = {
   init: function () {
     this.appendDummyInput()
@@ -6821,6 +7248,23 @@ if cm < 0:
   return code;
 };
 
+Blockly.Blocks["code_bot_4_distance_print"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("거리 화면 표시")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FFCD00");
+    this.setHelpUrl("https://example.com");
+  },
+};
+
+javascriptGenerator["code_bot_4_distance_print"] = function () {
+  let code = 'print(hcsr04.get_distance())\n';
+  return code;
+};
+
 Blockly.Blocks["code_bot_4_if_cm_10"] = {
   init: function () {
     this.appendDummyInput()
@@ -6907,6 +7351,25 @@ Blockly.Blocks["code_bot_5_read_text"] = {
 
 javascriptGenerator["code_bot_5_read_text"] = function () {
   let code = 'msg = s.read_text()\n';
+  return code;
+};
+
+Blockly.Blocks["code_bot_5_if_msg"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("메시지를 받았는가?")
+    this.appendStatementInput('while_state')
+    .appendField('');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("b666fc");
+  },
+};  
+
+javascriptGenerator["code_bot_5_if_msg"] = function (block) {
+  let branch = javascriptGenerator.statementToCode(block, 'while_state');
+  var code = "if msg:\n" + branch;
   return code;
 };
 
@@ -7002,6 +7465,23 @@ Blockly.Blocks["code_bot_5_if_r"] = {
 javascriptGenerator["code_bot_5_if_r"] = function (block) {
   let branch = javascriptGenerator.statementToCode(block, 'while_state');
   var code = "if msg == 'R':\n" + branch;
+  return code;
+};
+
+Blockly.Blocks["code_bot_5_print_msg"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("메시지 화면 표시")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("50a560");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["code_bot_5_print_msg"] = function () {
+  let code = 'print(msg)\n';
   return code;
 };
 
@@ -7109,6 +7589,108 @@ javascriptGenerator["code_bot_6_3m_minus"] = function () {
   return code;
 };
 
+Blockly.Blocks["code_bot_6_right_out"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("오른발을 바깥쪽으로 최대 접기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["code_bot_6_right_out"] = function () {
+  let code = 'asomebot.angle(3, 0)\n';
+  return code;
+};
+
+Blockly.Blocks["code_bot_6_right_in"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("오른발을 안쪽으로 최대 접기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["code_bot_6_right_in"] = function () {
+  let code = 'asomebot.angle(3, 180)\n';
+  return code;
+};
+
+Blockly.Blocks["code_bot_6_right_home"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("오른발을 원래 위치로")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["code_bot_6_right_home"] = function () {
+  let code = 'asomebot.angle(3, 180)\n';
+  return code;
+};
+
+Blockly.Blocks["code_bot_6_left_out"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("왼발을 바깥쪽으로 최대 접기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["code_bot_6_left_out"] = function () {
+  let code = 'asomebot.angle(2, 0)\n';
+  return code;
+};
+
+Blockly.Blocks["code_bot_6_left_in"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("왼발을 안쪽으로 최대 접기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["code_bot_6_left_in"] = function () {
+  let code = 'asomebot.angle(2, 180)\n';
+  return code;
+};
+
+Blockly.Blocks["code_bot_6_left_home"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("왼발을 원래 위치로")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["code_bot_6_left_home"] = function () {
+  let code = 'asomebot.angle(2, 180)\n';
+  return code;
+};
+
 Blockly.Blocks["code_bot_6_for_60"] = {
   init: function () {
     this.appendDummyInput()
@@ -7128,6 +7710,25 @@ javascriptGenerator["code_bot_6_for_60"] = function (block) {
   return code;
 };
 
+Blockly.Blocks["code_bot_6_for_30"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("30번 반복하기")
+    this.appendStatementInput('while_state')
+    .appendField('');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("50a560");
+  },
+};  
+
+javascriptGenerator["code_bot_6_for_30"] = function (block) {
+  let branch = javascriptGenerator.statementToCode(block, 'while_state');
+  var code = "for i in range(30):\n" + branch;
+  return code;
+};
+
 // Session 03.07
 
 Blockly.Blocks["code_bot_7_ready"] = {
@@ -7144,6 +7745,23 @@ Blockly.Blocks["code_bot_7_ready"] = {
 
 javascriptGenerator["code_bot_7_ready"] = function () {
   let code = 'import asomebot\nimport utime\nasomebot.ready(5, 6, 7, 8)\n';
+  return code;
+};
+
+Blockly.Blocks["code_bot_7_ticks_ms"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("어썸보드 사용시간 구하기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("50a560");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["code_bot_7_ticks_ms"] = function () {
+  let code = 'utime.ticks_ms()\n';
   return code;
 };
 
@@ -7230,7 +7848,7 @@ Blockly.Blocks["code_bot_8_forward"] = {
 };  
 
 javascriptGenerator["code_bot_8_forward"] = function () {
-  let code = 'asomebot.forward()()\n';
+  let code = 'asomebot.forward()\n';
   return code;
 };
 
@@ -7403,7 +8021,7 @@ Blockly.Blocks["code_bot_9_add_do"] = {
   init: function () {
     this.appendDummyInput()
     // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
-    .appendField('3옥타브 "도" 한 박자 음계 추가')
+    .appendField('4옥타브 "도" 한 박자 음표 추가')
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("ec1961");
@@ -7412,7 +8030,7 @@ Blockly.Blocks["code_bot_9_add_do"] = {
 };  
 
 javascriptGenerator["code_bot_9_add_do"] = function () {
-  let code = 'music_player.add("C3", 300)\n';
+  let code = 'music_player.add("C4", 300)\n';
   return code;
 };
 
@@ -7420,7 +8038,7 @@ Blockly.Blocks["code_bot_9_add_re"] = {
   init: function () {
     this.appendDummyInput()
     // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
-    .appendField('3옥타브 "레" 한 박자 음계 추가')
+    .appendField('4옥타브 "레" 한 박자 음표 추가')
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("ec1961");
@@ -7429,7 +8047,7 @@ Blockly.Blocks["code_bot_9_add_re"] = {
 };  
 
 javascriptGenerator["code_bot_9_add_re"] = function () {
-  let code = 'music_player.add("D3", 300)\n';
+  let code = 'music_player.add("D4", 300)\n';
   return code;
 };
 
@@ -7437,7 +8055,7 @@ Blockly.Blocks["code_bot_9_add_mi"] = {
   init: function () {
     this.appendDummyInput()
     // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
-    .appendField('3옥타브 "미" 한 박자 음계 추가')
+    .appendField('4옥타브 "미" 한 박자 음표 추가')
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("ec1961");
@@ -7446,7 +8064,92 @@ Blockly.Blocks["code_bot_9_add_mi"] = {
 };  
 
 javascriptGenerator["code_bot_9_add_mi"] = function () {
-  let code = 'music_player.add("E3", 300)\n';
+  let code = 'music_player.add("E4", 300)\n';
+  return code;
+};
+
+Blockly.Blocks["code_bot_9_add_fa"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('4옥타브 "파" 한 박자 음표 추가')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("ec1961");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["code_bot_9_add_fa"] = function () {
+  let code = 'music_player.add("F4", 300)\n';
+  return code;
+};
+
+Blockly.Blocks["code_bot_9_add_so"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('4옥타브 "솔" 한 박자 음표 추가')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("ec1961");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["code_bot_9_add_so"] = function () {
+  let code = 'music_player.add("G4", 300)\n';
+  return code;
+};
+
+Blockly.Blocks["code_bot_9_add_la"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('4옥타브 "라" 한 박자 음표 추가')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("ec1961");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["code_bot_9_add_la"] = function () {
+  let code = 'music_player.add("A4", 300)\n';
+  return code;
+};
+
+Blockly.Blocks["code_bot_9_add_ti"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('4옥타브 "시" 한 박자 음표 추가')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("ec1961");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["code_bot_9_add_ti"] = function () {
+  let code = 'music_player.add("B4", 300)\n';
+  return code;
+};
+
+Blockly.Blocks["code_bot_9_add_h_do"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('5옥타브 "도" 한 박자 음표 추가')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("ec1961");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["code_bot_9_add_h_do"] = function () {
+  let code = 'music_player.add("C5", 300)\n';
   return code;
 };
 
@@ -7585,6 +8288,23 @@ javascriptGenerator["code_bot_11_ready"] = function () {
   return code;
 };
 
+Blockly.Blocks["code_bot_11_home"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("차렷하기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("14A2FF");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["code_bot_11_home"] = function () {
+  let code = 'asomebot.home()\n';
+  return code;
+};
+
 Blockly.Blocks["code_bot_11_forward_1"] = {
   init: function () {
     this.appendDummyInput()
@@ -7686,6 +8406,23 @@ Blockly.Blocks["code_bot_12_ready"] = {
 
 javascriptGenerator["code_bot_12_ready"] = function () {
   let code = 'import asomebot\nasomebot.ready(5, 6, 7, 8)\nasomebot.home()\n';
+  return code;
+};
+
+Blockly.Blocks["code_bot_12_home"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("차렷하기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("14A2FF");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["code_bot_12_home"] = function () {
+  let code = 'asomebot.home()\n';
   return code;
 };
 
@@ -7876,6 +8613,74 @@ if cm < 0:
   return code;
 };
 
+Blockly.Blocks["code_bot_14_pass"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("무시")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("50a560");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["code_bot_14_pass"] = function () {
+  var code = "pass\n";
+  return code;
+};
+
+Blockly.Blocks["code_bot_14_change_close"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("close 상태로 변경")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("50a560");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["code_bot_14_change_close"] = function () {
+  var code = "state = close\n";
+  return code;
+};
+
+Blockly.Blocks["code_bot_14_change_ready"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("ready 상태로 변경")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("50a560");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["code_bot_14_change_ready"] = function () {
+  var code = "state = ready\n";
+  return code;
+};
+
+Blockly.Blocks["code_bot_14_print_stop"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('"stop"표시')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("50a560");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["code_bot_14_print_stop"] = function () {
+  var code = 'print("stop")\n';
+  return code;
+};
+
 Blockly.Blocks["code_bot_14_100_ready"] = {
   init: function () {
     this.appendDummyInput()
@@ -7953,6 +8758,54 @@ Blockly.Blocks["code_bot_14_if_close"] = {
 javascriptGenerator["code_bot_14_if_close"] = function (block) {
   let branch = javascriptGenerator.statementToCode(block, 'while_state');
   var code = "if state == close:\n" + branch;
+  return code;
+};
+
+Blockly.Blocks["code_bot_14_if_100"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("거리가 100cm 보다 큰가?")
+    this.appendStatementInput('while_state')
+    .appendField('');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("50a560");
+  },
+};  
+
+javascriptGenerator["code_bot_14_if_100"] = function (block) {
+  let branch = javascriptGenerator.statementToCode(block, 'while_state');
+  var code = "if cm > 100:\n" + branch;
+  return code;
+};
+
+Blockly.Blocks["code_bot_14_if_elif"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('거리가 100cm보다 큰가?')
+    this.setPreviousStatement(true, null);
+    // this.setNextStatement(true, "String");
+    this.setColour("50a560");
+    this.setHelpUrl("https://example.com");
+    
+    // this.appendValueInput("if_value")
+    //   .setCheck("센서 값이 50이 넘는가?")
+    this.appendStatementInput('if_state')
+      .appendField('')
+    this.appendStatementInput('if_state_else')
+      .appendField('아니면 20cm보다 작은가?');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setInputsInline(true);
+  },
+};  
+
+javascriptGenerator["code_bot_14_if_elif"] = function (block) {
+  const variable = javascriptGenerator.statementToCode(block, 'if_state');
+  const ineq = javascriptGenerator.statementToCode(block, 'if_state_else');
+  var code = 'if cm > 100:\n'+variable+'elif cm < 20:\n'+ineq;
   return code;
 };
 
@@ -8040,6 +8893,23 @@ Blockly.Blocks["code_bot_15_motion_get"] = {
 
 javascriptGenerator["code_bot_15_motion_get"] = function () {
   let code = 'command = motion.get()\n';
+  return code;
+};
+
+Blockly.Blocks["code_bot_15_command_3"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("모션 화면 표시")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FFCD00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["code_bot_15_command_3"] = function () {
+  let code = 'if command > 3:\n\tprint(command)\n';
   return code;
 };
 
@@ -8135,6 +9005,23 @@ Blockly.Blocks["code_car_1_ready"] = {
 
 javascriptGenerator["code_car_1_ready"] = function () {
   let code = 'import hcsr04\ns = ServoPin(8)\nhcsr04.open(5, 6)\n';
+  return code;
+};
+
+Blockly.Blocks["code_car_1_stop"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("멈추기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["code_car_1_stop"] = function () {
+  let code = 's.duty(0)\n';
   return code;
 };
 
@@ -8562,6 +9449,25 @@ javascriptGenerator["code_car_4_read_text"] = function () {
   return code;
 };
 
+Blockly.Blocks["code_car_4_if_msg"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("메시지를 받았는가?")
+    this.appendStatementInput('while_state')
+    .appendField('');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("b666fc");
+  },
+};  
+
+javascriptGenerator["code_car_4_if_msg"] = function (block) {
+  let branch = javascriptGenerator.statementToCode(block, 'while_state');
+  var code = "if msg:\n" + branch;
+  return code;
+};
+
 Blockly.Blocks["code_car_4_msg_h"] = {
   init: function () {
     this.appendDummyInput()
@@ -8657,6 +9563,23 @@ javascriptGenerator["code_car_4_msg_r"] = function (block) {
   return code;
 };
 
+Blockly.Blocks["code_car_4_print_msg"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("메시지 화면 표시")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("50a560");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["code_car_4_print_msg"] = function () {
+  let code = 'print(msg)\n';
+  return code;
+};
+
 // Session 04.05
 
 Blockly.Blocks["code_car_5_ready"] = {
@@ -8673,6 +9596,23 @@ Blockly.Blocks["code_car_5_ready"] = {
 
 javascriptGenerator["code_car_5_ready"] = function () {
   let code = 'servo = ServoPin(8)\nsensor = AnalogPin()\n';
+  return code;
+};
+
+Blockly.Blocks["code_car_5_sensor_read"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("센서 측정값 표시")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FFCD00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["code_car_5_sensor_read"] = function () {
+  let code = 'print(sensor.read())\n';
   return code;
 };
 
@@ -8758,6 +9698,23 @@ javascriptGenerator["code_car_6_ready"] = function () {
   return code;
 };
 
+Blockly.Blocks["code_car_6_sensor_read"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("라인 트래킹 센서값 확인하기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FFCD00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["code_car_6_sensor_read"] = function () {
+  let code = 'print(line_sensor.read())\n';
+  return code;
+};
+
 Blockly.Blocks["code_car_6_move_forward"] = {
   init: function () {
     this.appendDummyInput()
@@ -8765,7 +9722,7 @@ Blockly.Blocks["code_car_6_move_forward"] = {
     .appendField("앞으로 직진")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
-    this.setColour("14A2FF");
+    this.setColour("FF9A00");
     this.setHelpUrl("https://example.com");
   },
 };  
@@ -8851,6 +9808,74 @@ javascriptGenerator["code_car_7_ready"] = function () {
   return code;
 };
 
+Blockly.Blocks["code_car_7_move_stop"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("멈추기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["code_car_7_move_stop"] = function () {
+  let code = 'asomecar.stop()\n';
+  return code;
+};
+
+Blockly.Blocks["code_car_7_move_forward"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("앞으로 전진")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["code_car_7_move_forward"] = function () {
+  let code = 'asomecar.forward()\n';
+  return code;
+};
+
+Blockly.Blocks["code_car_7_fast_speed"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("최대 속도로 설정")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["code_car_7_fast_speed"] = function () {
+  let code = 'forward_speed = (140, 1, 140, 1)\nbackward_speed = (1, 140, 1, 140)\n';
+  return code;
+};
+
+Blockly.Blocks["code_car_7_slow_speed"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("느린속도로 설정")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["code_car_7_slow_speed"] = function () {
+  let code = 'forward_speed = (80, 60, 80, 60)\nbackward_speed = (60, 80, 60, 80)\n';
+  return code;
+};
+
 Blockly.Blocks["code_car_7_fasts_minus"] = {
   init: function () {
     this.appendDummyInput()
@@ -8899,6 +9924,57 @@ Blockly.Blocks["code_car_7_print_fasts"] = {
 
 javascriptGenerator["code_car_7_print_fasts"] = function () {
   let code = 'print(asomecar.forward_fasts)\n';
+  return code;
+};
+
+Blockly.Blocks["code_car_7_print_i"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("반복 횟수 결과창에 표시")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("50a560");
+    this.setHelpUrl("https://example.com");
+  },
+};
+
+javascriptGenerator["code_car_7_print_i"] = function () {
+  let code = 'print(print(i+1))\n';
+  return code;
+};
+
+Blockly.Blocks["code_car_7_print_forward_speed"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("앞으로 전진하기에 대한 현재 설정값 확인")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("50a560");
+    this.setHelpUrl("https://example.com");
+  },
+};
+
+javascriptGenerator["code_car_7_print_forward_speed"] = function () {
+  let code = 'print(forward_speed)\n';
+  return code;
+};
+
+Blockly.Blocks["code_car_7_print_backward_speed"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("뒤로 후진하기에 대한 현재 설정값 확인")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("50a560");
+    this.setHelpUrl("https://example.com");
+  },
+};
+
+javascriptGenerator["code_car_7_print_backward_speed"] = function () {
+  let code = 'print(backward_speed)\n';
   return code;
 };
 
@@ -9194,7 +10270,7 @@ Blockly.Blocks["code_car_10_input"] = {
 };
 
 javascriptGenerator["code_car_10_input"] = function () {
-  let code = "line = input()\nvalues = line.split(',')\nindex = int(values[0])\nduty  = int(values[1])\n";
+  let code = "input()\nline = input()\nvalues = line.split(',')\nindex = int(values[0])\nduty  = int(values[1])\n";
   return code;
 };
 
@@ -9268,6 +10344,40 @@ javascriptGenerator["code_car_11_turn"] = function () {
   return code;
 };
 
+Blockly.Blocks["code_car_11_print_yes"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('"Yes"를 결과창에 표시하기')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("50a560");
+    this.setHelpUrl("https://example.com");
+  },
+};
+
+javascriptGenerator["code_car_11_print_yes"] = function () {
+  let code = 'print("Yes")\n';
+  return code;
+};
+
+Blockly.Blocks["code_car_11_print_no"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('"No"를 결과창에 표시하기')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("50a560");
+    this.setHelpUrl("https://example.com");
+  },
+};
+
+javascriptGenerator["code_car_11_print_no"] = function () {
+  let code = 'print("No")\n';
+  return code;
+};
+
 Blockly.Blocks["code_car_11_obstacle"] = {
   init: function () {
     this.appendDummyInput()
@@ -9284,6 +10394,35 @@ Blockly.Blocks["code_car_11_obstacle"] = {
 javascriptGenerator["code_car_11_obstacle"] = function (block) {
   let branch = javascriptGenerator.statementToCode(block, 'while_state');
   var code = "if (cm < 10) or (line.read() < 100):\n" + branch;
+  return code;
+};
+
+Blockly.Blocks["code_car_11_cm_line_if_else"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField('장애물의 거리가 짧거나 바닥이 어두운가?')
+    this.setPreviousStatement(true, null);
+    // this.setNextStatement(true, "String");
+    this.setColour("50a560");
+    this.setHelpUrl("https://example.com");
+    
+    // this.appendValueInput("if_value")
+    //   .setCheck("센서 값이 50이 넘는가?")
+    this.appendStatementInput('if_state')
+      .appendField('')
+    this.appendStatementInput('if_state_else')
+      .appendField('아니면');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setInputsInline(true);
+  },
+};  
+
+javascriptGenerator["code_car_11_cm_line_if_else"] = function (block) {
+  const variable = javascriptGenerator.statementToCode(block, 'if_state');
+  const ineq = javascriptGenerator.statementToCode(block, 'if_state_else');
+  var code = 'if (cm < 10) or (line.read() < 100):\n'+variable+'else:\n'+ineq;
   return code;
 };
 
@@ -9337,6 +10476,23 @@ Blockly.Blocks["code_car_12_print_count"] = {
 
 javascriptGenerator["code_car_12_print_count"] = function () {
   let code = 'print(count)\ntimer.start()\ncount = 0\n';
+  return code;
+};
+
+Blockly.Blocks["code_car_12_timer_start"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("시간 측정 시작")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("50a560");
+    this.setHelpUrl("https://example.com");
+  },
+};
+
+javascriptGenerator["code_car_12_timer_start"] = function () {
+  let code = 'timer.start()\n';
   return code;
 };
 
@@ -9457,7 +10613,7 @@ Blockly.Blocks["code_car_13_maze_show"] = {
   init: function () {
     this.appendDummyInput()
     // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
-    .appendField("미로 가상화면 보인다")
+    .appendField("미로 가상화면 보이기")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("50a560");
@@ -9467,6 +10623,57 @@ Blockly.Blocks["code_car_13_maze_show"] = {
 
 javascriptGenerator["code_car_13_maze_show"] = function () {
   let code = 'maze_maker.show()\n';
+  return code;
+};
+
+Blockly.Blocks["code_car_13_maze_set_009"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("(0, 0) 좌표를 벽으로 변경하기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("50a560");
+    this.setHelpUrl("https://example.com");
+  },
+};
+
+javascriptGenerator["code_car_13_maze_set_009"] = function () {
+  let code = 'maze_maker.set_cell_type(0, 0, 9)\n';
+  return code;
+};
+
+Blockly.Blocks["code_car_13_maze_set_119"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("(1, 1) 좌표를 벽으로 변경하기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("50a560");
+    this.setHelpUrl("https://example.com");
+  },
+};
+
+javascriptGenerator["code_car_13_maze_set_119"] = function () {
+  let code = 'maze_maker.set_cell_type(1, 1, 9)\n';
+  return code;
+};
+
+Blockly.Blocks["code_car_13_maze_set_110"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("(1, 1) 좌표의 벽을 제거하기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("50a560");
+    this.setHelpUrl("https://example.com");
+  },
+};
+
+javascriptGenerator["code_car_13_maze_set_110"] = function () {
+  let code = 'maze_maker.set_cell_type(1, 1, 0)\n';
   return code;
 };
 
