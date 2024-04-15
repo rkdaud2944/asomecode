@@ -36,7 +36,7 @@ async function createWindow() {
   const contextMenu = Menu.buildFromTemplate([
     { label: '뒤로 가기', click: () => win.webContents.goBack() },
     { label: '앞으로 가기', click: () => win.webContents.goForward() },
-    { label: '새로고침', click: () => win.webContents.reload() }
+    // { label: '새로고침', click: () => win.webContents.reload() }
   ]);
 
   win.webContents.on('context-menu', () => {
