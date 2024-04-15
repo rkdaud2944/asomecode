@@ -108,6 +108,11 @@ asomebot.angle(1,${align02})
 asomebot.angle(2,${align03})
 asomebot.angle(3,${align04})
 print("pin5 = ${align01}, pin6 =${align02}, pin7 =${align03}, pin8 = ${align04}")`)
+    },
+
+    showSlider140() {
+        const route = router.resolve({ path: '/simulation/slider140' });
+        window.open(route.href, 'lessonBlock', 'width=400,height=400');
     }
     
 };
@@ -124,5 +129,6 @@ window.presentSession = bridge.presentSession;
 window.saveBotBase = bridge.saveBotBase;
 window.checkBotBase = bridge.checkBotBase;
 window.testBotBase = bridge.testBotBase;
+window.showSlider140 = bridge.showSlider140;
 
 export default bridge;

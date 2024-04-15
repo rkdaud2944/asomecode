@@ -13,6 +13,7 @@
     <SoilSensor v-if="$route.params.page === 'soil_sensor'"/>
     <WaterSensor v-if="$route.params.page === 'water_sensor'"/>
     <CarRacePage v-if="$route.params.page === 'car_race'"/>
+    <Slider140Page v-if="$route.params.page === 'slider140'"/>
 </template>
 
 
@@ -30,13 +31,15 @@ import CanonPage from '@/components/simulation/CanonPage.vue';
 import SoilSensor from '@/components/simulation/SoilSensorPage.vue';
 import WaterSensor from '@/components/simulation/WaterSensorPage.vue';
 import CarRacePage from '@/components/simulation/CarRacePage.vue';
+import Slider140Page from '@/components/simulation/Slider140Page.vue';
 
 export default {
 
     
     components: {
         DicePage, DhtScreenPage, StovePage, SoilSensor, WaterSensor,
-        DoorPage, FlagGamePage, SpaceCraftPage, MazePage, SlidingPuzzlePage, LunarLanderPage, CanonPage, CarRacePage
+        DoorPage, FlagGamePage, SpaceCraftPage, MazePage, SlidingPuzzlePage, LunarLanderPage, CanonPage, CarRacePage,
+        Slider140Page,
     }, 
 
     computed: {
