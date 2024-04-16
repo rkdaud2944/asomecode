@@ -127,6 +127,9 @@ class Scanner {
         } else if (text.startsWith("botBase")) {
             this.index = this.index + "botBase".length;
             this.onToken({ text: "[botBase", type: TokenType.BEGIN_MARK });
+        } else if (text.startsWith("boardErr")) {
+            this.index = this.index + "boardErr".length;
+            this.onToken({ text: "[boardErr", type: TokenType.BEGIN_MARK });
         } else {
             this.onToken({ text: "[", type: TokenType.TEXT });
         }
@@ -159,7 +162,7 @@ class Parser {
             this.markType = "";
         }
     }
-
+ 
     #get_markText() {
         switch (this.markType) {
             case "[button": return this.#get_buttonText(this.buffer);
@@ -174,6 +177,7 @@ class Parser {
             case "[openWifi": return this.#get_wifi_open_Text();
             case "[messenger": return this.#get_asome_messenger_Text();
             case "[botBase": return this.#get_botBase();
+            case "[boardErr": return this.#get_boardErr();
         }
     }
 
@@ -334,8 +338,7 @@ class Parser {
                 `
     }
 
-    #get_uploadFile(text) {
-        
+    #get_uploadFile(text) {        
         const firstLine = text.split("\n")[0];
         let functionName = firstLine.replace("[upload ", "");
         const fileName = functionName.split(":")[1].trim();
@@ -348,18 +351,23 @@ class Parser {
         content = lines.map(e => stripComments.stripPythonComments(e)).join('\n');
         return `<div onclick="contentsUploadFile('${fileName}',getCode('${functionId}'))" class="function_btn">${functionName}</div></br>` +
             `<div id="${functionId}" class="hidden">${content}</div>`;
-
-        
-        // const firstLine = text.split("\n")[0];
-        // const functionName = firstLine.replace("[uploadFile ", "");
-        // const uniqueId = Date.now();
-        // const functionId = `${functionName.replaceAll(' ', '-').replaceAll("'", '').replaceAll('"', '')}-${uniqueId}`;
+    }
     
-        // let content = text.replace(`${firstLine}`, "").slice(0, -1);
-        // const lines = content.split("\n");
-        // content = lines.map(e => stripComments.stripPythonComments(e)).join('\n');
-    
-        // return `<div onclick="runCode())" class="function_btn">123</div></br>` +
-        //     `<div id="${functionId}" class="hidden">${content}</div>`;
+    #get_boardErr() {        
+        return `<div class="board-err-wrap">
+                    <div class="board-err-img">
+                        <img src="/common/board-err.png">
+                    </div>
+                    <div>
+                        <p class="err-title">실행이 안 되는데요!</p>
+                        <p class="err-cts">실행이 잘 안된다면 다음 중에 원인이 있는지 확인해 보세요.</p>
+                        <p class="err-cts">1. 어썸보드의 불이 들어오는지 확인하세요. 불이 들어오지 않는다면 보드가 고장 난 것입니다.<br/>
+                        2. 부품 조립이 제대로 되어 있는지 확인해 보세요.<br/>
+                        3. 결과창에 에러가 있는지 확인해 보세요. 에러가 있다면 코드에 문제가 있는 것입니다. 마지막 실행한 코드가 제대로 입력되었는지 확인하세요.
+                        그래도 에러가 난다면 메뉴의 [포맷], [업데이트] 버튼을 순서대로 클릭하여 어썸보드를 최신 상태로 만들고 다시 실행하세요.<br/>
+                        4. USB 코드를 컴퓨터에 뽑았다가 다시 꽂은 후에 [연결하기] 버튼을 클릭해 보세요.
+                        </p>
+                    </div>
+                </div>`;
     }
 }
