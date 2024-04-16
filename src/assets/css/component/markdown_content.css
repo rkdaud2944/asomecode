@@ -311,6 +311,10 @@ a {
     display: flex;
 }
 
+.editor, .editor * {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'Source Code Pro', 'source-code-pro', monospace !important;
+}
+
 @media all and (min-width:722px) and (max-width:8000px) {
     .markdown_output .parts_comment_bar {
         font-size: 1em;
