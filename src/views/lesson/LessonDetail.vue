@@ -194,8 +194,8 @@ export default {
     },
 
     mounted() {
-        this.timer = new LatencyTimer(5000, () => this.saveToLocalStorage());
-        this.timer.start();
+        // this.timer = new LatencyTimer(5000, () => this.saveToLocalStorage());
+        // this.timer.start();
 
         this.debouncedScrollHandler = this.debounce(this.handleScroll, 1);
         window.addEventListener('scroll', this.debouncedScrollHandler);

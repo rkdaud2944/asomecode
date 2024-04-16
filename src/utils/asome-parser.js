@@ -228,7 +228,8 @@ class Parser {
         //     `<code id="${uuid}" class="python">${content}` +
         //     `</code></pre>`;
 
-        return `<div class="editorDiv">${content}</div>`;
+        return `<p class="editorLocation" style="display: none;"/>` +
+        `<div class="editorDiv">${content}</div>`;
     }
 
     #get_partsText(text) {
