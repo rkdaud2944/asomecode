@@ -1,4 +1,4 @@
-// import { v1 as uuidv1 } from "uuid"
+import { v1 as uuidv1 } from "uuid"
 import partImgCode from "@/utils/asome-part-img-code";
 import stripComments from "@/utils/strip-comments";
 
@@ -103,6 +103,9 @@ class Scanner {
         } else if (text.startsWith("video")) {
             this.index = this.index + "video".length;
             this.onToken({ text: "[video", type: TokenType.BEGIN_MARK });
+        } else if (text.startsWith("code")) {
+            this.index = this.index + "code".length;
+            this.onToken({ text: "[code", type: TokenType.BEGIN_MARK });
         } else if (text.startsWith("editor")) {
             this.index = this.index + "editor".length;
             this.onToken({ text: "[editor", type: TokenType.BEGIN_MARK });
@@ -160,6 +163,7 @@ class Parser {
             case "[imgButton": return this.#get_buttonImg(this.buffer);
             case "[image": return this.#get_imageText(this.buffer);
             case "[video": return this.#get_videoText(this.buffer);
+            case "[code": return this.#get_codeText(this.buffer);
             case "[editor": return this.#get_editorText(this.buffer);
             case "[parts": return this.#get_partsText(this.buffer);
             case "[wifi": return this.#get_wifi_Text();
@@ -219,14 +223,23 @@ class Parser {
         return `<video controls width="100%"><source src="${content}" type="video/webm"></video>`;
     }
 
-    #get_editorText(text) {
+    #get_codeText(text) {
         const firstLine = text.split("\n")[0]
         let content = text.replace(`${firstLine}`, "").slice(0, -1)
-        // const uuid = uuidv1(new Date())
+        const uuid = uuidv1(new Date())
 
         // return `<pre onclick="openEditor(getCode('${uuid}'))">\n` +
         //     `<code id="${uuid}" class="python">${content}` +
         //     `</code></pre>`;
+            
+        return `<pre onclick="openEditor(getCode('${uuid}'))" style="margin-left:10px; width:98%;">\n` +
+        `<code id="${uuid}" class="python">${content}` +
+        `</code></pre>`;
+    }
+
+    #get_editorText(text) {
+        const firstLine = text.split("\n")[0]
+        let content = text.replace(`${firstLine}`, "").slice(0, -1)
 
         return `<p class="editorLocation" style="display: none;"/>` +
         `<div class="editorDiv">${content}</div>`;
