@@ -28,6 +28,18 @@
 
                 <div class="cts" :class="{c9contents: scrollPosition > 10}"><br>
                     <div class="markdown_output" v-html="output"></div>
+                    <div v-for="editor in editors" :key="editor.id">
+                        <v-ace-editor 
+                            v-model:value="editor.content" 
+                            @update:value="onChanged" 
+                            class="editor" 
+                            lang="python" 
+                            theme="monokai"
+                            :options="{
+                                enableBasicAutocompletion: true,
+                                enableLiveAutocompletion: true
+                            }"/>
+                    </div>
                 </div>
             </div>
         </div>
@@ -40,9 +52,16 @@ import VueBase from '@/mixin/vue-base';
 import markdown from "@/utils/markdown";
 import apiLesson from "@/api/lesson";
 import images from "@/assets/images" 
+import { VAceEditor } from "vue3-ace-editor";
+import 'ace-builds/src-noconflict/mode-python';
+import 'ace-builds/src-noconflict/theme-monokai';
+import 'ace-builds/src-noconflict/ext-language_tools';
+import LatencyTimer from "@/utils/latency-timer";
 
 export default {
     mixins: [VueBase],
+    
+    components: { VAceEditor },
     
     data() {
         return {
@@ -57,15 +76,133 @@ export default {
             arrow2: images.arrow2,
             
             debouncedScrollHandler: null,
+            editors: [],
+            test: "123123"
         };
+    },
+    beforeMount(){
+        const keywords = [
+            "asomebot",
+                "ready", "align", "angle", "angles", "turn_off", "home", "leg_up", "forward",
+                "backward", "turn_left", "turn_right", "foot_wave", "mouse", "flap", "warigari",
+                "tock", "tick_tock", "wiggle", "ballet", "left_swing", "right_swing", "yaho", "swing", "moonwalk",
+
+            "asomecar",
+                "ready", "stop", "to_left", "to_right",
+
+            "boot",
+                "random", "delay", "OutputPin", "InputPin", "InputPullUp", "AnalogPin", "ServoPin", "turnoff_pins",
+            
+            "button",
+                "create", "is_clicked", "do_click", "setOnClick",
+            
+            "cannon",
+                "show", "set_angle", "set_power", "power_x", "power_y", "bullet_moveto", "target_moveto", "fire", "target_explode",
+
+            "car_race",
+                "show_time", "start", "move", "is_finished",
+            
+            "clock",
+                "set", "datetime", "year", "month", "day", "week", "hour", "minute", "second", "millis", "text",
+
+            "dth_screen",
+                "display",
+
+            "dht11",
+                "measure", "temperature", "humidity",
+            
+            "dice",
+                "roll",
+
+            "disk",
+                "list", "view", "run",
+            
+            "door",
+                "close",
+
+            "flag_game",
+                'join', "is_ready", "count_down", "win",
+
+            "hcsr04",
+                "get_distance",
+            
+            "internet",
+                "connect", "ifconfig", "open_ap", "get_http", "get_time", "send_msg",
+            
+            "interval",
+            
+            "line_sensor",
+                "ready", "read",
+
+            "lunar_lander",
+                "ship_move", "ship_speed_up", "ship_speed_down", "fule_is_empty", "engine_on", "engine_off", "is_landed", "ship_explode",
+            
+            "maze",
+                "move_xy", "can_move",
+
+            "maze_maker",
+                "set_cell_type", "get_left", "get_right", "get_up", "get_down", "find_next_move",
+
+            "music",
+                "get_tone", "tone", "mute", "note",
+
+            "rotary",
+                "direction", "has_changed",
+
+            "scheduler",
+                "check", "wait",
+
+            "sliding_puzzle",
+                "blank_left", "blank_right", "blank_up", "blank_down",
+
+            "sound_effect",
+                "level_up", "so_sad", "ariel", "laugh", "sad", "victory", "get_ready",
+
+            "spacecraft",
+                "move_left", "move_right", "set_speed",
+
+            "stove",
+                "on", "off",
+
+            "timer",
+                "number", "update", "set_mode", "mode", "set_value", "value", "duration",
+
+            "tm1637",
+                "set_brightness", "write_str", "time",
+
+            "udp_socket",
+                "read_text", "send_text",
+
+            "vibration_sensor",
+                "is_active",
+        ];
+
+        const ace = require("ace-builds/src-noconflict/ext-language_tools.js")
+        ace.addCompleter({
+            getCompletions: function (editor, session, pos, prefix, callback) {
+                var completions = [];
+                keywords.forEach(function (w) {
+                    completions.push({
+                        value: w,
+                        meta: "AsomeIT",
+                        score: 1000,
+                    });
+                });
+                callback(null, completions);
+            }
+        })
     },
 
     mounted() {
+        this.timer = new LatencyTimer(5000, () => this.saveToLocalStorage());
+        this.timer.start();
+
         this.debouncedScrollHandler = this.debounce(this.handleScroll, 1);
         window.addEventListener('scroll', this.debouncedScrollHandler);
         window.scrollTo(0, 0);
         this.getLesson(this.$route.query.id);
         this.markdownStyle();
+
     },
     
     updated() {
@@ -123,6 +260,21 @@ export default {
 
                     let domparser = new DOMParser()
                     let doc = domparser.parseFromString(this.output, 'text/html')
+                    
+                    // editorDiv 클래스를 가진 div 요소를 찾아 데이터로 변환
+                    const editorDivs = doc.querySelectorAll(".editorDiv");
+                    this.editors = Array.from(editorDivs).map((div, index) => ({
+                        id: index,
+                        content: div.textContent.trim(),
+                        language: 'python',  // 이 부분은 적절히 조정 필요
+                    }));
+
+                    console.log("aa : "+this.editors[0].content)
+
+                    // 원본 HTML에서 editorDiv들을 제거
+                    editorDivs.forEach(div => div.remove());
+
+
                     const elements = doc.getElementsByTagName("h2");
                     for (let i = 0; i < elements.length; i++) {
                         elements[i].id = i
@@ -136,7 +288,7 @@ export default {
                     this.output = serializer.serializeToString(doc);
                 })
             .catch(this.showError);
-        },
+        },        
         
         historyBack(){
             this.$router.go(-1);
@@ -213,6 +365,10 @@ export default {
             }
         },
 
+        
+        onChanged() {
+            this.timer.reset();
+        },
 
     },
 };

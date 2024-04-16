@@ -1,4 +1,4 @@
-import { v1 as uuidv1 } from "uuid"
+// import { v1 as uuidv1 } from "uuid"
 import partImgCode from "@/utils/asome-part-img-code";
 import stripComments from "@/utils/strip-comments";
 
@@ -222,11 +222,13 @@ class Parser {
     #get_editorText(text) {
         const firstLine = text.split("\n")[0]
         let content = text.replace(`${firstLine}`, "").slice(0, -1)
-        const uuid = uuidv1(new Date())
+        // const uuid = uuidv1(new Date())
 
-        return `<pre onclick="openEditor(getCode('${uuid}'))">\n` +
-            `<code id="${uuid}" class="python">${content}` +
-            `</code></pre>`;
+        // return `<pre onclick="openEditor(getCode('${uuid}'))">\n` +
+        //     `<code id="${uuid}" class="python">${content}` +
+        //     `</code></pre>`;
+
+        return `<div class="editorDiv">${content}</div>`;
     }
 
     #get_partsText(text) {
