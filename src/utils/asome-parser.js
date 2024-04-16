@@ -94,6 +94,9 @@ class Scanner {
         if (text.startsWith("button")) {
             this.index = this.index + "button".length;
             this.onToken({ text: "[button", type: TokenType.BEGIN_MARK });
+        } else if (text.startsWith("upload")) {
+            this.index = this.index + "upload".length;
+            this.onToken({ text: "[upload", type: TokenType.BEGIN_MARK });
         } else if (text.startsWith("image")) {
             this.index = this.index + "image".length;
             this.onToken({ text: "[image", type: TokenType.BEGIN_MARK });
@@ -124,7 +127,7 @@ class Scanner {
         } else if (text.startsWith("botBase")) {
             this.index = this.index + "botBase".length;
             this.onToken({ text: "[botBase", type: TokenType.BEGIN_MARK });
-        }else {
+        } else {
             this.onToken({ text: "[", type: TokenType.TEXT });
         }
         this.state = State.BASE;
@@ -160,6 +163,7 @@ class Parser {
     #get_markText() {
         switch (this.markType) {
             case "[button": return this.#get_buttonText(this.buffer);
+            case "[upload": return this.#get_uploadFile(this.buffer);
             case "[imgButton": return this.#get_buttonImg(this.buffer);
             case "[image": return this.#get_imageText(this.buffer);
             case "[video": return this.#get_videoText(this.buffer);
@@ -291,6 +295,7 @@ class Parser {
 
             `<div onclick="runCode(getCode('인터넷-연결하기'))" class="function_btn">인터넷 연결하기</div></br>` +
             `<div id="인터넷-연결하기" class="hidden"></div>`;
+            
     }
 
     #get_wifi_open_Text() {    // 인터넷 오픈     
@@ -327,5 +332,34 @@ class Parser {
                     <input class="form-control" type="text" id='align04' value="90" placeholder="4번 모터 중심 값"/>  
                 </div>
                 `
+    }
+
+    #get_uploadFile(text) {
+        
+        const firstLine = text.split("\n")[0];
+        let functionName = firstLine.replace("[upload ", "");
+        const fileName = functionName.split(":")[1].trim();
+        functionName = functionName.split(":")[0].trim();
+        const uniqueId = Date.now();
+        const functionId = `${functionName.replaceAll(' ', '-').replaceAll("'", '').replaceAll('"', '')}-${uniqueId}`;
+    
+        let content = text.replace(`${firstLine}`, "").slice(0, -1);
+        const lines = content.split("\n");
+        content = lines.map(e => stripComments.stripPythonComments(e)).join('\n');
+        return `<div onclick="contentsUploadFile('${fileName}',getCode('${functionId}'))" class="function_btn">${functionName}</div></br>` +
+            `<div id="${functionId}" class="hidden">${content}</div>`;
+
+        
+        // const firstLine = text.split("\n")[0];
+        // const functionName = firstLine.replace("[uploadFile ", "");
+        // const uniqueId = Date.now();
+        // const functionId = `${functionName.replaceAll(' ', '-').replaceAll("'", '').replaceAll('"', '')}-${uniqueId}`;
+    
+        // let content = text.replace(`${firstLine}`, "").slice(0, -1);
+        // const lines = content.split("\n");
+        // content = lines.map(e => stripComments.stripPythonComments(e)).join('\n');
+    
+        // return `<div onclick="runCode())" class="function_btn">123</div></br>` +
+        //     `<div id="${functionId}" class="hidden">${content}</div>`;
     }
 }

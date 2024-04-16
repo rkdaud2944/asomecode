@@ -1,5 +1,6 @@
 import serial from "@/globals/serial";
 import router from "@/router";
+import boardFileSaver from '@/globals/board-file-saver';
 // import windows from "@/globals/windows";
 
 /**
@@ -113,6 +114,10 @@ print("pin5 = ${align01}, pin6 =${align02}, pin7 =${align03}, pin8 = ${align04}"
     showSlider140() {
         const route = router.resolve({ path: '/simulation/slider140' });
         window.open(route.href, 'lessonBlock', 'width=400,height=400');
+    },
+    
+    contentsUploadFile(fileName,code) {
+        boardFileSaver.save(fileName,code)
     }
     
 };
@@ -130,5 +135,6 @@ window.saveBotBase = bridge.saveBotBase;
 window.checkBotBase = bridge.checkBotBase;
 window.testBotBase = bridge.testBotBase;
 window.showSlider140 = bridge.showSlider140;
+window.contentsUploadFile = bridge.contentsUploadFile;
 
 export default bridge;
