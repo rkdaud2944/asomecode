@@ -86,6 +86,7 @@ a {
     font-size: 14px;
     font-weight: bold;
     cursor: pointer;
+    margin-left: 10px;
 }
 
 .markdown_output .slide_component_box {
@@ -173,6 +174,7 @@ a {
     position: relative;
     display: table;
     border-collapse: separate;
+    margin-left: 10px;
 }
 
 .markdown_output .input-group-addon {
