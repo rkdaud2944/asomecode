@@ -26,19 +26,20 @@
                     </div>
                 </div>
 
-                <div class="cts" :class="{c9contents: scrollPosition > 10}"><br>
-                    <div class="markdown_output" v-html="output"></div>
-                    <div v-for="editor in editors" :key="editor.id">
-                        <v-ace-editor 
-                            v-model:value="editor.content" 
-                            @update:value="onChanged" 
-                            class="editor" 
-                            lang="python" 
+                <div class="cts">
+                    <div class="markdown_output">
+                        <div v-for="(chunk, index) in markedOutput" :key="index">
+                        <div v-html="chunk.html"></div> <!-- Regular HTML content -->
+                        <div v-if="chunk.editor">
+                            <v-ace-editor
+                            v-model="chunk.editor.content"
+                            class="editor"
+                            lang="python"
                             theme="monokai"
-                            :options="{
-                                enableBasicAutocompletion: true,
-                                enableLiveAutocompletion: true
-                            }"/>
+                            :options="{ enableBasicAutocompletion: true, enableLiveAutocompletion: true }"
+                            />
+                        </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -201,6 +202,8 @@ export default {
         window.addEventListener('scroll', this.debouncedScrollHandler);
         window.scrollTo(0, 0);
         this.getLesson(this.$route.query.id);
+        
+        this.insertEditors();
         this.markdownStyle();
 
     },
@@ -285,10 +288,36 @@ export default {
                     }
                     
                     let serializer = new XMLSerializer();
+
                     this.output = serializer.serializeToString(doc);
+                    // console.log(this.output)
+                    const parts = this.output.split('<p class="editorLocation" style="display: none;"></p>');
+                    // Create the markedOutput array with HTML chunks and editor placeholders
+                    this.markedOutput = parts.map((html, index) => {
+                        return { html: html, editor: this.editors[index] || null };
+                    });
                 })
             .catch(this.showError);
-        },        
+        }, 
+
+        insertEditors() {
+            const container = this.$el.querySelector('.markdown_output');
+            const editorLocations = container.querySelectorAll('.editorLocation');
+
+            editorLocations.forEach((location, index) => {
+                const editorContent = this.editors[index].content;
+                // 에디터 컴포넌트를 생성합니다.
+                const editorElement = document.createElement('div');
+                editorElement.className = 'editor';
+                editorElement.textContent = editorContent;
+
+                // 에디터 컴포넌트를 위치시키기 전 'editorLocation' 클래스의 부모 요소를 선택합니다.
+                const parentElement = location.parentNode;
+                // 선택된 부모 요소 바로 뒤에 에디터 컴포넌트를 삽입합니다.
+                parentElement.insertBefore(editorElement, location.nextSibling);
+            });
+        },
+  
         
         historyBack(){
             this.$router.go(-1);
