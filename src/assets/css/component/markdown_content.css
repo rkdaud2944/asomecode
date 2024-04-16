@@ -16,7 +16,7 @@ a {
 }
 
 .markdown_output h2 {
-    /* padding-top: 15px; */
+    padding-top: 15px;
     border-bottom: 2px solid #F3F3F5;
     font-size: 23px;
     font-weight: bold;

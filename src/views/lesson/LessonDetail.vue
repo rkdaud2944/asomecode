@@ -41,8 +41,8 @@
                                         enableLiveAutocompletion: true 
                                     }"/>
                                 <div class="editor-btn-wrap">
-                                    <span class="editor-run">실행하기</span>
-                                    <span class="editor-stop">멈추기</span>
+                                    <span class="editor-run" @click="runCode(chunk.editor.content)">실행하기</span>
+                                    <span class="editor-stop" @click="stop()">멈추기</span>
                                 </div>
                             </div>
                         </div>
@@ -63,10 +63,11 @@ import { VAceEditor } from "vue3-ace-editor";
 import 'ace-builds/src-noconflict/mode-python';
 import 'ace-builds/src-noconflict/theme-monokai';
 import 'ace-builds/src-noconflict/ext-language_tools';
-import LatencyTimer from "@/utils/latency-timer";
+import serial from "@/globals/serial";
+import bridgeIn from "@/globals/bridge-in";
 
 export default {
-    mixins: [VueBase],
+    mixins: [VueBase, bridgeIn],
     
     components: { VAceEditor },
     
@@ -242,6 +243,8 @@ export default {
     },
 
     methods: {
+        ...serial, ...bridgeIn,
+        
         moveTo(tag) {
             const element = window.document.getElementById(tag);
             const top = element.offsetTop - 0; 
