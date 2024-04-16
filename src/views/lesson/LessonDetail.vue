@@ -26,19 +26,38 @@
                     </div>
                 </div>
 
+                <!-- <div class="cts" :class="{c9contents: scrollPosition > 10}"><br>
+                    <div class="markdown_output" v-html="output"></div>
+                    <div v-for="editor in editors" :key="editor.id">
+                        <v-ace-editor 
+                            v-model:value="editor.content" 
+                            @update:value="onChanged" 
+                            class="editor" 
+                            lang="python" 
+                            theme="monokai"
+                            :options="{
+                                enableBasicAutocompletion: true,
+                                enableLiveAutocompletion: true
+                            }"/>
+                    </div>
+                </div> -->
+
+                
                 <div class="cts">
                     <div class="markdown_output">
                         <div v-for="(chunk, index) in markedOutput" :key="index">
-                        <div v-html="chunk.html"></div> <!-- Regular HTML content -->
-                        <div v-if="chunk.editor">
-                            <v-ace-editor
-                            v-model="chunk.editor.content"
-                            class="editor"
-                            lang="python"
-                            theme="monokai"
-                            :options="{ enableBasicAutocompletion: true, enableLiveAutocompletion: true }"
-                            />
-                        </div>
+                            <div v-html="chunk.html"></div> <!-- Regular HTML content -->
+                            <div v-if="chunk.editor">
+                                <v-ace-editor
+                                    v-model:value="chunk.editor.content"
+                                    class="editor"
+                                    lang="python"
+                                    theme="monokai"
+                                    :options="{ 
+                                        enableBasicAutocompletion: true, 
+                                        enableLiveAutocompletion: true 
+                                    }"/>
+                            </div>
                         </div>
                     </div>
                 </div>
