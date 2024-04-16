@@ -25,29 +25,12 @@
                         <p>{{title.name}}</p>                        
                     </div>
                 </div>
-
-                <!-- <div class="cts" :class="{c9contents: scrollPosition > 10}"><br>
-                    <div class="markdown_output" v-html="output"></div>
-                    <div v-for="editor in editors" :key="editor.id">
-                        <v-ace-editor 
-                            v-model:value="editor.content" 
-                            @update:value="onChanged" 
-                            class="editor" 
-                            lang="python" 
-                            theme="monokai"
-                            :options="{
-                                enableBasicAutocompletion: true,
-                                enableLiveAutocompletion: true
-                            }"/>
-                    </div>
-                </div> -->
-
                 
                 <div class="cts">
                     <div class="markdown_output">
                         <div v-for="(chunk, index) in markedOutput" :key="index">
-                            <div v-html="chunk.html"></div> <!-- Regular HTML content -->
-                            <div v-if="chunk.editor">
+                            <div v-html="chunk.html"></div>
+                            <div v-if="chunk.editor" class="editor-wrap">
                                 <v-ace-editor
                                     v-model:value="chunk.editor.content"
                                     class="editor"
@@ -57,6 +40,10 @@
                                         enableBasicAutocompletion: true, 
                                         enableLiveAutocompletion: true 
                                     }"/>
+                                <div class="editor-btn-wrap">
+                                    <span class="editor-run">실행하기</span>
+                                    <span class="editor-stop">멈추기</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -214,9 +201,6 @@ export default {
     },
 
     mounted() {
-        // this.timer = new LatencyTimer(5000, () => this.saveToLocalStorage());
-        // this.timer.start();
-
         this.debouncedScrollHandler = this.debounce(this.handleScroll, 1);
         window.addEventListener('scroll', this.debouncedScrollHandler);
         window.scrollTo(0, 0);
@@ -224,7 +208,6 @@ export default {
         
         this.insertEditors();
         this.markdownStyle();
-
     },
     
     updated() {
@@ -283,19 +266,15 @@ export default {
                     let domparser = new DOMParser()
                     let doc = domparser.parseFromString(this.output, 'text/html')
                     
-                    // editorDiv 클래스를 가진 div 요소를 찾아 데이터로 변환
                     const editorDivs = doc.querySelectorAll(".editorDiv");
                     this.editors = Array.from(editorDivs).map((div, index) => ({
                         id: index,
                         content: div.textContent.trim(),
-                        language: 'python',  // 이 부분은 적절히 조정 필요
+                        language: 'python',
                     }));
-
-                    console.log("aa : "+this.editors[0].content)
 
                     // 원본 HTML에서 editorDiv들을 제거
                     editorDivs.forEach(div => div.remove());
-
 
                     const elements = doc.getElementsByTagName("h2");
                     for (let i = 0; i < elements.length; i++) {
@@ -308,10 +287,9 @@ export default {
                     
                     let serializer = new XMLSerializer();
 
+                    // editorLocation 기준으로 자른뒤, 에디터 컴포넌트와 함께 순차 생성
                     this.output = serializer.serializeToString(doc);
-                    // console.log(this.output)
                     const parts = this.output.split('<p class="editorLocation" style="display: none;"></p>');
-                    // Create the markedOutput array with HTML chunks and editor placeholders
                     this.markedOutput = parts.map((html, index) => {
                         return { html: html, editor: this.editors[index] || null };
                     });
@@ -319,20 +297,18 @@ export default {
             .catch(this.showError);
         }, 
 
+        // editorLocation 아래 위치로 editor생성
         insertEditors() {
             const container = this.$el.querySelector('.markdown_output');
             const editorLocations = container.querySelectorAll('.editorLocation');
 
             editorLocations.forEach((location, index) => {
                 const editorContent = this.editors[index].content;
-                // 에디터 컴포넌트를 생성합니다.
                 const editorElement = document.createElement('div');
                 editorElement.className = 'editor';
                 editorElement.textContent = editorContent;
 
-                // 에디터 컴포넌트를 위치시키기 전 'editorLocation' 클래스의 부모 요소를 선택합니다.
                 const parentElement = location.parentNode;
-                // 선택된 부모 요소 바로 뒤에 에디터 컴포넌트를 삽입합니다.
                 parentElement.insertBefore(editorElement, location.nextSibling);
             });
         },
@@ -412,12 +388,6 @@ export default {
                 mkColor[i].style.color = this.$route.query.color;
             }
         },
-
-        
-        onChanged() {
-            this.timer.reset();
-        },
-
     },
 };
 </script>

@@ -198,8 +198,3 @@ p{
     background-color: var(--detail-title-background-color-tag-active);
 
 }
-
-.editor {
-    width: 500px;
-    height: 500px;
-}
