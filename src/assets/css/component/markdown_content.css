@@ -338,15 +338,23 @@ a {
 }
 
 .editor-run {
-	background-color: #353543; 
-	color: #E8E8E8;
+	background-color: #4f4f53; 
+	color: #fff;
     cursor: pointer;
 }
 
 .editor-stop {	
-	background-color: #E8E8E8; 
-	color: #353543;
+	background-color: #7e7e83; 
+	color: #fff;
     cursor: pointer;
+}
+
+.editor-run:hover, .editor-stop:hover {
+	background-color: #aeaeb4; 
+}
+
+.editor-run:active, .editor-stop:active {
+	background-color: #29292c; 
 }
 
 @media all and (min-width:722px) and (max-width:8000px) {
