@@ -100,9 +100,12 @@ class Scanner {
         } else if (text.startsWith("image")) {
             this.index = this.index + "image".length;
             this.onToken({ text: "[image", type: TokenType.BEGIN_MARK });
-        }  else if (text.startsWith("imgButton")) {
+        } else if (text.startsWith("imgButton")) {
             this.index = this.index + "imgButton".length;
             this.onToken({ text: "[imgButton", type: TokenType.BEGIN_MARK });
+        } else if (text.startsWith("writeLn")) {
+            this.index = this.index + "writeLn".length;
+            this.onToken({ text: "[writeLn", type: TokenType.BEGIN_MARK });
         } else if (text.startsWith("video")) {
             this.index = this.index + "video".length;
             this.onToken({ text: "[video", type: TokenType.BEGIN_MARK });
@@ -168,6 +171,7 @@ class Parser {
             case "[button": return this.#get_buttonText(this.buffer);
             case "[upload": return this.#get_uploadFile(this.buffer);
             case "[imgButton": return this.#get_buttonImg(this.buffer);
+            case "[writeLn": return this.#get_writeLn(this.buffer);
             case "[image": return this.#get_imageText(this.buffer);
             case "[video": return this.#get_videoText(this.buffer);
             case "[code": return this.#get_codeText(this.buffer);
@@ -208,6 +212,23 @@ class Parser {
 
         return `<div class="">
             <img class="markdown-btn-img" src="${functionImg}"  onclick="runCode(getCode('${functionId}'))"/></div></br>` +
+        `<div id="${functionId}" class="hidden">${content}</div>`
+
+    }
+
+    #get_writeLn(text) {
+        const firstLine = text.split("\n")[0]
+        let functionImg = firstLine.replace("[writeLn ", "")
+        const functionName = firstLine.replace(/\[imgButton |\.png/g, "");
+        const uniqueId = Date.now();
+        const functionId = `${functionName.replaceAll(' ', '-').replaceAll("'", '').replaceAll('"', '')}-${uniqueId}`;
+        let content = text.replace(`${firstLine}`, "").slice(0, -1);
+
+        if (functionImg.charAt(0) != '/')
+        functionImg = this.lessonContentBaseUrl + "lesson/images/btn-image/" + functionImg // S3 파일
+
+        return `<div class="">
+            <img class="markdown-btn-img" src="${functionImg}"  onclick="writeLn(getCode('${functionId}'))"/></div></br>` +
         `<div id="${functionId}" class="hidden">${content}</div>`
 
     }

@@ -38,6 +38,10 @@ const bridge = {
         serial.runCode(code);
     },
 
+    writeLn(code) {
+        serial.writeLn(code);
+    },
+
     openEditor(code) {
         const route = router.resolve({ path: '/editor' });
         localStorage.setItem("code", code);
@@ -126,6 +130,7 @@ window.refresh = bridge.refresh;
 window.loadUrl = bridge.loadUrl;
 window.getCode = bridge.getCode;
 window.runCode = bridge.runCode;
+window.writeLn = bridge.writeLn;
 window.openEditor = bridge.openEditor;
 window.setWifiInfo = bridge.setWifiInfo;
 window.openWifiInfo = bridge.openWifiInfo;
