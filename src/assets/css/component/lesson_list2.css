@@ -150,3 +150,15 @@
     border-color: var(--chapter-border-color-active) !important;
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
+
+
+/* 태블릿 */
+@media screen and (max-width: 883px){
+    .list-item {
+        flex: 0 0 100%;
+    }
+
+    .list-content {
+        max-width: 100%;
+    }
+}
