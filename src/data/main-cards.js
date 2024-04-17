@@ -12,6 +12,7 @@ export const cards = [
         txtContent: '#000',
         txtChapter: '#fff', 
 
+        hoverImage: require("@/assets/images/common/main_kit_hover.png"), 
         hoverBgColor: '#FFBADA', 
         hoverBgChapter: '#fff', 
         hoverTxtAge: '#000', 
@@ -39,6 +40,7 @@ export const cards = [
         txtContent: '#000',
         txtChapter: '#fff', 
 
+        hoverImage: require("@/assets/images/common/main_bot_hover.png"), 
         hoverBgColor: '#89EA82', 
         hoverBgChapter: '#fff', 
         hoverTxtAge: '#000', 
@@ -66,6 +68,7 @@ export const cards = [
         txtContent: '#000',
         txtChapter: '#fff', 
 
+        hoverImage: require("@/assets/images/common/main_car_hover.png"), 
         hoverBgColor: '#6E49F9', 
         hoverBgChapter: '#fff', 
         hoverTxtAge: '#fff', 

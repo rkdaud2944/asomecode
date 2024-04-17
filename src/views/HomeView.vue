@@ -51,7 +51,7 @@
                                         'background': clicked === true ? card.clickBgColor : card.hoverBgColor,
                                         'color': hoverIndex === index ? card.hoverTxtAge : '#000',
                                         transition: 'background-color 0.5s ease, color 0.5s ease',
-                                        'backgroundImage': `url(${card.image})`
+                                        'backgroundImage': `url(${card.hoverImage})`
                                 }">
                                     <p class="age NotoSansKR-Regular"
                                         :style="{'color': clicked === true ? card.clickTxtAge : card.hoverTxtAge,
@@ -115,7 +115,7 @@
 </template>
 
 <script>
-import images from "@/assets/images";
+import images from "@/assets/images"; 
 import apiSubjectSet from "@/api/subjectSet";
 // import Subject from '@/components/SubjectComponent.vue'
 import { cards } from "@/data/main-cards";
