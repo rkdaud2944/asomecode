@@ -8185,7 +8185,7 @@ Blockly.Blocks["code_bot_10_ready"] = {
 };  
 
 javascriptGenerator["code_bot_10_ready"] = function () {
-  let code = 'import asomebot\nasomebot.ready(5, 6, 7, 8)\nasomebot.home()\n';
+  let code = 'import asomebot\nasomebot.ready(5, 6, 7, 8)\nasomebot.home()\ninput()\n';
   return code;
 };
 
