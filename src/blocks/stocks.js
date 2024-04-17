@@ -3408,7 +3408,7 @@ Blockly.Blocks["pro_kit1_8_sensor_20_if_else"] = {
   init: function () {
     this.appendDummyInput()
     // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
-    .appendField('센서 값이 50이 넘는가?')
+    .appendField('센서 값이 20이 넘는가?')
     this.setPreviousStatement(true, null);
     // this.setNextStatement(true, "String");
     this.setColour("55A55B");
@@ -3429,7 +3429,7 @@ Blockly.Blocks["pro_kit1_8_sensor_20_if_else"] = {
 javascriptGenerator["pro_kit1_8_sensor_20_if_else"] = function (block) {
   const variable = javascriptGenerator.statementToCode(block, 'if_state');
   const ineq = javascriptGenerator.statementToCode(block, 'if_state_else');
-  var code = 'if value > 50:\n'+variable+'else:\n'+ineq;
+  var code = 'if value > 20:\n'+variable+'else:\n'+ineq;
   return code;
 };
 
