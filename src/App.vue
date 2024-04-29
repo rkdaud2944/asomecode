@@ -51,7 +51,7 @@ export default {
 
     watch: {
         $route(to) {
-            console.log("App route", to);
+            // console.log("App route", to);
 
             globals.currentPath = to.path;
 
@@ -62,7 +62,6 @@ export default {
                 if (to.path.startsWith(path)) {
                     this.showHeaderMain = false;
                     this.showFooterMain = false;
-                    console.log("skipHeaderMains", path);
                 }
             });
         },

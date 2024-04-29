@@ -68,7 +68,6 @@ export default {
             apiSubjectSet.getSubjectSet()
                 .then((response) => {
                     this.defaultSubjectSet = response.data.subjects;
-                    console.log(this.defaultSubjectSet)
                 })
                 .catch(this.showError);
         },

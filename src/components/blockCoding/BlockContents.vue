@@ -61,13 +61,6 @@ import 'ace-builds/src-noconflict/mode-python';
 import Modal from '@/components/SttModal.vue';
 import eventbus from "@/globals/eventbus"; 
 
-
-// eventbus.on("stt", (data) => {
-//     console.log("블록콘텐츠 들어와짐")
-//     if (data == "OK")
-//         console.log("ok콘텐츠")
-
-// })
     
 export default {
     watch: {
@@ -255,8 +248,7 @@ export default {
         })
         
         if (localStorage.getItem("lessonBlock")){
-            console.log("lessonBlock : "+localStorage.getItem("lessonBlock"))
-            // 블록코드 워크스페이스 코드(점박이 백그라운드 넣은곳)
+            // 블록코드 워크스페이스 코드
             this.$nextTick(() => {
                 this.workspace = Blockly.inject(this.$refs.blocklyDiv, {
                     toolbox: 
@@ -338,14 +330,12 @@ export default {
     // eventbus를 사용하여 이벤트 수신
     eventbus.on("sttReceived", function () {
         this2.openModal();
-        console.log("asd sttReceived");
     });
 
         // 브라우저 storage 이벤트를 추가
         window.addEventListener("storage", function (event) {
             if (event.key === "stt") {
                 this2.openModal();
-                console.log("asd" + event.key);
                 localStorage.removeItem("stt");
             }
         });
@@ -370,9 +360,6 @@ export default {
     },
 
     methods: {
-        test() {
-            console.log("TEST");
-        },
         // 뷰엑스 뮤테이션 선언
         ...mapMutations({
             setCode :'setCode',
@@ -574,11 +561,9 @@ export default {
             this.recognizedTextFromModal = text;
         },
 
-        // 블록코딩 export
         exportBlocks(){            
             let xml = Blockly.Xml.workspaceToDom(this.workspace);
             let xmlText = Blockly.Xml.domToPrettyText(xml);
-            console.log("xml : " + xmlText);
             return xmlText;
 
         },

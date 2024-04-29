@@ -60,7 +60,6 @@ export default {
 
         moveTo(tag) {
             const element = window.document.getElementById(tag);
-            // console.log(tag, element);
             const top = element.offsetTop - 100; // 헤더 길이만큼 낮추기
 
             window.scrollTo({

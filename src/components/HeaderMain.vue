@@ -229,7 +229,6 @@ while True:
 //     print(1)`);
         },
         bleStop(){
-            console.log('bleStop');
             ble.writeLn(String.fromCharCode(3))
         },
         

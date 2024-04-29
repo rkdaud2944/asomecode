@@ -25,7 +25,6 @@ export const useConnectStore = defineStore("connect",  {
             this.connectionState = 'connecting';
         }, 
         connected() {
-            console.log("cont 안임")
             this.connectionState = 'connected';
         }, 
         disconnect() {

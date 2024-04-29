@@ -136,8 +136,6 @@ const routes = [
     // Simulation
     {
         path: '/simulation/:page',
-        // path: '/simulation/:page/:widthValue/:heightValue',
-        // path: '/simulation',
         props: true,
         component: () => import('../views/SimulationView.vue')
 

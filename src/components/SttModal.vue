@@ -108,7 +108,6 @@ export default {
             // Vue.nextTick을 사용하여 데이터 갱신
             this.recognizedText = recognizedText;
             await fs.promises.unlink(filePath);
-            console.log("파일 삭제 성공");
           } catch (err) {
             console.error("녹음 프로세스 중 오류:", err);
           }

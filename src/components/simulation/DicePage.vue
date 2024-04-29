@@ -43,7 +43,6 @@ export default {
         ...remoteSerial,
 
 		roll_dice() {
-			console.log("roll_dice")
 			var index = Math.floor(Math.random() * 6) + 1;
 			document.getElementById("img_dice").src = this.dice[index-1];
 		},

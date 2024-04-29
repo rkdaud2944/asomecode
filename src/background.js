@@ -43,14 +43,13 @@ async function createWindow() {
     contextMenu.popup({ window: win });
   });
 
-  // 렌더러에서 창 열기
   win.webContents.setWindowOpenHandler(({ url }) => {
     if (url) {
       return {
         action: 'allow',
         overrideBrowserWindowOptions: {
-          alwaysOnTop : true, // 항상 다른 창 위에
-          autoHideMenuBar: true, // 메뉴바 숨김
+          alwaysOnTop : true,
+          autoHideMenuBar: true, 
           backgroundColor: '#fff',
           webPreferences: {
             preload: 'preload.js',

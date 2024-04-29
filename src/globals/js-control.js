@@ -7,13 +7,11 @@ import serial from "@/globals/serial";
 eventbus.on("onSerialReceived", (data) => {
     if (!data) return;
 
-    // console.log("jsControl", data);
     if (data.startsWith("### System.Line.RunJS")) jsControl.run(data);
     if (data.startsWith("### Sound Streaming")) jsControl.sound(data);
 });
 
 window.run_cmd = function (cmd) {
-    console.log('simulation cmd : '+cmd)
     if (cmd.startsWith("Code=ShowSimulation"))openSimulator(cmd);
 };
 
@@ -26,7 +24,6 @@ const jsControl = {
     },
 
     run(line) {
-        console.log("run : "+line)
         try {
             line = line.split(":");
             line = line[1].trim();
@@ -36,7 +33,6 @@ const jsControl = {
         }
 
         try {
-            console.log("line : "+line)
             eval(line);      
             // simulationRunJS(line)      
         } catch (error) {
@@ -57,9 +53,7 @@ const jsControl = {
         }
 
         try {
-            serial.readNextChunk(data[0],data[1],data[2],data[3]); 
-            // console.log(1)//
-            // serial.readNextChunk('test',0,1000);            
+            serial.readNextChunk(data[0],data[1],data[2],data[3]);      
         } catch (error) {
             console.log(error);            
         }
@@ -74,7 +68,6 @@ function openSimulator(cmd) {
     try {
         page = cmd.split("=")[2];
         page = page.replaceAll("/", "");
-        console.log("page : "+page)
         eventbus.emit('simulationOpen', `/simulation/${page}`);
 
     } catch (error) {

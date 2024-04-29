@@ -5,6 +5,9 @@
   "scripts": {
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
+    "start": "node app.js",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "e:prod": "vue-cli-service electron:serve --mode e-prod",
     "e:dev": "vue-cli-service electron:serve --mode e-dev",

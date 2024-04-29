@@ -47,7 +47,6 @@ export default {
         
 		for (var i=0; i<11; i++) {
 			this.cells.push(document.getElementById(`img_${(i+1)}`));
-            console.log(this.cells[i]);
             this.cells[i].style.left = (i % 4) * 100 + 'px';
             this.cells[i].style.top = parseInt(i / 4) * 100 + 'px';
 		}

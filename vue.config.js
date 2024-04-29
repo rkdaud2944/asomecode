@@ -33,5 +33,26 @@ module.exports = defineConfig({
     },
     devServer: {
         client:{overlay : false}
+    },
+    
+    configureWebpack: {
+        resolve: {
+            fallback: {
+                crypto: require.resolve('crypto-browserify'),
+                http: require.resolve('stream-http'),
+                https: require.resolve('https-browserify'),
+                zlib: require.resolve('browserify-zlib'),
+                stream: require.resolve('stream-browserify'),
+                buffer: require.resolve('buffer/'),
+                util: require.resolve('util/'),
+                os: require.resolve('os-browserify/browser'),
+                path: require.resolve('path-browserify'),
+                fs: false,  // fs는 브라우저에서 사용 불가능
+                child_process: false,  // child_process는 브라우저에서 사용 불가능
+                net: false, // net는 브라우저에서 사용할 수 없습니다.
+                tls: false, // tls도 마찬가지입니다.
+                serialport: false,
+            }
+        }
     }
 })

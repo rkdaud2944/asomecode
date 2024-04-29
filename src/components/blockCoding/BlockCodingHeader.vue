@@ -77,11 +77,8 @@ export default {
             this.stop()
         },
         send(){
-            const codes = this.$store.state.viewcode; // $store.state.viewcode�� ���� ����
-
-            // codes ������ Ȯ���ϱ� ���� �α׸� ���
+            const codes = this.$store.state.viewcode;
             console.log(codes);
-
             this.runCode(codes);
         },
 

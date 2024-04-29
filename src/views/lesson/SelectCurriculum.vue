@@ -23,8 +23,6 @@ export default {
 
     coomputed:{
         lessonId() {
-            // console.log(this.$route.params.id);
-            // return this.$route.params.id;
         }
     }
 

@@ -94,8 +94,6 @@ export default {
     },
 
     mounted() {
-        // this.getSubject(this.$route.query.id)
-        console.log("aa : "+this.$store.state.boViewTitle)
     },
 
 
@@ -111,8 +109,6 @@ export default {
             this.$router.push({ path: '/'});
         },
         getSubject(id) {
-            // console.log(this.$route.query.id);
-            // console.log(id);
             if (!id) {
                 console.error("id is undefined or null");
                 return;
@@ -124,29 +120,6 @@ export default {
                 .catch(this.showError);
         },
     },
-    
-    // watch: {
-    //     '$route.query.id': function(newVal) {
-    //         if (newVal >= 1 && newVal <= 15) {
-    //             this.deliver = 1;
-    //             this.getSubject(1);
-    //         } else if (newVal >= 16 && newVal <= 32) {
-    //             this.deliver = 16;
-    //             this.getSubject(2);
-    //         } else if (newVal >= 33 && newVal <= 47) {
-    //             this.deliver = 33;
-    //             this.getSubject(3);
-    //         } else if (newVal >= 48) {
-    //             this.deliver = 48;
-    //             this.getSubject(4);
-    //         }
-    //     },
-    //     '$store.state.boViewTitle':function(newVal) {
-    //         // state.boViewTitle 값이 변경되면 템플릿에 즉시 반영
-    //         console.log('Bo View Title changed:', newVal);
-    //     },
-        
-    // },
 };
 </script>
 

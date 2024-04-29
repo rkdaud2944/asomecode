@@ -65,7 +65,6 @@ export default {
 
                 if (this.oldValues[i] != this.sliderValues[i]){
                     let text = `${i},${slider}`
-                    console.log("refreshSlider : "+text)
                     this.writeInput(text);
                 }
                 
@@ -74,7 +73,6 @@ export default {
 
         stop_motor(no) {
             let text = `${no},0`
-            console.log("stop : "+text)
             this.writeInput(text);
         },
     },

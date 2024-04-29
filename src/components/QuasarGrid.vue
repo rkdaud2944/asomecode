@@ -43,7 +43,6 @@ export default {
         },
 
         setRows(rows, rowCount) {
-            console.log('setRows', rows, rowCount);
             this.rows = rows;
             this.rowCount = rowCount;
         },

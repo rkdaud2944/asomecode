@@ -200,7 +200,6 @@ export default {
         ...remoteSerial,
 
         run() {
-            console.log("this.mode : "+this.mode)
             if(this.mode == 'ble'){
                 ble.writeLn(this.content);
                 return;
