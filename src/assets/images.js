@@ -1,6 +1,7 @@
 import logom from "@/assets/images/logo/logom.png";
 import logo2 from "@/assets/images/logo/logo2.png";
 import logo from "@/assets/images/logo/logo.png";
+import logoBlockWhite from "@/assets/images/logo/logo_block_white.png";
 
 import connect from "@/assets/images/controls/connect.png";
 import connectBtn from "@/assets/images/controls/connect-btn.png";
@@ -105,6 +106,7 @@ export default {
     logom,
     logo2,
     logo,
+    logoBlockWhite,
 
     connect,
     connectBtn,

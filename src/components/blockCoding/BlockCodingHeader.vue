@@ -3,7 +3,7 @@
     <div id="header-area">
         <div class="top-menu-div">
             <div href="/blockeditor" class="top-menu-logo cursor-pointer">
-                <img :src="logom" />
+                <img :src="logoBlockWhite" />
             </div>
             <div class="menu-item-div">
                 <div class="btn btn-image" @click="send($store.state.viewcode)" style="margin-top: -7px;">
@@ -52,7 +52,7 @@ export default {
     },
     data() {
         return {
-            logom: images.logom,
+            logoBlockWhite: images.logoBlockWhite,
             connectBlock: images.connectBlock,
             connectBlockHover: images.connectBlockHover,
             customBlock: images.customBlock,    
@@ -107,14 +107,16 @@ export default {
     position: relative;
 }
 .top-menu-logo {
-    margin-top: -22px;
-    position: absolute;
-    top: 50%;
+    
+    left: 0; 
+    position: absolute; 
+    top: 35%;
+    margin-top: -10px; 
+    width: inherit; 
+    text-align: right;
 
     img{
-        width: 109px;
-        height: 41px;
-        display: block;
+        height: 40px;
     }
 }
 
