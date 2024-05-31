@@ -224,8 +224,17 @@ export default {
                 if (!filename) return;
                 if (!filename.endsWith('.py')) {
                     filename += '.py';
-                }
-                remoteSerial.uploadTextToBoard(filename, this.content);
+                }    
+
+            let processedContent = '';
+
+            for (let line of this.content.replaceAll("\r", "").split("\n")) {
+                line = line.replace(/\\/g, '\\\\');
+                line = line.replace(/'/g, "\\'");
+                processedContent += `${line}\\n`;
+            }
+
+            remoteSerial.uploadTextToBoard(filename, processedContent);
             });
         },
 
@@ -281,3 +290,12 @@ export default {
 </script>
 
 <style scoped src="@/assets/css/component/editorview.css"/>
+
+<style>
+/* .scroll, body.mobile .scroll--mobile {
+    overflow: hidden !important;
+} */
+.absolute-full {
+    right : 0px !important;
+}
+</style>

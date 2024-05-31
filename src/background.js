@@ -48,7 +48,7 @@ async function createWindow() {
       return {
         action: 'allow',
         overrideBrowserWindowOptions: {
-          alwaysOnTop : true,
+          alwaysOnTop : false,
           autoHideMenuBar: true, 
           backgroundColor: '#fff',
           webPreferences: {
