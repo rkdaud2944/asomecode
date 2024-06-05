@@ -3,6 +3,7 @@
 import { app, protocol, BrowserWindow, Menu } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
+import path from 'path'
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
@@ -19,12 +20,12 @@ async function createWindow() {
       enableRemoteModule: true,
       nodeIntegration: true,
       contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
-      preload: 'preload.js',
+      preload: path.join(__dirname, 'preload.js'),
     },
     backgroundColor: '#FFF',
   })
-  
-  
+
+
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     await win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
     if (!process.env.IS_TEST) win.webContents.openDevTools()
@@ -43,6 +44,38 @@ async function createWindow() {
     contextMenu.popup({ window: win });
   });
 
+  // Ctrl + 휠 확대/축소 기능
+  let zoomFactor = 1.0;
+
+  win.webContents.on('did-finish-load', () => {
+    win.webContents.setZoomFactor(zoomFactor);
+    win.webContents.executeJavaScript(`window.initialZoomFactor = ${zoomFactor}; window.updateZoomDisplay(${zoomFactor})`);
+  });
+
+  win.webContents.on('zoom-changed', (event, zoomDirection) => {
+    if (zoomDirection === 'in') {
+      zoomFactor += 0.1;
+    } else if (zoomDirection === 'out') {
+      zoomFactor -= 0.1;
+    }
+    win.webContents.setZoomFactor(zoomFactor);
+    win.webContents.executeJavaScript(`window.updateZoomDisplay(${zoomFactor})`);
+  });
+
+  win.webContents.on('mouse-wheel', (event, deltaX, deltaY, screenX, screenY) => {
+    if (event.ctrlKey) {
+      event.preventDefault();
+      if (deltaY < 0) {
+        zoomFactor += 0.1;
+      } else {
+        zoomFactor -= 0.1;
+      }
+      win.webContents.setZoomFactor(zoomFactor);
+      win.webContents.executeJavaScript(`window.updateZoomDisplay(${zoomFactor})`);
+    }
+  }, { passive: false });
+
+  // 부모창과 자식창 확대/축소 공유 방지코드
   win.webContents.setWindowOpenHandler(({ url }) => {
     if (url) {
       return {
@@ -52,8 +85,9 @@ async function createWindow() {
           autoHideMenuBar: true, 
           backgroundColor: '#fff',
           webPreferences: {
-            preload: 'preload.js',
-            devTools: !process.env.IS_TEST
+            preload: path.join(__dirname, 'preload.js'),
+            devTools: !process.env.IS_TEST,
+            zoomFactor: 1.0
           }
         }
       }

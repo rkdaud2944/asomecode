@@ -3617,7 +3617,41 @@ Blockly.Blocks["pro_kit1_11_1_ready"] = {
 };  
 
 javascriptGenerator["pro_kit1_11_1_ready"] = function () {
-  let code = 'sensor = AnalogPin(2)\nled = OutputPin(13)\n';
+  let code = 'sensor = AnalogPin(2)\nbright = OutputPin(20)\n';
+  return code;
+};
+
+Blockly.Blocks["pro_kit1_11_20pin_led_on"] = {
+  init: function () {
+    this.appendDummyInput()
+      // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
+      .appendField("20번 핀에 전기 공급하기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF61FF");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["pro_kit1_11_20pin_led_on"] = function () {
+  let code = 'bright.on()\n';
+  return code;
+};
+
+Blockly.Blocks["pro_kit1_11_20pin_led_off"] = {
+  init: function () {
+    this.appendDummyInput()
+      // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
+      .appendField("20번 핀에 전기 중단하기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF61FF");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["pro_kit1_11_20pin_led_off"] = function () {
+  let code = 'bright.off()\n';
   return code;
 };
 

@@ -63,11 +63,9 @@
                             <img :src="updateImg"/>
                             <p>업데이트</p>
                         </li>
-                        <li class="menu-cts">
-                            <a href="https://asomecode-web.s3.ap-northeast-2.amazonaws.com/driver/CH341SER.zip" download>
-                                <img :src="settingImg"/>
-                                <p>드라이버 설치</p>
-                            </a>
+                        <li class="menu-cts" @click="installDriver()">
+                            <img :src="settingImg"/>
+                            <p>드라이버 설치</p>
                         </li>
                     </ul>
                 </div>
@@ -232,6 +230,9 @@ while True:
             ble.writeLn(String.fromCharCode(3))
         },
         
+        installDriver() {
+            window.location.href = "https://asomecode-web.s3.ap-northeast-2.amazonaws.com/driver/CH341SER.zip";
+        },
     
         toggleUpdateModal() {
             var bg = document.querySelector('.darken-background');

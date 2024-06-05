@@ -278,7 +278,7 @@ export default {
                 });
                 // 에이스 에디터 코드 초기화
                 this.workspace.addChangeListener(this.handleWorkspaceChange);
-                // Ctrl 키 누르면서 휠 돌리면 확대/축소되는 코드
+                // Shift 키 누르면서 휠 돌리면 가로 스크롤되는 코드
                 this.addCustomWheelListener();
                 // 에이스에디터 변경 감지용 코드
                 this.updateAceEditorCode();
@@ -318,7 +318,7 @@ export default {
                 });
                 // 에이스 에디터 코드 초기화
                 this.workspace.addChangeListener(this.handleWorkspaceChange);
-                // Ctrl 키 누르면서 휠 돌리면 확대/축소되는 코드
+                // Shift 키 누르면서 휠 돌리면 가로 스크롤되는 코드
                 this.addCustomWheelListener();
                 // 에이스에디터 변경 감지용 코드
                 this.updateAceEditorCode();
@@ -633,22 +633,29 @@ export default {
             document.body.appendChild(fileInput);
             fileInput.click(); // 사용자 대신 file input을 클릭하는 행위를 프로그래매틱하게 실행
         },
-        // Ctrl 키를 누르면서 마우스 휠 사용 시 확대/축소 함수
         addCustomWheelListener() {
             const workspace = this.workspace;
             const mainWorkspaceSvg = workspace.getParentSvg();
 
             mainWorkspaceSvg.addEventListener('wheel', function(event) {
-                if (event.ctrlKey) {
-                    // Control 키가 눌렸을 때는 확대/축소
-                    const delta = -event.deltaY / 100 * workspace.options.zoomOptions.scaleSpeed;
+                if (event.shiftKey) {
+                    // Shift 키가 눌렸을 때는 가로 스크롤
+                    const delta = event.deltaY;
                     if (delta) {
-                        const metrics = workspace.getMetrics();
-                        const center = { x: metrics.viewWidth / 2, y: metrics.viewHeight / 2 };
-                        workspace.zoom(center.x, center.y, delta);
+                        workspace.scroll(workspace.scrollX - delta, workspace.scrollY);
                     }
-                } else {
-                    // Control 키가 눌리지 않았을 때는 스크롤
+                } 
+                // else if (event.altKey) {
+                //     // Alt 키가 눌렸을 때는 확대/축소
+                //     const delta = -event.deltaY / 100 * workspace.options.zoomOptions.scaleSpeed;
+                //     if (delta) {
+                //         const metrics = workspace.getMetrics();
+                //         const center = { x: metrics.viewWidth / 2, y: metrics.viewHeight / 2 };
+                //         workspace.zoom(center.x, center.y, delta);
+                //     }
+                // } 
+                else {
+                    // 아무 키도 눌리지 않았을 때는 세로 스크롤
                     workspace.scroll(workspace.scrollX - event.deltaX, workspace.scrollY - event.deltaY);
                 }
                 event.preventDefault();
@@ -659,5 +666,6 @@ export default {
     },
 }
 </script>
+
 
 <style src="@/assets/css/block/blockcontents.css" />

@@ -98,6 +98,8 @@ export { LessonToolbox };
                     { "kind": "block", "gap": "8", "type": "zet_kit1_6_la" },
                     { "kind": "block", "gap": "8", "type": "zet_kit1_6_ti" },
                     { "kind": "block", "gap": "8", "type": "zet_kit1_6_h_do" },
+                    
+                    { "kind": "block", "gap": "8", "type": "advance_waiting" },
                 ],
             },
         ],
@@ -213,8 +215,8 @@ export { LessonToolbox };
                     { "kind": "block", "gap": "8", "type": "basic_kit_ready" },
                     { "kind": "block", "gap": "8", "type": "pro_kit1_11_1_ready" },
 
-                    { "kind": "block", "gap": "8", "type": "pro_kit1_3_13pin_led_on" },
-                    { "kind": "block", "gap": "8", "type": "pro_kit1_3_13pin_led_off" },
+                    { "kind": "block", "gap": "8", "type": "pro_kit1_11_20pin_led_on" },
+                    { "kind": "block", "gap": "8", "type": "pro_kit1_11_20pin_led_off" },
                     { "kind": "block", "gap": "8", "type": "zet_kit1_11_1_sound_sensor_read" },
                     { "kind": "block", "gap": "8", "type": "pro_kit1_11_1_sensor_4000_if_else" },
                     { "kind": "block", "gap": "8", "type": "common_delay_1" },
