@@ -5,8 +5,6 @@
         </div>
     
         <div>
-            <!-- 현재 클릭만 하면 변경됨, 연결여부에 따라 표시하도록 수정 필요 (새로고침해도 유지되게)-->
-            <!-- <div class="connect-false-wrap" v-show="this.connected === false" @click="this.connected = true"> -->
             <div class="control-btn-wrap">
                 <span class="connect-btn Pretendard-Medium" @click="connect()">
                     <img :src="connectBtnImg"/>
@@ -19,21 +17,13 @@
             </div>
         </div>
         <div class="nav">
-            <span class="NotoSansKR-Regular nav-txt"><a :href="this.downloadLink" target="_blank">자료실</a></span>
-            <span class="NotoSansKR-Regular nav-txt"><a :href="this.qnaLink" target="_blank">도움말</a></span>
+            <span class="NotoSansKR-Regular nav-txt"><a @click="goToDownload" style="cursor: pointer;">자료실</a></span>
+            <span class="NotoSansKR-Regular nav-txt"><a @click="goToQna" style="cursor: pointer;">도움말</a></span>
             <span class="NotoSansKR-Regular hamburger-wrap nav-txt">
                 <div class="hamburger-icon">
-                    <!-- <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div> -->
                     <img :src="menu" class="menu-img"/>
                 </div>
-                
-                <!-- <img src="@/assets/images/common/hamburger_menu.png"/> -->
-                
-                <!-- 드롭다운 메뉴 -->
                 <div class="dropdown-menu">
-                <!-- 메뉴 항목 -->
                     <ul>
                         <li class="menu-cts menu-title">
                             <p>MENU</p>
@@ -59,7 +49,6 @@
                             <p>포맷</p>
                         </li>
                         <li class="menu-cts" @click="toggleUpdateModal()">
-                        <!-- <li class="menu-cts" @click="update()"> -->
                             <img :src="updateImg"/>
                             <p>업데이트</p>
                         </li>
@@ -69,15 +58,12 @@
                         </li>
                     </ul>
                 </div>
-                
             </span>
-            
             <div class="darken-background"></div>
         </div>
     </q-toolbar>
     
     <div class="update-modal" v-if="this.updateModal == true">
-    <!-- <div class="update-modal"> -->
         <div @click="toggleUpdateModal()" style="color: black">X</div>
         <p style="color: black">업데이트할 교구를 클릭하세요.</p>
         <div>
@@ -85,8 +71,6 @@
             <q-btn @click="update('asomebot')" style="background-color: #4EA949; color: #fff; font-weight: 600;">어썸봇</q-btn>
         </div>
     </div>
-    
-    <!-- 어두운 배경, v-show로 표시 여부 결정 -->
 </template>
 
 <script>
@@ -127,9 +111,6 @@ export default {
             isMenuOpen: false,
             connected: false,
             
-            downloadLink: "https://asomeit.kr/download",
-            qnaLink: "https://asomeit.imweb.me/faq",
-
             updateModal: false,
         } 
     },
@@ -159,12 +140,7 @@ export default {
                 this.connect();
             }
         });
-        // window.addEventListener("message", (event) => {
-        //     if (event.data && typeof event.data === 'string' && event.data.includes('import')) {
-        //         serial.runCode(event.data);
-        //         return;
-        //     }
-        // });
+        
         window.addEventListener("message", (event) => {
             if (event.data.type === 'sttclose') { 
                 serial.writeLn(event.data.text);
@@ -175,15 +151,6 @@ export default {
                 this.connect();
             }
         });
-
-        
-        // window.addEventListener("message", (event) => {
-        //     if (event.data === 'bleConnect') {
-        //         ble.bleConnect();
-        //     }
-        // });
-        
-
     },
 
     methods: {
@@ -221,10 +188,6 @@ while True:
         red.off()
     else :
         delay(0.5)`);
-
-//     ble.runCode(`
-// while True:
-//     print(1)`);
         },
         bleStop(){
             ble.writeLn(String.fromCharCode(3))
@@ -244,14 +207,18 @@ while True:
                 this.updateModal = true;
                 bg.style.display = 'block'
             }
+        },
+
+        goToDownload() {
+            window.open("https://asomeit.kr/download");
+        },
+
+        goToQna() {
+            window.open("https://asomeit.imweb.me/faq");
         }
     },
-    
-
-    
 }
 </script>
 
-<!-- <style scoped src="@/assets/css/component/nav_bar.css"/> -->
 <style scoped src="@/assets/css/component/header.css"/>
 <style scoped src="@/assets/css/font.css"/>

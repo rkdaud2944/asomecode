@@ -87,6 +87,6 @@ export default {
 
 <style>
     body::-webkit-scrollbar {
-        display: none;
+        /* display: none; */
     }
 </style>

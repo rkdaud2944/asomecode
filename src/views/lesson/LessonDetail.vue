@@ -1,4 +1,5 @@
 <template>
+
     <div class="container-wrap">
         <div class="container">
             <div class="container-top">
@@ -16,15 +17,16 @@
 
             <div class="cts-wrap">
                 <div class="objectives Pretendard-Medium">
-                    <div @click="moveTo(title.tag, index)" 
-                        :class="['detail-title', `tag-${title.tag}`, { 'active-button': activeButton === index }]"
+                    <div @click="moveTo(title.tag)" 
+                        :class="`detail-title tag-${title.tag} defaultTag`"
                         v-for="(title, index) in titles" :key="index"
                         :title="title.name"
-                        :style="[detailTitleStyleHandler, activeButton === index ? activeButtonStyle : {}]">
+                        :style="detailTitleStyleHandler">
                         <p>{{title.name}}</p>                        
                     </div>
                 </div>
-                <div class="cts markdown-output-wrap">
+                
+                <div class="cts">
                     <div class="markdown_output">
                         <div v-for="(chunk, index) in markedOutput" :key="index">
                             <div v-html="chunk.html"></div>
@@ -83,8 +85,7 @@ export default {
             
             debouncedScrollHandler: null,
             editors: [],
-            test: "123123",
-            activeButton: 0 // 초기 활성화된 버튼 인덱스를 0으로 설정
+            test: "123123"
         };
     },
     beforeMount(){
@@ -224,8 +225,9 @@ export default {
     computed: {
         chapterStyleHandler() {
             return {
-                'border-color': this.$route.query.color,
-                'background-color': this.$route.query.color,                
+                '--cahpter-border-color': this.$route.query.color,
+                '--cahpter-background-color': this.$route.query.color,                
+
             }
         },
 
@@ -234,28 +236,28 @@ export default {
                 '--detail-title-background-color-first': this.$route.query.color,
                 '--detail-title-background-color-active': this.$route.query.color,
                 '--detail-title-background-color-tag-active': this.$route.query.color,
+
                 '--markdown-h2': this.$route.query.color,
             }
         },
-
-        activeButtonStyle() {
-            return {
-                backgroundColor: this.$route.query.color,
-                color: 'white'
-            };
-        }
     },
 
     methods: {
         ...serial, ...bridgeIn,
         
-        moveTo(tag, index) {
-            this.activeButton = index; // 클릭된 버튼 인덱스를 활성화된 버튼으로 설정
+        moveTo(tag) {
             const element = window.document.getElementById(tag);
+            const top = element.offsetTop - 0; 
+
+            // 현재 항목의 클래스를 추가
             if (element) {
-                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 element.classList.add("active");
             }
+
+            window.scrollTo({
+                top: top,
+                behavior: 'smooth'
+            });
         },
 
         getLesson(id) {
@@ -397,18 +399,3 @@ export default {
 <style src="@/assets/css/component/markdown_content.css"/>
 <style scoped src="@/assets/css/component/lesson_detail.css"/>
 <style scoped src="@/assets/css/font.css"/>
-
-<style scoped>
-.markdown-output-wrap {
-    max-height: 600px;
-    overflow-y: auto;
-}
-
-.detail-title {
-    cursor: pointer;
-}
-
-.active-button {
-    /* background-color와 color는 JavaScript에서 동적으로 설정됩니다 */
-}
-</style>
