@@ -1,5 +1,4 @@
 <template>
-
     <div class="main-wrap">
         <div class="main-mid">
             <div>
@@ -39,7 +38,6 @@
                                         :style="{
                                             'color': card.txtChapter,
                                             'background-color': card.bgChapter,
-
                                     }">
                                         {{ card.chapter }}
                                     </div>
@@ -92,8 +90,9 @@
                         @mouseup="clickedStates[index] = false"
                         @mouseover="hoveredStates[index] = true"
                         @mouseleave="hoveredStates[index] = false; clickedStates[index] = false"
+                        @click="openLink(card.href)"
                         >
-                        <a :href="card.href" target="_blank" class="tip-link" :style="{'text-decoration': 'none'}">
+                        <div class="tip-link" :style="{'text-decoration': 'none'}">
                             <div :class="`tip-box box${index+1}`"
                                 :style="tipComputeStyle(card, index)">
                                 <div>
@@ -104,14 +103,13 @@
                                     <img :src="card.image"/>
                                 </div>
                             </div>
-                        </a>
+                        </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </template>
 
 <script>
@@ -238,9 +236,18 @@ export default {
         globalMouseUpHandler() {
             if (this.clicked) this.clicked = false;
         },
+
+        openLink(url) {
+            window.open(url, '_blank');
+        },
     }
 }
 </script>
 
 <style scoped src="@/assets/css/component/homeview.css"/>
 <style scoped src="@/assets/css/font.css"/>
+<style scoped>
+.tip {
+    cursor: pointer;
+}
+</style>

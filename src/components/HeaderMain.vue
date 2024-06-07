@@ -17,8 +17,8 @@
             </div>
         </div>
         <div class="nav">
-            <span class="NotoSansKR-Regular nav-txt"><a @click="goToDownload" style="cursor: pointer;">자료실</a></span>
-            <span class="NotoSansKR-Regular nav-txt"><a @click="goToQna" style="cursor: pointer;">도움말</a></span>
+            <span @click="goToDownload" class="NotoSansKR-Regular nav-txt"><a style="cursor: pointer;">자료실</a></span>
+            <span @click="goToQna" class="NotoSansKR-Regular nav-txt"><a style="cursor: pointer;">도움말</a></span>
             <span class="NotoSansKR-Regular hamburger-wrap nav-txt">
                 <div class="hamburger-icon">
                     <img :src="menu" class="menu-img"/>
@@ -52,7 +52,7 @@
                             <img :src="updateImg"/>
                             <p>업데이트</p>
                         </li>
-                        <li class="menu-cts" @click="installDriver()">
+                        <li class="menu-cts" @click="goToDownload()">
                             <img :src="settingImg"/>
                             <p>드라이버 설치</p>
                         </li>
