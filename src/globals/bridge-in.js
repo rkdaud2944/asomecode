@@ -69,8 +69,8 @@ const bridge = {
     },
 
     // 기능블록
-    presentSession(present, language) {
-        console.log("lessonBlock : "+present + " language : "+language)
+    presentSession(present) {
+        // console.log("lessonBlock : "+present + " language : "+language)
         localStorage.setItem("lessonBlock", present);
         // window.open('/blockCoding')
 
