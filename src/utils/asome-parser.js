@@ -318,7 +318,7 @@ class Parser {
             <input class="form-control" type="text" id="wifi_password" placeholder="와이파이 암호" onchange="setWifiInfo()">
         </div>` +
 
-            `<div onclick="runCode(getCode('인터넷-연결하기'))" class="function_btn">인터넷 연결하기</div></br>` +
+            `<button class="answer-btn" style="margin-left:10px; cursor: pointer;" onclick="runCode(getCode('인터넷-연결하기'))" class="function_btn" type="button"><span>인터넷 연결하기</span></button></br>` +
             `<div id="인터넷-연결하기" class="hidden"></div>`;
             
     }
@@ -330,8 +330,8 @@ class Parser {
         </div>`+
         
 
-            `<div onclick="runCode(getCode('asome-wifi-open'))" class="function_btn">확인</div></br>` +
-            `<div id="asome-wifi-open" class="hidden"></div>`;
+        `<button class="answer-btn" style="margin-left:10px; cursor: pointer;" onclick="runCode(getCode('asome-wifi-open'))" class="function_btn" type="button"><span>확인</span></button></br>` +
+        `<div id="asome-wifi-open" class="hidden"></div>`;
     }
 
     #get_asome_messenger_Text() {
@@ -343,8 +343,7 @@ class Parser {
           <span class="input-group-addon"><i class="q-icon material-icons">message</i></span>
             <input class="form-control" type="text" id="asome_msg" placeholder="메시지" onchange="setAsomeMessengerInfo()">
         </div>` +
-
-            `<div onclick="runCode(getCode('asome-messenger'))" class="function_btn">전송</div></br>` +
+            `<button class="answer-btn" style="margin-left:10px; cursor: pointer;" onclick="runCode(getCode('asome-messenger'))" class="function_btn" type="button"><span>전송</span></button></br>` +
             `<div id="asome-messenger" class="hidden"></div>`;
     }
 
@@ -370,7 +369,8 @@ class Parser {
         let content = text.replace(`${firstLine}`, "").slice(0, -1);
         const lines = content.split("\n");
         content = lines.map(e => stripComments.stripPythonComments(e)).join('\n');
-        return `<div onclick="contentsUploadFile('${fileName}',getCode('${functionId}'))" class="function_btn">${functionName}</div></br>` +
+        
+        return `<button class="answer-btn" style="cursor: pointer;" onclick="contentsUploadFile('${fileName}',getCode('${functionId}'))" class="function_btn">${functionName}</button></br>` +
             `<div id="${functionId}" class="hidden">${content}</div>`;
     }
     

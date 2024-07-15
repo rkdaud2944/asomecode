@@ -70,13 +70,11 @@ const bridge = {
 
     // 기능블록
     presentSession(present) {
-        // console.log("lessonBlock : "+present + " language : "+language)
         localStorage.setItem("lessonBlock", present);
-        // window.open('/blockCoding')
 
         
         const route = router.resolve({ path: '/blockCoding' });
-        lessonBlock['lessonBlock'] = window.open(route.href, 'lessonBlock', 'width=1000,height=900'); // 400 300
+        lessonBlock['lessonBlock'] = window.open(route.href, 'lessonBlock', 'width=1000,height=900');
     },
 
     saveBotBase() {
@@ -115,6 +113,41 @@ asomebot.angle(3,${align04})
 print("pin5 = ${align01}, pin6 =${align02}, pin7 =${align03}, pin8 = ${align04}")`)
     },
 
+    internetinquiry() {
+        bridge.runCode(`
+import internet;
+print(internet.ifconfig())`)
+    },
+
+    internetwebinquiry() {
+        bridge.runCode(`
+import http_utils
+print( http_utils.get_time("@@NOW") )`)
+    },
+
+    messageprogarmrun() {
+        bridge.runCode(`
+import udp_socket
+s = udp_socket.Server()
+s.open(1234)
+while True:
+    msg = s.read_text()
+    if msg:
+        print(msg)`)
+    },
+
+    reset() {
+        bridge.runCode(`
+import machine;
+machine.reset()`)
+    },
+
+    deletemain() {
+        bridge.runCode(`
+import os;
+os.remove('main.py')`)
+    },
+
     showSlider140() {
         const route = router.resolve({ path: '/simulation/slider140' });
         window.open(route.href, 'lessonBlock', 'width=400,height=400');
@@ -139,6 +172,11 @@ window.presentSession = bridge.presentSession;
 window.saveBotBase = bridge.saveBotBase;
 window.checkBotBase = bridge.checkBotBase;
 window.testBotBase = bridge.testBotBase;
+window.internetinquiry = bridge.internetinquiry;
+window.internetwebinquiry = bridge.internetwebinquiry;
+window.messageprogarmrun = bridge.messageprogarmrun;
+window.reset = bridge.reset;
+window.deletemain = bridge.deletemain;
 window.showSlider140 = bridge.showSlider140;
 window.contentsUploadFile = bridge.contentsUploadFile;
 
