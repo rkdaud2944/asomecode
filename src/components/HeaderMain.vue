@@ -52,7 +52,7 @@
                             <img :src="updateImg"/>
                             <p>업데이트</p>
                         </li>
-                        <li class="menu-cts" @click="goToDownload()">
+                        <li class="menu-cts" @click="installDriver()">
                             <img :src="settingImg"/>
                             <p>드라이버 설치</p>
                         </li>

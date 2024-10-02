@@ -124,7 +124,12 @@ const routes = [
         name: 'blockCoding',
         component: () => import('../views/blockCoding/AsomeBlock.vue')
     },
-
+    // Block
+    {
+        path: '/GoqcPage',
+        name: 'GoqcPage',
+        component: () => import('../views/GoqcPage/GoqcPage.vue')
+    },
     // Curriculum
     {
         path: '/curriculum',

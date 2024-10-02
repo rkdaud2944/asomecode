@@ -40,7 +40,7 @@ export default {
                     break;             
                 case '/blockCoding' : 
                     window.open(route.href,'blockCoding', 'width=1024,height=900');
-                    break;
+                    break;        
                 case '/simulation/dice' : 
                     simulator['simulator'] = window.open(route.href, 'simulator', 'width=400,height=335'); // 400 300;
                     break; 

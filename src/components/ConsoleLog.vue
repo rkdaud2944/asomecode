@@ -35,6 +35,7 @@ import { mapState } from 'pinia'
 import {useConnectStore} from '@/store/connect-store'
 import VueBase from "@/mixin/vue-base";
 import bridgeIn from "@/globals/bridge-in";
+import boardUpdater from "@/globals/board-updater";
 
 export default {
     mixins: [VueBase, bridgeIn],
@@ -197,6 +198,17 @@ export default {
                 this.openRouterPath('/blockCoding')
             }
 
+            if (this.text.startsWith("/go qc") || this.text.startsWith("/go qc")) {
+                this.$router.push('/GoqcPage');
+                this.text = "";
+            }
+
+            if (this.text.startsWith("/update weather")) {
+                boardUpdater.start('weather');
+                this.text = "";
+                return;
+            }
+
             if(this.mode == 'ble'){
                 ble.writeLn(this.text);
                 this.text = "";
@@ -220,6 +232,7 @@ export default {
                 }
             }
         },
+        // 한글 디코딩 함수
         decodeKoreanCharacters(str) {
             const koreanEncodedRegex = /{{(.*?)}}/g;
             return str.replace(koreanEncodedRegex, (match, p1) => {
@@ -227,7 +240,7 @@ export default {
                     return decodeURIComponent(p1);
                 } catch (e) {
                     console.error('Decode error:', e);
-                    return match; // 디코딩 실패 시 원본 반환
+                    return match;
                 }
             });
         },

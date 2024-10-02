@@ -349,14 +349,32 @@ class Parser {
 
     #get_botBase() {
         return `<div class="bot-base-from input-group" style="width: 50%;">
-                    <span class="input-group-addon bot-base"><i class="q-icon material-icons">settings</i></span>
-                    <input class="form-control" type="text" id='align01' value="90" placeholder="1번 모터 중심 값"/>  
-                    <input class="form-control" type="text" id='align02' value="90" placeholder="2번 모터 중심 값"/>  
-                    <input class="form-control" type="text" id='align03' value="90" placeholder="3번 모터 중심 값"/>  
-                    <input class="form-control" type="text" id='align04' value="90" placeholder="4번 모터 중심 값"/>  
-                </div>
-                `
+                    <div class="input-group-addon bot-base">
+                        <i class="q-icon material-icons">settings</i>
+                    </div>
+                    <div class="motor-control">
+                        <input class="form-control" type="text" id='align01' value="90" placeholder="0번 모터 (Pin5)"/>  
+                        <button style="width:25px;" class="btn-plus" onclick="updateMotorValue('align01', 1)">+</button>
+                        <button style="width:25px;" class="btn-minus" onclick="updateMotorValue('align01', -1)">-</button>
+                    </div>
+                    <div class="motor-control">
+                        <input class="form-control" type="text" id='align02' value="90" placeholder="1번 모터 (Pin6)"/>  
+                        <button style="width:25px;" class="btn-plus" onclick="updateMotorValue('align02', 1)">+</button>
+                        <button style="width:25px;" class="btn-minus" onclick="updateMotorValue('align02', -1)">-</button>
+                    </div>
+                    <div class="motor-control">
+                        <input class="form-control" type="text" id='align03' value="90" placeholder="2번 모터 (Pin7)"/>  
+                        <button style="width:25px;" class="btn-plus" onclick="updateMotorValue('align03', 1)">+</button>
+                        <button style="width:25px;" class="btn-minus" onclick="updateMotorValue('align03', -1)">-</button>
+                    </div>
+                    <div class="motor-control">
+                        <input class="form-control" type="text" id='align04' value="90" placeholder="3번 모터 (Pin8)"/>  
+                        <button style="width:25px;" class="btn-plus" onclick="updateMotorValue('align04', 1)">+</button>
+                        <button style="width:25px;" class="btn-minus" onclick="updateMotorValue('align04', -1)">-</button>
+                    </div>
+                </div>`;
     }
+    
 
     #get_uploadFile(text) {        
         const firstLine = text.split("\n")[0];
@@ -391,4 +409,10 @@ class Parser {
                     </div>
                 </div>`;
     }
+}
+window.updateMotorValue =  function updateMotorValue(inputId, increment) {
+    const inputField = document.getElementById(inputId);
+    let currentValue = parseInt(inputField.value) || 0; // Get the current value or default to 0
+    currentValue += increment; // Add the increment (or decrement)
+    inputField.value = currentValue; // Update the input field's value
 }
