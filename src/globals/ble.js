@@ -33,7 +33,7 @@ class BleUnit {
         connectStore.setMode('ble');
 
         noble.on('discover', (peripheral) => {
-            if (peripheral.advertisement.localName && peripheral.advertisement.localName.includes('AsomeBot-A01')) {
+            if (peripheral.advertisement.localName && peripheral.advertisement.localName.includes('asomecar1')) {
                 noble.stopScanning();
 
                 peripheral.connect((error) => {
@@ -125,7 +125,8 @@ const bleConnect = {
 
     connect() {
         this.bleUnit = new BleUnit();
-        this.bleUnit.serviceScan();        
+        this.bleUnit.serviceScan();       
+        this.bleUnit.sendData("import os; os.uname()"); 
     },
 
     write(text) {
@@ -145,18 +146,32 @@ const bleConnect = {
         this.write(text);
     },
 
-    runCode(codes) {
+    async runCode(codes) {
         console.log("runCode", codes);
 
         this.writeLn(`_codes_ = ""`);
         for (let code of codes.replaceAll("\r", "").split("\n")) {
+            code = code.replace(/@@NOW/gi, currentTime);
             code = code.replace(/\\/gi, '\\\\');
             code = code.replace(/'/gi, "\\'");
             this.writeLn(`_codes_ = _codes_ + '${code}\\n'`);
+            await new Promise(resolve => setTimeout(resolve, 100));
         }
-        this.writeLn(`exec(_codes_)`);
+        this.writeLn(`exec(_codes_)\r\n`);
     },
+    
 
+}
+
+function currentTime() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    return `(${year}, ${month}, ${day}, 0, ${hours}, ${minutes}, ${seconds}, 0)`;
 }
 
 

@@ -76,7 +76,6 @@ export default {
 
             data = data.replaceAll(" ", "&nbsp;"); 
             data = data.replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;");
-            data = data.replaceAll(/\r?\n/g, "<br>");
 
             // 한글 디코딩
             data = this.decodeKoreanCharacters(data)

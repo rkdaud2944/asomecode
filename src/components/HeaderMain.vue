@@ -6,12 +6,16 @@
     
         <div>
             <div class="control-btn-wrap">
-                <span class="connect-btn Pretendard-Medium" @click="connect()">
-                    <img :src="connectBtnImg"/>
+                <span class="connect-btn Pretendard-Medium" @mouseenter="showConnectOptions" @mouseleave="hideConnectOptions">
+                    <img :src="connectBtnImg" />
                     연결하기
+                    <div v-if="showOptions" class="connect-options">
+                        <span class="option" @click="connect()">유선 연결</span>
+                        <span class="option" @click="bleConnect()">무선 연결</span>
+                    </div>
                 </span>
                 <span class="stop-btn Pretendard-Medium" @click="stop()">
-                    <img :src="stopBtnImg"/> 
+                    <img :src="stopBtnImg" />
                     멈추기
                 </span>
             </div>
@@ -71,6 +75,19 @@
             <q-btn @click="update('asomebot')" style="background-color: #4EA949; color: #fff; font-weight: 600;">어썸봇</q-btn>
         </div>
     </div>
+
+    <!-- ble 모달 -->
+    <div v-if="showBleModal" class="ble-modal">
+        <div class="modal-content">
+            <h3>BLE 장치 선택</h3>
+            <ul>
+                <li v-for="device in bleDevices" :key="device.id" @click="selectDevice(device)">
+                    {{ device.name || '이름 없는 장치' }}
+                </li>
+            </ul>
+            <button @click="closeBleModal">취소</button>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -112,6 +129,7 @@ export default {
             connected: false,
             
             updateModal: false,
+            showOptions: false,
         } 
     },
 
@@ -155,6 +173,14 @@ export default {
 
     methods: {
         ...serial, ...bridgeIn,
+
+        showConnectOptions() {
+            this.showOptions = true;
+        },
+
+        hideConnectOptions() {
+            this.showOptions = false;
+        },
 
         update(mode) {
             boardUpdater.start(mode);
