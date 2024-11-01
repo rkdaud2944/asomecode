@@ -1,30 +1,32 @@
 <template>
     <Header />
-    <br />
-
-    <div class="q-ma-md">
-        <div class="q-ma-md">차시 목록</div>
-        <q-table :rows="subject.lessons" :columns="columns" row-key="id" hide-bottom /><br>
-
-        <q-input filled v-model="subject.title" label="제목" stack-label readonly /><br>
-        <q-input filled v-model="subject.subTitle" label="부제목 (영문제목)" stack-label readonly /><br>
-
-        <div class="row">
-            <div class="col q-pr-md">
-                <q-input filled v-model="subject.writer" label="작성자" stack-label readonly />
-            </div>
-            <div class="col q-pl-md">
-            </div>
+    <div>
+        <div>
+            <p class="help-detail-font-style">Help 
+                <img class="help-detail-title-img-style" :src="arrow">
+                <span class="color--999899">Custom Curriculum</span>
+            </p>
+            <input class="help-detail-title-font-style" filled readonly v-model="subject.title"/><br>
         </div>
+        <input class="help-detail-sub-title-font-style" filled readonly v-model="subject.subTitle"/>
+        <input class="help-detail-writer-font-style" filled readonly v-model="subject.writer"/>
+    </div>
+
+    <div class="hr">
+    </div>
+
+    <div class="q-ma-md margin-left--5">차시 목록</div>
+     
+        <q-table class="help-detail-table-style" :rows="subject.lessons" :columns="columns" row-key="id" hide-bottom /><br>
         <br>
 
-        <q-input v-model="subject.description" label="과목 설명" filled type="textarea" readonly /><br>
+        <q-input class="margin-left--5 margin-right--5 width--auto" v-model="subject.description" label="과목 설명" filled readonly /><br>
 
-        <div class="row flex flex-center">
+        <div class="margin-right--5 text-align--right">
             <q-btn @click="onclickUpdateBtn" color="secondary" label="수정" class="q-ml-md" />
-            <q-btn @click="onclickDeleteBtn" color="deep-orange" label="삭제" class="q-ml-md" />
+            <q-btn @click="onclickDeleteBtn" color="red" label="삭제" class="q-ml-md" />
+            <q-btn class="q-mx-md margin-right--0" @click="goBack()" color="green" label="뒤로가기" />
         </div>
-    </div>
 
     <q-dialog ref="passwordDialog" @hide="onCancelPasswordDialog">
         <q-card class="q-dialog-plugin">
@@ -52,7 +54,9 @@
 <script>
 import VueBase from "@/mixin/vue-base";
 import Header from "@/components/HeaderHelp.vue";
-import apiSubject from '@/api/subject';
+import apiSubject from "@/api/subject";
+import images from "@/assets/images";
+
 export default {
     mixins: [VueBase],
 
@@ -65,6 +69,8 @@ export default {
             subject: "",
             password: "",
             columns: columns,
+
+            arrow: images.arrow
         };
     },
 
@@ -113,3 +119,6 @@ const columns = [
     { name: 'title', align: 'left', label: '제목', field: 'title' },
 ];
 </script>
+
+<style scoped src="@/assets/css/component/common.css"/>
+<style src="@/assets/css/component/SubjectDetail.css"/>

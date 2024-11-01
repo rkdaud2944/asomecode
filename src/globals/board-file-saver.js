@@ -24,7 +24,8 @@ const boardFileSaver = {
         if (this.lines.length == 0) {
             serial.writeLn("f.close()");
             serial.writeLn("f = None");
-            serial.writeLn('print("### Saver Next File")');
+            serial.writeLn('print("파일 업로드 완료")');
+            serial.writeLn('');
             return;
         }
 

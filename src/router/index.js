@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 
 const routes = [
     {
@@ -109,13 +109,55 @@ const routes = [
                 props: true,
                 component: () => import('../views/backOffice/EditLesson.vue')
             },
+            {
+                path: '/backOffice/lesson/detail',
+                props: true,
+                component: () => import('../views/backOffice/backLessonDetail.vue')
+            },
         ]
     },
+
+    
+    // Block
+    {
+        path: '/blockCoding',
+        name: 'blockCoding',
+        component: () => import('../views/blockCoding/AsomeBlock.vue')
+    },
+    // Block
+    {
+        path: '/GoqcPage',
+        name: 'GoqcPage',
+        component: () => import('../views/GoqcPage/GoqcPage.vue')
+    },
+    // Curriculum
+    {
+        path: '/curriculum',
+        props: true,
+        component: () => import('../views/lesson/SelectCurriculum.vue')
+
+    },
+    
+    // Simulation
+    {
+        path: '/simulation/:page',
+        props: true,
+        component: () => import('../views/SimulationView.vue')
+
+    },
+    
+    {
+        path: '/your-route',
+        name: 'YourRoute',
+        component: () => import('../views/blockCoding/AsomeBlock.vue')
+    }
+
 ]
 
+// 일렉트론은 내부에서 모든걸 처리하기 때문에 hash모드가 적절
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes
-})
+    history: createWebHashHistory(process.env.BASE_URL),
+    routes
+});
 
 export default router

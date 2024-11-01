@@ -32,7 +32,7 @@ const boardFileManager = {
         let filename = tobeDowndloads.shift();
         let lines = [];
         try {
-            const response = await axios.request(config.pythonUrl() + filename);
+            const response = await axios.request(config.pythonUrl(localStorage.getItem('updateMode')) + filename);
             lines = response.data.replaceAll("\r", "").replaceAll("\t", "    ").replaceAll('"', '\\"').split("\n");
         } catch (error) {
             console.log(error);

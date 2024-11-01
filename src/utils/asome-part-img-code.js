@@ -26,6 +26,9 @@ export default {
                 { src: 'servo_180.png', label: '180도 서보모터' },
                 { src: 'battery_holder.png', label: '배터리 홀더' },
                 { src: 'battery_aaa.png', label: 'AA 배터리' },
+                { src: 'asomecar.png', label: '어썸카 바디' },
+                { src: 'servo_360.png', label: '360도 서보모터' },
+                { src: 'sensor_line.png', label: '라인 트래킹 센서' },
             ],
         }
     }

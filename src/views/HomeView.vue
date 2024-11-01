@@ -1,31 +1,111 @@
 <template>
-    <div class="row q-pa-md nav-padding" style="padding-left: 0px; padding-right: 0px;">
-        <div>
-
-            <a href="/"><img src="/images/common/logo2.png" class="img">
-            </a>
+    <div class="main-wrap">
+        <div class="main-mid">
+            <div>
+                <h3 class="Pretendard-ExtraBold">AsomeIT</h3>
+                <p class="Pretendard-Regular">어썸코드는 어썸아이티만의 코딩 학습 전용 프로그램입니다.</p>
+            </div>
         </div>
-        <div class="col menu">
-            <ImageButton :src="'/images/common/header_button_image/bt_notice.png'" @click="onClickNotice"/>
-            <ImageButton :src="'/images/common/header_button_image/bt_library.png'" />
-            <ImageButton :src="'/images/common/header_button_image/bt_community.png'" />
-            <ImageButton :src="'/images/common/header_button_image/bt_faq.png'" />
-        </div>
-    </div>
+        <div class="main-cts-wrap">
+            <div class="main-cts">
+                <div > 
+                    <!-- 여기는 원래 위에 main-mid가 217이어야 하는데 이부분 때문에 177로함, 폰트사이즈 20 상하 여백 10 -->
+                    <div class="curriculum-title Pretendard-Medium">Curriculum</div>
+                    <div class="curriculum">
+                        <div class="card-wrap"
+                            v-for="(card, index) in cards"
+                            :key="index"
+                            @mousedown="clicked = true"
+                            @mouseup ="clicked = false"
+                        >
+                            <div class="card" @click="goSelectCurriculum(card.id, card.title)">
+                                <div class="card-front"
+                                    :style="{ 
+                                        'background': card.bgColor,
+                                        'color': hoverIndex === index ? card.hoverTxtAge : '#000',
+                                        transition: 'background-color 0.5s ease, color 0.5s ease',
+                                        'backgroundImage': `url(${card.image})`
+                                }">
+                                    <p class="age NotoSansKR-Regular"
+                                        :style="{'color': card.txtAge,
+                                        'border': `1px solid ${card.txtAge}`
+                                    }">
+                                        {{ card.age }}
+                                    </p>
+                                    <h4 class="title Pretendard-ExtraBold">{{ card.title }}</h4>
+                                    <p class="description Pretendard-Regular">{{ card.description }}</p>
+                                    <div class="home-chapter Pretendard-Regular" 
+                                        :style="{
+                                            'color': card.txtChapter,
+                                            'background-color': card.bgChapter,
+                                    }">
+                                        {{ card.chapter }}
+                                    </div>
+                                </div>
 
-    <div class="what-is-asomeit" style="height: 170px;">
-        <img src="/images/korea/what_is_asomeit.png">
-        <p class="what-is-asomeit-font">
-            SW 코딩교육을 통해 <b>논리적인 사고</b>와 <b>창의력</b>을 길러 줄 수 있는 프로그램으로
-            <br>흥미있는 놀잇감형 교구를 활용해 어렵지 않게 배울 수 있습니다.
-        </p>
-    </div>
+                                <!-- hover -->
+                                <div class="card-back"
+                                    :style="{ 
+                                        'background': clicked === true ? card.clickBgColor : card.hoverBgColor,
+                                        'color': hoverIndex === index ? card.hoverTxtAge : '#000',
+                                        transition: 'background-color 0.5s ease, color 0.5s ease',
+                                        'backgroundImage': `url(${card.hoverImage})`
+                                }">
+                                    <p class="age NotoSansKR-Regular"
+                                        :style="{'color': clicked === true ? card.clickTxtAge : card.hoverTxtAge,
+                                        'border': `1px solid ${clicked === true ? card.clickTxtAge : card.hoverTxtAge}`
+                                    }">
+                                        {{ card.age }}
+                                    </p>
+                                    <h4 class="title Pretendard-ExtraBold"
+                                        :style="{
+                                            'color': clicked === true ? card.clickTxtTitle : card.hoverTxtTitle,
+                                            'text-shadow': '2px 2px 2px gray',
+                                            'opacity': clicked === true ? '0.5' : '1',
+                                        }
+                                        ">
+                                        {{ card.title }}
+                                    </h4>
+                                    <p class="description Pretendard-Regular">{{ card.description }}</p>
+                                    <div class="home-chapter Pretendard-Regular" 
+                                        :style="{
+                                            'color': card.hoverTxtChapter,
+                                            'background-color': card.hoverBgChapter,
+                                    }">
+                                        {{ card.chapter }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    <div style="background:rgb(224,230,235);">
-        <div class="row subject_box">
-            <div class="col-3 subject-box-interval" v-for="(subject, index) in subjects" :key="index">
-                <div class="q-ma-md subject">
-                    <Subject :subject="subject" :index="index" />
+                <div>
+                    <div class="tip-title Pretendard-Medium">TIP</div>
+                    <div class="tip-wrap">
+                        <div class="tip" 
+                        v-for="(card, index) in tipCards"
+                        :key="index"
+                        @mousedown="clickedStates[index] = true"
+                        @mouseup="clickedStates[index] = false"
+                        @mouseover="hoveredStates[index] = true"
+                        @mouseleave="hoveredStates[index] = false; clickedStates[index] = false"
+                        @click="openLink(card.href)"
+                        >
+                        <div class="tip-link" :style="{'text-decoration': 'none'}">
+                            <div :class="`tip-box box${index+1}`"
+                                :style="tipComputeStyle(card, index)">
+                                <div>
+                                    <p class="NotoSansKR-Regular p1">{{card.title}}</p>
+                                    <p class="Pretendard-Regular p2">{{card.description}}</p>
+                                </div>
+                                <div>
+                                    <img :src="card.image"/>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -33,13 +113,15 @@
 </template>
 
 <script>
+import images from "@/assets/images"; 
 import apiSubjectSet from "@/api/subjectSet";
-import ImageButton from '@/components/ImageButton.vue';
-import Subject from '@/components/SubjectComponent.vue'
+// import Subject from '@/components/SubjectComponent.vue'
+import { cards } from "@/data/main-cards";
+import { tipCards } from "@/data/main-tip-cards";
 
 export default {
     components: {
-        ImageButton, Subject,
+        // Subject,
     },
 
     setup() {
@@ -51,14 +133,70 @@ export default {
     data() {
         return {
             subjects: {},
+            isMouseOverNotice: false,
+            isMouseOverCommunity: false,
+            isMouseOverLibrary: false,
+            isMouseOverFaq: false,
+            logo2: images.logo2,
+            notice: images.notice,
+            noticeHover: images.noticeHover,
+            community: images.community,
+            communityHover: images.communityHover,
+            library: images.library,
+            libraryHover: images.libraryHover,
+            faq: images.faq,
+            faqHover: images.faqHover,
+            asomeitQuestionMark: images.asomeitQuestionMark,
+
+            
+            cards: cards,
+            tipCards: tipCards,
+            // tipCards: this.tipCards.map(card => ({ ...card, hovered: false })),
+            // hovered: false,
+            hoveredStates: {},
+            clickedStates: {},
+            clicked: false, // 클릭 상태 초기화
+            
+        }
+    },
+    computed: {
+        noticeImage() {
+            return this.isMouseOverNotice ? this.noticeHover : this.notice;
+        },
+        communityImage() {
+            return this.isMouseOverCommunity ? this.communityHover : this.community;
+        },
+        libraryImage() {
+            return this.isMouseOverLibrary ? this.libraryHover : this.library;
+        },
+        faqImage() {
+            return this.isMouseOverFaq ? this.faqHover : this.faq;
         }
     },
 
     mounted() {
         this.getSubjectSet()
+        window.addEventListener('mouseup', this.globalMouseUpHandler);
+    },
+
+    beforeUnmount() {
+        window.removeEventListener('mouseup', this.globalMouseUpHandler);
     },
 
     methods: {
+        onMouseOver(type) {
+            if(type === 'notice') this.isMouseOverNotice = true;
+            if(type === 'community') this.isMouseOverCommunity = true;
+            if(type === 'library') this.isMouseOverLibrary = true;
+            if(type === 'faq') this.isMouseOverFaq = true;
+        },
+
+        onMouseLeave(type) {
+            if(type === 'notice') this.isMouseOverNotice = false;
+            if(type === 'community') this.isMouseOverCommunity = false;
+            if(type === 'library') this.isMouseOverLibrary = false;
+            if(type === 'faq') this.isMouseOverFaq = false;
+        },
         onClickNotice() {
             this.$router.push({ path: '/notice/list'});
         },
@@ -70,8 +208,46 @@ export default {
                 })
                 .catch(this.showError);
         },
+        tipComputeStyle(card, index) {
+            // 클릭
+            if (this.clickedStates[index]) {
+                return { background: card.clickBgColor,
+                    color: card.clickTxtColor,};
+            } 
+            // 호버
+            else if (this.hoveredStates[index]) {
+                return { background: card.hoverBgColor,
+                    color: card.hoverTxtColor,};
+            } 
+            // 기본
+            else {
+                return { background: card.bgColor,
+                    color: card.txtColor,};
+            }
+        },
+
+        goSelectCurriculum(id, title){
+            this.$router.push({ 
+                path: `/curriculum`,
+                query:{id: `${id}`,title: `${title}`}
+            });
+        },
+        
+        globalMouseUpHandler() {
+            if (this.clicked) this.clicked = false;
+        },
+
+        openLink(url) {
+            window.open(url, '_blank');
+        },
     }
 }
 </script>
 
 <style scoped src="@/assets/css/component/homeview.css"/>
+<style scoped src="@/assets/css/font.css"/>
+<style scoped>
+.tip {
+    cursor: pointer;
+}
+</style>

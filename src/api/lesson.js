@@ -16,7 +16,7 @@ export default {
                 });
         })
     },
-
+ 
     async getLessons(params) {
         return new Promise((resolve, reject) => {
             rest.get("lessons", {params})
@@ -32,11 +32,25 @@ export default {
                 console.log(error);
             });
         });
-    },
+    }, 
 
     lessonDetail: async function (id) {
-        var url = `/lesson/${id}`;
-        return rest.get(url)
+        // var url = `/lesson/${id}`;
+        // return rest.get(url)
+        return new Promise((resolve, reject) => {
+            rest.get(`lesson/${id}`)
+            .then(response => {
+                if (response.data.resultCode) {
+                    reject(response);
+                    return;
+                }
+
+                resolve(response);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        });
     },
 
     async updateLesson(params, id) {

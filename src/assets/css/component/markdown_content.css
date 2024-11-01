@@ -1,18 +1,36 @@
+div, li, ul, h2, h3, p {
+    font-family: 'Pretendard-Light';
+}
+
+a {
+    color: black;
+    text-decoration: none;
+    pointer-events: none;
+    cursor: default;
+}
+
 .markdown_output {
-    padding-top: 80px;
+    /* padding-top: 80px; */
     margin: 0px 22px 0px 22px;
+    padding-bottom: 200px;
 }
 
 .markdown_output h2 {
     padding-top: 15px;
-    border-top: 2px solid #ff8123;
+    border-bottom: 2px solid #F3F3F5;
     font-size: 23px;
     font-weight: bold;
     line-height: 30px;
-    color: #ff8123;
+    /* color: #E4007F; */
+    /* color: var(--markdown-h2); */
     margin: 0px;
     margin-top: 50px;
     margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+.markdown_output h2:nth-child(1){
+    margin-top: 0;
 }
 
 .markdown_output h3 {
@@ -24,6 +42,7 @@
     margin-bottom: 10px;
     margin-left: 10px;
     line-height: normal;
+    color: #4F4F53;
 }
 
 .markdown_output p {
@@ -34,10 +53,12 @@
     margin: 0px;
     margin-bottom: 10px;
     margin-left: 10px;
+    color: #4F4F53;
 }
 
 .markdown_output ul {
     font-size: 1.2em;
+    color: #4F4F53;
 }
 
 .markdown_output img {
@@ -49,11 +70,11 @@
 
 .markdown_output .img_content_box {
     font-size: 1.2em;
-    text-align: center
+    text-align: center;
 }
 
 .markdown_output .function_btn {
-    background-image: url(/public/common/images/blockcode-1.png);
+    background-image: url(/src/assets/images/blockcode-1.png);
     background-color: #E7F0ED;
     background-repeat: no-repeat;
     width: 100%;
@@ -65,6 +86,7 @@
     font-size: 14px;
     font-weight: bold;
     cursor: pointer;
+    margin-left: 10px;
 }
 
 .markdown_output .slide_component_box {
@@ -128,8 +150,12 @@
     font-size: 1.3em;
     text-align: center;
     border-radius: 3em;
-    color: white;
+    color: white !important;
     background-color: #7d7d7d;
+}
+
+.parts_qty > p{
+    color: #fff;
 }
 
 .markdown_output .parts_comment_bar {
@@ -148,6 +174,7 @@
     position: relative;
     display: table;
     border-collapse: separate;
+    margin-left: 10px;
 }
 
 .markdown_output .input-group-addon {
@@ -195,8 +222,162 @@
     border: 1px solid transparent;
     border-radius: 4px;
     cursor: pointer;
-    
+    color: #fff;
     background-color: #59CB52;
+}
+
+.markdown_output .block-coding-view-btn:hover {
+    color: #fff;
+    background-color: #449d44;
+    border-color: #398439;
+}
+
+.markdown_output .blue-color-btn {
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+.markdown_output .blue-color-btn:hover {
+    color: #fff;
+    background-color: #286090;
+    border-color: #204d74;
+}
+
+.markdown_output .red-color-btn {
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+
+.markdown_output .red-color-btn:hover {
+    color: #fff;
+    background-color: #c9302c;
+    border-color: #ac2925;
+}
+
+.markdown_output .driver-download-btn {
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    
+    background-color: #337ab7;
+    color: white;
+}
+
+.markdown-btn-img{
+    display: inline;
+    zoom: 0.8;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.bot-base-from {
+    margin-bottom: 15px;
+    margin-left: 10px;
+    position: relative;
+    display: table;
+    border-collapse: separate;
+}
+
+.bot-base-from > .bot-base, .bot-base-from > .form-control {
+    display: table-cell;
+    vertical-align: middle; /* 추가된 부분 */
+}
+
+.bot-base {
+    margin: 0;
+    display: flex;
+}
+
+.editor-wrap {
+    width: 98%;
+    margin-left: 10px;
+}
+
+.editor {
+    width: 100%;
+    height: 300px;
+}
+
+.editor, .editor * {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'Source Code Pro', 'source-code-pro', monospace !important;
+}
+
+.editor-btn-wrap {
+    width: 100%; /* 부모 컨테이너의 폭을 100%로 설정 */
+    display: flex; /* Flexbox 레이아웃 사용 */
+    margin-bottom: 20px;
+}
+
+.editor-btn-wrap span {
+    flex: 1; /* Flexbox 아이템들이 부모 컨테이너의 남은 공간을 같게 나눔 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+    line-height: 30px; /* span의 높이를 지정하고 글씨를 가운데 정렬 (높이는 예시로 지정) */
+}
+
+.editor-run {
+	background-color: #4f4f53; 
+	color: #fff;
+    cursor: pointer;
+}
+
+.editor-stop {	
+	background-color: #7e7e83; 
+	color: #fff;
+    cursor: pointer;
+}
+
+.editor-run:hover, .editor-stop:hover {
+	background-color: #aeaeb4; 
+}
+
+.editor-run:active, .editor-stop:active {
+	background-color: #29292c; 
+}
+
+.board-err-wrap {
+    width: 98%;
+    margin-left: 10px;
+    padding: 20px;
+    background-color: #EFEFEF;
+}
+
+.board-err-img {
+    text-align: center;
+}
+
+.err-title {
+    font-size: 14px !important;
+    color: red !important;
+    margin-bottom: 0 !important;
+}
+
+.err-cts{
+    font-size: 13px !important;
 }
 
 @media all and (min-width:722px) and (max-width:8000px) {

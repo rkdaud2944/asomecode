@@ -63,7 +63,7 @@ export default {
     background-color: red;
 }
 .ghost {
-  opacity: 0.5;
-  background: #c8ebfb;
+    opacity: 0.5;
+    background: #c8ebfb;
 }
 </style>

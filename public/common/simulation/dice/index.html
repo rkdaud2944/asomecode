@@ -9,27 +9,25 @@
 	<link rel="stylesheet" href="../../../common/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../../../common/css/AsomeCODE.css">
 
+	<script src="../../../common/js/AsomeCODE.js"></script> 
     <script src="../../../common/js/jquery-1.9.1.js"></script>
 	<script src="../../../common/js/bootstrap.min.js"></script>
 </head>
 
-<!-- <body style="overflow-x: hidden; overflow-y: hidden;"> -->
-<body style="width: 100%;" onLoad="self.focus();window.onblur=function(){window.focus()}">
+<body style="overflow-x: hidden; overflow-y: hidden;">
 	<div style="position: relative;">
-		<img src="back.png" style="position: absolute; width: 100%">
-		<img id="img_dice" src="1.png" onclick="roll_dice()" style="position: absolute; width: 100%">
+		<img src="back.png" style="position: absolute;">
+		<img id="img_dice" src="1.png" onclick="roll_dice()" style="position: absolute;">
 	</div>
 
 	<script type="text/javascript">
 		window.onload = function() {
-			roll_dice()
+			App.run_cmd("Code=Input/Text=### Simulation started");
 		}
 
 		function roll_dice() {
 			var index = Math.floor(Math.random() * 6) + 1;
 			$("#img_dice").attr("src", index + ".png");
-			
-			window.opener.getValueFromeChild(index);
 		}
 	</script>	
 </body>

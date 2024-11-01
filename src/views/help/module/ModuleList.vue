@@ -1,10 +1,17 @@
 <template>
     <Header />
-
-    <div class="q-pa-md">
-        어썸보드에서 제공하는 다양한 모듈에 대한 설명입니다.
+    <div class="q-pa-md"> 
+        <p class="help-main-title-font-style text-align--center">
+            Module Library
+        </p>
+        <p class="help-sub-title-font-style text-align--center padding-bottom--35">
+            어썸보드에서 제공하는 다양한 모듈에 대한 설명입니다.
+        </p>
     </div>
-    <hr class="hr">
+
+    <div class="hr">
+    </div>
+
 </template>
 
 <script>
@@ -16,13 +23,7 @@ export default {
     },
 
     mounted() {
-        console.log(this.$route.query);
     }
 }
 </script>
-<style>
-.hr {
-    border: 1px solid #ff8123;
-    border-radius: 4px 4px 0 0;
-}
-</style>
+<style src="@/assets/css/component/common.css"/>

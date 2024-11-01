@@ -33,6 +33,14 @@ export default {
         window.opener.postMessage(JSON.stringify(msg));
     },
 
+    writeInput(code) {
+        const msg = {
+            type: "writeInput",
+            params: code,
+        };
+        window.opener.postMessage(JSON.stringify(msg));
+    },
+
     uploadTextToBoard(filename, text) {
         const msg = {
             type: "uploadTextToBoard",
@@ -40,5 +48,14 @@ export default {
             text: text,
         };
         window.opener.postMessage(JSON.stringify(msg));
-    }
+    },
+
+    
+    runBle(code) {
+        const msg = {
+            type: "runBle",
+            params: code,
+        };
+        window.opener.postMessage(JSON.stringify(msg));
+    },
 }

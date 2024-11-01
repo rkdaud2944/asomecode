@@ -4,19 +4,19 @@
             <q-toolbar>
                     <ul class="header-box">
                         <li class="button" @click="run" label="Run">
-                            <img src="../../public/images/common/editor/run.png" class="button-img">
+                            <img :src="runEdt" class="button-img"/>
                         </li>
                         <li class="button" @click="stop()" label="Stop">
-                            <img src="../../public/images/common/editor/stop.png" class="button-img">
+                            <img :src="stopEdt" class="button-img"/>
                         </li>
                         <li class="button" @click="upload" label="Upload">
-                            <img src="../../public/images/common/editor/update.png" class="button-img">
+                            <img :src="updateEdt" class="button-img"/>
                         </li>
                         <li class="button" @click="open" label="Open">
-                            <img src="../../public/images/common/editor/open.png" class="button-img">
+                            <img :src="openEdt" class="button-img"/>
                         </li>
                         <li class="button" @click="save" label="Save">
-                            <img src="../../public/images/common/editor/save.png" class="button-img">
+                            <img :src="saveEdt" class="button-img"/>
                         </li>
                     </ul>
             </q-toolbar>
@@ -40,7 +40,8 @@
 </template>
 
 <script>
-import localfile from "@/globals/localfile";
+import images from "@/assets/images.js";
+// import localfile from "@/globals/localfile";
 import { Dialog } from 'quasar'
 import { VAceEditor } from "vue3-ace-editor";
 import VueBase from "@/mixin/vue-base";
@@ -49,10 +50,17 @@ import LatencyTimer from "@/utils/latency-timer";
 import 'ace-builds/src-noconflict/mode-python';
 import 'ace-builds/src-noconflict/theme-monokai';
 import 'ace-builds/src-noconflict/ext-language_tools';
+import ble from "@/globals/ble";
+import { mapState } from 'pinia'
+import {useConnectStore} from '@/store/connect-store'
 
 
 export default {
     mixins: [VueBase],
+    
+    computed: {
+        ...mapState(useConnectStore,['mode','connectionState']),
+    },
 
     components: { VAceEditor },
 
@@ -60,6 +68,12 @@ export default {
         return {
             content: '',
             savedContent: '',
+
+            runEdt: images.runEdt,
+            stopEdt: images.stopEdt,
+            updateEdt: images.updateEdt,
+            openEdt: images.openEdt,
+            saveEdt: images.saveEdt
         }
     },
     
@@ -186,8 +200,13 @@ export default {
         ...remoteSerial,
 
         run() {
-            this.runCode(this.content);
-            this.saveToLocalStorage();
+            if(this.mode == 'ble'){
+                ble.writeLn(this.content);
+                return;
+            }else{
+                this.runCode(this.content);
+                this.saveToLocalStorage();
+            }
         },
 
         upload() {
@@ -205,17 +224,56 @@ export default {
                 if (!filename) return;
                 if (!filename.endsWith('.py')) {
                     filename += '.py';
-                }
-                remoteSerial.uploadTextToBoard(filename, this.content);
+                }    
+
+            let processedContent = '';
+
+            for (let line of this.content.replaceAll("\r", "").split("\n")) {
+                line = line.replace(/\\/g, '\\\\');
+                line = line.replace(/'/g, "\\'");
+                processedContent += `${line}\\n`;
+            }
+
+            remoteSerial.uploadTextToBoard(filename, processedContent);
             });
         },
 
-        async open() {
-            this.content = await localfile.loadFileAsText('Python', 'py');
-        },
-
         save() {
-            localfile.saveTextToFile('Python', 'py', this.content);
+            let text = this.content
+            const blob = new Blob([text], { type: 'text/plain;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.download = 'default.py';
+            link.href = url;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        },
+        
+        open() {
+            let fileInput = document.createElement("input");
+
+            fileInput.type = 'file';
+            fileInput.style.display = 'none';
+            var _this = this;
+            fileInput.onchange = function(e) {
+                let file = e.target.files[0];
+                if (!file) {
+                    return;
+                }
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    let contents = e.target.result;
+                    _this.content = contents;
+                    document.body.removeChild(fileInput); 
+                };
+                reader.readAsText(file);
+            };
+
+            document.body.appendChild(fileInput);
+            fileInput.click(); 
+            this.$forceUpdate();
         },
 
         onChanged() {
@@ -232,3 +290,12 @@ export default {
 </script>
 
 <style scoped src="@/assets/css/component/editorview.css"/>
+
+<style>
+/* .scroll, body.mobile .scroll--mobile {
+    overflow: hidden !important;
+} */
+.absolute-full {
+    right : 0px !important;
+}
+</style>

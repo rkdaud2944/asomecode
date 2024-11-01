@@ -1,186 +1,224 @@
 <template>
-    <nav class="header-nav">
-        <div class="logo_box">
-            <img src="../../public/images/common/logom.png" class="main-logo">
+    <q-toolbar class="header-nav">
+        <div class="main-logo" @click="this.$router.push({ path: `/`})">
+            <img :src="logo" alt="logo" class="logo"/>
         </div>
-
-        <div class="menulist">
-            <ul class="ui-left">
-                <li class="ui-left-bt" @click="connect()">
-                    <img src="../../public/images/common/connect.png" class="ui-img">
-                    <p class="ui-left-font" id="fs-four">연결하기</p>
-                </li>
-                <li class="ui-left-bt" @click="goTo('/')">
-                    <img src="../../public/images/common/home.png" class="ui-img">
-                    <p class="ui-left-font" id="fs-one">홈</p>
-                </li>
-                <li class="ui-left-bt" @click="openEditor()">
-                    <img src="../../public/images/common/editor.png" class="ui-img">
-                    <p class="ui-left-font" id="fs-four">소스편집</p>
-                </li>
-                <li class="ui-left-bt" @click="stop()">
-                    <img src="../../public/images/common/stop.png" class="ui-img">
-                    <p class="ui-left-font" id="fs-three">멈추기</p>
-                </li>
-            </ul>
-
-            <ul class="ui-right">
-                <li class="ui-right-bt" @click="reboot()">
-                    <img src="../../public/images/common/reboot.png" class="ui-img">
-                    <p class="ui-right-font" id="fs-three">재부팅</p>
-                </li>
-                <li class="ui-right-bt" @click="format()">
-                    <img src="../../public/images/common/format.png" class="ui-img">
-                    <p class="ui-right-font" id="fs-two">포맷</p>
-                </li>
-                <li class="ui-right-bt" @click="update()">
-                    <img src="../../public/images/common/update.png" class="ui-img">
-                    <p class="ui-right-font" id="fs-four">업데이트</p>
-                </li>
-                <li class="ui-right-bt" @click="openRouterPath('/help')">
-                    <img src="../../public/images/common/help.png" class="ui-img">
-                    <p class="ui-right-font" id="fs-three">HELP</p>
-                </li>
-                <li @click="openUrl('AsomeBlock', '/AsomeBlock/AsomeBlock.html?language=Korean')">
-                    Block
-                </li>
-                <!-- <li @click="openUrl('metaverse', 'http://www.metalive.be:13300/')">
-                    M
-                </li> -->
-                <li @click="openRouterPath('/backOffice')">
-                    BO
-                </li>
-            </ul>
+    
+        <div>
+            <div class="control-btn-wrap">
+                <span class="connect-btn Pretendard-Medium" @click="connect()">
+                    <img :src="connectBtnImg"/>
+                    연결하기
+                </span>
+                <span class="stop-btn Pretendard-Medium" @click="stop()">
+                    <img :src="stopBtnImg"/> 
+                    멈추기
+                </span>
+            </div>
         </div>
-
-    <div class="menu widht-100">
-            <img src="../../public/images/common/mobile_m.png" class="toggle toggle-img">
-            <ul class="align-center sub">
-                <div>
-                    <li class="mobile-top" @click="goTo('/')">
-                        <div>
-                            <img src="../../public/images/common/home.png" class="ui-img">
-                            <p class="ui-left-font" id="fs-one">홈</p>
-                        </div>
-                    </li>
-                    <li class="mobile-top" @click="connect()">
-                        <div>
-                            <img src="../../public/images/common/connect.png" class="ui-img2">
-                            <p class="ui-left-font" id="fs-four">연결하기</p>
-                        </div>
-                    </li>          
-                    <li class="mobile-top" @click="openEditor()">
-                        <div>
-                            <img src="../../public/images/common/editor.png" class="ui-img2">
-                            <p class="ui-left-font" id="fs-four">소스편집</p>
-                        </div>
-                    </li>
-                    <li class="mobile-top" @click="stop()">
-                        <div>
-                            <img src="../../public/images/common/stop.png" class="ui-img2 mobile-top-margin">
-                            <p class="ui-left-font" id="fs-three">멈추기</p>
-                        </div>
-                    </li>
+        <div class="nav">
+            <span @click="goToDownload" class="NotoSansKR-Regular nav-txt"><a style="cursor: pointer;">자료실</a></span>
+            <span @click="goToQna" class="NotoSansKR-Regular nav-txt"><a style="cursor: pointer;">도움말</a></span>
+            <span class="NotoSansKR-Regular hamburger-wrap nav-txt">
+                <div class="hamburger-icon">
+                    <img :src="menu" class="menu-img"/>
                 </div>
-                <div>
-                    <li class="mobile-bottom" @click="reboot()">
-                        <div>
-                            <img src="../../public/images/common/reboot.png" class="ui-img2 mobile-top-margin">
-                            <p class="ui-bottom-font" id="fs-three">재부팅</p>
-                        </div>
-                    </li>
-                    <li class="mobile-bottom" @click="format()">
-                        <div>
-                            <img src="../../public/images/common/format.png" class="ui-img2 mobile-top-margin">
-                            <p class="ui-bottom-font" id="fs-two">포맷</p>
-                        </div>
-                    </li>
-                    <li class="mobile-bottom" @click="update()">
-                        <div>
-                            <img src="../../public/images/common/update.png" class="ui-img2 mobile-top-margin">
-                            <p class="ui-bottom-font" id="fs-four">업데이트</p>
-                        </div>
-                    </li>
-                    <li class="mobile-bottom" @click="openUrl('help', '/help')">
-                        <div>
-                            <img src="../../public/images/common/help.png" class="ui-img2 mobile-top-margin">
-                            <p class="ui-bottom-font" id="fs-three">HELP</p>
-                        </div>
-                    </li>
+                <div class="dropdown-menu">
+                    <ul>
+                        <li class="menu-cts menu-title">
+                            <p>MENU</p>
+                        </li>
+                        <li class="menu-cts li-connect" @click="connect()">
+                            <img :src="connectImg"/>
+                            <p>연결하기</p>
+                        </li>
+                        <li class="menu-cts" @click="stop()">
+                            <img :src="stopImg"/>
+                            <p>멈추기</p>
+                        </li>
+                        <li class="menu-cts" @click="openEditor('')">
+                            <img :src="editorImg"/>
+                            <p>소스편집</p>
+                        </li>
+                        <li class="menu-cts" @click="reboot()">
+                            <img :src="restartImg"/>
+                            <p>재부팅</p>
+                        </li>
+                        <li class="menu-cts" @click="format()">
+                            <img :src="resetImg"/>
+                            <p>포맷</p>
+                        </li>
+                        <li class="menu-cts" @click="toggleUpdateModal()">
+                            <img :src="updateImg"/>
+                            <p>업데이트</p>
+                        </li>
+                        <li class="menu-cts" @click="installDriver()">
+                            <img :src="settingImg"/>
+                            <p>드라이버 설치</p>
+                        </li>
+                    </ul>
                 </div>
-            </ul>
+            </span>
+            <div class="darken-background"></div>
         </div>
-    </nav>
+    </q-toolbar>
+    
+    <div class="update-modal" v-if="this.updateModal == true">
+        <div @click="toggleUpdateModal()" style="color: black">X</div>
+        <p style="color: black">업데이트할 교구를 클릭하세요.</p>
+        <div>
+            <q-btn @click="update('asomekit')" style="background-color: #E4007F; color: #fff; font-weight: 600; margin-right: 10px;">어썸킷</q-btn>
+            <q-btn @click="update('asomebot')" style="background-color: #4EA949; color: #fff; font-weight: 600;">어썸봇</q-btn>
+        </div>
+    </div>
 </template>
 
 <script>
+import images from "@/assets/images";
 import serial from "@/globals/serial";
 import VueBase from "@/mixin/vue-base";
 import bridgeIn from "@/globals/bridge-in";
 import eventbus from "@/globals/eventbus";
 import boardUpdater from "@/globals/board-updater";
+import ble from "@/globals/ble";
+import { mapState } from 'pinia'
+import {useConnectStore} from '@/store/connect-store'
 
 export default {
     mixins: [VueBase, bridgeIn],
 
+    computed: {
+        ...mapState(useConnectStore,['mode','connectionState']),
+    },
+
     data() {
         return {
             btConnectColor: "grey",
-        }
+
+            logo: images.logo,
+            connectImg: images.connect,
+            editorImg: images.editor,
+            resetImg: images.reset,
+            restartImg: images.restart,
+            stopImg: images.stop,
+            updateImg: images.update,
+            settingImg: images.setting,
+            menu: images.menu,
+            connectBtnImg: images.connectBtn,
+            stopBtnImg: images.stopBtn,
+            codes: null,
+
+            isMenuOpen: false,
+            connected: false,
+            
+            updateModal: false,
+        } 
     },
 
     mounted() {
         eventbus.on("onSerialConnected", () => {
             this.btConnectColor = "primary";
         });
+        
         eventbus.on("onSerialClosed", () => {
             this.btConnectColor = "grey";
             this.$q.notify('어썸보드 연결이 끊어졌습니다.');
         });
         
+        eventbus.on('simulationOpen', (path) => {
+            this.openRouterPath(path);
+        });
 
-
-        const menu=document.querySelector(".toggle");
-        const subBar=document.querySelector(".menu>.sub");
-
-let subToggle=true
-
-function slide_menu(){
-  if(subToggle){
-    subBar.style.display="block";
-    subBar.classList.remove("up");
-    subBar.classList.add("down");
-    subToggle=!subToggle;
-    
-  }else{
-    subBar.classList.remove("down");
-    subBar.classList.add("up");
-    subToggle=!subToggle;
-  }
-  console.log(subBar.classList);
-}
-menu.addEventListener("click",slide_menu);
+        eventbus.on('simulationBus', (params) => {
+            window.parent.postMessage(JSON.stringify(params), '*');
+            this.simulJS(params);
+            
+        });
+        
+        window.addEventListener("message", (event) => {
+            if (event.data === 'connect') {
+                this.connect();
+            }
+        });
+        
+        window.addEventListener("message", (event) => {
+            if (event.data.type === 'sttclose') { 
+                serial.writeLn(event.data.text);
+            }
+        });
+        window.addEventListener("message", (event) => {
+            if (event.data === 'stop') {
+                this.connect();
+            }
+        });
     },
 
     methods: {
-        ...serial,
+        ...serial, ...bridgeIn,
 
-        update() {
-            boardUpdater.start();
+        update(mode) {
+            boardUpdater.start(mode);
+            this.toggleUpdateModal();
+        },
+        
+        showDropdown() { 
+            document.getElementById('dropdown').style.display = 'block';
         },
 
-        gotoBackOffice() {
-            this.$router.push("/backOffice");
-
-            // 빌드 실행 시에 필요한 코드
-            this.openUrl('BO', 'app://./index.html?goto=backOffice');
+        hideDropdown() {
+            document.getElementById('dropdown').style.display = 'none';
         },
 
-        openEditor() {
-            bridgeIn.openEditor('')
+        bleConnect() {
+            ble.connect();
+        },
+        
+        bleSendData() {
+            ble.runCode(`import hcsr04
+hcsr04.open(3, 2)
+red = OutputPin(11)
+yellow = OutputPin(14)
+green = OutputPin(15)
+bright = OutputPin(20)
+while True:
+    cm = hcsr04.get_distance()
+    if cm <= 5:
+        red.on()
+        delay(1)
+        red.off()
+    else :
+        delay(0.5)`);
+        },
+        bleStop(){
+            ble.writeLn(String.fromCharCode(3))
+        },
+        
+        installDriver() {
+            window.location.href = "https://asomecode-web.s3.ap-northeast-2.amazonaws.com/driver/CH341SER.zip";
+        },
+    
+        toggleUpdateModal() {
+            var bg = document.querySelector('.darken-background');
+            if (this.updateModal) {
+                this.updateModal = false;
+                bg.style.display = 'none'
+
+            } else {
+                this.updateModal = true;
+                bg.style.display = 'block'
+            }
+        },
+
+        goToDownload() {
+            window.open("https://asomeit.kr/download");
+        },
+
+        goToQna() {
+            window.open("https://asomeit.imweb.me/faq");
         }
-    }
+    },
 }
 </script>
 
-<style scoped src="@/assets/css/component/nav_bar.css"/>
+<style scoped src="@/assets/css/component/header.css"/>
+<style scoped src="@/assets/css/font.css"/>

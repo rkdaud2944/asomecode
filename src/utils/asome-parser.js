@@ -94,12 +94,24 @@ class Scanner {
         if (text.startsWith("button")) {
             this.index = this.index + "button".length;
             this.onToken({ text: "[button", type: TokenType.BEGIN_MARK });
+        } else if (text.startsWith("upload")) {
+            this.index = this.index + "upload".length;
+            this.onToken({ text: "[upload", type: TokenType.BEGIN_MARK });
         } else if (text.startsWith("image")) {
             this.index = this.index + "image".length;
             this.onToken({ text: "[image", type: TokenType.BEGIN_MARK });
+        } else if (text.startsWith("imgButton")) {
+            this.index = this.index + "imgButton".length;
+            this.onToken({ text: "[imgButton", type: TokenType.BEGIN_MARK });
+        } else if (text.startsWith("writeLn")) {
+            this.index = this.index + "writeLn".length;
+            this.onToken({ text: "[writeLn", type: TokenType.BEGIN_MARK });
         } else if (text.startsWith("video")) {
             this.index = this.index + "video".length;
             this.onToken({ text: "[video", type: TokenType.BEGIN_MARK });
+        } else if (text.startsWith("code")) {
+            this.index = this.index + "code".length;
+            this.onToken({ text: "[code", type: TokenType.BEGIN_MARK });
         } else if (text.startsWith("editor")) {
             this.index = this.index + "editor".length;
             this.onToken({ text: "[editor", type: TokenType.BEGIN_MARK });
@@ -109,9 +121,18 @@ class Scanner {
         } else if (text.startsWith("wifi")) {
             this.index = this.index + "wifi".length;
             this.onToken({ text: "[wifi", type: TokenType.BEGIN_MARK });
+        } else if (text.startsWith("openWifi")) {
+            this.index = this.index + "openWifi".length;
+            this.onToken({ text: "[openWifi", type: TokenType.BEGIN_MARK });
         } else if (text.startsWith("messenger")) {
             this.index = this.index + "messenger".length;
             this.onToken({ text: "[messenger", type: TokenType.BEGIN_MARK });
+        } else if (text.startsWith("botBase")) {
+            this.index = this.index + "botBase".length;
+            this.onToken({ text: "[botBase", type: TokenType.BEGIN_MARK });
+        } else if (text.startsWith("boardErr")) {
+            this.index = this.index + "boardErr".length;
+            this.onToken({ text: "[boardErr", type: TokenType.BEGIN_MARK });
         } else {
             this.onToken({ text: "[", type: TokenType.TEXT });
         }
@@ -144,32 +165,74 @@ class Parser {
             this.markType = "";
         }
     }
-
+ 
     #get_markText() {
         switch (this.markType) {
             case "[button": return this.#get_buttonText(this.buffer);
+            case "[upload": return this.#get_uploadFile(this.buffer);
+            case "[imgButton": return this.#get_buttonImg(this.buffer);
+            case "[writeLn": return this.#get_writeLn(this.buffer);
             case "[image": return this.#get_imageText(this.buffer);
             case "[video": return this.#get_videoText(this.buffer);
+            case "[code": return this.#get_codeText(this.buffer);
             case "[editor": return this.#get_editorText(this.buffer);
             case "[parts": return this.#get_partsText(this.buffer);
             case "[wifi": return this.#get_wifi_Text();
+            case "[openWifi": return this.#get_wifi_open_Text();
             case "[messenger": return this.#get_asome_messenger_Text();
+            case "[botBase": return this.#get_botBase();
+            case "[boardErr": return this.#get_boardErr();
         }
     }
 
     #get_buttonText(text) {
-        const firstLine = text.split("\n")[0]
+        const firstLine = text.split("\n")[0];
         const functionName = firstLine.replace("[button ", "");
-        const functionId = functionName.replaceAll(' ', '-').replaceAll("'", '').replaceAll('"', '')
-
-        let content = text.replace(`${firstLine}`, "").slice(0, -1)
-        const lines = content.split("\n")
-        content = lines.map(e => stripComments.stripPythonComments(e)).join('\n')
-
+        const uniqueId = Date.now();
+        const functionId = `${functionName.replaceAll(' ', '-').replaceAll("'", '').replaceAll('"', '')}-${uniqueId}`;
+    
+        let content = text.replace(`${firstLine}`, "").slice(0, -1);
+        const lines = content.split("\n");
+        content = lines.map(e => stripComments.stripPythonComments(e)).join('\n');
+    
         return `<div onclick="runCode(getCode('${functionId}'))" class="function_btn">${functionName}</div></br>` +
             `<div id="${functionId}" class="hidden">${content}</div>`;
     }
 
+    #get_buttonImg(text) {
+        const firstLine = text.split("\n")[0]
+        let functionImg = firstLine.replace("[imgButton ", "")
+        const functionName = firstLine.replace(/\[imgButton |\.png/g, "");
+        const uniqueId = Date.now();
+        const functionId = `${functionName.replaceAll(' ', '-').replaceAll("'", '').replaceAll('"', '')}-${uniqueId}`;
+        let content = text.replace(`${firstLine}`, "").slice(0, -1);
+
+        if (functionImg.charAt(0) != '/')
+        functionImg = this.lessonContentBaseUrl + "lesson/images/btn-image/" + functionImg // S3 파일
+
+        return `<div class="">
+            <img class="markdown-btn-img" src="${functionImg}"  onclick="runCode(getCode('${functionId}'))"/></div></br>` +
+        `<div id="${functionId}" class="hidden">${content}</div>`
+
+    }
+
+    #get_writeLn(text) {
+        const firstLine = text.split("\n")[0]
+        let functionImg = firstLine.replace("[writeLn ", "")
+        const functionName = firstLine.replace(/\[imgButton |\.png/g, "");
+        const uniqueId = Date.now();
+        const functionId = `${functionName.replaceAll(' ', '-').replaceAll("'", '').replaceAll('"', '')}-${uniqueId}`;
+        let content = text.replace(`${firstLine}`, "").slice(0, -1);
+
+        if (functionImg.charAt(0) != '/')
+        functionImg = this.lessonContentBaseUrl + "lesson/images/btn-image/" + functionImg // S3 파일
+
+        return `<div class="">
+            <img class="markdown-btn-img" src="${functionImg}"  onclick="writeLn(getCode('${functionId}'))"/></div></br>` +
+        `<div id="${functionId}" class="hidden">${content}</div>`
+
+    }
+    
     #get_imageText(text) {
         const firstLine = text.split("\n")[0]
         const imageTitle = firstLine.substring(firstLine.indexOf('(') + 1, firstLine.indexOf(')'))
@@ -189,14 +252,26 @@ class Parser {
         return `<video controls width="100%"><source src="${content}" type="video/webm"></video>`;
     }
 
-    #get_editorText(text) {
+    #get_codeText(text) {
         const firstLine = text.split("\n")[0]
         let content = text.replace(`${firstLine}`, "").slice(0, -1)
         const uuid = uuidv1(new Date())
 
-        return `<pre onclick="openEditor(getCode('${uuid}'))">\n` +
-            `<code id="${uuid}" class="python">${content}` +
-            `</code></pre>`;
+        // return `<pre onclick="openEditor(getCode('${uuid}'))">\n` +
+        //     `<code id="${uuid}" class="python">${content}` +
+        //     `</code></pre>`;
+            
+        return `<pre onclick="openEditor(getCode('${uuid}'))" style="margin-left:10px; width:98%;">\n` +
+        `<code id="${uuid}" class="python">${content}` +
+        `</code></pre>`;
+    }
+
+    #get_editorText(text) {
+        const firstLine = text.split("\n")[0]
+        let content = text.replace(`${firstLine}`, "").slice(0, -1)
+
+        return `<p class="editorLocation" style="display: none;"/>` +
+        `<div class="editorDiv">${content}</div>`;
     }
 
     #get_partsText(text) {
@@ -243,21 +318,101 @@ class Parser {
             <input class="form-control" type="text" id="wifi_password" placeholder="와이파이 암호" onchange="setWifiInfo()">
         </div>` +
 
-            `<div onclick="runCode(getCode('인터넷-연결하기'))" class="function_btn">인터넷 연결하기</div></br>` +
+            `<button class="answer-btn" style="margin-left:10px; cursor: pointer;" onclick="runCode(getCode('인터넷-연결하기'))" class="function_btn" type="button"><span>인터넷 연결하기</span></button></br>` +
             `<div id="인터넷-연결하기" class="hidden"></div>`;
+            
+    }
+
+    #get_wifi_open_Text() {    // 인터넷 오픈     
+        return `<div class="input-group">
+          <span class="input-group-addon"><i class="q-icon material-icons">wifi</i></span>
+          <input class="form-control" type="text" id="wifi_open" placeholder="공유기 이름 (SSID)" onchange="openWifiInfo()">
+        </div>`+
+        
+
+        `<button class="answer-btn" style="margin-left:10px; cursor: pointer;" onclick="runCode(getCode('asome-wifi-open'))" class="function_btn" type="button"><span>확인</span></button></br>` +
+        `<div id="asome-wifi-open" class="hidden"></div>`;
     }
 
     #get_asome_messenger_Text() {
         return `<div class="input-group">
-          <span class="input-group-addon"><i class="q-icon material-icons">wifi</i></span>
+          <span class="input-group-addon"><i class="q-icon material-icons">phone</i></span>
           <input class="form-control" type="text" id="asome_connect_code" placeholder="접속코드" onchange="setAsomeMessengerInfo()">
         </div>
         <div class="input-group">
-          <span class="input-group-addon"><i class="q-icon material-icons">lock</i></span>
+          <span class="input-group-addon"><i class="q-icon material-icons">message</i></span>
             <input class="form-control" type="text" id="asome_msg" placeholder="메시지" onchange="setAsomeMessengerInfo()">
         </div>` +
-
-            `<div onclick="runCode(getCode('asome-messenger'))" class="function_btn">전송</div></br>` +
+            `<button class="answer-btn" style="margin-left:10px; cursor: pointer;" onclick="runCode(getCode('asome-messenger'))" class="function_btn" type="button"><span>전송</span></button></br>` +
             `<div id="asome-messenger" class="hidden"></div>`;
     }
+
+    #get_botBase() {
+        return `<div class="bot-base-from input-group" style="width: 50%;">
+                    <div class="input-group-addon bot-base">
+                        <i class="q-icon material-icons">settings</i>
+                    </div>
+                    <div class="motor-control">
+                        <input class="form-control" type="text" id='align01' value="90" placeholder="0번 모터 (Pin5)"/>  
+                        <button style="width:25px;" class="btn-plus" onclick="updateMotorValue('align01', 1)">+</button>
+                        <button style="width:25px;" class="btn-minus" onclick="updateMotorValue('align01', -1)">-</button>
+                    </div>
+                    <div class="motor-control">
+                        <input class="form-control" type="text" id='align02' value="90" placeholder="1번 모터 (Pin6)"/>  
+                        <button style="width:25px;" class="btn-plus" onclick="updateMotorValue('align02', 1)">+</button>
+                        <button style="width:25px;" class="btn-minus" onclick="updateMotorValue('align02', -1)">-</button>
+                    </div>
+                    <div class="motor-control">
+                        <input class="form-control" type="text" id='align03' value="90" placeholder="2번 모터 (Pin7)"/>  
+                        <button style="width:25px;" class="btn-plus" onclick="updateMotorValue('align03', 1)">+</button>
+                        <button style="width:25px;" class="btn-minus" onclick="updateMotorValue('align03', -1)">-</button>
+                    </div>
+                    <div class="motor-control">
+                        <input class="form-control" type="text" id='align04' value="90" placeholder="3번 모터 (Pin8)"/>  
+                        <button style="width:25px;" class="btn-plus" onclick="updateMotorValue('align04', 1)">+</button>
+                        <button style="width:25px;" class="btn-minus" onclick="updateMotorValue('align04', -1)">-</button>
+                    </div>
+                </div>`;
+    }
+    
+
+    #get_uploadFile(text) {        
+        const firstLine = text.split("\n")[0];
+        let functionName = firstLine.replace("[upload ", "");
+        const fileName = functionName.split(":")[1].trim();
+        functionName = functionName.split(":")[0].trim();
+        const uniqueId = Date.now();
+        const functionId = `${functionName.replaceAll(' ', '-').replaceAll("'", '').replaceAll('"', '')}-${uniqueId}`;
+    
+        let content = text.replace(`${firstLine}`, "").slice(0, -1);
+        const lines = content.split("\n");
+        content = lines.map(e => stripComments.stripPythonComments(e)).join('\n');
+        
+        return `<button class="answer-btn" style="cursor: pointer;" onclick="contentsUploadFile('${fileName}',getCode('${functionId}'))" class="function_btn">${functionName}</button></br>` +
+            `<div id="${functionId}" class="hidden">${content}</div>`;
+    }
+    
+    #get_boardErr() {        
+        return `<div class="board-err-wrap">
+                    <div class="board-err-img">
+                        <img src="/common/board-err.png">
+                    </div>
+                    <div>
+                        <p class="err-title">실행이 안 되는데요!</p>
+                        <p class="err-cts">실행이 잘 안된다면 다음 중에 원인이 있는지 확인해 보세요.</p>
+                        <p class="err-cts">1. 어썸보드의 불이 들어오는지 확인하세요. 불이 들어오지 않는다면 보드가 고장 난 것입니다.<br/>
+                        2. 부품 조립이 제대로 되어 있는지 확인해 보세요.<br/>
+                        3. 결과창에 에러가 있는지 확인해 보세요. 에러가 있다면 코드에 문제가 있는 것입니다. 마지막 실행한 코드가 제대로 입력되었는지 확인하세요.
+                        그래도 에러가 난다면 메뉴의 [포맷], [업데이트] 버튼을 순서대로 클릭하여 어썸보드를 최신 상태로 만들고 다시 실행하세요.<br/>
+                        4. USB 코드를 컴퓨터에 뽑았다가 다시 꽂은 후에 [연결하기] 버튼을 클릭해 보세요.
+                        </p>
+                    </div>
+                </div>`;
+    }
+}
+window.updateMotorValue =  function updateMotorValue(inputId, increment) {
+    const inputField = document.getElementById(inputId);
+    let currentValue = parseInt(inputField.value) || 0; // Get the current value or default to 0
+    currentValue += increment; // Add the increment (or decrement)
+    inputField.value = currentValue; // Update the input field's value
 }

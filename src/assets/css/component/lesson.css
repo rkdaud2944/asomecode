@@ -1,3 +1,7 @@
+.scroll{
+    overflow: auto;
+    height: auto;
+}
 
 @media (min-width: 883px){
 .header {
@@ -7,7 +11,7 @@
 }
 }
 
-@media (min-width:783px) {
+@media (min-width:784px) {
 .logo {
     bottom: 65px;
     left: 115px;
@@ -96,6 +100,21 @@
 }
 .contents{
     padding-left: 20px;
+    padding-right: 20px;
+    left: 25%;
+}
+.sidefixed{
+    position: fixed;
+    top: 80px;
+}
+.backsidefixed{
+    position: fixed;
+    height: 100%;
+}
+.c9contents{
+    width: 100%;
+    height: auto;
+    padding-left: 26.8%;
     padding-right: 20px;
     left: 25%;
 }

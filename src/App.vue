@@ -1,8 +1,9 @@
 <template>
-    <q-layout view="hHh lpr fFf">
-        <div v-if="showHeaderMain">
+    <q-layout view="hHh lpr fFf" style=" height: calc(100vh - 36px);">
+
+        <q-header  v-if="showHeaderMain">
             <HeaderMain />
-        </div>
+        </q-header>
 
         <q-page-container>
             <router-view />
@@ -22,10 +23,11 @@ import editorControl from "@/globals/editor-control";
 import HeaderMain from "@/components/HeaderMain.vue";
 import ConsoleLog from "@/components/ConsoleLog.vue";
 import { useMemberStore } from "@/store/member";
+import "./blocks/stocks";
 
 export default {
     components: {
-        HeaderMain, ConsoleLog,
+        HeaderMain, ConsoleLog
     },
 
     setup() {
@@ -49,18 +51,17 @@ export default {
 
     watch: {
         $route(to) {
-            console.log("App route", to);
+            // console.log("App route", to);
 
             globals.currentPath = to.path;
 
             this.showHeaderMain = true;
             this.showFooterMain = true;
-            const skipHeaderMains = ["/editor", "/help", "/backOffice"];
+            const skipHeaderMains = ["/editor", "/help", "/backOffice", "/blockCoding", "/simulation"];
             skipHeaderMains.forEach((path) => {
                 if (to.path.startsWith(path)) {
                     this.showHeaderMain = false;
                     this.showFooterMain = false;
-                    console.log("skipHeaderMains", path);
                 }
             });
         },
@@ -74,6 +75,18 @@ export default {
                 this.$router.push({ path: path });
             }
         };
+        // this.setTitleBar()
+        
+        console.log(window.versions)
     },
+
+    
+    
 };
 </script>
+
+<style>
+    body::-webkit-scrollbar {
+        /* display: none; */
+    }
+</style>

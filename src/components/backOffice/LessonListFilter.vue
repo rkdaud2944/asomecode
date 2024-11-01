@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="row q-mb-md" style="width: 100%">
+        <div class="row q-mb-md">
             <div class="col">
                 <q-btn @click="onFilterChanged" color="red">필터적용</q-btn>
             </div>
@@ -68,7 +68,6 @@ export default {
             apiSubjectSet.getSubjectSet()
                 .then((response) => {
                     this.defaultSubjectSet = response.data.subjects;
-                    console.log(this.defaultSubjectSet)
                 })
                 .catch(this.showError);
         },
@@ -76,37 +75,4 @@ export default {
 }
 </script>
 
-<style scoped>
-.input-box {
-    width: 100%;
-    margin-bottom: 8px;
-}
-
-.range-box {
-    background: #F2F2F2;
-    margin-bottom: 8px;
-}
-
-.range-box-label {
-    font-size: 12px;
-    color: #8e8e8e;
-    margin-top: 4px;
-    margin-left: 8px;
-    margin-bottom: 4px;
-}
-
-.range-box-left {
-    width: 45%;
-}
-
-.range-box-center {
-    width: 10%;
-    text-align: center;
-    line-height: 56px;
-}
-
-.range-box-right {
-    width: 45%;
-    float: right;
-}
-</style>
+<style scoped src="@/assets/css/backoffice/backoffice.css"/>

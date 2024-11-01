@@ -1,0 +1,25 @@
+/* 페이지 고유값 */
+
+@media screen and (max-width:1250px ) {
+    .page-center {
+        margin-top: 25px;
+        float: left;
+        position: relative;
+        left: 40%;
+    }
+}
+@media screen and (min-width:1250px ) {
+    .page-center {
+        margin-top: 25px;
+        float: left;
+        position: relative;
+        left: 46%;
+    }
+}
+
+/* 페이지 고유 스타일 */
+
+.SubjectSetListGrid-table-tr{
+    background-color: #027BE3;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+}
