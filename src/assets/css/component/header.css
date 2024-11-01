@@ -1,0 +1,341 @@
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+.logo {
+    height: 40px;
+    cursor: pointer;
+}
+
+.header-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    width: 100%;
+    height: 94px;
+    position: fixed;
+    z-index: 2000;
+    border-bottom: #dedee2 1px solid;
+    top: 0;
+
+}
+
+.main-logo {
+    margin-left: 30px;
+}
+
+.control-btn-wrap {
+    display: flex;
+    gap: 10px;
+}
+
+.connect-btn {
+    display: flex;
+    gap: 5px;
+    width: 120px;
+    align-items: center;
+    justify-content: center;
+    background-color: #DEDEE2;
+    padding: 5.5px 15px;
+    border-radius: 20px;
+    color: #7E7E83;
+    font-size: 1rem;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.connect-btn>img {
+    width: 20px;
+}
+
+.connect-btn:hover {
+    background-color: #7E7E83;
+    color: #fff;
+}
+
+.connect-btn:hover>img {
+    content: url(../../images/controls/connect-btn-hover.png);
+    width: 20px;
+}
+
+.connect-btn:active {
+    background-color: #E4007F;
+}
+
+.stop-btn {
+    display: flex;
+    width: 120px;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    background-color: #DEDEE2;
+    padding: 5.5px 15px;
+    border-radius: 20px;
+    color: #7E7E83;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.stop-btn>img {
+    width: 20px;
+}
+
+.stop-btn:hover {
+    background-color: #7E7E83;
+    color: #fff;
+}
+
+.stop-btn:hover>img {
+    content: url(../../images/controls/stop-btn-hover.png);
+    width: 20px;
+}
+
+.stop-btn:active {
+    background-color: #E4007F;
+}
+
+.nav {
+    margin-right: 30px;
+}
+
+.nav-txt {
+    font-size: 1.1rem;
+    margin-right: 30px;
+    cursor: pointer;
+}
+
+.nav-txt>a {
+    position: relative;
+    z-index: 1;
+    font-size: 20px;
+}
+
+.nav-txt>a::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    bottom: -20px;
+    left: -15px;
+    right: -15px;
+    z-index: -1;
+    /* 가상 요소가 실제 요소 뒤에 오도록 함 */
+}
+
+.hamburger-wrap {
+    position: relative;
+    margin-top: 0;
+    margin-bottom: 0;
+    height: 25px;
+    z-index: 1;
+}
+
+.hamburger-wrap::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    bottom: -20px;
+    left: -15px;
+    right: -40px;
+    z-index: -1;
+    /* 가상 요소가 실제 요소 뒤에 오도록 함 */
+}
+
+.hamburger-icon {
+    display: inline-block;
+    cursor: pointer;
+    position: absolute;
+    z-index: 5000;
+}
+
+.hamburger-icon .bar {
+    width: 25px;
+    height: 3px;
+    background-color: #3E3A39;
+}
+
+.bar:nth-child(2) {
+    margin: 4px 0 4px 0;
+}
+
+
+/* 드롭다운 */
+/* 드롭다운 메뉴 스타일 */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    z-index: 3000;
+    width: 150px;
+    height: auto;
+    top: 30px;
+    right: -30px;
+    background-color: #fff;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.35);
+    border-radius: 10px;
+}
+
+.menu-cts {
+    width: 100%;
+    line-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    color: #4f4f53;
+    cursor: pointer;
+}
+
+
+
+.menu-cts:nth-last-child(1) {
+    border-radius: 0px 0px 10px 10px;
+}
+
+
+.menu-cts:hover,
+.menu-cts>a :hover {
+    background-color: #3E3A39;
+    color: #fff
+}
+
+.menu-title:hover {
+    background-color: #fff !important;
+}
+
+.menu-title {
+    display: block !important;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: auto !important;
+    border-radius: 10px;
+    color: #000 !important;
+}
+
+.menu-title>p {
+    font-weight: 300;
+    font-size: 1.2rem !important;
+}
+
+.menu-cts>img,
+.menu-cts>a>img {
+    padding: 0 10px 0 10px;
+    margin-left: 5px;
+    width: 45px;
+}
+
+.menu-cts>p,
+.menu-cts>a>p {
+    font-size: 15px;
+}
+
+.menu-cts>a {
+    width: 100%;
+    line-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    color: #4f4f53;
+    cursor: pointer;
+}
+
+.menu-cts:nth-child(2):hover>img {
+    content: url(../../images/controls/connect-hover.png);
+}
+
+.menu-cts:nth-child(3):hover>img {
+    content: url(../../images/controls/stop-hover.png);
+}
+
+.menu-cts:nth-child(4):hover>img {
+    content: url(../../images/controls/editor-hover.png);
+}
+
+.menu-cts:nth-child(5):hover>a>img {
+    content: url(../../images/controls/setting-hover.png);
+}
+
+.menu-cts:nth-child(6):hover>img {
+    content: url(../../images/controls/reset-hover.png);
+}
+
+.menu-cts:nth-child(7):hover>img {
+    content: url(../../images/controls/update-hover.png);
+}
+
+.menu-cts:nth-child(8):hover>a>img {
+    content: url(../../images/controls/setting-hover.png);
+}
+
+li {
+    list-style-type: none;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    margin: 0;
+}
+
+/* 어두운 배경 스타일 */
+.darken-background {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2999;
+}
+
+.menu-img {
+    width: 22px;
+    margin-top: 4px;
+    pointer-events: none;
+}
+
+.hamburger-wrap:hover .dropdown-menu { 
+    display: block;
+}
+
+/* .hamburger-wrap:hover+.darken-background {
+    display: block;
+} */
+
+.update-modal {
+    width: 260px;
+    height: 150px;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    position: fixed;
+    z-index: 3000;
+    top: 35%;
+    left: calc(50% - 130px);
+    /* text-align: center; */
+}
+
+.update-modal>p {
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 20px;
+    margin-bottom: 35px;
+}
+
+.update-modal>div {
+    display: inline;
+    /* background-color: #7E7E83; */
+    position: absolute;
+    cursor: pointer;
+    right: 15px;
+}
+
+@media screen and (max-width:770px ) {
+    .nav-txt:nth-child(1), .nav-txt:nth-child(2) {
+        display: none;
+    }
+}

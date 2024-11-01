@@ -1,0 +1,45 @@
+.header {
+    height: 53px;
+}
+
+.body {
+    width: 100vw;
+    height: 100vh;
+    background: #272822;
+}
+
+.editor {
+    height: calc(100vh);
+}
+
+.button-img {
+    width:auto;
+    position:relative;
+    
+}
+
+.button {
+    margin-right: 7px;
+    cursor: pointer;
+}
+
+.font {
+    color: white;
+    line-height: 15px;
+    font-size :11.9px;
+    margin: 0%;
+    float: right;
+    font-family:'Noto Sans KR', sans-serif;
+}
+
+ul li {
+    list-style-type: none;
+    float: left;
+}
+
+.header-box{
+    width: auto;
+    height: 30px;
+    float: left;
+    overflow: hidden;
+}

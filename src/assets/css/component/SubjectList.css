@@ -1,0 +1,37 @@
+/* 페이지 고유값 */
+
+.q-field--filled .q-field__control{
+    background: rgba(252,252,252, 0);
+}
+.q-field__label {
+    font-size: 12px !important;
+    color: black !important;
+}
+.q-field__native{
+    font-size: 10px !important;
+    color: black !important;
+}
+body {
+    background-color: white;
+}
+/* 페이지 고유 스타일 */
+
+.custom-div1{
+    width: 30%;
+    padding: 0px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+    border-top-left-radius: 3px !important;
+    border-bottom-left-radius: 3px !important;
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+}
+.custom-div2{
+    width: 70%;
+    padding-left: 0;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+    border-top-right-radius: 3px !important;
+    border-bottom-right-radius: 3px !important;
+    background-color: white;
+}

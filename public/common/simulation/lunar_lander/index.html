@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	<title>AsomeIT</title>
+
+	<link rel="stylesheet" href="../../../common/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../common/css/AsomeCODE.css">
+
+	<script src="../../../common/js/AsomeCODE.js"></script>
+    <script src="../../../common/js/jquery-1.9.1.js"></script>
+	<script src="../../../common/js/bootstrap.min.js"></script>
+</head>
+
+<body style="overflow-x: hidden; overflow-y: hidden;">
+	<div style="position: relative;">
+		<img src="back.png" style="position: absolute;">
+		<img id="ship" src="lander_plain.png" style="position: absolute; left: 162px;">
+	</div>
+
+	<script type="text/javascript">
+		window.onload = function() {
+			App.run_cmd("Code=Input/Text=### Simulation started");
+		}
+
+		function lunar_lander_engine_on() {
+			$("#ship").attr("src", "lander_firing.png");
+		}
+
+		function lunar_lander_engine_off() {
+			$("#ship").attr("src", "lander_plain.png");
+		}
+
+		function lunar_lander_moveto(x, y) {
+			$("#ship").css("left", x);
+			$("#ship").css("top", y);			
+		}
+
+		function lunar_lander_explode() {			
+			$("#ship").attr("src", "lander_crashed.png");
+
+			var audio = new Audio('../../audio/boom.ogg');
+			audio.play();
+		}
+	</script>	
+</body>
+</html>

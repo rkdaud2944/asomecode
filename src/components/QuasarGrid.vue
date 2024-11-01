@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import VueBase from '@/VueBase';
+import VueBase from '@/mixin/vue-base';
 
 export default {
     mixins: [VueBase],
@@ -43,7 +43,6 @@ export default {
         },
 
         setRows(rows, rowCount) {
-            console.log('setRows', rows, rowCount);
             this.rows = rows;
             this.rowCount = rowCount;
         },

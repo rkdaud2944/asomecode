@@ -1,5 +1,5 @@
 <template>
-    <q-img class="image-button" :src="imageSource" @mouseover="isMouseOver = true" @mouseleave="isMouseOver = false" />
+    <q-img class="image-button" :src="imageSource" />
 </template>
 
 <script>
@@ -25,6 +25,7 @@ export default {
 </script>
 
 <style scoped>
+
 .image-button {
     max-width: 82px;
     cursor: pointer;

@@ -1,47 +1,106 @@
 <template>
-    <div class="header">
-        <a href="#">
-            <img src="/images/common/logom.png" class="logo"/>
-        </a>
-    </div>
+    
+    <q-page>
 
-    <div class="row q-pa-md" style="padding: 0px;">
-        <div class="col-4 left">
-            <h4 class="subject-in-title">{{ subject.title }}</h4>
-            <br>
-            <h4 class="subject-in-title_eng">{{ subject.subTitle }}</h4>
-            <img src="../../../public/images/common/asomebot.png" class="asomebot">
-        </div>
-
-        <div class="subject-size subject-margin">
-            <div class="row list-header">
-                <p class="description-text">{{ subject.description }}</p>
-            </div>
-            <div class="list-top-bar"></div>
-            <div @click="goTo(`/lesson/detail/${lesson.id}`)" class="list-left rounded q-ma-sm q-pa-md" v-for="(lesson, index) in subject.lessons" :key="index" style="cursor: pointer" >
-                <div style="height: 60px;">          
-                    <div class="subject-number">
-                        <p class="subject-number-text"><b>{{ index + 1 }}</b> 차시</p>
+        <!-- <div class="header nav-padding">
+            <p>tts</p>
+            <button @click="saveToBoard('춤','네 춤출게요')">보드 저장</button>
+            <button @click="play('춤')">지정 재생</button>
+            <button @click="remove('하이')">지정 삭제</button>
+            <button @click="tempAudio('두번째 음성 테스트')">보드에 임시 저장 후 실행 - 삭제</button>
+            
+            <p>stt</p>
+            <button class="ui-left-font" id="fs-three" @click="handleClick()"> {{ isRecording ? 'Stop' : 'Start' }} </button>
+        </div> -->
+        <div class="list-page-wrap">
+            <div class="list-wrap">
+                <img :src="listImg"/>
+                <div class="list-top">
+                    <div class="list-back-button" @click="historyBack">
+                        <div class="ico_arrow"></div>
                     </div>
-                    <p class="subject-title-text">{{ lesson.title }}</p>
+                    <div class="title Pretendard-Medium">{{ subject.title }}</div>
+                    <div class="description Pretendard-Regular" v-html="subject.description" ></div>
+                </div>
+
+                <div class="list-container">
+                    <div class="list-item" v-for="(item, index) in subject.lessons" :key="index" @click="goTo('/lesson/detail', { id: item.id, subjectTitle: subject.title, index: index+1, title: item.title, color: this.$route.query.color})">
+                        <div class="list-content">
+                            <span class="list-number Pretendard-Regular"
+                            :style="defaultBorderColor">{{ index + 1 }}차시</span>
+                            <span class="list-title Pretendard-Regular">{{ item.title }}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    
+    </q-page>
+
 </template>
 
 <script>
-import VueBase from '@/VueBase';
+import images from "@/assets/images";
+import VueBase from '@/mixin/vue-base';
 import apiSubject from "@/api/subject";
+import apiTTS from "@/api/tts"
+import {stt} from '@/globals/stt.js';
+
+const fs = require('fs');
 
 export default {
     mixins: [VueBase],
 
     data() {
         return {
-            subject: null,
+            subject: {},
+
+            logom: images.logom,
+            listAsomebot: images.listAsomebot,
+            listAsomekit: images.listAsomekit,
+            listAsomecar: images.listAsomecar,
+
+            //stt            
+            mediaRecorder: null,
+            audioChunks: [],
+            isRecording: false,  // 녹음 상태를 추적하는 데이터 속성
+
+            title: null,
+            titleNum: null,
         }
     },
+
+    computed: {
+        listImg() {
+            const title = this.$route.query.title;
+            switch (title) {
+                case 'Asomebot':
+                    return this.listAsomebot;
+                case 'Asomekit':
+                    return this.listAsomekit;
+                case 'Asomecar':
+                    return this.listAsomecar;
+                default:
+                    return this.listAsomekit;
+            }
+        },
+
+        defaultBorderColor() {
+            return { borderColor: this.$route.query.color,
+                    color: this.$route.query.color,
+                    '--chapter-background-color-hover': this.$route.query.color,
+                    '--chapter-color-hover': '#fff',
+                    '--chapter-color-active': '#AEAEB4',
+                    '--chapter-background-color-active': this.$route.query.clickColor,
+                    '--chapter-border-color-active': this.$route.query.clickColor
+                };
+        },
+        
+        // defaultTextColor() {
+        //     return { color: this.$route.query.color};
+        // }
+    },
+
 
     mounted() {
         this.getSubject(this.$route.query.id)
@@ -51,312 +110,79 @@ export default {
         getSubject(id) {
             apiSubject.subjectDetail(id)
                 .then((response) => {
-                    console.log(response.data);
                     this.subject = response.data;
                 })
-                .catch((e) => {
-                    console.log(e);
-                });
+                .catch(this.showError);
         },
-    }
+        
+        //tts
+        saveToBoard(fileName,text){
+            apiTTS.saveToBoard(fileName,text);
+        },
+
+        tempAudio(text){
+            apiTTS.tempAudio(text);
+        },
+
+        play(text){            
+            apiTTS.play(text);
+        },
+        
+        remove(text){            
+            apiTTS.remove(text);
+        },
+        
+        //stt
+        async handleClick() {
+            if (this.isRecording) {
+                this.stopRecording();
+            } else {
+                this.startRecording();
+            }
+        },
+
+        async startRecording() {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            this.mediaRecorder = new MediaRecorder(stream);
+            this.mediaRecorder.ondataavailable = event => {
+                this.audioChunks.push(event.data);
+            };
+            this.mediaRecorder.start();
+            this.isRecording = true;  // 녹음 시작을 표시
+        },
+
+        async stopRecording() {
+            if (!this.mediaRecorder) return;
+
+            this.mediaRecorder.onstop = async () => {
+                const audioBlob = new Blob(this.audioChunks, { type: 'audio/wav' });
+                const filePath = '/sttaudiofile.wav'; // 실제 저장 경로로 변경하세요
+                
+                try {
+                    const buffer = Buffer.from(await audioBlob.arrayBuffer());
+                    await fs.promises.writeFile(filePath, buffer);
+                    await stt('Kor', filePath);
+                    await fs.promises.unlink(filePath);
+                    console.log('File deleted successfully');
+                } catch (err) {
+                    console.error('Error during recording process:', err);
+                }
+                this.audioChunks = [];
+            };
+            this.mediaRecorder.stop();
+            this.isRecording = false;
+        },
+
+        // 디자인 수정
+        historyBack(){
+            this.$router.go(-1);
+
+        }
+    },
+
 }
 </script>
 
-<style scoped>
-
-@media (min-width: 1180px){
-    .subject-margin {
-    margin-left:40px ;
-    }
-}
-
-
-@media (min-width: 834px){
-
-    .header {
-        width: 100%;
-        background: rgb(255, 102, 51);
-        height: 70px;
-    }
-    .logo{
-        margin: 10px;
-        margin-left: 200px;
-        width: 120px;
-        height: 45px;
-    }
-    .list-header {
-        margin-top: 70px;
-        font-size: 20px;
-        line-height: 30px;
-        margin-bottom: 15px;
-    }
-    .list-left {
-        background:rgb(242,242,242);
-        
-    }
-    .rounded {
-        border-radius: 30px;
-    }
-    .subject-in-title
-    {
-        font-family: inherit;
-        font-size: 55px;
-        font-weight: 900;
-        color: white;
-        text-align: right;
-        margin-top : 23%;
-        margin-right : 6%;
-        margin-bottom: 0px;
-        letter-spacing:-5px;
-    }
-    .subject-in-title_eng{
-        font-family: inherit;
-        font-size: 24px;
-        color: white;
-        text-align: right;
-        margin: 0px;
-        margin-right : 6%;
-    }
-    .left {
-        width: 29%;
-        height: 45vh;
-        background: rgba(255, 167, 101, 0.99);
-        background-image: radial-gradient(rgb(255, 184, 131) 19%, transparent 0), radial-gradient(rgb(255, 184, 131) 19%, transparent 0);
-        background-position: 1,10px;
-        background-size: 15px 15px;
-        padding: 0px;
-        position: relative;
-        margin-right: 10px;
-        float: left;
-    }
-    .list-top-bar{
-        background-color:darkgray;
-        height: 1px;
-        width: 100%;
-        margin-bottom:20px
-    }
-    .subject-number{
-        background:white ; width: 10%; height: 100%; border-radius: 20px; display: inline-block !important; position: relative;
-        font-size: 20px;
-    }
-    .subject-number-text{
-        padding:0px; position: absolute; top:30%; left:22%; font-size: 1.3vw;
-    }
-    .subject-title-text{
-        text-align:right;
-        display: inline-block;
-        position: relative;
-        bottom: 40%;
-        margin-left: 30px;
-        font-size: 20px;
-    }
-    .asomebot{
-        position:absolute ;
-        right:20px;
-        bottom: -70px;
-    }
-    .subject-size{
-        width: 66.67%;
-        height: auto;
-    }
-    .description-text{
-    font-size:2vw; 
-    }
-}
-@media (min-width: 718px) and (max-width:784px) {
-    
-    .header {
-        height: 0px;
-    }
-    .list-left {
-        background:rgb(242,242,242);
-        
-    }
-    .list-main {
-        background:rgb(242,242,242);
-        
-    }
-    .rounded {
-        border-radius: 30px;
-    }
-    .subject-in-title
-    {
-        font-family: inherit;
-        font-size: 55px;
-        font-weight: 900;
-        color: white;
-        text-align: center;
-        margin-top : 5%;
-        margin-right : 0%;
-        margin-bottom: 0px;
-        letter-spacing:-5px;
-    }
-    .subject-in-title_eng{
-        font-family: inherit;
-        font-size: 24px;
-        color: white;
-        text-align: center;
-        margin-top: 0px;
-        margin-left : 6%;
-    }
-    .left {
-        width: 100%;
-        height: 33.5vw;
-        background: rgba(255, 167, 101, 0.99);
-        background-image: radial-gradient(rgb(255, 184, 131) 19%, transparent 0), radial-gradient(rgb(255, 184, 131) 19%, transparent 0);
-        background-position: 1,10px;
-        background-size: 15px 15px;
-        padding: 0px;
-        position: relative;
-        margin-right: 10px;
-        float: left;
-    }
-    .list-top-bar{
-        background-color:darkgray;
-        height: 1px;
-        width: 98%;
-        margin-bottom:20px;
-        margin-left: auto;
-        margin-right: auto;
-        display: block;
-    }
-    .subject-number{
-        background:white;
-        width: 10%;
-        height: 100%;
-        border-radius: 20px;
-        display: inline-block !important;
-        position: relative;
-        font-size: 20px;
-    }
-    .subject-number-text{
-        padding:0px;
-        position: absolute;
-        top:30%;
-        left:22%;
-        font-size: 2vw;
-    }
-    .subject-title-text{
-        text-align:right;
-        display: inline-block;
-        position: relative;
-        bottom: 40%;
-        margin-left: 30px;
-        font-size: 20px;
-    }  
-    .asomebot{
-        position:absolute;
-        left: 230px;
-        top: 125px;
-    }
-    .subject-size{
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 98%;
-        height: auto;
-    }
-    .description-text{
-        font-size:2vw;
-        margin: 35px;
-    }
-}
-@media (min-width: 100px) and (max-width:718px) {
-        .header {
-        height: 0px;
-    }
-    .list-left {
-        background:rgb(242,242,242);
-        
-    }
-    .list-main {
-        background:rgb(242,242,242);
-        
-    }
-    .rounded {
-        border-radius: 30px;
-    }
-    .subject-in-title
-    {
-        font-family: inherit;
-        font-size: 55px;
-        font-weight: 900;
-        color: white;
-        text-align: center;
-        margin-top : 5%;
-        margin-right : 0%;
-        margin-bottom: 0px;
-        letter-spacing:-5px;
-    }
-    .subject-in-title_eng{
-        font-family: inherit;
-        font-size: 24px;
-        color: white;
-        text-align: center;
-        margin-top: 0px;
-        margin-left : 6%;
-    }
-    .left {
-        width: 100%;
-        height: 33.5vw;
-        background: rgba(255, 167, 101, 0.99);
-        background-image: radial-gradient(rgb(255, 184, 131) 19%, transparent 0), radial-gradient(rgb(255, 184, 131) 19%, transparent 0);
-        background-position: 1,10px;
-        background-size: 15px 15px;
-        padding: 0px;
-        position: relative;
-        margin-right: 10px;
-        float: left;
-    }
-    .list-top-bar{
-        background-color:darkgray;
-        height: 1px;
-        width: 98%;
-        margin-bottom:20px;
-        margin-left: auto;
-        margin-right: auto;
-        display: block;
-    }
-    .subject-number{
-        background:white;
-        width: 10%;
-        height: 100%;
-        border-radius: 20px;
-        display: inline-block !important;
-        position: relative;
-        font-size: 20px;
-    }
-    .subject-number-text{
-        padding:0px;
-        position: absolute;
-        top:30%;
-        left:22%;
-        font-size: 2vw;
-    }
-    .subject-title-text{
-        text-align:right;
-        display: inline-block;
-        position: relative;
-        bottom: 40%;
-        margin-left: 30px;
-        font-size: 20px;
-    }  
-    .asomebot{
-        position:absolute;
-        left: 230px;
-        top: 125px;
-    }
-    .subject-size{
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 98%;
-        height: auto;
-    }
-    .description-text{
-        font-size:2vw;
-        margin: 35px;
-    }
-
-}
-</style>
+<!-- <style scoped src="@/assets/css/component/lesson_list.css"/> -->
+<style scoped src="@/assets/css/component/lesson_list2.css"/>
+<style scoped src="@/assets/css/font.css"/>

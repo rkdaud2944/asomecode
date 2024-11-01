@@ -31,7 +31,7 @@ export default {
 
     methods: {
         addRows(rows) {
-            this.rows.push(...rows);
+            this.rows = rows;
         },
         removeRows(rows) {
             this.rows = this.rows.filter((row) => rows.indexOf(row) < 0);
@@ -50,6 +50,7 @@ export default {
 </script>
 
 <style scoped>
+
 .row {
     height: 32px;
     margin-bottom: 8px;
@@ -62,7 +63,7 @@ export default {
     background-color: red;
 }
 .ghost {
-  opacity: 0.5;
-  background: #c8ebfb;
+    opacity: 0.5;
+    background: #c8ebfb;
 }
 </style>

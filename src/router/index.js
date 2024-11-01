@@ -1,10 +1,15 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 
 const routes = [
     {
         path: '/',
         component: () => import('../views/HomeView.vue')
     },
+    {
+        path: '/index.html',
+        component: () => import('../views/HomeView.vue')
+    },
+
     {
         path: '/editor',
         component: () => import('../views/EditorView.vue')
@@ -17,7 +22,8 @@ const routes = [
         component: () => import('../views/lesson/LessonList.vue')
     },
     {
-        path: '/lesson/detail/:id',
+        path: '/lesson/detail',
+        props: true,
         component: () => import('../views/lesson/LessonDetail.vue')
     },
 
@@ -54,7 +60,8 @@ const routes = [
         component: () => import('../views/help/subject/SubjectWrite.vue')
     },
     {
-        path: '/help/subject/edit/:id',
+        path: '/help/subject/edit',
+        props: true,
         component: () => import('../views/help/subject/SubjectEdit.vue')
     },
 
@@ -73,28 +80,84 @@ const routes = [
         component: () => import('../views/help/subject-set/SubjectSetWrite.vue')
     },
     {
-        path: '/help/subject-set/edit/:id',
+        path: '/help/subject-set/edit',
+        props: true,
         component: () => import('../views/help/subject-set/SubjectSetEdit.vue')
     },
 
     // board
     {
-        path: '/board/list',
-        component: () => import('../views/board/BoardList.vue')
+        path: '/notice/list',
+        component: () => import('../views/notice/NoticeBoard.vue')
     },
+
+    // BO
     {
-        path: '/board/detail',
-        component: () => import('../views/board/BoardDetail.vue')
+        path: '/backOffice',
+        component: () => import('../views/backOffice/HomeView.vue'),
+        children: [
+            {
+                path: '/backOffice/lessons',
+                component: () => import('../views/backOffice/LessonList.vue')
+            },
+            {
+                path: '/backOffice/create/lesson',
+                component: () => import('../views/backOffice/CreateLesson.vue')
+            },
+            {
+                path: '/backOffice/edit/lesson',
+                props: true,
+                component: () => import('../views/backOffice/EditLesson.vue')
+            },
+            {
+                path: '/backOffice/lesson/detail',
+                props: true,
+                component: () => import('../views/backOffice/backLessonDetail.vue')
+            },
+        ]
     },
+
+    
+    // Block
     {
-        path: '/board/create',
-        component: () => import('../views/board/CreateBoard.vue')
+        path: '/blockCoding',
+        name: 'blockCoding',
+        component: () => import('../views/blockCoding/AsomeBlock.vue')
     },
+    // Block
+    {
+        path: '/GoqcPage',
+        name: 'GoqcPage',
+        component: () => import('../views/GoqcPage/GoqcPage.vue')
+    },
+    // Curriculum
+    {
+        path: '/curriculum',
+        props: true,
+        component: () => import('../views/lesson/SelectCurriculum.vue')
+
+    },
+    
+    // Simulation
+    {
+        path: '/simulation/:page',
+        props: true,
+        component: () => import('../views/SimulationView.vue')
+
+    },
+    
+    {
+        path: '/your-route',
+        name: 'YourRoute',
+        component: () => import('../views/blockCoding/AsomeBlock.vue')
+    }
+
 ]
 
+// 일렉트론은 내부에서 모든걸 처리하기 때문에 hash모드가 적절
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes
-})
+    history: createWebHashHistory(process.env.BASE_URL),
+    routes
+});
 
 export default router

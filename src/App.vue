@@ -1,46 +1,92 @@
 <template>
-    <el-row v-if="showHeaderMain">
-        <HeaderMain />
-    </el-row>
-    <router-view />
+    <q-layout view="hHh lpr fFf" style=" height: calc(100vh - 36px);">
+
+        <q-header  v-if="showHeaderMain">
+            <HeaderMain />
+        </q-header>
+
+        <q-page-container>
+            <router-view />
+        </q-page-container>
+
+        <q-footer v-if="showFooterMain" class="bg-grey-4 text-black">
+            <ConsoleLog />
+        </q-footer>
+    </q-layout>
 </template>
 
 <script>
-import globals from "./globals";
-import { useMemberStore } from "@/store/member";
+import globals from "@/globals/globals";
+import bridgeIn from "@/globals/bridge-in";
+import jsControl from "@/globals/js-control";
+import editorControl from "@/globals/editor-control";
 import HeaderMain from "@/components/HeaderMain.vue";
+import ConsoleLog from "@/components/ConsoleLog.vue";
+import { useMemberStore } from "@/store/member";
+import "./blocks/stocks";
 
 export default {
     components: {
-        HeaderMain,
-    },
-
-    data() {
-        return {
-            showHeaderMain: false,
-        };
-    },
-
-    watch: {
-        $route(to) {
-            globals.currentPath = to.path;
-
-            this.showHeaderMain = true;
-            const skipHeaderMains = ["/editor", "/help"];
-            skipHeaderMains.forEach((path) => {
-                if (to.path.startsWith(path)) {
-                    this.showHeaderMain = false;
-                }
-            });
-        },
+        HeaderMain, ConsoleLog
     },
 
     setup() {
+        bridgeIn.init();
+        jsControl.init();
+        editorControl.init();
+
         const memberStore = useMemberStore();
 
         return {
             memberStore,
         };
     },
+
+    data() {
+        return {
+            showHeaderMain: true,
+            showFooterMain: true,
+        };
+    },
+
+    watch: {
+        $route(to) {
+            // console.log("App route", to);
+
+            globals.currentPath = to.path;
+
+            this.showHeaderMain = true;
+            this.showFooterMain = true;
+            const skipHeaderMains = ["/editor", "/help", "/backOffice", "/blockCoding", "/simulation"];
+            skipHeaderMains.forEach((path) => {
+                if (to.path.startsWith(path)) {
+                    this.showHeaderMain = false;
+                    this.showFooterMain = false;
+                }
+            });
+        },
+    },
+
+    mounted() {
+        window.goTo = (path, params) => {
+            if (params) {
+                this.$router.push({ path: path, query: params });
+            } else {
+                this.$router.push({ path: path });
+            }
+        };
+        // this.setTitleBar()
+        
+        console.log(window.versions)
+    },
+
+    
+    
 };
 </script>
+
+<style>
+    body::-webkit-scrollbar {
+        /* display: none; */
+    }
+</style>

@@ -1,7 +1,7 @@
 import moment from "moment";
 
-export default {
-    getNumberStr(value) {
+export default class {
+    static getNumberStr(value) {
         if (!value) return "0";
         let unit = "";
         if (value >= 1000000) {
@@ -12,13 +12,13 @@ export default {
             unit = "K";
         }
         return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + unit;
-    },
+    }
 
-    getPriceStr(value) {
+    static getPriceStr(value) {
         return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    },
+    }
 
-    getHashTag(text) {
+    static getHashTag(text) {
         if (!text) return "";
 
         let tags = [];
@@ -35,9 +35,9 @@ export default {
             return tags.indexOf(element) === index;
         });
         return result.join(" ");
-    },
+    }
 
-    putTextAtCurrentPos(id, text, hiddenInput) {
+    static putTextAtCurrentPos(id, text, hiddenInput) {
         try {
             var element = document.getElementById(id);
             if (!element) return;
@@ -63,9 +63,9 @@ export default {
         } catch (e) {
             console.log(e);
         }
-    },
+    }
 
-    getDate(str) {
+    static getDate(str) {
         const nowDate = moment().valueOf();
         const date = moment(str).valueOf();
 
@@ -93,13 +93,13 @@ export default {
             return `${weeks}주 전`;
         }
         return `${years}년 전`;
-    },
+    }
 
-    getDeliveryDate(text) {
+    static getDeliveryDate(text) {
         let date, now = new Date();
         if (!text) date = new Date();
         else date = new Date(text);
-        
+
         date.setDate(date.getDate() + 3);
         const year = date.getFullYear();
         const mm = date.getMonth()+1;
@@ -107,25 +107,25 @@ export default {
 
         if (date > now) return year+"년 "+mm+"월 "+dd+"일 배송 예정";
         else return year+"년 "+mm+"월 "+dd+"일 배송 완료";
-    },
+    }
 
-    trim(text) {
+    static trim(text) {
         try {
             return text.trim();
         } catch (e) {
             console.log(e);
             return "";
         }
-    },
+    }
 
-    specialCharacterParse(str) {
+    static specialCharacterParse(str) {
         let parser = new DOMParser();
         let string = str.replaceAll("<br>", "\n");
         return parser.parseFromString(string, "text/html").body.innerText;
-    },
-    
+    }
+
     //TODO: specialCharacterParse(), toHtml() 겹침
-    toHtml(str) {
+    static toHtml(str) {
         try {
             let parser = new DOMParser();
             let string = str.replaceAll("<br>", "\n");
@@ -134,25 +134,25 @@ export default {
             console.log(e);
         }
         return "";
-    },
+    }
 
-    lineBreak(text) {
+    static lineBreak(text) {
         return text.split('\n').join('<br />');
-    },
+    }
 
-    phoneNumber(text) {
+    static phoneNumber(text) {
         if (text) return text.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
         return "";
-    },
+    }
 
     /**
      * 문자열의 라인수를 리턴한다.
      * @param text 입력 문자열
      */
-    lineCount(text) {
+    static lineCount(text) {
         const lines = text.split("\n");
         return lines.length;
-    },
+    }
 
     /**
      * 주어진 숫자만큼의 라인만 리턴한다.
@@ -160,24 +160,24 @@ export default {
      * @param size 리턴할 최대 라인 수
      * @param lineBreak 개행문자(\n)를 br 태그로 변할 것인지 여부
      */
-    shortenLines(text, size, lineBreak) {
+    static shortenLines(text, size, lineBreak) {
         let lines = text.split("\n");
         lines = lines.slice(0, size);
         let result = lines.join("\n") + " ...";
         if (lineBreak) result = this.lineBreak(result);
         return result;
-    },
+    }
 
     /**
      * 주어진 count 길이의 랜덤 문자열을 리턴한다.
      * @param count
      * @return string
      */
-    randomStr(count) {
+    static randomStr(count) {
         var text = '';
         var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         for (var i = 0; i < count; i++)
             text += possible.charAt(Math.floor(Math.random() * possible.length));
         return text;
-    },
-};
+    }
+}

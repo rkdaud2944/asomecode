@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../../../common/css/jquery-ui.min.css">
+
+    <script src="../../../common/js/jquery-3.2.1.min.js"></script>
+    <script src="../../../common/js/jquery-ui.min.js"></script>
+
+    <link rel="stylesheet" href="../../../common/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../common/css/s180.css">        
+    <script src="../../../common/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <br>
+    <div class="col-sm-12">
+        <div class="col-sm-12">
+            <div class="col-sm-2">
+                <span>Motor 0</span>
+            </div>
+            <div class="col-sm-8">
+                <div id="slider1"></div>
+            </div>
+            <div class="col-sm-2" style="text-align: right;">
+                <button class="btn btn-danger" onclick="stop_motor(0)">STOP</button>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div style="height: 8px;"></div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="col-sm-2">
+                <span>Motor 1</span>
+            </div>
+            <div class="col-sm-8">
+                <div id="slider2"></div>
+            </div>
+            <div class="col-sm-2" style="text-align: right;">
+                <button class="btn btn-danger" onclick="stop_motor(1)">STOP</button>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div style="height: 8px;"></div>
+        </div>
+        
+        <div class="col-sm-12">
+            <div class="col-sm-2">
+                <span>Motor 2</span>
+            </div>
+            <div class="col-sm-8">
+                <div id="slider3"></div>
+            </div>
+            <div class="col-sm-2" style="text-align: right;">
+                <button class="btn btn-danger" onclick="stop_motor(2)">STOP</button>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div style="height: 8px;"></div>
+        </div>
+        
+        <div class="col-sm-12">
+            <div class="col-sm-2">
+                <span>Motor 3</span>
+            </div>
+            <div class="col-sm-8">
+                <div id="slider4"></div>
+            </div>
+            <div class="col-sm-2" style="text-align: right;">
+                <button class="btn btn-danger" onclick="stop_motor(3)">STOP</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        String.format = function() {
+            var s = arguments[0];
+            for (var i = 0; i < arguments.length - 1; i++) {
+                var reg = new RegExp("\\{" + i + "\\}", "gm");
+                s = s.replace(reg, arguments[i + 1]);
+            }
+            return s;
+        }
+
+        var old_values = [90, 90, 90, 90];
+
+        function refresh_slider() {
+            var values = [$( "#slider1" ).slider("value"), $( "#slider2" ).slider("value"), $( "#slider3" ).slider("value"), $( "#slider4" ).slider("value")];
+
+            for (var i=0; i<4; i++) {
+                if (old_values[i] != values[i]) {
+                    var text = "Code=Input/Text={0},{1}/";
+                    App.run_cmd(String.format(text, i, values[i]));
+                }
+            }            
+        }
+
+        function stop_motor(no) {
+            var text = "Code=Input/Text={0},-1/";
+            App.run_cmd(String.format(text, no));
+        }
+
+        $(function() {
+            var max_value = 180;
+
+            var url = unescape(location.href);
+            var pm  = url.split('?');
+            if (pm.length > 1) {
+                var params = pm[1].split('&');
+                for( var i=0; i<params.length; i++ ) {
+                    var param = params[i].split('=');
+                    if (param[0] == "max") {
+                        max_value = parseInt(param[1]);
+                    }
+                }
+            }
+
+            $( "#slider1, #slider2, #slider3, #slider4" ).slider({
+              orientation: "horizontal",
+              range: "min",
+              max: max_value,
+              value: 90,
+              slide: refresh_slider,
+              change: refresh_slider
+            });
+        });
+    </script>
+</body>
+
+</html>

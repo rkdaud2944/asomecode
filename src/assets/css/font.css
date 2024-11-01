@@ -1,0 +1,58 @@
+
+
+@font-face {
+    font-family:'Pretendard-Regular';
+    src: url('@/assets/fonts/Pretendard-Regular.otf') format('opentype');
+}
+
+@font-face {
+    font-family:'Pretendard-ExtraBold';
+    font-weight: 700;
+    src: url('@/assets/fonts/Pretendard-ExtraBold.otf') format('opentype');
+}
+
+@font-face {
+    font-family:'Pretendard-Bold';
+    src: url('@/assets/fonts/Pretendard-Bold.otf') format('opentype');
+}
+
+@font-face {
+    font-family:'Pretendard-Medium';
+    src: url('@/assets/fonts/Pretendard-Medium.otf') format('opentype');
+}
+
+@font-face {
+    font-family:'Pretendard-Light';
+    src: url('@/assets/fonts/Pretendard-Light.otf') format('opentype');
+}
+
+
+@font-face {
+    font-family:'NotoSansKR-Regular';
+    src: url('@/assets/fonts/NotoSansKR-Medium.ttf') format('truetype');
+}
+
+
+.Pretendard-Light {
+    font-family: 'Pretendard-Light';
+}
+
+.Pretendard-Regular {
+    font-family: 'Pretendard-Regular';
+}
+
+.Pretendard-Medium {
+    font-family: 'Pretendard-Medium';
+}
+
+.Pretendard-Bold {
+    font-family: 'Pretendard-Bold';
+}
+
+.Pretendard-ExtraBold {
+    font-family: 'Pretendard-ExtraBold';
+}
+
+.NotoSansKR-Regular {
+    font-family: 'NotoSansKR-Regular' !important;
+}

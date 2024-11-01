@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	<title>AsomeIT</title>
+
+	<link rel="stylesheet" href="../../../common/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../common/css/AsomeCODE.css">
+
+    <script src="../../../common/js/jquery-1.9.1.js"></script>
+	<script src="../../../common/js/bootstrap.min.js"></script>
+
+</head>
+
+<body style="overflow-x: hidden; overflow-y: hidden;">
+	<div style="position: relative;">
+		<canvas id="paint" width="367" height="256" style="position: absolute; left: 17px; top: 14px; z-index: 5;"></canvas>
+
+		<img src="back.png" style="position: absolute;">
+
+		<div id="control">
+			<button style="position: absolute;width: 16px; height: 20px; left: 16px; top:273px;">
+				<img id="color_btn" data-color ="black" src="color_black.png" style="position: absolute; left:-3px; top: -3px;">
+			</button>
+
+			<button style="position: absolute;width: 16px; height: 20px; left: 42px; top:273px;">
+				<img id="color_btn" data-color ="red" src="color_red.png" style="position: absolute; left:-3px; top: -3px; ">
+			</button>
+
+			<button style="position: absolute;width: 16px; height: 20px; left: 68px; top:273px;">
+				<img id="color_btn" data-color ="orange"  src="color_orange.png" style="position: absolute; left:-3px; top: -3px; ">
+			</button>
+
+			<button style="position: absolute;width: 16px; height: 20px; left: 94px; top:273px;">
+				<img id="color_btn" data-color ="yellow"  src="color_yellow.png" style="position: absolute; left:-3px; top: -3px; ">
+			</button>
+
+			<button style="position: absolute;width: 16px; height: 20px; left: 120px; top:273px;">
+				<img id="color_btn" data-color ="green"  src="color_green.png" style="position: absolute; left:-3px; top: -3px; ">
+			</button>
+
+			<button style="position: absolute;width: 16px; height: 20px; left: 146px; top:273px;">
+				<img id="color_btn" data-color ="blue"  src="color_blue.png" style="position: absolute; left:-3px; top: -3px; ">
+			</button>
+
+			<button style="position: absolute;width: 16px; height: 20px; left: 172px; top:273px;">
+				<img id="color_btn" data-color ="purple"  src="color_purple.png" style="position: absolute; left:-3px; top: -3px; ">
+			</button>
+
+			<button style="position: absolute;width: 16px; height: 20px; left: 198px; top:273px;">
+				<img id="color_btn" data-color ="navy"  src="color_navy.png" style="position: absolute; left:-3px; top: -3px; ">
+			</button>
+
+			<button style="position: absolute;width: 16px; height: 20px; left: 224px; top:273px;">
+				<img id="color_btn" data-color ="white"  src="color_white.png" style="position: absolute; left:-3px; top: -3px; ">
+			</button>
+		</div>
+	</div>	
+
+	<script type="text/javascript">
+		window.onload = function() {
+			App.run_cmd("Code=Input/Text=### Simulation started");
+		}
+
+		const canvas = document.querySelector('#paint');
+		const context = canvas.getContext('2d');
+		const control = document.querySelector('#control');
+		let mouse_click;
+		let color_value = 'black';
+
+		function downHandler() {
+			mouse_click = true;
+		}
+
+		function upHandler() {
+			mouse_click = false;
+		}
+
+		function moveHandler(event) {
+			if (!mouse_click) return;
+
+			context.beginPath();
+			context.arc(event.layerX, event.layerY, 5, 0, Math.PI *2, false);
+			context.fill();
+			send_location(event.layerX, event.layerY);
+		}
+		
+		function setColor(event) {
+			color_value = event.target.getAttribute('data-color');
+			context.fillStyle = color_value;
+			send_color(color_value)
+		}
+
+		function send_location(x, y) {
+			var text = "Code=Input/Text='"+ x + "," + y+ "'/";
+			App.run_cmd(text);			
+		}
+
+		function send_color(color_value) {
+			var text = "Code=Input/Text='"+ color_value + "'/";
+			App.run_cmd(text);			
+		}
+
+		canvas.addEventListener('mousedown', downHandler);
+		canvas.addEventListener('mousemove', moveHandler);
+		canvas.addEventListener('mouseup', upHandler);
+		control.addEventListener('click', setColor);
+		
+	</script>
+</body>
+</html>
