@@ -11,7 +11,7 @@
                     연결하기
                     <div v-if="showOptions" class="connect-options">
                         <span class="option" @click="connect()">유선 연결</span>
-                        <span class="option" @click="bleConnect()">무선 연결</span>
+                        <span class="option" @click="startScan()">무선 연결</span>
                     </div>
                 </span>
                 <span class="stop-btn Pretendard-Medium" @click="stop()">
@@ -76,16 +76,24 @@
         </div>
     </div>
 
-    <!-- ble 모달 -->
-    <div v-if="showBleModal" class="ble-modal">
-        <div class="modal-content">
-            <h3>BLE 장치 선택</h3>
-            <ul>
-                <li v-for="device in bleDevices" :key="device.id" @click="selectDevice(device)">
-                    {{ device.name || '이름 없는 장치' }}
-                </li>
-            </ul>
-            <button @click="closeBleModal">취소</button>
+    <!-- ble 모달 -->    
+    <div>
+        <button @click="startScan">BLE 스캔 시작</button>
+        
+        <!-- BLE 장치 선택 모달 -->
+        <div v-if="showModal" class="ble-modal Pretendard-Medium">
+            <div class="ble-modal-content">
+                <h6>기기를 선택하세요</h6>
+                <select v-model="selectedDevice">
+                <option v-for="device in bleDevices" :key="device.id" :value="device.id">
+                    {{ device.name }}
+                </option>
+                </select>
+                <div class="ble-modal-actions">
+                    <button @click="cancelScan">취소</button>
+                    <button @click="selectDevice">연결</button>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -129,8 +137,21 @@ export default {
             connected: false,
             
             updateModal: false,
-            showOptions: false,
+            showOptions: false,            
+                    
+            bleDevices: [],
+            selectedDevice: null,
+            showModal: false
         } 
+    },
+
+    created() {
+        eventbus.on("onBleScan", (deviceData) => {
+            console.log("BLE 장치 발견:", deviceData);
+            if (!this.bleDevices.some(device => device.id === deviceData.id)) {
+                this.bleDevices.push(deviceData);
+            }
+        });
     },
 
     mounted() {
@@ -153,6 +174,38 @@ export default {
             
         });
         
+        eventbus.on("onBleScanStart", () => {
+            this.btConnectColor = "primary";
+            this.$q.notify('BLE 스캔이 시작되었습니다.');
+        });
+        
+        eventbus.on("onBleScanStopped", () => {
+            this.btConnectColor = "grey";
+            this.$q.notify('BLE 스캔이 중지되었습니다.');
+        });
+        
+        eventbus.on("onBleConnected", () => {
+            this.btConnectColor = "primary";
+            this.$q.notify('무선 연결이 완료되었습니다.');
+            this.showModal = false;
+            // ble.writeLn("/r/n");
+        });
+        
+        eventbus.on("bleDisconnect", () => {
+            this.btConnectColor = "grey";
+            this.$q.notify('무선 연결이 끊어졌습니다.');
+        });
+
+        eventbus.on("onBleConnectError", (error) => {
+            this.btConnectColor = "grey";
+            this.$q.notify('연결 실패 : ',error);
+        });
+        
+        eventbus.on("bleSendDataError", (error) => {
+            this.btConnectColor = "grey";
+            this.$q.notify('데이터 전송 실패 : ',error);
+        });
+        
         window.addEventListener("message", (event) => {
             if (event.data === 'connect') {
                 this.connect();
@@ -173,6 +226,34 @@ export default {
 
     methods: {
         ...serial, ...bridgeIn,
+
+        startScan() {
+            this.showModal = true;
+            this.bleDevices = []; // 이전 스캔 결과 초기화
+            ble.bleScan(); // BLE 스캔 시작
+        },
+
+        cancelScan() {
+            this.showModal = false;
+            this.bleDevices = []; // 장치 목록 초기화
+            this.selectedDevice = null;
+            ble.stopScanning(); // 스캔 중지
+        },
+        
+        selectDevice() {
+            console.log("선택된 장치 ID:", this.selectedDevice);
+            if (this.selectedDevice) {
+                ble.connectToSelectedDevice(this.selectedDevice)
+                    // .then(() => {
+                    //     this.$q.notify('BLE 장치에 성공적으로 연결되었습니다.');
+                    //     this.bleDevices = []; // 목록 초기화
+                    // })
+                    // .catch((error) => {
+                    //     this.$q.notify('BLE 장치 연결에 실패했습니다.');
+                    //     console.error("연결 실패:", error);
+                    // });
+            }
+        },
 
         showConnectOptions() {
             this.showOptions = true;
@@ -199,21 +280,9 @@ export default {
             ble.connect();
         },
         
-        bleSendData() {
-            ble.runCode(`import hcsr04
-hcsr04.open(3, 2)
-red = OutputPin(11)
-yellow = OutputPin(14)
-green = OutputPin(15)
-bright = OutputPin(20)
-while True:
-    cm = hcsr04.get_distance()
-    if cm <= 5:
-        red.on()
-        delay(1)
-        red.off()
-    else :
-        delay(0.5)`);
+        bleSendData(code) {
+            // ble.runCode(code);
+            ble.writeLn(code);
         },
         bleStop(){
             ble.writeLn(String.fromCharCode(3))
@@ -241,10 +310,41 @@ while True:
 
         goToQna() {
             window.open("https://asomeit.imweb.me/faq");
-        }
+        },
+        
     },
 }
 </script>
 
 <style scoped src="@/assets/css/component/header.css"/>
 <style scoped src="@/assets/css/font.css"/>
+
+<style scoped>
+/* 모달 스타일 */
+.ble-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ble-modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 300px;
+  text-align: center;
+}
+.ble-modal-content h6 {
+  color: black;
+}
+.ble-modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+</style>
