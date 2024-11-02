@@ -958,6 +958,140 @@ javascriptGenerator["advance_endless_repeat"] = function (block) {
   return code;
 };
 
+Blockly.Blocks["advance_if_logical"] = {
+  init: function() {
+    var dropdownGenerator = function() {
+      let dropdownOptions = [
+        ["k", "k"], ["j", "j"], ["l", "l"], ["q", "q"], ["sttMSG", "sttMSG"]
+      ];
+      let addlightOption = false;
+      let addsoundOption = false;
+
+      const workspaceBlocks = Blockly.mainWorkspace.getAllBlocks();
+      for(let i = 0; i < workspaceBlocks.length; i++) {
+        const blockType = workspaceBlocks[i].type;
+        if(blockType === 'sensor_ultrasonic') {
+          dropdownOptions.push(["cm", "cm"]);
+        } else if(blockType === 'sensor_hand_detection') {
+          dropdownOptions.push(["motion", "motion"]);
+        } else if(blockType === 'advance_repeat') {
+          dropdownOptions.push(["count", "count"]);
+        } else if(blockType === 'message') {
+          dropdownOptions.push(["msg", "msg"]);
+        } else if(blockType === 'get_weather') {
+          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"], ["weather", "weather"]);
+        } else if(blockType === 'prepare_button_ready') {
+          dropdownOptions.push(["bt", "bt"]);
+        } else if(blockType === 'prepare_buzzer_ready') {
+          dropdownOptions.push(["buzzer", "buzzer"]);
+        } else if(blockType === 'prepare_tm_ready') {
+          dropdownOptions.push(["bt", "bt"]);
+        } else if(blockType === 'prepare_vibration_ready') {
+          dropdownOptions.push(["vs", "vs"]);
+        } else if(blockType === 'led_ledtube_time') {
+          dropdownOptions.push(["h", "h"], ["m", "m"]);
+        } else if(blockType === 'button_push') {
+          dropdownOptions.push(["clicked", "clicked"]);
+        } else if(blockType === 'button_info') {
+          dropdownOptions.push(["bt_value", "bt_value"]);
+        } else if(blockType === 'sensor_humidity') {
+          dropdownOptions.push(["humidity", "humidity"]);
+        } else if(blockType === 'sensor_temperature') {
+          dropdownOptions.push(["temperature", "temperature"]);
+        } else if(blockType === 'sensor_water_level') {
+          dropdownOptions.push(["water", "water"]);
+        } else if(blockType === 'sensor_brightness' ||  blockType === 'sensor_brightness_complete') {
+          addlightOption = true;
+        } else if(blockType === 'sensor_sound' ||  blockType === 'sensor_sound_complete') {
+          addsoundOption = true;
+        } else if(blockType === 'sensor_soil_humidity') {
+          dropdownOptions.push(["moisture", "moisture"]);
+        } else if(blockType === 'sensor_vibration_sensor') {
+          dropdownOptions.push(["vibration", "vibration"]);
+        } else if(blockType === 'line_ready') {
+          dropdownOptions.push(["a", "a"], ["b", "b"]);
+        }
+      }
+      if(addsoundOption) {
+        dropdownOptions.push(["sound", "sound"]);
+      }
+      if(addlightOption) {
+        dropdownOptions.push(["light", "light"]);
+      }
+      return dropdownOptions;
+    };
+
+    this.appendDummyInput()
+      .appendField('만약에')
+      .appendField(new Blockly.FieldDropdown(dropdownGenerator), "variable1")
+      .appendField(new Blockly.FieldDropdown([
+        ["==", "=="],
+        [">", ">"],
+        ["<", "<"],
+        [">=", ">="],
+        ["<=", "<="],
+        ["!=", "!="]
+      ]), "inequality1");
+    this.appendValueInput("if_value1")
+      .setCheck("null");
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown([
+        ["그리고", "and"],
+        ["또는", "or"]
+      ]), "logical_operator")
+      .appendField(new Blockly.FieldDropdown(dropdownGenerator), "variable2")
+      .appendField(new Blockly.FieldDropdown([
+        ["==", "=="],
+        [">", ">"],
+        ["<", "<"],
+        [">=", ">="],
+        ["<=", "<="],
+        ["!=", "!="]
+      ]), "inequality2");
+    this.appendValueInput("if_value2")
+      .setCheck("null");
+    this.appendStatementInput('if_state')
+      .appendField('');
+    this.setColour("#55A55B");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setInputsInline(true);
+  }
+};
+
+javascriptGenerator["advance_if_logical"] = function(block) {
+  const variable1 = block.getFieldValue("variable1");
+  const ineq1 = block.getFieldValue('inequality1');
+  let variableCode1 = '';
+
+  if (variable1 === 'a' || variable1 === 'b') {
+    variableCode1 = `${variable1}.read()`;
+  } else {
+    variableCode1 = variable1;
+  }
+
+  const valueCode1 = javascriptGenerator.valueToCode(block, 'if_value1', javascriptGenerator.ORDER_ATOMIC);
+
+  const logicalOperator = block.getFieldValue('logical_operator');
+  const variable2 = block.getFieldValue("variable2");
+  const ineq2 = block.getFieldValue('inequality2');
+  let variableCode2 = '';
+
+  if (variable2 === 'a' || variable2 === 'b') {
+    variableCode2 = `${variable2}.read()`;
+  } else {
+    variableCode2 = variable2;
+  }
+
+  const valueCode2 = javascriptGenerator.valueToCode(block, 'if_value2', javascriptGenerator.ORDER_ATOMIC);
+
+  const statements = javascriptGenerator.statementToCode(block, 'if_state');
+
+  const code = `if (${variableCode1} ${ineq1} ${valueCode1} ${logicalOperator} ${variableCode2} ${ineq2} ${valueCode2}):\n${statements}`;
+
+  return code;
+};
+
 Blockly.Blocks["advance_if"] = {
   init: function() {
     var dropdownGenerator = function() {
@@ -1168,6 +1302,141 @@ javascriptGenerator["advance_elseif"] = function(block) {
   return code;
 };
 
+Blockly.Blocks["advance_elseif_logical"] = {
+  init: function() {
+    var dropdownGenerator = function() {
+      let dropdownOptions = [
+        ["k", "k"], ["j", "j"], ["l", "l"], ["q", "q"], ["sttMSG", "sttMSG"]
+      ];
+      let addlightOption = false;
+      let addsoundOption = false;
+
+      const workspaceBlocks = Blockly.mainWorkspace.getAllBlocks();
+      for(let i = 0; i < workspaceBlocks.length; i++) {
+        const blockType = workspaceBlocks[i].type;
+        if(blockType === 'sensor_ultrasonic') {
+          dropdownOptions.push(["cm", "cm"]);
+        } else if(blockType === 'sensor_hand_detection') {
+          dropdownOptions.push(["motion", "motion"]);
+        } else if(blockType === 'advance_repeat') {
+          dropdownOptions.push(["count", "count"]);
+        } else if(blockType === 'message') {
+          dropdownOptions.push(["msg", "msg"]);
+        } else if(blockType === 'get_weather') {
+          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"], ["weather", "weather"]);
+        } else if(blockType === 'prepare_button_ready') {
+          dropdownOptions.push(["bt", "bt"]);
+        } else if(blockType === 'prepare_buzzer_ready') {
+          dropdownOptions.push(["buzzer", "buzzer"]);
+        } else if(blockType === 'prepare_tm_ready') {
+          dropdownOptions.push(["bt", "bt"]);
+        } else if(blockType === 'prepare_vibration_ready') {
+          dropdownOptions.push(["vs", "vs"]);
+        } else if(blockType === 'led_ledtube_time') {
+          dropdownOptions.push(["h", "h"], ["m", "m"]);
+        } else if(blockType === 'button_push') {
+          dropdownOptions.push(["clicked", "clicked"]);
+        } else if(blockType === 'button_info') {
+          dropdownOptions.push(["bt_value", "bt_value"]);
+        } else if(blockType === 'sensor_humidity') {
+          dropdownOptions.push(["humidity", "humidity"]);
+        } else if(blockType === 'sensor_temperature') {
+          dropdownOptions.push(["temperature", "temperature"]);
+        } else if(blockType === 'sensor_water_level') {
+          dropdownOptions.push(["water", "water"]);
+        } else if(blockType === 'sensor_brightness' || blockType === 'sensor_brightness_complete') {
+          addlightOption = true;
+        } else if(blockType === 'sensor_sound' || blockType === 'sensor_sound_complete') {
+          addsoundOption = true;
+        } else if(blockType === 'sensor_soil_humidity') {
+          dropdownOptions.push(["moisture", "moisture"]);
+        } else if(blockType === 'sensor_vibration_sensor') {
+          dropdownOptions.push(["vibration", "vibration"]);
+        } else if(blockType === 'line_ready') {
+          dropdownOptions.push(["a", "a"], ["b", "b"]);
+        }
+      }
+      if(addsoundOption) {
+        dropdownOptions.push(["sound", "sound"]);
+      }
+      if(addlightOption) {
+        dropdownOptions.push(["light", "light"]);
+      }
+      return dropdownOptions;
+    };
+
+    this.appendDummyInput()
+      .appendField('만약에')
+      .appendField(new Blockly.FieldDropdown(dropdownGenerator), "variable1")
+      .appendField(new Blockly.FieldDropdown([
+        ["==", "=="],
+        [">", ">"], 
+        ["<", "<"],
+        [">=", ">="],
+        ["<=", "<="],
+        ["!=", "!="]
+      ]), "inequality1");
+    this.appendValueInput("if_value1")
+      .setCheck("null");
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown([
+        ["그리고", "and"],
+        ["또는", "or"]
+      ]), "logical_operator")
+      .appendField(new Blockly.FieldDropdown(dropdownGenerator), "variable2")
+      .appendField(new Blockly.FieldDropdown([
+        ["==", "=="],
+        [">", ">"],
+        ["<", "<"],
+        [">=", ">="],
+        ["<=", "<="],
+        ["!=", "!="]
+      ]), "inequality2");
+    this.appendValueInput("if_value2")
+      .setCheck("null");
+    this.appendStatementInput('if_state')
+      .appendField('');
+    this.appendStatementInput('if_state_else')
+      .appendField('아니라면');
+    this.setColour("#55A55B");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setInputsInline(true);
+  }
+};
+
+javascriptGenerator["advance_elseif_logical"] = function(block) {
+  const variable1 = block.getFieldValue("variable1");
+  const ineq1 = block.getFieldValue('inequality1');
+  let variableCode1 = '';
+
+  if (variable1 === 'a' || variable1 === 'b') {
+    variableCode1 = `${variable1}.read()`;
+  } else {
+    variableCode1 = variable1;
+  }
+
+  const valueCode1 = javascriptGenerator.valueToCode(block, 'if_value1', javascriptGenerator.ORDER_ATOMIC);
+
+  const logicalOperator = block.getFieldValue('logical_operator');
+  const variable2 = block.getFieldValue("variable2");
+  const ineq2 = block.getFieldValue('inequality2');
+  let variableCode2 = '';
+
+  if (variable2 === 'a' || variable2 === 'b') {
+    variableCode2 = `${variable2}.read()`;
+  } else {
+    variableCode2 = variable2;
+  }
+
+  const valueCode2 = javascriptGenerator.valueToCode(block, 'if_value2', javascriptGenerator.ORDER_ATOMIC);
+
+  const ifStatements = javascriptGenerator.statementToCode(block, 'if_state');
+  const elseStatements = javascriptGenerator.statementToCode(block, 'if_state_else');
+
+  const code = `if (${variableCode1} ${ineq1} ${valueCode1}) ${logicalOperator} (${variableCode2} ${ineq2} ${valueCode2}):\n${ifStatements}else:\n${elseStatements}`;
+  return code;
+};
 // Blockly.Blocks["advance_elseif"] = {
 //   init: function () {
 //     this.appendDummyInput()

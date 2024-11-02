@@ -92,6 +92,8 @@ export { BotToolbox };
                     { "kind": "block", "gap": "8", "type": "advance_endless_repeat" },
                     { "kind": "block", "gap": "8", "type": "advance_if" },
                     { "kind": "block", "gap": "8", "type": "advance_elseif" },
+                    { "kind": "block", "gap": "8", "type": "advance_if_logical" },
+                    { "kind": "block", "gap": "8", "type": "advance_elseif_logical" },
                     { "kind": "block", "gap": "8", "type": "int" },
                     { "kind": "block", "gap": "8", "type": "mark_int" },
                     { "kind": "block", "gap": "8", "type": "screen" },
