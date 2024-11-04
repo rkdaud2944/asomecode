@@ -35,7 +35,6 @@ class BleUnit {
     
         noble.removeAllListeners('discover');
         noble.on('discover', (peripheral) => {
-            console.log("discover 안")
             const deviceName = peripheral.advertisement.localName;
             
             // 이름이 있는 장치만 추가
@@ -47,7 +46,7 @@ class BleUnit {
                     uuid: peripheral.uuid,
                     advertisement: peripheral.advertisement,
                 };
-                console.log(`장치 발견: ${deviceName} (ID: ${peripheral.id})`);
+                // console.log(`장치 발견: ${deviceName} (ID: ${peripheral.id})`);
                 eventbus.emit("onBleScan", deviceData);
             }
             
@@ -134,7 +133,6 @@ class BleUnit {
     }
 
     readData() {
-        console.log(22)
         TX_characteristic.subscribe((error) => {
             if (!error) {
                 TX_characteristic.on('data', (data, isNotification) => {
@@ -155,7 +153,6 @@ class BleUnit {
     }
 
     sendData(text) {
-        console.log(11)
         if (!connectedCharacteristic) {
             console.error("connectedCharacteristic이 초기화되지 않았습니다.");
             return;

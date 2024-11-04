@@ -17,6 +17,7 @@ export const useConnectStore = defineStore("connect",  {
     actions: {
         setMode(newMode) {
             this.mode = newMode; 
+            console.log('Pinia mode 변경됨:', this.mode); // 변경될 때 로그
         },
         scanning() {
             this.connectionState = 'scanning';
