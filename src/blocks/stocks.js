@@ -3067,7 +3067,7 @@ Blockly.Blocks["move_back"] = {
 
 javascriptGenerator["move_back"] = function (block) {
   const value = block.getFieldValue("VALUE");
-  var code = `asomecar.forward(${value})\n`;
+  var code = `asomecar.backward(${value})\n`;
   return code;
 };
 
