@@ -15,6 +15,11 @@ window.run_cmd = function (cmd) {
     if (cmd.startsWith("Code=ShowSimulation"))openSimulator(cmd);
 };
 
+//### System.Line.RunJS: run_cmd('Code=ShowSimulation/Page=dice/')
+window.run_cmd = function (cmd) {
+    if (cmd.startsWith("Code=ShowAiContents"))openAiContents(cmd);
+};
+
 /**
  * 코드 에디터와 관련된 Event를 처리한다.
  */
@@ -86,6 +91,31 @@ function simulationRunJS(line){
 
     eventbus.emit('simulationBus', params);
 }
+
+function openAiContents(cmd) {
+    let page = "";
+    try {
+        page = cmd.split("=")[2];
+        page = page.replaceAll("/", "");
+        eventbus.emit('aiContentsOpen', `/ai/${page}`);
+
+    } catch (error) {
+        // TODO: 에러 처리
+        console.log(error);
+        return;
+    }
+
+}
+
+// function aiContentsRunJS(line){
+//     const params = {
+//         type: "aiContentsJS",
+//         func: line,
+//     };
+
+//     eventbus.emit('simulationBus', params);
+// }
+
 
 // 초음파 센서 로그
 window.hcsr04_distance = function (cm) { console.log('cm = '+cm) }

@@ -167,6 +167,11 @@ export default {
         eventbus.on('simulationOpen', (path) => {
             this.openRouterPath(path);
         });
+        
+        eventbus.on('aiContentsOpen', (path) => {
+            this.openRouterPath(path);
+        });
+
 
         eventbus.on('simulationBus', (params) => {
             window.parent.postMessage(JSON.stringify(params), '*');

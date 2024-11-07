@@ -4,6 +4,7 @@ import bridgeOut from "../globals/bridge-out";
 import windows from "@/globals/windows";
 
 let simulator = [];
+let ai_contents = [];
 /**
  * Vue 콤포넌트의 공통 기능을 제공한다.
  */
@@ -79,6 +80,9 @@ export default {
                     break;
                 case '/simulation/sliding_puzzle1' : 
                     simulator['simulator'] = window.open(route.href, 'simulator', 'width=400,height=335'); // 400 300;
+                    break;
+                case '/ai/selfDriving' : 
+                    ai_contents['selfDriving'] = window.open(route.href, 'ai-contents', 'width=400,height=335'); // 400 300;
                     break;
                 default:
                     window.open(route.href);

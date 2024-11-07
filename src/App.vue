@@ -57,7 +57,7 @@ export default {
 
             this.showHeaderMain = true;
             this.showFooterMain = true;
-            const skipHeaderMains = ["/editor", "/help", "/backOffice", "/blockCoding", "/simulation"];
+            const skipHeaderMains = ["/editor", "/help", "/backOffice", "/blockCoding", "/simulation", "/ai"];
             skipHeaderMains.forEach((path) => {
                 if (to.path.startsWith(path)) {
                     this.showHeaderMain = false;

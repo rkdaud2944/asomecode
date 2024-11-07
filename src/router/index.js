@@ -146,6 +146,14 @@ const routes = [
 
     },
     
+    // ai
+    {
+        path: '/ai/:page',
+        props: true,
+        component: () => import('../views/AiContentsView.vue')
+
+    },
+    
     {
         path: '/your-route',
         name: 'YourRoute',
