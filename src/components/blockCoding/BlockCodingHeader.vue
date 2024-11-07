@@ -79,7 +79,12 @@ export default {
         send(){
             const codes = this.$store.state.viewcode;
             console.log(codes);
-            this.runCode(codes);
+            
+            if (this.$store.state.connectionMode === 'ble') {
+                this.runBle(codes);
+            } else {
+                this.runCode(codes);
+            }
         },
 
         save(){

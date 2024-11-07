@@ -2,7 +2,13 @@ import { SerialPort, ReadlineParser } from "serialport";
 import eventbus from "@/globals/eventbus";
 import speakerManager from "@/globals/speaker-manager";
 import { Notify } from 'quasar'
-// import {useConnectStore} from '@/store/connect-store'
+import ble from "@/globals/ble";
+import {useConnectStore} from '@/store/connect-store'
+// import { createPinia, setActivePinia } from 'pinia';
+
+// const pinia = createPinia();
+// setActivePinia(pinia);  // Pinia 인스턴스를 활성화
+
 
 eventbus.on("onSerialReceived", (data) => {
     if (!data) return;
@@ -121,6 +127,7 @@ const seiral = {
     },
 
     async connect() {
+        const connectStore = useConnectStore();  // 이제 Pinia 스토어 사용 가능
         this.disconnect();
         
         const asomeboard = await this.getAsomeboard();
@@ -130,20 +137,33 @@ const seiral = {
         }
 
         serialUnit = new SerialUnit();
-        serialUnit.onOpened = () => eventbus.emit("onSerialConnected");
-        serialUnit.onClosed = () => eventbus.emit("onSerialClosed");
+        serialUnit.onOpened = () => {
+            connectStore.setMode("serial");
+            eventbus.emit("onSerialConnected");
+        };
+        serialUnit.onClosed = () => {
+            connectStore.disconnect();
+            eventbus.emit("onSerialClosed");
+        };
         serialUnit.onReceived = (msg) => eventbus.emit("onSerialReceived", msg);
         serialUnit.onError = (error) => this.fireErrorEvent(error);
         serialUnit.open(asomeboard.path);
 
-        console.log("연결 완료")
+        console.log("연결 완료");
     },
     
     disconnect() {
-        if (serialUnit == null) return;
+        const connectStore = useConnectStore();  // 이제 Pinia 스토어 사용 가능
+        if (serialUnit != null) {
+            serialUnit.close();
+            serialUnit = null;
+        }
 
-        serialUnit.close();
-        serialUnit = null;
+        if (connectStore.mode === 'ble') {
+            ble.disconnect();
+        }
+
+        connectStore.disconnect();
     },
 
     list() {
@@ -151,19 +171,30 @@ const seiral = {
     },
 
     write(text) {
-        // 한글만 인코딩하여 전송
-        if (text !== undefined && text !== null){
-            text = text.replace(/[ㄱ-ㅎㅏ-ㅣ가-힣]/g, (match) => `{{${encodeURIComponent(match)}}}`);
+        const connectStore = useConnectStore();  // 이제 Pinia 스토어 사용 가능
+        if (connectStore.mode === 'ble') {
+            ble.writeLn(text);
+        } else if (connectStore.mode === 'serial' && serialUnit != null) {
+            text = this.encodeKorean(text);
+            serialUnit.write(text);
         }
-        if (serialUnit) serialUnit.write(text);
     },
 
     writeLn(text) {
-        // 한글만 인코딩하여 전송
-        if (text !== undefined && text !== null){
+        const connectStore = useConnectStore();  // 이제 Pinia 스토어 사용 가능
+        if (connectStore.mode === 'ble') {
+            ble.writeLn(text);
+        } else if (connectStore.mode === 'serial' && serialUnit != null) {
+            text = this.encodeKorean(text);
+            serialUnit.writeLn(text);
+        }
+    },
+
+    encodeKorean(text) {
+        if (text !== undefined && text !== null) {
             text = text.replace(/[ㄱ-ㅎㅏ-ㅣ가-힣]/g, (match) => `{{${encodeURIComponent(match)}}}`);
         }
-        this.write(text +"\r\n");
+        return text;
     },
 
     writeInput(text) {

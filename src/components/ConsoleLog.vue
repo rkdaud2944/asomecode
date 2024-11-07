@@ -64,26 +64,20 @@ export default {
     mounted() {
         //ble
         eventbus.on("onBleConnected", () => {
-            console.log("onBleConnected");
             this.rows = [];
         });
         eventbus.on("onBleDisconnected", () => {
-            console.log("onBleDisconnected");
             this.rows = [];
         });
-        eventbus.on("onBleReceived", async(data) => {
-            console.log("onBleReceived");
-
+        eventbus.on("onBleReceived", (data) => {
             data = data.replaceAll(" ", "&nbsp;"); 
             data = data.replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;");
-            data = data.replaceAll(/\r?\n/g, "<br>");
 
             // 한글 디코딩
             data = this.decodeKoreanCharacters(data)
             
-            this.buffer.push(await data);
+            this.buffer.push(data);
         });
-
 
         //serial
         eventbus.on("onSerialConnected", () => {
@@ -93,12 +87,6 @@ export default {
         //     this.rows = [];
         // });
         eventbus.on("onSerialReceived", (data) => {
-            // TODO: 디버깅을 위해서 임시 주석 처리
-            // if (data && (data.startsWith("###") || data.startsWith(">>> ###"))) {
-            //     // console.log(data);
-            //     return;
-            // }
-
             data = data.replaceAll(" ", "&nbsp;");
             data = data.replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;");
 
@@ -211,6 +199,7 @@ export default {
 
             if(this.mode == 'ble'){
                 ble.writeLn(this.text);
+                // ble.runCode(this.text);
                 this.text = "";
                 return;
             }else{

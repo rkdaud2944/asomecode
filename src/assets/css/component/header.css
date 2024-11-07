@@ -32,6 +32,7 @@ a {
 }
 
 .connect-btn {
+    position: relative;
     display: flex;
     gap: 5px;
     width: 120px;
@@ -62,6 +63,32 @@ a {
 
 .connect-btn:active {
     background-color: #E4007F;
+}
+
+.connect-options {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #ffffff;
+    border: 1px solid #dedee2;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    width: 120px;
+    z-index: 10;
+}
+
+.option {
+    padding: 8px;
+    color: #7E7E83;
+    cursor: pointer;
+    text-align: center;
+}
+
+.option:hover {
+    background-color: #f0f0f5;
+    color: #3E3A39;
 }
 
 .stop-btn {
@@ -334,8 +361,10 @@ p {
     right: 15px;
 }
 
+
 @media screen and (max-width:770px ) {
     .nav-txt:nth-child(1), .nav-txt:nth-child(2) {
         display: none;
     }
 }
+
