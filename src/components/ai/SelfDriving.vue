@@ -1,160 +1,72 @@
 <template>
     <div>
-        <h5>Autonomous Driving Car2</h5>
-        <!-- ESP32 Camera Stream using video tag -->
-        <video id="stream" :src="streamUrl" autoplay width="320" height="240"></video>
-        
-        <!-- Hyperparameters Settings -->
-        <div class="params">
-            <label>Learning Rate:</label>
-            <select v-model="learningRate">
-                <option value="0.00001">0.00001</option>
-                <option value="0.0001">0.0001</option>
-                <option value="0.001">0.001</option>
-                <option value="0.003">0.003</option>
-            </select>
-
-            <label>Batch Size:</label>
-            <select v-model="batchSize">
-                <option value="0.05">0.05</option>
-                <option value="0.1">0.1</option>
-                <option value="0.4">0.4</option>
-                <option value="1">1</option>
-            </select>
-
-            <label>Epochs:</label>
-            <select v-model="epochs">
-                <option value="10">10</option>
-                <option value="20">20</option>
-                <option value="40">40</option>
-            </select>
-
-            <label>Hidden Units:</label>
-            <select v-model="hiddenUnits">
-                <option value="10">10</option>
-                <option value="100">100</option>
-                <option value="200">200</option>
-            </select>
+        <h4>자율주행 학습하기</h4>
+        <!-- 로딩 중 메시지 -->
+        <div v-if="isLoading" class="loading-message">
+            Loading...
         </div>
-        
-        <!-- Train and Predict Buttons -->
-        <div class="controls">
-            <button @click="trainModel">Train Model</button>
-            <button @click="startPrediction">Play</button>
+        <!-- 이미지 스트림 -->
+        <div class="image-container">
+            <img id="stream" :src="streamUrl" alt="Live Stream" width="320" height="240" @error="onImageError" @load="onImageLoad">
         </div>
     </div>
 </template>
 
 <script>
-import * as tf from '@tensorflow/tfjs';
-import { ControllerDataset } from '@/utils/ai-self-driving';
-
 export default {
-data() {
-    return {
-        learningRate: 0.0001,
-        batchSize: 0.4,
-        epochs: 20,
-        hiddenUnits: 100,
-        streamUrl: "http://192.168.0.214/stream",
-        controllerDataset: new ControllerDataset(4),
-        truncatedMobileNet: null,
-        model: null,
-        isPredicting: false,
-    };
-},
-mounted() {
-    this.init();
-    this.streamUrl = "http://192.168.0.214/stream";
-},
-methods: {
-    async init() {
-        this.truncatedMobileNet = await this.loadTruncatedMobileNet();
+    data() {
+        return {
+            streamUrl: "http://192.168.0.214/stream", // 초기 스트림 URL 설정
+            isLoading: true, // 로딩 상태를 나타내는 변수
+            retryCount: 0, // 로딩 재시도 횟수
+            maxRetries: 5, // 최대 재시도 횟수
+            retryDelay: 3000 // 재시도 딜레이 (밀리초)
+        };
     },
-    async loadTruncatedMobileNet() {
-        const mobilenet = await tf.loadLayersModel(
-            'https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_0.25_224/model.json'
-        );
-        const layer = mobilenet.getLayer('conv_pw_13_relu');
-        return tf.model({ inputs: mobilenet.inputs, outputs: layer.output });
-    },
-    async trainModel() {
-        if (this.controllerDataset.xs == null) {
-            alert('Add some examples before training!');
-            return;
+    methods: {
+        // 이미지 로드 성공 시 호출되는 메서드
+        onImageLoad() {
+            console.log("Image loaded successfully");
+            this.isLoading = false; // 로딩 상태를 false로 변경
+            this.retryCount = 0; // 재시도 횟수 초기화
+        },
+        // 이미지 로드 실패 시 호출되는 메서드
+        onImageError() {
+            if (this.retryCount < this.maxRetries) {
+                console.log(`Image failed to load, retrying... (${this.retryCount + 1}/${this.maxRetries})`);
+                this.retryCount++;
+                setTimeout(this.retryStream, this.retryDelay); // 재시도 딜레이 후 다시 요청
+            } else {
+                console.error("Max retries reached. Unable to load stream.");
+                this.isLoading = true; // 재시도 실패 후 로딩 상태로 유지
+            }
+        },
+        // 스트림 다시 요청하는 메서드
+        retryStream() {
+            this.streamUrl = "http://192.168.0.214/stream?time=" + new Date().getTime(); // 타임스탬프 추가로 캐시 방지
         }
-        this.model = tf.sequential({
-            layers: [
-                tf.layers.flatten({ inputShape: this.truncatedMobileNet.outputs[0].shape.slice(1) }),
-                tf.layers.dense({
-                    units: this.hiddenUnits,
-                    activation: 'relu',
-                    kernelInitializer: 'varianceScaling',
-                    useBias: true,
-                }),
-                tf.layers.dense({
-                    units: 4,
-                    kernelInitializer: 'varianceScaling',
-                    useBias: false,
-                    activation: 'softmax',
-                }),
-            ],
-        });
-        const optimizer = tf.train.adam(this.learningRate);
-        this.model.compile({ optimizer: optimizer, loss: 'categoricalCrossentropy' });
-        const batchSize = Math.floor(this.controllerDataset.xs.shape[0] * this.batchSize);
-        if (!(batchSize > 0)) {
-            alert('Batch size is 0 or NaN. Please choose a non-zero fraction.');
-            return;
-        }
-        await this.model.fit(this.controllerDataset.xs, this.controllerDataset.ys, {
-            batchSize,
-            epochs: this.epochs,
-            callbacks: {
-                onBatchEnd: async (batch, logs) => {
-                    console.log('Loss: ' + logs.loss.toFixed(5));
-                },
-            },
-        });
-    },
-    async startPrediction() {
-        this.isPredicting = true;
-        while (this.isPredicting) {
-            const img = await this.getImage();
-            const embeddings = this.truncatedMobileNet.predict(img);
-            const predictions = this.model.predict(embeddings);
-            const predictedClass = predictions.as1D().argMax();
-            const classId = (await predictedClass.data())[0];
-            img.dispose();
-            console.log('Predicted Class:', classId);
-            await tf.nextFrame();
-        }
-    },
-    async getImage() {
-        const imgElement = document.getElementById('stream');
-        const img = tf.browser.fromPixels(imgElement);
-        const processedImg = tf.tidy(() => img.expandDims(0).toFloat().div(127).sub(1));
-        img.dispose();
-        return processedImg;
-    },
-},
+    }
 };
 </script>
 
 <style scoped>
+/* 이미지 상하반전 */
 #stream {
     transform: scaleY(-1);
 }
-.params {
-    margin-top: 20px;
+
+/* 이미지 컨테이너 */
+.image-container {
+    width: 320px;
+    height: 240px;
+    position: relative;
 }
-.controls {
-    margin-top: 20px;
-}
-button {
-    margin-right: 10px;
-    padding: 10px 20px;
+
+/* 로딩 메시지 스타일 */
+.loading-message {
+    margin-top: 10px; /* 이미지와 로딩 메시지 사이에 여백 추가 */
+    color: #333; /* 로딩 메시지 색상 */
     font-size: 16px;
-    cursor: pointer;
+    font-weight: bold;
 }
 </style>
