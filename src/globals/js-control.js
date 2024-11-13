@@ -11,6 +11,13 @@ eventbus.on("onSerialReceived", (data) => {
     if (data.startsWith("### Sound Streaming")) jsControl.sound(data);
 });
 
+eventbus.on("onBleReceived", (data) => {
+    if (!data) return;
+
+    if (data.startsWith("### System.Line.RunJS")) jsControl.run(data);
+});
+
+
 window.run_cmd = function (cmd) {
     if (cmd.startsWith("Code=ShowSimulation"))openSimulator(cmd);
 };

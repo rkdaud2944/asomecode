@@ -82,7 +82,7 @@ export default {
                     simulator['simulator'] = window.open(route.href, 'simulator', 'width=400,height=335'); // 400 300;
                     break;
                 case '/ai/selfDriving' : 
-                    ai_contents['selfDriving'] = window.open(route.href, 'ai-contents', 'width=800,height=800'); // 400 300;
+                    ai_contents['selfDriving'] = window.open(route.href, 'ai-contents', 'width=1024,height=900'); // 400 300;
                     break;
                 default:
                     window.open(route.href);
