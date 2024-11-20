@@ -292,6 +292,8 @@ export default {
                 this.predictedLabel = this.getLabelNameByClassId(classId);
                 console.log(`Predicted label: ${this.predictedLabel}`);
                 await tf.nextFrame();
+                // 0.5초 대기
+                await new Promise(resolve => setTimeout(resolve, 500));
             }
         },
 
