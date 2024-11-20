@@ -5,7 +5,7 @@
             Loading...
         </div>
         <div class="image-container">
-            <img id="stream" :src="streamUrl" alt="Live Stream" width="320" height="240" @error="onImageError" @load="onImageLoad">
+            <img id="stream" :src="streamUrl" alt="Live Stream" width="320" height="240" @error="onImageError" @load="onImageLoad" crossorigin="anonymous">
         </div>
         <div class="controls">
             <input type="text" v-model="streamIp" placeholder="Enter Stream IP" class="input-ip">
@@ -14,6 +14,70 @@
         <div class="controls">
             <button @click="openModal" class="styled-button small-button">Wi-Fi 연결</button>
         </div>
+        
+        <!-- 학습 및 예측 관련 UI -->
+        <div class="controls">
+            <input type="text" v-model="labelName" placeholder="Enter Label Name" class="input-ip">
+            <button @click="addExampleHandler" class="styled-button small-button">Add Example</button>
+            <button @click="trainModelHandler" class="styled-button small-button">Train Model</button>
+            <button @click="predictHandler" class="styled-button small-button">Start Prediction</button>
+            <button @click="stopPredictionHandler" class="styled-button small-button">Stop Prediction</button>
+        </div>
+        <div class="controls">
+            <div class="hyper-params">
+                <div class="dropdown">
+                    <label>Learning rate</label>
+                    <div class="select">
+                        <select v-model="learningRate">
+                            <option value="0.00001">0.00001</option>
+                            <option selected value="0.0001">0.0001</option>
+                            <option value="0.001">0.001</option>
+                            <option value="0.003">0.003</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <label>Batch size</label>
+                    <div class="select">
+                        <select v-model="batchSizeFraction">
+                            <option value="0.05">0.05</option>
+                            <option value="0.1">0.1</option>
+                            <option selected value="0.4">0.4</option>
+                            <option value="1">1</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <label>Epochs</label>
+                    <div class="select">
+                        <select v-model="epochs">
+                            <option value="10">10</option>
+                            <option selected value="20">20</option>
+                            <option value="40">40</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <label>Hidden units</label>
+                    <div class="select">
+                        <select v-model="denseUnits">
+                            <option value="10">10</option>
+                            <option selected value="100">100</option>
+                            <option value="200">200</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <ul>
+                <li v-for="(label, index) in labelMap" :key="index">
+                    {{ index }}: {{ label.name }} ({{ label.count }} examples)
+                    <img :src="label.thumbnail" alt="Example Thumbnail" width="50" height="50" v-if="label.thumbnail">
+                </li>
+            </ul>
+        </div>
+        <h3>Detected: {{ predictedLabel }}</h3>
 
         <div v-if="isModalOpen" class="modal">
             <div class="modal-content">
@@ -35,6 +99,16 @@
 
 <script>
 import remoteSerial from "@/globals/remote-serial";
+import * as tf from "@tensorflow/tfjs";
+import {
+    initModel,
+    addExample,
+    trainModel,
+    predict,
+    isModelInitialized,
+    getNumClasses,
+    updateNumClasses
+} from "@/globals/ai-model";
 
 export default {
     data() {
@@ -47,34 +121,40 @@ export default {
             retryDelay: 3000, 
             isModalOpen: false,
             wifiSsid: '',
-            wifiPassword: ''
+            wifiPassword: '',
+            labelName: '',
+            predictedLabel: '',
+            isPredicting: false,
+            labelMap: {},
+            labelCounter: 0,
+            learningRate: 0.0001,
+            batchSizeFraction: 0.4,
+            epochs: 20,
+            denseUnits: 100
         };
     },
     methods: {
         ...remoteSerial,
 
-        // 이미지 로드 성공 시 호출되는 메서드
         onImageLoad() {
             console.log("Image loaded successfully");
-            this.isLoading = false; // 로딩 상태를 false로 변경
-            this.retryCount = 0; // 재시도 횟수 초기화
+            this.isLoading = false;
+            this.retryCount = 0;
         },
 
-        // 이미지 로드 실패 시 호출되는 메서드
         onImageError() {
             if (this.retryCount < this.maxRetries) {
                 console.log(`Image failed to load, retrying... (${this.retryCount + 1}/${this.maxRetries})`);
                 this.retryCount++;
-                setTimeout(this.retryStream, this.retryDelay); // 재시도 딜레이 후 다시 요청
+                setTimeout(this.retryStream, this.retryDelay);
             } else {
                 console.error("Max retries reached. Unable to load stream.");
-                this.isLoading = true; // 재시도 실패 후 로딩 상태로 유지
+                this.isLoading = true;
             }
         },
 
-        // 스트림 다시 요청하는 메서드
         retryStream() {
-            this.streamUrl = `http://${this.streamIp}/stream?time=` + new Date().getTime(); // 타임스탬프 추가로 캐시 방지
+            this.streamUrl = `http://${this.streamIp}/stream?time=` + new Date().getTime();
         },
 
         openModal() {
@@ -94,7 +174,7 @@ export default {
         registerStreamIp() {
             if (this.streamIp) {
                 this.streamUrl = `http://${this.streamIp}/stream`;
-                this.isLoading = true; // 로딩 상태로 변경하여 이미지 재로딩 시작
+                this.isLoading = true;
             } else {
                 console.error("Please enter a valid IP address");
             }
@@ -107,6 +187,115 @@ export default {
             } else {
                 this.runCode(codes);
             }
+        },
+
+        getNumberOfClasses() {
+            return Object.keys(this.labelMap).length;
+        },
+
+        async addExampleHandler() {
+            if (!this.labelName) {
+                console.error("Please enter a label name");
+                return;
+            }
+
+            // 현재 레이블 수를 확인
+            // const numClasses = this.getNumberOfClasses();
+            // // eslint-disable-next-line no-prototype-builtins
+            // if (numClasses < 2 && !this.labelMap.hasOwnProperty(this.labelName)) {
+            //     console.error("At least two labels are required to add examples.");
+            //     alert("예제를 추가하려면 최소 두 개의 레이블이 필요합니다.");
+            //     return;
+            // }
+
+            // 이미지 처리 코드 (생략 없이 그대로 유지)
+            const imgElement = document.getElementById('stream');
+            let img = tf.browser.fromPixels(imgElement);
+            img = tf.image.resizeBilinear(img, [224, 224]);
+            img = img.expandDims(0).toFloat().div(127).sub(1);
+
+            let labelKey;
+            // 동일한 이름의 레이블이 있을 경우 이미지 업데이트, 없으면 새로운 레이블 추가
+            if (Object.values(this.labelMap).some(label => label.name === this.labelName)) {
+                labelKey = Object.keys(this.labelMap).find(key => this.labelMap[key].name === this.labelName);
+                labelKey = parseInt(labelKey); // 문자열 키를 정수로 변환
+                this.labelMap[labelKey].count++;
+                this.labelMap[labelKey].thumbnail = imgElement.src;
+            } else {
+                labelKey = this.labelCounter;
+                this.labelMap[labelKey] = { name: this.labelName, count: 1, thumbnail: imgElement.src };
+                this.labelCounter++;
+            }
+
+            // 모델 초기화 여부 확인 및 초기화 또는 클래스 수 업데이트
+            if (!isModelInitialized()) {
+                // 모델 초기화
+                await initModel(this.getNumberOfClasses());
+            } else {
+                // 클래스 수가 변경되었는지 확인하고 업데이트
+                if (getNumClasses() !== this.getNumberOfClasses()) {
+                    await updateNumClasses(this.getNumberOfClasses());
+                }
+            }
+
+            await addExample(img, labelKey);
+
+            console.log(`Added example for label: ${this.labelName}`);
+        },
+
+        async trainModelHandler() {
+            if (this.getNumberOfClasses() < 2) {
+                console.error("At least two labels are required to train the model.");
+                alert("모델을 훈련하려면 최소 두 개의 레이블이 필요합니다.");
+                return;
+            }
+            try {
+                await trainModel(
+                    this.denseUnits,
+                    this.learningRate,
+                    this.batchSizeFraction,
+                    this.epochs,
+                    this.getNumberOfClasses()
+                );
+                console.log("Model trained successfully");
+            } catch (error) {
+                console.error("Error during training:", error);
+            }
+        },
+
+
+        async predictHandler() {
+            if (!isModelInitialized()) {
+                console.error("Model is not initialized. Please train the model first.");
+                return;
+            }
+            if (this.getNumberOfClasses() < 2) {
+                console.error("At least two labels are required for prediction.");
+                alert("예측을 위해서는 최소 두 개의 레이블이 필요합니다.");
+                return;
+            }
+
+            this.isPredicting = true;
+
+            while (this.isPredicting) {
+                const imgElement = document.getElementById('stream');
+                let img = tf.browser.fromPixels(imgElement);
+                img = tf.image.resizeBilinear(img, [224, 224]);
+                img = img.expandDims(0).toFloat().div(127).sub(1);
+                const classId = await predict(img);
+                this.predictedLabel = this.getLabelNameByClassId(classId);
+                console.log(`Predicted label: ${this.predictedLabel}`);
+                await tf.nextFrame();
+            }
+        },
+
+        stopPredictionHandler() {
+            this.isPredicting = false;
+            console.log("Prediction stopped");
+        },
+
+        getLabelNameByClassId(classId) {
+            return this.labelMap[classId] ? this.labelMap[classId].name : 'Unknown';
         }
     }
 };
@@ -202,6 +391,19 @@ input {
     padding: 5px;
     margin-top: 10px;
     box-sizing: border-box;
+    font-size: 14px;
+}
+.hyper-params {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.dropdown {
+    margin-bottom: 10px;
+}
+.select select {
+    width: 100%;
+    padding: 5px;
     font-size: 14px;
 }
 </style>
