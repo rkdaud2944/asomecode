@@ -285,8 +285,9 @@ export default {
 
 
         async predictHandler() {        
-            this.asomecarReady();    
+            this.asomecarReady();
             alert("모델예측을 시작합니다. 중단하려면 중단 버튼을 눌러주세요.");
+
             if (!isModelInitialized()) {
                 alert("모델이 초기화되지 않았습니다. 먼저 모델을 학습시켜주세요.");
                 return;
@@ -299,18 +300,24 @@ export default {
             this.isPredicting = true;
 
             while (this.isPredicting) {
-                const imgElement = document.getElementById('stream');
+                const imgElement = document.getElementById("stream");
                 let img = tf.browser.fromPixels(imgElement);
                 img = tf.image.resizeBilinear(img, [224, 224]);
                 img = img.expandDims(0).toFloat().div(127).sub(1);
                 const classId = await predict(img);
                 this.predictedLabel = this.getLabelNameByClassId(classId);
                 console.log(`Predicted label: ${this.predictedLabel}`);
+
+                this.executePredictedAction(this.predictedLabel);
+
                 await tf.nextFrame();
+                // 0.5초 대기
+                await new Promise(resolve => setTimeout(resolve, 500));
             }
         },
 
         stopPredictionHandler() {
+            this.asomecarStop();
             this.isPredicting = false;
             alert("모델예측을 중단합니다.");
         },
@@ -335,34 +342,77 @@ export default {
             alert("모델 및 데이터셋을 초기화합니다.");
         },
         async addDirectionExample(direction) {
-            // 현재 화면에서 이미지를 가져와 처리
             const imgElement = document.getElementById("stream");
             let img = tf.browser.fromPixels(imgElement);
             img = tf.image.resizeBilinear(img, [224, 224]);
             img = img.expandDims(0).toFloat().div(127).sub(1);
 
-            // labelMap 업데이트 (예제 수 증가)
             if (this.labelMap[direction.id]) {
                 this.labelMap[direction.id].count++;
             } else {
                 this.labelMap[direction.id] = { name: direction.label, count: 1 };
             }
 
-            // 모델에 예제 추가
             if (!isModelInitialized()) {
-                await initModel(this.directions.length); // directions 개수만큼 클래스 설정
+                initModel(this.directions.length);
             }
-            await addExample(img, direction.id);
+            addExample(img, direction.id);
 
-            console.log(
-                `Added example for direction: ${direction.label} (${this.labelMap[direction.id].count} examples)`
-            );
+            console.log(`Added example for direction: ${direction.label}`);
         },
 
         asomecarReady(){            
             const codes = `import asomecar\nasomecar.ready(1, 2, 3, 4, 5, 6, 7, 8)`;
             this.send(codes);
-        }
+        },
+        
+        asomecarStop(){            
+            const codes = `asomecar.stop()`;
+            this.send(codes);
+        },
+
+        sendDirectionCode(direction) {
+            const directionCodes = {
+                "왼쪽 위": "asomecar.leftForward(150)",
+                "위": "asomecar.forward(150)",
+                "오른쪽 위": "asomecar.rightForward(150)",
+                "왼쪽": "asomecar.left(150)",
+                "중앙": "asomecar.stop()",
+                "오른쪽": "asomecar.right(150)",
+                "왼쪽 아래": "asomecar.leftBack(150)",
+                "아래": "asomecar.backward(150)",
+                "오른쪽 아래": "asomecar.rightBack(150)"
+            };
+
+            const code = directionCodes[direction.label];
+            if (code) {
+                const command = `import asomecar\n${code}`;
+                this.send(command);
+            } else {
+                console.error("Direction code not found for:", direction.label);
+            }
+        },
+
+        executePredictedAction(predictedLabel) {
+            const actionMapping = {
+                "왼쪽 위": () => this.sendDirectionCode({ label: "왼쪽 위" }),
+                "위": () => this.sendDirectionCode({ label: "위" }),
+                "오른쪽 위": () => this.sendDirectionCode({ label: "오른쪽 위" }),
+                "왼쪽": () => this.sendDirectionCode({ label: "왼쪽" }),
+                "중앙": () => this.sendDirectionCode({ label: "중앙" }),
+                "오른쪽": () => this.sendDirectionCode({ label: "오른쪽" }),
+                "왼쪽 아래": () => this.sendDirectionCode({ label: "왼쪽 아래" }),
+                "아래": () => this.sendDirectionCode({ label: "아래" }),
+                "오른쪽 아래": () => this.sendDirectionCode({ label: "오른쪽 아래" })
+            };
+
+            if (actionMapping[predictedLabel]) {
+                actionMapping[predictedLabel]();
+            } else {
+                console.error("No action defined for predicted label:", predictedLabel);
+            }
+        },
+
 
     }
 };

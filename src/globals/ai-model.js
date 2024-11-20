@@ -1,6 +1,12 @@
 // ai-model.js
 
 import * as tf from "@tensorflow/tfjs";
+import "@tensorflow/tfjs-backend-wasm";
+
+// WebAssembly 백엔드 활성화
+tf.setBackend("wasm").then(() => {
+    console.log("WebAssembly backend is now active");
+});
 
 // 모델 및 데이터셋 초기화
 let truncatedMobileNet;
