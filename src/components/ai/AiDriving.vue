@@ -5,14 +5,15 @@
             <div class="image-box">
                 <img id="stream" :src="streamUrl" alt="Live Stream" @error="onImageError" @load="onImageLoad" crossorigin="anonymous">
             </div>
-            <div class="info-box">
-                <h6 class="Pretendard-Medium">인식 결과: {{ predictedLabel }}</h6>
-                <ul>
-                    <li v-for="(label, index) in labelMap" :key="index">
-                        {{ index }}: {{ label.name }} ({{ label.count }} examples)
-                    </li>
-                </ul>
+            <div class="direction-grid">
+                <div v-for="(direction, index) in directions" :key="index" class="grid-item">
+                    <button @click="addDirectionExample(direction)" class="grid-button">
+                        <!-- <span :class="`arrow arrow-${direction.id}`"></span> -->
+                        <span class="label">{{ direction.label }} ({{ labelMap[direction.id]?.count || 0 }})</span>
+                    </button>
+                </div>
             </div>
+
         </div>
 
         <div class="connect">
@@ -27,7 +28,8 @@
         <div class="action-controls">
             <button @click="resetHandler" class="styled-button small-button reset-button">초기화</button>
             <div>
-                <input type="text" v-model="labelName" placeholder="학습용 이미지의 라벨을 입력해주세요" class="input-ip small-input">
+                <!-- <input type="text" v-model="labelName" placeholder="학습용 이미지의 라벨을 입력해주세요" class="input-ip small-input"> -->
+                <h6 class="Pretendard-Medium direction-header">인식 결과: {{ predictedLabel }}</h6>
                 <button @click="addExampleHandler" class="styled-button small-button">예제추가</button>
                 <button @click="trainModelHandler" class="styled-button small-button">모델학습</button>
                 <button @click="predictHandler" class="styled-button small-button">시작</button>
@@ -115,6 +117,17 @@ import {
 export default {
     data() {
         return {
+            directions: [
+                { id: 0, label: "왼쪽 위" },
+                { id: 1, label: "위" },
+                { id: 2, label: "오른쪽 위" },
+                { id: 3, label: "왼쪽" },
+                { id: 4, label: "중앙" },
+                { id: 5, label: "오른쪽" },
+                { id: 6, label: "왼쪽 아래" },
+                { id: 7, label: "아래" },
+                { id: 8, label: "오른쪽 아래" },
+            ],
             streamIp: '', 
             streamUrl: '', 
             isLoading: true, 
@@ -318,7 +331,31 @@ export default {
                 console.error("Error during reinitialization:", error);
             });
             alert("모델 및 데이터셋을 초기화합니다.");
+        },
+        async addDirectionExample(direction) {
+        // 현재 화면에서 이미지를 가져와 처리
+        const imgElement = document.getElementById("stream");
+        let img = tf.browser.fromPixels(imgElement);
+        img = tf.image.resizeBilinear(img, [224, 224]);
+        img = img.expandDims(0).toFloat().div(127).sub(1);
+
+        // labelMap 업데이트 (예제 수 증가)
+        if (this.labelMap[direction.id]) {
+            this.labelMap[direction.id].count++;
+        } else {
+            this.labelMap[direction.id] = { name: direction.label, count: 1 };
         }
+
+        // 모델에 예제 추가
+        if (!isModelInitialized()) {
+            await initModel(this.directions.length); // directions 개수만큼 클래스 설정
+        }
+        await addExample(img, direction.id);
+
+        console.log(
+            `Added example for direction: ${direction.label} (${this.labelMap[direction.id].count} examples)`
+        );
+    },
 
     }
 };
@@ -358,22 +395,6 @@ export default {
     transform: scaleY(-1);
     width: 320px;
     height: 240px;
-}
-
-.info-box {
-    margin-left: 20px;
-    /* border: 1px solid #ccc; */
-    padding: 5px;
-    flex: 1;
-    height: 100%; 
-    display: flex;
-    flex-direction: column; 
-}
-
-.info-box > h6 {
-    margin: 0;
-    padding: 0;
-    align-self: flex-start; 
 }
 
 .image-box::before {
@@ -547,5 +568,122 @@ input {
     width: 100%;
     right: 0;
 }
+
+.direction-grid {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    height: 240px;
+    width: 320px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    justify-content: center;
+    align-content: center;
+    padding: 5px;
+    margin-left: 20px;
+    
+}
+
+.direction-header {
+    grid-column: span 3;
+    align-self: flex-start; 
+    margin: 0 50px 5px 20px;
+}
+
+.grid-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.grid-button {
+    width: 60px; 
+    height: 60px;
+    border: 1px solid #d1d1d1;
+    border-radius: 8px;
+    background-color: #f5f5f5;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    transition: background-color 0.3s, border-color 0.3s;
+    cursor: pointer;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.grid-button:hover {
+    background-color: #e0e0e0;
+    border-color: #bdbdbd;
+}
+
+.arrow {
+    display: block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+/* 각 방향의 화살표 스타일 */
+.arrow-0 {
+    border-width: 0 10px 10px 10px;
+    border-color: transparent transparent white transparent;
+}
+
+.arrow-1 {
+    border-width: 0 10px 10px 10px;
+    border-color: transparent transparent white transparent;
+}
+
+.arrow-2 {
+    border-width: 0 10px 10px 10px;
+    border-color: transparent transparent white transparent;
+}
+
+.arrow-3 {
+    border-width: 10px 10px 10px 0;
+    border-color: transparent white transparent transparent;
+}
+
+.arrow-4 {
+    border-width: 10px 10px 10px 10px;
+    border-color: transparent white transparent transparent;
+}
+
+.arrow-5 {
+    border-width: 10px 10px 10px 0;
+    border-color: white transparent transparent transparent;
+}
+
+.arrow-6 {
+    border-width: 10px 10px 0 10px;
+    border-color: white transparent transparent transparent;
+}
+
+.arrow-7 {
+    border-width: 10px 10px 0 10px;
+    border-color: white transparent transparent transparent;
+}
+
+.arrow-8 {
+    border-width: 10px 0 10px 10px;
+    border-color: transparent transparent white transparent;
+}
+
+.label {
+    font-size: 10px;
+    color: black;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 
 </style>
