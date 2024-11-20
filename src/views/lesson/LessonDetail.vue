@@ -360,7 +360,6 @@ export default {
 
                 // 2. Showdown을 사용하여 변환된 마크다운을 HTML로 변환
                 const converter = new showdown.Converter({
-                    // 필요 시 customExtensions 추가
                     // extensions: customExtensions(),
                     tables: true,
                     simplifiedAutoLink: true,
