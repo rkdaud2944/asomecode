@@ -34,13 +34,11 @@ export async function addExample(img, label) {
 }
 
 // 모델 훈련 함수
-
 export async function trainModel(denseUnits, learningRate, batchSizeFraction, epochs, numClasses) {
     if (controllerDataset.xs == null) {
         throw new Error('Add some examples before training!');
     }
 
-    // 입력과 대상 텐서의 샘플 수가 동일한지 확인
     if (controllerDataset.xs.shape[0] !== controllerDataset.ys.shape[0]) {
         throw new Error(`Mismatch in number of examples: xs has ${controllerDataset.xs.shape[0]}, ys has ${controllerDataset.ys.shape[0]}`);
     }
@@ -94,6 +92,7 @@ export async function trainModel(denseUnits, learningRate, batchSizeFraction, ep
 }
 
 
+
 // 예측 함수
 export async function predict(img) {
     const activation = truncatedMobileNet.predict(img);
@@ -130,51 +129,53 @@ class ControllerDataset {
         this.numClasses = numClasses;
         this.xs = null;
         this.ys = null;
+        this.labels = []; // 이 줄 추가
     }
 
     async updateNumClasses(newNumClasses) {
         if (newNumClasses <= this.numClasses) {
             this.numClasses = newNumClasses;
         } else {
-            // 클래스 수가 증가한 경우 ys를 재생성해야 함
             this.numClasses = newNumClasses;
-            if (this.ys) {
-                const labelsTensor = this.ys.argMax(1);
-                const labels = await labelsTensor.data();
-                labelsTensor.dispose();
-                this.ys.dispose();
-
-                if (this.numClasses === 1) {
-                    this.ys = tf.tensor2d(labels, [labels.length, 1]);
-                } else {
-                    this.ys = tf.oneHot(tf.tensor1d(labels).toInt(), this.numClasses);
+            if (this.labels.length > 0) {
+                if (this.ys) {
+                    this.ys.dispose();
                 }
+                const labelsTensor = tf.tensor1d(this.labels, 'int32');
+                if (this.numClasses > 1) {
+                    this.ys = tf.oneHot(labelsTensor, this.numClasses);
+                } else {
+                    this.ys = labelsTensor.reshape([-1, 1]);
+                }
+                labelsTensor.dispose();
             }
         }
-    }
+    }    
 
     addExample(example, label) {
+        this.labels.push(label); // 레이블 저장
         let y;
-        if (this.numClasses === 1) {
-            // 레이블을 그대로 사용하여 텐서로 변환
-            y = tf.tensor2d([[label]]);
-        } else {
+        if (this.numClasses > 1) {
             y = tf.tidy(() => tf.oneHot(tf.tensor1d([label]).toInt(), this.numClasses));
+        } else {
+            y = tf.tensor2d([[label]]);
         }
-
+    
         if (this.xs == null) {
             this.xs = tf.keep(example);
             this.ys = tf.keep(y);
         } else {
             const oldX = this.xs;
             this.xs = tf.keep(oldX.concat(example, 0));
-
+    
             const oldY = this.ys;
             this.ys = tf.keep(oldY.concat(y, 0));
-
+    
             oldX.dispose();
             oldY.dispose();
             y.dispose();
         }
     }
+    
+    
 }
