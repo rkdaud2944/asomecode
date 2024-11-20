@@ -30,7 +30,7 @@
             <div>
                 <!-- <input type="text" v-model="labelName" placeholder="학습용 이미지의 라벨을 입력해주세요" class="input-ip small-input"> -->
                 <h6 class="Pretendard-Medium direction-header">인식 결과: {{ predictedLabel }}</h6>
-                <button @click="addExampleHandler" class="styled-button small-button">예제추가</button>
+                <!-- <button @click="addExampleHandler" class="styled-button small-button">예제추가</button> -->
                 <button @click="trainModelHandler" class="styled-button small-button">모델학습</button>
                 <button @click="predictHandler" class="styled-button small-button">시작</button>
                 <button @click="stopPredictionHandler" class="styled-button small-button">중단</button>
