@@ -1,5 +1,5 @@
 <template>
-    <q-form @submit="createLesson" greedy>
+    <q-form @submit="handleSubmit" greedy>
         <div class="lesson-title">
             <q-input outlined v-model="lessonTitle" label="제목" style="width: 50%;"
                 :rules="[val => !!val || '제목을 입력해 주세요']" />
@@ -270,7 +270,12 @@ export default {
             
         },
 
-
+        handleSubmit() {
+            if (this.isSubmitting) return;
+            this.isSubmitting = true;
+            this.createLesson();
+        },
+        
         createLesson() {
             let body = {
                 title: this.lessonTitle,
