@@ -510,14 +510,26 @@ export default {
     margin-right: auto;
 }
 
-/* 추가적으로 이미지에 여백을 주고 싶다면 */
 .markdown_output img:not(.markdown-btn-img) {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 20px; /* 원하는 값으로 조정 */
-    margin-bottom: 20px; /* 원하는 값으로 조정 */
-    max-width: 100%; /* 반응형 디자인을 위해 최대 너비 설정 */
-    height: auto; /* 이미지 비율 유지 */
+    margin-top: 20px;
+    margin-bottom: 20px;
+    max-width: 100%;
+    height: auto;
+}
+.back-button {
+    top:24px;
+}
+.subject-title {
+    line-height: 90px;
+}
+.container-top {
+    height: 90px;
+    top: 90px;
+}
+.container-wrap{
+    top : 67px !important;
 }
 </style>

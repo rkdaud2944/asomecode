@@ -409,3 +409,17 @@ export default {
 <style src="@/assets/css/component/markdown_content.css"/>
 <style scoped src="@/assets/css/component/lesson_detail.css"/>
 <style scoped src="@/assets/css/font.css"/>
+
+<style>
+
+.back-button {
+    top:24px;
+}
+.chapter-title {
+    line-height: 90px;
+}
+.container-top {
+    height: 120px;
+    top: 90px;
+}
+</style>
