@@ -1,12 +1,12 @@
 <template>
-    <div class="container">
-        <h4>사물인식</h4>
+    <div class="container Pretendard-Regular">
+        <h4 class="Pretendard-Bold">AI 사물인식</h4>
         <div class="image-container">
             <div class="image-box">
                 <img id="stream" :src="streamUrl" alt="Live Stream" @error="onImageError" @load="onImageLoad" crossorigin="anonymous">
             </div>
             <div class="info-box">
-                <h5>Detected: {{ predictedLabel }}</h5>
+                <h6 class="Pretendard-Medium">인식 결과: {{ predictedLabel }}</h6>
                 <ul>
                     <li v-for="(label, index) in labelMap" :key="index">
                         {{ index }}: {{ label.name }} ({{ label.count }} examples)
@@ -18,23 +18,26 @@
         <div class="connect">
             <button @click="openModal" class="styled-button small-button left-button">Wi-Fi 연결</button>
             <div class="ip-controls">
-                <input type="text" v-model="streamIp" placeholder="Enter Stream IP" class="input-ip small-input">
+                <input type="text" v-model="streamIp" placeholder="WiFi 연결 후 로그창의 IP를 이곳에 입력해주세요" class="input-ip small-input">
                 <button @click="registerStreamIp" class="styled-button small-button">IP 등록</button>
             </div>
         </div>
 
         <!-- 학습 및 예측 관련 UI -->
-        <div class="controls">
-            <input type="text" v-model="labelName" placeholder="Enter Label Name" class="input-ip small-input">
-            <button @click="addExampleHandler" class="styled-button small-button">예제추가</button>
-            <button @click="trainModelHandler" class="styled-button small-button">모델학습</button>
-            <button @click="predictHandler" class="styled-button small-button">시작</button>
-            <button @click="stopPredictionHandler" class="styled-button small-button">중단</button>
+        <div class="action-controls">
+            <button @click="resetHandler" class="styled-button small-button reset-button">초기화</button>
+            <div>
+                <input type="text" v-model="labelName" placeholder="학습용 이미지의 라벨을 입력해주세요" class="input-ip small-input">
+                <button @click="addExampleHandler" class="styled-button small-button">예제추가</button>
+                <button @click="trainModelHandler" class="styled-button small-button">모델학습</button>
+                <button @click="predictHandler" class="styled-button small-button">시작</button>
+                <button @click="stopPredictionHandler" class="styled-button small-button">중단</button>
+            </div>
         </div>
 
-        <div class="controls hyper-params">
+        <div class="settings-controls hyper-params">
             <div class="dropdown">
-                <label>Learning rate</label>
+                <label>학습률</label>
                 <div class="select">
                     <select v-model="learningRate">
                         <option value="0.00001">0.00001</option>
@@ -45,7 +48,7 @@
                 </div>
             </div>
             <div class="dropdown">
-                <label>Batch size</label>
+                <label>배치 크기</label>
                 <div class="select">
                     <select v-model="batchSizeFraction">
                         <option value="0.05">0.05</option>
@@ -56,7 +59,7 @@
                 </div>
             </div>
             <div class="dropdown">
-                <label>Epochs</label>
+                <label>에포크</label>
                 <div class="select">
                     <select v-model="epochs">
                         <option value="10">10</option>
@@ -66,7 +69,7 @@
                 </div>
             </div>
             <div class="dropdown">
-                <label>Hidden units</label>
+                <label>은닉 유닛</label>
                 <div class="select">
                     <select v-model="denseUnits">
                         <option value="10">10</option>
@@ -81,10 +84,10 @@
             <div class="modal-content">
                 <h5>Wi-Fi 연결 정보 입력</h5>
                 <label for="ssid">ID:</label>
-                <input type="text" v-model="wifiSsid" id="ssid" placeholder="Enter Wi-Fi SSID" class="small-input wifi-input"><br/>
+                <input type="text" v-model="wifiSsid" id="ssid" placeholder="Wi-Fi SSID" class="small-input wifi-input"><br/>
 
                 <label for="password">PW:</label>
-                <input type="text" v-model="wifiPassword" id="password" placeholder="Enter Wi-Fi Password" class="small-input wifi-input">
+                <input type="text" v-model="wifiPassword" id="password" placeholder="Wi-Fi Password" class="small-input wifi-input">
 
                 <div class="modal-buttons">
                     <button @click="connectWifi" class="styled-button small-button">Connect</button>
@@ -106,7 +109,7 @@ import {
     predict,
     isModelInitialized,
     getNumClasses,
-    updateNumClasses
+    updateNumClasses,
 } from "@/globals/ai-model";
 
 export default {
@@ -168,14 +171,17 @@ export default {
             const codes = `import camera_control\ncamera_control.start("${this.wifiSsid}", "${this.wifiPassword}")`;
             this.send(codes);
             this.closeModal();
+            alert("Wi-Fi 연결을 시도합니다. 로그창의 ip를 확인해주세요.");
         },
 
         registerStreamIp() {
             if (this.streamIp) {
                 this.streamUrl = `http://${this.streamIp}/stream`;
                 this.isLoading = true;
+                
+                alert("화면 연결중.. 확인을 누르고 잠시만 기다려주세요.");
             } else {
-                console.error("Please enter a valid IP address");
+                alert("IP 주소를 입력해주세요.");
             }
         },
 
@@ -243,8 +249,9 @@ export default {
         },
 
         async trainModelHandler() {
+            
+            alert("학습을 시작합니다. 완료창이 뜰 때까지 기다려주세요.");
             if (this.getNumberOfClasses() < 2) {
-                console.error("At least two labels are required to train the model.");
                 alert("모델을 훈련하려면 최소 두 개의 레이블이 필요합니다.");
                 return;
             }
@@ -256,20 +263,20 @@ export default {
                     this.epochs,
                     this.getNumberOfClasses()
                 );
-                console.log("Model trained successfully");
+                alert("모델학습이 완료되었습니다.");
             } catch (error) {
-                console.error("Error during training:", error);
+                alert("error: " + error);
             }
         },
 
 
-        async predictHandler() {
+        async predictHandler() {            
+            alert("모델예측을 시작합니다. 중단하려면 중단 버튼을 눌러주세요.");
             if (!isModelInitialized()) {
-                console.error("Model is not initialized. Please train the model first.");
+                alert("모델이 초기화되지 않았습니다. 먼저 모델을 학습시켜주세요.");
                 return;
             }
             if (this.getNumberOfClasses() < 2) {
-                console.error("At least two labels are required for prediction.");
                 alert("예측을 위해서는 최소 두 개의 레이블이 필요합니다.");
                 return;
             }
@@ -290,62 +297,85 @@ export default {
 
         stopPredictionHandler() {
             this.isPredicting = false;
-            console.log("Prediction stopped");
+            alert("모델예측을 중단합니다.");
         },
 
         getLabelNameByClassId(classId) {
             return this.labelMap[classId] ? this.labelMap[classId].name : 'Unknown';
+        },
+
+        resetHandler() {
+            this.labelMap = {};
+            this.labelCounter = 0;
+            this.predictedLabel = '';
+            this.labelName = '';
+
+            // 모델 및 데이터셋 초기화
+            const numClasses = this.getNumberOfClasses();
+            initModel(numClasses).then(() => {
+                console.log("Model and dataset have been reinitialized.");
+            }).catch((error) => {
+                console.error("Error during reinitialization:", error);
+            });
+            alert("모델 및 데이터셋을 초기화합니다.");
         }
+
     }
 };
 </script>
+
+<style scoped src="@/assets/css/font.css"/>
+
 <style scoped>
-/* 전체 컨테이너 중앙 정렬 */
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* 이미지 컨테이너 */
 .image-container {
     display: flex;
     align-items: flex-start;
     border: 1px solid #ccc;
     padding: 10px;
     margin-top: 20px;
-    width: 700px; /* 고정 너비 설정 */
+    width: 700px;
     box-sizing: border-box;
 }
 
-/* 이미지 박스 */
 .image-box {
     border: 1px solid #ccc;
     padding: 5px;
-    width: 320px; /* 이미지 크기에 맞게 고정 */
+    width: 320px; 
     height: 240px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f9f9f9; /* 이미지가 없을 때 배경색 */
+    background-color: #f9f9f9; 
 }
 
-/* 이미지 상하반전 및 크기 고정 */
 #stream {
     transform: scaleY(-1);
     width: 320px;
     height: 240px;
 }
 
-/* 정보 박스 */
 .info-box {
     margin-left: 20px;
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
     padding: 5px;
-    flex: 1; /* 남은 공간 차지 */
+    flex: 1;
+    height: 100%; 
+    display: flex;
+    flex-direction: column; 
 }
 
-/* 이미지가 없을 때 빈 공간 유지 */
+.info-box > h6 {
+    margin: 0;
+    padding: 0;
+    align-self: flex-start; 
+}
+
 .image-box::before {
     content: '';
     display: block;
@@ -353,36 +383,68 @@ export default {
     height: 240px;
 }
 
-/* 컨트롤 영역 */
 .connect {
     margin-top: 10px;
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
-    width: 700px; /* 이미지 컨테이너와 동일한 너비 */
+    width: 700px; 
 }
 
-/* 컨트롤 영역 */
-.controls {
+.action-controls {
     margin-top: 30px;
     display: flex;
-    align-items: center;
+    width: 700px; 
+    /* justify-content: flex-end; */
+    align-items: stretch; /* 자식 요소를 부모 높이에 맞춤 */
     justify-content: center;
-    width: 700px; /* 이미지 컨테이너와 동일한 너비 */
 }
 
-/* Wi-Fi 연결 버튼 왼쪽 정렬 */
+.action-controls button {
+    margin-right: 3px;
+}
+
+.action-controls button:last-child{
+    margin-right: 0px;
+}
+
+.action-controls .reset-button {
+    display: flex;
+    width: 70px;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px; /* input 필드와의 간격 */
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+
+.action-controls .reset-button:hover {
+    background-color: #c9302c;
+    border-color: #ac2925;
+}
+
+.action-controls div {
+    display: flex;
+    justify-content: flex-end;
+    width: 700px;
+}
+
+.settings-controls {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    width: 700px; 
+}
+
 .left-button {
     margin-right: auto;
 }
 
-/* IP 입력 컨트롤 */
 .ip-controls {
     display: flex;
-    align-items: center;
+    align-items: stretch;
 }
 
-/* 입력창 스타일 */
 .input-ip {
     width: 300px;
     padding: 5px;
@@ -390,19 +452,19 @@ export default {
     font-size: 12px;
 }
 
-/* 작은 버튼 스타일 */
 .small-button {
-    padding: 5px 10px;
+    width: 70px;
+    justify-content: center;
+    /* padding: 5px 10px; */
     font-size: 12px;
 }
 
-/* 하이퍼파라미터 드롭다운 가로 배열 */
 .hyper-params {
     display: flex;
     align-items: center;
-    margin-top: 10px;
+    /* margin-top: 10px; */
     flex-wrap: wrap;
-    width: 700px; /* 이미지 컨테이너와 동일한 너비 */
+    width: 700px;
 }
 
 .hyper-params .dropdown {
@@ -412,6 +474,7 @@ export default {
 .hyper-params .dropdown label {
     display: block;
     font-size: 12px;
+    text-align: center;
 }
 
 .hyper-params .dropdown .select select {
@@ -420,13 +483,13 @@ export default {
     font-size: 12px;
 }
 
-/* 버튼 스타일 개선 */
 .styled-button {
     /* margin-right: 5px; */
-    padding: 5px 10px;
+    padding: 5px 5px;
     font-size: 12px;
     cursor: pointer;
-    background: linear-gradient(45deg, #4CAF50, #45A049);
+    background-color: #337ab7;
+    border-color: #2e6da4;
     color: white;
     border: none;
     border-radius: 5px;
@@ -434,24 +497,25 @@ export default {
 }
 
 .styled-button:hover {
-    background: linear-gradient(45deg, #45A049, #4CAF50);
+    background-color: #286090;
+    border-color: #204d74;
 }
 
 .cancel-button {
-    background: linear-gradient(45deg, #f44336, #e53935);
+    background-color: #d9534f;
+    border-color: #d43f3a;
 }
 
 .cancel-button:hover {
-    background: linear-gradient(45deg, #e53935, #f44336);
+    background-color: #c9302c;
+    border-color: #ac2925;
 }
 
-/* 입력창 공통 스타일 */
 input {
     box-sizing: border-box;
     font-size: 14px;
 }
 
-/* 모달 스타일 */
 .modal {
     position: fixed;
     top: 0;
