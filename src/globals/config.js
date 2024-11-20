@@ -17,6 +17,8 @@ export default {
                     return `https://asomecode-dev-resource.s3.ap-northeast-2.amazonaws.com/board-update/Pro/asomecar-old/`;
                 case "weather":                    
                     return `https://asomecode-dev-resource.s3.ap-northeast-2.amazonaws.com/board-update/Pro/weather/`;
+                case "asomecar-ai":                    
+                    return `https://asomecode-dev-resource.s3.ap-northeast-2.amazonaws.com/board-update/Pro/asomecar-ai/`;
                 default:
                     return `https://asomecode-dev-resource.s3.ap-northeast-2.amazonaws.com/board-update/Pro/asomekit/`;
             }

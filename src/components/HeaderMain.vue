@@ -71,7 +71,8 @@
         <div @click="toggleUpdateModal()" style="color: black">X</div>
         <p style="color: black">업데이트할 교구를 클릭하세요.</p>
         <div>
-            <q-btn @click="update('asomekit')" style="background-color: #E4007F; color: #fff; font-weight: 600; margin-right: 10px;">어썸킷</q-btn>
+            <q-btn @click="update('asomecar-ai')" style="background-color: #337ab7; color: #fff; font-weight: 600; margin-right: 6px;">어썸카</q-btn>
+            <q-btn @click="update('asomekit')" style="background-color: #E4007F; color: #fff; font-weight: 600; margin-right: 6px;">어썸킷</q-btn>
             <q-btn @click="update('asomebot')" style="background-color: #4EA949; color: #fff; font-weight: 600;">어썸봇</q-btn>
         </div>
     </div>
