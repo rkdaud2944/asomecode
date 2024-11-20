@@ -187,7 +187,9 @@ export default {
             alert("Wi-Fi 연결을 시도합니다. 로그창의 ip를 확인해주세요.");
         },
 
-        registerStreamIp() {
+        registerStreamIp() {                 
+            this.asomecarReady();
+
             if (this.streamIp) {
                 this.streamUrl = `http://${this.streamIp}/stream`;
                 this.isLoading = true;
@@ -284,8 +286,7 @@ export default {
         },
 
 
-        async predictHandler() {        
-            this.asomecarReady();
+        async predictHandler() { 
             alert("모델예측을 시작합니다. 중단하려면 중단 버튼을 눌러주세요.");
 
             if (!isModelInitialized()) {
@@ -359,6 +360,8 @@ export default {
             addExample(img, direction.id);
 
             console.log(`Added example for direction: ${direction.label}`);
+
+            this.sendTrainingCode(direction);
         },
 
         asomecarReady(){            
@@ -410,6 +413,28 @@ export default {
                 actionMapping[predictedLabel]();
             } else {
                 console.error("No action defined for predicted label:", predictedLabel);
+            }
+        },
+
+        sendTrainingCode(direction) {
+            const trainingCodes = {
+                "왼쪽 위": "asomecar.leftForwardWith(150,1)",
+                "위": "asomecar.forwardWith(150,1)",
+                "오른쪽 위": "asomecar.rightForwardWith(150,1)",
+                "왼쪽": "asomecar.leftWith(150,1)",
+                "중앙": "asomecar.stop()",
+                "오른쪽": "asomecar.rightWith(150,1)",
+                "왼쪽 아래": "asomecar.leftBackWith(150,1)",
+                "아래": "asomecar.backwardWith(150,1)",
+                "오른쪽 아래": "asomecar.rightBackWith(150,1)"
+            };
+
+            const code = trainingCodes[direction.label];
+            if (code) {
+                const command = `import asomecar\n${code}`;
+                this.send(command);
+            } else {
+                console.error("Training code not found for:", direction.label);
             }
         },
 
