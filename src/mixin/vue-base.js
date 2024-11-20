@@ -107,12 +107,14 @@ export default {
             });
         },
 
-        showError(response) {
-            Notify.create({
-                color: "deep-orange",
-                textColor: "white",
-                message: response.data.message,
-            });
+        showError(error) {
+            if (error && error.message) {
+                console.error('Error:', error.message);
+                this.$toast.error(error.message);
+            } else {
+                console.error('Unknown error occurred:', error);
+                this.$toast.error('An unknown error occurred.');
+            }
         },
     }
 }

@@ -56,7 +56,21 @@
 <script>
 /* eslint-disable */
 import VueBase from '@/mixin/vue-base';
-import markdown from "@/utils/markdown";
+// 마크다운
+// import MarkdownIt from 'markdown-it';
+// 커먼마크
+// import { Parser, HtmlRenderer } from 'commonmark';
+// 리마크
+// import { remark } from 'remark';
+// import html from 'remark-html';
+// 쇼다운
+import showdown from 'showdown';
+import AsomeParser from "@/utils/asome-parser"; // AsomeParser 임포트
+// 마크다운js
+// import markdown from 'markdown';
+// 마크다운 to jsx
+// import markdownToJSX from 'markdown-to-jsx';
+
 import apiLesson from "@/api/lesson";
 import images from "@/assets/images" 
 import { VAceEditor } from "vue3-ace-editor";
@@ -77,6 +91,7 @@ export default {
             titles: [],
             output: null,
             scrollPosition: null,
+            markedOutput: [], // markedOutput 초기화
 
             logom: images.logom,
             lectureList: images.lectureList,
@@ -259,47 +274,137 @@ export default {
                 behavior: 'smooth'
             });
         },
+        // 리마크
+        // getLesson(id) {
+        //     try {
+        //         const response = apiLesson.lessonDetail(id);
+        //         this.lesson = response.data;
+        //         const processedContent = remark()
+        //             .use(html)
+        //             .process(this.lesson.content);
+        //         this.output = processedContent.toString();
 
+        //         // 이후 코드 동일
+        //         let domparser = new DOMParser();
+        //         let doc = domparser.parseFromString(this.output, 'text/html');
+                
+        //         // ... 이하 동일
+        //     } catch (error) {
+        //         this.showError(error);
+        //     }
+        // },
+        // getLesson(id) {
+        
+        //     apiLesson.lessonDetail(id)
+        //         .then((response) => {
+        //             this.lesson = response.data;
+        //             // 마크다운 to jsx
+        //             // this.output = markdownToJSX(this.lesson.content);
+        //             // 마크다운 js
+        //             // this.output = markdown.toHTML(this.lesson.content);
+        //             // 쇼다운
+        //             const converter = new showdown.Converter();
+        //             this.output = converter.makeHtml(this.lesson.content);
+        //             // 마크다운잇
+        //             // const markdown = new MarkdownIt();
+        //             // this.output = markdown.render(this.lesson.content);
+        //             // 커먼마크
+        //             // const parser = new Parser();
+        //             // const renderer = new HtmlRenderer();
+        //             // const parsed = parser.parse(this.lesson.content);
+        //             // this.output = renderer.render(parsed);
+
+        //             let domparser = new DOMParser()
+        //             let doc = domparser.parseFromString(this.output, 'text/html')
+                    
+        //             const editorDivs = doc.querySelectorAll(".editorDiv");
+        //             this.editors = Array.from(editorDivs).map((div, index) => ({
+        //                 id: index,
+        //                 content: div.textContent.trim(),
+        //                 language: 'python',
+        //             }));
+
+        //             // 원본 HTML에서 editorDiv들을 제거
+        //             editorDivs.forEach(div => div.remove());
+
+        //             const elements = doc.getElementsByTagName("h2");
+        //             for (let i = 0; i < elements.length; i++) {
+        //                 elements[i].id = i
+        //                 this.titles.push({
+        //                     name: elements[i].innerText,
+        //                     tag: elements[i].id,
+        //                 });
+        //             }
+                    
+        //             let serializer = new XMLSerializer();
+
+        //             // editorLocation 기준으로 자른뒤, 에디터 컴포넌트와 함께 순차 생성
+        //             this.output = serializer.serializeToString(doc);
+        //             const parts = this.output.split('<p class="editorLocation" style="display: none;"></p>');
+        //             this.markedOutput = parts.map((html, index) => {
+        //                 return { html: html, editor: this.editors[index] || null };
+        //             });
+                    
+        //         })
+        //     .catch(this.showError);
+        // }, 
         getLesson(id) {
-            apiLesson.lessonDetail(id)
-                .then((response) => {
-                    this.lesson = response.data;
-                    this.output = markdown.parse(this.lesson.content)
+        apiLesson.lessonDetail(id)
+            .then((response) => {
+                this.lesson = response.data;
 
-                    let domparser = new DOMParser()
-                    let doc = domparser.parseFromString(this.output, 'text/html')
-                    
-                    const editorDivs = doc.querySelectorAll(".editorDiv");
-                    this.editors = Array.from(editorDivs).map((div, index) => ({
-                        id: index,
-                        content: div.textContent.trim(),
-                        language: 'python',
-                    }));
+                // 1. AsomeParser를 사용하여 커스텀 마크다운 변환
+                const parser = new AsomeParser(this.lesson.content);
+                const transformedMarkdown = parser.execute();
+                // console.log('Transformed Markdown:', transformedMarkdown);
 
-                    // 원본 HTML에서 editorDiv들을 제거
-                    editorDivs.forEach(div => div.remove());
+                // 2. Showdown을 사용하여 변환된 마크다운을 HTML로 변환
+                const converter = new showdown.Converter({
+                    // 필요 시 customExtensions 추가
+                    // extensions: customExtensions(),
+                    tables: true,
+                    simplifiedAutoLink: true,
+                    strikethrough: true,
+                    ghCompatibleHeaderId: true,
+                    // 기타 필요한 옵션 설정
+                });
+                this.output = converter.makeHtml(transformedMarkdown);
 
-                    const elements = doc.getElementsByTagName("h2");
-                    for (let i = 0; i < elements.length; i++) {
-                        elements[i].id = i
-                        this.titles.push({
-                            name: elements[i].innerText,
-                            tag: elements[i].id,
-                        });
-                    }
-                    
-                    let serializer = new XMLSerializer();
+                // 3. HTML 파싱 및 추가 처리
+                let domparser = new DOMParser();
+                let doc = domparser.parseFromString(this.output, 'text/html');
+                
+                const editorDivs = doc.querySelectorAll(".editorDiv");
+                this.editors = Array.from(editorDivs).map((div, index) => ({
+                    id: index,
+                    content: div.textContent.trim(),
+                    language: 'python',
+                }));
 
-                    // editorLocation 기준으로 자른뒤, 에디터 컴포넌트와 함께 순차 생성
-                    this.output = serializer.serializeToString(doc);
-                    const parts = this.output.split('<p class="editorLocation" style="display: none;"></p>');
-                    this.markedOutput = parts.map((html, index) => {
-                        return { html: html, editor: this.editors[index] || null };
+                // 원본 HTML에서 editorDiv들을 제거
+                editorDivs.forEach(div => div.remove());
+
+                const elements = doc.getElementsByTagName("h2");
+                for (let i = 0; i < elements.length; i++) {
+                    elements[i].id = i;
+                    this.titles.push({
+                        name: elements[i].innerText,
+                        tag: elements[i].id,
                     });
-                })
-            .catch(this.showError);
-        }, 
+                }
+                
+                let serializer = new XMLSerializer();
 
+                // editorLocation 기준으로 자른뒤, 에디터 컴포넌트와 함께 순차 생성
+                this.output = serializer.serializeToString(doc);
+                const parts = this.output.split('<p class="editorLocation" style="display: none;"></p>');
+                this.markedOutput = parts.map((html, index) => {
+                    return { html: html, editor: this.editors[index] || null };
+                });
+
+            })
+            .catch(this.showError);
+    }, 
         // editorLocation 아래 위치로 editor생성
         insertEditors() {
             const container = this.$el.querySelector('.markdown_output');
@@ -399,3 +504,21 @@ export default {
 <style src="@/assets/css/component/markdown_content.css"/>
 <style scoped src="@/assets/css/component/lesson_detail.css"/>
 <style scoped src="@/assets/css/font.css"/>
+<style>
+.markdown_output img:not(.markdown-btn-img) {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 추가적으로 이미지에 여백을 주고 싶다면 */
+.markdown_output img:not(.markdown-btn-img) {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px; /* 원하는 값으로 조정 */
+    margin-bottom: 20px; /* 원하는 값으로 조정 */
+    max-width: 100%; /* 반응형 디자인을 위해 최대 너비 설정 */
+    height: auto; /* 이미지 비율 유지 */
+}
+</style>

@@ -1,4 +1,7 @@
-import { v1 as uuidv1 } from "uuid"
+// src/utils/asome-parser.js
+import { v1 as uuidv1 } from "uuid";
+import showdown from 'showdown';
+import { customExtensions } from "@/utils/showdown-extensions";
 import partImgCode from "@/utils/asome-part-img-code";
 import stripComments from "@/utils/strip-comments";
 
@@ -90,82 +93,63 @@ class Scanner {
     }
 
     #do_beginMark() {
-        const text = this.source.substr(this.index, 9);
-        if (text.startsWith("button")) {
-            this.index = this.index + "button".length;
-            this.onToken({ text: "[button", type: TokenType.BEGIN_MARK });
-        } else if (text.startsWith("upload")) {
-            this.index = this.index + "upload".length;
-            this.onToken({ text: "[upload", type: TokenType.BEGIN_MARK });
-        } else if (text.startsWith("image")) {
-            this.index = this.index + "image".length;
-            this.onToken({ text: "[image", type: TokenType.BEGIN_MARK });
-        } else if (text.startsWith("imgButton")) {
-            this.index = this.index + "imgButton".length;
-            this.onToken({ text: "[imgButton", type: TokenType.BEGIN_MARK });
-        } else if (text.startsWith("writeLn")) {
-            this.index = this.index + "writeLn".length;
-            this.onToken({ text: "[writeLn", type: TokenType.BEGIN_MARK });
-        } else if (text.startsWith("video")) {
-            this.index = this.index + "video".length;
-            this.onToken({ text: "[video", type: TokenType.BEGIN_MARK });
-        } else if (text.startsWith("code")) {
-            this.index = this.index + "code".length;
-            this.onToken({ text: "[code", type: TokenType.BEGIN_MARK });
-        } else if (text.startsWith("editor")) {
-            this.index = this.index + "editor".length;
-            this.onToken({ text: "[editor", type: TokenType.BEGIN_MARK });
-        } else if (text.startsWith("parts")) {
-            this.index = this.index + "parts".length;
-            this.onToken({ text: "[parts", type: TokenType.BEGIN_MARK });
-        } else if (text.startsWith("wifi")) {
-            this.index = this.index + "wifi".length;
-            this.onToken({ text: "[wifi", type: TokenType.BEGIN_MARK });
-        } else if (text.startsWith("openWifi")) {
-            this.index = this.index + "openWifi".length;
-            this.onToken({ text: "[openWifi", type: TokenType.BEGIN_MARK });
-        } else if (text.startsWith("messenger")) {
-            this.index = this.index + "messenger".length;
-            this.onToken({ text: "[messenger", type: TokenType.BEGIN_MARK });
-        } else if (text.startsWith("botBase")) {
-            this.index = this.index + "botBase".length;
-            this.onToken({ text: "[botBase", type: TokenType.BEGIN_MARK });
-        } else if (text.startsWith("boardErr")) {
-            this.index = this.index + "boardErr".length;
-            this.onToken({ text: "[boardErr", type: TokenType.BEGIN_MARK });
-        } else {
+        const text = this.source.substr(this.index, 20); // 최대 길이 조정
+        const marks = ["button", "upload", "image", "imgButton", "writeLn", "video", "code", "editor", "parts", "wifi", "openWifi", "messenger", "botBase", "boardErr"];
+        let matched = false;
+
+        for (let mark of marks) {
+            if (text.startsWith(mark)) {
+                this.index += mark.length;
+                this.onToken({ text: `[${mark}`, type: TokenType.BEGIN_MARK });
+                matched = true;
+                break;
+            }
+        }
+
+        if (!matched) {
             this.onToken({ text: "[", type: TokenType.TEXT });
         }
+
         this.state = State.BASE;
     }
 }
 
 class Parser {
     constructor() {
-        this.lessonContentBaseUrl = process.env.VUE_APP_LESSON_CONTENT_BASEURL,
-            this.result = "";
+        this.lessonContentBaseUrl = process.env.VUE_APP_LESSON_CONTENT_BASEURL || 'https://asomecode-dev-resource.s3.ap-northeast-2.amazonaws.com/';
+        this.result = "";
         this.markType = "";
         this.buffer = "";
+
+        // Showdown 설정
+        this.converter = new showdown.Converter({
+            extensions: customExtensions(),
+            tables: true,
+            simplifiedAutoLink: true,
+            strikethrough: true,
+            ghCompatibleHeaderId: true,
+            // 필요에 따라 추가 옵션 설정
+        });
     }
 
     addToken(token) {
-        if (token.type == TokenType.BEGIN_MARK) {
+        if (token.type === TokenType.BEGIN_MARK) {
             this.markType = token.text;
         }
 
-        if (this.markType == "") {
-            this.result = this.result + token.text;
+        if (this.markType === "") {
+            this.result += token.text;
         } else {
-            this.buffer = this.buffer + token.text;
+            this.buffer += token.text;
         }
 
-        if (token.type == TokenType.END_MARK) {
-            this.result = this.result + this.#get_markText();
+        if (token.type === TokenType.END_MARK) {
+            this.result += this.#get_markText();
             this.buffer = "";
             this.markType = "";
         }
     }
- 
+
     #get_markText() {
         switch (this.markType) {
             case "[button": return this.#get_buttonText(this.buffer);
@@ -182,169 +166,225 @@ class Parser {
             case "[messenger": return this.#get_asome_messenger_Text();
             case "[botBase": return this.#get_botBase();
             case "[boardErr": return this.#get_boardErr();
+            default: return this.buffer;
         }
     }
 
     #get_buttonText(text) {
         const firstLine = text.split("\n")[0];
-        const functionName = firstLine.replace("[button ", "");
+        const functionName = firstLine.replace("[button ", "").trim();
         const uniqueId = Date.now();
         const functionId = `${functionName.replaceAll(' ', '-').replaceAll("'", '').replaceAll('"', '')}-${uniqueId}`;
-    
+
         let content = text.replace(`${firstLine}`, "").slice(0, -1);
         const lines = content.split("\n");
         content = lines.map(e => stripComments.stripPythonComments(e)).join('\n');
-    
+
+        // 표준 마크다운 처리
+        const markdownContent = this.converter.makeHtml(content);
+
         return `<div onclick="runCode(getCode('${functionId}'))" class="function_btn">${functionName}</div></br>` +
-            `<div id="${functionId}" class="hidden">${content}</div>`;
+            `<div id="${functionId}" class="hidden">${markdownContent}</div>`;
     }
 
     #get_buttonImg(text) {
-        const firstLine = text.split("\n")[0]
-        let functionImg = firstLine.replace("[imgButton ", "")
-        const functionName = firstLine.replace(/\[imgButton |\.png/g, "");
+        const firstLine = text.split("\n")[0];
+        let functionImg = firstLine.replace("[imgButton ", "").trim();
+        const functionName = functionImg.replace(/\.png/g, "").trim();
         const uniqueId = Date.now();
         const functionId = `${functionName.replaceAll(' ', '-').replaceAll("'", '').replaceAll('"', '')}-${uniqueId}`;
         let content = text.replace(`${firstLine}`, "").slice(0, -1);
 
-        if (functionImg.charAt(0) != '/')
-        functionImg = this.lessonContentBaseUrl + "lesson/images/btn-image/" + functionImg // S3 파일
+        if (functionImg.charAt(0) !== '/')
+            functionImg = this.lessonContentBaseUrl + "lesson/images/btn-image/" + functionImg; // S3 파일
+
+        // 표준 마크다운 처리
+        const markdownContent = this.converter.makeHtml(stripComments.stripPythonComments(content));
 
         return `<div class="">
-            <img class="markdown-btn-img" src="${functionImg}"  onclick="runCode(getCode('${functionId}'))"/></div></br>` +
-        `<div id="${functionId}" class="hidden">${content}</div>`
-
+            <img class="markdown-btn-img" src="${functionImg}" onclick="runCode(getCode('${functionId}'))"/></div></br>` +
+            `<div id="${functionId}" class="hidden">${markdownContent}</div>`;
     }
 
     #get_writeLn(text) {
-        const firstLine = text.split("\n")[0]
-        let functionImg = firstLine.replace("[writeLn ", "")
-        const functionName = firstLine.replace(/\[imgButton |\.png/g, "");
+        const firstLine = text.split("\n")[0];
+        let functionImg = firstLine.replace("[writeLn ", "").trim();
+        const functionName = functionImg.replace(/\.png/g, "").trim();
         const uniqueId = Date.now();
         const functionId = `${functionName.replaceAll(' ', '-').replaceAll("'", '').replaceAll('"', '')}-${uniqueId}`;
         let content = text.replace(`${firstLine}`, "").slice(0, -1);
 
-        if (functionImg.charAt(0) != '/')
-        functionImg = this.lessonContentBaseUrl + "lesson/images/btn-image/" + functionImg // S3 파일
+        if (functionImg.charAt(0) !== '/')
+            functionImg = this.lessonContentBaseUrl + "lesson/images/btn-image/" + functionImg; // S3 파일
+
+        // 표준 마크다운 처리
+        const markdownContent = this.converter.makeHtml(stripComments.stripPythonComments(content));
 
         return `<div class="">
-            <img class="markdown-btn-img" src="${functionImg}"  onclick="writeLn(getCode('${functionId}'))"/></div></br>` +
-        `<div id="${functionId}" class="hidden">${content}</div>`
-
+            <img class="markdown-btn-img" src="${functionImg}" onclick="writeLn(getCode('${functionId}'))"/></div></br>` +
+            `<div id="${functionId}" class="hidden">${markdownContent}</div>`;
     }
     
     #get_imageText(text) {
-        const firstLine = text.split("\n")[0]
-        const imageTitle = firstLine.substring(firstLine.indexOf('(') + 1, firstLine.indexOf(')'))
-        let imageSrc = text.replace(`[image (${imageTitle}) `, "").slice(0, -1) // 로컬 파일
-        if (imageSrc.charAt(0) != '/')
-            imageSrc = this.lessonContentBaseUrl + "lesson/images/" + text.replace(`[image (${imageTitle}) `, "").slice(0, -1) // S3 파일
+        // 정규표현식으로 이미지 구문 추출
+        const regex = /\[image\s*\((.*?)\)\s*(.*?)\]/s; // 's' 플래그는 줄바꿈 포함
+        const match = text.match(regex);
+    
+        if (match) {
+            const imageTitle = match[1].trim();
+            let imageSrc = match[2].trim();
+    
+            // console.log(`Image Title: "${imageTitle}", Image Src: "${imageSrc}"`);
+    
+            // S3 URL 생성
+            if (!imageSrc.startsWith('http://') && !imageSrc.startsWith('https://')) {
+                imageSrc = this.lessonContentBaseUrl + "lesson/images/" + imageSrc;
+            }
+    
+            // console.log(`Final Image URL: "${imageSrc}"`);
+    
+            // 표준 마크다운 이미지 구문으로 변환
 
-        if (imageTitle == '')
-            return `<figure class="img_content_box"><img src="${imageSrc}"></figure>`
-        else
-            return `<figure class="img_content_box"><img src="${imageSrc}"><figcaption align = "center">[${imageTitle}]</figcaption></figure>`
+            if (imageTitle === '') {
+                return `![alt](${imageSrc})`;
+            } else {
+                return `![${imageTitle}](${imageSrc})`;
+            }
+        } else {
+            console.warn('Image syntax not matched:', text);
+            return text; // 변환 실패 시 원본 텍스트 반환
+        }
     }
-
+    
+    
     #get_videoText(text) {
-        const firstLine = text.split("\n")[0]
-        let content = this.lessonContentBaseUrl + "lesson/videos/" + firstLine.replace("[video ", "")
-        return `<video controls width="100%"><source src="${content}" type="video/webm"></video>`;
+        const firstLine = text.split("\n")[0];
+        let videoSrc = firstLine.replace("[video ", "").trim();
+        
+        if (videoSrc.charAt(0) !== '/') {
+            videoSrc = this.lessonContentBaseUrl + "lesson/videos/" + videoSrc; // S3 파일
+        }
+
+        return `<video controls width="100%"><source src="${videoSrc}" type="video/webm">Your browser does not support the video tag.</video>`;
     }
 
     #get_codeText(text) {
-        const firstLine = text.split("\n")[0]
-        let content = text.replace(`${firstLine}`, "").slice(0, -1)
-        const uuid = uuidv1(new Date())
+        const firstLine = text.split("\n")[0];
+        let content = text.replace(`${firstLine}`, "").slice(0, -1);
+        const uuid = uuidv1(new Date());
 
-        // return `<pre onclick="openEditor(getCode('${uuid}'))">\n` +
-        //     `<code id="${uuid}" class="python">${content}` +
-        //     `</code></pre>`;
-            
+        // 표준 마크다운 처리 (코드 블록)
+        const markdownContent = this.converter.makeHtml(`\`\`\`python\n${content}\n\`\`\``);
+        
         return `<pre onclick="openEditor(getCode('${uuid}'))" style="margin-left:10px; width:98%;">\n` +
-        `<code id="${uuid}" class="python">${content}` +
-        `</code></pre>`;
+            `<code id="${uuid}" class="python">${content}</code></pre>` +
+            markdownContent;
     }
 
     #get_editorText(text) {
-        const firstLine = text.split("\n")[0]
-        let content = text.replace(`${firstLine}`, "").slice(0, -1)
+        const firstLine = text.split("\n")[0];
+        let content = text.replace(`${firstLine}`, "").slice(0, -1);
+
+        // 표준 마크다운 처리 (필요 시)
+        const markdownContent = this.converter.makeHtml(content);
 
         return `<p class="editorLocation" style="display: none;"/>` +
-        `<div class="editorDiv">${content}</div>`;
+            `<div class="editorDiv">${markdownContent}</div>`;
     }
 
     #get_partsText(text) {
-        const firstLine = text.split("\n")[0]
-        const partList = text.replace(`${firstLine}`, "").slice(0, -1).split("\n")
-        let content = ''
+        const firstLine = text.split("\n")[0];
+        const partList = text.replace(`${firstLine}`, "").slice(0, -1).split("\n");
+        let content = '';
 
         partList.forEach(e => {
-            const partName = e.split('*')[0].trim()
-            const qty = e.split('*')[1]
-            const src = partImgCode.data().parts.find(item => item.label == partName)?.src
+            const [partName, qty] = e.split('*').map(str => str.trim());
+            const src = partImgCode.data().parts.find(item => item.label === partName)?.src;
 
-            if (src == undefined || qty == undefined)
-                return;
+            if (!src || !qty) return;
 
-            content = content +
+            content +=
                 `<div class="part_component">
                     <div class="parts_compoent_box">
-                    <div class="parts_compoent" frameborder="0">
-                        <div style="width: 100%; height: 100%;">
-                        <div class="parts_image_bar">
-                            <img class="parts_image" src="/common/parts/${src}">
-                            <div class="parts_qty"><p style="display: table-cell; vertical-align: middle;">x ${qty}</p></div>
-                        </div>
-                        <div class="parts_comment_bar">
-                        ${partName}
-                        </div>
+                        <div class="parts_compoent" frameborder="0">
+                            <div style="width: 100%; height: 100%;">
+                                <div class="parts_image_bar">
+                                    <img class="parts_image" src="/common/parts/${src}">
+                                    <div class="parts_qty"><p style="display: table-cell; vertical-align: middle;">x ${qty}</p></div>
+                                </div>
+                                <div class="parts_comment_bar">
+                                    ${partName}
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    </div>
-                </div>`
+                </div>`;
         });
 
-        return `<div>${content}</div>`;
+        // 표준 마크다운 처리 (필요 시)
+        const markdownContent = this.converter.makeHtml(content);
+
+        return `<div>${markdownContent}</div>`;
     }
 
     #get_wifi_Text() {
-        return `<div class="input-group">
-          <span class="input-group-addon"><i class="q-icon material-icons">wifi</i></span>
-          <input class="form-control" type="text" id="wifi_name" placeholder="와이파이 이름" onchange="setWifiInfo()">
-        </div>
-        <div class="input-group">
-          <span class="input-group-addon"><i class="q-icon material-icons">lock</i></span>
-            <input class="form-control" type="text" id="wifi_password" placeholder="와이파이 암호" onchange="setWifiInfo()">
-        </div>` +
-
-            `<button class="answer-btn" style="margin-left:10px; cursor: pointer;" onclick="runCode(getCode('인터넷-연결하기'))" class="function_btn" type="button"><span>인터넷 연결하기</span></button></br>` +
-            `<div id="인터넷-연결하기" class="hidden"></div>`;
-            
+        return `
+            <div class="wifi-container">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="q-icon material-icons">wifi</i></span>
+                    <input class="form-control" type="text" id="wifi_name" placeholder="와이파이 이름" onchange="setWifiInfo()">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="q-icon material-icons">lock</i></span>
+                    <input class="form-control" type="text" id="wifi_password" placeholder="와이파이 암호" onchange="setWifiInfo()">
+                </div>
+                <div class="button-group">
+                    <button class="answer-btn function_btn" onclick="runCode(getCode('인터넷-연결하기'))" type="button">
+                        <span>인터넷 연결하기</span>
+                    </button>
+                </div>
+                <div id="인터넷-연결하기" class="hidden"></div>
+            </div>
+        `;
     }
+    
 
-    #get_wifi_open_Text() {    // 인터넷 오픈     
-        return `<div class="input-group">
-          <span class="input-group-addon"><i class="q-icon material-icons">wifi</i></span>
-          <input class="form-control" type="text" id="wifi_open" placeholder="공유기 이름 (SSID)" onchange="openWifiInfo()">
-        </div>`+
-        
-
-        `<button class="answer-btn" style="margin-left:10px; cursor: pointer;" onclick="runCode(getCode('asome-wifi-open'))" class="function_btn" type="button"><span>확인</span></button></br>` +
-        `<div id="asome-wifi-open" class="hidden"></div>`;
+    #get_wifi_open_Text() { // 인터넷 오픈
+        return `
+            <div class="wifi-open-container">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="q-icon material-icons">wifi</i></span>
+                    <input class="form-control" type="text" id="wifi_open" placeholder="공유기 이름 (SSID)" onchange="openWifiInfo()" aria-label="공유기 이름 (SSID)">
+                </div>
+                <div class="button-group">
+                    <button class="answer-btn function_btn" onclick="runCode(getCode('asome-wifi-open'))" type="button" aria-label="인터넷 연결하기">
+                        <span>확인</span>
+                    </button>
+                </div>
+                <div id="asome-wifi-open" class="hidden"></div>
+            </div>
+        `;
     }
-
+    
     #get_asome_messenger_Text() {
-        return `<div class="input-group">
-          <span class="input-group-addon"><i class="q-icon material-icons">phone</i></span>
-          <input class="form-control" type="text" id="asome_connect_code" placeholder="접속코드" onchange="setAsomeMessengerInfo()">
-        </div>
-        <div class="input-group">
-          <span class="input-group-addon"><i class="q-icon material-icons">message</i></span>
-            <input class="form-control" type="text" id="asome_msg" placeholder="메시지" onchange="setAsomeMessengerInfo()">
-        </div>` +
-            `<button class="answer-btn" style="margin-left:10px; cursor: pointer;" onclick="runCode(getCode('asome-messenger'))" class="function_btn" type="button"><span>전송</span></button></br>` +
-            `<div id="asome-messenger" class="hidden"></div>`;
+        return `
+            <div class="asome-messenger-container">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="q-icon material-icons">phone</i></span>
+                    <input class="form-control" type="text" id="asome_connect_code" placeholder="접속코드" onchange="setAsomeMessengerInfo()" aria-label="접속코드">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="q-icon material-icons">message</i></span>
+                    <input class="form-control" type="text" id="asome_msg" placeholder="메시지" onchange="setAsomeMessengerInfo()" aria-label="메시지">
+                </div>
+                <div class="button-group">
+                    <button class="answer-btn function_btn" onclick="runCode(getCode('asome-messenger'))" type="button" aria-label="메시지 전송">
+                        <span>전송</span>
+                    </button>
+                </div>
+                <div id="asome-messenger" class="hidden"></div>
+            </div>
+        `;
     }
 
     #get_botBase() {
@@ -374,22 +414,23 @@ class Parser {
                     </div>
                 </div>`;
     }
-    
 
     #get_uploadFile(text) {        
         const firstLine = text.split("\n")[0];
-        let functionName = firstLine.replace("[upload ", "");
-        const fileName = functionName.split(":")[1].trim();
-        functionName = functionName.split(":")[0].trim();
+        let functionName = firstLine.replace("[upload ", "").trim();
+        const [funcName, fileName] = functionName.split(":").map(str => str.trim());
         const uniqueId = Date.now();
-        const functionId = `${functionName.replaceAll(' ', '-').replaceAll("'", '').replaceAll('"', '')}-${uniqueId}`;
+        const functionId = `${funcName.replaceAll(' ', '-').replaceAll("'", '').replaceAll('"', '')}-${uniqueId}`;
     
         let content = text.replace(`${firstLine}`, "").slice(0, -1);
         const lines = content.split("\n");
         content = lines.map(e => stripComments.stripPythonComments(e)).join('\n');
         
-        return `<button class="answer-btn" style="cursor: pointer;" onclick="contentsUploadFile('${fileName}',getCode('${functionId}'))" class="function_btn">${functionName}</button></br>` +
-            `<div id="${functionId}" class="hidden">${content}</div>`;
+        // 표준 마크다운 처리
+        const markdownContent = this.converter.makeHtml(content);
+        
+        return `<button class="answer-btn" style="cursor: pointer;" onclick="contentsUploadFile('${fileName}',getCode('${functionId}'))" class="function_btn">${funcName}</button></br>` +
+            `<div id="${functionId}" class="hidden">${markdownContent}</div>`;
     }
     
     #get_boardErr() {        
@@ -409,10 +450,4 @@ class Parser {
                     </div>
                 </div>`;
     }
-}
-window.updateMotorValue =  function updateMotorValue(inputId, increment) {
-    const inputField = document.getElementById(inputId);
-    let currentValue = parseInt(inputField.value) || 0; // Get the current value or default to 0
-    currentValue += increment; // Add the increment (or decrement)
-    inputField.value = currentValue; // Update the input field's value
 }
