@@ -82,10 +82,10 @@ export default {
                     simulator['simulator'] = window.open(route.href, 'simulator', 'width=400,height=335'); // 400 300;
                     break;
                 case '/ai/aiDriving' : 
-                    ai_contents['aiDriving'] = window.open(route.href, 'ai-contents', 'width=1024,height=900'); // 400 300;
+                    ai_contents['aiDriving'] = window.open(route.href, 'ai-contents', 'width=820,height=650'); // 400 300;
                     break;
                 case '/ai/aiObject' : 
-                    ai_contents['aiObject'] = window.open(route.href, 'ai-contents', 'width=1024,height=900'); // 400 300;
+                    ai_contents['aiObject'] = window.open(route.href, 'ai-contents', 'width=820,height=650'); // 400 300;
                     break;
                 default:
                     window.open(route.href);
