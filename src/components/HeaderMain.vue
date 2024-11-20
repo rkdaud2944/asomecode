@@ -85,13 +85,13 @@
             <div class="ble-modal-content">
                 <h6>기기를 선택하세요</h6>
                 <select v-model="selectedDevice">
-                <option v-for="device in bleDevices" :key="device.id" :value="device.id">
-                    {{ device.name }}
-                </option>
+                    <option v-for="device in bleDevices" :key="device.id" :value="device.id">
+                        {{ device.name }}
+                    </option>
                 </select>
                 <div class="ble-modal-actions">
-                    <button @click="cancelScan">취소</button>
-                    <button @click="selectDevice">연결</button>
+                    <button @click="cancelScan" class="cancel-button">취소</button>
+                    <button @click="selectDevice" class="connect-button">연결</button>
                 </div>
             </div>
         </div>
@@ -147,7 +147,7 @@ export default {
 
     created() {
         eventbus.on("onBleScan", (deviceData) => {
-            console.log("BLE 장치 발견:", deviceData);
+            // console.log("BLE 장치 발견:", deviceData);
             if (!this.bleDevices.some(device => device.id === deviceData.id)) {
                 this.bleDevices.push(deviceData);
             }
@@ -246,7 +246,7 @@ export default {
         },
         
         selectDevice() {
-            console.log("선택된 장치 ID:", this.selectedDevice);
+            // console.log("선택된 장치 ID:", this.selectedDevice);
             if (this.selectedDevice) {
                 ble.connectToSelectedDevice(this.selectedDevice)
                     // .then(() => {
@@ -258,6 +258,7 @@ export default {
                     //     console.error("연결 실패:", error);
                     // });
             }
+            alert("확인을 누른 후 기다려주세요. 연결이 완료되면 자동으로 기기 선택창이 닫힙니다.");
         },
 
         showConnectOptions() {
@@ -347,9 +348,55 @@ export default {
 .ble-modal-content h6 {
   color: black;
 }
+.ble-modal-content select {
+    display: block;
+    max-height: 30px; /* 안먹히는 것 같음 */
+    overflow-y: auto;
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
 .ble-modal-actions {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
+}
+
+.cancel-button {
+    width: 50px;
+    padding: 5px 5px;
+    font-size: 12px;
+    cursor: pointer;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+
+.cancel-button:hover {
+    background-color: #c9302c;
+    border-color: #ac2925;
+}
+
+.connect-button {
+    width: 50px;
+    padding: 5px 5px;
+    font-size: 12px;
+    cursor: pointer;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+.connect-button:hover {
+    background-color: #286090;
+    border-color: #204d74;
 }
 </style>
