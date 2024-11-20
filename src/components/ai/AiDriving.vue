@@ -278,12 +278,14 @@ export default {
                 );
                 alert("모델학습이 완료되었습니다.");
             } catch (error) {
-                alert("error: " + error);
+                console.error("Error during training:", error);
+                alert("전 방향을 학습해주세요.");
             }
         },
 
 
-        async predictHandler() {            
+        async predictHandler() {        
+            this.asomecarReady();    
             alert("모델예측을 시작합니다. 중단하려면 중단 버튼을 눌러주세요.");
             if (!isModelInitialized()) {
                 alert("모델이 초기화되지 않았습니다. 먼저 모델을 학습시켜주세요.");
@@ -333,29 +335,34 @@ export default {
             alert("모델 및 데이터셋을 초기화합니다.");
         },
         async addDirectionExample(direction) {
-        // 현재 화면에서 이미지를 가져와 처리
-        const imgElement = document.getElementById("stream");
-        let img = tf.browser.fromPixels(imgElement);
-        img = tf.image.resizeBilinear(img, [224, 224]);
-        img = img.expandDims(0).toFloat().div(127).sub(1);
+            // 현재 화면에서 이미지를 가져와 처리
+            const imgElement = document.getElementById("stream");
+            let img = tf.browser.fromPixels(imgElement);
+            img = tf.image.resizeBilinear(img, [224, 224]);
+            img = img.expandDims(0).toFloat().div(127).sub(1);
 
-        // labelMap 업데이트 (예제 수 증가)
-        if (this.labelMap[direction.id]) {
-            this.labelMap[direction.id].count++;
-        } else {
-            this.labelMap[direction.id] = { name: direction.label, count: 1 };
+            // labelMap 업데이트 (예제 수 증가)
+            if (this.labelMap[direction.id]) {
+                this.labelMap[direction.id].count++;
+            } else {
+                this.labelMap[direction.id] = { name: direction.label, count: 1 };
+            }
+
+            // 모델에 예제 추가
+            if (!isModelInitialized()) {
+                await initModel(this.directions.length); // directions 개수만큼 클래스 설정
+            }
+            await addExample(img, direction.id);
+
+            console.log(
+                `Added example for direction: ${direction.label} (${this.labelMap[direction.id].count} examples)`
+            );
+        },
+
+        asomecarReady(){            
+            const codes = `import asomecar\nasomecar.ready(1, 2, 3, 4, 5, 6, 7, 8)`;
+            this.send(codes);
         }
-
-        // 모델에 예제 추가
-        if (!isModelInitialized()) {
-            await initModel(this.directions.length); // directions 개수만큼 클래스 설정
-        }
-        await addExample(img, direction.id);
-
-        console.log(
-            `Added example for direction: ${direction.label} (${this.labelMap[direction.id].count} examples)`
-        );
-    },
 
     }
 };
