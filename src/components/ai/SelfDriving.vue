@@ -1,92 +1,90 @@
 <template>
-    <div>
-        <h4>자율주행 학습하기</h4>
-        <div v-if="isLoading" class="loading-message">
-            Loading...
-        </div>
+    <div class="container">
+        <h4>사물인식</h4>
         <div class="image-container">
-            <img id="stream" :src="streamUrl" alt="Live Stream" width="320" height="240" @error="onImageError" @load="onImageLoad" crossorigin="anonymous">
+            <div class="image-box">
+                <img id="stream" :src="streamUrl" alt="Live Stream" @error="onImageError" @load="onImageLoad" crossorigin="anonymous">
+            </div>
+            <div class="info-box">
+                <h5>Detected: {{ predictedLabel }}</h5>
+                <ul>
+                    <li v-for="(label, index) in labelMap" :key="index">
+                        {{ index }}: {{ label.name }} ({{ label.count }} examples)
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="controls">
-            <input type="text" v-model="streamIp" placeholder="Enter Stream IP" class="input-ip">
-            <button @click="registerStreamIp" class="styled-button small-button">IP 등록</button>
+
+        <div class="connect">
+            <button @click="openModal" class="styled-button small-button left-button">Wi-Fi 연결</button>
+            <div class="ip-controls">
+                <input type="text" v-model="streamIp" placeholder="Enter Stream IP" class="input-ip small-input">
+                <button @click="registerStreamIp" class="styled-button small-button">IP 등록</button>
+            </div>
         </div>
-        <div class="controls">
-            <button @click="openModal" class="styled-button small-button">Wi-Fi 연결</button>
-        </div>
-        
+
         <!-- 학습 및 예측 관련 UI -->
         <div class="controls">
-            <input type="text" v-model="labelName" placeholder="Enter Label Name" class="input-ip">
-            <button @click="addExampleHandler" class="styled-button small-button">Add Example</button>
-            <button @click="trainModelHandler" class="styled-button small-button">Train Model</button>
-            <button @click="predictHandler" class="styled-button small-button">Start Prediction</button>
-            <button @click="stopPredictionHandler" class="styled-button small-button">Stop Prediction</button>
+            <input type="text" v-model="labelName" placeholder="Enter Label Name" class="input-ip small-input">
+            <button @click="addExampleHandler" class="styled-button small-button">예제추가</button>
+            <button @click="trainModelHandler" class="styled-button small-button">모델학습</button>
+            <button @click="predictHandler" class="styled-button small-button">시작</button>
+            <button @click="stopPredictionHandler" class="styled-button small-button">중단</button>
         </div>
-        <div class="controls">
-            <div class="hyper-params">
-                <div class="dropdown">
-                    <label>Learning rate</label>
-                    <div class="select">
-                        <select v-model="learningRate">
-                            <option value="0.00001">0.00001</option>
-                            <option selected value="0.0001">0.0001</option>
-                            <option value="0.001">0.001</option>
-                            <option value="0.003">0.003</option>
-                        </select>
-                    </div>
+
+        <div class="controls hyper-params">
+            <div class="dropdown">
+                <label>Learning rate</label>
+                <div class="select">
+                    <select v-model="learningRate">
+                        <option value="0.00001">0.00001</option>
+                        <option selected value="0.0001">0.0001</option>
+                        <option value="0.001">0.001</option>
+                        <option value="0.003">0.003</option>
+                    </select>
                 </div>
-                <div class="dropdown">
-                    <label>Batch size</label>
-                    <div class="select">
-                        <select v-model="batchSizeFraction">
-                            <option value="0.05">0.05</option>
-                            <option value="0.1">0.1</option>
-                            <option selected value="0.4">0.4</option>
-                            <option value="1">1</option>
-                        </select>
-                    </div>
+            </div>
+            <div class="dropdown">
+                <label>Batch size</label>
+                <div class="select">
+                    <select v-model="batchSizeFraction">
+                        <option value="0.05">0.05</option>
+                        <option value="0.1">0.1</option>
+                        <option selected value="0.4">0.4</option>
+                        <option value="1">1</option>
+                    </select>
                 </div>
-                <div class="dropdown">
-                    <label>Epochs</label>
-                    <div class="select">
-                        <select v-model="epochs">
-                            <option value="10">10</option>
-                            <option selected value="20">20</option>
-                            <option value="40">40</option>
-                        </select>
-                    </div>
+            </div>
+            <div class="dropdown">
+                <label>Epochs</label>
+                <div class="select">
+                    <select v-model="epochs">
+                        <option value="10">10</option>
+                        <option selected value="20">20</option>
+                        <option value="40">40</option>
+                    </select>
                 </div>
-                <div class="dropdown">
-                    <label>Hidden units</label>
-                    <div class="select">
-                        <select v-model="denseUnits">
-                            <option value="10">10</option>
-                            <option selected value="100">100</option>
-                            <option value="200">200</option>
-                        </select>
-                    </div>
+            </div>
+            <div class="dropdown">
+                <label>Hidden units</label>
+                <div class="select">
+                    <select v-model="denseUnits">
+                        <option value="10">10</option>
+                        <option selected value="100">100</option>
+                        <option value="200">200</option>
+                    </select>
                 </div>
             </div>
         </div>
-        <div>
-            <ul>
-                <li v-for="(label, index) in labelMap" :key="index">
-                    {{ index }}: {{ label.name }} ({{ label.count }} examples)
-                    <img :src="label.thumbnail" alt="Example Thumbnail" width="50" height="50" v-if="label.thumbnail">
-                </li>
-            </ul>
-        </div>
-        <h3>Detected: {{ predictedLabel }}</h3>
 
         <div v-if="isModalOpen" class="modal">
             <div class="modal-content">
                 <h5>Wi-Fi 연결 정보 입력</h5>
-                <label for="ssid">Wi-Fi SSID:</label>
-                <input type="text" v-model="wifiSsid" id="ssid" placeholder="Enter Wi-Fi SSID" class="small-input">
+                <label for="ssid">ID:</label>
+                <input type="text" v-model="wifiSsid" id="ssid" placeholder="Enter Wi-Fi SSID" class="small-input wifi-input"><br/>
 
-                <label for="password">Wi-Fi Password:</label>
-                <input type="text" v-model="wifiPassword" id="password" placeholder="Enter Wi-Fi Password" class="small-input">
+                <label for="password">PW:</label>
+                <input type="text" v-model="wifiPassword" id="password" placeholder="Enter Wi-Fi Password" class="small-input wifi-input">
 
                 <div class="modal-buttons">
                     <button @click="connectWifi" class="styled-button small-button">Connect</button>
@@ -96,6 +94,7 @@
         </div>
     </div>
 </template>
+
 
 <script>
 import remoteSerial from "@/globals/remote-serial";
@@ -300,57 +299,156 @@ export default {
     }
 };
 </script>
-
 <style scoped>
-/* 이미지 상하반전 */
-#stream {
-    transform: scaleY(-1);
+/* 전체 컨테이너 중앙 정렬 */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* 이미지 컨테이너 */
 .image-container {
+    display: flex;
+    align-items: flex-start;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 20px;
+    width: 700px; /* 고정 너비 설정 */
+    box-sizing: border-box;
+}
+
+/* 이미지 박스 */
+.image-box {
+    border: 1px solid #ccc;
+    padding: 5px;
+    width: 320px; /* 이미지 크기에 맞게 고정 */
+    height: 240px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9; /* 이미지가 없을 때 배경색 */
+}
+
+/* 이미지 상하반전 및 크기 고정 */
+#stream {
+    transform: scaleY(-1);
     width: 320px;
     height: 240px;
-    position: relative;
 }
 
-/* 로딩 메시지 스타일 */
-.loading-message {
-    margin-top: 10px; 
-    color: #333; 
-    font-size: 16px;
-    font-weight: bold;
+/* 정보 박스 */
+.info-box {
+    margin-left: 20px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    flex: 1; /* 남은 공간 차지 */
 }
 
+/* 이미지가 없을 때 빈 공간 유지 */
+.image-box::before {
+    content: '';
+    display: block;
+    width: 320px;
+    height: 240px;
+}
+
+/* 컨트롤 영역 */
+.connect {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 700px; /* 이미지 컨테이너와 동일한 너비 */
+}
+
+/* 컨트롤 영역 */
 .controls {
-    margin-top: 20px;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 700px; /* 이미지 컨테이너와 동일한 너비 */
+}
+
+/* Wi-Fi 연결 버튼 왼쪽 정렬 */
+.left-button {
+    margin-right: auto;
+}
+
+/* IP 입력 컨트롤 */
+.ip-controls {
     display: flex;
     align-items: center;
 }
-.styled-button {
+
+/* 입력창 스타일 */
+.input-ip {
+    width: 300px;
+    padding: 5px;
+    margin-right: 5px;
+    font-size: 12px;
+}
+
+/* 작은 버튼 스타일 */
+.small-button {
+    padding: 5px 10px;
+    font-size: 12px;
+}
+
+/* 하이퍼파라미터 드롭다운 가로 배열 */
+.hyper-params {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    flex-wrap: wrap;
+    width: 700px; /* 이미지 컨테이너와 동일한 너비 */
+}
+
+.hyper-params .dropdown {
     margin-right: 10px;
-    padding: 5px 10px; 
-    font-size: 14px;
+}
+
+.hyper-params .dropdown label {
+    display: block;
+    font-size: 12px;
+}
+
+.hyper-params .dropdown .select select {
+    width: 100%;
+    padding: 5px;
+    font-size: 12px;
+}
+
+/* 버튼 스타일 개선 */
+.styled-button {
+    /* margin-right: 5px; */
+    padding: 5px 10px;
+    font-size: 12px;
     cursor: pointer;
-    background-color: #007BFF;
+    background: linear-gradient(45deg, #4CAF50, #45A049);
     color: white;
     border: none;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-.styled-button:hover {
-    background-color: #0056b3;
-}
-.cancel-button {
-    background-color: #6c757d;
-}
-.cancel-button:hover {
-    background-color: #5a6268;
+    transition: background 0.3s ease;
 }
 
-.small-button {
-    padding: 5px 10px; 
-    font-size: 14px; 
+.styled-button:hover {
+    background: linear-gradient(45deg, #45A049, #4CAF50);
+}
+
+.cancel-button {
+    background: linear-gradient(45deg, #f44336, #e53935);
+}
+
+.cancel-button:hover {
+    background: linear-gradient(45deg, #e53935, #f44336);
+}
+
+/* 입력창 공통 스타일 */
+input {
+    box-sizing: border-box;
+    font-size: 14px;
 }
 
 /* 모달 스타일 */
@@ -365,6 +463,7 @@ export default {
     justify-content: center;
     align-items: center;
 }
+
 .modal-content {
     background: white;
     padding: 20px;
@@ -372,38 +471,17 @@ export default {
     width: 300px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
+
 .modal-buttons {
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
 }
-.input-ip {
-    padding: 5px;
-    margin-right: 10px;
-    font-size: 14px;
-}
-.small-input {
-    padding: 5px;
-    font-size: 14px;
-}
-input {
+
+.wifi-input {
+    display: block;
     width: 100%;
-    padding: 5px;
-    margin-top: 10px;
-    box-sizing: border-box;
-    font-size: 14px;
+    right: 0;
 }
-.hyper-params {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-}
-.dropdown {
-    margin-bottom: 10px;
-}
-.select select {
-    width: 100%;
-    padding: 5px;
-    font-size: 14px;
-}
+
 </style>
