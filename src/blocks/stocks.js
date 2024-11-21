@@ -3565,7 +3565,7 @@ Blockly.Blocks["servo_turnoff"] = {
 };
 
 javascriptGenerator["servo_turnoff"] = function () {
-  let code = `turnoff_pins((12))\n`;
+  let code = `turnoff_pins((12,))\n`;
   return code;
 };
 
