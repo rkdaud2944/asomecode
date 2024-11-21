@@ -1,6 +1,6 @@
 {
-  "name": "AsomeCODE",
-  "version": "2.0.0",
+  "name": "AsomeCODE-Ai",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "test:unit": "vue-cli-service test:unit",
