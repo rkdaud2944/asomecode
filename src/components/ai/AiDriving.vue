@@ -152,24 +152,27 @@ export default {
         ...remoteSerial,
 
         onImageLoad() {
-            console.log("Image loaded successfully");
-            this.isLoading = false;
-            this.retryCount = 0;
+        console.log("Image loaded successfully");
+        this.isLoading = false;
+        this.retryCount = 0; // 성공하면 재시도 횟수 초기화
         },
 
         onImageError() {
-            if (this.retryCount < this.maxRetries) {
-                console.log(`Image failed to load, retrying... (${this.retryCount + 1}/${this.maxRetries})`);
-                this.retryCount++;
-                setTimeout(this.retryStream, this.retryDelay);
-            } else {
-                console.error("Max retries reached. Unable to load stream.");
-                this.isLoading = true;
+            if (!this.isLoading) {
+                console.error("Unable to load stream after retries.");
+                return;
             }
+            console.log(`Image failed to load, retrying in 1 second...`);
+            setTimeout(this.retryStream, 1000); // 1초 후 재시도
         },
 
         retryStream() {
-            this.streamUrl = `http://${this.streamIp}/stream?time=` + new Date().getTime();
+            if (!this.isLoading) return; // 이미 로드 성공 시 중단
+                this.streamUrl = `http://${this.streamIp}/stream?time=` + new Date().getTime();
+                const imgElement = document.getElementById("stream");
+            if (imgElement) {
+                imgElement.src = this.streamUrl; // 이미지 src 업데이트
+            }
         },
 
         openModal() {
@@ -418,15 +421,15 @@ export default {
 
         sendTrainingCode(direction) {
             const trainingCodes = {
-                "왼쪽 위": "asomecar.leftForwardWith(150,1)",
-                "위": "asomecar.forwardWith(150,1)",
-                "오른쪽 위": "asomecar.rightForwardWith(150,1)",
-                "왼쪽": "asomecar.leftWith(150,1)",
+                "왼쪽 위": "asomecar.leftForwardWith(150,0.5)",
+                "위": "asomecar.forwardWith(150,0.5)",
+                "오른쪽 위": "asomecar.rightForwardWith(150,0.5)",
+                "왼쪽": "asomecar.leftWith(150,0.5)",
                 "중앙": "asomecar.stop()",
-                "오른쪽": "asomecar.rightWith(150,1)",
-                "왼쪽 아래": "asomecar.leftBackWith(150,1)",
-                "아래": "asomecar.backwardWith(150,1)",
-                "오른쪽 아래": "asomecar.rightBackWith(150,1)"
+                "오른쪽": "asomecar.rightWith(150,0.5)",
+                "왼쪽 아래": "asomecar.leftBackWith(150,0.5)",
+                "아래": "asomecar.backwardWith(150,0.5)",
+                "오른쪽 아래": "asomecar.rightBackWith(150,0.5)"
             };
 
             const code = trainingCodes[direction.label];
