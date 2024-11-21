@@ -382,9 +382,9 @@ export default {
                 "왼쪽 위": "asomecar.leftForward(150)",
                 "위": "asomecar.forward(150)",
                 "오른쪽 위": "asomecar.rightForward(150)",
-                "왼쪽": "asomecar.left(150)",
+                "왼쪽": "asomecar.turnLeft(150)",
                 "중앙": "asomecar.stop()",
-                "오른쪽": "asomecar.right(150)",
+                "오른쪽": "asomecar.turnRight(150)",
                 "왼쪽 아래": "asomecar.leftBack(150)",
                 "아래": "asomecar.backward(150)",
                 "오른쪽 아래": "asomecar.rightBack(150)"
@@ -421,15 +421,15 @@ export default {
 
         sendTrainingCode(direction) {
             const trainingCodes = {
-                "왼쪽 위": "asomecar.leftForwardWith(150,0.5)",
-                "위": "asomecar.forwardWith(150,0.5)",
-                "오른쪽 위": "asomecar.rightForwardWith(150,0.5)",
-                "왼쪽": "asomecar.leftWith(150,0.5)",
+                "왼쪽 위": "asomecar.leftForwardWith(200,0.2)",
+                "위": "asomecar.forwardWith(200,0.2)",
+                "오른쪽 위": "asomecar.rightForwardWith(200,0.2)",
+                "왼쪽": "asomecar.turnLeftWith(200,0.1)",
                 "중앙": "asomecar.stop()",
-                "오른쪽": "asomecar.rightWith(150,0.5)",
-                "왼쪽 아래": "asomecar.leftBackWith(150,0.5)",
-                "아래": "asomecar.backwardWith(150,0.5)",
-                "오른쪽 아래": "asomecar.rightBackWith(150,0.5)"
+                "오른쪽": "asomecar.turnRightWith(200,0.1)",
+                "왼쪽 아래": "asomecar.leftBackWith(200,0.2)",
+                "아래": "asomecar.backwardWith(200,0.2)",
+                "오른쪽 아래": "asomecar.rightBackWith(200,0.2)"
             };
 
             const code = trainingCodes[direction.label];
@@ -477,7 +477,7 @@ export default {
 }
 
 #stream {
-    transform: scaleY(-1);
+    transform: scaleX(-1) scaleY(-1); /* 좌우 및 상하 반전 */
     width: 320px;
     height: 240px;
 }
