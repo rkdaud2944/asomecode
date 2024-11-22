@@ -56,7 +56,8 @@
 <script>
 /* eslint-disable */
 import VueBase from '@/mixin/vue-base';
-import markdown from "@/utils/markdown";
+import showdown from 'showdown';
+import AsomeParser from "@/utils/asome-parser"; 
 import apiLesson from "@/api/lesson";
 import images from "@/assets/images" 
 import { VAceEditor } from "vue3-ace-editor";
@@ -77,6 +78,7 @@ export default {
           titles: [],
           output: null,
           scrollPosition: null,
+          markedOutput: [], // markedOutput 초기화
 
           logom: images.logom,
           lectureList: images.lectureList,
@@ -264,7 +266,15 @@ export default {
           apiLesson.lessonDetail(82)
               .then((response) => {
                   this.lesson = response.data;
-                  this.output = markdown.parse(this.lesson.content)
+                  const parser = new AsomeParser(this.lesson.content);
+                  const transformedMarkdown = parser.execute();
+                  const converter = new showdown.Converter({
+                      tables: true,
+                      simplifiedAutoLink: true,
+                      strikethrough: true,
+                      ghCompatibleHeaderId: true,
+                  });
+                  this.output = converter.makeHtml(transformedMarkdown);
 
                   let domparser = new DOMParser()
                   let doc = domparser.parseFromString(this.output, 'text/html')
@@ -399,3 +409,17 @@ export default {
 <style src="@/assets/css/component/markdown_content.css"/>
 <style scoped src="@/assets/css/component/lesson_detail.css"/>
 <style scoped src="@/assets/css/font.css"/>
+
+<style>
+
+.back-button {
+    top:24px;
+}
+.chapter-title {
+    line-height: 90px;
+}
+.container-top {
+    height: 120px;
+    top: 90px;
+}
+</style>

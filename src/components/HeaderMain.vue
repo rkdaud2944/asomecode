@@ -3,8 +3,17 @@
         <div class="main-logo" @click="this.$router.push({ path: `/`})">
             <img :src="logo" alt="logo" class="logo"/>
         </div>
-    
-        <div>
+        <div class="control-btn-wrap">
+                <span class="connect-btn Pretendard-Medium" @click="connect()">
+                    <img :src="connectBtnImg"/>
+                    연결하기
+                </span>
+                <span class="stop-btn Pretendard-Medium" @click="stop()">
+                    <img :src="stopBtnImg"/> 
+                    멈추기
+                </span>
+            </div>
+        <!-- <div>
             <div class="control-btn-wrap">
                 <span class="connect-btn Pretendard-Medium" @mouseenter="showConnectOptions" @mouseleave="hideConnectOptions">
                     <img :src="connectBtnImg" />
@@ -19,7 +28,7 @@
                     멈추기
                 </span>
             </div>
-        </div>
+        </div> -->
         <div class="nav">
             <span @click="goToDownload" class="NotoSansKR-Regular nav-txt"><a style="cursor: pointer;">자료실</a></span>
             <span @click="goToQna" class="NotoSansKR-Regular nav-txt"><a style="cursor: pointer;">도움말</a></span>
