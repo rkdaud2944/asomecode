@@ -360,7 +360,7 @@ export default {
 }
 
 #stream {
-    transform: scaleX(-1) scaleY(-1); /* 좌우 및 상하 반전 */
+    transform: scaleY(-1); /* 좌우 및 상하 반전 */
     width: 320px;
     height: 240px;
 }
