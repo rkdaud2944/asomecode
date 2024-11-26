@@ -664,7 +664,7 @@ Blockly.Blocks["sound_bot_scale"] = {
     this.appendDummyInput()
       .appendField("음계")
       .appendField(new Blockly.FieldDropdown([
-        ["C", "C"],["C#", "D#"],
+        ["C", "C"],["C#", "C#"],
         ["D", "D"],["D#", "D#"],
         ["Db", "Db"],["E", "E"],
         ["Eb", "Eb"],["F", "F"],
@@ -3146,7 +3146,7 @@ Blockly.Blocks["move_right"] = {
 
 javascriptGenerator["move_right"] = function (block) {
   const value = block.getFieldValue("VALUE");
-  var code = `asomecar.left(${value})\n`;
+  var code = `asomecar.right(${value})\n`;
   return code;
 };
 
