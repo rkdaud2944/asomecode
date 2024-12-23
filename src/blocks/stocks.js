@@ -962,7 +962,7 @@ Blockly.Blocks["advance_if_logical"] = {
   init: function() {
     var dropdownGenerator = function() {
       let dropdownOptions = [
-        ["k", "k"], ["j", "j"], ["l", "l"], ["q", "q"], ["sttMSG", "sttMSG"]
+        ["k", "k"], ["j", "j"], ["l", "l"], ["q", "q"],
       ];
       let addlightOption = false;
       let addsoundOption = false;
@@ -1096,7 +1096,7 @@ Blockly.Blocks["advance_if"] = {
   init: function() {
     var dropdownGenerator = function() {
       let dropdownOptions = [
-        ["k", "k"], ["j", "j"], ["l", "l"], ["q", "q"], ["sttMSG", "sttMSG"]
+        ["k", "k"], ["j", "j"], ["l", "l"], ["q", "q"],
       ];
       let addlightOption = false;
       let addsoundOption = false;
@@ -1200,7 +1200,7 @@ Blockly.Blocks["advance_elseif"] = {
   init: function() {
     var dropdownGenerator = function() {
       let dropdownOptions = [
-        ["k", "k"], ["j", "j"], ["l", "l"], ["q", "q"], ["sttMSG", "sttMSG"]
+        ["k", "k"], ["j", "j"], ["l", "l"], ["q", "q"]
       ];
       let addlightOption = false;
       let addsoundOption = false;
@@ -1306,7 +1306,7 @@ Blockly.Blocks["advance_elseif_logical"] = {
   init: function() {
     var dropdownGenerator = function() {
       let dropdownOptions = [
-        ["k", "k"], ["j", "j"], ["l", "l"], ["q", "q"], ["sttMSG", "sttMSG"]
+        ["k", "k"], ["j", "j"], ["l", "l"], ["q", "q"]
       ];
       let addlightOption = false;
       let addsoundOption = false;
@@ -1541,7 +1541,7 @@ Blockly.Blocks["screen"] = {
   init: function () {
     var dropdownGenerator = function() {
       let dropdownOptions = [
-        ["k", "k"], ["j", "j"], ["l", "l"], ["q", "q"], ["sttMSG", "sttMSG"]
+        ["k", "k"], ["j", "j"], ["l", "l"], ["q", "q"]
       ];
       let addlightOption = false;
       let addsoundOption = false;
@@ -1658,7 +1658,7 @@ Blockly.Blocks["variable"] = {
   init: function () {
     var dropdownGenerator = function() {
       let dropdownOptions = [
-        ["k", "k"],["j", "j"],["l", "l"],["q", "q"],["sttMSG", "sttMSG"]
+        ["k", "k"],["j", "j"],["l", "l"],["q", "q"]
       ];
       let addlightOption = false;
       let addsoundOption = false;
