@@ -16,6 +16,7 @@ import update from "@/assets/images/controls/update.png";
 import help from "@/assets/images/controls/help.png";
 import setting from "@/assets/images/controls/setting.png";
 import menu from "@/assets/images/controls/menu.png";
+import block from "@/assets/images/controls/block.png";
 
 import runEdt from "@/assets/images/editor/run.png";
 import openEdt from "@/assets/images/editor/open.png";
@@ -121,6 +122,7 @@ export default {
     help,
     setting,
     menu,
+    block,
 
     runEdt,
     openEdt,

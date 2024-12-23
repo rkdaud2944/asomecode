@@ -116,18 +116,18 @@ export { BotToolbox };
                     { "kind": "block", "gap": "8", "type": "get_weather" },
                 ],
             },
-            {
-                "kind": "category",
-                "name": "AI",
-                "field" : "BOT",
-                "colour": "5058D1",
-                "contents": [
-                    { "kind": "block", "gap": "8", "type": "ai_stt" },
-                    // { "kind": "block", "gap": "8", "type": "ai_tts" },
-                    { "kind": "block", "gap": "8", "type": "ai_tts_play" },
-                    { "kind": "block", "gap": "8", "type": "ai_tts_delete" },
-                    { "kind": "block", "gap": "8", "type": "stt_mark_int" },
-                ],
-            },
+            // {
+            //     "kind": "category",
+            //     "name": "AI",
+            //     "field" : "BOT",
+            //     "colour": "5058D1",
+            //     "contents": [
+            //         { "kind": "block", "gap": "8", "type": "ai_stt" },
+            //         // { "kind": "block", "gap": "8", "type": "ai_tts" },
+            //         { "kind": "block", "gap": "8", "type": "ai_tts_play" },
+            //         { "kind": "block", "gap": "8", "type": "ai_tts_delete" },
+            //         { "kind": "block", "gap": "8", "type": "stt_mark_int" },
+            //     ],
+            // },
         ]
     };

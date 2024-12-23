@@ -102,19 +102,19 @@ const CarToolbox = {
                 { "kind": "block", "gap": "8", "type": "variable" },
             ],
         },
-        {
-            "kind": "category",
-            "name": "AI",
-            "field" : "CAR",
-            "colour": "5058D1",
-            "contents": [
-                // { "kind": "block", "gap": "8", "type": "ai_stt" },
-                // { "kind": "block", "gap": "8", "type": "ai_tts" },
-                // { "kind": "block", "gap": "8", "type": "ai_tts_play" },
-                // { "kind": "block", "gap": "8", "type": "ai_tts_delete" },
-                // { "kind": "block", "gap": "8", "type": "stt_mark_int" },
-            ],
-        },
+        // {
+        //     "kind": "category",
+        //     "name": "AI",
+        //     "field" : "CAR",
+        //     "colour": "5058D1",
+        //     "contents": [
+        //         // { "kind": "block", "gap": "8", "type": "ai_stt" },
+        //         // { "kind": "block", "gap": "8", "type": "ai_tts" },
+        //         // { "kind": "block", "gap": "8", "type": "ai_tts_play" },
+        //         // { "kind": "block", "gap": "8", "type": "ai_tts_delete" },
+        //         // { "kind": "block", "gap": "8", "type": "stt_mark_int" },
+        //     ],
+        // },
         {
             "kind": "category",
             "name": "INTERNET",

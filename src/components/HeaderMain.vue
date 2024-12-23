@@ -69,6 +69,10 @@
                             <img :src="settingImg"/>
                             <p>드라이버 설치</p>
                         </li>
+                        <li class="menu-cts" @click="goToBlockCoding">
+                            <img :src="blockImg"/>
+                            <p>블록코딩</p>
+                        </li>
                     </ul>
                 </div>
             </span>
@@ -140,6 +144,7 @@ export default {
             menu: images.menu,
             connectBtnImg: images.connectBtn,
             stopBtnImg: images.stopBtn,
+            blockImg: images.block,
             codes: null,
 
             isMenuOpen: false,
@@ -320,7 +325,11 @@ export default {
         goToQna() {
             window.open("https://asomeit.imweb.me/faq");
         },
-        
+
+        goToBlockCoding() {
+            localStorage.removeItem("lessonBlock")
+            this.openRouterPath('/blockCoding')
+        },
     },
 }
 </script>
