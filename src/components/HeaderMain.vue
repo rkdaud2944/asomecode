@@ -69,6 +69,10 @@
                             <img :src="settingImg"/>
                             <p>드라이버 설치</p>
                         </li>
+                        <li class="menu-cts" @click="goToBlockCoding">
+                            <img :src="blockImg"/>
+                            <p>블록코딩</p>
+                        </li>
                     </ul>
                 </div>
             </span>
@@ -141,6 +145,7 @@ export default {
             menu: images.menu,
             connectBtnImg: images.connectBtn,
             stopBtnImg: images.stopBtn,
+            blockImg: images.block,
             codes: null,
 
             isMenuOpen: false,
@@ -328,6 +333,11 @@ export default {
             window.open("https://asomeit.imweb.me/faq");
         },
         
+        goToBlockCoding() {
+            // 콘솔 컴포넌트에서와 동일하게 로컬스토리지 항목 제거
+            localStorage.removeItem("lessonBlock")
+            this.openRouterPath('/blockCoding')
+        },
     },
 }
 </script>

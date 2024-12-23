@@ -3036,7 +3036,7 @@ Blockly.Blocks["move_forward"] = {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomecar.png', 23, 23, '*'))
       .appendField("앞으로 전진 (속도:")
-      .appendField(new Blockly.FieldDropdown([["150", "150"], ["200", "200"], ["250", "250"], ["300", "300"], ["350", "350"]]), "VALUE")
+      .appendField(new Blockly.FieldDropdown([["200", "200"], ["250", "250"], ["300", "300"], ["350", "350"]]), "VALUE")
       .appendField(")")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -3056,7 +3056,7 @@ Blockly.Blocks["move_back"] = {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomecar/move_backward.png', 23, 23, '*'))
       .appendField("뒤로 후진 (속도:")
-      .appendField(new Blockly.FieldDropdown([["150", "150"], ["200", "200"], ["250", "250"], ["300", "300"], ["350", "350"]]), "VALUE")
+      .appendField(new Blockly.FieldDropdown([["200", "200"], ["250", "250"], ["300", "300"], ["350", "350"]]), "VALUE")
       .appendField(")")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -3076,7 +3076,7 @@ Blockly.Blocks["move_left_fixed"] = {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomecar/rotate_left.png', 23, 23, '*'))
       .appendField("왼쪽으로 제자리 회전 (속도:")
-      .appendField(new Blockly.FieldDropdown([["150", "150"], ["200", "200"], ["250", "250"], ["300", "300"], ["350", "350"]]), "VALUE")
+      .appendField(new Blockly.FieldDropdown([["200", "200"], ["250", "250"], ["300", "300"], ["350", "350"]]), "VALUE")
       .appendField(")")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -3095,7 +3095,7 @@ Blockly.Blocks["move_right_fixed"] = {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomecar/rotate_left.png', 23, 23, '*'))
       .appendField("오른쪽으로 제자리 회전 (속도:")
-      .appendField(new Blockly.FieldDropdown([["150", "150"], ["200", "200"], ["250", "250"], ["300", "300"], ["350", "350"]]), "VALUE")
+      .appendField(new Blockly.FieldDropdown([["200", "200"], ["250", "250"], ["300", "300"], ["350", "350"]]), "VALUE")
       .appendField(")")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -3115,7 +3115,7 @@ Blockly.Blocks["move_left"] = {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomecar/turn_left.png', 23, 23, '*'))
       .appendField("왼쪽으로 이동 (속도:")
-      .appendField(new Blockly.FieldDropdown([["150", "150"], ["200", "200"], ["250", "250"], ["300", "300"], ["350", "350"]]), "VALUE")
+      .appendField(new Blockly.FieldDropdown([["200", "200"], ["250", "250"], ["300", "300"], ["350", "350"]]), "VALUE")
       .appendField(")")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -3135,7 +3135,7 @@ Blockly.Blocks["move_right"] = {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomecar/turn_left.png', 23, 23, '*'))
       .appendField("오른쪽으로 이동 (속도:")
-      .appendField(new Blockly.FieldDropdown([["150", "150"], ["200", "200"], ["250", "250"], ["300", "300"], ["350", "350"]]), "VALUE")
+      .appendField(new Blockly.FieldDropdown([["200", "200"], ["250", "250"], ["300", "300"], ["350", "350"]]), "VALUE")
       .appendField(")")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -3155,7 +3155,7 @@ Blockly.Blocks["move_diagonal_right_front"] = {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomecar/turn_right.png', 23, 23, '*'))
       .appendField("오른쪽 대각선 앞으로 이동 (속도:")
-      .appendField(new Blockly.FieldDropdown([["150", "150"], ["200", "200"], ["250", "250"], ["300", "300"], ["350", "350"]]), "VALUE")
+      .appendField(new Blockly.FieldDropdown([["200", "200"], ["250", "250"], ["300", "300"], ["350", "350"]]), "VALUE")
       .appendField(")")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -3175,7 +3175,7 @@ Blockly.Blocks["move_diagonal_right_back"] = {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomecar/turn_right.png', 23, 23, '*'))
       .appendField("오른쪽 대각선 뒤로 이동 (속도:")
-      .appendField(new Blockly.FieldDropdown([["150", "150"], ["200", "200"], ["250", "250"], ["300", "300"], ["350", "350"]]), "VALUE")
+      .appendField(new Blockly.FieldDropdown([["200", "200"], ["250", "250"], ["300", "300"], ["350", "350"]]), "VALUE")
       .appendField(")")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -3195,7 +3195,7 @@ Blockly.Blocks["move_diagonal_left_front"] = {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomecar/turn_right.png', 23, 23, '*'))
       .appendField("왼쪽 대각선 앞으로 이동 (속도:")
-      .appendField(new Blockly.FieldDropdown([["150", "150"], ["200", "200"], ["250", "250"], ["300", "300"], ["350", "350"]]), "VALUE")
+      .appendField(new Blockly.FieldDropdown([["200", "200"], ["250", "250"], ["300", "300"], ["350", "350"]]), "VALUE")
       .appendField(")")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -3215,7 +3215,7 @@ Blockly.Blocks["move_diagonal_left_back"] = {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomecar/turn_right.png', 23, 23, '*'))
       .appendField("왼쪽 대각선 뒤로 이동 (속도:")
-      .appendField(new Blockly.FieldDropdown([["150", "150"], ["200", "200"], ["250", "250"], ["300", "300"], ["350", "350"]]), "VALUE")
+      .appendField(new Blockly.FieldDropdown([["200", "200"], ["250", "250"], ["300", "300"], ["350", "350"]]), "VALUE")
       .appendField(")")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
