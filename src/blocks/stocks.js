@@ -1170,7 +1170,7 @@ Blockly.Blocks["advance_if_logical"] = {
   init: function() {
     var dropdownGenerator = function() {
       let dropdownOptions = [
-        ["k", "k"], ["j", "j"], ["l", "l"], ["q", "q"], ["sttMSG", "sttMSG"]
+        ["k", "k"], ["j", "j"], ["l", "l"], ["q", "q"]
       ];
       let addlightOption = false;
       let addsoundOption = false;
@@ -1313,7 +1313,7 @@ Blockly.Blocks["advance_elseif_logical"] = {
   init: function() {
     var dropdownGenerator = function() {
       let dropdownOptions = [
-        ["k", "k"], ["j", "j"], ["l", "l"], ["q", "q"], ["sttMSG", "sttMSG"]
+        ["k", "k"], ["j", "j"], ["l", "l"], ["q", "q"]
       ];
       let addlightOption = false;
       let addsoundOption = false;
