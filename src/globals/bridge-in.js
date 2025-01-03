@@ -38,6 +38,7 @@ const bridge = {
         serial.runCode(code);
     },
 
+
     writeLn(code) {
         serial.writeLn(code);
     },
@@ -53,6 +54,13 @@ const bridge = {
         const wifiPassword = document.getElementById('wifi_password').value;
         document.getElementById("인터넷-연결하기").innerText =
             `import internet; internet.connect('${wifiName}', '${wifiPassword}')`;
+    },
+
+    setClockWifiInfo() {
+        const wifiName = document.getElementById('wifi_name').value;
+        const wifiPassword = document.getElementById('wifi_password').value;
+        document.getElementById("clock-wifi").innerText =
+        `import internet; connect_wifi = lambda: internet.connect('${wifiName}', '${wifiPassword}')`;
     },
 
     openWifiInfo() {
@@ -166,6 +174,7 @@ window.runCode = bridge.runCode;
 window.writeLn = bridge.writeLn;
 window.openEditor = bridge.openEditor;
 window.setWifiInfo = bridge.setWifiInfo;
+window.setClockWifiInfo = bridge.setClockWifiInfo;
 window.openWifiInfo = bridge.openWifiInfo;
 window.setAsomeMessengerInfo = bridge.setAsomeMessengerInfo;
 window.presentSession = bridge.presentSession;

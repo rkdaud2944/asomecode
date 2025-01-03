@@ -285,13 +285,14 @@ class Parser {
         const uuid = uuidv1(new Date());
 
         // 표준 마크다운 처리 (코드 블록)
-        const markdownContent = this.converter.makeHtml(`\`\`\`python\n${content}\n\`\`\``);
+        // const markdownContent = this.converter.makeHtml(`\`\`\`python\n${content}\n\`\`\``);
         
         return `<pre onclick="openEditor(getCode('${uuid}'))" style="margin-left:10px; width:98%;">\n` +
-            `<code id="${uuid}" class="python">${content}</code></pre>` +
-            markdownContent;
+            `<code id="${uuid}" class="python">${content}</code></pre>`
+            // + markdownContent;
+            // 코드가 두개 중복되서 없앰
     }
-
+    
     #get_editorText(text) {
         const firstLine = text.split("\n")[0];
         let content = text.replace(`${firstLine}`, "").slice(0, -1);
