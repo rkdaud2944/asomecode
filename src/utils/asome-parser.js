@@ -7,17 +7,28 @@ import stripComments from "@/utils/strip-comments";
 
 export default class AsomeParser {
     constructor(input) {
-        this.scanner = new Scanner(input);
-        this.parser = new Parser();
-
-        this.scanner.onToken = (token) => this.parser.addToken(token);
+      this.scanner = new Scanner(input);
+      this.parser = new Parser();
+  
+      // updateMotorValue 전역 함수 정의
+      window.updateMotorValue = (inputId, value) => {
+        const inputEl = document.getElementById(inputId);
+        if (!inputEl) return; 
+        
+        // 문자열을 정수로 변환 후 증감
+        const currentVal = parseInt(inputEl.value || '0', 10);
+        inputEl.value = currentVal + value;
+      };
+  
+      this.scanner.onToken = (token) => this.parser.addToken(token);
     }
-
+  
     execute() {
-        this.scanner.execute();
-        return this.parser.result;
+      this.scanner.execute();
+      return this.parser.result;
     }
-}
+  }
+  
 
 const State = {
     BASE: 0,

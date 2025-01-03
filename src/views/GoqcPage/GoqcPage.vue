@@ -419,7 +419,10 @@ export default {
     line-height: 90px;
 }
 .container-top {
-    height: 120px;
+    /* height: 120px; */
     top: 90px;
+}
+.container-wrap{
+    top : 67px !important;
 }
 </style>
