@@ -1,306 +1,230 @@
-import { SerialPort, ReadlineParser } from "serialport";
 import eventbus from "@/globals/eventbus";
 import speakerManager from "@/globals/speaker-manager";
-import { Notify } from 'quasar'
+import { Notify } from 'quasar';
 import ble from "@/globals/ble";
-import {useConnectStore} from '@/store/connect-store'
-// import { createPinia, setActivePinia } from 'pinia';
+import { useConnectStore } from '@/store/connect-store';
 
-// const pinia = createPinia();
-// setActivePinia(pinia);  // Pinia 인스턴스를 활성화
-
-
-eventbus.on("onSerialReceived", (data) => {
-    if (!data) return;
-    
-    if (data.startsWith("(sysname=")) {
-        seiral.setBoardType(data);
-    }
-
-    if (data.startsWith("### Speech to text")) {
-        localStorage.setItem("stt", "OK");
-        localStorage.removeItem("stt");
-        eventbus.emit("sttReceived"); // 이벤트 발생시키기
-    }
-});
-
-let serialUnit = null;
-let boardType = "Zet";
+// Node.js FS (preload or nodeIntegration에 따라)
 const fs = require('fs');
 
-class SerialUnit {
-    async open(portName) {
-        // useConnectStore.connecting();
+// === IPC
+import { ipcRenderer } from 'electron';
 
-        this.port = new SerialPort({
-            path: portName,
-            baudRate: 115200,
-            autoOpen: false,
-            lock: false,
-        });
+let boardType = "Zet";
 
-        this.parser = new ReadlineParser({ delimiter: '\r\n' });
-        this.port.pipe(this.parser);
+// ---------------------------------------------------
+// (1) 메인 프로세스 -> 렌더러: 시리얼 데이터 수신
+// ---------------------------------------------------
+ipcRenderer.on('serial-data', (event, msg) => {
+  console.log('[Renderer] serial-data:', msg);
+  eventbus.emit('onSerialReceived', msg);
+});
 
-        this.parser.on('data', (msg) => this.onReceived(msg));
-        this.port.on('close', () => {
-            if (this.port != null) this.onClosed()
-        });
-        this.port.on('error', (error) => {
-            console.log(error);
-            this.close();
-            // useConnectStore.handleError();
-            // this.onError("어썸보드에서 오류가 감지되었습니다.");
-            console.log("어썸보드에서 오류가 감지되었습니다.")
-        });
+// ---------------------------------------------------
+// (2) 포트가 닫혔음을 렌더러에 알리는 이벤트
+// ---------------------------------------------------
+ipcRenderer.on('serial-closed', () => {
+  console.log('[Renderer] serial-closed');
+  const connectStore = useConnectStore();
+  // Pinia 스토어를 disconnected 로
+  connectStore.disconnect();
 
-        try {
-            await this.port.open();            
-            this.onOpened();
-            // useConnectStore.connected();
-            this.writeLn("import os; os.uname()");
-            this.writeLn("");
-        } catch (error) {
-            console.log(error);
-            
-            // useConnectStore.handleError();
-            this.onError("어썸보드에 연결할 수가 없습니다.");
-            return;
-        }
-    }
+  // 혹시 eventbus로도 알리고 싶다면
+  eventbus.emit('onSerialClosed');
+});
 
-    
-    close() {
-        if (!this.port) return;
-
-        const port = this.port;
-
-        this.port = null;
-        this.parser = null;
-
-        try {
-            port.close();            
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    write(text) {
-        if (this.port == null) return;
-        try {
-            this.port.write(text);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    writeLn(text) {
-        if (this.port == null) return;
-        try {
-            this.port.write(text +"\r\n");
-        } catch (error) {
-            console.log(error);
-        }
-    }
-}
-
-/**
- * 시리얼 포트를 열고, 시리얼 포트로부터 데이터를 읽거나 쓰는 등의 기능을 제공한다.
- */
+// ----------------------------------------------------------------------------
+// 시리얼 제어 객체
+// ----------------------------------------------------------------------------
 const seiral = {
-    setBoardType(boardInfo) {
-        boardInfo.includes("esp32") ? boardType = "Pro" : boardType = "Zet";
-        console.log("Board Type: " + boardType);
-    },
+  setBoardType(boardInfo) {
+    boardInfo.includes("esp32") ? (boardType = "Pro") : (boardType = "Zet");
+    console.log("Board Type: " + boardType);
+  },
 
-    getBoardType() {
-        return boardType;
-    },
+  getBoardType() {
+    return boardType;
+  },
 
-    async getAsomeboard() {
-        const ports = await SerialPort.list();
-        console.log(ports);
-        return ports.find((port) =>
-            port.manufacturer &&
-            (port.manufacturer.startsWith("Silicon Labs") || port.manufacturer.startsWith("wch.cn")) || (port.vendorId === "1a86")
-        );
-    },
+  // ----------------------------------------------------------
+  // (A) connect(): 보드 검색 후 연결
+  // ----------------------------------------------------------
+  async connect() {
+    const connectStore = useConnectStore();
+    // 혹시 이미 연결되어 있으면 닫고 시작
+    this.disconnect();
 
-    async connect() {
-        const connectStore = useConnectStore();  // 이제 Pinia 스토어 사용 가능
-        this.disconnect();
-        
-        const asomeboard = await this.getAsomeboard();
-        if (asomeboard == null) {
-            this.fireErrorEvent("어썸보드를 찾을 수 없습니다.");
-            return;
-        }
+    let ports;
+    try {
+      ports = await ipcRenderer.invoke('list-serial-ports');
+      console.log("[seiral.connect] ports:", ports);
+    } catch (err) {
+      console.error("Error listing ports:", err);
+      this.fireErrorEvent("어썸보드를 찾을 수 없습니다 (목록 조회 오류).");
+      return;
+    }
 
-        serialUnit = new SerialUnit();
-        serialUnit.onOpened = () => {
-            connectStore.setMode("serial");
-            eventbus.emit("onSerialConnected");
-        };
-        serialUnit.onClosed = () => {
-            connectStore.disconnect();
-            eventbus.emit("onSerialClosed");
-        };
-        serialUnit.onReceived = (msg) => eventbus.emit("onSerialReceived", msg);
-        serialUnit.onError = (error) => this.fireErrorEvent(error);
-        serialUnit.open(asomeboard.path);
+    if (!ports || ports.length === 0) {
+      this.fireErrorEvent("어썸보드를 찾을 수 없습니다.");
+      return;
+    }
 
-        console.log("연결 완료");
-    },
-    
-    disconnect() {
-        const connectStore = useConnectStore();  // 이제 Pinia 스토어 사용 가능
-        if (serialUnit != null) {
-            serialUnit.close();
-            serialUnit = null;
-        }
+    // '어썸보드'로 추정되는 포트 찾기
+    const asomeboard = ports.find((port) =>
+      (port.manufacturer && (
+        port.manufacturer.startsWith("Silicon Labs") ||
+        port.manufacturer.startsWith("wch.cn")
+      )) ||
+      (port.vendorId === "1a86")
+    );
+    if (!asomeboard) {
+      this.fireErrorEvent("어썸보드를 찾을 수 없습니다 (조건 불일치).");
+      return;
+    }
 
-        if (connectStore.mode === 'ble') {
-            ble.disconnect();
-        }
+    // 포트 열기
+    try {
+      const result = await ipcRenderer.invoke('open-serial-port', {
+        portPath: asomeboard.path,
+      });
+      if (!result || !result.success) {
+        this.fireErrorEvent("어썸보드에 연결할 수가 없습니다.");
+        return;
+      }
 
-        connectStore.disconnect();
-    },
+      // 연결 성공
+      console.log("[seiral.connect] 포트 연결 완료:", asomeboard.path);
+      // Pinia 스토어에 모드=serial, connectionState=connected
+      connectStore.setMode("serial");
+      connectStore.connected();
 
-    list() {
-        SerialPort.list().then(console.log);
-    },
+      // eventbus
+      eventbus.emit("onSerialConnected");
 
-    write(text) {
-        const connectStore = useConnectStore();  // 이제 Pinia 스토어 사용 가능
-        if (connectStore.mode === 'ble') {
-            ble.writeLn(text);
-        } else if (connectStore.mode === 'serial' && serialUnit != null) {
-            text = this.encodeKorean(text);
-            serialUnit.write(text);
-        }
-    },
+      // 필요하다면 보드 버전 요청
+      // this.writeLn("import os; os.uname()");
+    } catch (error) {
+      console.error("Error opening port:", error);
+      this.fireErrorEvent("어썸보드에 연결할 수가 없습니다.");
+    }
+  },
 
-    writeLn(text) {
-        const connectStore = useConnectStore();  // 이제 Pinia 스토어 사용 가능
-        if (connectStore.mode === 'ble') {
-            ble.writeLn(text);
-        } else if (connectStore.mode === 'serial' && serialUnit != null) {
-            text = this.encodeKorean(text);
-            serialUnit.writeLn(text);
-        }
-    },
+  // ----------------------------------------------------------
+  // (B) disconnect(): 포트 닫기
+  // ----------------------------------------------------------
+  disconnect() {
+    const connectStore = useConnectStore();
+    if (connectStore.mode === 'ble') {
+      ble.disconnect();
+    }
 
-    encodeKorean(text) {
-        if (text !== undefined && text !== null) {
-            text = text.replace(/[ㄱ-ㅎㅏ-ㅣ가-힣]/g, (match) => `{{${encodeURIComponent(match)}}}`);
-        }
-        return text;
-    },
+    // 메인 프로세스에 포트 닫기 요청
+    ipcRenderer.invoke('close-serial-port').catch((err) => {
+      console.error("Error closing serial port:", err);
+    });
 
-    writeInput(text) {
-        if (serialUnit) serialUnit.write(text+"\r\n");
-    },
-    
-    stop() {
-        this.write(String.fromCharCode(3));
-    },
+    // Pinia 스토어도 disconnected로
+    connectStore.disconnect();
+  },
 
-    reboot() {
-        this.writeLn("import machine; machine.reset()");
-    },
+  // ----------------------------------------------------------
+  // (C) 쓰기/명령 함수들
+  // ----------------------------------------------------------
+  write(text) {
+    const connectStore = useConnectStore();
+    if (connectStore.mode === 'ble') {
+      ble.writeLn(text);
+    } else if (connectStore.mode === 'serial') {
+      text = this.encodeKorean(text);
+      ipcRenderer.invoke('write-serial-port', { text }).catch(console.error);
+    }
+  },
+  writeLn(text) {
+    this.write(text + "\r\n");
+  },
 
-    format() {
-        this.writeLn("import os; import flashbdev; os.VfsFat.mkfs(flashbdev.bdev)");
-        this.writeLn("import machine; machine.reset()");
-    },
+  encodeKorean(text) {
+    if (text !== undefined && text !== null) {
+      text = text.replace(/[ㄱ-ㅎㅏ-ㅣ가-힣]/g, (match) => `{{${encodeURIComponent(match)}}}`);
+    }
+    return text;
+  },
 
-    listFiles() {
-        this.write(codeListFiles);
-    },
+  // ----------------------------------------------------------
+  // (D) runCode 등
+  // ----------------------------------------------------------
+  async runCode(codes) {
+    console.log("runCode", codes);
+    this.writeLn(`_codes_ = ""`);
+    for (let code of codes.replaceAll("\r", "").split("\n")) {
+      code = code.replace(/\\/gi, '\\\\');
+      code = code.replace(/'/gi, "\\'");
+      await new Promise((resolve) => setTimeout(resolve, 100));
+      this.writeLn(`_codes_ = _codes_ + '${code}\\n'`);
+    }
+    this.writeLn(`exec(_codes_)\r\n`);
+  },
 
-    viewFile(filename) {
-        this.runCode(codeViewFile(filename));
-    },
+  listFiles() {
+    this.write(codeListFiles);
+  },
+  viewFile(filename) {
+    this.runCode(codeViewFile(filename));
+  },
+  runFile(filename) {
+    this.runCode(codeRunFile(filename));
+  },
+  deleteFile(filename) {
+    this.runCode(codeDeleteFile(filename));
+  },
 
-    runFile(filename) {
-        this.runCode(codeRunFile(filename));
-    },
+  stop() {
+    this.write(String.fromCharCode(3)); // Ctrl+C
+  },
+  reboot() {
+    this.writeLn("import machine; machine.reset()");
+  },
+  format() {
+    this.writeLn("import os; import flashbdev; os.VfsFat.mkfs(flashbdev.bdev)");
+    this.writeLn("import machine; machine.reset()");
+  },
 
-    deleteFile(filename) {
-        this.runCode(codeDeleteFile(filename));
-    },
+  fireErrorEvent(msg) {
+    eventbus.emit("onError", msg);
+    Notify.create({
+      color: "deep-orange",
+      textColor: "white",
+      message: msg,
+    });
+  },
 
-    async runCode(codes) {
-        console.log("runCode", codes);
-
-        this.writeLn( `_codes_ = ""`);
-        for (let code of codes.replaceAll("\r", "").split("\n")) {
-            // TODO: 파이썬 코드의 주석을 삭제한다. 특히 한글 주석은 보드에 에러를 유발할 수 있다.
-            // sLine := RemoveComment(sLine);
-
-            // TODO: 델파이와 달라서 필요 없을 듯. 확인 후  삭제
-            // sLine := Space2Tab(Lines[Loop]);
-            // sLine := StringReplace(sLine, #9, '\t', [rfReplaceAll]);
-            // code = code.replace(/{mod}/gi, "%");
-            code = code.replace(/@@NOW/gi, currentTime);
-
-            code = code.replace(/\\/gi, '\\\\');
-            code = code.replace(/'/gi, "\\'");
-
-            
-            await new Promise(resolve => setTimeout(resolve, 100)); 
-            
-            // if (code.startsWith("Code=Input/Text=")) {
-            //     code = code.trim();
-            //     code = code.split("=")[2];
-            //     code = code.split("/")[0];
-                
-            //     this.writeLn(code);
-            //     return;
-            // }
-            
-            this.writeLn(`_codes_ = _codes_ + '${code}\\n'`);
-        }
-
-
-        this.writeLn(`exec(_codes_)\r\n`);
-    },
-
-    fireErrorEvent(msg) {
-        eventbus.emit("onError", msg);
-        Notify.create({
-            color: "deep-orange",
-            textColor: "white",
-            message: msg,
-        });
-    },
-
-    audioWrite(filename, path) {
-        fs.readFile(path, (err, data) => {
-            if (err) throw err;
-            data = data.slice(44);
-            speakerManager.save(filename,data.toString('base64'));
-        }); 
-    },
-}
+  audioWrite(filename, path) {
+    fs.readFile(path, (err, data) => {
+      if (err) throw err;
+      data = data.slice(44);
+      speakerManager.save(filename, data.toString('base64'));
+    });
+  },
+};
 
 export default seiral;
 
-const codeListFiles =
+// 파이썬 코드
+const codeListFiles = 
 `import os\r\n
 _codes_ = ""\r\n
-_codes_ = _codes_ + 'files = os.listdir("")\\n'\r\n
-_codes_ = _codes_ + 'count = 0\\n'\r\n
-_codes_ = _codes_ + 'for file in files:\\n'\r\n
-_codes_ = _codes_ + '    if file == "system.run.temp.py":\\n'\r\n
-_codes_ = _codes_ + '        continue\\n'\r\n
-_codes_ = _codes_ + '    count = count + 1\\n'\r\n
-_codes_ = _codes_ + '    print(file)\\n'\r\n
-_codes_ = _codes_ + 'print(count, "files")\\n'\r\n
+_codes_ = _codes_ + 'files = os.listdir("")\\n'\\r\\n
+_codes_ = _codes_ + 'count = 0\\n'\\r\\n
+_codes_ = _codes_ + 'for file in files:\\n'\\r\\n
+_codes_ = _codes_ + '    if file == "system.run.temp.py":\\n'\\r\\n
+_codes_ = _codes_ + '        continue\\n'\\r\\n
+_codes_ = _codes_ + '    count = count + 1\\n'\\r\\n
+_codes_ = _codes_ + '    print(file)\\n'\\r\\n
+_codes_ = _codes_ + 'print(count, "files")\\n'\\r\\n
 exec(_codes_)\r\n`;
 
 function codeViewFile(filename) {
-    return `print("### System.Start.View")
+  return `print("### System.Start.View")
 f = open("${filename}", "r")
 while True:
     line = f.readline()
@@ -310,23 +234,9 @@ while True:
 f.close()
 print("### System.End.View")`;
 }
-
 function codeRunFile(filename) {
-    return `import disk;disk.run('${filename}')\r\n`;
+  return `import disk;disk.run('${filename}')\r\n`;
 }
-
 function codeDeleteFile(filename) {
-    return `import os; os.remove('${filename}')\r\n`;
-}
-
-
-function currentTime() {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const seconds = String(now.getSeconds()).padStart(2, '0');
-    return `(${year}, ${month}, ${day}, 0, ${hours}, ${minutes}, ${seconds}, 0)`;
+  return `import os; os.remove('${filename}')\r\n`;
 }
