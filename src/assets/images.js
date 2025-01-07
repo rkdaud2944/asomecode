@@ -3,6 +3,10 @@ import logo2 from "@/assets/images/logo/logo2.png";
 import logo from "@/assets/images/logo/logo.png";
 import logoBlockWhite from "@/assets/images/logo/logo_block_white.png";
 
+import asomebotBtnImg from "@/assets/images/bot.png";
+import asomekitBtnImg from "@/assets/images/kit.png";
+import asomecarBtnImg from "@/assets/images/car.png";
+
 import connect from "@/assets/images/controls/connect.png";
 import connectBtn from "@/assets/images/controls/connect-btn.png";
 import editor from "@/assets/images/controls/editor.png";
@@ -108,6 +112,10 @@ export default {
     logo2,
     logo,
     logoBlockWhite,
+    
+    asomebotBtnImg,
+    asomekitBtnImg,
+    asomecarBtnImg,
 
     connect,
     connectBtn,
