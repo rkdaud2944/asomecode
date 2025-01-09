@@ -1,6 +1,6 @@
 {
   "name": "AsomeCODE",
-  "version": "2.0.3",
+  "version": "2.0.4-test2",
   "private": true,
   "scripts": {
     "test:unit": "vue-cli-service test:unit",
