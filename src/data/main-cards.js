@@ -1,8 +1,8 @@
 export const cards = [
     {
-        age: "초등 이상", 
+        age: "Beginner", 
         title: "Asomekit", 
-        description: "IoT 스마트 키트", 
+        description: "IoT Smart Kit", 
         chapter: "32차", 
         image: require("@/assets/images/common/main_kit.png"), 
         bgColor: '#F0F0F0', 
@@ -28,9 +28,9 @@ export const cards = [
         clickTxtChapter: '#3E3A39', 
     },
     {
-        age: "초등 이상", 
+        age: "Beginner", 
         title: "Asomebot", 
-        description: "춤추는 이족보행로봇",
+        description: "Dancing Biped Robot",
         chapter: "15차", 
         image: require("@/assets/images/common/main_bot.png"),
         bgColor: '#F0F0F0', 
@@ -56,9 +56,9 @@ export const cards = [
         clickTxtChapter: '#3E3A39', 
     },
     {
-        age: "초등 이상", 
+        age: "Beginner", 
         title: "Asomecar", 
-        description: "스마트 자율주행 자동차", 
+        description: "Smart Self-Driving Car", 
         chapter: "14차", 
         image: require("@/assets/images/common/main_car.png"), 
         bgColor: '#F0F0F0', 

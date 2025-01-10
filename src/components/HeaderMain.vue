@@ -18,7 +18,7 @@
         @click="connect"
       >
         <img :src="connectBtnImg" />
-        연결하기
+        Connect
       </span>
       <span
         v-else
@@ -26,21 +26,21 @@
         @click="disconnect"
       >
         <img :src="connectBtnImg" />
-        연결해제
+        Disconnect
       </span>
 
       <span class="stop-btn Pretendard-Medium" @click="stop">
         <img :src="stopBtnImg" />
-        멈추기
+        Stop
       </span>
     </div>
 
     <div class="nav">
       <span @click="goToDownload" class="NotoSansKR-Regular nav-txt">
-        <a style="cursor: pointer;">자료실</a>
+        <a style="cursor: pointer;">Resources</a>
       </span>
       <span @click="goToQna" class="NotoSansKR-Regular nav-txt">
-        <a style="cursor: pointer;">도움말</a>
+        <a style="cursor: pointer;">Help</a>
       </span>
 
       <span class="NotoSansKR-Regular hamburger-wrap nav-txt">
@@ -54,35 +54,35 @@
             </li>
             <li class="menu-cts li-connect" @click="connect">
               <img :src="connectImg" />
-              <p>연결하기</p>
+              <p>Connect</p>
             </li>
             <li class="menu-cts" @click="stop">
               <img :src="stopImg" />
-              <p>멈추기</p>
+              <p>Stop</p>
             </li>
             <li class="menu-cts" @click="openEditor('')">
               <img :src="editorImg" />
-              <p>소스편집</p>
+              <p>Code Editor</p>
             </li>
             <li class="menu-cts" @click="reboot">
               <img :src="restartImg" />
-              <p>재부팅</p>
+              <p>Reboot</p>
             </li>
             <li class="menu-cts" @click="format">
               <img :src="resetImg" />
-              <p>포맷</p>
+              <p>Format</p>
             </li>
             <li class="menu-cts" @click="toggleUpdateModal">
               <img :src="updateImg" />
-              <p>업데이트</p>
+              <p>Update</p>
             </li>
             <li class="menu-cts" @click="installDriver">
               <img :src="settingImg" />
-              <p>드라이버 설치</p>
+              <p>install Driver</p>
             </li>
             <li class="menu-cts" @click="goToBlockCoding">
               <img :src="blockImg" />
-              <p>블록코딩</p>
+              <p>Block Coding</p>
             </li>
           </ul>
         </div>
