@@ -3,7 +3,8 @@
         <div class="main-mid">
             <div>
                 <h3 class="Pretendard-ExtraBold">AsomeIT</h3>
-                <p class="Pretendard-Regular">어썸코드는 어썸아이티만의 코딩 학습 전용 프로그램입니다.</p>
+                <p class="Pretendard-Regular">AsomeCode is a coding education program exclusive to AsomeIT.</p>
+                <p class="Pretendard-Regular" style="font-size: 15px; color: red;">※ Most of the languages used in this curriculum are developed in Korean.</p>
             </div>
         </div>
         <div class="main-cts-wrap">

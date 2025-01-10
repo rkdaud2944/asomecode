@@ -6,7 +6,7 @@ Blockly.Blocks["basic_ready"] = {
   init: function () {  
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/clarify.png', 23, 23, '*'))
-      .appendField("준비");
+      .appendField("Ready");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("14A2FF");
@@ -25,7 +25,7 @@ Blockly.Blocks["basic_attention"] = {
     
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/clarify.png', 23, 23, '*'))
-      .appendField("차렷")
+      .appendField("Attention")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("14A2FF");
@@ -42,7 +42,7 @@ Blockly.Blocks["basic_motor_angle"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/clarify.png', 23, 23, '*'))
-      .appendField("모터 각도 조절");
+      .appendField("Set alignment");
 
     this.appendDummyInput()
       .appendField(new Blockly.FieldNumber(90), "number1")
@@ -73,7 +73,7 @@ Blockly.Blocks["walk_step_forward"] = {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomebot/move_forward.png', 23, 23, '*'))
       .appendField(new Blockly.FieldNumber(1), "number")
-      .appendField("걸음 앞으로 걷기")
+      .appendField("Move forward")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF9A00");
@@ -94,7 +94,7 @@ Blockly.Blocks["walk_step_back"] = {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/move_backward.png', 23, 23, '*'))
       .appendField(new Blockly.FieldNumber(1), "number")
-      .appendField("걸음 뒤로 걷기")
+      .appendField("Move backward")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF9A00");
@@ -115,7 +115,7 @@ Blockly.Blocks["walk_step_left"] = {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/turn_left.png', 23, 23, '*'))
       .appendField(new Blockly.FieldNumber(1), "number")
-      .appendField("걸음 왼쪽으로 회전")
+      .appendField("Turn left")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF9A00");
@@ -135,7 +135,7 @@ Blockly.Blocks["walk_step_right"] = {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/turn_right.png', 23, 23, '*'))
       .appendField(new Blockly.FieldNumber(1), "number")
-      .appendField("걸음 오른쪽으로 회전")
+      .appendField("Trun right")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF9A00");
@@ -154,14 +154,14 @@ Blockly.Blocks["walk_motor_angle"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/turn_right.png', 23, 23, '*'))
+      .appendField("Set angle of motor")
       .appendField(new Blockly.FieldNumber(1), "count")
-      .appendField("번 모터")
     this.appendDummyInput()
-      .appendField("각도")
+      .appendField("to")
       .appendField(new Blockly.FieldNumber(90), "angle")
-      .appendField(", 회전시간")
+      .appendField(", in")
       .appendField(new Blockly.FieldNumber(1), "secs")
-      .appendField("초")
+      // .appendField("초")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF9A00");
@@ -182,8 +182,9 @@ Blockly.Blocks["walk_all_motor_angle"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/turn_right.png', 23, 23, '*'))
-      .appendField("각 모터의 각도")
+      .appendField("Set angles")
     this.appendDummyInput()
+      .appendField("to")
       .appendField(new Blockly.FieldNumber(90), "angle1")
       .appendField(",")
       .appendField(new Blockly.FieldNumber(90), "angle2")
@@ -192,9 +193,9 @@ Blockly.Blocks["walk_all_motor_angle"] = {
       .appendField(",")
       .appendField(new Blockly.FieldNumber(90), "angle4")
     this.appendDummyInput()
-      .appendField("회전시간")
+      .appendField("in")
       .appendField(new Blockly.FieldNumber(1), "secs")
-      .appendField("초")
+      .appendField("secs.")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF9A00");
@@ -216,9 +217,9 @@ Blockly.Blocks["walk_forward"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomebot/move_forward.png', 23, 23, '*'))
-      .appendField("앞으로 걷기")
+      .appendField("Move forward")
     this.appendDummyInput()
-      .appendField("속도")
+      .appendField("speed")
       .appendField(new Blockly.FieldNumber(150), "speed1")
       .appendField(new Blockly.FieldNumber(300), "speed2")
     this.setPreviousStatement(true, null);
@@ -239,9 +240,9 @@ Blockly.Blocks["walk_back"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/move_backward.png', 23, 23, '*'))
-      .appendField("뒤로 걷기")
+      .appendField("Move backward")
     this.appendDummyInput()
-      .appendField("속도")
+      .appendField("speed")
       .appendField(new Blockly.FieldNumber(150), "speed1")
       .appendField(new Blockly.FieldNumber(300), "speed2")
     this.setPreviousStatement(true, null);
@@ -264,9 +265,9 @@ Blockly.Blocks["walk_left"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/turn_left.png', 23, 23, '*'))
-      .appendField("왼쪽으로 회전")
+      .appendField("Turn left")
     this.appendDummyInput()
-      .appendField("속도")
+      .appendField("speed")
       .appendField(new Blockly.FieldNumber(300), "speed")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -286,9 +287,9 @@ Blockly.Blocks["walk_right"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/turn_right.png', 23, 23, '*'))
-      .appendField("오른쪽으로 회전")
+      .appendField("Turn right")
     this.appendDummyInput()
-      .appendField("속도")
+      .appendField("speed")
       .appendField(new Blockly.FieldNumber(300), "speed")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -310,7 +311,7 @@ Blockly.Blocks["dance_ballet"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/ballet.png', 23, 23, '*'))
-      .appendField("발레")
+      .appendField("Ballet")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF61FF");
@@ -328,7 +329,7 @@ Blockly.Blocks["dance_wiggle"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/wiggle.png', 23, 23, '*'))
-      .appendField("위글")
+      .appendField("Wiggle")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF61FF");
@@ -348,7 +349,7 @@ Blockly.Blocks["dance_flap"] = {
     
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/flap.png', 23, 23, '*'))
-      .appendField("플랩")
+      .appendField("Flap")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF61FF");
@@ -367,7 +368,7 @@ Blockly.Blocks["dance_mouse"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/mouse.png', 23, 23, '*'))
-      .appendField("마우스")
+      .appendField("Mouse")
       .appendField(new Blockly.FieldDropdown([["left", "left"], ["right", "right"]]), "MOUSE_BUTTON");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -390,7 +391,7 @@ Blockly.Blocks["dance_warigari"] = {
     
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/warigari.png', 23, 23, '*'))
-      .appendField("와리가리")
+      .appendField("Warigari")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF61FF");
@@ -410,7 +411,7 @@ Blockly.Blocks["dance_swing"] = {
     
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/swing.png', 23, 23, '*'))
-      .appendField("스윙")
+      .appendField("Swing")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF61FF");
@@ -430,7 +431,7 @@ Blockly.Blocks["dance_right_swing"] = {
     
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/right_swing.png', 23, 23, '*'))
-      .appendField("오른쪽 스윙")
+      .appendField("Right swing")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF61FF");
@@ -450,7 +451,7 @@ Blockly.Blocks["dance_left_swing"] = {
     
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/left_swing.png', 23, 23, '*'))
-      .appendField("왼쪽 스윙")
+      .appendField("Left swing")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF61FF");
@@ -470,7 +471,7 @@ Blockly.Blocks["dance_tick_tock"] = {
     
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/tick_tock.png', 23, 23, '*'))
-      .appendField("틱톡")
+      .appendField("Tick tock")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF61FF");
@@ -490,7 +491,7 @@ Blockly.Blocks["dance_yaho"] = {
     
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/yaho.png', 23, 23, '*'))
-      .appendField("야호")
+      .appendField("Yaho")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF61FF");
@@ -510,7 +511,7 @@ Blockly.Blocks["dance_moonwalk"] = {
     
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/moonwalk.png', 23, 23, '*'))
-      .appendField("문워크")
+      .appendField("Moonwalk")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF61FF");
@@ -532,7 +533,7 @@ Blockly.Blocks["sensor_ultrasonic"] = {
     
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/common/measure_distance.png', 23, 23, '*'))
-      .appendField("초음파 센서 거리측정")
+      .appendField("Measure distance")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FFCD00");
@@ -552,7 +553,7 @@ Blockly.Blocks["sensor_hand_detection"] = {
     
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/common/measure_distance.png', 23, 23, '*'))
-      .appendField("손동작 감지 준비")
+      .appendField("Prepare motion detect")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FFCD00");
@@ -571,7 +572,7 @@ Blockly.Blocks["sensor_hand_check"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/common/measure_distance.png', 23, 23, '*'))
-      .appendField("손동작 체크")
+      .appendField("Check motion")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FFCD00");
@@ -593,7 +594,7 @@ Blockly.Blocks["sound_buzzer_on"] = {
     
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/asomebot/music.png', 23, 23, '*'))
-      .appendField("부저 켜기")
+      .appendField("Buzzer on")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("EC1961");
@@ -613,7 +614,7 @@ Blockly.Blocks["sound_buzzer_off"] = {
     
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/asomebot/music.png', 23, 23, '*'))
-      .appendField("부저 끄기")
+      .appendField("Buzzer off")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("EC1961");
@@ -633,13 +634,13 @@ Blockly.Blocks["sound_bot_hz"] = {
     
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/asomebot/music.png', 23, 23, '*'))
-      .appendField("주파수로 소리내기")
+      .appendField("Make sound of")
     this.appendDummyInput()
-      .appendField("주파수")
+      // .appendField("주파수")
       .appendField(new Blockly.FieldNumber(0), "tone")
-      .appendField("Hz, 연주시간")
+      .appendField("Hz, for")
       .appendField(new Blockly.FieldNumber(1), "secs")
-      .appendField("초")
+      .appendField("seconds.")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("EC1961");
@@ -660,9 +661,9 @@ Blockly.Blocks["sound_bot_scale"] = {
   init: function () { 
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/asomebot/music.png', 23, 23, '*'))
-      .appendField("음계로 소리내기")
+      .appendField("Play")
     this.appendDummyInput()
-      .appendField("음계")
+      // .appendField("음계")
       .appendField(new Blockly.FieldDropdown([
         ["C", "C"],["C#", "C#"],
         ["D", "D"],["D#", "D#"],
@@ -673,11 +674,11 @@ Blockly.Blocks["sound_bot_scale"] = {
         ["A", "A"],["A#", "A#"],
         ["Ab", "Ab"],["B", "B"],
         ["Bb", "Bb"]]), "scale_button")
-      .appendField(",옥타브")
+      .appendField(", Octave")
       .appendField(new Blockly.FieldNumber(1), "octave")
-      .appendField(",연주시간")
+      .appendField(", for")
       .appendField(new Blockly.FieldNumber(1), "secs")
-      .appendField("초")
+      .appendField("seconds.")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("EC1961");
@@ -756,17 +757,17 @@ javascriptGenerator["sound_bot_scale"] = function (block) {
 
 Blockly.Blocks["advance_waiting"] = {
   init: function () {
-    
+
     this.appendDummyInput()
-      .appendField("기다리기")
+      .appendField("Delay")
       .appendField(new Blockly.FieldNumber(1), "secs")
-      .appendField("초")
+      .appendField("secs.")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("55A55B");
     this.setTooltip("buy id");
     this.setHelpUrl("https://example.com");
-    
+
   },
 };
 
@@ -778,7 +779,7 @@ javascriptGenerator["advance_waiting"] = function (block) {
 
 Blockly.Blocks["advance_waiting_0.5"] = {
   init: function () {
-    
+
     this.appendDummyInput()
       .appendField("기다리기")
       .appendField(new Blockly.FieldNumber(0.5), "secs")
@@ -788,7 +789,7 @@ Blockly.Blocks["advance_waiting_0.5"] = {
     this.setColour("55A55B");
     this.setTooltip("buy id");
     this.setHelpUrl("https://example.com");
-    
+
   },
 };
 
@@ -800,7 +801,7 @@ javascriptGenerator["advance_waiting_0.5"] = function (block) {
 
 Blockly.Blocks["advance_waiting_0.1"] = {
   init: function () {
-    
+
     this.appendDummyInput()
       .appendField("기다리기")
       .appendField(new Blockly.FieldNumber(0.1), "secs")
@@ -810,7 +811,7 @@ Blockly.Blocks["advance_waiting_0.1"] = {
     this.setColour("55A55B");
     this.setTooltip("buy id");
     this.setHelpUrl("https://example.com");
-    
+
   },
 };
 
@@ -822,7 +823,7 @@ javascriptGenerator["advance_waiting_0.1"] = function (block) {
 
 Blockly.Blocks["advance_waiting_5"] = {
   init: function () {
-    
+
     this.appendDummyInput()
       .appendField("기다리기")
       .appendField(new Blockly.FieldNumber(5), "secs")
@@ -832,7 +833,7 @@ Blockly.Blocks["advance_waiting_5"] = {
     this.setColour("55A55B");
     this.setTooltip("buy id");
     this.setHelpUrl("https://example.com");
-    
+
   },
 };
 
@@ -845,7 +846,7 @@ javascriptGenerator["advance_waiting_5"] = function (block) {
 
 Blockly.Blocks["advance_waiting_0.01"] = {
   init: function () {
-    
+
     this.appendDummyInput()
       .appendField("기다리기")
       .appendField(new Blockly.FieldNumber(0.01), "secs")
@@ -855,7 +856,7 @@ Blockly.Blocks["advance_waiting_0.01"] = {
     this.setColour("55A55B");
     this.setTooltip("buy id");
     this.setHelpUrl("https://example.com");
-    
+
   },
 };
 
@@ -867,7 +868,7 @@ javascriptGenerator["advance_waiting_0.01"] = function (block) {
 
 Blockly.Blocks["advance_waiting_0.02"] = {
   init: function () {
-    
+
     this.appendDummyInput()
       .appendField("기다리기")
       .appendField(new Blockly.FieldNumber(0.02), "secs")
@@ -877,7 +878,7 @@ Blockly.Blocks["advance_waiting_0.02"] = {
     this.setColour("55A55B");
     this.setTooltip("buy id");
     this.setHelpUrl("https://example.com");
-    
+
   },
 };
 
@@ -889,7 +890,7 @@ javascriptGenerator["advance_waiting_0.02"] = function (block) {
 
 Blockly.Blocks["advance_waiting_0.2"] = {
   init: function () {
-    
+
     this.appendDummyInput()
       .appendField("기다리기")
       .appendField(new Blockly.FieldNumber(0.2), "secs")
@@ -899,7 +900,7 @@ Blockly.Blocks["advance_waiting_0.2"] = {
     this.setColour("55A55B");
     this.setTooltip("buy id");
     this.setHelpUrl("https://example.com");
-    
+
   },
 };
 
@@ -912,9 +913,9 @@ javascriptGenerator["advance_waiting_0.2"] = function (block) {
 Blockly.Blocks["advance_repeat"] = {
   init: function () {
     this.appendDummyInput()
-      .appendField('반복하기')
+      .appendField('Repeat')
       .appendField(new Blockly.FieldNumber(1), "repeat_times")
-      .appendField('번');
+      .appendField('times');
     this.appendStatementInput('do_state')
       .setCheck(null);
     this.setColour("55A55B");
@@ -936,14 +937,14 @@ javascriptGenerator["advance_repeat"] = function (block) {
   let code = '';
   code += 'for count in range(' + repeat_times + '):\n';
   code += branch;
-    
+
   return code;
 };
 
 Blockly.Blocks["advance_endless_repeat"] = {
   init: function () {
     this.appendDummyInput()
-      .appendField('무한 반복')
+      .appendField('Repeat infinitely')
     this.appendStatementInput('while_state')
       .appendField('');
     this.setColour("55A55B");
@@ -958,9 +959,113 @@ javascriptGenerator["advance_endless_repeat"] = function (block) {
   return code;
 };
 
-Blockly.Blocks["advance_if_logical"] = {
-  init: function() {
-    var dropdownGenerator = function() {
+Blockly.Blocks["advance_if"] = {
+  init: function () {
+    var dropdownGenerator = function () {
+      let dropdownOptions = [
+        ["k", "k"], ["j", "j"], ["l", "l"], ["q", "q"]
+      ];
+      let addlightOption = false;
+      let addsoundOption = false;
+
+      const workspaceBlocks = Blockly.mainWorkspace.getAllBlocks();
+      for (let i = 0; i < workspaceBlocks.length; i++) {
+        if (workspaceBlocks[i].type === 'sensor_ultrasonic') {
+          dropdownOptions.push(["cm", "cm"]);
+        } else if (workspaceBlocks[i].type === 'sensor_hand_detection') {
+          dropdownOptions.push(["motion", "motion"]);
+        } else if (workspaceBlocks[i].type === 'advance_repeat') {
+          dropdownOptions.push(["count", "count"]);
+        } else if (workspaceBlocks[i].type === 'message') {
+          dropdownOptions.push(["msg", "msg"]);
+        } else if (workspaceBlocks[i].type === 'get_weather') {
+          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"]["weather", "weather"]);
+        } else if (workspaceBlocks[i].type === 'prepare_button_ready') {
+          dropdownOptions.push(["bt", "bt"]);
+        } else if (workspaceBlocks[i].type === 'prepare_buzzer_ready') {
+          dropdownOptions.push(["buzzer", "buzzer"]);
+        } else if (workspaceBlocks[i].type === 'prepare_tm_ready') {
+          dropdownOptions.push(["bt", "bt"]);
+        } else if (workspaceBlocks[i].type === 'prepare_vibration_ready') {
+          dropdownOptions.push(["vs", "vs"]);
+        } else if (workspaceBlocks[i].type === 'led_ledtube_time') {
+          dropdownOptions.push(["h", "h"], ["m", "m"]);
+        } else if (workspaceBlocks[i].type === 'button_push') {
+          dropdownOptions.push(["clicked", "clicked"]);
+        } else if (workspaceBlocks[i].type === 'button_info') {
+          dropdownOptions.push(["bt_value", "bt_value"]);
+        } else if (workspaceBlocks[i].type === 'sensor_humidity') {
+          dropdownOptions.push(["humidity", "humidity"]);
+        } else if (workspaceBlocks[i].type === 'sensor_temperature') {
+          dropdownOptions.push(["temperature", "temperature"]);
+        } else if (workspaceBlocks[i].type === 'sensor_water_level') {
+          dropdownOptions.push(["water", "water"]);
+        } else if (workspaceBlocks[i].type === 'sensor_brightness' || workspaceBlocks[i].type === 'sensor_brightness_complete') {
+          addlightOption = true;
+        } else if (workspaceBlocks[i].type === 'sensor_sound' || workspaceBlocks[i].type === 'sensor_sound_complete') {
+          addsoundOption = true;
+        } else if (workspaceBlocks[i].type === 'sensor_soil_humidity') {
+          dropdownOptions.push(["moisture", "moisture"]);
+        } else if (workspaceBlocks[i].type === 'sensor_vibration_sensor') {
+          dropdownOptions.push(["vibration", "vibration"]);
+        } else if (workspaceBlocks[i].type === 'asomecar_switch_check') {
+          dropdownOptions.push(["sw", "sw"]);
+        } else if (workspaceBlocks[i].type === 'asomecar_button_check') {
+          dropdownOptions.push(["btn", "btn"]);
+        } else if (workspaceBlocks[i].type === 'asomecar_sensor_ultrasonic') {
+          dropdownOptions.push(["cm", "cm"]);
+        } else if (workspaceBlocks[i].type === 'potentimeter_check') {
+          dropdownOptions.push(["pt", "pt"]);
+        } else if (workspaceBlocks[i].type === 'cds_check') {
+          dropdownOptions.push(["cds", "cds"]);
+        } else if (workspaceBlocks[i].type === 'asome_message') {
+          dropdownOptions.push(["msg", "msg"]);
+        }
+      }
+      if (addsoundOption) {
+        dropdownOptions.push(["sound", "sound"]);
+      }
+      if (addlightOption) {
+        dropdownOptions.push(["light", "light"]);
+      }
+      return dropdownOptions;
+    };
+
+    this.appendDummyInput()
+      .appendField('If')
+      .appendField(new Blockly.FieldDropdown(dropdownGenerator), "variable")
+      .appendField(new Blockly.FieldDropdown([
+        ["==", "=="],
+        [">", ">"],
+        ["<", "<"],
+        [">=", ">="],
+        ["<=", "<="],
+        ["!=", "!="]
+      ]), "inequality")
+    this.appendValueInput("if_value")
+      .setCheck("null");
+    this.appendStatementInput('if_state')
+      .appendField('');
+    this.setColour("55A55B");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setInputsInline(true);
+  }
+};
+
+javascriptGenerator["advance_if"] = function (block) {
+  const variable = block.getFieldValue("variable");
+  const ineq = block.getFieldValue('inequality');
+
+  const code = `if ${variable} ${ineq} ` + javascriptGenerator.valueToCode(block, 'if_value', javascriptGenerator.ORDER_ATOMIC) + ':\n' + javascriptGenerator.statementToCode(block, 'if_state');
+
+  return code;
+};
+
+
+Blockly.Blocks["advance_elseif"] = {
+  init: function () {
+    var dropdownGenerator = function () {
       let dropdownOptions = [
         ["k", "k"], ["j", "j"], ["l", "l"], ["q", "q"],
       ];
@@ -968,48 +1073,161 @@ Blockly.Blocks["advance_if_logical"] = {
       let addsoundOption = false;
 
       const workspaceBlocks = Blockly.mainWorkspace.getAllBlocks();
-      for(let i = 0; i < workspaceBlocks.length; i++) {
-        const blockType = workspaceBlocks[i].type;
-        if(blockType === 'sensor_ultrasonic') {
+      for (let i = 0; i < workspaceBlocks.length; i++) {
+        if (workspaceBlocks[i].type === 'sensor_ultrasonic') {
           dropdownOptions.push(["cm", "cm"]);
-        } else if(blockType === 'sensor_hand_detection') {
+        } else if (workspaceBlocks[i].type === 'sensor_hand_detection') {
           dropdownOptions.push(["motion", "motion"]);
-        } else if(blockType === 'advance_repeat') {
+        } else if (workspaceBlocks[i].type === 'advance_repeat') {
           dropdownOptions.push(["count", "count"]);
-        } else if(blockType === 'message') {
+        } else if (workspaceBlocks[i].type === 'message') {
           dropdownOptions.push(["msg", "msg"]);
-        } else if(blockType === 'get_weather') {
-          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"], ["weather", "weather"]);
-        } else if(blockType === 'prepare_button_ready') {
+        } else if (workspaceBlocks[i].type === 'get_weather') {
+          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"]["weather", "weather"]);
+        } else if (workspaceBlocks[i].type === 'prepare_button_ready') {
           dropdownOptions.push(["bt", "bt"]);
-        } else if(blockType === 'prepare_buzzer_ready') {
+        } else if (workspaceBlocks[i].type === 'prepare_buzzer_ready') {
           dropdownOptions.push(["buzzer", "buzzer"]);
-        } else if(blockType === 'prepare_tm_ready') {
+        } else if (workspaceBlocks[i].type === 'prepare_tm_ready') {
           dropdownOptions.push(["bt", "bt"]);
-        } else if(blockType === 'prepare_vibration_ready') {
+        } else if (workspaceBlocks[i].type === 'prepare_vibration_ready') {
           dropdownOptions.push(["vs", "vs"]);
-        } else if(blockType === 'led_ledtube_time') {
+        } else if (workspaceBlocks[i].type === 'led_ledtube_time') {
           dropdownOptions.push(["h", "h"], ["m", "m"]);
-        } else if(blockType === 'button_push') {
+        } else if (workspaceBlocks[i].type === 'button_push') {
           dropdownOptions.push(["clicked", "clicked"]);
-        } else if(blockType === 'button_info') {
+        } else if (workspaceBlocks[i].type === 'button_info') {
           dropdownOptions.push(["bt_value", "bt_value"]);
-        } else if(blockType === 'sensor_humidity') {
+        } else if (workspaceBlocks[i].type === 'sensor_humidity') {
           dropdownOptions.push(["humidity", "humidity"]);
-        } else if(blockType === 'sensor_temperature') {
+        } else if (workspaceBlocks[i].type === 'sensor_temperature') {
           dropdownOptions.push(["temperature", "temperature"]);
-        } else if(blockType === 'sensor_water_level') {
+        } else if (workspaceBlocks[i].type === 'sensor_water_level') {
           dropdownOptions.push(["water", "water"]);
-        } else if(blockType === 'sensor_brightness' ||  blockType === 'sensor_brightness_complete') {
+        } else if (workspaceBlocks[i].type === 'sensor_brightness' || workspaceBlocks[i].type === 'sensor_brightness_complete') {
           addlightOption = true;
-        } else if(blockType === 'sensor_sound' ||  blockType === 'sensor_sound_complete') {
+        } else if (workspaceBlocks[i].type === 'sensor_sound' || workspaceBlocks[i].type === 'sensor_sound_complete') {
           addsoundOption = true;
-        } else if(blockType === 'sensor_soil_humidity') {
+        } else if (workspaceBlocks[i].type === 'sensor_soil_humidity') {
           dropdownOptions.push(["moisture", "moisture"]);
-        } else if(blockType === 'sensor_vibration_sensor') {
+        } else if (workspaceBlocks[i].type === 'sensor_vibration_sensor') {
           dropdownOptions.push(["vibration", "vibration"]);
-        } else if(blockType === 'line_ready') {
-          dropdownOptions.push(["a", "a"], ["b", "b"]);
+        } else if (workspaceBlocks[i].type === 'asomecar_switch_check') {
+          dropdownOptions.push(["sw", "sw"]);
+        } else if (workspaceBlocks[i].type === 'asomecar_button_check') {
+          dropdownOptions.push(["btn", "btn"]);
+        } else if (workspaceBlocks[i].type === 'asomecar_sensor_ultrasonic') {
+          dropdownOptions.push(["cm", "cm"]);
+        } else if (workspaceBlocks[i].type === 'potentimeter_check') {
+          dropdownOptions.push(["pt", "pt"]);
+        } else if (workspaceBlocks[i].type === 'cds_check') {
+          dropdownOptions.push(["cds", "cds"]);
+        } else if (workspaceBlocks[i].type === 'asome_message') {
+          dropdownOptions.push(["msg", "msg"]);
+        }
+      }
+      if (addsoundOption) {
+        dropdownOptions.push(["sound", "sound"]);
+      }
+      if (addlightOption) {
+        dropdownOptions.push(["light", "light"]);
+      }
+      return dropdownOptions;
+    };
+
+    this.appendDummyInput()
+      .appendField('If')
+      .appendField(new Blockly.FieldDropdown(dropdownGenerator), "variable")
+      .appendField(new Blockly.FieldDropdown([
+        ["==", "=="],
+        [">", ">"],
+        ["<", "<"],
+        [">=", ">="],
+        ["<=", "<="],
+        ["!=", "!="]
+      ]), "inequality")
+    this.appendValueInput("if_value")
+      .setCheck("null")
+    this.appendStatementInput('if_state')
+      .appendField('')
+    this.appendStatementInput('if_state_else')
+      .appendField('Else');
+    this.setColour("55A55B");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setInputsInline(true);
+  }
+};
+
+javascriptGenerator["advance_elseif"] = function (block) {
+  const variable = block.getFieldValue("variable");
+  const ineq = block.getFieldValue('inequality');
+
+  const code = `if ${variable} ${ineq} ` + javascriptGenerator.valueToCode(block, 'if_value', javascriptGenerator.ORDER_ATOMIC) + ':\n' + javascriptGenerator.statementToCode(block, 'if_state') + 'else:\n' + javascriptGenerator.statementToCode(block, 'if_state_else');
+
+  return code;
+};
+Blockly.Blocks["advance_if_logical"] = {
+  init: function() {
+    var dropdownGenerator = function() {
+      let dropdownOptions = [
+        ["k", "k"], ["j", "j"], ["l", "l"], ["q", "q"]
+      ];
+      let addlightOption = false;
+      let addsoundOption = false;
+
+      const workspaceBlocks = Blockly.mainWorkspace.getAllBlocks();
+      for(let i = 0; i < workspaceBlocks.length; i++) {
+        if (workspaceBlocks[i].type === 'sensor_ultrasonic') {
+          dropdownOptions.push(["cm", "cm"]);
+        } else if (workspaceBlocks[i].type === 'sensor_hand_detection') {
+          dropdownOptions.push(["motion", "motion"]);
+        } else if (workspaceBlocks[i].type === 'advance_repeat') {
+          dropdownOptions.push(["count", "count"]);
+        } else if (workspaceBlocks[i].type === 'message') {
+          dropdownOptions.push(["msg", "msg"]);
+        } else if (workspaceBlocks[i].type === 'get_weather') {
+          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"]["weather", "weather"]);
+        } else if (workspaceBlocks[i].type === 'prepare_button_ready') {
+          dropdownOptions.push(["bt", "bt"]);
+        } else if (workspaceBlocks[i].type === 'prepare_buzzer_ready') {
+          dropdownOptions.push(["buzzer", "buzzer"]);
+        } else if (workspaceBlocks[i].type === 'prepare_tm_ready') {
+          dropdownOptions.push(["bt", "bt"]);
+        } else if (workspaceBlocks[i].type === 'prepare_vibration_ready') {
+          dropdownOptions.push(["vs", "vs"]);
+        } else if (workspaceBlocks[i].type === 'led_ledtube_time') {
+          dropdownOptions.push(["h", "h"], ["m", "m"]);
+        } else if (workspaceBlocks[i].type === 'button_push') {
+          dropdownOptions.push(["clicked", "clicked"]);
+        } else if (workspaceBlocks[i].type === 'button_info') {
+          dropdownOptions.push(["bt_value", "bt_value"]);
+        } else if (workspaceBlocks[i].type === 'sensor_humidity') {
+          dropdownOptions.push(["humidity", "humidity"]);
+        } else if (workspaceBlocks[i].type === 'sensor_temperature') {
+          dropdownOptions.push(["temperature", "temperature"]);
+        } else if (workspaceBlocks[i].type === 'sensor_water_level') {
+          dropdownOptions.push(["water", "water"]);
+        } else if (workspaceBlocks[i].type === 'sensor_brightness' || workspaceBlocks[i].type === 'sensor_brightness_complete') {
+          addlightOption = true;
+        } else if (workspaceBlocks[i].type === 'sensor_sound' || workspaceBlocks[i].type === 'sensor_sound_complete') {
+          addsoundOption = true;
+        } else if (workspaceBlocks[i].type === 'sensor_soil_humidity') {
+          dropdownOptions.push(["moisture", "moisture"]);
+        } else if (workspaceBlocks[i].type === 'sensor_vibration_sensor') {
+          dropdownOptions.push(["vibration", "vibration"]);
+        } else if (workspaceBlocks[i].type === 'asomecar_switch_check') {
+          dropdownOptions.push(["sw", "sw"]);
+        } else if (workspaceBlocks[i].type === 'asomecar_button_check') {
+          dropdownOptions.push(["btn", "btn"]);
+        } else if (workspaceBlocks[i].type === 'asomecar_sensor_ultrasonic') {
+          dropdownOptions.push(["cm", "cm"]);
+        } else if (workspaceBlocks[i].type === 'potentimeter_check') {
+          dropdownOptions.push(["pt", "pt"]);
+        } else if (workspaceBlocks[i].type === 'cds_check') {
+          dropdownOptions.push(["cds", "cds"]);
+        } else if (workspaceBlocks[i].type === 'asome_message') {
+          dropdownOptions.push(["msg", "msg"]);
         }
       }
       if(addsoundOption) {
@@ -1022,7 +1240,7 @@ Blockly.Blocks["advance_if_logical"] = {
     };
 
     this.appendDummyInput()
-      .appendField('만약에')
+      .appendField('If')
       .appendField(new Blockly.FieldDropdown(dropdownGenerator), "variable1")
       .appendField(new Blockly.FieldDropdown([
         ["==", "=="],
@@ -1036,8 +1254,8 @@ Blockly.Blocks["advance_if_logical"] = {
       .setCheck("null");
     this.appendDummyInput()
       .appendField(new Blockly.FieldDropdown([
-        ["그리고", "and"],
-        ["또는", "or"]
+        ["and", "and"],
+        ["or", "or"]
       ]), "logical_operator")
       .appendField(new Blockly.FieldDropdown(dropdownGenerator), "variable2")
       .appendField(new Blockly.FieldDropdown([
@@ -1092,216 +1310,6 @@ javascriptGenerator["advance_if_logical"] = function(block) {
   return code;
 };
 
-Blockly.Blocks["advance_if"] = {
-  init: function() {
-    var dropdownGenerator = function() {
-      let dropdownOptions = [
-        ["k", "k"], ["j", "j"], ["l", "l"], ["q", "q"],
-      ];
-      let addlightOption = false;
-      let addsoundOption = false;
-
-      const workspaceBlocks = Blockly.mainWorkspace.getAllBlocks();
-      for(let i = 0; i < workspaceBlocks.length; i++) {
-        const blockType = workspaceBlocks[i].type;
-        if(blockType === 'sensor_ultrasonic') {
-          dropdownOptions.push(["cm", "cm"]);
-        } else if(blockType === 'sensor_hand_detection') {
-          dropdownOptions.push(["motion", "motion"]);
-        } else if(blockType === 'advance_repeat') {
-          dropdownOptions.push(["count", "count"]);
-        } else if(blockType === 'message') {
-          dropdownOptions.push(["msg", "msg"]);
-        } else if(blockType === 'get_weather') {
-          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"], ["weather", "weather"]);
-        } else if(blockType === 'prepare_button_ready') {
-          dropdownOptions.push(["bt", "bt"]);
-        } else if(blockType === 'prepare_buzzer_ready') {
-          dropdownOptions.push(["buzzer", "buzzer"]);
-        } else if(blockType === 'prepare_tm_ready') {
-          dropdownOptions.push(["bt", "bt"]);
-        } else if(blockType === 'prepare_vibration_ready') {
-          dropdownOptions.push(["vs", "vs"]);
-        } else if(blockType === 'led_ledtube_time') {
-          dropdownOptions.push(["h", "h"], ["m", "m"]);
-        } else if(blockType === 'button_push') {
-          dropdownOptions.push(["clicked", "clicked"]);
-        } else if(blockType === 'button_info') {
-          dropdownOptions.push(["bt_value", "bt_value"]);
-        } else if(blockType === 'sensor_humidity') {
-          dropdownOptions.push(["humidity", "humidity"]);
-        } else if(blockType === 'sensor_temperature') {
-          dropdownOptions.push(["temperature", "temperature"]);
-        } else if(blockType === 'sensor_water_level') {
-          dropdownOptions.push(["water", "water"]);
-        } else if(blockType === 'sensor_brightness' ||  blockType === 'sensor_brightness_complete') {
-          addlightOption = true;
-        } else if(blockType === 'sensor_sound' ||  blockType === 'sensor_sound_complete') {
-          addsoundOption = true;
-        } else if(blockType === 'sensor_soil_humidity') {
-          dropdownOptions.push(["moisture", "moisture"]);
-        } else if(blockType === 'sensor_vibration_sensor') {
-          dropdownOptions.push(["vibration", "vibration"]);
-        } else if(blockType === 'line_ready') {
-          dropdownOptions.push(["a", "a"], ["b", "b"]);
-        }
-      }
-      if(addsoundOption) {
-        dropdownOptions.push(["sound", "sound"]);
-      }
-      if(addlightOption) {
-        dropdownOptions.push(["light", "light"]);
-      }
-      return dropdownOptions;
-    };
-
-    this.appendDummyInput()
-      .appendField('만약에')
-      .appendField(new Blockly.FieldDropdown(dropdownGenerator), "variable")
-      .appendField(new Blockly.FieldDropdown([
-        ["==", "=="],
-        [">", ">"],
-        ["<", "<"],
-        [">=", ">="],
-        ["<=", "<="],
-        ["!=", "!="]
-      ]), "inequality");
-    this.appendValueInput("if_value")
-      .setCheck("null");
-    this.appendStatementInput('if_state')
-      .appendField('');
-    this.setColour("#55A55B");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, "String");
-    this.setInputsInline(true);
-  }
-};
-
-javascriptGenerator["advance_if"] = function(block) {
-  const variable = block.getFieldValue("variable");
-  const ineq = block.getFieldValue('inequality');
-  let variableCode = '';
-
-  if (variable === 'a' || variable === 'b') {
-    variableCode = `${variable}.read()`;
-  } else {
-    variableCode = variable;
-  }
-
-  const valueCode = javascriptGenerator.valueToCode(block, 'if_value', javascriptGenerator.ORDER_ATOMIC);
-  const statements = javascriptGenerator.statementToCode(block, 'if_state');
-  
-  const code = `if ${variableCode} ${ineq} ${valueCode}:\n${statements}`;
-  
-  return code;
-};
-
-Blockly.Blocks["advance_elseif"] = {
-  init: function() {
-    var dropdownGenerator = function() {
-      let dropdownOptions = [
-        ["k", "k"], ["j", "j"], ["l", "l"], ["q", "q"]
-      ];
-      let addlightOption = false;
-      let addsoundOption = false;
-
-      const workspaceBlocks = Blockly.mainWorkspace.getAllBlocks();
-      for(let i = 0; i < workspaceBlocks.length; i++) {
-        const blockType = workspaceBlocks[i].type;
-        if(blockType === 'sensor_ultrasonic') {
-          dropdownOptions.push(["cm", "cm"]);
-        } else if(blockType === 'sensor_hand_detection') {
-          dropdownOptions.push(["motion", "motion"]);
-        } else if(blockType === 'advance_repeat') {
-          dropdownOptions.push(["count", "count"]);
-        } else if(blockType === 'message') {
-          dropdownOptions.push(["msg", "msg"]);
-        } else if(blockType === 'get_weather') {
-          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"], ["weather", "weather"]);
-        } else if(blockType === 'prepare_button_ready') {
-          dropdownOptions.push(["bt", "bt"]);
-        } else if(blockType === 'prepare_buzzer_ready') {
-          dropdownOptions.push(["buzzer", "buzzer"]);
-        } else if(blockType === 'prepare_tm_ready') {
-          dropdownOptions.push(["bt", "bt"]);
-        } else if(blockType === 'prepare_vibration_ready') {
-          dropdownOptions.push(["vs", "vs"]);
-        } else if(blockType === 'led_ledtube_time') {
-          dropdownOptions.push(["h", "h"], ["m", "m"]);
-        } else if(blockType === 'button_push') {
-          dropdownOptions.push(["clicked", "clicked"]);
-        } else if(blockType === 'button_info') {
-          dropdownOptions.push(["bt_value", "bt_value"]);
-        } else if(blockType === 'sensor_humidity') {
-          dropdownOptions.push(["humidity", "humidity"]);
-        } else if(blockType === 'sensor_temperature') {
-          dropdownOptions.push(["temperature", "temperature"]);
-        } else if(blockType === 'sensor_water_level') {
-          dropdownOptions.push(["water", "water"]);
-        } else if(blockType === 'sensor_brightness' || blockType === 'sensor_brightness_complete') {
-          addlightOption = true;
-        } else if(blockType === 'sensor_sound' || blockType === 'sensor_sound_complete') {
-          addsoundOption = true;
-        } else if(blockType === 'sensor_soil_humidity') {
-          dropdownOptions.push(["moisture", "moisture"]);
-        } else if(blockType === 'sensor_vibration_sensor') {
-          dropdownOptions.push(["vibration", "vibration"]);
-        } else if(blockType === 'line_ready') {
-          dropdownOptions.push(["a", "a"], ["b", "b"]);
-        }
-      }
-      if(addsoundOption) {
-        dropdownOptions.push(["sound", "sound"]);
-      }
-      if(addlightOption) {
-        dropdownOptions.push(["light", "light"]);
-      }
-      return dropdownOptions;
-    };
-
-    this.appendDummyInput()
-      .appendField('만약에')
-      .appendField(new Blockly.FieldDropdown(dropdownGenerator), "variable")
-      .appendField(new Blockly.FieldDropdown([
-        ["==", "=="],
-        [">", ">"], 
-        ["<", "<"],
-        [">=", ">="],
-        ["<=", "<="],
-        ["!=", "!="]
-      ]), "inequality");
-    this.appendValueInput("if_value")
-      .setCheck("null");
-    this.appendStatementInput('if_state')
-      .appendField('');
-    this.appendStatementInput('if_state_else')
-      .appendField('아니라면');
-    this.setColour("#55A55B");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, "String");
-    this.setInputsInline(true);
-  }
-};
-
-javascriptGenerator["advance_elseif"] = function(block) {
-  const variable = block.getFieldValue("variable");
-  const ineq = block.getFieldValue('inequality');
-  let variableCode = '';
-
-  if (variable === 'a' || variable === 'b') {
-    variableCode = `${variable}.read()`;
-  } else {
-    variableCode = variable;
-  }
-
-  const valueCode = javascriptGenerator.valueToCode(block, 'if_value', javascriptGenerator.ORDER_ATOMIC);
-  const ifStatements = javascriptGenerator.statementToCode(block, 'if_state');
-  const elseStatements = javascriptGenerator.statementToCode(block, 'if_state_else');
-
-  const code = `if ${variableCode} ${ineq} ${valueCode}:\n${ifStatements}else:\n${elseStatements}`;
-  return code;
-};
-
 Blockly.Blocks["advance_elseif_logical"] = {
   init: function() {
     var dropdownGenerator = function() {
@@ -1313,47 +1321,56 @@ Blockly.Blocks["advance_elseif_logical"] = {
 
       const workspaceBlocks = Blockly.mainWorkspace.getAllBlocks();
       for(let i = 0; i < workspaceBlocks.length; i++) {
-        const blockType = workspaceBlocks[i].type;
-        if(blockType === 'sensor_ultrasonic') {
+        if (workspaceBlocks[i].type === 'sensor_ultrasonic') {
           dropdownOptions.push(["cm", "cm"]);
-        } else if(blockType === 'sensor_hand_detection') {
+        } else if (workspaceBlocks[i].type === 'sensor_hand_detection') {
           dropdownOptions.push(["motion", "motion"]);
-        } else if(blockType === 'advance_repeat') {
+        } else if (workspaceBlocks[i].type === 'advance_repeat') {
           dropdownOptions.push(["count", "count"]);
-        } else if(blockType === 'message') {
+        } else if (workspaceBlocks[i].type === 'message') {
           dropdownOptions.push(["msg", "msg"]);
-        } else if(blockType === 'get_weather') {
-          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"], ["weather", "weather"]);
-        } else if(blockType === 'prepare_button_ready') {
+        } else if (workspaceBlocks[i].type === 'get_weather') {
+          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"]["weather", "weather"]);
+        } else if (workspaceBlocks[i].type === 'prepare_button_ready') {
           dropdownOptions.push(["bt", "bt"]);
-        } else if(blockType === 'prepare_buzzer_ready') {
+        } else if (workspaceBlocks[i].type === 'prepare_buzzer_ready') {
           dropdownOptions.push(["buzzer", "buzzer"]);
-        } else if(blockType === 'prepare_tm_ready') {
+        } else if (workspaceBlocks[i].type === 'prepare_tm_ready') {
           dropdownOptions.push(["bt", "bt"]);
-        } else if(blockType === 'prepare_vibration_ready') {
+        } else if (workspaceBlocks[i].type === 'prepare_vibration_ready') {
           dropdownOptions.push(["vs", "vs"]);
-        } else if(blockType === 'led_ledtube_time') {
+        } else if (workspaceBlocks[i].type === 'led_ledtube_time') {
           dropdownOptions.push(["h", "h"], ["m", "m"]);
-        } else if(blockType === 'button_push') {
+        } else if (workspaceBlocks[i].type === 'button_push') {
           dropdownOptions.push(["clicked", "clicked"]);
-        } else if(blockType === 'button_info') {
+        } else if (workspaceBlocks[i].type === 'button_info') {
           dropdownOptions.push(["bt_value", "bt_value"]);
-        } else if(blockType === 'sensor_humidity') {
+        } else if (workspaceBlocks[i].type === 'sensor_humidity') {
           dropdownOptions.push(["humidity", "humidity"]);
-        } else if(blockType === 'sensor_temperature') {
+        } else if (workspaceBlocks[i].type === 'sensor_temperature') {
           dropdownOptions.push(["temperature", "temperature"]);
-        } else if(blockType === 'sensor_water_level') {
+        } else if (workspaceBlocks[i].type === 'sensor_water_level') {
           dropdownOptions.push(["water", "water"]);
-        } else if(blockType === 'sensor_brightness' || blockType === 'sensor_brightness_complete') {
+        } else if (workspaceBlocks[i].type === 'sensor_brightness' || workspaceBlocks[i].type === 'sensor_brightness_complete') {
           addlightOption = true;
-        } else if(blockType === 'sensor_sound' || blockType === 'sensor_sound_complete') {
+        } else if (workspaceBlocks[i].type === 'sensor_sound' || workspaceBlocks[i].type === 'sensor_sound_complete') {
           addsoundOption = true;
-        } else if(blockType === 'sensor_soil_humidity') {
+        } else if (workspaceBlocks[i].type === 'sensor_soil_humidity') {
           dropdownOptions.push(["moisture", "moisture"]);
-        } else if(blockType === 'sensor_vibration_sensor') {
+        } else if (workspaceBlocks[i].type === 'sensor_vibration_sensor') {
           dropdownOptions.push(["vibration", "vibration"]);
-        } else if(blockType === 'line_ready') {
-          dropdownOptions.push(["a", "a"], ["b", "b"]);
+        } else if (workspaceBlocks[i].type === 'asomecar_switch_check') {
+          dropdownOptions.push(["sw", "sw"]);
+        } else if (workspaceBlocks[i].type === 'asomecar_button_check') {
+          dropdownOptions.push(["btn", "btn"]);
+        } else if (workspaceBlocks[i].type === 'asomecar_sensor_ultrasonic') {
+          dropdownOptions.push(["cm", "cm"]);
+        } else if (workspaceBlocks[i].type === 'potentimeter_check') {
+          dropdownOptions.push(["pt", "pt"]);
+        } else if (workspaceBlocks[i].type === 'cds_check') {
+          dropdownOptions.push(["cds", "cds"]);
+        } else if (workspaceBlocks[i].type === 'asome_message') {
+          dropdownOptions.push(["msg", "msg"]);
         }
       }
       if(addsoundOption) {
@@ -1366,7 +1383,7 @@ Blockly.Blocks["advance_elseif_logical"] = {
     };
 
     this.appendDummyInput()
-      .appendField('만약에')
+      .appendField('If')
       .appendField(new Blockly.FieldDropdown(dropdownGenerator), "variable1")
       .appendField(new Blockly.FieldDropdown([
         ["==", "=="],
@@ -1380,8 +1397,8 @@ Blockly.Blocks["advance_elseif_logical"] = {
       .setCheck("null");
     this.appendDummyInput()
       .appendField(new Blockly.FieldDropdown([
-        ["그리고", "and"],
-        ["또는", "or"]
+        ["and", "and"],
+        ["or", "or"]
       ]), "logical_operator")
       .appendField(new Blockly.FieldDropdown(dropdownGenerator), "variable2")
       .appendField(new Blockly.FieldDropdown([
@@ -1397,7 +1414,7 @@ Blockly.Blocks["advance_elseif_logical"] = {
     this.appendStatementInput('if_state')
       .appendField('');
     this.appendStatementInput('if_state_else')
-      .appendField('아니라면');
+      .appendField('Else');
     this.setColour("#55A55B");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -1437,6 +1454,8 @@ javascriptGenerator["advance_elseif_logical"] = function(block) {
   const code = `if (${variableCode1} ${ineq1} ${valueCode1}) ${logicalOperator} (${variableCode2} ${ineq2} ${valueCode2}):\n${ifStatements}else:\n${elseStatements}`;
   return code;
 };
+
+
 // Blockly.Blocks["advance_elseif"] = {
 //   init: function () {
 //     this.appendDummyInput()
@@ -1459,7 +1478,7 @@ javascriptGenerator["advance_elseif_logical"] = function(block) {
 // };
 
 // javascriptGenerator["advance_elseif"] = function (block) {
-  
+
 //   const variable = block.getFieldValue("variable");
 //   const inq = block.getFieldValue('inequality');
 //   let vari = '';
@@ -1510,7 +1529,7 @@ javascriptGenerator["advance_elseif_logical"] = function(block) {
 Blockly.Blocks["int"] = {
   init: function () {
     this.appendDummyInput('VALUE')
-      .appendField(new Blockly.FieldNumber(1) ,"int_key")
+      .appendField(new Blockly.FieldNumber(1), "int_key")
     this.setOutput(true, 'null');
     this.setColour("55A55B");
   },
@@ -1525,7 +1544,7 @@ javascriptGenerator["int"] = function (block) {
 Blockly.Blocks["mark_int"] = {
   init: function () {
     this.appendDummyInput('VALUE')
-      .appendField(new Blockly.FieldTextInput("가"), "string_key")
+      .appendField(new Blockly.FieldTextInput("A"), "string_key")
     this.setOutput(true);
     this.setColour("55A55B");
   },
@@ -1539,113 +1558,102 @@ javascriptGenerator["mark_int"] = function (block) {
 
 Blockly.Blocks["screen"] = {
   init: function () {
-    var dropdownGenerator = function() {
+    var dropdownGenerator = function () {
       let dropdownOptions = [
         ["k", "k"], ["j", "j"], ["l", "l"], ["q", "q"]
       ];
       let addlightOption = false;
       let addsoundOption = false;
       const workspaceBlocks = Blockly.mainWorkspace.getAllBlocks();
-      for(let i = 0; i < workspaceBlocks.length; i++) {
-        const blockType = workspaceBlocks[i].type;
-        if(blockType === 'sensor_ultrasonic') {
+      for (let i = 0; i < workspaceBlocks.length; i++) {
+        if (workspaceBlocks[i].type === 'sensor_ultrasonic') {
           dropdownOptions.push(["cm", "cm"]);
-        } else if(blockType === 'sensor_hand_detection') {
+        } else if (workspaceBlocks[i].type === 'sensor_hand_detection') {
           dropdownOptions.push(["motion", "motion"]);
-        } else if(blockType === 'advance_repeat') {
+        } else if (workspaceBlocks[i].type === 'advance_repeat') {
           dropdownOptions.push(["count", "count"]);
-        } else if(blockType === 'message') {
+        } else if (workspaceBlocks[i].type === 'message') {
           dropdownOptions.push(["msg", "msg"]);
-        } else if(blockType === 'get_weather') {
-          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"], ["weather", "weather"]);
-        } else if(blockType === 'prepare_button_ready') {
+        } else if (workspaceBlocks[i].type === 'get_weather') {
+          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"]["weather", "weather"]);
+        } else if (workspaceBlocks[i].type === 'prepare_button_ready') {
           dropdownOptions.push(["bt", "bt"]);
-        } else if(blockType === 'prepare_buzzer_ready') {
+        } else if (workspaceBlocks[i].type === 'prepare_buzzer_ready') {
           dropdownOptions.push(["buzzer", "buzzer"]);
-        } else if(blockType === 'prepare_tm_ready') {
+        } else if (workspaceBlocks[i].type === 'prepare_tm_ready') {
           dropdownOptions.push(["bt", "bt"]);
-        } else if(blockType === 'prepare_vibration_ready') {
+        } else if (workspaceBlocks[i].type === 'prepare_vibration_ready') {
           dropdownOptions.push(["vs", "vs"]);
-        } else if(blockType === 'led_ledtube_time') {
+        } else if (workspaceBlocks[i].type === 'led_ledtube_time') {
           dropdownOptions.push(["h", "h"], ["m", "m"]);
-        } else if(blockType === 'button_push') {
+        } else if (workspaceBlocks[i].type === 'button_push') {
           dropdownOptions.push(["clicked", "clicked"]);
-        } else if(blockType === 'button_info') {
+        } else if (workspaceBlocks[i].type === 'button_info') {
           dropdownOptions.push(["bt_value", "bt_value"]);
-        } else if(blockType === 'sensor_humidity') {
+        } else if (workspaceBlocks[i].type === 'sensor_humidity') {
           dropdownOptions.push(["humidity", "humidity"]);
-        } else if(blockType === 'sensor_temperature') {
+        } else if (workspaceBlocks[i].type === 'sensor_temperature') {
           dropdownOptions.push(["temperature", "temperature"]);
-        } else if(blockType === 'sensor_water_level') {
+        } else if (workspaceBlocks[i].type === 'sensor_water_level') {
           dropdownOptions.push(["water", "water"]);
-        } else if(blockType === 'sensor_brightness' ||  blockType === 'sensor_brightness_complete') {
+        } else if (workspaceBlocks[i].type === 'sensor_brightness' || workspaceBlocks[i].type === 'sensor_brightness_complete') {
           addlightOption = true;
-        } else if(blockType === 'sensor_sound' ||  blockType === 'sensor_sound_complete') {
+        } else if (workspaceBlocks[i].type === 'sensor_sound' || workspaceBlocks[i].type === 'sensor_sound_complete') {
           addsoundOption = true;
-        } else if(blockType === 'sensor_soil_humidity') {
+        } else if (workspaceBlocks[i].type === 'sensor_soil_humidity') {
           dropdownOptions.push(["moisture", "moisture"]);
-        } else if(blockType === 'sensor_vibration_sensor') {
+        } else if (workspaceBlocks[i].type === 'sensor_vibration_sensor') {
           dropdownOptions.push(["vibration", "vibration"]);
-        } else if(blockType === 'line_ready') {
-          dropdownOptions.push(["a", "a"], ["b", "b"]);
+        } else if (workspaceBlocks[i].type === 'asomecar_switch_check') {
+          dropdownOptions.push(["sw", "sw"]);
+        } else if (workspaceBlocks[i].type === 'asomecar_button_check') {
+          dropdownOptions.push(["btn", "btn"]);
+        } else if (workspaceBlocks[i].type === 'asomecar_sensor_ultrasonic') {
+          dropdownOptions.push(["cm", "cm"]);
+        } else if (workspaceBlocks[i].type === 'potentimeter_check') {
+          dropdownOptions.push(["pt", "pt"]);
+        } else if (workspaceBlocks[i].type === 'cds_check') {
+          dropdownOptions.push(["cds", "cds"]);
+        } else if (workspaceBlocks[i].type === 'asome_message') {
+          dropdownOptions.push(["msg", "msg"]);
         }
       }
-      if(addsoundOption) {
+      if (addsoundOption) {
         dropdownOptions.push(["sound", "sound"]);
       }
-      if(addlightOption) {
+      if (addlightOption) {
         dropdownOptions.push(["light", "light"]);
       }
       return dropdownOptions;
     };
-    
+
     this.appendDummyInput()
-      .appendField('화면 표시')
-      .appendField(new Blockly.FieldDropdown(dropdownGenerator), "variable");
+      .appendField('Print')
+      .appendField(new Blockly.FieldDropdown(dropdownGenerator), "variable")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
-    this.setColour("#55A55B");
+    this.setColour("55A55B");
     this.setTooltip("buy id");
     this.setHelpUrl("https://example.com");
   },
 };
 
-javascriptGenerator["screen"] = function(block) {
+javascriptGenerator["screen"] = function (block) {
   const variable = block.getFieldValue("variable");
-  let code = '';
-  
-  if (variable === 'a' || variable === 'b') {
-    code = `print(${variable}.read())`;
-  } else {
-    code = `print(${variable})`;
-  }
-  
-  code += javascriptGenerator.valueToCode(block, 'if_value', javascriptGenerator.ORDER_ATOMIC) + '\n' + javascriptGenerator.statementToCode(block, 'if_state');
+  const code = `print(${variable})` + javascriptGenerator.valueToCode(block, 'if_value', javascriptGenerator.ORDER_ATOMIC) + '\n' + javascriptGenerator.statementToCode(block, 'if_state');
+
   return code;
 };
-
-// Variable Initialization Function
-// function initializeVariables(variables) {
-//   let code = '';
-//   variables.forEach(variable => {
-//     if (variable === 'a' || variable === 'b') {
-//       code += `${variable} = None\n`;
-//     } else {
-//       code += `${variable} = None\n`; // Adjust according to your needs
-//     }
-//   });
-//   return code;
-// }
 
 Blockly.Blocks["break"] = {
   init: function () {
     this.appendDummyInput()
-    .appendField("반복 중단")
-  this.setPreviousStatement(true, null);
-  this.setNextStatement(true, "String");
-  this.setColour("55A55B");
-  this.setTooltip("buy id");
-  this.setHelpUrl("https://example.com");
+      .appendField("Break")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("55A55B");
+    this.setTooltip("buy id");
+    this.setHelpUrl("https://example.com");
   },
 };
 
@@ -1656,83 +1664,92 @@ javascriptGenerator["break"] = function () {
 
 Blockly.Blocks["variable"] = {
   init: function () {
-    var dropdownGenerator = function() {
+    var dropdownGenerator = function () {
       let dropdownOptions = [
-        ["k", "k"],["j", "j"],["l", "l"],["q", "q"]
+        ["k", "k"], ["j", "j"], ["l", "l"], ["q", "q"]
       ];
       let addlightOption = false;
       let addsoundOption = false;
       const workspaceBlocks = Blockly.mainWorkspace.getAllBlocks();
-      for(let i = 0; i < workspaceBlocks.length; i++) {
-        if(workspaceBlocks[i].type === 'sensor_ultrasonic') {
+      for (let i = 0; i < workspaceBlocks.length; i++) {
+        if (workspaceBlocks[i].type === 'sensor_ultrasonic') {
           dropdownOptions.push(["cm", "cm"]);
-        } else if(workspaceBlocks[i].type === 'sensor_hand_detection') {
+        } else if (workspaceBlocks[i].type === 'sensor_hand_detection') {
           dropdownOptions.push(["motion", "motion"]);
-        } else if(workspaceBlocks[i].type === 'advance_repeat') {
+        } else if (workspaceBlocks[i].type === 'advance_repeat') {
           dropdownOptions.push(["count", "count"]);
-        } else if(workspaceBlocks[i].type === 'message') {
+        } else if (workspaceBlocks[i].type === 'message') {
           dropdownOptions.push(["msg", "msg"]);
-        } else if(workspaceBlocks[i].type === 'get_weather') {
-          dropdownOptions.push(["humidity", "humidity"],["temp", "temp"]["weather", "weather"]);
-        } else if(workspaceBlocks[i].type === 'prepare_button_ready') {
+        } else if (workspaceBlocks[i].type === 'get_weather') {
+          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"]["weather", "weather"]);
+        } else if (workspaceBlocks[i].type === 'prepare_button_ready') {
           dropdownOptions.push(["bt", "bt"]);
-        } else if(workspaceBlocks[i].type === 'prepare_buzzer_ready') {
+        } else if (workspaceBlocks[i].type === 'prepare_buzzer_ready') {
           dropdownOptions.push(["buzzer", "buzzer"]);
-        } else if(workspaceBlocks[i].type === 'prepare_tm_ready') {
+        } else if (workspaceBlocks[i].type === 'prepare_tm_ready') {
           dropdownOptions.push(["bt", "bt"]);
-        } else if(workspaceBlocks[i].type === 'prepare_vibration_ready') {
+        } else if (workspaceBlocks[i].type === 'prepare_vibration_ready') {
           dropdownOptions.push(["vs", "vs"]);
-        } else if(workspaceBlocks[i].type === 'led_ledtube_time') {
-          dropdownOptions.push(["h", "h"],["m", "m"]);
-        } else if(workspaceBlocks[i].type === 'button_push') {
+        } else if (workspaceBlocks[i].type === 'led_ledtube_time') {
+          dropdownOptions.push(["h", "h"], ["m", "m"]);
+        } else if (workspaceBlocks[i].type === 'button_push') {
           dropdownOptions.push(["clicked", "clicked"]);
-        } else if(workspaceBlocks[i].type === 'button_info') {
+        } else if (workspaceBlocks[i].type === 'button_info') {
           dropdownOptions.push(["bt_value", "bt_value"]);
-        } else if(workspaceBlocks[i].type === 'sensor_humidity') {
+        } else if (workspaceBlocks[i].type === 'sensor_humidity') {
           dropdownOptions.push(["humidity", "humidity"]);
-        } else if(workspaceBlocks[i].type === 'sensor_temperature') {
+        } else if (workspaceBlocks[i].type === 'sensor_temperature') {
           dropdownOptions.push(["temperature", "temperature"]);
-        } else if(workspaceBlocks[i].type === 'sensor_water_level') {
+        } else if (workspaceBlocks[i].type === 'sensor_water_level') {
           dropdownOptions.push(["water", "water"]);
-        } else if(workspaceBlocks[i].type === 'sensor_brightness' ||  workspaceBlocks[i].type === 'sensor_brightness_complete') {
+        } else if (workspaceBlocks[i].type === 'sensor_brightness' || workspaceBlocks[i].type === 'sensor_brightness_complete') {
           addlightOption = true;
-        } else if(workspaceBlocks[i].type === 'sensor_sound' ||  workspaceBlocks[i].type === 'sensor_sound_complete') {
+        } else if (workspaceBlocks[i].type === 'sensor_sound' || workspaceBlocks[i].type === 'sensor_sound_complete') {
           addsoundOption = true;
-        } else if(workspaceBlocks[i].type === 'sensor_soil_humidity') {
+        } else if (workspaceBlocks[i].type === 'sensor_soil_humidity') {
           dropdownOptions.push(["moisture", "moisture"]);
-        } else if(workspaceBlocks[i].type === 'sensor_vibration_sensor') {
+        } else if (workspaceBlocks[i].type === 'sensor_vibration_sensor') {
           dropdownOptions.push(["vibration", "vibration"]);
-        } else if(workspaceBlocks[i].type === 'line_ready') {
-          dropdownOptions.push(["a", "a"]);
-          dropdownOptions.push(["b", "b"]);
+        } else if (workspaceBlocks[i].type === 'asomecar_switch_check') {
+          dropdownOptions.push(["sw", "sw"]);
+        } else if (workspaceBlocks[i].type === 'asomecar_button_check') {
+          dropdownOptions.push(["btn", "btn"]);
+        } else if (workspaceBlocks[i].type === 'asomecar_sensor_ultrasonic') {
+          dropdownOptions.push(["cm", "cm"]);
+        } else if (workspaceBlocks[i].type === 'potentimeter_check') {
+          dropdownOptions.push(["pt", "pt"]);
+        } else if (workspaceBlocks[i].type === 'cds_check') {
+          dropdownOptions.push(["cds", "cds"]);
+        } else if (workspaceBlocks[i].type === 'asome_message') {
+          dropdownOptions.push(["msg", "msg"]);
         }
       }
-    if(addsoundOption) {
-      dropdownOptions.push(["sound", "sound"]);
-    }
-    if(addlightOption) {
-      dropdownOptions.push(["light", "light"]);
-    }
-    return dropdownOptions;
-  };
+      if (addsoundOption) {
+        dropdownOptions.push(["sound", "sound"]);
+      }
+      if (addlightOption) {
+        dropdownOptions.push(["light", "light"]);
+      }
+      return dropdownOptions;
+    };
 
-  this.appendDummyInput()
-    .appendField('변수')
-    .appendField(new Blockly.FieldDropdown(dropdownGenerator), "variable")
-    .appendField('=')
-  this.appendValueInput("if_value")
-    .setCheck("null")
-  this.setColour("55A55B");
-  this.setPreviousStatement(true, null);
-  this.setNextStatement(true, "String");
-  this.setInputsInline(true);
+    this.appendDummyInput()
+      .appendField('Set')
+      .appendField(new Blockly.FieldDropdown(dropdownGenerator), "variable")
+      .appendField('=')
+    this.appendValueInput("if_value")
+      .setCheck("null")
+    this.setColour("55A55B");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setInputsInline(true);
   },
 };
 
 javascriptGenerator["variable"] = function (block) {
   let value_if_value = javascriptGenerator.valueToCode(block, 'if_value', javascriptGenerator.ORDER_ATOMIC);
   const variable = block.getFieldValue("variable");
-  const code = `${variable}=`+value_if_value+'\n' ;
+  const code = `${variable}=` + value_if_value + '\n';
 
   return code;
 };
@@ -1743,12 +1760,12 @@ Blockly.Blocks["internet_connect"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/common/internet.png', 23, 23, '*'))
-      .appendField("인터넷 접속하기")
+      .appendField("Connect to internet")
     this.appendDummyInput()
-      .appendField("아이디")
+      .appendField("SSID")
       .appendField(new Blockly.FieldTextInput(""), "ssid")
     this.appendDummyInput()
-      .appendField("비밀번호")
+      .appendField("Password")
       .appendField(new Blockly.FieldTextInput(""), "password")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -1769,9 +1786,9 @@ Blockly.Blocks["nonpass_wifi"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/common/internet.png', 23, 23, '*'))
-      .appendField("비밀번호 없는 와이파이 연결하기")
+      .appendField("Change to access point mode")
     this.appendDummyInput()
-      .appendField("아이디")
+      .appendField("SSID")
       .appendField(new Blockly.FieldTextInput(""), "ssid")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -1783,7 +1800,7 @@ Blockly.Blocks["nonpass_wifi"] = {
 
 javascriptGenerator["nonpass_wifi"] = function (block) {
   let string_ssid = block.getFieldValue('ssid');
-  let code = 'import internet\ninternet.connect("'+string_ssid+'")\n';
+  let code = 'import internet\ninternet.open_ap("'+string_ssid+'")\n';
   return code;
 };
 
@@ -1791,9 +1808,9 @@ Blockly.Blocks["get_message"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/common/internet.png', 23, 23, '*'))
-      .appendField("메세지 받을 준비")
+      .appendField("Open UDP socket on")
       .appendField(new Blockly.FieldNumber('1234'), "port")
-      .appendField("포트")
+      .appendField("port")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("B666FC");
@@ -1812,7 +1829,7 @@ Blockly.Blocks["message"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/common/internet.png', 23, 23, '*'))
-      .appendField("메세지 읽어오기")
+      .appendField("Read messages from UDP socket")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("B666FC");
@@ -1830,11 +1847,11 @@ Blockly.Blocks["send_message"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/common/internet.png', 23, 23, '*'))
-      .appendField("메세지 보내기")
+      .appendField("Send message")
     this.appendDummyInput()
-      .appendField("보낼 메세지")
+      .appendField("Message")
       .appendField(new Blockly.FieldTextInput(""), "msg")
-      .appendField(",보낼 대상")
+      .appendField("to")
       .appendField(new Blockly.FieldTextInput(""), "code")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -1854,7 +1871,7 @@ Blockly.Blocks["get_weather"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/common/internet.png', 23, 23, '*'))
-      .appendField("날씨 데이터 가져오기 [")
+      .appendField("Get weather data [")
       .appendField(new Blockly.FieldTextInput(""), "dat1")
       .appendField(new Blockly.FieldTextInput(""), "dat2")
       .appendField("]")
@@ -1968,7 +1985,7 @@ Blockly.Blocks["basic_kit_ready"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
-      .appendField("준비")
+      .appendField("Ready")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("14A2FF");
@@ -1985,7 +2002,7 @@ Blockly.Blocks["basic_turnoff_pins"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
-      .appendField("핀 초기화")
+      .appendField("Turn off pins")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("14A2FF");
@@ -2004,7 +2021,7 @@ Blockly.Blocks["prepare_led_ready"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
-      .appendField("LED 준비")
+      .appendField("Prepare LED")
       .appendField(new Blockly.FieldNumber(13) ,"pin1_number")
       .appendField(new Blockly.FieldNumber(14) ,"pin2_number")
       .appendField(new Blockly.FieldNumber(15) ,"pin3_number")
@@ -2029,7 +2046,7 @@ Blockly.Blocks["prepare_RGBled_ready"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
-      .appendField("RGB LED 준비")
+      .appendField("Prepare RGB")
       .appendField(new Blockly.FieldNumber(17), "pin1_number")
       .appendField(new Blockly.FieldNumber(18), "pin2_number")
       .appendField(new Blockly.FieldNumber(19), "pin3_number")
@@ -2052,7 +2069,7 @@ Blockly.Blocks["prepare_button_ready"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/button.png', 23, 23, '*'))
-      .appendField("버튼 준비")
+      .appendField("Prepare button")
       .appendField(new Blockly.FieldNumber(6), "pin_number")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -2071,7 +2088,7 @@ Blockly.Blocks["prepare_music_ready"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/sound_sensor.png', 23, 23, '*'))
-      .appendField("음악 준비")
+      .appendField("Prepare sound")
       .appendField(new Blockly.FieldNumber(12), "pin_number")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -2090,7 +2107,7 @@ Blockly.Blocks["prepare_buzzer_ready"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/buzzer.png', 23, 23, '*'))
-      .appendField("부저 준비")
+      .appendField("Prepare buzzer")
       .appendField(new Blockly.FieldNumber(11), "pin_number")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -2109,7 +2126,7 @@ Blockly.Blocks["prepare_tm_ready"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/dht.png', 23, 23, '*'))
-      .appendField("온습도 센서 준비")
+      .appendField("Prepare DHT")
       .appendField(new Blockly.FieldNumber(5) ,"pin_number")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -2128,7 +2145,7 @@ Blockly.Blocks["prepare_ledtube_ready"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led_tube.png', 23, 23, '*'))
-      .appendField("LED 튜브 준비")
+      .appendField("Prepare LED tube")
       .appendField(new Blockly.FieldNumber(3), "pin1_number")
       .appendField(new Blockly.FieldNumber(4), "pin2_number")
     this.setPreviousStatement(true, null);
@@ -2149,7 +2166,7 @@ Blockly.Blocks["prepare_vibration_ready"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/vibration_sensor.png', 23, 23, '*'))
-      .appendField("진동 센서 준비")
+      .appendField("Prepare vibration sensor")
       .appendField(new Blockly.FieldNumber(1), "pin_number")
       .appendField(new Blockly.FieldNumber(1000), "secs")
     this.setPreviousStatement(true, null);
@@ -2170,7 +2187,7 @@ Blockly.Blocks["prepare_ultrasonic_ready"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/ultrasonic_sensor.png', 23, 23, '*'))
-      .appendField("초음파 센서 준비")
+      .appendField("Prepare ultrasonic sensor")
       .appendField(new Blockly.FieldNumber(7), "pin1_number")
       .appendField(new Blockly.FieldNumber(8), "pin2_number")
     this.setPreviousStatement(true, null);
@@ -2191,9 +2208,9 @@ Blockly.Blocks["prepare_photoresistor_ready"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/sensor.png', 23, 23, '*'))
-      .appendField("조도 센서 준비")
+      .appendField("Prepare photoresistor")
       .appendField(new Blockly.FieldNumber(1), "pin1_number")
-      .appendField("(완성형)")
+      // .appendField("(완성형)")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF9A00");
@@ -2211,9 +2228,9 @@ Blockly.Blocks["prepare_photoresistor2_ready"] = {
   init: function () {
     this.appendDummyInput()
     .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/sensor.png', 23, 23, '*'))
-    .appendField("조도 센서 준비")
+    .appendField("Prepare photoresistor")
     .appendField(new Blockly.FieldNumber(2), "pin1_number")
-    .appendField("(완성형)")
+    // .appendField("(완성형)")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF9A00");
@@ -2286,9 +2303,10 @@ Blockly.Blocks["led_setting"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
+      .appendField("Set brightness of")
       .appendField(new Blockly.FieldDropdown([
         ["Red", "Red"],["Green", "Green"],["Blue", "Blue"]]), "variable")
-      .appendField("밝기 설정")
+      .appendField("to")
       .appendField(new Blockly.FieldNumber() ,"int_key")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -2383,8 +2401,9 @@ Blockly.Blocks["led_ledtube_ready"] = {
 
       this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led_tube.png', 23, 23, '*'))
-      .appendField("LED 튜브에 표시")
+      .appendField("Display")
       .appendField(new Blockly.FieldDropdown(dropdownGenerator), "variable")
+      .appendField("on LED tube")
      this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF61FF");
@@ -2402,7 +2421,7 @@ Blockly.Blocks["led_ledtube_time"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led_tube.png', 23, 23, '*'))
-      .appendField("LED 튜브에 시간표시")
+      .appendField("Display time")
       .appendField(new Blockly.FieldDropdown([
         ["h", "h"],["buzzer", "buzzer"],["bt", "bt"],["ht", "ht"],["q", "q"],["m", "m"],["vs", "vs"]]), "variable")
       .appendField(new Blockly.FieldDropdown([
@@ -2496,7 +2515,7 @@ Blockly.Blocks["button_push"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/button.png', 23, 23, '*'))
-      .appendField("버튼이 눌러졌는가?")
+      .appendField("Check button clicked")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("4CC1B9");
@@ -2513,7 +2532,7 @@ Blockly.Blocks["button_info"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/button.png', 23, 23, '*'))
-      .appendField("버튼 정보 읽기")
+      .appendField("Check button value")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("4CC1B9");
@@ -2532,7 +2551,7 @@ Blockly.Blocks["sensor_humidity"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/sensor.png', 23, 23, '*'))
-      .appendField("습도 재기")
+      .appendField("Measure sensor_humidity")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FFCD00");
@@ -2549,7 +2568,7 @@ Blockly.Blocks["sensor_temperature"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/sensor.png', 23, 23, '*'))
-      .appendField("온도 재기")
+      .appendField("Measure temperature")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FFCD00");
@@ -2566,7 +2585,7 @@ Blockly.Blocks["sensor_water_level"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/sensor.png', 23, 23, '*'))
-      .appendField("수위 재기")
+      .appendField("Check water sensor")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FFCD00");
@@ -2583,7 +2602,7 @@ Blockly.Blocks["sensor_brightness"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/sensor.png', 23, 23, '*'))
-      .appendField("밝기 재기 (조립형)")
+      .appendField("Check light sensor")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FFCD00");
@@ -2592,7 +2611,7 @@ Blockly.Blocks["sensor_brightness"] = {
 };
 
 javascriptGenerator["sensor_brightness"] = function () {
-  let code = 'light = AnalogPin().read()\n';
+  let code = 'light = light_sensor.read()\n';
   return code;
 };
 
@@ -2600,7 +2619,7 @@ Blockly.Blocks["sensor_sound"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/sensor.png', 23, 23, '*'))
-      .appendField("소리 감지 (조립형)")
+      .appendField("Check sound sensor")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FFCD00");
@@ -2609,49 +2628,49 @@ Blockly.Blocks["sensor_sound"] = {
 };
 
 javascriptGenerator["sensor_sound"] = function () {
-  let code = 'sound = AnalogPin().read()\n';
-  return code;
-};
-
-Blockly.Blocks["sensor_brightness_complete"] = {
-  init: function () {
-    this.appendDummyInput()
-      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/sensor.png', 23, 23, '*'))
-      .appendField("밝기 재기 (완성형)")
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, "String");
-    this.setColour("FFCD00");
-    this.setHelpUrl("https://example.com");
-  },
-};
-
-javascriptGenerator["sensor_brightness_complete"] = function () {
-  let code = 'light = light_sensor.read()\n';
-  return code;
-};
-
-Blockly.Blocks["sensor_sound_complete"] = {
-  init: function () {
-    this.appendDummyInput()
-      .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/sensor.png', 23, 23, '*'))
-      .appendField("소리 감지 (완성형)")
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, "String");
-    this.setColour("FFCD00");
-    this.setHelpUrl("https://example.com");
-  },
-};
-
-javascriptGenerator["sensor_sound_complete"] = function () {
   let code = 'sound = sound_sensor.read()\n';
   return code;
 };
+
+// Blockly.Blocks["sensor_brightness_complete"] = {
+//   init: function () {
+//     this.appendDummyInput()
+//       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/sensor.png', 23, 23, '*'))
+//       .appendField("밝기 재기 (완성형)")
+//     this.setPreviousStatement(true, null);
+//     this.setNextStatement(true, "String");
+//     this.setColour("FFCD00");
+//     this.setHelpUrl("https://example.com");
+//   },
+// };
+
+// javascriptGenerator["sensor_brightness_complete"] = function () {
+//   let code = 'light = light_sensor.read()\n';
+//   return code;
+// };
+
+// Blockly.Blocks["sensor_sound_complete"] = {
+//   init: function () {
+//     this.appendDummyInput()
+//       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/sensor.png', 23, 23, '*'))
+//       .appendField("소리 감지 (완성형)")
+//     this.setPreviousStatement(true, null);
+//     this.setNextStatement(true, "String");
+//     this.setColour("FFCD00");
+//     this.setHelpUrl("https://example.com");
+//   },
+// };
+
+// javascriptGenerator["sensor_sound_complete"] = function () {
+//   let code = 'sound = sound_sensor.read()\n';
+//   return code;
+// };
 
 Blockly.Blocks["sensor_soil_humidity"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/sensor.png', 23, 23, '*'))
-      .appendField("토양 습도 재기")
+      .appendField("Check soil humidity sensor")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FFCD00");
@@ -2668,7 +2687,7 @@ Blockly.Blocks["sensor_vibration_sensor"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/vibration_sensor.png', 23, 23, '*'))
-      .appendField("진동 센서 감지")
+      .appendField("Check vibration sensor")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FFCD00");
@@ -2687,7 +2706,7 @@ Blockly.Blocks["sound_buzzer_onoff"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/asomebot/music.png', 23, 23, '*'))
-      .appendField("부저")
+      .appendField("Buzzer")
       .appendField(new Blockly.FieldDropdown([
         ["On", "On"],["Off", "Off"]]), "on,off")
     this.setPreviousStatement(true, null);
@@ -3316,7 +3335,7 @@ Blockly.Blocks["neopixel_turnoff"] = {
 };
 
 javascriptGenerator["neopixel_turnoff"] = function () {
-  let code = `Turn off_pins((9,10))\n`;
+  let code = `turnoff_pins((9,10))\n`;
   return code;
 };
 
@@ -3610,7 +3629,7 @@ Blockly.Blocks["car_sound_buzzer_on"] = {
     
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/asomebot/music.png', 23, 23, '*'))
-      .appendField("부저 켜기")
+      .appendField("Buzzer on")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("EC1961");
@@ -3630,7 +3649,7 @@ Blockly.Blocks["car_sound_buzzer_off"] = {
     
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/asomebot/music.png', 23, 23, '*'))
-      .appendField("부저 끄기")
+      .appendField("Buzzer off")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("EC1961");

@@ -17,21 +17,21 @@
             <div class="control-btn-wrap">
                 <span class="connect-btn Pretendard-Medium" @mouseenter="showConnectOptions" @mouseleave="hideConnectOptions">
                     <img :src="connectBtnImg" />
-                    연결하기
+                    Connect
                     <div v-if="showOptions" class="connect-options">
-                        <span class="option" @click="connect()">유선 연결</span>
-                        <span class="option" @click="startScan()">무선 연결</span>
+                        <span class="option" @click="connect()">Wired</span>
+                        <span class="option" @click="startScan()">Wireless</span>
                     </div>
                 </span>
                 <span class="stop-btn Pretendard-Medium" @click="stop()">
                     <img :src="stopBtnImg" />
-                    멈추기
+                    Stop
                 </span>
             </div>
         </div>
         <div class="nav">
-            <span @click="goToDownload" class="NotoSansKR-Regular nav-txt"><a style="cursor: pointer;">자료실</a></span>
-            <span @click="goToQna" class="NotoSansKR-Regular nav-txt"><a style="cursor: pointer;">도움말</a></span>
+            <span @click="goToDownload" class="NotoSansKR-Regular nav-txt"><a style="cursor: pointer;">Resources</a></span>
+            <span @click="goToQna" class="NotoSansKR-Regular nav-txt"><a style="cursor: pointer;">Help</a></span>
             <span class="NotoSansKR-Regular hamburger-wrap nav-txt">
                 <div class="hamburger-icon">
                     <img :src="menu" class="menu-img"/>
@@ -41,37 +41,37 @@
                         <li class="menu-cts menu-title">
                             <p>MENU</p>
                         </li>
-                        <li class="menu-cts li-connect" @click="connect()">
-                            <img :src="connectImg"/>
-                            <p>연결하기</p>
+                        <li class="menu-cts li-connect" @click="connect">
+                            <img :src="connectImg" />
+                            <p>Connect</p>
                         </li>
-                        <li class="menu-cts" @click="stop()">
-                            <img :src="stopImg"/>
-                            <p>멈추기</p>
+                        <li class="menu-cts" @click="stop">
+                            <img :src="stopImg" />
+                            <p>Stop</p>
                         </li>
                         <li class="menu-cts" @click="openEditor('')">
-                            <img :src="editorImg"/>
-                            <p>소스편집</p>
+                            <img :src="editorImg" />
+                            <p>Code Editor</p>
                         </li>
-                        <li class="menu-cts" @click="reboot()">
-                            <img :src="restartImg"/>
-                            <p>재부팅</p>
+                        <li class="menu-cts" @click="reboot">
+                            <img :src="restartImg" />
+                            <p>Reboot</p>
                         </li>
-                        <li class="menu-cts" @click="format()">
-                            <img :src="resetImg"/>
-                            <p>포맷</p>
+                        <li class="menu-cts" @click="format">
+                            <img :src="resetImg" />
+                            <p>Format</p>
                         </li>
-                        <li class="menu-cts" @click="toggleUpdateModal()">
-                            <img :src="updateImg"/>
-                            <p>업데이트</p>
+                        <li class="menu-cts" @click="toggleUpdateModal">
+                            <img :src="updateImg" />
+                            <p>Update</p>
                         </li>
-                        <li class="menu-cts" @click="installDriver()">
-                            <img :src="settingImg"/>
-                            <p>드라이버 설치</p>
+                        <li class="menu-cts" @click="installDriver">
+                            <img :src="settingImg" />
+                            <p>install Driver</p>
                         </li>
                         <li class="menu-cts" @click="goToBlockCoding">
-                            <img :src="blockImg"/>
-                            <p>블록코딩</p>
+                            <img :src="blockImg" />
+                            <p>Block Coding</p>
                         </li>
                     </ul>
                 </div>
@@ -97,15 +97,15 @@
         <!-- BLE 장치 선택 모달 -->
         <div v-if="showModal" class="ble-modal Pretendard-Medium">
             <div class="ble-modal-content">
-                <h6>기기를 선택하세요</h6>
+                <h6>Select a device</h6>
                 <select v-model="selectedDevice">
                     <option v-for="device in bleDevices" :key="device.id" :value="device.id">
                         {{ device.name }}
                     </option>
                 </select>
                 <div class="ble-modal-actions">
-                    <button @click="cancelScan" class="cancel-button">취소</button>
-                    <button @click="selectDevice" class="connect-button">연결</button>
+                    <button @click="cancelScan" class="cancel-button">Cancel</button>
+                    <button style="width: 70px;" @click="selectDevice" class="connect-button">Connect</button>
                 </div>
             </div>
         </div>
@@ -206,14 +206,14 @@ export default {
         
         eventbus.on("onBleConnected", () => {
             this.btConnectColor = "primary";
-            this.$q.notify('무선 연결이 완료되었습니다.');
+            this.$q.notify('The wireless connection has been successfully completed.');
             this.showModal = false;
             // ble.writeLn("/r/n");
         });
         
         eventbus.on("bleDisconnect", () => {
             this.btConnectColor = "grey";
-            this.$q.notify('무선 연결이 끊어졌습니다.');
+            this.$q.notify('The wireless connection has been disconnected.');
         });
 
         eventbus.on("onBleConnectError", (error) => {
@@ -273,7 +273,7 @@ export default {
                     //     console.error("연결 실패:", error);
                     // });
             }
-            alert("확인을 누른 후 기다려주세요. 연결이 완료되면 자동으로 기기 선택창이 닫힙니다.");
+            alert("Please press button and wait. Once the connection is complete, the device selection window will close automatically.");
         },
 
         showConnectOptions() {
