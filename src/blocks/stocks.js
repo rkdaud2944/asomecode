@@ -2965,7 +2965,7 @@ Blockly.Blocks["basic_car_ready"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomecar.png', 23, 23, '*'))
-      .appendField("준비")
+      .appendField("Ready")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("14A2FF");
@@ -2984,7 +2984,7 @@ Blockly.Blocks["moter_ready"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomecar.png', 23, 23, '*'))
-      .appendField("모터 준비")
+      .appendField("Prepare motor")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF9A00");
@@ -3001,7 +3001,7 @@ Blockly.Blocks["moter_off"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomecar.png', 23, 23, '*'))
-      .appendField("모터 끄기")
+      .appendField("Turn off motor")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF9A00");
@@ -3018,7 +3018,7 @@ Blockly.Blocks["move_stop"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomecar.png', 23, 23, '*'))
-      .appendField("멈추기")
+      .appendField("Stop")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF9A00");
@@ -3035,7 +3035,7 @@ Blockly.Blocks["move_forward"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomecar.png', 23, 23, '*'))
-      .appendField("앞으로 전진 (속도:")
+      .appendField("Move forward (Speed:")
       .appendField(new Blockly.FieldDropdown([["200", "200"], ["250", "250"], ["300", "300"], ["350", "350"]]), "VALUE")
       .appendField(")")
     this.setPreviousStatement(true, null);
@@ -3055,7 +3055,7 @@ Blockly.Blocks["move_back"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomecar/move_backward.png', 23, 23, '*'))
-      .appendField("뒤로 후진 (속도:")
+      .appendField("Move backward (Speed:")
       .appendField(new Blockly.FieldDropdown([["200", "200"], ["250", "250"], ["300", "300"], ["350", "350"]]), "VALUE")
       .appendField(")")
     this.setPreviousStatement(true, null);
@@ -3075,7 +3075,7 @@ Blockly.Blocks["move_left_fixed"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomecar/rotate_left.png', 23, 23, '*'))
-      .appendField("왼쪽으로 제자리 회전 (속도:")
+      .appendField("Turn left (Speed:")
       .appendField(new Blockly.FieldDropdown([["200", "200"], ["250", "250"], ["300", "300"], ["350", "350"]]), "VALUE")
       .appendField(")")
     this.setPreviousStatement(true, null);
@@ -3094,7 +3094,7 @@ Blockly.Blocks["move_right_fixed"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomecar/rotate_left.png', 23, 23, '*'))
-      .appendField("오른쪽으로 제자리 회전 (속도:")
+      .appendField("Turn right (Speed:")
       .appendField(new Blockly.FieldDropdown([["200", "200"], ["250", "250"], ["300", "300"], ["350", "350"]]), "VALUE")
       .appendField(")")
     this.setPreviousStatement(true, null);
@@ -3114,7 +3114,7 @@ Blockly.Blocks["move_left"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomecar/turn_left.png', 23, 23, '*'))
-      .appendField("왼쪽으로 이동 (속도:")
+      .appendField("Move left (Speed:")
       .appendField(new Blockly.FieldDropdown([["200", "200"], ["250", "250"], ["300", "300"], ["350", "350"]]), "VALUE")
       .appendField(")")
     this.setPreviousStatement(true, null);
@@ -3134,7 +3134,7 @@ Blockly.Blocks["move_right"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomecar/turn_left.png', 23, 23, '*'))
-      .appendField("오른쪽으로 이동 (속도:")
+      .appendField("Move right (Speed:")
       .appendField(new Blockly.FieldDropdown([["200", "200"], ["250", "250"], ["300", "300"], ["350", "350"]]), "VALUE")
       .appendField(")")
     this.setPreviousStatement(true, null);
@@ -3154,7 +3154,7 @@ Blockly.Blocks["move_diagonal_right_front"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomecar/turn_right.png', 23, 23, '*'))
-      .appendField("오른쪽 대각선 앞으로 이동 (속도:")
+      .appendField("Move right diagonally forward (Speed:")
       .appendField(new Blockly.FieldDropdown([["200", "200"], ["250", "250"], ["300", "300"], ["350", "350"]]), "VALUE")
       .appendField(")")
     this.setPreviousStatement(true, null);
@@ -3174,7 +3174,7 @@ Blockly.Blocks["move_diagonal_right_back"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomecar/turn_right.png', 23, 23, '*'))
-      .appendField("오른쪽 대각선 뒤로 이동 (속도:")
+      .appendField("Move right diagonally backward (Speed:")
       .appendField(new Blockly.FieldDropdown([["200", "200"], ["250", "250"], ["300", "300"], ["350", "350"]]), "VALUE")
       .appendField(")")
     this.setPreviousStatement(true, null);
@@ -3194,7 +3194,7 @@ Blockly.Blocks["move_diagonal_left_front"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomecar/turn_right.png', 23, 23, '*'))
-      .appendField("왼쪽 대각선 앞으로 이동 (속도:")
+      .appendField("Move left diagonally forward (Speed:")
       .appendField(new Blockly.FieldDropdown([["200", "200"], ["250", "250"], ["300", "300"], ["350", "350"]]), "VALUE")
       .appendField(")")
     this.setPreviousStatement(true, null);
@@ -3214,7 +3214,7 @@ Blockly.Blocks["move_diagonal_left_back"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomecar/turn_right.png', 23, 23, '*'))
-      .appendField("왼쪽 대각선 뒤로 이동 (속도:")
+      .appendField("Move left diagonally backward (Speed:")
       .appendField(new Blockly.FieldDropdown([["200", "200"], ["250", "250"], ["300", "300"], ["350", "350"]]), "VALUE")
       .appendField(")")
     this.setPreviousStatement(true, null);
@@ -3285,7 +3285,7 @@ Blockly.Blocks["prepare_neopixel_ready"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
-      .appendField("네오픽셀 준비 ")
+      .appendField("Prepare Neo-Pixel")
       .appendField(new Blockly.FieldNumber(9), "pin1_number")
       .appendField(",")
       .appendField(new Blockly.FieldNumber(8), "pin2_number");
@@ -3307,7 +3307,7 @@ Blockly.Blocks["neopixel_turnoff"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
-      .appendField("네오픽셀 끄기")
+      .appendField("turn off Neo-Pixel")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF61FF");
@@ -3316,7 +3316,7 @@ Blockly.Blocks["neopixel_turnoff"] = {
 };
 
 javascriptGenerator["neopixel_turnoff"] = function () {
-  let code = `turnoff_pins((9,10))\n`;
+  let code = `Turn off_pins((9,10))\n`;
   return code;
 };
 
@@ -3324,7 +3324,7 @@ Blockly.Blocks["neopixel_off"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
-      .appendField("네오픽셀 소등")
+      .appendField("Neo-Pixel off")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF61FF");
@@ -3344,15 +3344,14 @@ Blockly.Blocks["neopixel_turnon"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
-      .appendField("네오픽셀 ")
-      .appendField(new Blockly.FieldDropdown([
-        ["1", "1"],["2", "2"],["3", "3"],["4", "4"],["5", "5"],["6", "6"],["7", "7"],["8", "8"]]), "variable")
-      .appendField("번 칸에")
-      this.appendDummyInput()
       .appendField(new Blockly.FieldNumber(255), "red")
       .appendField(new Blockly.FieldNumber(255), "green")
       .appendField(new Blockly.FieldNumber(255), "blue")
-      .appendField(" 색상 켜기")
+      this.appendDummyInput()
+      .appendField("color setting in neopixel")
+      .appendField(new Blockly.FieldDropdown([
+        ["1", "1"],["2", "2"],["3", "3"],["4", "4"],["5", "5"],["6", "6"],["7", "7"],["8", "8"]]), "variable")
+      .appendField("compartment")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF61FF");
@@ -3404,7 +3403,7 @@ Blockly.Blocks["neopixel_write"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
-      .appendField("네오픽셀 적용하기")
+      .appendField("Reflects the set Neo-Pixel")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF61FF");
@@ -3421,12 +3420,12 @@ Blockly.Blocks["neopixel_all_turnon"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
-      .appendField("네오픽셀 한번에")
-      this.appendDummyInput()
+      .appendField("Apply")
       .appendField(new Blockly.FieldNumber(255), "red")
       .appendField(new Blockly.FieldNumber(255), "green")
       .appendField(new Blockly.FieldNumber(255), "blue")
-      .appendField(" 색상 켜기")
+      this.appendDummyInput()
+      .appendField("colors at a time of Neo-Pixels")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF61FF");
@@ -3449,15 +3448,14 @@ Blockly.Blocks["neopixel_for_turnon"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
-      .appendField("네오픽셀 차례대로")
-      this.appendDummyInput()
-      .appendField(new Blockly.FieldNumber(1), "time")
-      .appendField(" 초 간격으로")
-      this.appendDummyInput()
+      .appendField("Apply")
       .appendField(new Blockly.FieldNumber(255), "red")
       .appendField(new Blockly.FieldNumber(255), "green")
       .appendField(new Blockly.FieldNumber(255), "blue")
-      .appendField(" 색상 켜기")
+      .appendField("colors at")
+      this.appendDummyInput()
+      .appendField(new Blockly.FieldNumber(1), "time")
+      .appendField("second intervals in order of Neo-Pixels")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF61FF");
@@ -3484,7 +3482,7 @@ Blockly.Blocks["neopixel_rainbow"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
-      .appendField("네오픽셀 무지개 켜기")
+      .appendField("Apply Neo-Pixels rainbow color")
       .appendField(new Blockly.FieldNumber(750), "pin1_number")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -3505,7 +3503,7 @@ Blockly.Blocks["sensor_ready"] = {
   init: function () {
     this.appendDummyInput()
     .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/common/measure_distance.png', 23, 23, '*'))
-      .appendField("초음파 센서 준비")
+      .appendField("Prepare ultrasonic")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FFCD00");
@@ -3522,7 +3520,7 @@ Blockly.Blocks["sensor_turnoff"] = {
   init: function () {
     this.appendDummyInput()
     .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/common/measure_distance.png', 23, 23, '*'))
-      .appendField("초음파 센서 끄기")
+      .appendField("turn off ultrasonic")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FFCD00");
@@ -3539,7 +3537,7 @@ Blockly.Blocks["servo_ready"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/sensor.png', 23, 23, '*'))
-      .appendField("서보모터 준비")
+      .appendField("Prepare servo motor")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FFCD00");
@@ -3556,7 +3554,7 @@ Blockly.Blocks["servo_turnoff"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/sensor.png', 23, 23, '*'))
-      .appendField("서보모터 끄기")
+      .appendField("trun off servo motor")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FFCD00");
@@ -3573,7 +3571,7 @@ Blockly.Blocks["servo_move"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/sensor.png', 23, 23, '*'))
-      .appendField("서보모터 각도 조절 (각도:")
+      .appendField("Change servo motor (angle:")
       .appendField(new Blockly.FieldDropdown([["10", "10"], ["45", "45"], ["95", "95"], ["135", "135"], ["180", "180"]]), "VALUE")
       .appendField(")")
     this.setPreviousStatement(true, null);
@@ -3593,7 +3591,7 @@ Blockly.Blocks["line_ready"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/sensor.png', 23, 23, '*'))
-      .appendField("라인트래킹 감지하기")
+      .appendField("Line tracking detection")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FFCD00");
