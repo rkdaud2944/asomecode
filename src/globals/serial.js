@@ -4,12 +4,6 @@ import eventbus from "@/globals/eventbus";
 import { useConnectStore } from "@/store/connect-store";
 import ble from "@/globals/ble";
 
-// 예: boardFileManager, boardUpdater, speakerManager 등
-// import boardUpdater from "@/globals/board-updater";
-// import boardFileManager from "@/globals/board-file-manager";
-
-// const fs = require("fs");
-
 let boardType = "Zet";
 
 /** 
@@ -164,7 +158,9 @@ const seiral = {
     this.writeLn(`_codes_ = ""`);
     const lines = codes.replaceAll("\r", "").split("\n");
     for (let line of lines) {
-      // 이스케이프
+      // @@NOW 토큰 처리
+      line = line.replace(/@@NOW/gi, currentTime());
+      // 이스케이프 처리
       line = line.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
       // 딜레이
       await new Promise(r => setTimeout(r, 100));
@@ -196,3 +192,18 @@ const seiral = {
 };
 
 export default seiral;
+
+/** 
+ * 현재 시간을 파이썬의 datetime 형식으로 반환하는 함수 
+ * ex: (2023, 03, 15, 0, 14, 30, 45, 0)
+ */
+function currentTime() {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+  return `(${year}, ${month}, ${day}, 0, ${hours}, ${minutes}, ${seconds}, 0)`;
+}
