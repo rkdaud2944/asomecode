@@ -4,35 +4,55 @@ import eventbus from "@/globals/eventbus";
 import { useConnectStore } from "@/store/connect-store";
 import ble from "@/globals/ble";
 
+// =======================
+// (A) 파일 작업용 코드들
+// =======================
+const codeListFiles = `
+import os
+_codes_ = ""
+_codes_ = _codes_ + 'files = os.listdir("")\\n'
+_codes_ = _codes_ + 'count = 0\\n'
+_codes_ = _codes_ + 'for file in files:\\n'
+_codes_ = _codes_ + '    if file == "system.run.temp.py":\\n'
+_codes_ = _codes_ + '        continue\\n'
+_codes_ = _codes_ + '    count = count + 1\\n'
+_codes_ = _codes_ + '    print(file)\\n'
+_codes_ = _codes_ + 'print(count, "files")\\n'
+exec(_codes_)
+`;
+
+function codeViewFile(filename) {
+  return `print("### System.Start.View")
+f = open("${filename}", "r")
+while True:
+    line = f.readline()
+    if not line:
+        break
+    print("> " + line[:-1])
+f.close()
+print("### System.End.View")`;
+}
+
+function codeRunFile(filename) {
+  return `import disk; disk.run('${filename}')\r\n`;
+}
+
+function codeDeleteFile(filename) {
+  return `import os; os.remove('${filename}')\r\n`;
+}
+
+// =======================
+// (B) 보드 타입 관리
+// =======================
 let boardType = "Zet";
 
-/** 
- * 1) 'serial-data' 이벤트: 
- *    모든 보드 출력이 여기로 옴.
- */
 ipcRenderer.on("serial-data", (event, msg) => {
   console.log("[Renderer] serial-data:", msg);
-
-  // A. eventbus로도 전달
   eventbus.emit("onSerialReceived", msg);
 
-  // B. “(sysname=esp32...)” → setBoardType
   if (msg.startsWith("(sysname=")) {
     seiral.setBoardType(msg);
   }
-
-  // C. “### Next File” / “### Next Line”을 여기서 잡아서 
-  //    boardFileManager.nextFile(), boardFileManager.nextLine()을 호출 
-  //    (로직상 필요 시)
-  // if (msg.startsWith("### Next File")) {
-  //   boardFileManager.nextFile();
-  // }
-  // if (msg.startsWith("### Next Line")) {
-  //   boardFileManager.nextLine();
-  // }
-
-  // D. “### AsomeCODE.Version:” 이면 boardUpdater.updateFile(msg);
-  //    ... etc
 });
 
 ipcRenderer.on("serial-closed", () => {
@@ -42,7 +62,6 @@ ipcRenderer.on("serial-closed", () => {
   eventbus.emit("onSerialClosed");
 });
 
-/** 메인 시리얼 관리 객체 */
 const seiral = {
   setBoardType(str) {
     if (str.includes("esp32")) {
@@ -58,12 +77,11 @@ const seiral = {
   },
 
   // --------------------------------------
-  // (A) connect(): 포트 목록 → 원하는 포트 open
+  // (1) connect(): 포트 목록 → 원하는 포트 open
   // --------------------------------------
   async connect() {
     const connectStore = useConnectStore();
-    // 혹시 이미 연결 중이면 닫아주기
-    this.disconnect();
+    this.disconnect(); // 혹시 이미 연결되어 있으면 닫기
 
     let ports = [];
     try {
@@ -80,14 +98,13 @@ const seiral = {
       return;
     }
 
-    // 예: Silicon Labs / wch.cn / vendorId=1a86
-    const asomeboard = ports.find(
-      (p) =>
-        (p.manufacturer && (
-          p.manufacturer.startsWith("Silicon Labs") ||
-          p.manufacturer.startsWith("wch.cn")
-        )) ||
-        p.vendorId === "1a86"
+    // 특정 보드 찾기
+    const asomeboard = ports.find((p) =>
+      (p.manufacturer && (
+        p.manufacturer.startsWith("Silicon Labs") ||
+        p.manufacturer.startsWith("wch.cn")
+      )) ||
+      p.vendorId === "1a86"
     );
     if (!asomeboard) {
       this.fireErrorEvent("어썸보드를 찾을 수 없습니다 (조건 불일치).");
@@ -103,22 +120,19 @@ const seiral = {
         return;
       }
 
-      // 연결 성공
       console.log("[seiral.connect] 연결 완료:", asomeboard.path);
       connectStore.setMode("serial");
       connectStore.connected();
       eventbus.emit("onSerialConnected");
-
-      // 백그라운드에서 이미 "import os; os.uname()" 보냄
-      // => (sysname=esp32...) 응답은 "serial-data" 이벤트로 받을 수 있음
+      // 백그라운드에서 uname() 호출 -> "serial-data"로 (sysname=...) 받음
     } catch (error) {
       console.error("Error opening port:", error);
-      this.fireErrorEvent("어썸보드에 연결할 수가 없습니다.");
+      this.fireErrorEvent("어썸보드를 찾을 수가 없습니다.");
     }
   },
 
   // --------------------------------------
-  // (B) disconnect(): 포트 닫기
+  // (2) disconnect()
   // --------------------------------------
   disconnect() {
     const connectStore = useConnectStore();
@@ -130,7 +144,7 @@ const seiral = {
   },
 
   // --------------------------------------
-  // (C) write / writeLn
+  // (3) write / writeLn
   // --------------------------------------
   write(text) {
     const connectStore = useConnectStore();
@@ -151,7 +165,7 @@ const seiral = {
   },
 
   // --------------------------------------
-  // (D) runCode, stop, reboot, ...
+  // (4) runCode, stop, reboot, ...
   // --------------------------------------
   async runCode(codes) {
     console.log("runCode", codes);
@@ -180,6 +194,26 @@ const seiral = {
     this.writeLn("import machine; machine.reset()");
   },
 
+  // --------------------------------------
+  // (5) 파일 관련 함수 복원
+  // --------------------------------------
+  listFiles() {
+    // 예전처럼 codeListFiles를 runCode()로 전송
+    this.runCode(codeListFiles);
+  },
+
+  viewFile(filename) {
+    this.runCode(codeViewFile(filename));
+  },
+
+  runFile(filename) {
+    this.runCode(codeRunFile(filename));
+  },
+
+  deleteFile(filename) {
+    this.runCode(codeDeleteFile(filename));
+  },
+
   fireErrorEvent(msg) {
     console.error(msg);
     Notify.create({
@@ -193,9 +227,9 @@ const seiral = {
 
 export default seiral;
 
-/** 
- * 현재 시간을 파이썬의 datetime 형식으로 반환하는 함수 
- * ex: (2023, 03, 15, 0, 14, 30, 45, 0)
+/**
+ * 현재 시간을 파이썬의 datetime 형식과 유사하게 반환하는 함수
+ * 예: (2023, 03, 15, 0, 14, 30, 45, 0)
  */
 function currentTime() {
   const now = new Date();
