@@ -664,7 +664,7 @@ Blockly.Blocks["sound_bot_scale"] = {
     this.appendDummyInput()
       .appendField("음계")
       .appendField(new Blockly.FieldDropdown([
-        ["C", "C"],["C#", "D#"],
+        ["C", "C"],["C#", "C#"],
         ["D", "D"],["D#", "D#"],
         ["Db", "Db"],["E", "E"],
         ["Eb", "Eb"],["F", "F"],
@@ -1799,7 +1799,7 @@ Blockly.Blocks["nonpass_wifi"] = {
 
 javascriptGenerator["nonpass_wifi"] = function (block) {
   let string_ssid = block.getFieldValue('ssid');
-  let code = 'import internet\ninternet.connect("'+string_ssid+'")\n';
+  let code = 'import internet\ninternet.open_ap("'+string_ssid+'")\n';
   return code;
 };
 
