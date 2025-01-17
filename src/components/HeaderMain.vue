@@ -5,13 +5,14 @@
     </div>
 
     <div class="control-btn-wrap">
-      <span
+      <!-- 신호등 -->
+      <!-- <span
         class="indicator"
         :class="{ 
           connected: connectionState === 'connected',
           disconnected: connectionState !== 'connected'
         }"
-      ></span>
+      ></span> -->
       <span
         v-if="connectionState !== 'connected'"
         class="connect-btn Pretendard-Medium"
@@ -91,9 +92,32 @@
       <div class="darken-background"></div>
     </div>
   </q-toolbar>
+  
+  <!-- 업데이트 창 개선 전 코드 -->
 
-  <!-- 업데이트 선택 다이얼로그 -->
-  <q-dialog v-model="updateModal" persistent>
+  <div class="update-modal" v-if="this.updateModal == true">
+      <div @click="toggleUpdateModal()" style="color: black">X</div>
+      <p style="color: black">업데이트할 교구를 클릭하세요.</p>
+      <div>
+          <q-btn
+              @click="update('asomekit')"
+              style="background-color: #E4007F; color: #fff; font-weight: 600; margin-right: 10px;"
+          >
+              어썸킷
+          </q-btn>
+          <q-btn
+              @click="update('asomebot')"
+              style="background-color: #4EA949; color: #fff; font-weight: 600;"
+          >
+              어썸봇
+          </q-btn>
+      </div>
+  </div>
+
+
+  <!-- 업데이트 창 개선코드 -->
+
+  <!-- <q-dialog v-model="updateModal" persistent>
     <q-card style="min-width: 400px;">
       <q-card-section class="q-pt-none q-px-md q-pb-md">
         <div class="modal-header">
@@ -101,7 +125,6 @@
         </div>
         <p class="modal-message">업데이트할 교구를 선택하세요.</p>
         <div class="modal-content">
-          <!-- 연결된 경우 버튼 그룹 표시 -->
           <div v-if="connectionState === 'connected'" class="buttons-group">
             <q-btn
               @click="update('asomekit')"
@@ -134,7 +157,6 @@
               </div>
             </q-btn>
           </div>
-          <!-- 연결되지 않은 경우 메시지 및 연결 버튼 표시 -->
           <div v-else class="not-connected-message">
             <p>교구가 연결되어 있지 않습니다. 업데이트를 진행하려면 교구를 연결해주세요.</p>
             <q-btn label="확인" color="primary" @click="toggleUpdateModal" />
@@ -144,7 +166,6 @@
     </q-card>
   </q-dialog>
 
-  <!-- 업데이트 진행 중 다이얼로그 -->
   <q-dialog v-model="isUpdating" persistent>
     <q-card>
       <q-card-section class="q-pt-none q-px-md q-pb-md" style="text-align: center;">
@@ -156,7 +177,7 @@
         <q-btn flat label="취소" color="negative" @click="cancelUpdate" v-if="canCancel" />
       </q-card-actions>
     </q-card>
-  </q-dialog>
+  </q-dialog> -->
 
   <!-- BLE 스캔 버튼 및 모달 -->
   <div>
