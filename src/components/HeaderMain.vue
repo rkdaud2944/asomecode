@@ -1,114 +1,203 @@
 <template>
-    <q-toolbar class="header-nav">
-        <div class="main-logo" @click="this.$router.push({ path: `/`})">
-            <img :src="logo" alt="logo" class="logo"/>
-        </div>
-        <div class="control-btn-wrap">
-                <span class="connect-btn Pretendard-Medium" @click="connect()">
-                    <img :src="connectBtnImg"/>
-                    연결하기
-                </span>
-                <span class="stop-btn Pretendard-Medium" @click="stop()">
-                    <img :src="stopBtnImg"/> 
-                    멈추기
-                </span>
-            </div>
-        <!-- <div>
-            <div class="control-btn-wrap">
-                <span class="connect-btn Pretendard-Medium" @mouseenter="showConnectOptions" @mouseleave="hideConnectOptions">
-                    <img :src="connectBtnImg" />
-                    연결하기
-                    <div v-if="showOptions" class="connect-options">
-                        <span class="option" @click="connect()">유선 연결</span>
-                        <span class="option" @click="startScan()">무선 연결</span>
-                    </div>
-                </span>
-                <span class="stop-btn Pretendard-Medium" @click="stop()">
-                    <img :src="stopBtnImg" />
-                    멈추기
-                </span>
-            </div>
-        </div> -->
-        <div class="nav">
-            <span @click="goToDownload" class="NotoSansKR-Regular nav-txt"><a style="cursor: pointer;">자료실</a></span>
-            <span @click="goToQna" class="NotoSansKR-Regular nav-txt"><a style="cursor: pointer;">도움말</a></span>
-            <span class="NotoSansKR-Regular hamburger-wrap nav-txt">
-                <div class="hamburger-icon">
-                    <img :src="menu" class="menu-img"/>
-                </div>
-                <div class="dropdown-menu">
-                    <ul>
-                        <li class="menu-cts menu-title">
-                            <p>MENU</p>
-                        </li>
-                        <li class="menu-cts li-connect" @click="connect()">
-                            <img :src="connectImg"/>
-                            <p>연결하기</p>
-                        </li>
-                        <li class="menu-cts" @click="stop()">
-                            <img :src="stopImg"/>
-                            <p>멈추기</p>
-                        </li>
-                        <li class="menu-cts" @click="openEditor('')">
-                            <img :src="editorImg"/>
-                            <p>소스편집</p>
-                        </li>
-                        <li class="menu-cts" @click="reboot()">
-                            <img :src="restartImg"/>
-                            <p>재부팅</p>
-                        </li>
-                        <li class="menu-cts" @click="format()">
-                            <img :src="resetImg"/>
-                            <p>포맷</p>
-                        </li>
-                        <li class="menu-cts" @click="toggleUpdateModal()">
-                            <img :src="updateImg"/>
-                            <p>업데이트</p>
-                        </li>
-                        <li class="menu-cts" @click="installDriver()">
-                            <img :src="settingImg"/>
-                            <p>드라이버 설치</p>
-                        </li>
-                        <li class="menu-cts" @click="goToBlockCoding">
-                            <img :src="blockImg"/>
-                            <p>블록코딩</p>
-                        </li>
-                    </ul>
-                </div>
-            </span>
-            <div class="darken-background"></div>
-        </div>
-    </q-toolbar>
-    
-    <div class="update-modal" v-if="this.updateModal == true">
-        <div @click="toggleUpdateModal()" style="color: black">X</div>
-        <p style="color: black">업데이트할 교구를 클릭하세요.</p>
-        <div>
-            <q-btn @click="update('asomekit')" style="background-color: #E4007F; color: #fff; font-weight: 600; margin-right: 10px;">어썸킷</q-btn>
-            <q-btn @click="update('asomebot')" style="background-color: #4EA949; color: #fff; font-weight: 600;">어썸봇</q-btn>
-        </div>
+  <q-toolbar class="header-nav">
+    <div class="main-logo" @click="goHome">
+      <img :src="logo" alt="logo" class="logo" />
     </div>
 
-    <!-- ble 모달 -->    
-    <div>
-        <button @click="startScan">BLE 스캔 시작</button>
-        
-        <!-- BLE 장치 선택 모달 -->
-        <div v-if="showModal" class="ble-modal Pretendard-Medium">
-            <div class="ble-modal-content">
-                <h6>기기를 선택하세요</h6>
-                <select v-model="selectedDevice">
-                <option v-for="device in bleDevices" :key="device.id" :value="device.id">
-                    {{ device.name }}
-                </option>
-                </select>
-                <div class="ble-modal-actions">
-                    <button @click="cancelScan">취소</button>
-                    <button @click="selectDevice">연결</button>
-                </div>
-            </div>
-        </div>
+    <div class="control-btn-wrap">
+      <!-- 신호등 -->
+      <!-- <span
+        class="indicator"
+        :class="{ 
+          connected: connectionState === 'connected',
+          disconnected: connectionState !== 'connected'
+        }"
+      ></span> -->
+      <span
+        v-if="connectionState !== 'connected'"
+        class="connect-btn Pretendard-Medium"
+        @click="connect"
+      >
+        <img :src="connectBtnImg" />
+        연결하기
+      </span>
+      <span
+        v-else
+        class="connect-btn Pretendard-Medium"
+        @click="disconnect"
+      >
+        <img :src="connectBtnImg" />
+        연결해제
+      </span>
+
+      <span class="stop-btn Pretendard-Medium" @click="stop">
+        <img :src="stopBtnImg" />
+        멈추기
+      </span>
     </div>
+
+    <div class="nav">
+      <span @click="goToDownload" class="NotoSansKR-Regular nav-txt">
+        <a style="cursor: pointer;">자료실</a>
+      </span>
+      <span @click="goToQna" class="NotoSansKR-Regular nav-txt">
+        <a style="cursor: pointer;">도움말</a>
+      </span>
+
+      <span class="NotoSansKR-Regular hamburger-wrap nav-txt">
+        <div class="hamburger-icon">
+          <img :src="menu" class="menu-img" />
+        </div>
+        <div class="dropdown-menu">
+          <ul>
+            <li class="menu-cts menu-title">
+              <p>MENU</p>
+            </li>
+            <li class="menu-cts li-connect" @click="connect">
+              <img :src="connectImg" />
+              <p>연결하기</p>
+            </li>
+            <li class="menu-cts" @click="stop">
+              <img :src="stopImg" />
+              <p>멈추기</p>
+            </li>
+            <li class="menu-cts" @click="openEditor('')">
+              <img :src="editorImg" />
+              <p>소스편집</p>
+            </li>
+            <li class="menu-cts" @click="reboot">
+              <img :src="restartImg" />
+              <p>재부팅</p>
+            </li>
+            <li class="menu-cts" @click="format">
+              <img :src="resetImg" />
+              <p>포맷</p>
+            </li>
+            <li class="menu-cts" @click="toggleUpdateModal">
+              <img :src="updateImg" />
+              <p>업데이트</p>
+            </li>
+            <li class="menu-cts" @click="installDriver">
+              <img :src="settingImg" />
+              <p>드라이버 설치</p>
+            </li>
+            <li class="menu-cts" @click="goToBlockCoding">
+              <img :src="blockImg" />
+              <p>블록코딩</p>
+            </li>
+          </ul>
+        </div>
+      </span>
+
+      <div class="darken-background"></div>
+    </div>
+  </q-toolbar>
+  
+  <!-- 업데이트 창 개선 전 코드 -->
+
+  <div class="update-modal" v-if="this.updateModal == true">
+      <div @click="toggleUpdateModal()" style="color: black">X</div>
+      <p style="color: black">업데이트할 교구를 클릭하세요.</p>
+      <div>
+          <q-btn
+              @click="update('asomekit')"
+              style="background-color: #E4007F; color: #fff; font-weight: 600; margin-right: 10px;"
+          >
+              어썸킷
+          </q-btn>
+          <q-btn
+              @click="update('asomebot')"
+              style="background-color: #4EA949; color: #fff; font-weight: 600;"
+          >
+              어썸봇
+          </q-btn>
+      </div>
+  </div>
+
+
+  <!-- 업데이트 창 개선코드 -->
+
+  <!-- <q-dialog v-model="updateModal" persistent>
+    <q-card style="min-width: 400px;">
+      <q-card-section class="q-pt-none q-px-md q-pb-md">
+        <div class="modal-header">
+          <div @click="toggleUpdateModal" class="close-button">X</div>
+        </div>
+        <p class="modal-message">업데이트할 교구를 선택하세요.</p>
+        <div class="modal-content">
+          <div v-if="connectionState === 'connected'" class="buttons-group">
+            <q-btn
+              @click="update('asomekit')"
+              class="update-button kit-button"
+              flat
+            >
+              <div class="button-content">
+                <img :src="asomekitBtnImg" alt="어썸킷" class="button-image" />
+                <span class="button-label">어썸킷</span>
+              </div>
+            </q-btn>
+            <q-btn
+              @click="update('asomebot')"
+              class="update-button bot-button"
+              flat
+            >
+              <div class="button-content">
+                <img :src="asomebotBtnImg" alt="어썸봇" class="button-image" />
+                <span class="button-label">어썸봇</span>
+              </div>
+            </q-btn>
+            <q-btn
+              @click="update('asomecar')"
+              class="update-button car-button"
+              flat
+            >
+              <div class="button-content">
+                <img :src="asomecarBtnImg" alt="어썸카" class="button-image" />
+                <span class="button-label">어썸카</span>
+              </div>
+            </q-btn>
+          </div>
+          <div v-else class="not-connected-message">
+            <p>교구가 연결되어 있지 않습니다. 업데이트를 진행하려면 교구를 연결해주세요.</p>
+            <q-btn label="확인" color="primary" @click="toggleUpdateModal" />
+          </div>
+        </div>
+      </q-card-section>
+    </q-card>
+  </q-dialog>
+
+  <q-dialog v-model="isUpdating" persistent>
+    <q-card>
+      <q-card-section class="q-pt-none q-px-md q-pb-md" style="text-align: center;">
+        <div class="text-h6">업데이트 중...</div>
+        <q-spinner-dots size="100px" color="primary" class="q-my-md" />
+        <div class="q-mt-md">업데이트를 진행 중입니다. 잠시만 기다려주세요.</div>
+      </q-card-section>
+      <q-card-actions align="right">
+        <q-btn flat label="취소" color="negative" @click="cancelUpdate" v-if="canCancel" />
+      </q-card-actions>
+    </q-card>
+  </q-dialog> -->
+
+  <!-- BLE 스캔 버튼 및 모달 -->
+  <div>
+    <button @click="startScan">BLE 스캔 시작</button>
+
+    <div v-if="showModal" class="ble-modal Pretendard-Medium">
+      <div class="ble-modal-content">
+        <h6>기기를 선택하세요</h6>
+        <select v-model="selectedDevice">
+          <option v-for="device in bleDevices" :key="device.id" :value="device.id">
+            {{ device.name }}
+          </option>
+        </select>
+        <div class="ble-modal-actions">
+          <button @click="cancelScan">취소</button>
+          <button @click="selectDevice">연결</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
