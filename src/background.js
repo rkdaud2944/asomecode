@@ -1,112 +1,159 @@
 'use strict'
 
-import { app, protocol, BrowserWindow, Menu } from 'electron'
+import { app, protocol, BrowserWindow, Menu, ipcMain } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
 import path from 'path'
 
+// 시리얼포트
+import { SerialPort, ReadlineParser } from 'serialport'
+
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
+// vue-cli-plugin-electron-builder 기본
 protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
 ])
 
+let mainWindow = null
+
 async function createWindow() {
-  const win = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 1280,
     height: 1024,
     autoHideMenuBar: true,
+    backgroundColor: '#FFF',
     webPreferences: {
       enableRemoteModule: true,
       nodeIntegration: true,
       contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
       preload: path.join(__dirname, 'preload.js'),
     },
-    backgroundColor: '#FFF',
   })
 
-
   if (process.env.WEBPACK_DEV_SERVER_URL) {
-    await win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
-    if (!process.env.IS_TEST) win.webContents.openDevTools()
+    await mainWindow.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
+    if (!process.env.IS_TEST) mainWindow.webContents.openDevTools()
   } else {
     createProtocol('app')
-    win.loadURL('app://./index.html')
+    mainWindow.loadURL('app://./index.html')
   }
 
   const contextMenu = Menu.buildFromTemplate([
-    { label: '뒤로 가기', click: () => win.webContents.goBack() },
-    { label: '앞으로 가기', click: () => win.webContents.goForward() },
-    // { label: '새로고침', click: () => win.webContents.reload() }
-  ]);
+    { label: '뒤로 가기', click: () => mainWindow.webContents.goBack() },
+    { label: '앞으로 가기', click: () => mainWindow.webContents.goForward() },
+  ])
+  mainWindow.webContents.on('context-menu', () => {
+    contextMenu.popup({ window: mainWindow })
+  })
 
-  win.webContents.on('context-menu', () => {
-    contextMenu.popup({ window: win });
-  });
-
-  // Ctrl + 휠 확대/축소 기능
-  let zoomFactor = 1.0;
-
-  win.webContents.on('did-finish-load', () => {
-    win.webContents.setZoomFactor(zoomFactor);
-    win.webContents.executeJavaScript(`window.initialZoomFactor = ${zoomFactor}; window.updateZoomDisplay(${zoomFactor})`);
-  });
-
-  win.webContents.on('zoom-changed', (event, zoomDirection) => {
-    if (zoomDirection === 'in') {
-      zoomFactor += 0.1;
-    } else if (zoomDirection === 'out') {
-      zoomFactor -= 0.1;
-    }
-    win.webContents.setZoomFactor(zoomFactor);
-    win.webContents.executeJavaScript(`window.updateZoomDisplay(${zoomFactor})`);
-  });
-
-  win.webContents.on('mouse-wheel', (event, deltaX, deltaY, screenX, screenY) => {
-    if (event.ctrlKey) {
-      event.preventDefault();
-      if (deltaY < 0) {
-        zoomFactor += 0.1;
-      } else {
-        zoomFactor -= 0.1;
-      }
-      win.webContents.setZoomFactor(zoomFactor);
-      win.webContents.executeJavaScript(`window.updateZoomDisplay(${zoomFactor})`);
-    }
-  }, { passive: false });
-
-  // 부모창과 자식창 확대/축소 공유 방지코드
-  win.webContents.setWindowOpenHandler(({ url }) => {
-    if (url) {
-      return {
-        action: 'allow',
-        overrideBrowserWindowOptions: {
-          alwaysOnTop : false,
-          autoHideMenuBar: true, 
-          backgroundColor: '#fff',
-          webPreferences: {
-            preload: path.join(__dirname, 'preload.js'),
-            devTools: !process.env.IS_TEST,
-            zoomFactor: 1.0
-          }
-        }
-      }
-    }
-    return { action: 'deny' }
-  });
+  // 확대/축소 로직 등은 필요하면 추가
 }
 
+// ──────────────────────────
+// 전역 시리얼 포트
+// ──────────────────────────
+let globalSerialPort = null
+let globalParser = null
 
+// (A) 포트 목록
+ipcMain.handle('list-serial-ports', async () => {
+  const ports = await SerialPort.list()
+  return ports
+})
+
+// (B) 포트 열기 => 연결 직후 `import os; os.uname()` 전송
+ipcMain.handle('open-serial-port', async (event, { portPath }) => {
+  // 이미 열려 있으면 닫기
+  if (globalSerialPort) {
+    try {
+      globalSerialPort.close()
+    } catch (err) {
+      console.warn('Failed to close existing port:', err)
+    }
+    globalSerialPort = null
+    globalParser = null
+  }
+
+  const port = new SerialPort({
+    path: portPath,
+    baudRate: 115200,
+    autoOpen: false,
+    lock: false,
+  })
+  const parser = new ReadlineParser({ delimiter: '\r\n' })
+  port.pipe(parser)
+
+  // 모든 시리얼 데이터 → 렌더러('serial-data')
+  parser.on('data', (msg) => {
+    console.log('[Serial Data]', msg)
+    if (mainWindow) {
+      mainWindow.webContents.send('serial-data', msg)
+    }
+  })
+
+  // 포트가 닫혔을 때 → 'serial-closed'
+  port.on('close', () => {
+    console.log('[Serial] port closed:', portPath)
+    if (mainWindow) {
+      mainWindow.webContents.send('serial-closed')
+    }
+  })
+
+  await new Promise((resolve, reject) => {
+    port.open((err) => {
+      if (err) reject(err)
+      else resolve()
+    })
+  })
+
+  globalSerialPort = port
+  globalParser = parser
+  console.log('Serial Port opened:', portPath)
+
+  // 연결 직후 uname()
+  port.write("import os; os.uname()\r\n")
+
+  return { success: true, path: portPath }
+})
+
+// (C) 포트 닫기
+ipcMain.handle('close-serial-port', async () => {
+  if (globalSerialPort) {
+    if (globalSerialPort.isOpen) {
+      try {
+        globalSerialPort.close()
+      } catch (err) {
+        console.error('Error closing port:', err)
+      }
+    }
+    globalSerialPort = null
+    globalParser = null
+  }
+  console.log('[Serial] Port closed.')
+  return { success: true }
+})
+
+// (D) write
+ipcMain.handle('write-serial-port', async (event, { text }) => {
+  if (!globalSerialPort) {
+    throw new Error('No serial port is open')
+  }
+  globalSerialPort.write(text)
+  return { success: true }
+})
+
+// ──────────────────────────
+// Electron 기본
+// ──────────────────────────
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit()
   }
 })
-
 app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) createWindow()
 })
-
 app.on('ready', async () => {
   if (isDevelopment && !process.env.IS_TEST) {
     try {

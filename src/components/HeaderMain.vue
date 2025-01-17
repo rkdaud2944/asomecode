@@ -208,226 +208,256 @@ import bridgeIn from "@/globals/bridge-in";
 import eventbus from "@/globals/eventbus";
 import boardUpdater from "@/globals/board-updater";
 import ble from "@/globals/ble";
-import { mapState } from 'pinia'
-import {useConnectStore} from '@/store/connect-store'
+import { mapState } from 'pinia';
+import { useConnectStore } from '@/store/connect-store';
+import seiral from "@/globals/serial"; // Typo 확인: 'seiral' -> 'serial' 필요할 수 있음
 
 export default {
-    mixins: [VueBase, bridgeIn],
+  mixins: [VueBase, bridgeIn],
 
-    computed: {
-        ...mapState(useConnectStore,['mode','connectionState']),
+  computed: {
+    ...mapState(useConnectStore, ['mode', 'connectionState']),
+  },
+
+  data() {
+    return {
+      btConnectColor: "grey",
+
+      logo: images.logo,
+      connectImg: images.connect,
+      editorImg: images.editor,
+      resetImg: images.reset,
+      restartImg: images.restart,
+      stopImg: images.stop,
+      updateImg: images.update,
+      settingImg: images.setting,
+      menu: images.menu,
+      connectBtnImg: images.connectBtn,
+      stopBtnImg: images.stopBtn,
+      blockImg: images.block,
+      asomebotBtnImg: images.asomebotBtnImg,
+      asomekitBtnImg: images.asomekitBtnImg,
+      asomecarBtnImg: images.asomecarBtnImg,
+      codes: null,
+
+      isMenuOpen: false,
+      connected: false,
+
+      updateModal: false,
+      showOptions: false,
+
+      bleDevices: [],
+      selectedDevice: null,
+      showModal: false,
+
+      isUpdating: false,
+      canCancel: false,
+    };
+  },
+
+  created() {
+    eventbus.on("onBleScan", (deviceData) => {
+      console.log("BLE 장치 발견:", deviceData);
+      if (!this.bleDevices.some((device) => device.id === deviceData.id)) {
+        this.bleDevices.push(deviceData);
+      }
+    });
+
+    eventbus.on("onUpdateStart", this.handleUpdateStart);
+    eventbus.on("onUpdateProgress", this.handleUpdateProgress);
+    eventbus.on("onUpdateComplete", this.handleUpdateComplete);
+  },
+
+  mounted() {
+    eventbus.on("onSerialConnected", () => {
+      this.btConnectColor = "primary";
+    });
+    eventbus.on("onSerialClosed", () => {
+      this.btConnectColor = "grey";
+      this.$q.notify('어썸보드 연결이 끊어졌습니다.');
+    });
+    eventbus.on("onSerialpp", () => {
+      this.btConnectColor = "grey";
+      this.$q.notify('어썸보드가 다른곳에 연결되어있습니다 다시 연결해주세요.');
+    });
+
+    eventbus.on('simulationOpen', (path) => {
+      this.openRouterPath(path);
+    });
+
+    eventbus.on('simulationBus', (params) => {
+      window.parent.postMessage(JSON.stringify(params), '*');
+      this.simulJS(params);
+    });
+
+    eventbus.on("onBleScanStart", () => {
+      this.btConnectColor = "primary";
+      this.$q.notify('BLE 스캔이 시작되었습니다.');
+    });
+
+    eventbus.on("onBleScanStopped", () => {
+      this.btConnectColor = "grey";
+      this.$q.notify('BLE 스캔이 중지되었습니다.');
+    });
+
+    eventbus.on("onBleConnected", () => {
+      this.btConnectColor = "primary";
+      this.$q.notify('무선 연결이 완료되었습니다.');
+      this.showModal = false;
+    });
+
+    eventbus.on("bleDisconnect", () => {
+      this.btConnectColor = "grey";
+      this.$q.notify('무선 연결이 끊어졌습니다.');
+    });
+
+    eventbus.on("onBleConnectError", (error) => {
+      this.btConnectColor = "grey";
+      this.$q.notify('연결 실패 : ' + error);
+    });
+
+    eventbus.on("bleSendDataError", (error) => {
+      this.btConnectColor = "grey";
+      this.$q.notify('데이터 전송 실패 : ' + error);
+    });
+
+    window.addEventListener("message", (event) => {
+      if (event.data === 'connect') {
+        this.connect();
+      }
+    });
+    window.addEventListener("message", (event) => {
+      if (event.data.type === 'sttclose') {
+        serial.writeLn(event.data.text);
+      }
+    });
+    window.addEventListener("message", (event) => {
+      if (event.data === 'stop') {
+        this.connect();
+      }
+    });
+  },
+
+  methods: {
+    ...serial,
+    ...bridgeIn,
+
+    goHome() {
+      this.$router.push({ path: `/` });
     },
 
-    data() {
-        return {
-            btConnectColor: "grey",
-
-            logo: images.logo,
-            connectImg: images.connect,
-            editorImg: images.editor,
-            resetImg: images.reset,
-            restartImg: images.restart,
-            stopImg: images.stop,
-            updateImg: images.update,
-            settingImg: images.setting,
-            menu: images.menu,
-            connectBtnImg: images.connectBtn,
-            stopBtnImg: images.stopBtn,
-            blockImg: images.block,
-            codes: null,
-
-            isMenuOpen: false,
-            connected: false,
-            
-            updateModal: false,
-            showOptions: false,            
-                    
-            bleDevices: [],
-            selectedDevice: null,
-            showModal: false
-        } 
+    connect() {
+      seiral.connect();
+    },
+    disconnect() {
+      seiral.disconnect();
     },
 
-    created() {
-        eventbus.on("onBleScan", (deviceData) => {
-            console.log("BLE 장치 발견:", deviceData);
-            if (!this.bleDevices.some(device => device.id === deviceData.id)) {
-                this.bleDevices.push(deviceData);
-            }
+    async update(mode) {
+      if (this.connectionState !== 'connected') {
+        // 연결되지 않은 경우 사용자에게 알림 표시
+        this.$q.notify({
+          type: 'warning',
+          message: '교구가 연결되어 있지 않습니다. 연결을 시도해주세요.',
         });
+
+        // 연결 창 자동 열기
+        this.startScan();
+
+        return; // 업데이트 진행 중단
+      }
+
+      // 연결된 경우 업데이트 진행
+      this.toggleUpdateModal();
+      boardUpdater.start(mode);
     },
 
-    mounted() {
-        eventbus.on("onSerialConnected", () => {
-            this.btConnectColor = "primary";
-        });
-        
-        eventbus.on("onSerialClosed", () => {
-            this.btConnectColor = "grey";
-            this.$q.notify('어썸보드 연결이 끊어졌습니다.');
-        });
-        
-        eventbus.on('simulationOpen', (path) => {
-            this.openRouterPath(path);
-        });
-
-        eventbus.on('simulationBus', (params) => {
-            window.parent.postMessage(JSON.stringify(params), '*');
-            this.simulJS(params);
-            
-        });
-        
-        eventbus.on("onBleScanStart", () => {
-            this.btConnectColor = "primary";
-            this.$q.notify('BLE 스캔이 시작되었습니다.');
-        });
-        
-        eventbus.on("onBleScanStopped", () => {
-            this.btConnectColor = "grey";
-            this.$q.notify('BLE 스캔이 중지되었습니다.');
-        });
-        
-        eventbus.on("onBleConnected", () => {
-            this.btConnectColor = "primary";
-            this.$q.notify('무선 연결이 완료되었습니다.');
-            this.showModal = false;
-            // ble.writeLn("/r/n");
-        });
-        
-        eventbus.on("bleDisconnect", () => {
-            this.btConnectColor = "grey";
-            this.$q.notify('무선 연결이 끊어졌습니다.');
-        });
-
-        eventbus.on("onBleConnectError", (error) => {
-            this.btConnectColor = "grey";
-            this.$q.notify('연결 실패 : ',error);
-        });
-        
-        eventbus.on("bleSendDataError", (error) => {
-            this.btConnectColor = "grey";
-            this.$q.notify('데이터 전송 실패 : ',error);
-        });
-        
-        window.addEventListener("message", (event) => {
-            if (event.data === 'connect') {
-                this.connect();
-            }
-        });
-        
-        window.addEventListener("message", (event) => {
-            if (event.data.type === 'sttclose') { 
-                serial.writeLn(event.data.text);
-            }
-        });
-        window.addEventListener("message", (event) => {
-            if (event.data === 'stop') {
-                this.connect();
-            }
-        });
+    startScan() {
+      this.showModal = true;
+      this.bleDevices = [];
+      ble.bleScan();
+    },
+    cancelScan() {
+      this.showModal = false;
+      this.bleDevices = [];
+      this.selectedDevice = null;
+      ble.stopScanning();
+    },
+    selectDevice() {
+      console.log("선택된 장치 ID:", this.selectedDevice);
+      if (this.selectedDevice) {
+        ble.connectToSelectedDevice(this.selectedDevice);
+      }
     },
 
-    methods: {
-        ...serial, ...bridgeIn,
-
-        startScan() {
-            this.showModal = true;
-            this.bleDevices = []; // 이전 스캔 결과 초기화
-            ble.bleScan(); // BLE 스캔 시작
-        },
-
-        cancelScan() {
-            this.showModal = false;
-            this.bleDevices = []; // 장치 목록 초기화
-            this.selectedDevice = null;
-            ble.stopScanning(); // 스캔 중지
-        },
-        
-        selectDevice() {
-            console.log("선택된 장치 ID:", this.selectedDevice);
-            if (this.selectedDevice) {
-                ble.connectToSelectedDevice(this.selectedDevice)
-                    // .then(() => {
-                    //     this.$q.notify('BLE 장치에 성공적으로 연결되었습니다.');
-                    //     this.bleDevices = []; // 목록 초기화
-                    // })
-                    // .catch((error) => {
-                    //     this.$q.notify('BLE 장치 연결에 실패했습니다.');
-                    //     console.error("연결 실패:", error);
-                    // });
-            }
-        },
-
-        showConnectOptions() {
-            this.showOptions = true;
-        },
-
-        hideConnectOptions() {
-            this.showOptions = false;
-        },
-
-        update(mode) {
-            boardUpdater.start(mode);
-            this.toggleUpdateModal();
-        },
-        
-        showDropdown() { 
-            document.getElementById('dropdown').style.display = 'block';
-        },
-
-        hideDropdown() {
-            document.getElementById('dropdown').style.display = 'none';
-        },
-
-        bleConnect() {
-            ble.connect();
-        },
-        
-        bleSendData(code) {
-            // ble.runCode(code);
-            ble.writeLn(code);
-        },
-        bleStop(){
-            ble.writeLn(String.fromCharCode(3))
-        },
-        
-        installDriver() {
-            window.location.href = "https://asomecode-web.s3.ap-northeast-2.amazonaws.com/driver/CH341SER.zip";
-        },
-    
-        toggleUpdateModal() {
-            var bg = document.querySelector('.darken-background');
-            if (this.updateModal) {
-                this.updateModal = false;
-                bg.style.display = 'none'
-
-            } else {
-                this.updateModal = true;
-                bg.style.display = 'block'
-            }
-        },
-
-        goToDownload() {
-            window.open("https://asomeit.kr/download");
-        },
-
-        goToQna() {
-            window.open("https://asomeit.imweb.me/faq");
-        },
-
-        goToBlockCoding() {
-            localStorage.removeItem("lessonBlock")
-            this.openRouterPath('/blockCoding')
-        },
+    showConnectOptions() {
+      this.showOptions = true;
     },
-}
+    hideConnectOptions() {
+      this.showOptions = false;
+    },
+
+    showDropdown() {
+      document.getElementById('dropdown').style.display = 'block';
+    },
+    hideDropdown() {
+      document.getElementById('dropdown').style.display = 'none';
+    },
+
+    bleConnect() {
+      ble.connect();
+    },
+    bleSendData(code) {
+      ble.writeLn(code);
+    },
+    bleStop() {
+      ble.writeLn(String.fromCharCode(3));
+    },
+
+    installDriver() {
+      window.location.href = "https://asomecode-web.s3.ap-northeast-2.amazonaws.com/driver/CH341SER.zip";
+    },
+
+    toggleUpdateModal() {
+      this.updateModal = !this.updateModal;
+    },
+
+    goToDownload() {
+      window.open("https://asomeit.kr/download");
+    },
+    goToQna() {
+      window.open("https://asomeit.imweb.me/faq");
+    },
+    goToBlockCoding() {
+      localStorage.removeItem("lessonBlock");
+      this.openRouterPath('/blockCoding');
+    },
+
+    handleUpdateStart() {
+      this.isUpdating = true;
+    },
+    handleUpdateComplete() {
+      this.isUpdating = false;
+      this.$q.notify({
+        type: 'positive',
+        message: '업데이트가 완료되었습니다.',
+      });
+    },
+    cancelUpdate() {
+      this.isUpdating = false;
+      this.$q.notify({
+        type: 'warning',
+        message: '업데이트가 취소되었습니다.',
+      });
+    },
+  },
+};
 </script>
 
 <style scoped src="@/assets/css/component/header.css"/>
 <style scoped src="@/assets/css/font.css"/>
 
 <style scoped>
-/* 모달 스타일 */
 .ble-modal {
   position: fixed;
   top: 0;
@@ -453,5 +483,114 @@ export default {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
+}
+
+.indicator {
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin-left: auto;
+  background-color: gray; 
+  text-align: center;
+  margin-right: auto;
+  transform: translateY(65%);
+}
+.indicator.connected {
+  background-color: green;
+}
+.indicator.disconnected {
+  background-color: gray; 
+}
+
+/* 업데이트 모달 스타일 */
+.update-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  width: 400px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.close-button {
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.modal-message {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 버튼 그룹 스타일 */
+.buttons-group {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* 개별 버튼 스타일 */
+.update-button {
+  flex: 1;
+  margin: 0 5px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: box-shadow 0.3s ease;
+}
+
+.update-button:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 버튼 내부 내용 정렬 */
+.button-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 버튼 이미지 스타일 */
+.button-image {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+/* 버튼 라벨 스타일 */
+.button-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* 연결되지 않은 상태 메시지 스타일 */
+.not-connected-message {
+  text-align: center;
+}
+
+.not-connected-message p {
+  margin-bottom: 20px;
+  color: #ff5722;
 }
 </style>
