@@ -197,6 +197,13 @@ export default {
                 return;
             }
 
+            if (this.text.startsWith("/ver")) {
+                console.log("어썸코드: 2.0.4 ver");
+                alert("어썸코드: 2.0.4 ver");
+                this.text = "";
+                return;
+            }
+
             if(this.mode == 'ble'){
                 ble.writeLn(this.text);
                 // ble.runCode(this.text);
