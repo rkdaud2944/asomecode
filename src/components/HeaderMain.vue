@@ -4,8 +4,8 @@
       <img :src="logo" alt="logo" class="logo" />
     </div>
 
+    <!-- 중앙에 위치할 버튼 영역 -->
     <div class="control-btn-wrap">
-
       <span
         v-if="connectionState !== 'connected'"
         class="connect-btn Pretendard-Medium"
@@ -41,10 +41,12 @@
         <img :src="navstopImg" />
         멈추기
       </span>
-
     </div>
 
     <div class="nav">
+      <span @click="goToBlockCoding" class="NotoSansKR-Regular nav-txt">
+        <a style="cursor: pointer;">블록코딩</a>
+      </span>
       <span @click="goToDownload" class="NotoSansKR-Regular nav-txt">
         <a style="cursor: pointer;">자료실</a>
       </span>
@@ -89,10 +91,10 @@
               <img :src="settingImg" />
               <p>드라이버 설치</p>
             </li>
-            <li class="menu-cts" @click="goToBlockCoding">
+            <!-- <li class="menu-cts" @click="goToBlockCoding">
               <img :src="blockImg" />
               <p>블록코딩</p>
-            </li>
+            </li> -->
           </ul>
         </div>
       </span>
@@ -358,6 +360,7 @@ export default {
 <style scoped src="@/assets/css/font.css"/>
 
 <style scoped>
+/* BLE 모달 스타일 */
 .ble-modal {
   position: fixed;
   top: 0;
@@ -385,6 +388,7 @@ export default {
   margin-top: 20px;
 }
 
+/* 업데이트 모달 스타일 */
 .update-modal {
   position: fixed;
   top: 50%;
@@ -457,11 +461,17 @@ export default {
   color: #ff5722;
 }
 
+/* 툴바의 중앙 버튼 영역: 항상 가운데 정렬 */
 .control-btn-wrap {
   display: flex;
   align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
+/* 기타 버튼 스타일 */
 .connect-btn {
   display: inline-flex;
   align-items: center;
