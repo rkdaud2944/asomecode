@@ -154,67 +154,73 @@
           this.inputHistory.unshift(this.text); 
           this.currentIndex = -1; 
         }
+        
+        const trimmedText = this.text.trim();
+        const tokens = trimmedText.split(" ");
   
-        if (this.text.startsWith("/list")) {
+        // 정확한 명령어 비교
+        
+        if (trimmedText === "/list") {
           serial.listFiles();
           this.text = "";
           return;
         }
-  
-        if (this.text.startsWith("/view")) {
-          serial.viewFile(this.text.split(" ")[1]);
-          this.text = "";
-          return;
-        }
-  
-        if (this.text.startsWith("/run")) {
-          serial.runFile(this.text.split(" ")[1]);
-          this.text = "";
-          return;
-        }
-  
-        if (this.text.startsWith("/del")) {
-          serial.deleteFile(this.text.split(" ")[1]);
+        
+        if (tokens[0] === "/view" && tokens.length === 2) {
+          serial.viewFile(tokens[1]);
           this.text = "";
           return;
         }
         
-        if (this.text.startsWith("/blockcoding") || this.text.startsWith("/blockCoding")) {
+        if (tokens[0] === "/run" && tokens.length === 2) {
+          serial.runFile(tokens[1]);
+          this.text = "";
+          return;
+        }
+        
+        if (tokens[0] === "/del" && tokens.length === 2) {
+          serial.deleteFile(tokens[1]);
+          this.text = "";
+          return;
+        }
+        
+        if (trimmedText === "/blockcoding" || trimmedText === "/blockCoding") {
           localStorage.removeItem("lessonBlock")
           this.openRouterPath('/blockCoding')
+          this.text = "";
+          return;
         }
-  
-        if (this.text.startsWith("/go qc") || this.text.startsWith("/go qc")) {
+        
+        if (trimmedText === "/go qc") {
           this.$router.push('/GoqcPage');
           this.text = "";
+          return;
         }
-  
-        if (this.text.startsWith("/update weather")) {
+        
+        if (trimmedText === "/update weather") {
           boardUpdater.start('weather');
           this.text = "";
           return;
         }
-  
-        if (this.text.startsWith("/ver") || this.text.startsWith("/버전")) {
-            remote.dialog.showMessageBox({
-                type: 'info',
-                title: 'AsomeCode',
-                message: 'AsomeCode: 2.0.5 version',
-                // buttons: ['확인']
-            });
-            this.text = "";
-            return;
-        }
-
-  
-        if(this.mode == 'ble'){
-          ble.writeLn(this.text);
+        
+        if (trimmedText === "/ver" || trimmedText === "/버전") {
+          remote.dialog.showMessageBox({
+            type: 'info',
+            title: 'AsomeCode',
+            message: 'AsomeCode: 2.0.5 version',
+            // buttons: ['확인']
+          });
           this.text = "";
           return;
+        }
+        
+        // 명령어에 해당되지 않는 경우
+        if(this.mode === 'ble'){
+          ble.writeLn(this.text);
         } else {
           serial.writeLn(this.text);
-          this.text = "";
         }
+        this.text = "";
       },
       codeHistory(direction) {
         if (direction === 'up' && this.currentIndex + 1 < this.inputHistory.length) {
