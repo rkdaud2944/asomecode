@@ -56,10 +56,10 @@ a {
     color: #fff;
 }
 
-.connect-btn:hover>img {
+/* .connect-btn:hover>img {
     content: url(../../images/controls/connect-btn-hover.png);
     width: 20px;
-}
+} */
 
 .connect-btn:active {
     background-color: #E4007F;
@@ -114,10 +114,10 @@ a {
     color: #fff;
 }
 
-.stop-btn:hover>img {
+/* .stop-btn:hover>img {
     content: url(../../images/controls/stop-btn-hover.png);
     width: 20px;
-}
+} */
 
 .stop-btn:active {
     background-color: #E4007F;

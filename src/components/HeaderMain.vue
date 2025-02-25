@@ -5,35 +5,43 @@
     </div>
 
     <div class="control-btn-wrap">
-      <!-- 신호등 -->
-      <!-- <span
-        class="indicator"
-        :class="{ 
-          connected: connectionState === 'connected',
-          disconnected: connectionState !== 'connected'
-        }"
-      ></span> -->
+
       <span
         v-if="connectionState !== 'connected'"
         class="connect-btn Pretendard-Medium"
         @click="connect"
+        @mouseover="onConnectBtnHover"
+        @mouseleave="onConnectBtnLeave"
       >
-        <img :src="connectBtnImg" />
+        <img :src="currentConnectImg" />
         연결하기
-      </span>
-      <span
-        v-else
-        class="connect-btn Pretendard-Medium"
-        @click="disconnect"
-      >
-        <img :src="connectBtnImg" />
-        연결해제
+        <span class="indicator disconnected"></span>
       </span>
 
-      <span class="stop-btn Pretendard-Medium" @click="stop">
-        <img :src="stopBtnImg" />
+      <span
+        v-else
+        class="connect-btn Pretendard-Medium connected"
+        @click="disconnect"
+        @mouseover="onConnectedBtnHover"
+        @mouseleave="onConnectedBtnLeave"
+      >
+        <img :src="currentConnectImg" />
+        연결해제
+        <span class="indicator connected"></span>
+      </span>
+
+      <span
+        class="stop-btn Pretendard-Medium"
+        @click="stop"
+        @mouseover="onStopBtnHover"
+        @mouseleave="onStopBtnLeave"
+        @mousedown="onStopBtnActive"
+        @mouseup="onStopBtnHover"
+      >
+        <img :src="navstopImg" />
         멈추기
       </span>
+
     </div>
 
     <div class="nav">
@@ -92,92 +100,25 @@
       <div class="darken-background"></div>
     </div>
   </q-toolbar>
-  
-  <!-- 업데이트 창 개선 전 코드 -->
 
-  <div class="update-modal" v-if="this.updateModal == true">
-      <div @click="toggleUpdateModal()" style="color: black">X</div>
-      <p style="color: black">업데이트할 교구를 클릭하세요.</p>
-      <div>
-          <q-btn
-              @click="update('asomekit')"
-              style="background-color: #E4007F; color: #fff; font-weight: 600; margin-right: 10px;"
-          >
-              어썸킷
-          </q-btn>
-          <q-btn
-              @click="update('asomebot')"
-              style="background-color: #4EA949; color: #fff; font-weight: 600;"
-          >
-              어썸봇
-          </q-btn>
-      </div>
+  <div class="update-modal" v-if="updateModal">
+    <div @click="toggleUpdateModal()" style="color: black">X</div>
+    <p style="color: black">업데이트할 교구를 클릭하세요.</p>
+    <div>
+      <q-btn
+        @click="update('asomekit')"
+        style="background-color: #E4007F; color: #fff; font-weight: 600; margin-right: 10px;"
+      >
+        어썸킷
+      </q-btn>
+      <q-btn
+        @click="update('asomebot')"
+        style="background-color: #4EA949; color: #fff; font-weight: 600;"
+      >
+        어썸봇
+      </q-btn>
+    </div>
   </div>
-
-
-  <!-- 업데이트 창 개선코드 -->
-
-  <!-- <q-dialog v-model="updateModal" persistent>
-    <q-card style="min-width: 400px;">
-      <q-card-section class="q-pt-none q-px-md q-pb-md">
-        <div class="modal-header">
-          <div @click="toggleUpdateModal" class="close-button">X</div>
-        </div>
-        <p class="modal-message">업데이트할 교구를 선택하세요.</p>
-        <div class="modal-content">
-          <div v-if="connectionState === 'connected'" class="buttons-group">
-            <q-btn
-              @click="update('asomekit')"
-              class="update-button kit-button"
-              flat
-            >
-              <div class="button-content">
-                <img :src="asomekitBtnImg" alt="어썸킷" class="button-image" />
-                <span class="button-label">어썸킷</span>
-              </div>
-            </q-btn>
-            <q-btn
-              @click="update('asomebot')"
-              class="update-button bot-button"
-              flat
-            >
-              <div class="button-content">
-                <img :src="asomebotBtnImg" alt="어썸봇" class="button-image" />
-                <span class="button-label">어썸봇</span>
-              </div>
-            </q-btn>
-            <q-btn
-              @click="update('asomecar')"
-              class="update-button car-button"
-              flat
-            >
-              <div class="button-content">
-                <img :src="asomecarBtnImg" alt="어썸카" class="button-image" />
-                <span class="button-label">어썸카</span>
-              </div>
-            </q-btn>
-          </div>
-          <div v-else class="not-connected-message">
-            <p>교구가 연결되어 있지 않습니다. 업데이트를 진행하려면 교구를 연결해주세요.</p>
-            <q-btn label="확인" color="primary" @click="toggleUpdateModal" />
-          </div>
-        </div>
-      </q-card-section>
-    </q-card>
-  </q-dialog>
-
-  <q-dialog v-model="isUpdating" persistent>
-    <q-card>
-      <q-card-section class="q-pt-none q-px-md q-pb-md" style="text-align: center;">
-        <div class="text-h6">업데이트 중...</div>
-        <q-spinner-dots size="100px" color="primary" class="q-my-md" />
-        <div class="q-mt-md">업데이트를 진행 중입니다. 잠시만 기다려주세요.</div>
-      </q-card-section>
-      <q-card-actions align="right">
-        <q-btn flat label="취소" color="negative" @click="cancelUpdate" v-if="canCancel" />
-      </q-card-actions>
-    </q-card>
-  </q-dialog> -->
 
   <!-- BLE 스캔 버튼 및 모달 -->
   <div>
@@ -187,7 +128,11 @@
       <div class="ble-modal-content">
         <h6>기기를 선택하세요</h6>
         <select v-model="selectedDevice">
-          <option v-for="device in bleDevices" :key="device.id" :value="device.id">
+          <option
+            v-for="device in bleDevices"
+            :key="device.id"
+            :value="device.id"
+          >
             {{ device.name }}
           </option>
         </select>
@@ -210,7 +155,7 @@ import boardUpdater from "@/globals/board-updater";
 import ble from "@/globals/ble";
 import { mapState } from 'pinia';
 import { useConnectStore } from '@/store/connect-store';
-import seiral from "@/globals/serial"; // Typo 확인: 'seiral' -> 'serial' 필요할 수 있음
+import seiral from "@/globals/serial";
 
 export default {
   mixins: [VueBase, bridgeIn],
@@ -222,8 +167,21 @@ export default {
   data() {
     return {
       btConnectColor: "grey",
-
       logo: images.logo,
+      menu: images.menu,
+
+      connect_default: images.connect_default,   
+      connect_hover: images.connect_hover,      
+      connect_click: images.connect_click,      
+      connect_variant: images.connect_variant,  
+      stop_default: images.stop_default,      
+      stop_hover: images.stop_hover,       
+      stop_click: images.stop_click,   
+
+      currentConnectImg: images.connect_default,
+      navstopImg: images.stop_default,      
+
+      stopBtnImg: images.stopBtn,
       connectImg: images.connect,
       editorImg: images.editor,
       resetImg: images.reset,
@@ -231,25 +189,18 @@ export default {
       stopImg: images.stop,
       updateImg: images.update,
       settingImg: images.setting,
-      menu: images.menu,
-      connectBtnImg: images.connectBtn,
-      stopBtnImg: images.stopBtn,
       blockImg: images.block,
       asomebotBtnImg: images.asomebotBtnImg,
       asomekitBtnImg: images.asomekitBtnImg,
       asomecarBtnImg: images.asomecarBtnImg,
-      codes: null,
 
       isMenuOpen: false,
       connected: false,
-
       updateModal: false,
       showOptions: false,
-
       bleDevices: [],
       selectedDevice: null,
       showModal: false,
-
       isUpdating: false,
       canCancel: false,
     };
@@ -257,12 +208,10 @@ export default {
 
   created() {
     eventbus.on("onBleScan", (deviceData) => {
-      console.log("BLE 장치 발견:", deviceData);
       if (!this.bleDevices.some((device) => device.id === deviceData.id)) {
         this.bleDevices.push(deviceData);
       }
     });
-
     eventbus.on("onUpdateStart", this.handleUpdateStart);
     eventbus.on("onUpdateProgress", this.handleUpdateProgress);
     eventbus.on("onUpdateComplete", this.handleUpdateComplete);
@@ -275,50 +224,6 @@ export default {
     eventbus.on("onSerialClosed", () => {
       this.btConnectColor = "grey";
       this.$q.notify('어썸보드 연결이 끊어졌습니다.');
-    });
-    eventbus.on("onSerialpp", () => {
-      this.btConnectColor = "grey";
-      this.$q.notify('어썸보드가 다른곳에 연결되어있습니다 다시 연결해주세요.');
-    });
-
-    eventbus.on('simulationOpen', (path) => {
-      this.openRouterPath(path);
-    });
-
-    eventbus.on('simulationBus', (params) => {
-      window.parent.postMessage(JSON.stringify(params), '*');
-      this.simulJS(params);
-    });
-
-    eventbus.on("onBleScanStart", () => {
-      this.btConnectColor = "primary";
-      this.$q.notify('BLE 스캔이 시작되었습니다.');
-    });
-
-    eventbus.on("onBleScanStopped", () => {
-      this.btConnectColor = "grey";
-      this.$q.notify('BLE 스캔이 중지되었습니다.');
-    });
-
-    eventbus.on("onBleConnected", () => {
-      this.btConnectColor = "primary";
-      this.$q.notify('무선 연결이 완료되었습니다.');
-      this.showModal = false;
-    });
-
-    eventbus.on("bleDisconnect", () => {
-      this.btConnectColor = "grey";
-      this.$q.notify('무선 연결이 끊어졌습니다.');
-    });
-
-    eventbus.on("onBleConnectError", (error) => {
-      this.btConnectColor = "grey";
-      this.$q.notify('연결 실패 : ' + error);
-    });
-
-    eventbus.on("bleSendDataError", (error) => {
-      this.btConnectColor = "grey";
-      this.$q.notify('데이터 전송 실패 : ' + error);
     });
 
     window.addEventListener("message", (event) => {
@@ -348,26 +253,46 @@ export default {
 
     connect() {
       seiral.connect();
+      this.currentConnectImg = this.connect_click;
     },
     disconnect() {
       seiral.disconnect();
+      this.currentConnectImg = this.connect_default;
+    },
+
+    onConnectBtnHover() {
+      this.currentConnectImg = this.connect_hover;
+    },
+    onConnectBtnLeave() {
+      this.currentConnectImg = this.connect_default;
+    },
+
+    onConnectedBtnHover() {
+      this.currentConnectImg = this.connect_variant;
+    },
+    onConnectedBtnLeave() {
+      this.currentConnectImg = this.connect_click;
+    },
+
+    onStopBtnHover() {
+      this.navstopImg = images.stop_hover;
+    },
+    onStopBtnLeave() {
+      this.navstopImg = images.stop_default;
+    },
+    onStopBtnActive() {
+      this.navstopImg = images.stop_click;
     },
 
     async update(mode) {
       if (this.connectionState !== 'connected') {
-        // 연결되지 않은 경우 사용자에게 알림 표시
         this.$q.notify({
           type: 'warning',
           message: '교구가 연결되어 있지 않습니다. 연결을 시도해주세요.',
         });
-
-        // 연결 창 자동 열기
         this.startScan();
-
-        return; // 업데이트 진행 중단
+        return;
       }
-
-      // 연결된 경우 업데이트 진행
       this.toggleUpdateModal();
       boardUpdater.start(mode);
     },
@@ -384,34 +309,9 @@ export default {
       ble.stopScanning();
     },
     selectDevice() {
-      console.log("선택된 장치 ID:", this.selectedDevice);
       if (this.selectedDevice) {
         ble.connectToSelectedDevice(this.selectedDevice);
       }
-    },
-
-    showConnectOptions() {
-      this.showOptions = true;
-    },
-    hideConnectOptions() {
-      this.showOptions = false;
-    },
-
-    showDropdown() {
-      document.getElementById('dropdown').style.display = 'block';
-    },
-    hideDropdown() {
-      document.getElementById('dropdown').style.display = 'none';
-    },
-
-    bleConnect() {
-      ble.connect();
-    },
-    bleSendData(code) {
-      ble.writeLn(code);
-    },
-    bleStop() {
-      ble.writeLn(String.fromCharCode(3));
     },
 
     installDriver() {
@@ -485,25 +385,6 @@ export default {
   margin-top: 20px;
 }
 
-.indicator {
-  display: block;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  margin-left: auto;
-  background-color: gray; 
-  text-align: center;
-  margin-right: auto;
-  transform: translateY(65%);
-}
-.indicator.connected {
-  background-color: green;
-}
-.indicator.disconnected {
-  background-color: gray; 
-}
-
-/* 업데이트 모달 스타일 */
 .update-modal {
   position: fixed;
   top: 50%;
@@ -516,39 +397,31 @@ export default {
   z-index: 1000;
   width: 400px;
 }
-
 .modal-header {
   display: flex;
   justify-content: flex-end;
 }
-
 .close-button {
   cursor: pointer;
   font-size: 18px;
   font-weight: bold;
 }
-
 .modal-message {
   text-align: center;
   margin: 20px 0;
   font-size: 16px;
   color: #333;
 }
-
 .modal-content {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
-/* 버튼 그룹 스타일 */
 .buttons-group {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
-
-/* 개별 버튼 스타일 */
 .update-button {
   flex: 1;
   margin: 0 5px;
@@ -557,40 +430,120 @@ export default {
   border-radius: 8px;
   transition: box-shadow 0.3s ease;
 }
-
 .update-button:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-
-/* 버튼 내부 내용 정렬 */
 .button-content {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
-/* 버튼 이미지 스타일 */
 .button-image {
   width: 50px;
   height: 50px;
   object-fit: contain;
   margin-bottom: 10px;
 }
-
-/* 버튼 라벨 스타일 */
 .button-label {
   font-size: 14px;
   font-weight: 600;
   color: #333;
 }
-
-/* 연결되지 않은 상태 메시지 스타일 */
 .not-connected-message {
   text-align: center;
 }
-
 .not-connected-message p {
   margin-bottom: 20px;
   color: #ff5722;
+}
+
+.control-btn-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.connect-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30px;
+  cursor: pointer;
+  padding: 6px 12px;
+  color: #fff;
+  margin-right: 8px;
+  transition: background-color 0.2s;
+  width: auto;
+}
+
+.connect-btn:not(.connected) {
+  background-color: #E4007F; 
+}
+.connect-btn:not(.connected):hover {
+  background-color: #EF60AF;
+}
+
+.connect-btn.connected {
+  background-color: #4F4F53;
+}
+.connect-btn.connected:hover {
+  background-color: #7E7E83;
+}
+
+.connect-btn img {
+  margin-right: 6px;
+}
+
+.stop-btn {
+  display: inline-flex;
+  align-items: center;
+  background-color: #e0e0e0;
+  color: #333;
+  padding: 6px 12px;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-left: 5px;
+  transition: background-color 0.2s;
+}
+
+.indicator {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-left: 8px;
+}
+.indicator.disconnected {
+  background-color: #fff;
+}
+
+.indicator.connected {
+  background-color: #00ff00;
+}
+
+.stop-btn {
+  display: inline-flex;
+  align-items: center;
+  background-color: #DEDEE2; 
+  color: #4F4F53;           
+  padding: 6px 12px;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-left: 5px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.stop-btn img {
+  fill: currentColor;
+  transition: fill 0.2s;
+}
+
+.stop-btn:hover {
+  background-color: #F0F0F0;
+  color: #7E7E83;
+}
+
+.stop-btn:active {
+  background-color: #AEAEB4;
+  color: #4F4F53;
 }
 </style>

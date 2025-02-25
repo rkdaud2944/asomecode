@@ -22,6 +22,14 @@ import setting from "@/assets/images/controls/setting.png";
 import menu from "@/assets/images/controls/menu.png";
 import block from "@/assets/images/controls/block.png";
 
+import connect_default from "@/assets/images/controls/navbar/connect_default.png";
+import connect_hover from "@/assets/images/controls/navbar/connect_hover.png";
+import connect_click from "@/assets/images/controls/navbar/connect_click.png";
+import connect_variant from "@/assets/images/controls/navbar/connect_variant.png";
+import stop_default from "@/assets/images/controls/navbar/stop_default.png";
+import stop_hover from "@/assets/images/controls/navbar/stop_hover.png";
+import stop_click from "@/assets/images/controls/navbar/stop_click.png";
+
 import runEdt from "@/assets/images/editor/run.png";
 import openEdt from "@/assets/images/editor/open.png";
 import saveEdt from "@/assets/images/editor/save.png";
@@ -131,6 +139,14 @@ export default {
     setting,
     menu,
     block,
+
+    connect_default,
+    connect_hover,
+    connect_click,
+    connect_variant,
+    stop_default,
+    stop_hover,
+    stop_click,
 
     runEdt,
     openEdt,
