@@ -280,9 +280,9 @@ export default {
       this.navstopImg = this.stop_click;
     },
     // 멈추기
-    stop() {
-      console.log("Stop command triggered.");
-    },
+    // stop() {
+    //   console.log("Stop command triggered.");
+    // },
     // 업데이트 모달 열기
     openUpdateModal() {
       if (this.connectionState !== 'connected') {
