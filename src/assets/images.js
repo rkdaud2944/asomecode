@@ -115,6 +115,9 @@ import sttmodaloff from "@/assets/images/sttmodaloff.png";
 import sttmodalcheck from "@/assets/images/sttmodalcheck.png";
 
 
+import motorbot from "@/assets/images/motorbot.jpg";
+
+
 export default {
     logom,
     logo2,
@@ -228,5 +231,6 @@ export default {
     ai,
     aiClick,
 
+    motorbot,
 
 };
