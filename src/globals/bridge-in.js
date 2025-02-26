@@ -100,7 +100,14 @@ f = None
 
 import machine
 machine.reset()`);
+    
+        // 저장 후 인풋 값을 모두 90으로 초기화
+        document.getElementById('align01').value = 90;
+        document.getElementById('align02').value = 90;
+        document.getElementById('align03').value = 90;
+        document.getElementById('align04').value = 90;
     },
+    
 
     checkBotBase() {
         bridge.runCode(`import asomebot_align

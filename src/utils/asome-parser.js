@@ -400,29 +400,70 @@ class Parser {
     }
 
     #get_botBase() {
-        return `<div class="bot-base-from input-group" style="width: 50%;">
-                    <div class="input-group-addon bot-base">
-                        <i class="q-icon material-icons">settings</i>
+        return `<div style="width: 70%; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 20px auto;">
+                    <div style="display: flex; align-items: center;">
+                        <input style="width: 60px; text-align: center; border: 1px solid #ddd; border-radius: 4px; padding: 5px; font-size: 16px;"
+                            type="text" id="align01" value="90" placeholder="0번 모터 (Pin5)"
+                            onfocus="this.style.borderColor='#6fb1fc'; this.style.boxShadow='0 0 5px rgba(111,177,252,0.5)';"
+                            onblur="this.style.borderColor='#ddd'; this.style.boxShadow='none';" />
+                        <button style="background: linear-gradient(145deg, #6fb1fc, #4364f7); border: none; border-radius: 50%; color: #fff; font-size: 18px; width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center; margin: 0 5px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.2s ease, box-shadow 0.2s ease;"
+                                onmousedown="this.style.transform='scale(0.95)'; this.style.boxShadow='0 2px 3px rgba(0,0,0,0.1)';"
+                                onmouseup="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';"
+                                onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';"
+                                onclick="updateMotorValue('align01', 1)">+</button>
+                        <button style="background: linear-gradient(145deg, #6fb1fc, #4364f7); border: none; border-radius: 50%; color: #fff; font-size: 18px; width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center; margin: 0 5px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.2s ease, box-shadow 0.2s ease;"
+                                onmousedown="this.style.transform='scale(0.95)'; this.style.boxShadow='0 2px 3px rgba(0,0,0,0.1)';"
+                                onmouseup="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';"
+                                onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';"
+                                onclick="updateMotorValue('align01', -1)">-</button>
                     </div>
-                    <div class="motor-control">
-                        <input class="form-control" type="text" id='align01' value="90" placeholder="0번 모터 (Pin5)"/>  
-                        <button style="width:25px;" class="btn-plus" onclick="updateMotorValue('align01', 1)">+</button>
-                        <button style="width:25px;" class="btn-minus" onclick="updateMotorValue('align01', -1)">-</button>
+                    <div style="display: flex; align-items: center;">
+                        <input style="width: 60px; text-align: center; border: 1px solid #ddd; border-radius: 4px; padding: 5px; font-size: 16px;"
+                            type="text" id="align02" value="90" placeholder="1번 모터 (Pin6)"
+                            onfocus="this.style.borderColor='#6fb1fc'; this.style.boxShadow='0 0 5px rgba(111,177,252,0.5)';"
+                            onblur="this.style.borderColor='#ddd'; this.style.boxShadow='none';" />
+                        <button style="background: linear-gradient(145deg, #6fb1fc, #4364f7); border: none; border-radius: 50%; color: #fff; font-size: 18px; width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center; margin: 0 5px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.2s ease, box-shadow 0.2s ease;"
+                                onmousedown="this.style.transform='scale(0.95)'; this.style.boxShadow='0 2px 3px rgba(0,0,0,0.1)';"
+                                onmouseup="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';"
+                                onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';"
+                                onclick="updateMotorValue('align02', 1)">+</button>
+                        <button style="background: linear-gradient(145deg, #6fb1fc, #4364f7); border: none; border-radius: 50%; color: #fff; font-size: 18px; width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center; margin: 0 5px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.2s ease, box-shadow 0.2s ease;"
+                                onmousedown="this.style.transform='scale(0.95)'; this.style.boxShadow='0 2px 3px rgba(0,0,0,0.1)';"
+                                onmouseup="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';"
+                                onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';"
+                                onclick="updateMotorValue('align02', -1)">-</button>
                     </div>
-                    <div class="motor-control">
-                        <input class="form-control" type="text" id='align02' value="90" placeholder="1번 모터 (Pin6)"/>  
-                        <button style="width:25px;" class="btn-plus" onclick="updateMotorValue('align02', 1)">+</button>
-                        <button style="width:25px;" class="btn-minus" onclick="updateMotorValue('align02', -1)">-</button>
+                    <div style="display: flex; align-items: center;">
+                        <input style="width: 60px; text-align: center; border: 1px solid #ddd; border-radius: 4px; padding: 5px; font-size: 16px;"
+                            type="text" id="align03" value="90" placeholder="2번 모터 (Pin7)"
+                            onfocus="this.style.borderColor='#6fb1fc'; this.style.boxShadow='0 0 5px rgba(111,177,252,0.5)';"
+                            onblur="this.style.borderColor='#ddd'; this.style.boxShadow='none';" />
+                        <button style="background: linear-gradient(145deg, #6fb1fc, #4364f7); border: none; border-radius: 50%; color: #fff; font-size: 18px; width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center; margin: 0 5px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.2s ease, box-shadow 0.2s ease;"
+                                onmousedown="this.style.transform='scale(0.95)'; this.style.boxShadow='0 2px 3px rgba(0,0,0,0.1)';"
+                                onmouseup="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';"
+                                onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';"
+                                onclick="updateMotorValue('align03', 1)">+</button>
+                        <button style="background: linear-gradient(145deg, #6fb1fc, #4364f7); border: none; border-radius: 50%; color: #fff; font-size: 18px; width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center; margin: 0 5px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.2s ease, box-shadow 0.2s ease;"
+                                onmousedown="this.style.transform='scale(0.95)'; this.style.boxShadow='0 2px 3px rgba(0,0,0,0.1)';"
+                                onmouseup="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';"
+                                onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';"
+                                onclick="updateMotorValue('align03', -1)">-</button>
                     </div>
-                    <div class="motor-control">
-                        <input class="form-control" type="text" id='align03' value="90" placeholder="2번 모터 (Pin7)"/>  
-                        <button style="width:25px;" class="btn-plus" onclick="updateMotorValue('align03', 1)">+</button>
-                        <button style="width:25px;" class="btn-minus" onclick="updateMotorValue('align03', -1)">-</button>
-                    </div>
-                    <div class="motor-control">
-                        <input class="form-control" type="text" id='align04' value="90" placeholder="3번 모터 (Pin8)"/>  
-                        <button style="width:25px;" class="btn-plus" onclick="updateMotorValue('align04', 1)">+</button>
-                        <button style="width:25px;" class="btn-minus" onclick="updateMotorValue('align04', -1)">-</button>
+                    <div style="display: flex; align-items: center;">
+                        <input style="width: 60px; text-align: center; border: 1px solid #ddd; border-radius: 4px; padding: 5px; font-size: 16px;"
+                            type="text" id="align04" value="90" placeholder="3번 모터 (Pin8)"
+                            onfocus="this.style.borderColor='#6fb1fc'; this.style.boxShadow='0 0 5px rgba(111,177,252,0.5)';"
+                            onblur="this.style.borderColor='#ddd'; this.style.boxShadow='none';" />
+                        <button style="background: linear-gradient(145deg, #6fb1fc, #4364f7); border: none; border-radius: 50%; color: #fff; font-size: 18px; width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center; margin: 0 5px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.2s ease, box-shadow 0.2s ease;"
+                                onmousedown="this.style.transform='scale(0.95)'; this.style.boxShadow='0 2px 3px rgba(0,0,0,0.1)';"
+                                onmouseup="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';"
+                                onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';"
+                                onclick="updateMotorValue('align04', 1)">+</button>
+                        <button style="background: linear-gradient(145deg, #6fb1fc, #4364f7); border: none; border-radius: 50%; color: #fff; font-size: 18px; width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center; margin: 0 5px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.2s ease, box-shadow 0.2s ease;"
+                                onmousedown="this.style.transform='scale(0.95)'; this.style.boxShadow='0 2px 3px rgba(0,0,0,0.1)';"
+                                onmouseup="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';"
+                                onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';"
+                                onclick="updateMotorValue('align04', -1)">-</button>
                     </div>
                 </div>`;
     }
