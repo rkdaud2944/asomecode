@@ -353,13 +353,13 @@ p {
     margin-bottom: 35px;
 }
 
-.update-modal>div {
+/* .update-modal>div {
     display: inline;
-    /* background-color: #7E7E83; */
+    background-color: #7E7E83;
     position: absolute;
     cursor: pointer;
     right: 15px;
-}
+} */
 
 
 @media screen and (max-width:770px ) {
