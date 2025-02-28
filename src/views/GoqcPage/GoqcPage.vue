@@ -11,7 +11,7 @@
                   <p class="subject-title Pretendard-Regular"> {{ this.$route.query.subjectTitle }} </p>
                   <!-- <p class="lesson-chapter Pretendard-Regular"
                   :style="chapterStyleHandler"> {{ this.$route.query.index }}차시 </p> -->
-                  <p class="chapter-title Pretendard-Regular"> {{ this.$route.query.title }} 어썸봇 발 각도 조절하기</p>
+                  <p class="chapter-title Pretendard-Regular"> {{ this.$route.query.title }} 어썸봇 테스트</p>
               </div>
           </div>
 

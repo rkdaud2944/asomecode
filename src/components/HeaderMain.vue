@@ -224,6 +224,50 @@ export default {
       this.btConnectColor = "grey";
       this.$q.notify('어썸보드 연결이 끊어졌습니다.');
     });
+    eventbus.on("onSerialpp", () => {
+      this.btConnectColor = "grey";
+      this.$q.notify('어썸보드가 다른곳에 연결되어있습니다 다시 연결해주세요.');
+    });
+
+    eventbus.on('simulationOpen', (path) => {
+      this.openRouterPath(path);
+    });
+
+    eventbus.on('simulationBus', (params) => {
+      window.parent.postMessage(JSON.stringify(params), '*');
+      this.simulJS(params);
+    });
+
+    eventbus.on("onBleScanStart", () => {
+      this.btConnectColor = "primary";
+      this.$q.notify('BLE 스캔이 시작되었습니다.');
+    });
+
+    eventbus.on("onBleScanStopped", () => {
+      this.btConnectColor = "grey";
+      this.$q.notify('BLE 스캔이 중지되었습니다.');
+    });
+
+    eventbus.on("onBleConnected", () => {
+      this.btConnectColor = "primary";
+      this.$q.notify('무선 연결이 완료되었습니다.');
+      this.showModal = false;
+    });
+
+    eventbus.on("bleDisconnect", () => {
+      this.btConnectColor = "grey";
+      this.$q.notify('무선 연결이 끊어졌습니다.');
+    });
+
+    eventbus.on("onBleConnectError", (error) => {
+      this.btConnectColor = "grey";
+      this.$q.notify('연결 실패 : ' + error);
+    });
+
+    eventbus.on("bleSendDataError", (error) => {
+      this.btConnectColor = "grey";
+      this.$q.notify('데이터 전송 실패 : ' + error);
+    });
 
     window.addEventListener("message", (event) => {
       if (event.data === 'connect') {
@@ -435,6 +479,30 @@ export default {
         ble.connectToSelectedDevice(this.selectedDevice);
       }
     },
+    showConnectOptions() {
+      this.showOptions = true;
+    },
+    hideConnectOptions() {
+      this.showOptions = false;
+    },
+
+    showDropdown() {
+      document.getElementById('dropdown').style.display = 'block';
+    },
+    hideDropdown() {
+      document.getElementById('dropdown').style.display = 'none';
+    },
+
+    bleConnect() {
+      ble.connect();
+    },
+    bleSendData(code) {
+      ble.writeLn(code);
+    },
+    bleStop() {
+      ble.writeLn(String.fromCharCode(3));
+    },
+    
     installDriver() {
       window.location.href = "https://asomecode-web.s3.ap-northeast-2.amazonaws.com/driver/CH341SER.zip";
     },
