@@ -158,7 +158,7 @@ import boardUpdater from "@/globals/board-updater";
 import ble from "@/globals/ble";
 import { mapState } from 'pinia';
 import { useConnectStore } from '@/store/connect-store';
-import seiral from "@/globals/serial";  // 오타 그대로 유지
+import seiral from "@/globals/serial";
 
 export default {
   mixins: [VueBase, bridgeIn],
@@ -295,6 +295,14 @@ export default {
     connect() {
       seiral.connect();
       this.currentConnectImg = this.connect_click;
+      // 1초 후 멈추기 버튼 효과 (>>> 표시때문)
+      setTimeout(() => {
+        this.onStopBtnActive();
+        setTimeout(() => {
+          this.onStopBtnHover();
+        }, 200);
+        this.stop();
+      }, 50);
     },
     // 연결해제
     disconnect() {

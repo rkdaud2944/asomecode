@@ -263,7 +263,7 @@ export default {
       },
 
       getLesson() {
-          apiLesson.lessonDetail(82)
+          apiLesson.lessonDetail(83)
               .then((response) => {
                   this.lesson = response.data;
                   const parser = new AsomeParser(this.lesson.content);

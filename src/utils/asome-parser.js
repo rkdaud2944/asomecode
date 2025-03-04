@@ -106,7 +106,7 @@ class Scanner {
 
     #do_beginMark() {
         const text = this.source.substr(this.index, 20); // 최대 길이 조정
-        const marks = ["button", "upload", "image", "imgButton", "writeLn", "video", "code", "editor", "parts", "wifi", "openWifi", "messenger", "botBase", "boardErr", "oldbotBase"];
+        const marks = ["button", "upload", "image", "imgButton", "writeLn", "video", "code", "editor", "parts", "wifi", "openWifi", "messenger", "botBase", "boardErr", "newbotBase"];
         let matched = false;
 
         for (let mark of marks) {
@@ -176,9 +176,9 @@ class Parser {
             case "[wifi": return this.#get_wifi_Text();
             case "[openWifi": return this.#get_wifi_open_Text();
             case "[messenger": return this.#get_asome_messenger_Text();
-            case "[botBase": return this.#get_botBase();
+            case "[newbotBase": return this.#get_newbotBase();
             case "[boardErr": return this.#get_boardErr();
-            case "[oldbotBase": return this.#get_botBaseold();
+            case "[botBase": return this.#get_botBase();
         
             default: return this.buffer;
         }
@@ -402,7 +402,7 @@ class Parser {
         `;
     }
 
-    #get_botBase() {
+    #get_newbotBase() {
         return `<div style="width: 1000px; margin: 20px auto; padding: 20px; padding-top: 0px;border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; height: 520px;">
                     <h2 style="text-align: center; margin-bottom: 20px;">
                         어썸봇 각도조절 (정면)
@@ -611,30 +611,30 @@ class Parser {
                     </div>
                 </div>`;
     }
-    #get_botBaseold() {
+    #get_botBase() {
         return `<div class="bot-base-from input-group" style="width: 50%;">
                     <div class="input-group-addon bot-base">
                         <i class="q-icon material-icons">settings</i>
                     </div>
                     <div class="motor-control">
-                        <input class="form-control" type="text" id="old_align01" value="90" placeholder="0번 모터 (Pin5)"/>  
-                        <button style="width:25px;" class="btn-plus" onclick="updateMotorValue('old_align01', 1)">+</button>
-                        <button style="width:25px;" class="btn-minus" onclick="updateMotorValue('old_align01', -1)">-</button>
+                        <input class="form-control" type="text" id='align01' value="90" placeholder="0번 모터 (Pin5)"/>  
+                        <button style="width:25px;" class="btn-plus" onclick="updateMotorValue('align01', 1)">+</button>
+                        <button style="width:25px;" class="btn-minus" onclick="updateMotorValue('align01', -1)">-</button>
                     </div>
                     <div class="motor-control">
-                        <input class="form-control" type="text" id="old_align02" value="90" placeholder="1번 모터 (Pin6)"/>  
-                        <button style="width:25px;" class="btn-plus" onclick="updateMotorValue('old_align02', 1)">+</button>
-                        <button style="width:25px;" class="btn-minus" onclick="updateMotorValue('old_align02', -1)">-</button>
+                        <input class="form-control" type="text" id='align02' value="90" placeholder="1번 모터 (Pin6)"/>  
+                        <button style="width:25px;" class="btn-plus" onclick="updateMotorValue('align02', 1)">+</button>
+                        <button style="width:25px;" class="btn-minus" onclick="updateMotorValue('align02', -1)">-</button>
                     </div>
                     <div class="motor-control">
-                        <input class="form-control" type="text" id="old_align03" value="90" placeholder="2번 모터 (Pin7)"/>  
-                        <button style="width:25px;" class="btn-plus" onclick="updateMotorValue('old_align03', 1)">+</button>
-                        <button style="width:25px;" class="btn-minus" onclick="updateMotorValue('old_align03', -1)">-</button>
+                        <input class="form-control" type="text" id='align03' value="90" placeholder="2번 모터 (Pin7)"/>  
+                        <button style="width:25px;" class="btn-plus" onclick="updateMotorValue('align03', 1)">+</button>
+                        <button style="width:25px;" class="btn-minus" onclick="updateMotorValue('align03', -1)">-</button>
                     </div>
                     <div class="motor-control">
-                        <input class="form-control" type="text" id="old_align04" value="90" placeholder="3번 모터 (Pin8)"/>  
-                        <button style="width:25px;" class="btn-plus" onclick="updateMotorValue('old_align04', 1)">+</button>
-                        <button style="width:25px;" class="btn-minus" onclick="updateMotorValue('old_align04', -1)">-</button>
+                        <input class="form-control" type="text" id='align04' value="90" placeholder="3번 모터 (Pin8)"/>  
+                        <button style="width:25px;" class="btn-plus" onclick="updateMotorValue('align04', 1)">+</button>
+                        <button style="width:25px;" class="btn-minus" onclick="updateMotorValue('align04', -1)">-</button>
                     </div>
                 </div>`;
     }
