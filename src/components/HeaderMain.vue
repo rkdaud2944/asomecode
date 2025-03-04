@@ -190,7 +190,7 @@ export default {
       blockImg: images.block,
       asomebotBtnImg: images.asomebotBtnImg,
       asomekitBtnImg: images.asomekitBtnImg,
-      asomecarBtnImg: images.asomecarBtnImg,
+      // asomecarBtnImg: images.asomecarBtnImg,
       isMenuOpen: false,
       connected: false,
 
@@ -389,13 +389,7 @@ export default {
                        <div style="font-size: 14px; color: #4F4F53;">어썸키트</div>
                      </div>
                    </div>
-                   <div id="btnAsomeCar" class="swal-update-item" style="border: 1px solid #D8D8D8; border-radius: 8px; width: 180px; height: 60px; display: flex; align-items: center; padding: 8px 10px; cursor: pointer;">
-                     <img src="${this.asomecarBtnImg}" alt="asomecar" style="width: 36px; height: 36px;" />
-                     <div style="margin-left: 10px; display: flex; flex-direction: column;">
-                       <div style="font-size: 12px; color: #979797;">AsomeIT</div>
-                       <div style="font-size: 14px; color: #4F4F53;">어썸카</div>
-                     </div>
-                   </div>
+                   
                  </div>`,
           showCancelButton: true,
           showConfirmButton: true,
@@ -422,8 +416,8 @@ export default {
 
             document.getElementById('btnAsomeBot')
               .addEventListener('click', () => onClickTool('AsomeBot'));
-            document.getElementById('btnAsomeCar')
-              .addEventListener('click', () => onClickTool('AsomeCar'));
+            // document.getElementById('btnAsomeCar')
+            //   .addEventListener('click', () => onClickTool('AsomeCar'));
             document.getElementById('btnAsomeKit')
               .addEventListener('click', () => onClickTool('AsomeKit'));
 
@@ -457,7 +451,7 @@ export default {
             let mode;
             switch (selectedTool) {
               case 'AsomeBot':    mode = 'asomebot';    break;
-              case 'AsomeCar':    mode = 'asomecar';    break;
+              // case 'AsomeCar':    mode = 'asomecar';    break;
               case 'AsomeKit':    mode = 'asomekit';    break;
               default:            mode = 'asomebot';
             }
