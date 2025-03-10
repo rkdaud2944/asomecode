@@ -978,7 +978,7 @@ Blockly.Blocks["advance_if"] = {
         } else if (workspaceBlocks[i].type === 'message') {
           dropdownOptions.push(["msg", "msg"]);
         } else if (workspaceBlocks[i].type === 'get_weather') {
-          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"]["weather", "weather"]);
+          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"],["weather", "weather"]);
         } else if (workspaceBlocks[i].type === 'prepare_button_ready') {
           dropdownOptions.push(["bt", "bt"]);
         } else if (workspaceBlocks[i].type === 'prepare_buzzer_ready') {
@@ -1082,7 +1082,7 @@ Blockly.Blocks["advance_elseif"] = {
         } else if (workspaceBlocks[i].type === 'message') {
           dropdownOptions.push(["msg", "msg"]);
         } else if (workspaceBlocks[i].type === 'get_weather') {
-          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"]["weather", "weather"]);
+          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"],["weather", "weather"]);
         } else if (workspaceBlocks[i].type === 'prepare_button_ready') {
           dropdownOptions.push(["bt", "bt"]);
         } else if (workspaceBlocks[i].type === 'prepare_buzzer_ready') {
@@ -1186,7 +1186,7 @@ Blockly.Blocks["advance_if_logical"] = {
         } else if (workspaceBlocks[i].type === 'message') {
           dropdownOptions.push(["msg", "msg"]);
         } else if (workspaceBlocks[i].type === 'get_weather') {
-          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"]["weather", "weather"]);
+          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"],["weather", "weather"]);
         } else if (workspaceBlocks[i].type === 'prepare_button_ready') {
           dropdownOptions.push(["bt", "bt"]);
         } else if (workspaceBlocks[i].type === 'prepare_buzzer_ready') {
@@ -1329,7 +1329,7 @@ Blockly.Blocks["advance_elseif_logical"] = {
         } else if (workspaceBlocks[i].type === 'message') {
           dropdownOptions.push(["msg", "msg"]);
         } else if (workspaceBlocks[i].type === 'get_weather') {
-          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"]["weather", "weather"]);
+          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"],["weather", "weather"]);
         } else if (workspaceBlocks[i].type === 'prepare_button_ready') {
           dropdownOptions.push(["bt", "bt"]);
         } else if (workspaceBlocks[i].type === 'prepare_buzzer_ready') {
@@ -1574,7 +1574,7 @@ Blockly.Blocks["screen"] = {
         } else if (workspaceBlocks[i].type === 'message') {
           dropdownOptions.push(["msg", "msg"]);
         } else if (workspaceBlocks[i].type === 'get_weather') {
-          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"]["weather", "weather"]);
+          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"],["weather", "weather"]);
         } else if (workspaceBlocks[i].type === 'prepare_button_ready') {
           dropdownOptions.push(["bt", "bt"]);
         } else if (workspaceBlocks[i].type === 'prepare_buzzer_ready') {
@@ -1680,7 +1680,7 @@ Blockly.Blocks["variable"] = {
         } else if (workspaceBlocks[i].type === 'message') {
           dropdownOptions.push(["msg", "msg"]);
         } else if (workspaceBlocks[i].type === 'get_weather') {
-          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"]["weather", "weather"]);
+          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"],["weather", "weather"]);
         } else if (workspaceBlocks[i].type === 'prepare_button_ready') {
           dropdownOptions.push(["bt", "bt"]);
         } else if (workspaceBlocks[i].type === 'prepare_buzzer_ready') {
@@ -2354,7 +2354,7 @@ Blockly.Blocks["led_ledtube_ready"] = {
           } else if(workspaceBlocks[i].type === 'message') {
             dropdownOptions.push(["msg", "msg"]);
           } else if(workspaceBlocks[i].type === 'get_weather') {
-            dropdownOptions.push(["humidity", "humidity"],["temp", "temp"]["weather", "weather"]);
+            dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"],["weather", "weather"]);
           } else if(workspaceBlocks[i].type === 'prepare_button_ready') {
             dropdownOptions.push(["bt", "bt"]);
           } else if(workspaceBlocks[i].type === 'prepare_buzzer_ready') {
