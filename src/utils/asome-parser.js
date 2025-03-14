@@ -106,7 +106,7 @@ class Scanner {
 
     #do_beginMark() {
         const text = this.source.substr(this.index, 20); // 최대 길이 조정
-        const marks = ["button", "upload", "image", "imgButton", "writeLn", "video", "code", "editor", "parts", "wifi", "openWifi", "messenger", "botBase", "boardErr", "newbotBase"];
+        const marks = ["button", "upload", "image", "imgButton", "writeLn", "video", "code", "editor", "parts", "wifi", "openWifi", "messenger", "botBase", "boardErr", "newbotBase", "phoneupload"];
         let matched = false;
 
         for (let mark of marks) {
@@ -140,7 +140,6 @@ class Parser {
             simplifiedAutoLink: true,
             strikethrough: true,
             ghCompatibleHeaderId: true,
-            // 필요에 따라 추가 옵션 설정
         });
     }
 
@@ -166,6 +165,7 @@ class Parser {
         switch (this.markType) {
             case "[button": return this.#get_buttonText(this.buffer);
             case "[upload": return this.#get_uploadFile(this.buffer);
+            case "[phoneupload": return this.#get_codeupload(this.buffer);
             case "[imgButton": return this.#get_buttonImg(this.buffer);
             case "[writeLn": return this.#get_writeLn(this.buffer);
             case "[image": return this.#get_imageText(this.buffer);
@@ -248,17 +248,11 @@ class Parser {
             const imageTitle = match[1].trim();
             let imageSrc = match[2].trim();
     
-            // console.log(`Image Title: "${imageTitle}", Image Src: "${imageSrc}"`);
-    
             // S3 URL 생성
             if (!imageSrc.startsWith('http://') && !imageSrc.startsWith('https://')) {
                 imageSrc = this.lessonContentBaseUrl + "lesson/images/" + imageSrc;
             }
     
-            // console.log(`Final Image URL: "${imageSrc}"`);
-    
-            // 표준 마크다운 이미지 구문으로 변환
-
             if (imageTitle === '') {
                 return `![alt](${imageSrc})`;
             } else {
@@ -269,7 +263,6 @@ class Parser {
             return text; // 변환 실패 시 원본 텍스트 반환
         }
     }
-    
     
     #get_videoText(text) {
         const firstLine = text.split("\n")[0];
@@ -287,20 +280,14 @@ class Parser {
         let content = text.replace(`${firstLine}`, "").slice(0, -1);
         const uuid = uuidv1(new Date());
 
-        // 표준 마크다운 처리 (코드 블록)
-        // const markdownContent = this.converter.makeHtml(`\`\`\`python\n${content}\n\`\`\``);
-        
         return `<pre onclick="openEditor(getCode('${uuid}'))" style="margin-left:10px; width:98%;">\n` +
-            `<code id="${uuid}" class="python">${content}</code></pre>`
-            // + markdownContent;
-            // 코드가 두개 중복되서 없앰
+            `<code id="${uuid}" class="python">${content}</code></pre>`;
     }
     
     #get_editorText(text) {
         const firstLine = text.split("\n")[0];
         let content = text.replace(`${firstLine}`, "").slice(0, -1);
 
-        // 표준 마크다운 처리 (필요 시)
         const markdownContent = this.converter.makeHtml(content);
 
         return `<p class="editorLocation" style="display: none;"/>` +
@@ -336,7 +323,6 @@ class Parser {
                 </div>`;
         });
 
-        // 표준 마크다운 처리 (필요 시)
         const markdownContent = this.converter.makeHtml(content);
 
         return `<div>${markdownContent}</div>`;
@@ -363,7 +349,6 @@ class Parser {
         `;
     }
     
-
     #get_wifi_open_Text() { // 인터넷 오픈
         return `
             <div class="wifi-open-container">
@@ -400,6 +385,92 @@ class Parser {
                 <div id="asome-messenger" class="hidden"></div>
             </div>
         `;
+    }
+
+    #get_codeupload(text) {        
+        // 첫 줄에서 업로드 정보를 추출 (예: "[upload 자동 실행 프로그램 등록 : main.py")
+        const firstLine = text.split("\n")[0];
+        let functionName = firstLine.replace("[phoneupload ", "").trim();
+        const [funcName, fileName] = functionName.split(":").map(str => str.trim());
+        const uniqueId = Date.now();
+        const functionId = funcName.replaceAll(' ', '-').replaceAll("'", '').replaceAll('"', '') + "-" + uniqueId;
+            
+        // 첫 줄 제거 후 나머지 내용 추출, 마지막 ']' 제거
+        let content = text.substring(firstLine.length).trim();
+        if (content.endsWith("]")) {
+            content = content.slice(0, -1).trim();
+        }
+            
+        // (옵션) Python 주석 제거: '#'으로 시작하는 줄은 제거
+        const lines = content.split("\n");
+        content = lines.map(line => line.trim().startsWith("#") ? "" : line).join("\n");
+            
+        // (옵션) 마크다운 변환기가 있으면 사용, 없으면 <pre> 태그로 감쌉니다.
+        const markdownContent = window.converter ? window.converter.makeHtml(content) : "<pre>" + content + "</pre>";
+            
+        // 버튼과 숨김 영역 HTML 반환 (버튼 클릭 시 contentsUploadFile() 호출)
+        return `<div style="width: 1000px; margin: 20px auto; padding: 20px; padding-top: 0px;border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; height: 520px; text-align: center;">
+                    <h2 style="text-align: center; margin-bottom: 20px;">
+                        어썸봇 - 자동 실행 프로그램 등록
+                    </h2>
+                    <img src="${images.controllerbot}" alt="controllerbot" style="width: 800px; height: auto; display: block; margin-bottom: 20px; margin-left: auto; margin-right: auto;"/>
+                    <div class="wifi-open-container">
+                        <div class="input-group" style="margin-left: auto; margin-right: auto;">
+                            <span class="input-group-addon"><i class="q-icon material-icons">wifi</i></span>
+                            <input id="wifi_open" style="width: 200px; text-align: center; border: 1px solid #ddd; border-radius: 4px;
+                                    padding: 5px; font-size: 16px;" type="text" id="align02" value="AsomebotSolo"
+                                    onfocus="this.style.borderColor='#6fb1fc'; this.style.boxShadow='0 0 5px rgba(111,177,252,0.5)';"
+                                    onblur="this.style.borderColor='#ddd'; this.style.boxShadow='none';" class="form-control" type="text" id="wifi_open" placeholder="공유기 이름 (SSID)" aria-label="공유기 이름 (SSID)">
+                        </div>
+                    </div>
+                    <button class="answer-btn" style="background: #fff; border: 2px solid #6fb1fc; border-radius: 5px; 
+                        color: #6fb1fc; padding: 10px 20px; font-size: 16px; cursor: pointer; 
+                        transition: all 0.2s;"
+                        onmouseover="this.style.background='#6fb1fc'; this.style.color='#fff';"
+                        onmouseout="this.style.background='#fff'; this.style.color='#6fb1fc';" onclick="contentsUploadFile('${fileName}', getCode('${functionId}'))">${funcName}
+                    </button>
+                    <button type="button"tabindex="-1"
+                        style="background: #fff; border: 2px solid #6fb1fc; border-radius: 5px; 
+                        color: #6fb1fc; padding: 10px 20px; font-size: 16px; cursor: pointer; 
+                        transition: all 0.2s;"
+                        onmouseover="this.style.background='#6fb1fc'; this.style.color='#fff';"
+                        onmouseout="this.style.background='#fff'; this.style.color='#6fb1fc';"
+                        onclick="reset()"
+                        >
+                        재부팅
+                    </button>
+                    <button type="button"tabindex="-1"
+                        style="background: #fff; border: 2px solid #dc3545; border-radius: 5px; 
+                        color: #dc3545; padding: 10px 20px; font-size: 16px; cursor: pointer; 
+                        transition: all 0.2s;"
+                        onmouseover="this.style.background='#dc3545'; this.style.color='#fff';"
+                        onmouseout="this.style.background='#fff'; this.style.color='#dc3545';"
+                        onclick="deletemain()"
+                        >
+                        자동 실행 프로그램 삭제
+                    </button>
+                </div>`+
+                `</br>` +
+               `<div id="${functionId}" class="hidden">${markdownContent}
+               </div>`;
+    }
+
+    #get_uploadFile(text) {        
+        const firstLine = text.split("\n")[0];
+        let functionName = firstLine.replace("[upload ", "").trim();
+        const [funcName, fileName] = functionName.split(":").map(str => str.trim());
+        const uniqueId = Date.now();
+        const functionId = `${funcName.replaceAll(' ', '-').replaceAll("'", '').replaceAll('"', '')}-${uniqueId}`;
+    
+        let content = text.replace(`${firstLine}`, "").slice(0, -1);
+        const lines = content.split("\n");
+        content = lines.map(e => stripComments.stripPythonComments(e)).join('\n');
+        
+        // 표준 마크다운 처리
+        const markdownContent = this.converter.makeHtml(content);
+        
+        return `<button class="answer-btn" style="cursor: pointer;" onclick="contentsUploadFile('${fileName}',getCode('${functionId}'))" class="function_btn">${funcName}</button></br>` +
+            `<div id="${functionId}" class="hidden">${markdownContent}</div>`;
     }
 
     #get_newbotBase() {
@@ -575,23 +646,6 @@ class Parser {
                     </div>
                 </div>
             `;
-    }
-    #get_uploadFile(text) {        
-        const firstLine = text.split("\n")[0];
-        let functionName = firstLine.replace("[upload ", "").trim();
-        const [funcName, fileName] = functionName.split(":").map(str => str.trim());
-        const uniqueId = Date.now();
-        const functionId = `${funcName.replaceAll(' ', '-').replaceAll("'", '').replaceAll('"', '')}-${uniqueId}`;
-    
-        let content = text.replace(`${firstLine}`, "").slice(0, -1);
-        const lines = content.split("\n");
-        content = lines.map(e => stripComments.stripPythonComments(e)).join('\n');
-        
-        // 표준 마크다운 처리
-        const markdownContent = this.converter.makeHtml(content);
-        
-        return `<button class="answer-btn" style="cursor: pointer;" onclick="contentsUploadFile('${fileName}',getCode('${functionId}'))" class="function_btn">${funcName}</button></br>` +
-            `<div id="${functionId}" class="hidden">${markdownContent}</div>`;
     }
     
     #get_boardErr() {        

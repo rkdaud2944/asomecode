@@ -195,6 +195,12 @@
           this.$router.push('/GoqcPage');
           this.text = "";
           return;
+        }  
+
+        if (trimmedText === "/auto") {
+          this.$router.push('/AutomaticProgram');
+          this.text = "";
+          return;
         }
         
         if (trimmedText === "/update weather") {

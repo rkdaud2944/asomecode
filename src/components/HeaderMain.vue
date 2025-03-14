@@ -91,6 +91,10 @@
               <img :src="settingImg" />
               <p>드라이버 설치</p>
             </li>
+            <!-- <li class="menu-cts" @click="goToAutomaticProgram">
+              <img :src="settingImg" />
+              <p>자동실행</p>
+            </li> -->
           </ul>
         </div>
       </span>
@@ -127,7 +131,7 @@
   <div v-if="isUpdating" class="update-modal">
     <div class="update-modal-content">
       <!-- 상단 제목 -->
-      <h2 class="update-title">업데이트 진행 중</h2>
+      <h2 class="update-title" style="font-family: 'Pretendard-Regular';">업데이트 진행 중</h2>
       
       <div style="width: 80%; border-bottom: 1px solid #D8D8D8; margin: 16px 0; text-align: center; display: block; margin-left: auto; margin-right: auto;"></div>
       <!-- 구분선 -->
@@ -137,7 +141,7 @@
         <div class="anim3"></div>
       </div>
       <!-- 안내 문구 -->
-      <p class="update-desc">
+      <p class="update-desc" style="font-family: 'Pretendard-Regular';">
         업데이트를 진행합니다.<br />
         잠시만 기다려주세요.
       </p>
@@ -159,6 +163,9 @@ import ble from "@/globals/ble";
 import { mapState } from 'pinia';
 import { useConnectStore } from '@/store/connect-store';
 import seiral from "@/globals/serial";
+
+// Electron의 shell 모듈을 불러옵니다.
+const { shell } = require('electron');
 
 export default {
   mixins: [VueBase, bridgeIn],
@@ -340,9 +347,9 @@ export default {
       if (this.connectionState !== 'connected') {
         Swal.fire({
           icon: undefined,
-          html: `<h2 style="font-size: 18px; font-weight: 600; color: #E4007F; margin-bottom: 10px;">업데이트할 교구를 연결하세요.</h2>
+          html: `<h2 style="font-size: 18px; font-weight: 600; color: #E4007F; margin-bottom: 10px; font-family: 'Pretendard-Regular';">업데이트할 교구를 연결하세요.</h2>
                  <div style="width: 100%; border-bottom: 1px solid #D8D8D8; margin: 16px 0;"></div>
-                 <p style="color: #979797; line-height: 1.4; margin-bottom: 24px; font-size: 14px;">
+                 <p style="color: #979797; line-height: 1.4; margin-bottom: 24px; font-size: 14px; font-family: 'Pretendard-Regular';">
                    교구가 연결되어 있지 않습니다.<br/>업데이트를 진행하려면 교구를 연결해주세요.
                  </p>`,
           showConfirmButton: true,
@@ -366,11 +373,11 @@ export default {
         Swal.fire({
           width: 560,
           title: '',
-          html: `<h2 style="font-size: 18px; font-weight: 600; color: #E4007F; margin: 0 0 10px 0;">업데이트할 교구를 선택하세요.</h2>
+          html: `<h2 style="font-family: 'Pretendard-Regular'; font-size: 18px; font-weight: 600; color: #E4007F; margin: 0 0 10px 0;">업데이트할 교구를 선택하세요.</h2>
                  <div style="width: 100%; border-bottom: 1px solid #D8D8D8; margin: 16px 0;"></div>
                  <div style="margin-bottom: 16px; display: flex; justify-content: center;">
                    <div style="position: relative; width: 60%; max-width: 280px;">
-                     <input id="searchInput" type="text" placeholder="교구명, 프로젝트명 검색" style="width: 100%; box-sizing: border-box; padding: 8px 36px 8px 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px;" />
+                     <input id="searchInput" type="text" placeholder="교구명, 프로젝트명 검색" style="font-family: 'Pretendard-Regular'; width: 100%; box-sizing: border-box; padding: 8px 36px 8px 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px;" />
                      <img src="https://cdn-icons-png.flaticon.com/512/49/49116.png" alt="search" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; opacity: 0.6;" />
                    </div>
                  </div>
@@ -378,18 +385,17 @@ export default {
                    <div id="btnAsomeBot" class="swal-update-item" style="border: 1px solid #D8D8D8; border-radius: 8px; width: 180px; height: 60px; display: flex; align-items: center; padding: 8px 10px; cursor: pointer;">
                      <img src="${this.asomebotBtnImg}" alt="asomebot" style="width: 36px; height: 36px;" />
                      <div style="margin-left: 10px; display: flex; flex-direction: column;">
-                       <div style="font-size: 12px; color: #979797;">AsomeIT</div>
-                       <div style="font-size: 14px; color: #4F4F53;">어썸봇</div>
+                       <div style="font-family: 'Pretendard-Regular'; font-size: 12px; color: #979797;">AsomeIT</div>
+                       <div style="font-family: 'Pretendard-Regular'; font-size: 14px; color: #4F4F53;">어썸봇</div>
                      </div>
                    </div>
                    <div id="btnAsomeKit" class="swal-update-item" style="border: 1px solid #D8D8D8; border-radius: 8px; width: 180px; height: 60px; display: flex; align-items: center; padding: 8px 10px; cursor: pointer;">
                      <img src="${this.asomekitBtnImg}" alt="asomekit" style="width: 36px; height: 36px;" />
                      <div style="margin-left: 10px; display: flex; flex-direction: column;">
-                       <div style="font-size: 12px; color: #979797;">AsomeIT</div>
-                       <div style="font-size: 14px; color: #4F4F53;">어썸키트</div>
+                       <div style="font-family: 'Pretendard-Regular'; font-size: 12px; color: #979797;">AsomeIT</div>
+                       <div style="font-family: 'Pretendard-Regular'; font-size: 14px; color: #4F4F53;">어썸키트</div>
                      </div>
                    </div>
-                   
                  </div>`,
           showCancelButton: true,
           showConfirmButton: true,
@@ -416,8 +422,6 @@ export default {
 
             document.getElementById('btnAsomeBot')
               .addEventListener('click', () => onClickTool('AsomeBot'));
-            // document.getElementById('btnAsomeCar')
-            //   .addEventListener('click', () => onClickTool('AsomeCar'));
             document.getElementById('btnAsomeKit')
               .addEventListener('click', () => onClickTool('AsomeKit'));
 
@@ -451,7 +455,6 @@ export default {
             let mode;
             switch (selectedTool) {
               case 'AsomeBot':    mode = 'asomebot';    break;
-              // case 'AsomeCar':    mode = 'asomecar';    break;
               case 'AsomeKit':    mode = 'asomekit';    break;
               default:            mode = 'asomebot';
             }
@@ -509,14 +512,20 @@ export default {
       window.location.href = "https://asomecode-web.s3.ap-northeast-2.amazonaws.com/driver/CH341SER.zip";
     },
     goToDownload() {
-      window.open("https://asomeit.kr/download");
+      // 자료실을 외부 브라우저로 엽니다.
+      shell.openExternal("https://asomeit.kr/download");
     },
     goToQna() {
-      window.open("https://asomeit.imweb.me/faq");
+      // 도움말을 외부 브라우저로 엽니다.
+      shell.openExternal("https://asomeit.imweb.me/faq");
     },
     goToBlockCoding() {
       localStorage.removeItem("lessonBlock");
       this.openRouterPath('/blockCoding');
+    },
+    goToAutomaticProgram() {
+      // localStorage.removeItem("lessonBlock");
+      this.$router.push('/AutomaticProgram');
     },
 
     handleUpdateStart() {
@@ -592,11 +601,11 @@ export default {
 
 .update-modal-content {
   background-color: #fff;
-  width: 300px;              /* 원하는 크기에 맞춰 조정 */
-  padding: 20px 16px;        /* 여백 */
-  border-radius: 8px;        /* 모서리 둥글게 */
+  width: 300px;
+  padding: 20px 16px;
+  border-radius: 8px;
   box-sizing: border-box;
-  text-align: center;        /* 내부 콘텐츠 중앙 정렬 */
+  text-align: center;
 }
 
 

@@ -116,6 +116,7 @@ import sttmodalcheck from "@/assets/images/sttmodalcheck.png";
 
 
 import motorbot from "@/assets/images/motorbot.jpg";
+import controllerbot from "@/assets/images/controllerbot.png";
 
 
 export default {
@@ -232,5 +233,6 @@ export default {
     aiClick,
 
     motorbot,
+    controllerbot,
 
 };
