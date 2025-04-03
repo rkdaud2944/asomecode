@@ -38,6 +38,7 @@ const bridge = {
         serial.runCode(code);
     },
 
+
     writeLn(code) {
         serial.writeLn(code);
     },
@@ -53,6 +54,13 @@ const bridge = {
         const wifiPassword = document.getElementById('wifi_password').value;
         document.getElementById("인터넷-연결하기").innerText =
             `import internet; internet.connect('${wifiName}', '${wifiPassword}')`;
+    },
+
+    setClockWifiInfo() {
+        const wifiName = document.getElementById('wifi_name').value;
+        const wifiPassword = document.getElementById('wifi_password').value;
+        document.getElementById("clock-wifi").innerText =
+        `import internet; connect_wifi = lambda: internet.connect('${wifiName}', '${wifiPassword}')`;
     },
 
     openWifiInfo() {
@@ -92,7 +100,14 @@ f = None
 
 import machine
 machine.reset()`);
+    
+        // 저장 후 인풋 값을 모두 90으로 초기화
+        document.getElementById('align01').value = 90;
+        document.getElementById('align02').value = 90;
+        document.getElementById('align03').value = 90;
+        document.getElementById('align04').value = 90;
     },
+    
 
     checkBotBase() {
         bridge.runCode(`import asomebot_align
@@ -154,7 +169,30 @@ os.remove('main.py')`)
     },
     
     contentsUploadFile(fileName,code) {
-        boardFileSaver.save(fileName,code)
+        // 인풋태그 찾아서 그 값을 wifiname으로 변경
+        var wifiName = "AsomebotSolo"
+        try{
+            if(document.getElementById("wifi_open").value){
+                wifiName = document.getElementById("wifi_open").value;
+                // console.log("안망했쏘~ : " +wifiName)
+            }
+        } catch {
+            // console.log("아 망했네!! : "+wifiName)
+        }
+
+        // wifiname을 넣기위해 업로드될 코드 조개기
+        var result_code = "0"
+        console.log("Tste code : "+code)
+        var code_1 = code.split('internet.open_ap("')[0];
+        console.log("code_1 : "+code_1)
+        var code_warp = code.split('internet.open_ap("')[1];
+        console.log("code_warp : "+code_warp)
+        var code_3 = code_warp.split('AsomebotSolo")')[1];
+        console.log("code_3 : "+code_3)
+        var code_2 = 'internet.open_ap("'+wifiName+'")';
+        console.log("code_2 : "+code_2)
+        result_code = code_1 + code_2 + code_3;
+        boardFileSaver.save(fileName,result_code)
     }
     
 };
@@ -166,6 +204,7 @@ window.runCode = bridge.runCode;
 window.writeLn = bridge.writeLn;
 window.openEditor = bridge.openEditor;
 window.setWifiInfo = bridge.setWifiInfo;
+window.setClockWifiInfo = bridge.setClockWifiInfo;
 window.openWifiInfo = bridge.openWifiInfo;
 window.setAsomeMessengerInfo = bridge.setAsomeMessengerInfo;
 window.presentSession = bridge.presentSession;

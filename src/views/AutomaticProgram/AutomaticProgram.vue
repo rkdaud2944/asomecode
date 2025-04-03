@@ -11,7 +11,7 @@
                   <p class="subject-title Pretendard-Regular"> {{ this.$route.query.subjectTitle }} </p>
                   <!-- <p class="lesson-chapter Pretendard-Regular"
                   :style="chapterStyleHandler"> {{ this.$route.query.index }}차시 </p> -->
-                  <p class="chapter-title Pretendard-Regular"> {{ this.$route.query.title }} 어썸봇 테스트</p>
+                  <p class="chapter-title Pretendard-Regular"> {{ this.$route.query.title }} 자동실행 프로그램</p>
               </div>
           </div>
 
@@ -263,7 +263,7 @@ export default {
       },
 
       getLesson() {
-          apiLesson.lessonDetail(83)
+          apiLesson.lessonDetail(84)
               .then((response) => {
                   this.lesson = response.data;
                   const parser = new AsomeParser(this.lesson.content);
