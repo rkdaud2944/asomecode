@@ -244,6 +244,11 @@ export default {
       window.parent.postMessage(JSON.stringify(params), '*');
       this.simulJS(params);
     });
+    
+    eventbus.on('aiContentsOpen', (path) => {
+      console.log(9999)
+      this.openRouterPath(path);
+    });
 
     eventbus.on("onBleScanStart", () => {
       this.btConnectColor = "primary";

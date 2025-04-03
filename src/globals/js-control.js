@@ -36,9 +36,11 @@ const jsControl = {
     },
 
     run(line) {
+        console.log(line)
         try {
             line = line.split(":");
             line = line[1].trim();
+            console.log(line)
         } catch (error) {
             console.log(error);
             return;
