@@ -169,19 +169,35 @@ const seiral = {
   // --------------------------------------
   async runCode(codes) {
     console.log("runCode", codes);
-    this.writeLn(`_codes_ = ""`);
-    const lines = codes.replaceAll("\r", "").split("\n");
-    for (let line of lines) {
-      // @@NOW 토큰 처리
-      line = line.replace(/@@NOW/gi, currentTime());
-      // 이스케이프 처리
-      line = line.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
-      // 딜레이
-      await new Promise(r => setTimeout(r, 100));
-      this.writeLn(`_codes_ = _codes_ + '${line}\\n'`);
-    }
-    this.writeLn(`exec(_codes_)\r\n`);
+    // Paste mode 진입: Ctrl+E (0x05)
+    this.write(String.fromCharCode(0x05));
+    // 진입 후 약간의 딜레이를 둡니다 (50ms 정도)
+    await new Promise(r => setTimeout(r, 50));
+  
+    // 전체 코드를 그대로 전송합니다.
+    // 코드를 수정할 필요가 있다면 (예: 이스케이프 등) 추가 처리할 수 있습니다.
+    // 여기서는 줄바꿈(\r\n)을 포함하여 한 번에 전송합니다.
+    this.write(codes + "\r\n");
+  
+    // Paste mode 종료: Ctrl+D (0x04)
+    this.write(String.fromCharCode(0x04));
   },
+
+  // async runCode(codes) {
+  //   console.log("runCode", codes);
+  //   this.writeLn(`_codes_ = ""`);
+  //   const lines = codes.replaceAll("\r", "").split("\n");
+  //   for (let line of lines) {
+  //     // @@NOW 토큰 처리
+  //     line = line.replace(/@@NOW/gi, currentTime());
+  //     // 이스케이프 처리
+  //     line = line.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+  //     // 딜레이
+  //     await new Promise(r => setTimeout(r, 100));
+  //     this.writeLn(`_codes_ = _codes_ + '${line}\\n'`);
+  //   }
+  //   this.writeLn(`exec(_codes_)\r\n`);
+  // },
 
   stop() {
     this.write(String.fromCharCode(3)); // Ctrl+C
@@ -231,13 +247,13 @@ export default seiral;
  * 현재 시간을 파이썬의 datetime 형식과 유사하게 반환하는 함수
  * 예: (2023, 03, 15, 0, 14, 30, 45, 0)
  */
-function currentTime() {
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, '0');
-  const day = String(now.getDate()).padStart(2, '0');
-  const hours = String(now.getHours()).padStart(2, '0');
-  const minutes = String(now.getMinutes()).padStart(2, '0');
-  const seconds = String(now.getSeconds()).padStart(2, '0');
-  return `(${year}, ${month}, ${day}, 0, ${hours}, ${minutes}, ${seconds}, 0)`;
-}
+// function currentTime() {
+//   const now = new Date();
+//   const year = now.getFullYear();
+//   const month = String(now.getMonth() + 1).padStart(2, '0');
+//   const day = String(now.getDate()).padStart(2, '0');
+//   const hours = String(now.getHours()).padStart(2, '0');
+//   const minutes = String(now.getMinutes()).padStart(2, '0');
+//   const seconds = String(now.getSeconds()).padStart(2, '0');
+//   return `(${year}, ${month}, ${day}, 0, ${hours}, ${minutes}, ${seconds}, 0)`;
+// }

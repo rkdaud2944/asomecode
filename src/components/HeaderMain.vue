@@ -9,7 +9,7 @@
       <span
         v-if="connectionState !== 'connected'"
         class="connect-btn Pretendard-Medium"
-        @click="connect"
+        @click="startScan"
         @mouseover="onConnectBtnHover"
         @mouseleave="onConnectBtnLeave"
       >
