@@ -117,6 +117,11 @@ import sttmodalcheck from "@/assets/images/sttmodalcheck.png";
 
 import motorbot from "@/assets/images/motorbot.jpg";
 import controllerbot from "@/assets/images/controllerbot.png";
+import servicecontrollerbot from "@/assets/images/servicecontrollerbot.png";
+import servicecontrollerstep1 from "@/assets/images/servicecontrollerstep1.png";
+import servicecontrollerstep2 from "@/assets/images/servicecontrollerstep2.png";
+import servicecontrollerstep3 from "@/assets/images/servicecontrollerstep3.png";
+import servicecontrollerstep4 from "@/assets/images/servicecontrollerstep4.png";
 
 
 export default {
@@ -234,5 +239,10 @@ export default {
 
     motorbot,
     controllerbot,
+    servicecontrollerbot,
+    servicecontrollerstep1,
+    servicecontrollerstep2,
+    servicecontrollerstep3,
+    servicecontrollerstep4,
 
 };
