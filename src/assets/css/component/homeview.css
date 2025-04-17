@@ -125,10 +125,10 @@
 
 .home-chapter {
     display: inline-block;
-    width: 58px;
+    width: 130px;
     line-height: 58px;
     text-align: center;
-    border-radius: 50%;
+    border-radius: 5%;
     font-size: 22px;
     font-weight: 600;
 }

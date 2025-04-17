@@ -14,7 +14,7 @@
         @mouseleave="onConnectBtnLeave"
       >
         <img :src="currentConnectImg" />
-        연결하기
+        Connect
         <span class="indicator disconnected"></span>
       </span>
 
@@ -26,7 +26,7 @@
         @mouseleave="onConnectedBtnLeave"
       >
         <img :src="currentConnectImg" />
-        연결해제
+        Disconnect
         <span class="indicator connected"></span>
       </span>
 
@@ -39,19 +39,19 @@
         @mouseup="onStopBtnHover"
       >
         <img :src="navstopImg" />
-        멈추기
+        Stop
       </span>
     </div>
 
     <div class="nav">
       <span @click="goToBlockCoding" class="NotoSansKR-Regular nav-txt">
-        <a style="cursor: pointer;">블록코딩</a>
+        <a style="cursor: pointer;">Block Coding</a>
       </span>
       <span @click="goToDownload" class="NotoSansKR-Regular nav-txt">
         <a style="cursor: pointer;">Resources</a>
       </span>
       <span @click="goToQna" class="NotoSansKR-Regular nav-txt">
-        <a style="cursor: pointer;">Help</a>
+        <a style="cursor: pointer;">Web</a>
       </span>
 
       <span class="NotoSansKR-Regular hamburger-wrap nav-txt">
@@ -131,7 +131,7 @@
   <div v-if="isUpdating" class="update-modal">
     <div class="update-modal-content">
       <!-- 상단 제목 -->
-      <h2 class="update-title" style="font-family: 'Pretendard-Regular';">업데이트 진행 중</h2>
+      <h2 class="update-title" style="font-family: 'Pretendard-Regular';">Updating...</h2>
       
       <div style="width: 80%; border-bottom: 1px solid #D8D8D8; margin: 16px 0; text-align: center; display: block; margin-left: auto; margin-right: auto;"></div>
       <!-- 구분선 -->
@@ -142,8 +142,8 @@
       </div>
       <!-- 안내 문구 -->
       <p class="update-desc" style="font-family: 'Pretendard-Regular';">
-        업데이트를 진행합니다.<br />
-        잠시만 기다려주세요.
+        Update in progress.<br />
+        Please wait...
       </p>
     </div>
   </div>
@@ -229,11 +229,11 @@ export default {
     });
     eventbus.on("onSerialClosed", () => {
       this.btConnectColor = "grey";
-      this.$q.notify('어썸보드 연결이 끊어졌습니다.');
+      this.$q.notify('Lost connection to AsomeBoard.');
     });
     eventbus.on("onSerialpp", () => {
       this.btConnectColor = "grey";
-      this.$q.notify('어썸보드가 다른곳에 연결되어있습니다 다시 연결해주세요.');
+      this.$q.notify('The AsomeBoard is connected to another device. Please reconnect it.');
     });
 
     eventbus.on('simulationOpen', (path) => {
@@ -347,15 +347,15 @@ export default {
       if (this.connectionState !== 'connected') {
         Swal.fire({
           icon: undefined,
-          html: `<h2 style="font-size: 18px; font-weight: 600; color: #E4007F; margin-bottom: 10px; font-family: 'Pretendard-Regular';">업데이트할 교구를 연결하세요.</h2>
+          html: `<h2 style="font-size: 18px; font-weight: 600; color: #E4007F; margin-bottom: 10px; font-family: 'Pretendard-Regular';">Please connect the device to update.</h2>
                  <div style="width: 100%; border-bottom: 1px solid #D8D8D8; margin: 16px 0;"></div>
                  <p style="color: #979797; line-height: 1.4; margin-bottom: 24px; font-size: 14px; font-family: 'Pretendard-Regular';">
-                   교구가 연결되어 있지 않습니다.<br/>업데이트를 진행하려면 교구를 연결해주세요.
+                   No device is connected.<br/>Please connect the device to proceed with the update.
                  </p>`,
           showConfirmButton: true,
-          confirmButtonText: '연결하기',
+          confirmButtonText: 'Connect',
           showCancelButton: true,
-          cancelButtonText: '닫기',
+          cancelButtonText: 'Close',
           buttonsStyling: false,
           customClass: {
             popup: 'swal-custom-popup',
@@ -373,11 +373,11 @@ export default {
         Swal.fire({
           width: 560,
           title: '',
-          html: `<h2 style="font-family: 'Pretendard-Regular'; font-size: 18px; font-weight: 600; color: #E4007F; margin: 0 0 10px 0;">업데이트할 교구를 선택하세요.</h2>
+          html: `<h2 style="font-family: 'Pretendard-Regular'; font-size: 18px; font-weight: 600; color: #E4007F; margin: 0 0 10px 0;">Select Device for Update.</h2>
                  <div style="width: 100%; border-bottom: 1px solid #D8D8D8; margin: 16px 0;"></div>
                  <div style="margin-bottom: 16px; display: flex; justify-content: center;">
                    <div style="position: relative; width: 60%; max-width: 280px;">
-                     <input id="searchInput" type="text" placeholder="교구명, 프로젝트명 검색" style="font-family: 'Pretendard-Regular'; width: 100%; box-sizing: border-box; padding: 8px 36px 8px 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px;" />
+                     <input id="searchInput" type="text" placeholder="Search by Device Name" style="font-family: 'Pretendard-Regular'; width: 100%; box-sizing: border-box; padding: 8px 36px 8px 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px;" />
                      <img src="https://cdn-icons-png.flaticon.com/512/49/49116.png" alt="search" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; opacity: 0.6;" />
                    </div>
                  </div>
@@ -386,21 +386,21 @@ export default {
                      <img src="${this.asomebotBtnImg}" alt="asomebot" style="width: 36px; height: 36px;" />
                      <div style="margin-left: 10px; display: flex; flex-direction: column;">
                        <div style="font-family: 'Pretendard-Regular'; font-size: 12px; color: #979797;">AsomeIT</div>
-                       <div style="font-family: 'Pretendard-Regular'; font-size: 14px; color: #4F4F53;">어썸봇</div>
+                       <div style="font-family: 'Pretendard-Regular'; font-size: 14px; color: #4F4F53;">Asomebot</div>
                      </div>
                    </div>
                    <div id="btnAsomeKit" class="swal-update-item" style="border: 1px solid #D8D8D8; border-radius: 8px; width: 180px; height: 60px; display: flex; align-items: center; padding: 8px 10px; cursor: pointer;">
                      <img src="${this.asomekitBtnImg}" alt="asomekit" style="width: 36px; height: 36px;" />
                      <div style="margin-left: 10px; display: flex; flex-direction: column;">
                        <div style="font-family: 'Pretendard-Regular'; font-size: 12px; color: #979797;">AsomeIT</div>
-                       <div style="font-family: 'Pretendard-Regular'; font-size: 14px; color: #4F4F53;">어썸키트</div>
+                       <div style="font-family: 'Pretendard-Regular'; font-size: 14px; color: #4F4F53;">Asomekit</div>
                      </div>
                    </div>
                  </div>`,
           showCancelButton: true,
           showConfirmButton: true,
-          confirmButtonText: '진행하기',
-          cancelButtonText: '닫기',
+          confirmButtonText: 'Start',
+          cancelButtonText: 'Close',
           buttonsStyling: false,
           customClass: {
             popup: 'swal-update-popup',
@@ -513,11 +513,11 @@ export default {
     },
     goToDownload() {
       // 자료실을 외부 브라우저로 엽니다.
-      shell.openExternal("https://asomeit.kr/download");
+      shell.openExternal("https://asomeit.com/download");
     },
     goToQna() {
       // 도움말을 외부 브라우저로 엽니다.
-      shell.openExternal("https://asomeit.imweb.me/faq");
+      shell.openExternal("https://asomeit.com");
     },
     goToBlockCoding() {
       localStorage.removeItem("lessonBlock");
@@ -538,14 +538,14 @@ export default {
       this.isUpdating = false;
       this.$q.notify({
         type: 'positive',
-        message: '업데이트가 완료되었습니다.',
+        message: 'Update completed.',
       });
     },
     cancelUpdate() {
       this.isUpdating = false;
       this.$q.notify({
         type: 'warning',
-        message: '업데이트가 취소되었습니다.',
+        message: 'Update canceled',
       });
     },
   },

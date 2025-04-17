@@ -94,7 +94,7 @@ const seiral = {
     }
 
     if (!ports || ports.length === 0) {
-      this.fireErrorEvent("어썸보드를 찾을 수 없습니다.");
+      this.fireErrorEvent("The AsomeBoard could not be found. Please make sure it is connected properly.");
       return;
     }
 

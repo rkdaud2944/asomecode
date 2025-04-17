@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="console-input">
-      <p>입력</p>
+      <p>Console</p>
       <q-input @keydown.enter.prevent="send" 
                @keydown.up.prevent="codeHistory('up')"
                @keydown.down.prevent="codeHistory('down')"
@@ -209,7 +209,7 @@
           return;
         }
         
-        if (trimmedText === "/ver" || trimmedText === "/버전") {
+        if (trimmedText === "/ver" || trimmedText === "/버전" || trimmedText === "/version") {
           remote.dialog.showMessageBox({
             type: 'info',
             title: 'AsomeCode',

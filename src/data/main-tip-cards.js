@@ -12,11 +12,11 @@ export const tipCards = [
         clickBgColor: '#B4B4B4',
         clickTxtColor: '#474747', 
         clickImage: require("@/assets/images/common/main_tip_2.png"),
-        href: "https://asomeit.kr/download/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=15447162&t=board"
+        href: "https://asomeit.com/download/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=15447162&t=board"
     },
     {
-        title: "자동실행 프로그램", 
-        description: "실행하기",
+        title: "Auto-run Program", 
+        description: "Program that runs on execution",
         image: require("@/assets/images/common/main_tip_4.png"), 
         bgColor: '#83A5C8', 
         txtColor: '#FFFFFF', 
@@ -42,6 +42,6 @@ export const tipCards = [
         clickBgColor: '#6A6A6A',
         clickTxtColor: '#474747', 
         clickImage: require("@/assets/images/common/main_tip_1.png"),
-        href: "https://asomeit.kr/"
+        href: "https://asomeit.com/"
     },
 ];
