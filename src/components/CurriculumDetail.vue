@@ -76,8 +76,8 @@
     </div>
 
     <div class="arrow-wrap">
-        <span class="arrow-prev"></span>
-        <span class="arrow-next"></span>
+        <!-- <span class="arrow-prev"></span>
+        <span class="arrow-next"></span> -->
     </div>
 </template>
 

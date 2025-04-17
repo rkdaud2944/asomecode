@@ -9,7 +9,7 @@
         </div>
         <div class="main-cts-wrap">
             <div class="main-cts">
-                <div > 
+                <div> 
                     <!-- 여기는 원래 위에 main-mid가 217이어야 하는데 이부분 때문에 177로함, 폰트사이즈 20 상하 여백 10 -->
                     <div class="curriculum-title Pretendard-Medium">Curriculum</div>
                     <div class="curriculum">
@@ -17,7 +17,7 @@
                             v-for="(card, index) in cards"
                             :key="index"
                             @mousedown="clicked = true"
-                            @mouseup ="clicked = false"
+                            @mouseup="clicked = false"
                         >
                             <div class="card" @click="goSelectCurriculum(card.id, card.title)">
                                 <div class="card-front"
@@ -26,24 +26,21 @@
                                         'color': hoverIndex === index ? card.hoverTxtAge : '#000',
                                         transition: 'background-color 0.5s ease, color 0.5s ease',
                                         'backgroundImage': `url(${card.image})`
-                                }">
-                                    <p class="age NotoSansKR-Regular"
-                                        :style="{'color': card.txtAge,
-                                        'border': `1px solid ${card.txtAge}`
                                     }">
+                                    <p class="age NotoSansKR-Regular"
+                                        :style="{
+                                            'color': card.txtAge,
+                                            'border': `1px solid ${card.txtAge}`
+                                        }">
                                         {{ card.age }}
                                     </p>
                                     <h4 class="title Pretendard-ExtraBold">{{ card.title }}</h4>
                                     <p class="description Pretendard-Regular">{{ card.description }}</p>
                                     <div class="home-chapter Pretendard-Regular" 
-                                        :style="{
-                                            'color': card.txtChapter,
-                                            'background-color': card.bgChapter,
-                                    }">
+                                        :style="{ 'color': card.txtChapter, 'background-color': card.bgChapter }">
                                         {{ card.chapter }}
                                     </div>
                                 </div>
-
                                 <!-- hover -->
                                 <div class="card-back"
                                     :style="{ 
@@ -51,28 +48,25 @@
                                         'color': hoverIndex === index ? card.hoverTxtAge : '#000',
                                         transition: 'background-color 0.5s ease, color 0.5s ease',
                                         'backgroundImage': `url(${card.hoverImage})`
-                                }">
-                                    <p class="age NotoSansKR-Regular"
-                                        :style="{'color': clicked === true ? card.clickTxtAge : card.hoverTxtAge,
-                                        'border': `1px solid ${clicked === true ? card.clickTxtAge : card.hoverTxtAge}`
                                     }">
+                                    <p class="age NotoSansKR-Regular"
+                                        :style="{
+                                            'color': clicked === true ? card.clickTxtAge : card.hoverTxtAge,
+                                            'border': `1px solid ${clicked === true ? card.clickTxtAge : card.hoverTxtAge}`
+                                        }">
                                         {{ card.age }}
                                     </p>
                                     <h4 class="title Pretendard-ExtraBold"
                                         :style="{
                                             'color': clicked === true ? card.clickTxtTitle : card.hoverTxtTitle,
                                             'text-shadow': '2px 2px 2px gray',
-                                            'opacity': clicked === true ? '0.5' : '1',
-                                        }
-                                        ">
+                                            'opacity': clicked === true ? '0.5' : '1'
+                                        }">
                                         {{ card.title }}
                                     </h4>
                                     <p class="description Pretendard-Regular">{{ card.description }}</p>
                                     <div class="home-chapter Pretendard-Regular" 
-                                        :style="{
-                                            'color': card.hoverTxtChapter,
-                                            'background-color': card.hoverBgChapter,
-                                    }">
+                                        :style="{ 'color': card.hoverTxtChapter, 'background-color': card.hoverBgChapter }">
                                         {{ card.chapter }}
                                     </div>
                                 </div>
@@ -82,32 +76,34 @@
                 </div>
 
                 <div>
-                    <div class="tip-title Pretendard-Medium">TIP</div>
+                    <!-- TIP 텍스트는 그대로 영역을 유지하지만 보이지 않게 처리 -->
+                    <div class="tip-title Pretendard-Medium" style="visibility: hidden;">TIP</div>
                     <div class="tip-wrap">
                         <div class="tip" 
-                        v-for="(card, index) in tipCards"
-                        :key="index"
-                        @mousedown="clickedStates[index] = true"
-                        @mouseup="clickedStates[index] = false"
-                        @mouseover="hoveredStates[index] = true"
-                        @mouseleave="hoveredStates[index] = false; clickedStates[index] = false"
-                        @click="openLink(card.href)"
+                            v-for="(card, index) in tipCards"
+                            :key="index"
+                            @mousedown="clickedStates[index] = true"
+                            @mouseup="clickedStates[index] = false"
+                            @mouseover="hoveredStates[index] = true"
+                            @mouseleave="hoveredStates[index] = false; clickedStates[index] = false"
+                            @click="openLink(card.href)"
                         >
-                        <div class="tip-link" :style="{'text-decoration': 'none'}">
-                            <div :class="`tip-box box${index+1}`"
-                                :style="tipComputeStyle(card, index)">
-                                <div>
-                                    <p class="NotoSansKR-Regular p1">{{card.title}}</p>
-                                    <p class="Pretendard-Regular p2">{{card.description}}</p>
-                                </div>
-                                <div>
-                                    <img :src="card.image"/>
+                            <div class="tip-link" :style="{ 'text-decoration': 'none' }">
+                                <div :class="`tip-box box${index+1}`"
+                                    :style="tipComputeStyle(card, index)">
+                                    <div>
+                                        <p class="NotoSansKR-Regular p1">{{ card.title }}</p>
+                                        <p class="Pretendard-Regular p2">{{ card.description }}</p>
+                                    </div>
+                                    <div>
+                                        <img :src="card.image" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        </div>
                     </div>
                 </div>
+                
             </div>
         </div>
     </div>
@@ -116,9 +112,11 @@
 <script>
 import images from "@/assets/images"; 
 import apiSubjectSet from "@/api/subjectSet";
-// import Subject from '@/components/SubjectComponent.vue'
 import { cards } from "@/data/main-cards";
 import { tipCards } from "@/data/main-tip-cards";
+
+// Electron의 shell 모듈을 불러옵니다.
+const { shell } = require('electron');
 
 export default {
     components: {
@@ -148,16 +146,12 @@ export default {
             faq: images.faq,
             faqHover: images.faqHover,
             asomeitQuestionMark: images.asomeitQuestionMark,
-
             
             cards: cards,
             tipCards: tipCards,
-            // tipCards: this.tipCards.map(card => ({ ...card, hovered: false })),
-            // hovered: false,
             hoveredStates: {},
             clickedStates: {},
             clicked: false, // 클릭 상태 초기화
-            
         }
     },
     computed: {
@@ -174,16 +168,13 @@ export default {
             return this.isMouseOverFaq ? this.faqHover : this.faq;
         }
     },
-
     mounted() {
-        this.getSubjectSet()
+        this.getSubjectSet();
         window.addEventListener('mouseup', this.globalMouseUpHandler);
     },
-
     beforeUnmount() {
         window.removeEventListener('mouseup', this.globalMouseUpHandler);
     },
-
     methods: {
         onMouseOver(type) {
             if(type === 'notice') this.isMouseOverNotice = true;
@@ -191,7 +182,6 @@ export default {
             if(type === 'library') this.isMouseOverLibrary = true;
             if(type === 'faq') this.isMouseOverFaq = true;
         },
-
         onMouseLeave(type) {
             if(type === 'notice') this.isMouseOverNotice = false;
             if(type === 'community') this.isMouseOverCommunity = false;
@@ -199,47 +189,41 @@ export default {
             if(type === 'faq') this.isMouseOverFaq = false;
         },
         onClickNotice() {
-            this.$router.push({ path: '/notice/list'});
+            this.$router.push({ path: '/notice/list' });
         },
-
         getSubjectSet() {
             apiSubjectSet.getSubjectSet(this.selectedSubjectSetId)
                 .then((response) => {
-                    this.subjects = response.data.subjects
+                    this.subjects = response.data.subjects;
                 })
                 .catch(this.showError);
         },
         tipComputeStyle(card, index) {
-            // 클릭
             if (this.clickedStates[index]) {
-                return { background: card.clickBgColor,
-                    color: card.clickTxtColor,};
-            } 
-            // 호버
-            else if (this.hoveredStates[index]) {
-                return { background: card.hoverBgColor,
-                    color: card.hoverTxtColor,};
-            } 
-            // 기본
-            else {
-                return { background: card.bgColor,
-                    color: card.txtColor,};
+                return { background: card.clickBgColor, color: card.clickTxtColor };
+            } else if (this.hoveredStates[index]) {
+                return { background: card.hoverBgColor, color: card.hoverTxtColor };
+            } else {
+                return { background: card.bgColor, color: card.txtColor };
             }
         },
-
-        goSelectCurriculum(id, title){
+        goSelectCurriculum(id, title) {
             this.$router.push({ 
                 path: `/curriculum`,
-                query:{id: `${id}`,title: `${title}`}
+                query: { id: `${id}`, title: `${title}` }
             });
         },
-        
         globalMouseUpHandler() {
             if (this.clicked) this.clicked = false;
         },
-
         openLink(url) {
-            window.open(url, '_blank');
+            // TIP 카드의 경우 /AutomaticProgram이면 내부 라우터로 이동
+            if (url === '/AutomaticProgram') {
+                this.$router.push(url);
+            } else {
+                // 어썸코드 사용법, 어썸아이티 등은 Electron 창이 아닌 기본 브라우저로 엽니다.
+                shell.openExternal(url);
+            }
         },
     }
 }
