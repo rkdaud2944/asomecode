@@ -10,7 +10,7 @@ export { BotToolbox };
         "contents": [
             {
                 "kind": "category",
-                "name": "BASIC",
+                "name": "Cơ bản",
                 "field" : "BOT",
                 "colour": "14A2FF",
                 "autoClose": "true",
@@ -22,7 +22,7 @@ export { BotToolbox };
             },
             {
                 "kind": "category",
-                "name": "WALK",
+                "name": "Di chuyển",
                 "field" : "BOT",    
                 "colour": "FF9A00",
                 "contents": [
@@ -41,7 +41,7 @@ export { BotToolbox };
             },
             {
                 "kind": "category",
-                "name": "DANCE",
+                "name": "Nhảy múa",
                 "field" : "BOT",
                 "colour": "FF61FF",
                 "contents": [
@@ -60,7 +60,7 @@ export { BotToolbox };
             },
             {
                 "kind": "category",
-                "name": "SENSOR",
+                "name": "Cảm biến",
                 "field" : "BOT",
                 "colour": "FFCD00",
                 "contents": [
@@ -71,7 +71,7 @@ export { BotToolbox };
             },
             {
                 "kind": "category",
-                "name": "SOUND",
+                "name": "Âm thanh",
                 "field" : "BOT",
                 "colour": "EC1961",
                 "contents": [
@@ -83,7 +83,7 @@ export { BotToolbox };
             },
             {
                 "kind": "category",
-                "name": "ADVANCE",
+                "name": "Điều kiển",
                 "field" : "BOT",
                 "colour": "55A55B",
                 "contents": [
@@ -104,7 +104,7 @@ export { BotToolbox };
             },
             {
                 "kind": "category",
-                "name": "INTERNET",
+                "name": "Internet",
                 "field" : "BOT",
                 "colour": "B666FC",
                 "contents": [

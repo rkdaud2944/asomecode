@@ -9,7 +9,7 @@ export { KitToolbox };
         "contents": [
             {
               "kind": "category",
-              "name": "BASIC",
+              "name": "Cơ bản",
               "field" : "KIT",
               "colour": "14A2FF",
               "contents": [
@@ -19,7 +19,7 @@ export { KitToolbox };
           },
           {
               "kind": "category",
-              "name": "PREPARE",
+              "name": "Chuẩn bị",
               "field" : "KIT",
               "colour": "FF9A00",
               "contents": [
@@ -50,7 +50,7 @@ export { KitToolbox };
           },
           {
               "kind": "category",
-              "name": "BUTTON",
+              "name": "Nút bấm",
               "field" : "KIT",
               "colour": "4CC1B9",
               "contents": [
@@ -60,7 +60,7 @@ export { KitToolbox };
           },
           {
               "kind": "category",
-              "name": "SENSOR",
+              "name": "Cảm biến",
               "field" : "KIT",
               "colour": "FFCD00",
               "contents": [
@@ -70,15 +70,15 @@ export { KitToolbox };
                 { "kind": "block", "gap": "8", "type": "sensor_water_level" },
                 { "kind": "block", "gap": "8", "type": "sensor_brightness" },
                 { "kind": "block", "gap": "8", "type": "sensor_sound" },
-                // { "kind": "block", "gap": "8", "type": "sensor_brightness_complete" },
-                // { "kind": "block", "gap": "8", "type": "sensor_sound_complete" },
+                { "kind": "block", "gap": "8", "type": "sensor_brightness_complete" },
+                { "kind": "block", "gap": "8", "type": "sensor_sound_complete" },
                 { "kind": "block", "gap": "8", "type": "sensor_soil_humidity" },
                 { "kind": "block", "gap": "8", "type": "sensor_vibration_sensor" },
               ],
           },
           {
               "kind": "category",
-              "name": "SOUND",
+              "name": "Âm thanh",
               "field" : "KIT",
               "colour": "EC1961",
               "contents": [
@@ -89,7 +89,7 @@ export { KitToolbox };
           },
           {
               "kind": "category",
-              "name": "ADVANCE",
+              "name": "Điều kiển",
               "field" : "KIT",
               "colour": "55A55B",
               "contents": [
@@ -109,7 +109,7 @@ export { KitToolbox };
           },
           {
               "kind": "category",
-              "name": "INTERNET",
+              "name": "Internet",
               "field" : "KIT",
               "colour": "B666FC",
               "contents": [

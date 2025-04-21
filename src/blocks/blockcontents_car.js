@@ -9,7 +9,7 @@ const CarToolbox = {
     "contents": [
         {
             "kind": "category",
-            "name": "BASIC",
+            "name": "Cơ bản",
             "field" : "CAR",
             "colour": "14A2FF",
             "contents": [
@@ -18,7 +18,7 @@ const CarToolbox = {
         },
         {
             "kind": "category",
-            "name": "MOVE",
+            "name": "Chuyển động",
             "field" : "CAR",
             "colour": "FF9A00",
             "contents": [
@@ -55,19 +55,19 @@ const CarToolbox = {
               { "kind": "block", "gap": "8", "type": "prepare_left_led_ready" },
               { "kind": "block", "gap": "8", "type": "prepare_right_led_ready" },
               { "kind": "block", "gap": "8", "type": "prepare_brake_led_ready" },
-              { "kind": "block", "gap": "8", "type": "prepare_neopixel_ready" },
               { "kind": "block", "gap": "8", "type": "led_control" },
+              { "kind": "block", "gap": "8", "type": "prepare_neopixel_ready" },
+              { "kind": "block", "gap": "8", "type": "neopixel_turnoff" },
               { "kind": "block", "gap": "8", "type": "neopixel_turnon" },
-            //   { "kind": "block", "gap": "8", "type": "neopixel_write" },/
+              { "kind": "block", "gap": "8", "type": "neopixel_write" },
               { "kind": "block", "gap": "8", "type": "neopixel_all_turnon" },
               { "kind": "block", "gap": "8", "type": "neopixel_for_turnon" },
               { "kind": "block", "gap": "8", "type": "neopixel_rainbow" },
-              { "kind": "block", "gap": "8", "type": "neopixel_turnoff" },
             ],
         },
         {
             "kind": "category",
-            "name": "BUTTON",
+            "name": "Nút bấm",
             "field" : "CAR",
             "colour": "4CC1B9",
             "contents": [
@@ -81,7 +81,7 @@ const CarToolbox = {
         },
         {
             "kind": "category",
-            "name": "SENSOR",
+            "name": "Cảm biến",
             "field" : "CAR",
             "colour": "FFCD00",
             "contents": [
@@ -104,7 +104,7 @@ const CarToolbox = {
         },
         {
             "kind": "category",
-            "name": "SOUND",
+            "name": "Âm thanh",
             "field" : "CAR",
             "colour": "EC1961",
             "contents": [
@@ -117,7 +117,7 @@ const CarToolbox = {
         },
         {
             "kind": "category",
-            "name": "ADVANCE",
+            "name": "Điều kiển",
             "field" : "CAR",
             "colour": "55A55B",
             "contents": [
@@ -137,7 +137,7 @@ const CarToolbox = {
         },
         {
             "kind": "category",
-            "name": "INTERNET",
+            "name": "Internet",
             "field" : "CAR",
             "colour": "B666FC",
             "contents": [

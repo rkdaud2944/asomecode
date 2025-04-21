@@ -85,28 +85,28 @@ export default {
             asomecarIconClick: images.asomecarIconClick,
             sourceView: images.sourceView,
             
-            advance: images.advance,
-            advanceClick: images.advanceClick,
-            basic: images.basic,
-            basicClick: images.basicClick,
-            button: images.button,
-            buttonClick: images.buttonClick,
-            dance: images.dance,
-            danceClick: images.danceClick,
-            internet: images.internet,
-            internetClick: images.internetClick,
+            "điều kiển": images.advance,
+            "điều kiểnClick": images.advanceClick,
+            "cơ bản": images.basic,
+            "cơ bảnClick": images.basicClick,
+            "nút bấm": images.button,
+            "nút bấmClick": images.buttonClick,
+            "nhảy múa": images.dance,
+            "nhảy múaClick": images.danceClick,
+            "internet": images.internet,
+            "internetClick": images.internetClick,
             led: images.led,
             ledClick: images.ledClick,
-            move: images.move,
-            moveClick: images.moveClick,
-            prepare: images.prepare,
-            prepareClick: images.prepareClick,
-            sensor: images.sensor,
-            sensorClick: images.sensorClick,
-            sound: images.sound,
-            soundClick: images.soundClick,
-            walk: images.walk,
-            walkClick: images.walkClick,
+            "chuyển động": images.move,
+            "chuyển độngClick": images.moveClick,
+            "chuẩn bị": images.prepare,
+            "chuẩn bịClick": images.prepareClick,
+            "cảm biến": images.sensor,
+            "cảm biếnClick": images.sensorClick,
+            "âm thanh": images.sound,
+            "âm thanhClick": images.soundClick,
+            "di chuyển": images.walk,
+            "di chuyểnClick": images.walkClick,
             ai: images.ai,
             aiClick: images.aiClick,
             selectedField: 'BOT',
@@ -134,7 +134,23 @@ export default {
     },
 
     beforeMount() {
-        // 타이핑 자동완성
+        // 에디터 우클릭할때 언어 베트남어로 변경
+        Blockly.Msg.UNDO         = 'Hoàn tác';
+        Blockly.Msg.REDO         = 'Làm lại';
+        Blockly.Msg.CLEAN_UP     = 'Sắp xếp lại các khối';
+        Blockly.Msg.COLLAPSE_ALL = 'Thu gọn các khối';
+        Blockly.Msg.EXPAND_ALL   = 'Mở rộng các khối';
+        Blockly.Msg.DELETE_BLOCK     = 'Xóa khối';
+        Blockly.Msg.DELETE_X_BLOCKS  = 'Xóa %1 khối';
+        Blockly.Msg.DELETE_ALL_BLOCKS= 'Xóa tất cả %1 khối';
+
+        Blockly.Msg.DUPLICATE_BLOCK  = 'Sao chép';
+        Blockly.Msg.ADD_COMMENT      = 'Thêm bình luận';
+        Blockly.Msg.COLLAPSE_BLOCK   = 'Thu gọn khối lệnh';
+        Blockly.Msg.DISABLE_BLOCK    = 'Vô hiệu hóa khối lệnh';
+        Blockly.Msg.DELETE_BLOCK     = 'Xóa khối lệnh';
+        Blockly.Msg.HELP             = 'Trợ giúp';
+                
         const keywords = [
             "asomebot",
                 "ready", "align", "angle", "angles", "turn_off", "home", "leg_up", "forward",
