@@ -166,7 +166,7 @@ Blockly.Blocks["walk_motor_angle"] = {
       .appendField(new Blockly.FieldNumber(90), "angle")
       .appendField(", thời gian xoay")
       .appendField(new Blockly.FieldNumber(1), "secs")
-      .appendField(", giây")
+      .appendField(" giây")
       // .appendField("초")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -371,7 +371,7 @@ Blockly.Blocks["dance_mouse"] = {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/asomebot/mouse.png', 23, 23, '*'))
       .appendField("Nhảy 1 chân")
-      .appendField(new Blockly.FieldDropdown([["left", "left"], ["right", "right"]]), "MOUSE_BUTTON");
+      .appendField(new Blockly.FieldDropdown([["trái", "trái"], ["phải", "phải"]]), "MOUSE_BUTTON");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF61FF");
@@ -382,7 +382,7 @@ Blockly.Blocks["dance_mouse"] = {
 
 javascriptGenerator["dance_mouse"] = function (block) {
   const mouseButton = block.getFieldValue("MOUSE_BUTTON");
-  let code = `asomebot.mouse(${mouseButton === 'left' ? '1' : '-1'})\n`;
+  let code = `asomebot.mouse(${mouseButton === 'trái' ? '1' : '-1'})\n`;
   return code;
 };
 
@@ -1256,8 +1256,8 @@ Blockly.Blocks["advance_if_logical"] = {
       .setCheck("null");
     this.appendDummyInput()
       .appendField(new Blockly.FieldDropdown([
-        ["and", "and"],
-        ["or", "or"]
+        ["và", "and"],
+        ["hoặc", "or"]
       ]), "logical_operator")
       .appendField(new Blockly.FieldDropdown(dropdownGenerator), "variable2")
       .appendField(new Blockly.FieldDropdown([
@@ -1399,8 +1399,8 @@ Blockly.Blocks["advance_elseif_logical"] = {
       .setCheck("null");
     this.appendDummyInput()
       .appendField(new Blockly.FieldDropdown([
-        ["and", "and"],
-        ["or", "or"]
+        ["và", "and"],
+        ["hoặc", "or"]
       ]), "logical_operator")
       .appendField(new Blockly.FieldDropdown(dropdownGenerator), "variable2")
       .appendField(new Blockly.FieldDropdown([
@@ -2255,9 +2255,9 @@ Blockly.Blocks["led_ready"] = {
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
       .appendField(new Blockly.FieldDropdown([
         ["màu đỏ", "màu đỏ"],["màu vàng", "màu vàng"],["màu xanh lá", "màu xanh lá"],["màu sáng", "màu sáng"]]), "variable")
-      .appendField("Bật đèn")
+      .appendField("đèn")
       .appendField(new Blockly.FieldDropdown([
-        ["On", "On"],["Off", "Off"]]), "on,off")
+        ["Bật", "Bật"],["Tắt", "Tắt"]]), "on,off")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF61FF");
@@ -2288,10 +2288,10 @@ javascriptGenerator["led_ready"] = function (block) {
   }
 
   switch (power) {
-    case 'On':
+    case 'Bật':
       pow = 'on';
       break;
-    case 'Off':
+    case 'Tắt':
       pow = 'off';
       break;
     default:
@@ -2306,10 +2306,10 @@ Blockly.Blocks["led_setting"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
-      .appendField("đặt độ sáng")
+      // .appendField("đặt độ sáng")
       .appendField(new Blockly.FieldDropdown([
         ["màu đỏ", "màu đỏ"],["màu xanh lá", "màu xanh lá"],["màu xanh dương", "màu xanh dương"]]), "variable")
-      .appendField("to")
+      .appendField("thiết lập độ sáng")
       .appendField(new Blockly.FieldNumber() ,"int_key")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
@@ -2430,7 +2430,7 @@ Blockly.Blocks["led_ledtube_time"] = {
       .appendField(new Blockly.FieldDropdown([
         ["m", "m"],["buzzer", "buzzer"],["h", "h"],["ht", "ht"],["q", "q"],["bt", "bt"],["vs", "vs"]]), "variable2")
       .appendField(new Blockly.FieldDropdown([
-        ["úng", "úng"],["Sai", "Sai"]]), "toggle")
+        ["Đúng", "Đúng"],["Sai", "Sai"]]), "toggle")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF61FF");
@@ -2499,7 +2499,7 @@ javascriptGenerator["led_ledtube_time"] = function (block) {
   }
 
   switch (toggle) {
-    case 'úng':
+    case 'Đúng':
       tog = 'True';
       break;
     case 'Sai':
@@ -12281,7 +12281,7 @@ Blockly.Blocks["asomecar_forward"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomecar.png', 23, 23, '*'))
-      .appendField("Tiến về phía trước (Tốc độ:")
+      .appendField("Tiến về phía trước (Tốc độ")
       .appendField(new Blockly.FieldDropdown([["800", "800"], ["850", "850"], ["900", "900"], ["950", "950"], ["1000", "1000"]]), "VALUE")
       .appendField(")")
     this.setPreviousStatement(true, null);
@@ -12302,7 +12302,7 @@ Blockly.Blocks["asomecar_backward"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomecar.png', 23, 23, '*'))
-      .appendField("Lùi về phía sau (Tốc độ:")
+      .appendField("Lùi về phía sau (Tốc độ")
       .appendField(new Blockly.FieldDropdown([["800", "800"], ["850", "850"], ["900", "900"], ["950", "950"], ["1000", "1000"]]), "VALUE")
       .appendField(")")
     this.setPreviousStatement(true, null);
@@ -12323,7 +12323,7 @@ Blockly.Blocks["asomecar_turnRight"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomecar.png', 23, 23, '*'))
-      .appendField("Xoay tại chỗ sang phải (Tốc độ:")
+      .appendField("Xoay tại chỗ sang phải (Tốc độ")
       .appendField(new Blockly.FieldDropdown([["800", "800"], ["850", "850"], ["900", "900"], ["950", "950"], ["1000", "1000"]]), "VALUE")
       .appendField(")")
     this.setPreviousStatement(true, null);
@@ -12345,7 +12345,7 @@ Blockly.Blocks["asomecar_turnLeft"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomecar.png', 23, 23, '*'))
-      .appendField("Xoay tại chỗ sang trái (Tốc độ:")
+      .appendField("Xoay tại chỗ sang trái (Tốc độ")
       .appendField(new Blockly.FieldDropdown([["800", "800"], ["850", "850"], ["900", "900"], ["950", "950"], ["1000", "1000"]]), "VALUE")
       .appendField(")")
     this.setPreviousStatement(true, null);
@@ -12366,7 +12366,7 @@ Blockly.Blocks["asomecar_left"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomecar.png', 23, 23, '*'))
-      .appendField("Di chuyển sang phải (Tốc độ:")
+      .appendField("Di chuyển sang phải (Tốc độ")
       .appendField(new Blockly.FieldDropdown([["800", "800"], ["850", "850"], ["900", "900"], ["950", "950"], ["1000", "1000"]]), "VALUE")
       .appendField(")")
     this.setPreviousStatement(true, null);
@@ -12387,7 +12387,7 @@ Blockly.Blocks["asomecar_right"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomecar.png', 23, 23, '*'))
-      .appendField("Di chuyển sang trái (Tốc độ:")
+      .appendField("Di chuyển sang trái (Tốc độ")
       .appendField(new Blockly.FieldDropdown([["800", "800"], ["850", "850"], ["900", "900"], ["950", "950"], ["1000", "1000"]]), "VALUE")
       .appendField(")")
     this.setPreviousStatement(true, null);
@@ -12409,7 +12409,7 @@ Blockly.Blocks["asomecar_rightForward"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomecar.png', 23, 23, '*'))
-      .appendField("Di chuyển chéo về phía trước bên phải (Tốc độ:")
+      .appendField("Di chuyển chéo về phía trước bên phải (Tốc độ")
       .appendField(new Blockly.FieldDropdown([["800", "800"], ["850", "850"], ["900", "900"], ["950", "950"], ["1000", "1000"]]), "VALUE")
       .appendField(")")
     this.setPreviousStatement(true, null);
@@ -12431,7 +12431,7 @@ Blockly.Blocks["asomecar_rightBack"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomecar.png', 23, 23, '*'))
-      .appendField("Di chuyển chéo về phía sau bên phải (Tốc độ:")
+      .appendField("Di chuyển chéo về phía sau bên phải (Tốc độ")
       .appendField(new Blockly.FieldDropdown([["800", "800"], ["850", "850"], ["900", "900"], ["950", "950"], ["1000", "1000"]]), "VALUE")
       .appendField(")")
     this.setPreviousStatement(true, null);
@@ -12453,7 +12453,7 @@ Blockly.Blocks["asomecar_leftForward"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomecar.png', 23, 23, '*'))
-      .appendField("Di chuyển chéo về phía trước bên trái (Tốc độ:")
+      .appendField("Di chuyển chéo về phía trước bên trái (Tốc độ")
       .appendField(new Blockly.FieldDropdown([["800", "800"], ["850", "850"], ["900", "900"], ["950", "950"], ["1000", "1000"]]), "VALUE")
       .appendField(")")
     this.setPreviousStatement(true, null);
@@ -12474,7 +12474,7 @@ Blockly.Blocks["asomecar_leftBack"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomecar.png', 23, 23, '*'))
-      .appendField("Di chuyển chéo về phía sau bên trái (Tốc độ:")
+      .appendField("Di chuyển chéo về phía sau bên trái (Tốc độ")
       .appendField(new Blockly.FieldDropdown([["800", "800"], ["850", "850"], ["900", "900"], ["950", "950"], ["1000", "1000"]]), "VALUE")
       .appendField(")")
     this.setPreviousStatement(true, null);
@@ -12638,7 +12638,7 @@ Blockly.Blocks["asomecar_sound_buzzer_on"] = {
 
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/asomebot/music.png', 23, 23, '*'))
-      .appendField("Bật buzzer")
+      .appendField("Bật còi buzzer")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("EC1961");
@@ -12659,7 +12659,7 @@ Blockly.Blocks["asomecar_sound_buzzer_off"] = {
 
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/images/block_icons/asomebot/music.png', 23, 23, '*'))
-      .appendField("Tắt buzzer")
+      .appendField("Tắt còi buzzer")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("EC1961");
@@ -12765,15 +12765,15 @@ Blockly.Blocks["neopixel_turnon"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
-      .appendField("Bật màu")
+      .appendField("Tại ô số")
       .appendField(new Blockly.FieldDropdown([
         ["1", "1"],["2", "2"],["3", "3"],["4", "4"],["5", "5"],["6", "6"],["7", "7"],["8", "8"]]), "variable")
-      .appendField("tại ô số")
+      .appendField("bật màu")
     this.appendDummyInput()
       .appendField(new Blockly.FieldNumber(255), "red")
       .appendField(new Blockly.FieldNumber(255), "green")
       .appendField(new Blockly.FieldNumber(255), "blue")
-      .appendField("của NeoPixel")
+      .appendField("của Neo Pixel")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF61FF");
@@ -12826,7 +12826,7 @@ Blockly.Blocks["neopixel_write"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
-      .appendField("Chuẩn bị NeoPixel")
+      .appendField("Áp dụng Neo Pixel")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF61FF");
@@ -12873,14 +12873,14 @@ Blockly.Blocks["neopixel_for_turnon"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
-      .appendField("Bật NeoPixel lần lượt màu")
+      .appendField("Bật NeoPixel theo thứ tự mỗi")
     this.appendDummyInput()
       .appendField(new Blockly.FieldNumber(1), "time")
-      .appendField("mỗi")
+      .appendField("giây màu")
       .appendField(new Blockly.FieldNumber(255), "red")
       .appendField(new Blockly.FieldNumber(255), "green")
       .appendField(new Blockly.FieldNumber(255), "blue")
-      .appendField("giây")
+      .appendField("lần lượt")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF61FF");
@@ -12907,7 +12907,7 @@ Blockly.Blocks["neopixel_rainbow"] = {
   init: function () {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomekit/led.png', 23, 23, '*'))
-      .appendField("Bật chế độ cầu vồng NeoPixel")
+      .appendField("Bật cầu vồng Neo-Pixels")
       .appendField(new Blockly.FieldNumber(750), "pin1_number")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
