@@ -213,7 +213,7 @@
           remote.dialog.showMessageBox({
             type: 'info',
             title: 'AsomeCode',
-            message: 'AsomeCode: 2.0.10(VN) version',
+            message: 'AsomeCode: 2.0.11(VN) version',
             // buttons: ['확인']
           });
           this.text = "";
