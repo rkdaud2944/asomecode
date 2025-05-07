@@ -4,6 +4,9 @@ import { app, protocol, BrowserWindow, Menu, ipcMain } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
 import path from 'path'
+// 자동 업데이트
+import { autoUpdater } from 'electron-updater'
+import log from 'electron-log'
 
 // 시리얼포트
 import { SerialPort, ReadlineParser } from 'serialport'
@@ -49,6 +52,50 @@ async function createWindow() {
 
   // 확대/축소 로직 등은 필요하면 추가
 }
+app.on('ready', async () => {
+  // 개발모드에선 Vue devtools
+  if (isDevelopment && !process.env.IS_TEST) {
+    try {
+      await installExtension(VUEJS3_DEVTOOLS)
+    } catch (e) {
+      console.error('Vue Devtools 설치 실패:', e.toString())
+    }
+  }
+
+  createWindow()
+
+  // --- 자동 업데이트 설정 시작 ---
+  if (app.isPackaged) {
+    // 로깅
+    autoUpdater.logger = log
+    autoUpdater.logger.transports.file.level = 'info'
+
+    // 업데이트 체크 & 알림
+    autoUpdater.checkForUpdatesAndNotify()
+    autoUpdater.on('checking-for-update', () => console.log('🔍 업데이트 체크 중…'))
+    autoUpdater.on('update-available', info => console.log('✅ 새 버전 발견:', info.version))
+    autoUpdater.on('update-not-available', () => console.log('ℹ️ 업데이트 없음'))
+    autoUpdater.on('error', err => console.error('❌ 업데이트 에러:', err))
+    // (선택) 이벤트 추가로 진행 상황 핸들링 가능
+    autoUpdater.on('update-available', info => {
+      log.info(`새 버전 발견: ${info.version}`)
+    })
+    autoUpdater.on('update-downloaded', () => {
+      dialog.showMessageBox(mainWindow, {
+        type: 'info',
+        buttons: ['지금 재시작','나중에'],
+        defaultId: 0,
+        message: '업데이트가 준비되었습니다. 지금 재시작할까요?'
+      }).then(({ response }) => {
+        if (response === 0) autoUpdater.quitAndInstall()
+      })
+    })
+    autoUpdater.on('error', err => {
+      log.error('업데이트 에러:', err)
+    })
+  }
+  // --- 자동 업데이트 설정 끝 ---
+})
 
 // ──────────────────────────
 // 전역 시리얼 포트
@@ -153,16 +200,6 @@ app.on('window-all-closed', () => {
 })
 app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) createWindow()
-})
-app.on('ready', async () => {
-  if (isDevelopment && !process.env.IS_TEST) {
-    try {
-      await installExtension(VUEJS3_DEVTOOLS)
-    } catch (e) {
-      console.error('Vue Devtools failed to install:', e.toString())
-    }
-  }
-  createWindow()
 })
 
 if (isDevelopment) {
