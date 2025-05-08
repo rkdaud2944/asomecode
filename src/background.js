@@ -103,7 +103,7 @@ app.on('ready', async () => {
         // createFromPath가 실패하면 isEmpty()가 true
         let robotBase64 = '';
         if (!robotImg.isEmpty()) {
-          robotBase64 = robotImg.toDataURL();           // 정상
+          robotBase64 = robotImg.toDataURL();
         } else {
           // dev 편의용: 바로 읽어 변환
           const buf = fs.readFileSync(robotPath);
@@ -116,13 +116,23 @@ app.on('ready', async () => {
         width, height, x, y,
         frame: false,
         transparent: true,
-        movable: true,
+        movable: false,
         closable: false,
         resizable: false,
-        // alwaysOnTop: true,
+        alwaysOnTop: true,
         webPreferences: { nodeIntegration: true, contextIsolation: false }
       });
     
+      overlay.setBounds(mainWindow.getBounds());
+
+      const syncBounds = () => {
+        if (!overlay.isDestroyed()) {
+          overlay.setBounds(mainWindow.getBounds());
+        }
+      };
+      mainWindow.on('move',   syncBounds);
+      mainWindow.on('resize', syncBounds);
+
       const html = `
         <!DOCTYPE html>
         <meta charset="UTF-8">

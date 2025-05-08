@@ -23,32 +23,21 @@ module.exports = defineConfig({
       builderOptions: {
         extraResources: [
           {
-            from: 'src/assets',          // 복사할 원본
-            to:   'assets',              // process.resourcesPath\assets\…
-            filter: ['**/*.{png,jpg}']   // 원하면 필터 추가
+            from: 'src/assets',
+            to:   'assets',
+            filter: ['**/*.{png,jpg}']
           }
         ],
         appId: 'com.asomecode.app',
         publish: [
-          // (1) 채널 메타데이터만 version-files/ 에
+          // 이거 npm run ebf:prod하면 aws s3의 version-files라는 폴더에 올림
           {
             provider: 's3',
             bucket: 'asomecode-dev-resource',
             region: 'ap-northeast-2',
             path: 'version-files',
-            // NOTE: 이 항목은 metadata(latest.yml)만 업로드
             publishAutoUpdate: true,  
-            // 기본값 true 이므로 생략해도 무방합니다
           },
-          // (2) 각 버전별 바이너리(exe, blockMap)만 version-files/${version}/ 에
-          // {
-          //   provider: 's3',
-          //   bucket: 'asomecode-dev-resource',
-          //   region: 'ap-northeast-2',
-          //   path: 'version-files/${version}',
-          //   // 이 설정에서는 metadata를 다시 올리지 않도록
-          //   publishAutoUpdate: false
-          // }
         ],
         win: {
           icon: 'src/assets/images/logo/asome-favicon-1024.ico'
