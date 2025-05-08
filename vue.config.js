@@ -1,3 +1,4 @@
+// vue.config.js
 const { defineConfig } = require('@vue/cli-service')
 
 module.exports = defineConfig({
@@ -18,45 +19,38 @@ module.exports = defineConfig({
         'electron-updater'
       ],
       preload: 'src/preload.js',
+      // vue.config.js 의 electronBuilder.builderOptions 안에…
       builderOptions: {
         appId: 'com.asomecode.app',
         publish: [
+          // (1) 채널 메타데이터만 version-files/ 에
           {
             provider: 's3',
             bucket: 'asomecode-dev-resource',
             region: 'ap-northeast-2',
-            path: 'version-files/${version}'
-          }
+            path: 'version-files',
+            // NOTE: 이 항목은 metadata(latest.yml)만 업로드
+            publishAutoUpdate: true,  
+            // 기본값 true 이므로 생략해도 무방합니다
+          },
+          // (2) 각 버전별 바이너리(exe, blockMap)만 version-files/${version}/ 에
+          // {
+          //   provider: 's3',
+          //   bucket: 'asomecode-dev-resource',
+          //   region: 'ap-northeast-2',
+          //   path: 'version-files/${version}',
+          //   // 이 설정에서는 metadata를 다시 올리지 않도록
+          //   publishAutoUpdate: false
+          // }
         ],
-            // 1) 앱 식별자
-            appId: 'com.asomecode.app',
-        
-            // 2) S3 publisher: 버전별 하위 폴더 자동 생성
-            publish: [
-              {
-                provider: 's3',
-                bucket: 'asomecode-dev-resource',
-                region: 'ap-northeast-2',
-                path: 'version-files/${version}'
-              }
-            ],
-        
-            // 3) 플랫폼별 빌드 타겟 & 아이콘
-            win: {
-              target: ['nsis', 'zip'],
-              icon: 'src/assets/images/logo/asome-favicon-1024.ico'
-            },
-            mac: {
-              target: ['dmg'],
-              icon: 'src/assets/images/logo/asome-favicon-1024.ico'
-            },
-            linux: {
-              target: ['AppImage'],
-              icon: 'src/assets/images/logo/asome-favicon-1024.ico'
-            }
+        win: { target: ['nsis','zip'], icon: '…/asome-favicon-1024.ico' },
+        mac: { target:['dmg'], icon: '…/asome-favicon-1024.ico' },
+        linux: { target:['AppImage'], icon: '…/asome-favicon-1024.ico' }
       }
+
     }
   },
+
   css: {
     loaderOptions: {
       scss: {
@@ -66,9 +60,11 @@ module.exports = defineConfig({
       },
     },
   },
+
   devServer: {
     client: { overlay: false }
   },
+
   configureWebpack: {
     resolve: {
       fallback: {

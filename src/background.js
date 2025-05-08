@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, protocol, BrowserWindow, Menu, ipcMain } from 'electron'
+import { app, protocol, BrowserWindow, Menu, ipcMain, dialog } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
 import path from 'path'
@@ -49,53 +49,140 @@ async function createWindow() {
   mainWindow.webContents.on('context-menu', () => {
     contextMenu.popup({ window: mainWindow })
   })
-
-  // 확대/축소 로직 등은 필요하면 추가
 }
+
 app.on('ready', async () => {
-  // 개발모드에선 Vue devtools
+  // 개발 모드에서 Vue Devtools 설치
   if (isDevelopment && !process.env.IS_TEST) {
     try {
       await installExtension(VUEJS3_DEVTOOLS)
     } catch (e) {
-      console.error('Vue Devtools 설치 실패:', e.toString())
+      console.error('Vue Devtools 설치 실패:', e)
     }
   }
-
   createWindow()
 
-  // --- 자동 업데이트 설정 시작 ---
   if (app.isPackaged) {
-    // 로깅
+    // 로깅 설정
     autoUpdater.logger = log
-    autoUpdater.logger.transports.file.level = 'info'
+    autoUpdater.logger.transports.file.level = 'debug'
 
-    // 업데이트 체크 & 알림
-    autoUpdater.checkForUpdatesAndNotify()
-    autoUpdater.on('checking-for-update', () => console.log('🔍 업데이트 체크 중…'))
-    autoUpdater.on('update-available', info => console.log('✅ 새 버전 발견:', info.version))
-    autoUpdater.on('update-not-available', () => console.log('ℹ️ 업데이트 없음'))
-    autoUpdater.on('error', err => console.error('❌ 업데이트 에러:', err))
-    // (선택) 이벤트 추가로 진행 상황 핸들링 가능
+    // 업데이트 체크 시작
+    log.info('자동 업데이트: 업데이트 확인 시작')
+    autoUpdater.checkForUpdates()
+
+    // 이벤트 핸들러
+    autoUpdater.on('checking-for-update', () => {
+      log.debug('checking-for-update 이벤트 발생')
+    })
     autoUpdater.on('update-available', info => {
-      log.info(`새 버전 발견: ${info.version}`)
+      log.info(`update-available: 새로운 버전 ${info.version} 발견`)
     })
-    autoUpdater.on('update-downloaded', () => {
-      dialog.showMessageBox(mainWindow, {
-        type: 'info',
-        buttons: ['지금 재시작','나중에'],
-        defaultId: 0,
-        message: '업데이트가 준비되었습니다. 지금 재시작할까요?'
-      }).then(({ response }) => {
-        if (response === 0) autoUpdater.quitAndInstall()
-      })
+    autoUpdater.on('update-not-available', () => {
+      log.info('update-not-available: 사용 가능한 업데이트 없음')
     })
+    autoUpdater.on('download-progress', progress => {
+      log.debug(`download-progress: ${Math.round(progress.percent)}% (${progress.transferred}/${progress.total})`)
+    })
+    autoUpdater.on('update-downloaded', info => {
+      const { width, height, x, y } = mainWindow.getBounds();
+      const overlay = new BrowserWindow({
+        parent: mainWindow,
+        modal: true,
+        width, height, x, y,
+        frame: false,
+        transparent: true,
+        movable: true,
+        closable: false,
+        resizable: false,
+        // alwaysOnTop: true,
+        webPreferences: { nodeIntegration: true, contextIsolation: false }
+      });
+    
+      const html = `
+        <!DOCTYPE html>
+        <meta charset="UTF-8">
+        <style>
+          html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; }
+          .overlay {
+            position:absolute; top:0; left:0;
+            width:100%; height:100%;
+            background: rgba(0,0,0,0.6);
+          }
+          .dialog {
+            position:absolute; top:50%; left:50%;
+            transform: translate(-50%,-50%);
+            width: 320px;
+            background: #FFFFFF;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            padding: 24px 20px;
+            font-family: 'Pretendard-Regular', sans-serif;
+            text-align: center;
+          }
+          .dialog h2 {
+            margin: 0 0 8px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #E4007F;
+          }
+          .dialog .divider {
+            width: 100%; height: 1px;
+            background: #D8D8D8;
+            margin: 16px 0;
+          }
+          .dialog p {
+            margin: 0 0 24px;
+            font-size: 14px;
+            line-height: 1.4;
+            color: #979797;
+          }
+          .btn-update {
+            width: 100%;
+            padding: 10px 0;
+            font-size: 15px;
+            font-weight: 600;
+            border: none;
+            border-radius: 6px;
+            background: #E4007F;
+            color: #FFFFFF;
+            cursor: pointer;
+            font-family: 'Pretendard-Regular', sans-serif;
+          }
+        </style>
+        <body>
+          <div class="overlay"></div>
+          <div class="dialog">
+            <h2>새 버전 ${info.version} 설치 필요</h2>
+            <div class="divider"></div>
+            <p>
+              현재 사용 중인 버전이 오래되었습니다.<br>
+              업데이트 버튼을 눌러 최신 버전을 설치하세요.
+            </p>
+            <button id="update" class="btn-update">업데이트</button>
+          </div>
+          <script>
+            const { ipcRenderer } = require('electron');
+            document.getElementById('update').onclick = () => {
+              ipcRenderer.send('install-update');
+            };
+          </script>
+        </body>
+      `;
+    
+      overlay.loadURL(`data:text/html;charset=UTF-8,${encodeURIComponent(html)}`);
+    
+      ipcMain.once('install-update', () => {
+        autoUpdater.quitAndInstall();
+      });
+    });
+    
     autoUpdater.on('error', err => {
-      log.error('업데이트 에러:', err)
+      log.error('자동 업데이트 에러:', err)
     })
   }
-  // --- 자동 업데이트 설정 끝 ---
 })
+
 
 // ──────────────────────────
 // 전역 시리얼 포트
