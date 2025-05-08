@@ -1,6 +1,6 @@
 'use strict'
-
-import { app, protocol, BrowserWindow, Menu, ipcMain, dialog } from 'electron'
+import { app, protocol, BrowserWindow, Menu, ipcMain, dialog, nativeImage } from 'electron'
+import fs from 'fs'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
 import path from 'path'
@@ -12,7 +12,15 @@ import log from 'electron-log'
 import { SerialPort, ReadlineParser } from 'serialport'
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
-
+// dev ↔ prod 모두 통하는 자산 경로 계산기
+function resolveAsset(...segments) {
+    if (isDevelopment) {
+      // dev: background.js가 dist_electron 로더 밑에 모여 있으므로 한 폴더 위로
+      return path.join(__dirname, '..', 'assets', ...segments)
+    }
+    // prod: resourcesPath(= 설치폴더\resources) 아래로 복사해 두기
+    return path.join(process.resourcesPath, 'assets', ...segments)
+  }
 // vue-cli-plugin-electron-builder 기본
 protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
@@ -85,6 +93,22 @@ app.on('ready', async () => {
       log.debug(`download-progress: ${Math.round(progress.percent)}% (${progress.transferred}/${progress.total})`)
     })
     autoUpdater.on('update-downloaded', info => {
+
+        const robotPath = resolveAsset('images', 'robot.png');
+
+        // 경로 확인용 로그 (필요하면 주석 제거)
+        console.log('Robot image path:', robotPath, fs.existsSync(robotPath));
+      
+        const robotImg = nativeImage.createFromPath(robotPath);
+        // createFromPath가 실패하면 isEmpty()가 true
+        let robotBase64 = '';
+        if (!robotImg.isEmpty()) {
+          robotBase64 = robotImg.toDataURL();           // 정상
+        } else {
+          // dev 편의용: 바로 읽어 변환
+          const buf = fs.readFileSync(robotPath);
+          robotBase64 = 'data:image/png;base64,' + buf.toString('base64');
+        }
       const { width, height, x, y } = mainWindow.getBounds();
       const overlay = new BrowserWindow({
         parent: mainWindow,
@@ -120,8 +144,9 @@ app.on('ready', async () => {
             font-family: 'Pretendard-Regular', sans-serif;
             text-align: center;
           }
+          .robot  {width:140px;height:auto;margin-bottom:16px;}
           .dialog h2 {
-            margin: 0 0 8px;
+            margin: 0 0 17px;
             font-size: 18px;
             font-weight: 600;
             color: #E4007F;
@@ -129,7 +154,7 @@ app.on('ready', async () => {
           .dialog .divider {
             width: 100%; height: 1px;
             background: #D8D8D8;
-            margin: 16px 0;
+            margin-bottom: 16px;
           }
           .dialog p {
             margin: 0 0 24px;
@@ -153,11 +178,13 @@ app.on('ready', async () => {
         <body>
           <div class="overlay"></div>
           <div class="dialog">
-            <h2>새 버전 ${info.version} 설치 필요</h2>
+            <h2>새로운 버전 (${info.version})이 출시되었어요!</h2>
+            <img class="robot" src="${robotBase64}" alt="AsomeBot">
             <div class="divider"></div>
             <p>
-              현재 사용 중인 버전이 오래되었습니다.<br>
-              업데이트 버튼을 눌러 최신 버전을 설치하세요.
+              지금 사용 중인 버전은 오래된 버전이에요.<br>
+              아래 ‘업데이트’ 버튼을 눌러 최신 기능과<br>
+              개선 사항을 만나보세요!
             </p>
             <button id="update" class="btn-update">업데이트</button>
           </div>

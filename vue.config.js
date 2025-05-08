@@ -21,6 +21,13 @@ module.exports = defineConfig({
       preload: 'src/preload.js',
       // vue.config.js 의 electronBuilder.builderOptions 안에…
       builderOptions: {
+        extraResources: [
+          {
+            from: 'src/assets',          // 복사할 원본
+            to:   'assets',              // process.resourcesPath\assets\…
+            filter: ['**/*.{png,jpg}']   // 원하면 필터 추가
+          }
+        ],
         appId: 'com.asomecode.app',
         publish: [
           // (1) 채널 메타데이터만 version-files/ 에
@@ -43,9 +50,17 @@ module.exports = defineConfig({
           //   publishAutoUpdate: false
           // }
         ],
-        win: { target: ['nsis','zip'], icon: '…/asome-favicon-1024.ico' },
-        mac: { target:['dmg'], icon: '…/asome-favicon-1024.ico' },
-        linux: { target:['AppImage'], icon: '…/asome-favicon-1024.ico' }
+        win: {
+          icon: 'src/assets/images/logo/asome-favicon-1024.ico'
+        },
+        mac: {
+          target: ['dmg'],
+          icon: 'src/assets/images/logo/asome-favicon-1024.ico'
+        },
+        linux: {
+          target: ['AppImage'],
+          icon: 'src/assets/images/logo/asome-favicon-1024.ico'
+        }
       }
 
     }

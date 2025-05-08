@@ -123,6 +123,8 @@ import servicecontrollerstep2 from "@/assets/images/servicecontrollerstep2.png";
 import servicecontrollerstep3 from "@/assets/images/servicecontrollerstep3.png";
 import servicecontrollerstep4 from "@/assets/images/servicecontrollerstep4.png";
 
+import robotdance from "@/assets/images/robot.png";
+
 
 export default {
     logom,
@@ -244,5 +246,7 @@ export default {
     servicecontrollerstep2,
     servicecontrollerstep3,
     servicecontrollerstep4,
+
+    robotdance,
 
 };
