@@ -4,7 +4,7 @@
       <img :src="logo" alt="logo" class="logo" />
     </div>
 
-    <!-- 중앙에 위치할 버튼 영역 -->
+    <!-- 중앙 버튼 -->
     <div class="control-btn-wrap">
       <span
         v-if="connectionState !== 'connected'"
@@ -14,7 +14,7 @@
         @mouseleave="onConnectBtnLeave"
       >
         <img :src="currentConnectImg" />
-        연결하기
+        {{ $t('연결하기') }}
         <span class="indicator disconnected"></span>
       </span>
 
@@ -26,7 +26,7 @@
         @mouseleave="onConnectedBtnLeave"
       >
         <img :src="currentConnectImg" />
-        연결해제
+        {{ $t('연결해제') }}
         <span class="indicator connected"></span>
       </span>
 
@@ -39,19 +39,23 @@
         @mouseup="onStopBtnHover"
       >
         <img :src="navstopImg" />
-        멈추기
+        {{ $t('멈추기') }}
       </span>
     </div>
 
+    <div class="language-switcher-wrap">
+      <LanguageSwitcher />
+    </div>
+    <!-- 네비게이션 -->
     <div class="nav">
       <span @click="goToBlockCoding" class="NotoSansKR-Regular nav-txt">
-        <a style="cursor: pointer;">블록코딩</a>
+        <a style="cursor: pointer;">{{ $t('블록코딩') }}</a>
       </span>
       <span @click="goToDownload" class="NotoSansKR-Regular nav-txt">
-        <a style="cursor: pointer;">자료실</a>
+        <a style="cursor: pointer;">{{ $t('자료실') }}</a>
       </span>
       <span @click="goToQna" class="NotoSansKR-Regular nav-txt">
-        <a style="cursor: pointer;">도움말</a>
+        <a style="cursor: pointer;">{{ $t('도움말') }}</a>
       </span>
 
       <span class="NotoSansKR-Regular hamburger-wrap nav-txt">
@@ -61,45 +65,39 @@
         <div class="dropdown-menu">
           <ul>
             <li class="menu-cts menu-title">
-              <p>MENU</p>
+              <p>{{ $t('MENU') }}</p>
             </li>
             <li class="menu-cts li-connect" @click="connect">
               <img :src="connectImg" />
-              <p>연결하기</p>
+              <p>{{ $t('연결하기') }}</p>
             </li>
             <li class="menu-cts" @click="stop">
               <img :src="stopImg" />
-              <p>멈추기</p>
+              <p>{{ $t('멈추기') }}</p>
             </li>
             <li class="menu-cts" @click="openEditor('')">
               <img :src="editorImg" />
-              <p>소스편집</p>
+              <p>{{ $t('소스편집') }}</p>
             </li>
             <li class="menu-cts" @click="reboot">
               <img :src="restartImg" />
-              <p>재부팅</p>
+              <p>{{ $t('재부팅') }}</p>
             </li>
             <li class="menu-cts" @click="format">
               <img :src="resetImg" />
-              <p>포맷</p>
+              <p>{{ $t('포맷') }}</p>
             </li>
             <li class="menu-cts" @click="openUpdateModal">
               <img :src="updateImg" />
-              <p>업데이트</p>
+              <p>{{ $t('업데이트') }}</p>
             </li>
             <li class="menu-cts" @click="installDriver">
               <img :src="settingImg" />
-              <p>드라이버 설치</p>
+              <p>{{ $t('드라이버 설치') }}</p>
             </li>
-            <!-- <li class="menu-cts" @click="goToAutomaticProgram">
-              <img :src="settingImg" />
-              <p>자동실행</p>
-            </li> -->
           </ul>
         </div>
       </span>
-
-      <div class="darken-background"></div>
     </div>
   </q-toolbar>
 
@@ -163,11 +161,16 @@ import ble from "@/globals/ble";
 import { mapState } from 'pinia';
 import { useConnectStore } from '@/store/connect-store';
 import seiral from "@/globals/serial";
+import LanguageSwitcher from '@/components/LanguageSwitcher.vue'
 
 // Electron의 shell 모듈을 불러옵니다.
 const { shell } = require('electron');
 
 export default {
+  components: {
+    // …기존 컴포넌트들…,
+    LanguageSwitcher
+  },
   mixins: [VueBase, bridgeIn],
   computed: {
     ...mapState(useConnectStore, ['mode', 'connectionState']),
@@ -852,5 +855,11 @@ export default {
 .swal-item-selected,
 .swal-item-selected * {
   color: #E4007F !important;
+}
+.language-switcher-wrap {
+  margin-left: auto;      /* 오른쪽 끝으로 배치 */
+  display: flex;
+  align-items: center;
+  padding-right: 1rem;    /* 필요에 따라 여유 공간 */
 }
 </style>

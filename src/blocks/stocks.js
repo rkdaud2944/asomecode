@@ -73,11 +73,11 @@ Blockly.Blocks["walk_step_forward"] = {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomebot/move_forward.png', 23, 23, '*'))
       .appendField(new Blockly.FieldNumber(1), "number")
-      .appendField("걸음 앞으로 걷기")
+      .appendField(Blockly.Msg.WALK_STEP_FORWARD_TITLE);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF9A00");
-    this.setTooltip("입력한 걸음 수 만큼 앞으로 걷는 블록");
+    this.setTooltip(Blockly.Msg.WALK_STEP_FORWARD_TOOLTIP);
   },
 };
 

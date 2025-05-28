@@ -6,6 +6,7 @@ import errorLog from "@/globals/error-log";
 import { Quasar } from 'quasar'
 import quasarUserOptions from './quasar-user-options'
 import store from "./store/store";
+import { i18n } from './i18n'
 
 
 const app = createApp(App)
@@ -18,7 +19,7 @@ app.config.errorHandler = (e) => {
     console.log("------->", e);
     errorLog.sendMessage(JSON.stringify(e));
 };
-
+app.use(i18n)
 // Vue.config.productionTip = false
 
 

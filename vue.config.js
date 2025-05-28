@@ -2,6 +2,16 @@
 const { defineConfig } = require('@vue/cli-service')
 
 module.exports = defineConfig({
+  chainWebpack: config => {
+    // .mjs 파일을 javascript/auto로 처리하도록 등록
+    config.module
+      .rule('mjs')
+      .test(/\.mjs$/)
+      .include
+        .add(/node_modules/)
+        .end()
+      .type('javascript/auto')
+  },
   transpileDependencies: [
     'quasar'
   ],
@@ -66,11 +76,19 @@ module.exports = defineConfig({
   },
 
   devServer: {
+    proxy: {
+      '/translate': {
+        target: 'https://libretranslate.com',
+        changeOrigin: true,
+        pathRewrite: { '^/translate': '/translate' }
+      }
+    },
     client: { overlay: false }
   },
 
   configureWebpack: {
     resolve: {
+      extensions: ['.mjs', '.js', '.jsx', '.ts', '.tsx', '.vue', '.json'],
       fallback: {
         crypto: require.resolve('crypto-browserify'),
         http: require.resolve('stream-http'),
