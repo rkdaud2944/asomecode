@@ -29,6 +29,17 @@ export const customExtensions = () => {
         },
         {
             type: 'lang',
+            regex: /\[controllerwifi\s+(.*?)\]/g, // [controllerwifi functionName:filename]
+            replace: function (match, params) {
+                const [functionName, fileName] = params.split(':').map(str => str.trim());
+                const uniqueId = Date.now();
+                const functionId = `${functionName.replaceAll(' ', '-').replaceAll("'", '').replaceAll('"', '')}-${uniqueId}`;
+                return `<button class="answer-btn" style="cursor: pointer;" onclick="contentsUploadFile('${fileName}',getCode('${functionId}'))" class="function_btn">${functionName}</button></br>` +
+                       `<div id="${functionId}" class="hidden"></div>`;
+            }
+        },
+        {
+            type: 'lang',
             regex: /\[upload\s+(.*?)\]/g, // [upload functionName:filename]
             replace: function (match, params) {
                 const [functionName, fileName] = params.split(':').map(str => str.trim());

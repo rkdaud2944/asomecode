@@ -10,15 +10,15 @@ import eventbus from "@/globals/eventbus";
 import boardFileManager from "@/globals/board-file-manager";
 
 eventbus.on("onSerialReceived", (data) => {
-    if (!data) return;
+  if (!data) return;
 
-    if (data.startsWith("### AsomeCODE.Version:")) boardUpdater.updateFile(data);
-    if (data.startsWith("### Get Remote File List")) {
-        data = data.split(":");
-        data = data[1].trim();
-        localStorage.setItem('updateMode', data);
-        boardUpdater.getRemoteFileList(data);
-    }
+  if (data.startsWith("### AsomeCODE.Version:")) boardUpdater.updateFile(data);
+  if (data.startsWith("### Get Remote File List")) {
+    data = data.split(":");
+    data = data[1].trim();
+    localStorage.setItem('updateMode', data);
+    boardUpdater.getRemoteFileList(data);
+  }
 });
 
 let versions = [];
@@ -30,61 +30,71 @@ let tobeDowndloads = [];
  * 업데이트 대상의 파일을 찾아내고, 실제 업데이트는 BoardFileManager에게 위임한다.
  */
 const boardUpdater = {
-    async start(mode) {
-        await serial.runCode(codeGetVersion);
-        serial.writeLn(`print("### Get Remote File List: ${mode}")`);
-    },
+  async start(mode) {
+    eventbus.emit("onUpdateStart");
+    await serial.runCode(codeGetVersion);
+    serial.writeLn(`print("### Get Remote File List: ${mode}")`);
+  },
 
-    async getRemoteFileList(data) {
-        versions = [];
-        filenameQue = [];
-        tobeDowndloads = [];
-        const remoteVersions = await getRemoteFileList(data);
-        for (const filename in remoteVersions) {
-            const fileInfo = remoteVersions[filename];
-            versions.push(`${filename}=${fileInfo.Version}`);
-            filenameQue.push(filename);
-        }
-        this.nextFile();
-    },
+  async getRemoteFileList(data) {
+    versions = [];
+    filenameQue = [];
+    tobeDowndloads = [];
+    const remoteVersions = await getRemoteFileList(data);
+    for (const filename in remoteVersions) {
+      const fileInfo = remoteVersions[filename];
+      versions.push(`${filename}=${fileInfo.Version}`);
+      filenameQue.push(filename);
+    }
 
-    updateFile(verInfo) {
-        try {
-            verInfo = verInfo.split(":");
-            verInfo = verInfo[1].trim();
-        } catch (error) {
-            console.log(error);
-            return;
-        }
-        if (!versions.includes(verInfo)) tobeDowndloads.push(verInfo.split("=")[0]);
-        this.nextFile();
-    },
+    this.nextFile();
+  },
 
-    nextFile() {
-        if (filenameQue.length == 0) {
-            boardFileManager.download(tobeDowndloads);
-            return;
-        }
+  updateFile(verInfo) {
+    try {
+      verInfo = verInfo.split(":");
+      verInfo = verInfo[1].trim();
+    } catch (error) {
+      console.log(error);
+      return;
+    }
+    if (!versions.includes(verInfo)) {
+      tobeDowndloads.push(verInfo.split("=")[0]);
+    }
 
-        const filename = filenameQue.shift();
-        getFileVersion(filename);
-    },
+    this.nextFile();
+  },
+
+  nextFile() {
+    if (filenameQue.length == 0) {
+      if (tobeDowndloads.length > 0) {
+        boardFileManager.download(tobeDowndloads);
+      } else {
+        serial.reboot();
+        eventbus.emit("onUpdateComplete");
+      }
+      return;
+    }
+
+    const filename = filenameQue.shift();
+    getFileVersion(filename);
+  },
 };
 
 export default boardUpdater;
 
 async function getRemoteFileList(data) {
-    try {
-        const response = await axios.request(config.pythonUrl(data) + "versions.json");
-        return response.data;
-    } catch (error) {
-        console.log(error);
-    }
-    return {};
+  try {
+    const response = await axios.get(config.pythonUrl(data) + "versions.json");
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+  return {};
 }
 
 function getFileVersion(filename) {
-    serial.writeLn(`getVersion("${filename}")`);
+  serial.writeLn(`getVersion("${filename}")`);
 }
 
 const codeGetVersion = `

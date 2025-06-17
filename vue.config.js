@@ -1,58 +1,110 @@
+// vue.config.js
 const { defineConfig } = require('@vue/cli-service')
 
 module.exports = defineConfig({
-    transpileDependencies: [
-        'quasar'
-    ],
+  chainWebpack: config => {
+    // .mjs 파일을 javascript/auto로 처리하도록 등록
+    config.module
+      .rule('mjs')
+      .test(/\.mjs$/)
+      .include
+        .add(/node_modules/)
+        .end()
+      .type('javascript/auto')
+  },
+  transpileDependencies: [
+    'quasar'
+  ],
 
-    pluginOptions: {
-        quasar: {
-            importStrategy: 'kebab',
-            rtlSupport: false
+  pluginOptions: {
+    quasar: {
+      importStrategy: 'kebab',
+      rtlSupport: false
+    },
+    electronBuilder: {
+      nodeIntegration: true,
+      externals: [
+        'serialport',
+        'electron-log',
+        'electron-updater'
+      ],
+      preload: 'src/preload.js',
+      // vue.config.js 의 electronBuilder.builderOptions 안에…
+      builderOptions: {
+        extraResources: [
+          {
+            from: 'src/assets',
+            to:   'assets',
+            filter: ['**/*.{png,jpg}']
+          }
+        ],
+        appId: 'com.asomecode.app',
+        publish: [
+          // 이거 npm run ebf:prod하면 aws s3의 version-files라는 폴더에 올림
+          {
+            provider: 's3',
+            bucket: 'asomecode-dev-resource',
+            region: 'ap-northeast-2',
+            path: 'version-files',
+            publishAutoUpdate: true,  
+          },
+        ],
+        win: {
+          icon: 'src/assets/images/logo/asome-favicon-1024.ico'
         },
-        electronBuilder: {
-            nodeIntegration: true,
-            externals: ['serialport'],
-            preload: 'src/preload.js',
-            builderOptions: {
-                win: {
-                    icon: 'src/assets/images/logo/asome-favicon-1024.ico'
-                }
-            }
-        }
-    },
-    css: {
-        loaderOptions: {
-            scss: {
-            // 이 옵션에 변수를 모아둔 파일을 연결한다.
-            additionalData: `
-                @import "@/assets/css/_variabled.scss";
-                    `,
-            },
+        mac: {
+          target: ['dmg'],
+          icon: 'src/assets/images/logo/asome-favicon-1024.ico'
         },
-    },
-    devServer: {
-        client:{overlay : false}
-    },
-    
-    configureWebpack: {
-        resolve: {
-            fallback: {
-                crypto: require.resolve('crypto-browserify'),
-                http: require.resolve('stream-http'),
-                https: require.resolve('https-browserify'),
-                zlib: require.resolve('browserify-zlib'),
-                stream: require.resolve('stream-browserify'),
-                buffer: require.resolve('buffer/'),
-                util: require.resolve('util/'),
-                os: require.resolve('os-browserify/browser'),
-                path: require.resolve('path-browserify'),
-                fs: false,  // fs는 브라우저에서 사용 불가능
-                child_process: false,  // child_process는 브라우저에서 사용 불가능
-                net: false, // net는 브라우저에서 사용할 수 없습니다.
-                tls: false, // tls도 마찬가지입니다.
-                serialport: false,
-            }
+        linux: {
+          target: ['AppImage'],
+          icon: 'src/assets/images/logo/asome-favicon-1024.ico'
         }
+      }
+
     }
+  },
+
+  css: {
+    loaderOptions: {
+      scss: {
+        additionalData: `
+          @import "@/assets/css/_variabled.scss";
+        `,
+      },
+    },
+  },
+
+  devServer: {
+    proxy: {
+      '/translate': {
+        target: 'https://libretranslate.com',
+        changeOrigin: true,
+        pathRewrite: { '^/translate': '/translate' }
+      }
+    },
+    client: { overlay: false }
+  },
+
+  configureWebpack: {
+    resolve: {
+      extensions: ['.mjs', '.js', '.jsx', '.ts', '.tsx', '.vue', '.json'],
+      fallback: {
+        crypto: require.resolve('crypto-browserify'),
+        http: require.resolve('stream-http'),
+        https: require.resolve('https-browserify'),
+        zlib: require.resolve('browserify-zlib'),
+        stream: require.resolve('stream-browserify'),
+        buffer: require.resolve('buffer/'),
+        util: require.resolve('util/'),
+        os: require.resolve('os-browserify/browser'),
+        path: require.resolve('path-browserify'),
+        fs: false,
+        child_process: false,
+        net: false,
+        tls: false,
+        serialport: false,
+      }
+    }
+  }
 })
