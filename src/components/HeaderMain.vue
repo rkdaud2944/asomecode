@@ -103,11 +103,11 @@
 
   <!-- BLE 스캔 버튼 및 모달 -->
   <div>
-    <button @click="startScan">BLE 스캔 시작</button>
+    <button @click="startScan">{{ $t('BLE 스캔 시작') }}</button>
 
     <div v-if="showModal" class="ble-modal Pretendard-Medium">
       <div class="ble-modal-content">
-        <h6>기기를 선택하세요</h6>
+        <h6>{{ $t('기기를 선택하세요') }}</h6>
         <select v-model="selectedDevice">
           <option
             v-for="device in bleDevices"
@@ -118,18 +118,17 @@
           </option>
         </select>
         <div class="ble-modal-actions">
-          <button @click="cancelScan">취소</button>
-          <button @click="selectDevice">연결</button>
+          <button @click="cancelScan">{{ $t('취소') }}</button>
+          <button @click="selectDevice">{{ $t('연결') }}</button>
         </div>
       </div>
     </div>
   </div>
 
-  
   <div v-if="isUpdating" class="update-modal">
     <div class="update-modal-content">
       <!-- 상단 제목 -->
-      <h2 class="update-title" style="font-family: 'Pretendard-Regular';">업데이트 진행 중</h2>
+      <h2 class="update-title" style="font-family: 'Pretendard-Regular';">{{ $t('업데이트 진행 중') }}</h2>
       
       <div style="width: 80%; border-bottom: 1px solid #D8D8D8; margin: 16px 0; text-align: center; display: block; margin-left: auto; margin-right: auto;"></div>
       <!-- 구분선 -->
@@ -140,8 +139,8 @@
       </div>
       <!-- 안내 문구 -->
       <p class="update-desc" style="font-family: 'Pretendard-Regular';">
-        업데이트를 진행합니다.<br />
-        잠시만 기다려주세요.
+        {{ $t('업데이트를 진행합니다') }}<br />
+        {{ $t('잠시만 기다려주세요') }}
       </p>
     </div>
   </div>
@@ -168,7 +167,6 @@ const { shell } = require('electron');
 
 export default {
   components: {
-    // …기존 컴포넌트들…,
     LanguageSwitcher
   },
   mixins: [VueBase, bridgeIn],
@@ -232,11 +230,11 @@ export default {
     });
     eventbus.on("onSerialClosed", () => {
       this.btConnectColor = "grey";
-      this.$q.notify('어썸보드 연결이 끊어졌습니다.');
+      this.$q.notify(this.$t('어썸보드 연결이 끊어졌습니다'));
     });
     eventbus.on("onSerialpp", () => {
       this.btConnectColor = "grey";
-      this.$q.notify('어썸보드가 다른곳에 연결되어있습니다 다시 연결해주세요.');
+      this.$q.notify(this.$t('어썸보드가 다른곳에 연결되어있습니다 다시 연결해주세요'));
     });
 
     eventbus.on('simulationOpen', (path) => {
@@ -250,33 +248,33 @@ export default {
 
     eventbus.on("onBleScanStart", () => {
       this.btConnectColor = "primary";
-      this.$q.notify('BLE 스캔이 시작되었습니다.');
+      this.$q.notify(this.$t('BLE 스캔이 시작되었습니다'));
     });
 
     eventbus.on("onBleScanStopped", () => {
       this.btConnectColor = "grey";
-      this.$q.notify('BLE 스캔이 중지되었습니다.');
+      this.$q.notify(this.$t('BLE 스캔이 중지되었습니다'));
     });
 
     eventbus.on("onBleConnected", () => {
       this.btConnectColor = "primary";
-      this.$q.notify('무선 연결이 완료되었습니다.');
+      this.$q.notify(this.$t('무선 연결이 완료되었습니다'));
       this.showModal = false;
     });
 
     eventbus.on("bleDisconnect", () => {
       this.btConnectColor = "grey";
-      this.$q.notify('무선 연결이 끊어졌습니다.');
+      this.$q.notify(this.$t('무선 연결이 끊어졌습니다'));
     });
 
     eventbus.on("onBleConnectError", (error) => {
       this.btConnectColor = "grey";
-      this.$q.notify('연결 실패 : ' + error);
+      this.$q.notify(this.$t('연결 실패') + ' : ' + error);
     });
 
     eventbus.on("bleSendDataError", (error) => {
       this.btConnectColor = "grey";
-      this.$q.notify('데이터 전송 실패 : ' + error);
+      this.$q.notify(this.$t('데이터 전송 실패') + ' : ' + error);
     });
 
     window.addEventListener("message", (event) => {
@@ -350,15 +348,15 @@ export default {
       if (this.connectionState !== 'connected') {
         Swal.fire({
           icon: undefined,
-          html: `<h2 style="font-size: 18px; font-weight: 600; color: #E4007F; margin-bottom: 10px; font-family: 'Pretendard-Regular';">업데이트할 교구를 연결하세요.</h2>
+          html: `<h2 style="font-size: 18px; font-weight: 600; color: #E4007F; margin-bottom: 10px; font-family: 'Pretendard-Regular';">${this.$t('업데이트할 교구를 연결하세요')}</h2>
                  <div style="width: 100%; border-bottom: 1px solid #D8D8D8; margin: 16px 0;"></div>
                  <p style="color: #979797; line-height: 1.4; margin-bottom: 24px; font-size: 14px; font-family: 'Pretendard-Regular';">
-                   교구가 연결되어 있지 않습니다.<br/>업데이트를 진행하려면 교구를 연결해주세요.
+                   ${this.$t('교구가 연결되어 있지 않습니다')}<br/>${this.$t('업데이트를 진행하려면 교구를 연결해주세요')}
                  </p>`,
           showConfirmButton: true,
-          confirmButtonText: '연결하기',
+          confirmButtonText: this.$t('연결하기'),
           showCancelButton: true,
-          cancelButtonText: '닫기',
+          cancelButtonText: this.$t('닫기'),
           buttonsStyling: false,
           customClass: {
             popup: 'swal-custom-popup',
@@ -376,11 +374,11 @@ export default {
         Swal.fire({
           width: 560,
           title: '',
-          html: `<h2 style="font-family: 'Pretendard-Regular'; font-size: 18px; font-weight: 600; color: #E4007F; margin: 0 0 10px 0;">업데이트할 교구를 선택하세요.</h2>
+          html: `<h2 style="font-family: 'Pretendard-Regular'; font-size: 18px; font-weight: 600; color: #E4007F; margin: 0 0 10px 0;">${this.$t('업데이트할 교구를 선택하세요')}</h2>
                  <div style="width: 100%; border-bottom: 1px solid #D8D8D8; margin: 16px 0;"></div>
                  <div style="margin-bottom: 16px; display: flex; justify-content: center;">
                    <div style="position: relative; width: 60%; max-width: 280px;">
-                     <input id="searchInput" type="text" placeholder="교구명, 프로젝트명 검색" style="font-family: 'Pretendard-Regular'; width: 100%; box-sizing: border-box; padding: 8px 36px 8px 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px;" />
+                     <input id="searchInput" type="text" placeholder="${this.$t('교구명, 프로젝트명 검색')}" style="font-family: 'Pretendard-Regular'; width: 100%; box-sizing: border-box; padding: 8px 36px 8px 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px;" />
                      <img src="https://cdn-icons-png.flaticon.com/512/49/49116.png" alt="search" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; opacity: 0.6;" />
                    </div>
                  </div>
@@ -389,21 +387,21 @@ export default {
                      <img src="${this.asomebotBtnImg}" alt="asomebot" style="width: 36px; height: 36px;" />
                      <div style="margin-left: 10px; display: flex; flex-direction: column;">
                        <div style="font-family: 'Pretendard-Regular'; font-size: 12px; color: #979797;">AsomeIT</div>
-                       <div style="font-family: 'Pretendard-Regular'; font-size: 14px; color: #4F4F53;">어썸봇</div>
+                       <div style="font-family: 'Pretendard-Regular'; font-size: 14px; color: #4F4F53;">${this.$t('어썸봇')}</div>
                      </div>
                    </div>
                    <div id="btnAsomeKit" class="swal-update-item" style="border: 1px solid #D8D8D8; border-radius: 8px; width: 180px; height: 60px; display: flex; align-items: center; padding: 8px 10px; cursor: pointer;">
                      <img src="${this.asomekitBtnImg}" alt="asomekit" style="width: 36px; height: 36px;" />
                      <div style="margin-left: 10px; display: flex; flex-direction: column;">
                        <div style="font-family: 'Pretendard-Regular'; font-size: 12px; color: #979797;">AsomeIT</div>
-                       <div style="font-family: 'Pretendard-Regular'; font-size: 14px; color: #4F4F53;">어썸키트</div>
+                       <div style="font-family: 'Pretendard-Regular'; font-size: 14px; color: #4F4F53;">${this.$t('어썸키트')}</div>
                      </div>
                    </div>
                  </div>`,
           showCancelButton: true,
           showConfirmButton: true,
-          confirmButtonText: '진행하기',
-          cancelButtonText: '닫기',
+          confirmButtonText: this.$t('진행하기'),
+          cancelButtonText: this.$t('닫기'),
           buttonsStyling: false,
           customClass: {
             popup: 'swal-update-popup',
@@ -445,8 +443,8 @@ export default {
             if (!selectedTool) {
               Swal.fire({
                 icon: 'warning',
-                text: '교구를 선택해주세요.',
-                confirmButtonText: '확인',
+                text: this.$t('교구를 선택해주세요'),
+                confirmButtonText: this.$t('확인'),
                 buttonsStyling: false,
                 customClass: {
                   popup: 'swal-custom-popup',
@@ -541,14 +539,14 @@ export default {
       this.isUpdating = false;
       this.$q.notify({
         type: 'positive',
-        message: '업데이트가 완료되었습니다.',
+        message: this.$t('업데이트가 완료되었습니다'),
       });
     },
     cancelUpdate() {
       this.isUpdating = false;
       this.$q.notify({
         type: 'warning',
-        message: '업데이트가 취소되었습니다.',
+        message: this.$t('업데이트가 취소되었습니다'),
       });
     },
   },
