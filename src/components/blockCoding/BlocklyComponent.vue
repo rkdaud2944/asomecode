@@ -10,8 +10,13 @@
  * @author dcoodien@gmail.com (Dylan Coodien)
  */
 
-import { onMounted, ref, shallowRef, defineProps, defineExpose } from "vue";
 import Blockly from "blockly";
+ import { onMounted, ref, shallowRef, defineProps, defineExpose, watch } from "vue";
+ import { useI18n } from "vue-i18n";
+ import enLocale from "blockly/msg/en";
+ import koLocale from "blockly/msg/ko";
+  const { locale } = useI18n();
+ const localeMap = { en: enLocale, ko: koLocale };
 
 
 // import BlocklyComponent from "./components/BlocklyComponent.vue";
@@ -27,6 +32,7 @@ const workspace = shallowRef();
 defineExpose({ workspace });
 
 onMounted(() => {
+  Blockly.setLocale(localeMap[locale.value] || enLocale);
   const options = props.options || {};
   if (!options.toolbox) {
     options.toolbox = blocklyToolbox.value;
@@ -85,6 +91,24 @@ const options = {
 };
 
 const showCode = () => (code.value = javascriptGenerator.workspaceToCode(foo.value.workspace));
+// 언어 드롭다운이 바뀔 때 워크스페이스 통째로 재주입
+watch(locale, (lang) => {
+  if (!workspace.value) return;
+
+  const xmlText = Blockly.Xml.domToText(
+    Blockly.Xml.workspaceToDom(workspace.value)
+  );
+  workspace.value.dispose();
+
+  Blockly.setLocale(localeMap[lang] || enLocale);
+  workspace.value = Blockly.inject(blocklyDiv.value, props.options || {});
+
+  Blockly.Xml.domToWorkspace(
+    Blockly.Xml.textToDom(xmlText),
+    workspace.value
+  );
+});
+
 </script>
 
 <template>

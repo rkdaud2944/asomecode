@@ -1,253 +1,416 @@
 <template>
-    <div class="main-wrap">
-        <div class="main-mid">
-            <div>
-                <h3 class="Pretendard-ExtraBold">AsomeIT</h3>
-                <p class="Pretendard-Regular">어썸코드는 어썸아이티만의 코딩 학습 전용 프로그램입니다.</p>
-            </div>
-        </div>
-        <div class="main-cts-wrap">
-            <div class="main-cts">
-                <div > 
-                    <!-- 여기는 원래 위에 main-mid가 217이어야 하는데 이부분 때문에 177로함, 폰트사이즈 20 상하 여백 10 -->
-                    <div class="curriculum-title Pretendard-Medium">Curriculum</div>
-                    <div class="curriculum">
-                        <div class="card-wrap"
-                            v-for="(card, index) in cards"
-                            :key="index"
-                            @mousedown="clicked = true"
-                            @mouseup ="clicked = false"
-                        >
-                            <div class="card" @click="goSelectCurriculum(card.id, card.title)">
-                                <div class="card-front"
-                                    :style="{ 
-                                        'background': card.bgColor,
-                                        'color': hoverIndex === index ? card.hoverTxtAge : '#000',
-                                        transition: 'background-color 0.5s ease, color 0.5s ease',
-                                        'backgroundImage': `url(${card.image})`
-                                }">
-                                    <p class="age NotoSansKR-Regular"
-                                        :style="{'color': card.txtAge,
-                                        'border': `1px solid ${card.txtAge}`
-                                    }">
-                                        {{ card.age }}
-                                    </p>
-                                    <h4 class="title Pretendard-ExtraBold">{{ card.title }}</h4>
-                                    <p class="description Pretendard-Regular">{{ card.description }}</p>
-                                    <div class="home-chapter Pretendard-Regular" 
-                                        :style="{
-                                            'color': card.txtChapter,
-                                            'background-color': card.bgChapter,
-                                    }">
-                                        {{ card.chapter }}
-                                    </div>
-                                </div>
-
-                                <!-- hover -->
-                                <div class="card-back"
-                                    :style="{ 
-                                        'background': clicked === true ? card.clickBgColor : card.hoverBgColor,
-                                        'color': hoverIndex === index ? card.hoverTxtAge : '#000',
-                                        transition: 'background-color 0.5s ease, color 0.5s ease',
-                                        'backgroundImage': `url(${card.hoverImage})`
-                                }">
-                                    <p class="age NotoSansKR-Regular"
-                                        :style="{'color': clicked === true ? card.clickTxtAge : card.hoverTxtAge,
-                                        'border': `1px solid ${clicked === true ? card.clickTxtAge : card.hoverTxtAge}`
-                                    }">
-                                        {{ card.age }}
-                                    </p>
-                                    <h4 class="title Pretendard-ExtraBold"
-                                        :style="{
-                                            'color': clicked === true ? card.clickTxtTitle : card.hoverTxtTitle,
-                                            'text-shadow': '2px 2px 2px gray',
-                                            'opacity': clicked === true ? '0.5' : '1',
-                                        }
-                                        ">
-                                        {{ card.title }}
-                                    </h4>
-                                    <p class="description Pretendard-Regular">{{ card.description }}</p>
-                                    <div class="home-chapter Pretendard-Regular" 
-                                        :style="{
-                                            'color': card.hoverTxtChapter,
-                                            'background-color': card.hoverBgChapter,
-                                    }">
-                                        {{ card.chapter }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="tip-title Pretendard-Medium">TIP</div>
-                    <div class="tip-wrap">
-                        <div class="tip" 
-                        v-for="(card, index) in tipCards"
-                        :key="index"
-                        @mousedown="clickedStates[index] = true"
-                        @mouseup="clickedStates[index] = false"
-                        @mouseover="hoveredStates[index] = true"
-                        @mouseleave="hoveredStates[index] = false; clickedStates[index] = false"
-                        @click="openLink(card.href)"
-                        >
-                        <div class="tip-link" :style="{'text-decoration': 'none'}">
-                            <div :class="`tip-box box${index+1}`"
-                                :style="tipComputeStyle(card, index)">
-                                <div>
-                                    <p class="NotoSansKR-Regular p1">{{card.title}}</p>
-                                    <p class="Pretendard-Regular p2">{{card.description}}</p>
-                                </div>
-                                <div>
-                                    <img :src="card.image"/>
-                                </div>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="main-wrap">
+    <div class="main-mid">
+      <div>
+        <h3 class="Pretendard-ExtraBold">AsomeIT</h3>
+        <p class="Pretendard-Regular">
+          {{ $t('어썸코드는 어썸아이티만의 코딩 학습 전용 프로그램입니다.') }}
+        </p>
+      </div>
     </div>
+    <div class="main-cts-wrap">
+      <div class="main-cts">
+        <div>
+          <div class="curriculum-title Pretendard-Medium">Curriculum</div>
+          <div class="curriculum">
+            <div
+              class="card-wrap"
+              v-for="(card, index) in cards"
+              :key="card.id"
+              @mousedown="clicked = true"
+              @mouseup="clicked = false"
+              @mouseenter="hoverIndex = index"
+              @mouseleave="hoverIndex = null"
+            >
+              <div class="card" @click="goSelectCurriculum(card.id, card.title)">
+                <!-- Front Card -->
+                <div
+                  class="card-front"
+                  :style="{
+                    background: card.bgColor,
+                    color: hoverIndex === index ? card.hoverTxtAge : '#000',
+                    'background-image': `url(${card.image})`,
+                    transition: 'background-color 0.5s, color 0.5s'
+                  }"
+                >
+                  <p
+                    class="age NotoSansKR-Regular"
+                    :style="{ color: card.txtAge, border: `1px solid ${card.txtAge}` }"
+                  >
+                    {{ card.age }}
+                  </p>
+                  <h4 class="title Pretendard-ExtraBold">{{ card.title }}</h4>
+                  <p class="description Pretendard-Regular">{{ card.description }}</p>
+                  
+                  <!-- 📍 핵심: 언어별 반응형 Chapter 스타일 -->
+                  <div
+                    class="home-chapter Pretendard-Regular"
+                    :class="getChapterClass(card.chapter)"
+                    :style="chapterStyle(card)"
+                  >
+                    {{ card.chapter }}
+                  </div>
+                </div>
+                
+                <!-- Back Card -->
+                <div
+                  class="card-back"
+                  :style="{
+                    background: clicked ? card.clickBgColor : card.hoverBgColor,
+                    color: hoverIndex === index ? card.hoverTxtAge : '#000',
+                    'background-image': `url(${card.hoverImage})`,
+                    transition: 'background-color 0.5s, color 0.5s'
+                  }"
+                >
+                  <p
+                    class="age NotoSansKR-Regular"
+                    :style="{
+                      color: clicked ? card.clickTxtAge : card.hoverTxtAge,
+                      border: `1px solid ${clicked ? card.clickTxtAge : card.hoverTxtAge}`
+                    }"
+                  >
+                    {{ card.age }}
+                  </p>
+                  <h4
+                    class="title Pretendard-ExtraBold"
+                    :style="{
+                      color: clicked ? card.clickTxtTitle : card.hoverTxtTitle,
+                      textShadow: '2px 2px 2px gray',
+                      opacity: clicked ? 0.5 : 1
+                    }"
+                  >
+                    {{ card.title }}
+                  </h4>
+                  <p class="description Pretendard-Regular">{{ card.description }}</p>
+                  
+                  <!-- 📍 핵심: 언어별 반응형 Chapter 스타일 (Hover) -->
+                  <div
+                    class="home-chapter Pretendard-Regular"
+                    :class="getChapterClass(card.chapter)"
+                    :style="chapterHoverStyle(card)"
+                  >
+                    {{ card.chapter }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="tip-title Pretendard-Medium" style="visibility: hidden;">TIP</div>
+          <div class="tip-wrap">
+            <div
+              class="tip"
+              v-for="(card, index) in tipCards"
+              :key="index"
+              @mousedown="clickedStates[index] = true"
+              @mouseup="clickedStates[index] = false"
+              @mouseover="hoveredStates[index] = true"
+              @mouseleave="() => { hoveredStates[index] = false; clickedStates[index] = false }"
+              @click="openLink(card.href)"
+            >
+              <div class="tip-link" style="text-decoration: none">
+                <div
+                  :class="`tip-box box${index + 1}`"
+                  :style="tipComputeStyle(card, index)"
+                >
+                  <div>
+                    <!-- 📍 번역 함수 적용 -->
+                    <p class="NotoSansKR-Regular p1">{{ $t(card.titleKey) }}</p>
+                    <p class="Pretendard-Regular p2">{{ $t(card.descriptionKey) }}</p>
+                  </div>
+                  <div>
+                    <img :src="card.image" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import images from "@/assets/images"; 
-import apiSubjectSet from "@/api/subjectSet";
-// import Subject from '@/components/SubjectComponent.vue'
-import { cards } from "@/data/main-cards";
-import { tipCards } from "@/data/main-tip-cards";
+import { useI18n } from 'vue-i18n'
+import apiSubjectSet from '@/api/subjectSet'
+import { rawCards } from '@/data/main-cards'
+import { tipCards } from '@/data/main-tip-cards'
+const { shell } = require('electron')
 
 export default {
-    components: {
-        // Subject,
-    },
+  name: 'HomeView',
+  
+  setup() {
+    const { t, locale } = useI18n()
+    const selectedSubjectSetId = localStorage.getItem('selectedSubjectSetId')
+    return { t, locale, selectedSubjectSetId }
+  },
 
-    setup() {
-        return {
-            selectedSubjectSetId: localStorage.getItem('selectedSubjectSetId'),
-        }
-    },
-
-    data() {
-        return {
-            subjects: {},
-            isMouseOverNotice: false,
-            isMouseOverCommunity: false,
-            isMouseOverLibrary: false,
-            isMouseOverFaq: false,
-            logo2: images.logo2,
-            notice: images.notice,
-            noticeHover: images.noticeHover,
-            community: images.community,
-            communityHover: images.communityHover,
-            library: images.library,
-            libraryHover: images.libraryHover,
-            faq: images.faq,
-            faqHover: images.faqHover,
-            asomeitQuestionMark: images.asomeitQuestionMark,
-
-            
-            cards: cards,
-            tipCards: tipCards,
-            // tipCards: this.tipCards.map(card => ({ ...card, hovered: false })),
-            // hovered: false,
-            hoveredStates: {},
-            clickedStates: {},
-            clicked: false, // 클릭 상태 초기화
-            
-        }
-    },
-    computed: {
-        noticeImage() {
-            return this.isMouseOverNotice ? this.noticeHover : this.notice;
-        },
-        communityImage() {
-            return this.isMouseOverCommunity ? this.communityHover : this.community;
-        },
-        libraryImage() {
-            return this.isMouseOverLibrary ? this.libraryHover : this.library;
-        },
-        faqImage() {
-            return this.isMouseOverFaq ? this.faqHover : this.faq;
-        }
-    },
-
-    mounted() {
-        this.getSubjectSet()
-        window.addEventListener('mouseup', this.globalMouseUpHandler);
-    },
-
-    beforeUnmount() {
-        window.removeEventListener('mouseup', this.globalMouseUpHandler);
-    },
-
-    methods: {
-        onMouseOver(type) {
-            if(type === 'notice') this.isMouseOverNotice = true;
-            if(type === 'community') this.isMouseOverCommunity = true;
-            if(type === 'library') this.isMouseOverLibrary = true;
-            if(type === 'faq') this.isMouseOverFaq = true;
-        },
-
-        onMouseLeave(type) {
-            if(type === 'notice') this.isMouseOverNotice = false;
-            if(type === 'community') this.isMouseOverCommunity = false;
-            if(type === 'library') this.isMouseOverLibrary = false;
-            if(type === 'faq') this.isMouseOverFaq = false;
-        },
-        onClickNotice() {
-            this.$router.push({ path: '/notice/list'});
-        },
-
-        getSubjectSet() {
-            apiSubjectSet.getSubjectSet(this.selectedSubjectSetId)
-                .then((response) => {
-                    this.subjects = response.data.subjects
-                })
-                .catch(this.showError);
-        },
-        tipComputeStyle(card, index) {
-            // 클릭
-            if (this.clickedStates[index]) {
-                return { background: card.clickBgColor,
-                    color: card.clickTxtColor,};
-            } 
-            // 호버
-            else if (this.hoveredStates[index]) {
-                return { background: card.hoverBgColor,
-                    color: card.hoverTxtColor,};
-            } 
-            // 기본
-            else {
-                return { background: card.bgColor,
-                    color: card.txtColor,};
-            }
-        },
-
-        goSelectCurriculum(id, title){
-            this.$router.push({ 
-                path: `/curriculum`,
-                query:{id: `${id}`,title: `${title}`}
-            });
-        },
-        
-        globalMouseUpHandler() {
-            if (this.clicked) this.clicked = false;
-        },
-
-        openLink(url) {
-            window.open(url, '_blank');
-        },
+  data() {
+    return {
+      hoverIndex: null,
+      subjects: {},
+      tipCards,
+      hoveredStates: {},
+      clickedStates: {},
+      clicked: false,
     }
+  },
+
+  computed: {
+    // 📍 번역된 카드 데이터
+    cards() {
+      return rawCards.map(c => ({
+        ...c,
+        age: this.t(c.ageKey),
+        title: this.t(c.titleKey),
+        description: this.t(c.descriptionKey),
+        chapter: this.t(c.chapterKey)
+      }))
+    },
+
+    // 📍 현재 언어 확인
+    currentLanguage() {
+      return this.locale
+    }
+  },
+
+  mounted() {
+    this.getSubjectSet()
+    window.addEventListener('mouseup', this.globalMouseUpHandler)
+    
+
+    window.addEventListener('language-changed', this.handleLanguageChange)
+    
+    this.$nextTick(() => {
+      this.stabilizeChapterLayout()
+    })
+    const debugMode = localStorage.getItem('awesome-debug-mode') === 'true'
+    if (debugMode && process.env.NODE_ENV === 'development') {
+      document.documentElement.setAttribute('data-debug', 'true')
+      console.log('🔧 디버그 모드 활성화됨')
+    } else {
+      document.documentElement.removeAttribute('data-debug')
+    }
+  },
+
+  beforeUnmount() {
+    window.removeEventListener('mouseup', this.globalMouseUpHandler)
+    window.removeEventListener('language-changed', this.handleLanguageChange)
+  },
+
+  methods: {
+    // 📍 핵심: Chapter 텍스트 길이에 따른 CSS 클래스 반환 (개선)
+    getChapterClass(chapterText) {
+      const textLength = chapterText.length
+      const currentLang = this.currentLanguage
+      
+      // 언어별 길이 기준 설정 (여유도 증가)
+      const lengthThresholds = {
+        ko: { short: 3, medium: 5 },      
+        en: { short: 10, medium: 16 },    // 9→10, 14→16 (여유 증가)
+        vi: { short: 12, medium: 18 }     // 11→12, 17→18 (여유 증가)
+      }
+      
+      const thresholds = lengthThresholds[currentLang] || lengthThresholds.ko
+      
+      if (textLength <= thresholds.short) {
+        return 'chapter-short'
+      } else if (textLength <= thresholds.medium) {
+        return 'chapter-medium'
+      } else {
+        return 'chapter-long'
+      }
+    },
+
+    // 📍 동적 Chapter 스타일 (일반) - 높이 고정 추가
+    chapterStyle(card) {
+      return {
+        color: card.txtChapter,
+        backgroundColor: card.bgChapter,
+        // 🔧 언어별 추가 스타일 + 높이 고정
+        ...this.getLanguageSpecificChapterStyle(),
+        // 🔧 높이 확장 방지를 위한 추가 속성
+        boxSizing: 'border-box',
+        verticalAlign: 'middle'
+      }
+    },
+
+    // 📍 동적 Chapter 스타일 (호버) - 높이 고정 추가
+    chapterHoverStyle(card) {
+      return {
+        color: card.hoverTxtChapter,
+        backgroundColor: card.hoverBgChapter,
+        // 🔧 언어별 추가 스타일 + 높이 고정
+        ...this.getLanguageSpecificChapterStyle(),
+        // 🔧 높이 확장 방지를 위한 추가 속성
+        boxSizing: 'border-box',
+        verticalAlign: 'middle'
+      }
+    },
+
+    // 📍 언어별 특정 스타일 반환 (개선 - 높이 고정)
+    getLanguageSpecificChapterStyle() {
+      const currentLang = this.currentLanguage
+      
+      switch(currentLang) {
+        case 'en':
+          return {
+            fontSize: '13px',
+            padding: '5px 8px',
+            minWidth: '85px',
+            maxWidth: '110px',
+            textAlign: 'center',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            letterSpacing: '-0.1px',
+            // 🔧 높이 고정으로 확장 방지
+            height: 'auto',
+            maxHeight: '38px',
+            lineHeight: '1.1'
+          }
+        case 'vi':
+          return {
+            fontSize: '12px',
+            padding: '4px 7px',
+            minWidth: '90px',
+            maxWidth: '105px',
+            textAlign: 'center',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            letterSpacing: '-0.2px',
+            // 🔧 높이 고정으로 확장 방지
+            height: 'auto',
+            maxHeight: '36px',
+            lineHeight: '1.1'
+          }
+        case 'ko':
+        default:
+          return {
+            fontSize: '14px',
+            padding: '6px 10px',
+            minWidth: '60px',
+            textAlign: 'center',
+            letterSpacing: '0',
+            whiteSpace: 'normal',
+            overflow: 'visible',
+            textOverflow: 'clip',
+            // 🔧 높이 고정으로 확장 방지
+            height: 'auto',
+            maxHeight: '40px',
+            lineHeight: '1.2'
+          }
+      }
+    },
+
+    // 🔧 언어 변경 감지 및 레이아웃 안정화
+    handleLanguageChange() {
+      this.$nextTick(() => {
+        // DOM 업데이트 후 레이아웃 강제 재계산
+        this.stabilizeChapterLayout()
+      })
+    },
+
+    // 🔧 Chapter 레이아웃 안정화 함수
+    stabilizeChapterLayout() {
+      const chapterElements = document.querySelectorAll('.home-chapter')
+      chapterElements.forEach(element => {
+        // 강제 reflow로 레이아웃 안정화
+        const display = element.style.display
+        element.style.display = 'none'
+        element.offsetHeight // reflow 강제 실행
+        element.style.display = display || ''
+      })
+    },
+
+    // 📍 기존 메서드들
+    getSubjectSet() {
+      apiSubjectSet
+        .getSubjectSet(this.selectedSubjectSetId)
+        .then(res => (this.subjects = res.data.subjects))
+        .catch(this.showError)
+    },
+
+    globalMouseUpHandler() {
+      if (this.clicked) this.clicked = false
+    },
+
+    goSelectCurriculum(id, title) {
+      this.$router.push({ path: '/curriculum', query: { id, title } })
+    },
+
+    tipComputeStyle(card, index) {
+      if (this.clickedStates[index]) {
+        return { background: card.clickBgColor, color: card.clickTxtColor }
+      } else if (this.hoveredStates[index]) {
+        return { background: card.hoverBgColor, color: card.hoverTxtColor }
+      } else {
+        return { background: card.bgColor, color: card.txtColor }
+      }
+    },
+
+    openLink(url) {
+      if (url === '/AutomaticProgram') this.$router.push(url)
+      else shell.openExternal(url)
+    },
+
+    showError(error) {
+      console.error('Error:', error)
+      // 에러 처리 로직
+    }
+  },
 }
 </script>
 
 <style scoped src="@/assets/css/component/homeview.css"/>
 <style scoped src="@/assets/css/font.css"/>
+
 <style scoped>
+
+/* 📍 컴포넌트별 추가 스타일 */
 .tip {
-    cursor: pointer;
+  cursor: pointer;
+}
+
+/* Chapter 기본 스타일 보강 */
+.home-chapter {
+  border-radius: 20px;
+  display: inline-block;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* 호버 효과 개선 */
+.card:hover .home-chapter {
+  transform: scale(1.02);
+}
+
+/* 클릭 효과 */
+.card:active .home-chapter {
+  transform: scale(0.98);
+}
+
+/* 반응형 추가 조정 */
+@media (max-width: 768px) {
+  .home-chapter {
+    font-size: 10px !important;
+    padding: 3px 5px !important;
+    min-width: 45px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-chapter {
+    font-size: 8px !important;
+    padding: 2px 3px !important;
+    min-width: 40px !important;
+  }
 }
 </style>

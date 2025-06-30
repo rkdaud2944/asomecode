@@ -489,8 +489,9 @@ export { LessonToolbox };
                 "contents": [
                     { "kind": "block", "gap": "8", "type": "basic_kit_ready" },
                     { "kind": "block", "gap": "8", "type": "pro_kit2_7_ready" },
-
+                    
                     { "kind": "block", "gap": "8", "type": "zet_kit2_7_maze_show" },
+                    { "kind": "block", "gap": "8", "type": "zet_kit2_7_maze_start" },
                     { "kind": "block", "gap": "8", "type": "zet_kit2_7_maze_apply" },
                     { "kind": "block", "gap": "8", "type": "zet_kit2_7_hori_vert" },
                     { "kind": "block", "gap": "8", "type": "zet_kit2_7_hori_move" },
@@ -1234,6 +1235,7 @@ export { LessonToolbox };
 
                     { "kind": "block", "gap": "8", "type": "zet_kit2_7_if_button_clicked" },
                     { "kind": "block", "gap": "8", "type": "zet_kit2_7_maze_show" },
+                    { "kind": "block", "gap": "8", "type": "zet_kit2_7_maze_start" },
                     { "kind": "block", "gap": "8", "type": "zet_kit2_7_maze_apply" },
                     { "kind": "block", "gap": "8", "type": "zet_kit2_6_encoder_update" },
                     { "kind": "block", "gap": "8", "type": "zet_kit2_7_hori_vert" },

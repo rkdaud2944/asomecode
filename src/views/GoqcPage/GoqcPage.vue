@@ -11,7 +11,7 @@
                   <p class="subject-title Pretendard-Regular"> {{ this.$route.query.subjectTitle }} </p>
                   <!-- <p class="lesson-chapter Pretendard-Regular"
                   :style="chapterStyleHandler"> {{ this.$route.query.index }}차시 </p> -->
-                  <p class="chapter-title Pretendard-Regular"> {{ this.$route.query.title }} 어썸봇 발 각도 조절하기</p>
+                  <p class="chapter-title Pretendard-Regular"> {{ this.$route.query.title }} 어썸봇 테스트</p>
               </div>
           </div>
 
@@ -263,7 +263,7 @@ export default {
       },
 
       getLesson() {
-          apiLesson.lessonDetail(82)
+          apiLesson.lessonDetail(83)
               .then((response) => {
                   this.lesson = response.data;
                   const parser = new AsomeParser(this.lesson.content);
@@ -419,7 +419,10 @@ export default {
     line-height: 90px;
 }
 .container-top {
-    height: 120px;
+    /* height: 120px; */
     top: 90px;
+}
+.container-wrap{
+    top : 67px !important;
 }
 </style>

@@ -130,6 +130,11 @@ const routes = [
         name: 'GoqcPage',
         component: () => import('../views/GoqcPage/GoqcPage.vue')
     },
+    {
+        path: '/AutomaticProgram',
+        name: 'AutomaticProgram',
+        component: () => import('../views/AutomaticProgram/AutomaticProgram.vue')
+    },
     // Curriculum
     {
         path: '/curriculum',

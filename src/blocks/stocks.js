@@ -73,11 +73,11 @@ Blockly.Blocks["walk_step_forward"] = {
     this.appendDummyInput()
       .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/block_icons/asomebot/move_forward.png', 23, 23, '*'))
       .appendField(new Blockly.FieldNumber(1), "number")
-      .appendField("걸음 앞으로 걷기")
+      .appendField(Blockly.Msg.WALK_STEP_FORWARD_TITLE);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF9A00");
-    this.setTooltip("입력한 걸음 수 만큼 앞으로 걷는 블록");
+    this.setTooltip(Blockly.Msg.WALK_STEP_FORWARD_TOOLTIP);
   },
 };
 
@@ -664,7 +664,7 @@ Blockly.Blocks["sound_bot_scale"] = {
     this.appendDummyInput()
       .appendField("음계")
       .appendField(new Blockly.FieldDropdown([
-        ["C", "C"],["C#", "D#"],
+        ["C", "C"],["C#", "C#"],
         ["D", "D"],["D#", "D#"],
         ["Db", "Db"],["E", "E"],
         ["Eb", "Eb"],["F", "F"],
@@ -978,7 +978,7 @@ Blockly.Blocks["advance_if"] = {
         } else if (workspaceBlocks[i].type === 'message') {
           dropdownOptions.push(["msg", "msg"]);
         } else if (workspaceBlocks[i].type === 'get_weather') {
-          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"]["weather", "weather"]);
+          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"],["weather", "weather"]);
         } else if (workspaceBlocks[i].type === 'prepare_button_ready') {
           dropdownOptions.push(["bt", "bt"]);
         } else if (workspaceBlocks[i].type === 'prepare_buzzer_ready') {
@@ -1082,7 +1082,7 @@ Blockly.Blocks["advance_elseif"] = {
         } else if (workspaceBlocks[i].type === 'message') {
           dropdownOptions.push(["msg", "msg"]);
         } else if (workspaceBlocks[i].type === 'get_weather') {
-          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"]["weather", "weather"]);
+          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"],["weather", "weather"]);
         } else if (workspaceBlocks[i].type === 'prepare_button_ready') {
           dropdownOptions.push(["bt", "bt"]);
         } else if (workspaceBlocks[i].type === 'prepare_buzzer_ready') {
@@ -1186,7 +1186,7 @@ Blockly.Blocks["advance_if_logical"] = {
         } else if (workspaceBlocks[i].type === 'message') {
           dropdownOptions.push(["msg", "msg"]);
         } else if (workspaceBlocks[i].type === 'get_weather') {
-          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"]["weather", "weather"]);
+          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"],["weather", "weather"]);
         } else if (workspaceBlocks[i].type === 'prepare_button_ready') {
           dropdownOptions.push(["bt", "bt"]);
         } else if (workspaceBlocks[i].type === 'prepare_buzzer_ready') {
@@ -1329,7 +1329,7 @@ Blockly.Blocks["advance_elseif_logical"] = {
         } else if (workspaceBlocks[i].type === 'message') {
           dropdownOptions.push(["msg", "msg"]);
         } else if (workspaceBlocks[i].type === 'get_weather') {
-          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"]["weather", "weather"]);
+          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"],["weather", "weather"]);
         } else if (workspaceBlocks[i].type === 'prepare_button_ready') {
           dropdownOptions.push(["bt", "bt"]);
         } else if (workspaceBlocks[i].type === 'prepare_buzzer_ready') {
@@ -1574,7 +1574,7 @@ Blockly.Blocks["screen"] = {
         } else if (workspaceBlocks[i].type === 'message') {
           dropdownOptions.push(["msg", "msg"]);
         } else if (workspaceBlocks[i].type === 'get_weather') {
-          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"]["weather", "weather"]);
+          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"],["weather", "weather"]);
         } else if (workspaceBlocks[i].type === 'prepare_button_ready') {
           dropdownOptions.push(["bt", "bt"]);
         } else if (workspaceBlocks[i].type === 'prepare_buzzer_ready') {
@@ -1680,7 +1680,7 @@ Blockly.Blocks["variable"] = {
         } else if (workspaceBlocks[i].type === 'message') {
           dropdownOptions.push(["msg", "msg"]);
         } else if (workspaceBlocks[i].type === 'get_weather') {
-          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"]["weather", "weather"]);
+          dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"],["weather", "weather"]);
         } else if (workspaceBlocks[i].type === 'prepare_button_ready') {
           dropdownOptions.push(["bt", "bt"]);
         } else if (workspaceBlocks[i].type === 'prepare_buzzer_ready') {
@@ -1799,7 +1799,7 @@ Blockly.Blocks["nonpass_wifi"] = {
 
 javascriptGenerator["nonpass_wifi"] = function (block) {
   let string_ssid = block.getFieldValue('ssid');
-  let code = 'import internet\ninternet.connect("'+string_ssid+'")\n';
+  let code = 'import internet\ninternet.open_ap("'+string_ssid+'")\n';
   return code;
 };
 
@@ -2354,7 +2354,7 @@ Blockly.Blocks["led_ledtube_ready"] = {
           } else if(workspaceBlocks[i].type === 'message') {
             dropdownOptions.push(["msg", "msg"]);
           } else if(workspaceBlocks[i].type === 'get_weather') {
-            dropdownOptions.push(["humidity", "humidity"],["temp", "temp"]["weather", "weather"]);
+            dropdownOptions.push(["humidity", "humidity"], ["temp", "temp"],["weather", "weather"]);
           } else if(workspaceBlocks[i].type === 'prepare_button_ready') {
             dropdownOptions.push(["bt", "bt"]);
           } else if(workspaceBlocks[i].type === 'prepare_buzzer_ready') {
@@ -5947,6 +5947,23 @@ javascriptGenerator["zet_kit2_7_maze_show"] = function () {
   return code;
 };
 
+Blockly.Blocks["zet_kit2_7_maze_start"] = {
+  init: function () {
+    this.appendDummyInput()
+    // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
+    .appendField("게임 시작하기")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, "String");
+    this.setColour("FF9A00");
+    this.setHelpUrl("https://example.com");
+  },
+};  
+
+javascriptGenerator["zet_kit2_7_maze_start"] = function () {
+  let code = 'maze.start()\n';
+  return code;
+};
+
 Blockly.Blocks["zet_kit2_7_maze_apply"] = {
   init: function () {
     this.appendDummyInput()
@@ -6114,7 +6131,7 @@ Blockly.Blocks["zet_kit2_8_puzzle_shuffle"] = {
   init: function () {
     this.appendDummyInput()
     // .appendField(new Blockly.FieldImage('https://asomecode-web.s3.ap-northeast-2.amazonaws.com/contents2/coding/html/common/images/icons/asomekit.png', 23, 23, '*'))
-    .appendField("퍼즐 썪기")
+    .appendField("퍼즐 섞기")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, "String");
     this.setColour("FF9A00");

@@ -1,7 +1,7 @@
 export const tipCards = [
     {
-        title: "어썸코드 사용법", 
-        description: "올인원 학습 프로그램",
+        titleKey: "어썸코드 사용법", 
+        descriptionKey: "올인원 학습 프로그램",
         image: require("@/assets/images/common/main_tip_1.png"), 
         bgColor: '#EDEDED', 
         txtColor: '#5C5C5C', 
@@ -15,9 +15,9 @@ export const tipCards = [
         href: "https://asomeit.kr/download/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=15447162&t=board"
     },
     {
-        title: "커리큘럼 가이드", 
-        description: "코딩을 재밌게!",
-        image: require("@/assets/images/common/main_tip_2.png"), 
+        titleKey: "자동실행 프로그램", 
+        descriptionKey: "실행하기",
+        image: require("@/assets/images/common/main_tip_4.png"), 
         bgColor: '#83A5C8', 
         txtColor: '#FFFFFF', 
 
@@ -27,11 +27,11 @@ export const tipCards = [
         clickBgColor: '#637990',
         clickTxtColor: '#C5C5C5', 
         clickImage: require("@/assets/images/common/main_tip_1.png"),
-        href: "https://asomeit.kr/book"
+        href: "/AutomaticProgram"
     },
     {
-        title: "어썸아이티", 
-        description: "홈페이지 바로가기",
+        titleKey: "어썸아이티", 
+        descriptionKey: "홈페이지 바로가기",
         image: require("@/assets/images/common/main_tip_3.png"), 
         bgColor: '#828282', 
         txtColor: '#FFFFFF', 
