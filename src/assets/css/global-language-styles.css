@@ -1,0 +1,497 @@
+/* src/assets/css/global-language-styles.css */
+/* 언어별 전역 스타일 정의 */
+
+/* ===== CSS 커스텀 속성 기본값 ===== */
+:root {
+  /* 한국어 기본값 - 기존 크기로 복원 */
+  --primary-font: 'Pretendard', 'Noto Sans KR', sans-serif;
+  --chapter-font-size: 14px;  /* 12px → 14px */
+  --chapter-padding: 6px 10px;  /* 5px 8px → 6px 10px */
+  --chapter-min-width: 60px;  /* 50px → 60px */
+  --chapter-letter-spacing: 0;
+  --text-scale: 1.0;
+  --line-height-scale: 1.5;
+  
+  /* 공통 전환 효과 */
+  --transition-speed: 0.3s;
+  --transition-easing: ease-in-out;
+  
+  /* 색상 변수 */
+  --text-color-primary: #333;
+  --text-color-secondary: #666;
+  --border-color: #ddd;
+}
+
+/* ===== 언어별 HTML 속성 기반 스타일 ===== */
+
+/* 한국어 */
+html[lang="ko"] {
+  --primary-font: 'Pretendard', 'Noto Sans KR', sans-serif;
+  --chapter-font-size: 14px;  /* 12px → 14px */
+  --chapter-padding: 6px 10px;  /* 5px 8px → 6px 10px */
+  --chapter-min-width: 60px;  /* 50px → 60px */
+  --chapter-letter-spacing: 0;
+  --text-scale: 1.0;
+  --line-height-scale: 1.5;
+}
+
+html[lang="ko"] .home-chapter,
+html[lang="ko"] .curriculum-chapter {
+  font-size: var(--chapter-font-size);
+  padding: var(--chapter-padding);
+  min-width: var(--chapter-min-width);
+  letter-spacing: var(--chapter-letter-spacing);
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  max-width: none;
+}
+
+/* 영어 - 적당히 축소 */
+html[lang="en"] {
+  --primary-font: 'Pretendard', 'Inter', sans-serif;
+  --chapter-font-size: 13px;  /* 11px → 13px */
+  --chapter-padding: 5px 8px;  /* 4px 6px → 5px 8px */
+  --chapter-min-width: 85px;  /* 80px → 85px */
+  --chapter-letter-spacing: -0.1px;  /* -0.2px → -0.1px */
+  --text-scale: 1.0;  /* 0.98 → 1.0 */
+  --line-height-scale: 1.4;
+}
+
+html[lang="en"] .home-chapter,
+html[lang="en"] .curriculum-chapter {
+  font-size: var(--chapter-font-size);
+  padding: var(--chapter-padding);
+  min-width: var(--chapter-min-width);
+  letter-spacing: var(--chapter-letter-spacing);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 110px; /* 100px → 110px */
+}
+
+/* 베트남어 - 조금만 축소 */
+html[lang="vi"] {
+  --primary-font: 'Inter', 'Roboto', sans-serif;
+  --chapter-font-size: 12px;  /* 10px → 12px */
+  --chapter-padding: 4px 7px;  /* 3px 5px → 4px 7px */
+  --chapter-min-width: 90px;  /* 85px → 90px */
+  --chapter-letter-spacing: -0.2px;  /* -0.3px → -0.2px */
+  --text-scale: 1.0;  /* 0.95 → 1.0 */
+  --line-height-scale: 1.5;  /* 1.6 → 1.5 */
+}
+
+html[lang="vi"] .home-chapter,
+html[lang="vi"] .curriculum-chapter {
+  font-size: var(--chapter-font-size);
+  padding: var(--chapter-padding);
+  min-width: var(--chapter-min-width);
+  letter-spacing: var(--chapter-letter-spacing);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 105px; /* 95px → 105px */
+  line-height: 1.2;  /* 1.1 → 1.2 */
+}
+
+/* ===== Chapter 공통 스타일 ===== */
+.home-chapter, 
+.curriculum-chapter {
+  border-radius: 20px;
+  display: inline-block;
+  font-weight: 500;
+  text-align: center;
+  transition: all var(--transition-speed) var(--transition-easing);
+  position: relative;
+  box-sizing: border-box;
+  font-family: var(--primary-font);
+}
+
+/* ===== 텍스트 길이별 자동 조정 ===== */
+
+/* 짧은 텍스트 (1-5글자) */
+.chapter-short {
+  font-size: calc(var(--chapter-font-size) + 1px);
+  padding: var(--chapter-padding);
+  min-width: var(--chapter-min-width);
+}
+
+/* 중간 텍스트 (6-10글자) */
+.chapter-medium {
+  font-size: var(--chapter-font-size);
+  padding: calc(var(--chapter-padding) * 0.9);  /* 0.8 → 0.9 */
+  min-width: calc(var(--chapter-min-width) * 1.15);  /* 1.2 → 1.15 */
+  white-space: nowrap;
+}
+
+/* 긴 텍스트 (11글자 이상) */
+.chapter-long {
+  font-size: calc(var(--chapter-font-size) - 1px);
+  padding: calc(var(--chapter-padding) * 0.8);  /* 0.6 → 0.8 */
+  min-width: calc(var(--chapter-min-width) * 1.3);  /* 1.5 → 1.3 */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 130px;  /* 120px → 130px */
+}
+
+/* ===== 반응형 디자인 ===== */
+
+@media (max-width: 768px) {
+  :root {
+    --chapter-font-size: 12px;  /* 10px → 12px */
+    --chapter-padding: 4px 6px;  /* 3px 5px → 4px 6px */
+    --chapter-min-width: 50px;  /* 45px → 50px */
+  }
+  
+  html[lang="en"] .home-chapter,
+  html[lang="en"] .curriculum-chapter {
+    font-size: 11px;  /* 10px → 11px */
+    padding: 3px 6px;  /* 3px 5px → 3px 6px */
+    min-width: 75px;  /* 70px → 75px */
+    max-width: 90px;  /* 85px → 90px */
+  }
+  
+  html[lang="vi"] .home-chapter,
+  html[lang="vi"] .curriculum-chapter {
+    font-size: 10px;  /* 9px → 10px */
+    padding: 3px 5px;  /* 2px 4px → 3px 5px */
+    min-width: 80px;  /* 75px → 80px */
+    max-width: 85px;  /* 80px → 85px */
+  }
+}
+
+/* 모바일 */
+@media (max-width: 480px) {
+  .home-chapter, 
+  .curriculum-chapter {
+    font-size: 10px !important;  /* 8px → 10px */
+    padding: 3px 4px !important;  /* 2px 3px → 3px 4px */
+    min-width: 50px !important;  /* 45px → 50px */
+    max-width: 70px !important;  /* 60px → 70px */
+  }
+  
+  .chapter-short,
+  .chapter-medium,
+  .chapter-long {
+    font-size: 10px !important;  /* 8px → 10px */
+    padding: 3px 4px !important;  /* 2px 3px → 3px 4px */
+    min-width: 45px !important;  /* 40px → 45px */
+    max-width: 65px !important;  /* 55px → 65px */
+  }
+}
+
+/* ===== 카드 내 다른 요소들 언어별 조정 ===== */
+
+/* 제목 스타일 언어별 조정 */
+html[lang="en"] .card .title {
+  /* font-size: calc(1.2em * var(--text-scale)); */
+  line-height: var(--line-height-scale);
+  letter-spacing: -0.05px;  /* -0.1px → -0.05px */
+}
+
+html[lang="vi"] .card .title {
+  /* font-size: calc(1.15em * var(--text-scale)); */
+  line-height: var(--line-height-scale);
+  letter-spacing: -0.1px;  /* -0.2px → -0.1px */
+}
+
+html[lang="ko"] .card .title {
+  /* font-size: calc(1.2em * var(--text-scale)); */
+  line-height: var(--line-height-scale);
+  letter-spacing: 0;
+}
+
+/* 설명 텍스트 언어별 조정 */
+html[lang="en"] .card .description {
+  font-size: calc(0.95em * var(--text-scale));  /* 0.9em → 0.95em */
+  line-height: calc(var(--line-height-scale) * 0.95);  /* 0.9 → 0.95 */
+}
+
+html[lang="vi"] .card .description {
+  font-size: calc(0.9em * var(--text-scale));  /* 0.85em → 0.9em */
+  line-height: calc(var(--line-height-scale) * 1.0);  /* 0.95 → 1.0 */
+}
+
+html[lang="ko"] .card .description {
+  font-size: calc(1.0em * var(--text-scale));
+  line-height: calc(var(--line-height-scale) * 0.9);  /* 0.85 → 0.9 */
+}
+
+/* ===== Age 태그 언어별 조정 ===== */
+html[lang="en"] .age {
+  font-size: 12px;  /* 11px → 12px */
+  padding: 4px 9px;  /* 3px 8px → 4px 9px */
+  letter-spacing: -0.05px;  /* -0.1px → -0.05px */
+}
+
+html[lang="vi"] .age {
+  font-size: 11px;  /* 10px → 11px */
+  padding: 3px 8px;  /* 2px 7px → 3px 8px */
+  letter-spacing: -0.1px;  /* -0.2px → -0.1px */
+}
+
+html[lang="ko"] .age {
+  font-size: 13px;  /* 12px → 13px */
+  padding: 5px 10px;  /* 4px 9px → 5px 10px */
+  letter-spacing: 0;
+}
+
+/* TIP 카드 버튼 */
+html[lang="en"] .tip-box {
+  letter-spacing: -0.05px;  /* -0.1px → -0.05px */
+  word-spacing: -0.5px;  /* -1px → -0.5px */
+}
+
+html[lang="en"] .tip-box .p1,
+html[lang="en"] .tip-box .p2 {
+  line-height: 1.4;  /* 1.3 → 1.4 */
+  font-size: 1.0em;  /* 기본 크기 */
+}
+
+html[lang="vi"] .tip-box {
+  letter-spacing: -0.1px;  /* -0.2px → -0.1px */
+  word-spacing: -0.5px;  /* -1px → -0.5px */
+}
+
+html[lang="vi"] .tip-box .p1,
+html[lang="vi"] .tip-box .p2 {
+  line-height: 1.45;  /* 1.4 → 1.45 */
+  font-size: 0.98em;  /* 0.95em → 0.98em */
+}
+
+html[lang="ko"] .tip-box {
+  letter-spacing: 0;
+  word-spacing: normal;
+}
+
+/* 툴바 버튼 */
+html[lang="en"] .toolbar-btn {
+  font-size: 14px;  /* 13px → 14px */
+  padding: 8px 11px;  /* 7px 10px → 8px 11px */
+  letter-spacing: -0.05px;  /* -0.1px → -0.05px */
+}
+
+html[lang="vi"] .toolbar-btn {
+  font-size: 13px;  /* 12px → 13px */
+  padding: 7px 10px;  /* 6px 9px → 7px 10px */
+  letter-spacing: -0.1px;  /* -0.2px → -0.1px */
+}
+
+html[lang="ko"] .toolbar-btn {
+  font-size: 15px;  /* 14px → 15px */
+  padding: 9px 13px;  /* 8px 12px → 9px 13px */
+  letter-spacing: 0;
+}
+
+
+/* ===== 호버 및 인터랙션 효과 ===== */
+
+/* Chapter 호버 효과 */
+.home-chapter:hover,
+.curriculum-chapter:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  z-index: 10;
+}
+
+/* 긴 텍스트 호버 시 전체 표시 */
+html[lang="en"] .chapter-medium:hover,
+html[lang="en"] .chapter-long:hover,
+html[lang="vi"] .chapter-medium:hover,
+html[lang="vi"] .chapter-long:hover {
+  overflow: visible;
+  white-space: normal;
+  z-index: 10;
+  position: relative;
+  background: inherit;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  padding: calc(var(--chapter-padding) * 1.2);
+  border-radius: 8px;
+  max-width: none;
+}
+
+/* ===== 애니메이션 및 전환 효과 ===== */
+
+/* 언어 변경 시 부드러운 전환 */
+.home-chapter, 
+.curriculum-chapter,
+.card .title,
+.card .description,
+.tip-box,
+.toolbar-btn,
+.age {
+  transition: 
+    font-size var(--transition-speed) var(--transition-easing),
+    padding var(--transition-speed) var(--transition-easing),
+    min-width var(--transition-speed) var(--transition-easing),
+    letter-spacing var(--transition-speed) var(--transition-easing),
+    line-height var(--transition-speed) var(--transition-easing),
+    transform var(--transition-speed) var(--transition-easing);
+}
+
+/* 부드러운 언어 전환 애니메이션 */
+@keyframes languageTransition {
+  0% { opacity: 0.8; transform: scale(0.98); }
+  50% { opacity: 0.9; transform: scale(1.02); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.home-chapter,
+.curriculum-chapter {
+  animation: languageTransition 0.5s ease-out;
+}
+
+/* ===== 접근성 개선 ===== */
+
+/* 고대비 모드 지원 */
+@media (prefers-contrast: high) {
+  .home-chapter, .curriculum-chapter {
+    border: 2px solid currentColor;
+    font-weight: 600;
+    background: white !important;
+    color: black !important;
+  }
+}
+
+/* 축소된 모션 설정 */
+@media (prefers-reduced-motion: reduce) {
+  .home-chapter, 
+  .curriculum-chapter,
+  .card .title,
+  .card .description {
+    transition: none;
+    animation: none;
+  }
+  
+  .home-chapter:hover,
+  .curriculum-chapter:hover {
+    transform: none;
+  }
+}
+
+/* 포커스 가능한 요소 접근성 */
+.home-chapter:focus,
+.curriculum-chapter:focus,
+.tip-box:focus {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
+}
+
+/* ===== 브라우저별 호환성 ===== */
+
+/* Safari 지원 */
+@supports (-webkit-appearance: none) {
+  .home-chapter, .curriculum-chapter {
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+}
+
+/* Firefox 지원 */
+@-moz-document url-prefix() {
+  .home-chapter, .curriculum-chapter {
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Edge 지원 */
+@supports (-ms-ime-align: auto) {
+  .home-chapter, .curriculum-chapter {
+    font-feature-settings: "kern" 1;
+  }
+}
+
+/* ===== 디버깅용 스타일 (개발 모드만) ===== */
+[data-debug="true"] .home-chapter,
+[data-debug="true"] .curriculum-chapter {
+  border: 1px dashed #ff0000 !important;
+  position: relative;
+}
+
+[data-debug="true"] .home-chapter::after,
+[data-debug="true"] .curriculum-chapter::after {
+  content: attr(class) " | " attr(lang);
+  position: absolute;
+  top: -25px;
+  left: 0;
+  font-size: 8px;
+  color: #ff0000;
+  background: #fff;
+  padding: 2px 4px;
+  border: 1px solid #ff0000;
+  border-radius: 2px;
+  white-space: nowrap;
+  z-index: 1000;
+  font-family: monospace;
+}
+
+/* 개발 모드 정보 표시 */
+[data-debug="true"]::before {
+  content: "Lang: " attr(lang) " | Debug Mode";
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: #ff0000;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  z-index: 9999;
+  font-family: monospace;
+}
+
+/* ===== 프린트 스타일 ===== */
+@media print {
+  .home-chapter, .curriculum-chapter {
+    font-size: 10pt !important;
+    padding: 2pt 4pt !important;
+    border: 1pt solid #000 !important;
+    background: none !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+  
+  /* 프린트 시 언어 정보 표시 */
+  .home-chapter::after,
+  .curriculum-chapter::after {
+    content: " (" attr(lang) ")";
+    font-size: 8pt;
+    color: #666;
+  }
+}
+
+/* ===== 다크 모드 지원 ===== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-color-primary: #fff;
+    --text-color-secondary: #ccc;
+    --border-color: #444;
+  }
+  
+  .home-chapter,
+  .curriculum-chapter {
+    border: 1px solid var(--border-color);
+  }
+}
+
+/* ===== 성능 최적화 ===== */
+
+/* GPU 가속 활성화 */
+.home-chapter,
+.curriculum-chapter {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+/* 렌더링 최적화 */
+.card {
+  contain: layout style;
+}
+
+/* 메모리 사용량 최적화 */
+.home-chapter:not(:hover),
+.curriculum-chapter:not(:hover) {
+  will-change: auto;
+}
