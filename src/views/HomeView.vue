@@ -88,33 +88,35 @@
   
           <div>
             <div class="tip-title Pretendard-Medium" style="visibility: hidden;">TIP</div>
-            <div class="tip-wrap">
-              <div
-                class="tip"
-                v-for="(card, index) in tipCards"
-                :key="index"
-                @mousedown="clickedStates[index] = true"
-                @mouseup="clickedStates[index] = false"
-                @mouseover="hoveredStates[index] = true"
-                @mouseleave="() => { hoveredStates[index] = false; clickedStates[index] = false }"
-                @click="openLink(card.href)"
-              >
-                <div class="tip-link" style="text-decoration: none">
-                  <div
-                    :class="`tip-box box${index + 1}`"
-                    :style="tipComputeStyle(card, index)"
-                  >
-                    <div>
-                      <p class="NotoSansKR-Regular p1">{{ card.title }}</p>
-                      <p class="Pretendard-Regular p2">{{ card.description }}</p>
-                    </div>
-                    <div>
-                      <img :src="card.image" />
-                    </div>
+            
+          <div class="tip-wrap">
+            <div
+              class="tip"
+              v-for="(card, index) in tipCards"
+              :key="index"
+              @mousedown="clickedStates[index] = true"
+              @mouseup="clickedStates[index] = false"
+              @mouseover="hoveredStates[index] = true"
+              @mouseleave="() => { hoveredStates[index] = false; clickedStates[index] = false }"
+              @click="openLink(card.href)"
+            >
+              <div class="tip-link" style="text-decoration: none">
+                <div
+                  :class="`tip-box box${index + 1}`"
+                  :style="tipComputeStyle(card, index)"
+                >
+                  <div>
+                    <!-- 여기가 핵심! $t() 함수로 번역 적용 -->
+                    <p class="NotoSansKR-Regular p1">{{ $t(card.titleKey) }}</p>
+                    <p class="Pretendard-Regular p2">{{ $t(card.descriptionKey) }}</p>
+                  </div>
+                  <div>
+                    <img :src="card.image" />
                   </div>
                 </div>
               </div>
             </div>
+          </div>
           </div>
   
         </div>
