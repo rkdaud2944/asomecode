@@ -1,20 +1,20 @@
 /* src/assets/css/global-language-styles.css */
-/* 언어별 전역 스타일 정의 */
+/* 언어별 전역 스타일 정의 - 높이 확장 문제 해결 */
 
 /* ===== CSS 커스텀 속성 기본값 ===== */
 :root {
-  /* 한국어 기본값 - 기존 크기로 복원 */
+  /* 한국어 기본값 */
   --primary-font: 'Pretendard', 'Noto Sans KR', sans-serif;
-  --chapter-font-size: 14px;  /* 12px → 14px */
-  --chapter-padding: 6px 10px;  /* 5px 8px → 6px 10px */
-  --chapter-min-width: 60px;  /* 50px → 60px */
+  --chapter-font-size: 14px;
+  --chapter-padding: 6px 10px;
+  --chapter-min-width: 60px;
   --chapter-letter-spacing: 0;
   --text-scale: 1.0;
   --line-height-scale: 1.5;
   
-  /* 공통 전환 효과 */
-  --transition-speed: 0.3s;
-  --transition-easing: ease-in-out;
+  /* 공통 전환 효과 - 더 빠르고 부드럽게 */
+  --transition-speed: 0.2s;
+  --transition-easing: ease-out;
   
   /* 색상 변수 */
   --text-color-primary: #333;
@@ -27,9 +27,9 @@
 /* 한국어 */
 html[lang="ko"] {
   --primary-font: 'Pretendard', 'Noto Sans KR', sans-serif;
-  --chapter-font-size: 14px;  /* 12px → 14px */
-  --chapter-padding: 6px 10px;  /* 5px 8px → 6px 10px */
-  --chapter-min-width: 60px;  /* 50px → 60px */
+  --chapter-font-size: 14px;
+  --chapter-padding: 6px 10px;
+  --chapter-min-width: 60px;
   --chapter-letter-spacing: 0;
   --text-scale: 1.0;
   --line-height-scale: 1.5;
@@ -45,16 +45,20 @@ html[lang="ko"] .curriculum-chapter {
   overflow: visible;
   text-overflow: clip;
   max-width: none;
+  /* 🔧 높이 고정으로 확장 방지 */
+  height: auto;
+  max-height: 40px;
+  line-height: 1.2;
 }
 
 /* 영어 - 적당히 축소 */
 html[lang="en"] {
   --primary-font: 'Pretendard', 'Inter', sans-serif;
-  --chapter-font-size: 13px;  /* 11px → 13px */
-  --chapter-padding: 5px 8px;  /* 4px 6px → 5px 8px */
-  --chapter-min-width: 85px;  /* 80px → 85px */
-  --chapter-letter-spacing: -0.1px;  /* -0.2px → -0.1px */
-  --text-scale: 1.0;  /* 0.98 → 1.0 */
+  --chapter-font-size: 13px;
+  --chapter-padding: 5px 8px;
+  --chapter-min-width: 85px;
+  --chapter-letter-spacing: -0.1px;
+  --text-scale: 1.0;
   --line-height-scale: 1.4;
 }
 
@@ -67,18 +71,22 @@ html[lang="en"] .curriculum-chapter {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 110px; /* 100px → 110px */
+  max-width: 110px;
+  /* 🔧 높이 고정으로 확장 방지 */
+  height: auto;
+  max-height: 38px;
+  line-height: 1.1;
 }
 
 /* 베트남어 - 조금만 축소 */
 html[lang="vi"] {
   --primary-font: 'Inter', 'Roboto', sans-serif;
-  --chapter-font-size: 12px;  /* 10px → 12px */
-  --chapter-padding: 4px 7px;  /* 3px 5px → 4px 7px */
-  --chapter-min-width: 90px;  /* 85px → 90px */
-  --chapter-letter-spacing: -0.2px;  /* -0.3px → -0.2px */
-  --text-scale: 1.0;  /* 0.95 → 1.0 */
-  --line-height-scale: 1.5;  /* 1.6 → 1.5 */
+  --chapter-font-size: 12px;
+  --chapter-padding: 4px 7px;
+  --chapter-min-width: 90px;
+  --chapter-letter-spacing: -0.2px;
+  --text-scale: 1.0;
+  --line-height-scale: 1.5;
 }
 
 html[lang="vi"] .home-chapter,
@@ -90,8 +98,11 @@ html[lang="vi"] .curriculum-chapter {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 105px; /* 95px → 105px */
-  line-height: 1.2;  /* 1.1 → 1.2 */
+  max-width: 105px;
+  /* 🔧 높이 고정으로 확장 방지 */
+  height: auto;
+  max-height: 36px;
+  line-height: 1.1;
 }
 
 /* ===== Chapter 공통 스타일 ===== */
@@ -101,10 +112,22 @@ html[lang="vi"] .curriculum-chapter {
   display: inline-block;
   font-weight: 500;
   text-align: center;
-  transition: all var(--transition-speed) var(--transition-easing);
   position: relative;
   box-sizing: border-box;
   font-family: var(--primary-font);
+  /* 🔧 기본 크기와 정렬 고정 */
+  vertical-align: middle;
+  contain: layout style;
+  
+  /* 🔧 언어 전환 시에만 부드러운 전환 */
+  transition: 
+    font-size var(--transition-speed) var(--transition-easing),
+    padding var(--transition-speed) var(--transition-easing),
+    min-width var(--transition-speed) var(--transition-easing),
+    letter-spacing var(--transition-speed) var(--transition-easing);
+  
+  /* 🔧 transform과 opacity는 별도 처리 */
+  /* transform과 opacity 전환은 제거하여 높이 확장 방지 */
 }
 
 /* ===== 텍스트 길이별 자동 조정 ===== */
@@ -119,180 +142,56 @@ html[lang="vi"] .curriculum-chapter {
 /* 중간 텍스트 (6-10글자) */
 .chapter-medium {
   font-size: var(--chapter-font-size);
-  padding: calc(var(--chapter-padding) * 0.9);  /* 0.8 → 0.9 */
-  min-width: calc(var(--chapter-min-width) * 1.15);  /* 1.2 → 1.15 */
+  padding: calc(var(--chapter-padding) * 0.9);
+  min-width: calc(var(--chapter-min-width) * 1.15);
   white-space: nowrap;
 }
 
 /* 긴 텍스트 (11글자 이상) */
 .chapter-long {
   font-size: calc(var(--chapter-font-size) - 1px);
-  padding: calc(var(--chapter-padding) * 0.8);  /* 0.6 → 0.8 */
-  min-width: calc(var(--chapter-min-width) * 1.3);  /* 1.5 → 1.3 */
+  padding: calc(var(--chapter-padding) * 0.8);
+  min-width: calc(var(--chapter-min-width) * 1.3);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 130px;  /* 120px → 130px */
+  max-width: 130px;
 }
 
-/* ===== 반응형 디자인 ===== */
+/* ===== 🔧 애니메이션 최적화 - 높이 확장 방지 ===== */
 
-@media (max-width: 768px) {
-  :root {
-    --chapter-font-size: 12px;  /* 10px → 12px */
-    --chapter-padding: 4px 6px;  /* 3px 5px → 4px 6px */
-    --chapter-min-width: 50px;  /* 45px → 50px */
+/* 🔧 언어 전환 애니메이션 수정 - scale 제거 */
+@keyframes languageTransitionFixed {
+  0% { 
+    opacity: 0.7;
+    /* transform: scale(0.98) 제거 - 높이 확장 원인 */
   }
-  
-  html[lang="en"] .home-chapter,
-  html[lang="en"] .curriculum-chapter {
-    font-size: 11px;  /* 10px → 11px */
-    padding: 3px 6px;  /* 3px 5px → 3px 6px */
-    min-width: 75px;  /* 70px → 75px */
-    max-width: 90px;  /* 85px → 90px */
+  50% { 
+    opacity: 0.85;
+    /* transform: scale(1.02) 제거 - 높이 확장 원인 */
   }
-  
-  html[lang="vi"] .home-chapter,
-  html[lang="vi"] .curriculum-chapter {
-    font-size: 10px;  /* 9px → 10px */
-    padding: 3px 5px;  /* 2px 4px → 3px 5px */
-    min-width: 80px;  /* 75px → 80px */
-    max-width: 85px;  /* 80px → 85px */
+  100% { 
+    opacity: 1;
+    /* transform: scale(1) 제거 - 높이 확장 원인 */
   }
 }
 
-/* 모바일 */
-@media (max-width: 480px) {
-  .home-chapter, 
-  .curriculum-chapter {
-    font-size: 10px !important;  /* 8px → 10px */
-    padding: 3px 4px !important;  /* 2px 3px → 3px 4px */
-    min-width: 50px !important;  /* 45px → 50px */
-    max-width: 70px !important;  /* 60px → 70px */
-  }
-  
-  .chapter-short,
-  .chapter-medium,
-  .chapter-long {
-    font-size: 10px !important;  /* 8px → 10px */
-    padding: 3px 4px !important;  /* 2px 3px → 3px 4px */
-    min-width: 45px !important;  /* 40px → 45px */
-    max-width: 65px !important;  /* 55px → 65px */
-  }
+/* 🔧 언어 변경 시에만 애니메이션 적용 */
+.language-changing .home-chapter,
+.language-changing .curriculum-chapter {
+  animation: languageTransitionFixed 0.3s ease-out;
 }
 
-/* ===== 카드 내 다른 요소들 언어별 조정 ===== */
+/* ===== 호버 및 인터랙션 효과 수정 ===== */
 
-/* 제목 스타일 언어별 조정 */
-html[lang="en"] .card .title {
-  /* font-size: calc(1.2em * var(--text-scale)); */
-  line-height: var(--line-height-scale);
-  letter-spacing: -0.05px;  /* -0.1px → -0.05px */
-}
-
-html[lang="vi"] .card .title {
-  /* font-size: calc(1.15em * var(--text-scale)); */
-  line-height: var(--line-height-scale);
-  letter-spacing: -0.1px;  /* -0.2px → -0.1px */
-}
-
-html[lang="ko"] .card .title {
-  /* font-size: calc(1.2em * var(--text-scale)); */
-  line-height: var(--line-height-scale);
-  letter-spacing: 0;
-}
-
-/* 설명 텍스트 언어별 조정 */
-html[lang="en"] .card .description {
-  font-size: calc(0.95em * var(--text-scale));  /* 0.9em → 0.95em */
-  line-height: calc(var(--line-height-scale) * 0.95);  /* 0.9 → 0.95 */
-}
-
-html[lang="vi"] .card .description {
-  font-size: calc(0.9em * var(--text-scale));  /* 0.85em → 0.9em */
-  line-height: calc(var(--line-height-scale) * 1.0);  /* 0.95 → 1.0 */
-}
-
-html[lang="ko"] .card .description {
-  font-size: calc(1.0em * var(--text-scale));
-  line-height: calc(var(--line-height-scale) * 0.9);  /* 0.85 → 0.9 */
-}
-
-/* ===== Age 태그 언어별 조정 ===== */
-html[lang="en"] .age {
-  font-size: 12px;  /* 11px → 12px */
-  padding: 4px 9px;  /* 3px 8px → 4px 9px */
-  letter-spacing: -0.05px;  /* -0.1px → -0.05px */
-}
-
-html[lang="vi"] .age {
-  font-size: 11px;  /* 10px → 11px */
-  padding: 3px 8px;  /* 2px 7px → 3px 8px */
-  letter-spacing: -0.1px;  /* -0.2px → -0.1px */
-}
-
-html[lang="ko"] .age {
-  font-size: 13px;  /* 12px → 13px */
-  padding: 5px 10px;  /* 4px 9px → 5px 10px */
-  letter-spacing: 0;
-}
-
-/* TIP 카드 버튼 */
-html[lang="en"] .tip-box {
-  letter-spacing: -0.05px;  /* -0.1px → -0.05px */
-  word-spacing: -0.5px;  /* -1px → -0.5px */
-}
-
-html[lang="en"] .tip-box .p1,
-html[lang="en"] .tip-box .p2 {
-  line-height: 1.4;  /* 1.3 → 1.4 */
-  font-size: 1.0em;  /* 기본 크기 */
-}
-
-html[lang="vi"] .tip-box {
-  letter-spacing: -0.1px;  /* -0.2px → -0.1px */
-  word-spacing: -0.5px;  /* -1px → -0.5px */
-}
-
-html[lang="vi"] .tip-box .p1,
-html[lang="vi"] .tip-box .p2 {
-  line-height: 1.45;  /* 1.4 → 1.45 */
-  font-size: 0.98em;  /* 0.95em → 0.98em */
-}
-
-html[lang="ko"] .tip-box {
-  letter-spacing: 0;
-  word-spacing: normal;
-}
-
-/* 툴바 버튼 */
-html[lang="en"] .toolbar-btn {
-  font-size: 14px;  /* 13px → 14px */
-  padding: 8px 11px;  /* 7px 10px → 8px 11px */
-  letter-spacing: -0.05px;  /* -0.1px → -0.05px */
-}
-
-html[lang="vi"] .toolbar-btn {
-  font-size: 13px;  /* 12px → 13px */
-  padding: 7px 10px;  /* 6px 9px → 7px 10px */
-  letter-spacing: -0.1px;  /* -0.2px → -0.1px */
-}
-
-html[lang="ko"] .toolbar-btn {
-  font-size: 15px;  /* 14px → 15px */
-  padding: 9px 13px;  /* 8px 12px → 9px 13px */
-  letter-spacing: 0;
-}
-
-
-/* ===== 호버 및 인터랙션 효과 ===== */
-
-/* Chapter 호버 효과 */
+/* 🔧 호버 효과에서 scale 최소화 */
 .home-chapter:hover,
 .curriculum-chapter:hover {
-  transform: scale(1.05);
+  /* transform: scale(1.05) → scale(1.02)로 축소 */
+  transform: scale(1.02);
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
   z-index: 10;
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
 }
 
 /* 긴 텍스트 호버 시 전체 표시 */
@@ -309,40 +208,161 @@ html[lang="vi"] .chapter-long:hover {
   padding: calc(var(--chapter-padding) * 1.2);
   border-radius: 8px;
   max-width: none;
+  /* 🔧 호버 시에도 높이 제한 */
+  max-height: 50px;
 }
 
-/* ===== 애니메이션 및 전환 효과 ===== */
+/* ===== 반응형 디자인 ===== */
 
-/* 언어 변경 시 부드러운 전환 */
-.home-chapter, 
-.curriculum-chapter,
-.card .title,
-.card .description,
-.tip-box,
-.toolbar-btn,
-.age {
-  transition: 
-    font-size var(--transition-speed) var(--transition-easing),
-    padding var(--transition-speed) var(--transition-easing),
-    min-width var(--transition-speed) var(--transition-easing),
-    letter-spacing var(--transition-speed) var(--transition-easing),
-    line-height var(--transition-speed) var(--transition-easing),
-    transform var(--transition-speed) var(--transition-easing);
+@media (max-width: 768px) {
+  :root {
+    --chapter-font-size: 12px;
+    --chapter-padding: 4px 6px;
+    --chapter-min-width: 50px;
+  }
+  
+  html[lang="en"] .home-chapter,
+  html[lang="en"] .curriculum-chapter {
+    font-size: 11px;
+    padding: 3px 6px;
+    min-width: 75px;
+    max-width: 90px;
+    max-height: 32px; /* 🔧 모바일에서 높이 제한 */
+  }
+  
+  html[lang="vi"] .home-chapter,
+  html[lang="vi"] .curriculum-chapter {
+    font-size: 10px;
+    padding: 3px 5px;
+    min-width: 80px;
+    max-width: 85px;
+    max-height: 30px; /* 🔧 모바일에서 높이 제한 */
+  }
 }
 
-/* 부드러운 언어 전환 애니메이션 */
-@keyframes languageTransition {
-  0% { opacity: 0.8; transform: scale(0.98); }
-  50% { opacity: 0.9; transform: scale(1.02); }
-  100% { opacity: 1; transform: scale(1); }
+/* 모바일 */
+@media (max-width: 480px) {
+  .home-chapter, 
+  .curriculum-chapter {
+    font-size: 10px !important;
+    padding: 3px 4px !important;
+    min-width: 50px !important;
+    max-width: 70px !important;
+    max-height: 28px !important; /* 🔧 최소 화면에서 높이 제한 */
+  }
+  
+  .chapter-short,
+  .chapter-medium,
+  .chapter-long {
+    font-size: 10px !important;
+    padding: 3px 4px !important;
+    min-width: 45px !important;
+    max-width: 65px !important;
+    max-height: 28px !important; /* 🔧 최소 화면에서 높이 제한 */
+  }
 }
 
-.home-chapter,
-.curriculum-chapter {
-  animation: languageTransition 0.5s ease-out;
+/* ===== 카드 내 다른 요소들 언어별 조정 ===== */
+
+/* 제목 스타일 언어별 조정 */
+html[lang="en"] .card .title {
+  line-height: var(--line-height-scale);
+  letter-spacing: -0.05px;
 }
 
-/* ===== 접근성 개선 ===== */
+html[lang="vi"] .card .title {
+  line-height: var(--line-height-scale);
+  letter-spacing: -0.1px;
+}
+
+html[lang="ko"] .card .title {
+  line-height: var(--line-height-scale);
+  letter-spacing: 0;
+}
+
+/* 설명 텍스트 언어별 조정 */
+html[lang="en"] .card .description {
+  font-size: calc(0.95em * var(--text-scale));
+  line-height: calc(var(--line-height-scale) * 0.95);
+}
+
+html[lang="vi"] .card .description {
+  font-size: calc(0.9em * var(--text-scale));
+  line-height: calc(var(--line-height-scale) * 1.0);
+}
+
+html[lang="ko"] .card .description {
+  font-size: calc(1.0em * var(--text-scale));
+  line-height: calc(var(--line-height-scale) * 0.9);
+}
+
+/* ===== Age 태그 언어별 조정 ===== */
+html[lang="en"] .age {
+  font-size: 12px;
+  padding: 4px 9px;
+  letter-spacing: -0.05px;
+}
+
+html[lang="vi"] .age {
+  font-size: 11px;
+  padding: 3px 8px;
+  letter-spacing: -0.1px;
+}
+
+html[lang="ko"] .age {
+  font-size: 13px;
+  padding: 5px 10px;
+  letter-spacing: 0;
+}
+
+/* ===== TIP 카드 및 버튼 최적화 ===== */
+html[lang="en"] .tip-box {
+  letter-spacing: -0.05px;
+  word-spacing: -0.5px;
+}
+
+html[lang="en"] .tip-box .p1,
+html[lang="en"] .tip-box .p2 {
+  line-height: 1.4;
+  font-size: 1.0em;
+}
+
+html[lang="vi"] .tip-box {
+  letter-spacing: -0.1px;
+  word-spacing: -0.5px;
+}
+
+html[lang="vi"] .tip-box .p1,
+html[lang="vi"] .tip-box .p2 {
+  line-height: 1.45;
+  font-size: 0.98em;
+}
+
+html[lang="ko"] .tip-box {
+  letter-spacing: 0;
+  word-spacing: normal;
+}
+
+/* 툴바 버튼 */
+html[lang="en"] .toolbar-btn {
+  font-size: 14px;
+  padding: 8px 11px;
+  letter-spacing: -0.05px;
+}
+
+html[lang="vi"] .toolbar-btn {
+  font-size: 13px;
+  padding: 7px 10px;
+  letter-spacing: -0.1px;
+}
+
+html[lang="ko"] .toolbar-btn {
+  font-size: 15px;
+  padding: 9px 13px;
+  letter-spacing: 0;
+}
+
+/* ===== 접근성 및 성능 최적화 ===== */
 
 /* 고대비 모드 지원 */
 @media (prefers-contrast: high) {
@@ -360,8 +380,8 @@ html[lang="vi"] .chapter-long:hover {
   .curriculum-chapter,
   .card .title,
   .card .description {
-    transition: none;
-    animation: none;
+    transition: none !important;
+    animation: none !important;
   }
   
   .home-chapter:hover,
@@ -399,6 +419,40 @@ html[lang="vi"] .chapter-long:hover {
 @supports (-ms-ime-align: auto) {
   .home-chapter, .curriculum-chapter {
     font-feature-settings: "kern" 1;
+  }
+}
+
+/* ===== 성능 최적화 ===== */
+
+/* GPU 가속 활성화 (transform 사용 시에만) */
+.home-chapter:hover,
+.curriculum-chapter:hover {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* 렌더링 최적화 */
+.card {
+  contain: layout style;
+}
+
+/* 메모리 사용량 최적화 */
+.home-chapter:not(:hover),
+.curriculum-chapter:not(:hover) {
+  will-change: auto;
+}
+
+/* ===== 다크 모드 지원 ===== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-color-primary: #fff;
+    --text-color-secondary: #ccc;
+    --border-color: #444;
+  }
+  
+  .home-chapter,
+  .curriculum-chapter {
+    border: 1px solid var(--border-color);
   }
 }
 
@@ -451,6 +505,7 @@ html[lang="vi"] .chapter-long:hover {
     color: #000 !important;
     box-shadow: none !important;
     transform: none !important;
+    max-height: none !important;
   }
   
   /* 프린트 시 언어 정보 표시 */
@@ -460,38 +515,4 @@ html[lang="vi"] .chapter-long:hover {
     font-size: 8pt;
     color: #666;
   }
-}
-
-/* ===== 다크 모드 지원 ===== */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text-color-primary: #fff;
-    --text-color-secondary: #ccc;
-    --border-color: #444;
-  }
-  
-  .home-chapter,
-  .curriculum-chapter {
-    border: 1px solid var(--border-color);
-  }
-}
-
-/* ===== 성능 최적화 ===== */
-
-/* GPU 가속 활성화 */
-.home-chapter,
-.curriculum-chapter {
-  will-change: transform, opacity;
-  backface-visibility: hidden;
-}
-
-/* 렌더링 최적화 */
-.card {
-  contain: layout style;
-}
-
-/* 메모리 사용량 최적화 */
-.home-chapter:not(:hover),
-.curriculum-chapter:not(:hover) {
-  will-change: auto;
 }

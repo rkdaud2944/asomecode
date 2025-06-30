@@ -1,59 +1,40 @@
-<!-- src/components/EnhancedLanguageSwitcher.vue -->
 <template>
-  <div class="enhanced-language-switcher">
-    <!-- 드롭다운 스타일 -->
-    <div v-if="displayType === 'dropdown'" class="dropdown-container">
-      <select 
-        v-model="currentLocale" 
-        @change="changeLanguage"
-        class="language-select"
-        :class="{ 'with-flag': showFlag }"
-      >
-        <option v-for="(info, code) in localesWithFlags" :key="code" :value="code">
-          {{ showFlag ? info.flag + ' ' : '' }}{{ info.label }}
-        </option>
-      </select>
-      
-      <!-- 번역 완성도 표시 (개발 모드) -->
-      <div v-if="showProgress && isDevMode" class="progress-indicator">
-        <div class="progress-bar">
-          <div 
-            class="progress-fill" 
-            :style="{ width: completionPercentage + '%' }"
-          ></div>
-        </div>
-        <span class="progress-text">{{ completionPercentage }}%</span>
-      </div>
-    </div>
-
+  <div 
+    :class="['language-switcher', `style-${displayType}`, { 'dev-mode': showDevPanel && isDevMode }]"
+    @click.stop
+  >
     <!-- 버튼 스타일 -->
-    <div v-else-if="displayType === 'buttons'" class="language-buttons">
+    <div v-if="displayType === 'buttons'" class="language-buttons">
       <button
         v-for="(info, code) in localesWithFlags"
         :key="code"
         @click="setLanguage(code)"
         :class="['lang-btn', { active: currentLocale === code }]"
-        :title="`${info.label} (${getCompletionForLanguage(code)}% 완성)`"
+        :aria-pressed="currentLocale === code"
+        :title="`${info.label}로 변경`"
       >
-        <span v-if="showFlag" class="flag">{{ info.flag }}</span>
-        <span class="label">{{ info.label }}</span>
-        <span v-if="showProgress && isDevMode" class="completion">
-          {{ getCompletionForLanguage(code) }}%
-        </span>
+        <span class="flag">{{ info.flag }}</span>
+        <span class="lang-text">{{ info.label }}</span>
+        <div v-if="showProgress && isDevMode" class="mini-progress">
+          <div 
+            class="mini-progress-fill" 
+            :style="{ width: getCompletionForLanguage(code) + '%' }"
+          ></div>
+        </div>
       </button>
     </div>
 
-    <!-- 플래그 + 텍스트 스타일 -->
+    <!-- 플래그 스타일 -->
     <div v-else-if="displayType === 'flags'" class="language-flags">
-      <div 
+      <div
         v-for="(info, code) in localesWithFlags"
         :key="code"
         @click="setLanguage(code)"
         :class="['flag-item', { active: currentLocale === code }]"
-        :title="`${info.label} (${getCompletionForLanguage(code)}% 완성)`"
+        :title="`${info.label}로 변경`"
       >
         <span class="flag">{{ info.flag }}</span>
-        <span v-if="!flagOnly" class="lang-text">{{ info.label }}</span>
+        <span class="lang-text">{{ info.label }}</span>
         <div v-if="showProgress && isDevMode" class="mini-progress">
           <div 
             class="mini-progress-fill" 
@@ -96,344 +77,265 @@
       
       <div class="dev-content">
         <div class="stats-grid">
-          <div v-for="(info, code) in translationStats" :key="code" class="stat-item">
+          <div 
+            v-for="(info, code) in localesWithFlags" 
+            :key="code" 
+            class="stat-item"
+          >
             <div class="stat-header">
-              <span class="flag">{{ localesWithFlags[code].flag }}</span>
-              <span class="name">{{ localesWithFlags[code].label }}</span>
+              <span class="flag">{{ info.flag }}</span>
+              <span class="name">{{ info.label }}</span>
             </div>
             <div class="stat-details">
               <div class="progress-line">
-                <span>완성도: {{ info.completion }}%</span>
+                <span class="label">완성도:</span>
                 <div class="mini-bar">
-                  <div class="mini-fill" :style="{ width: info.completion + '%' }"></div>
+                  <div 
+                    class="mini-fill" 
+                    :style="{ width: getCompletionForLanguage(code) + '%' }"
+                  ></div>
                 </div>
+                <span class="percentage">{{ getCompletionForLanguage(code) }}%</span>
               </div>
               <div class="counts">
-                <span>번역됨: {{ info.translated }}</span>
-                <span>누락: {{ info.missing }}</span>
+                <span>번역: {{ getTranslationStats(code).translated }}</span>
+                <span>전체: {{ getTranslationStats(code).total }}</span>
               </div>
             </div>
           </div>
         </div>
         
         <div class="dev-actions">
-          <button @click="refreshStats" class="dev-btn">새로고침</button>
-          <button @click="exportTranslations" class="dev-btn">내보내기</button>
-          <button @click="analyzeTranslations" class="dev-btn">분석</button>
+          <button @click="checkMissingKeys" class="dev-btn">누락 키 확인</button>
+          <button @click="exportProgress" class="dev-btn">진행률 내보내기</button>
         </div>
       </div>
     </div>
 
-    <!-- 개발 모드 토글 버튼 -->
+    <!-- 개발 토글 버튼 -->
     <button 
-      v-if="isDevMode && showDevToggle" 
+      v-if="isDevMode" 
       @click="toggleDevPanel"
       class="dev-toggle"
-      :title="$t('번역 개발 패널 열기')"
+      title="개발 패널 토글"
     >
-      🛠️
+      🔧
     </button>
   </div>
 </template>
 
 <script>
 import { useI18n } from 'vue-i18n'
-import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
-import { enhancedTranslationManager } from '@/utils/enhancedTranslationManager'
+import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
+import { changeLanguage, getCurrentLanguage, getTranslationProgress, checkMissingTranslations } from '@/i18n'
 
 export default {
   name: 'EnhancedLanguageSwitcher',
+  
   props: {
     displayType: {
       type: String,
-      default: 'dropdown',
-      validator: (value) => ['dropdown', 'buttons', 'flags', 'compact'].includes(value)
-    },
-    showFlag: {
-      type: Boolean,
-      default: true
-    },
-    flagOnly: {
-      type: Boolean,
-      default: false
+      default: 'flags', // 'buttons', 'flags', 'compact'
+      validator: value => ['buttons', 'flags', 'compact'].includes(value)
     },
     showProgress: {
       type: Boolean,
       default: false
-    },
-    showDevPanel: {
-      type: Boolean,
-      default: false
-    },
-    showDevToggle: {
-      type: Boolean,
-      default: true
-    },
-    autoRefresh: {
-      type: Boolean,
-      default: true
-    },
-    refreshInterval: {
-      type: Number,
-      default: 30000 // 30초
     }
   },
-  emits: ['languageChanged', 'translationStatsUpdated'],
+
   setup(props, { emit }) {
-    const { locale, t } = useI18n()
-    const currentLocale = ref(locale.value)
+    const { t, locale } = useI18n()
+    
+    // 반응형 데이터
     const dropdownOpen = ref(false)
-    const devPanelOpen = ref(false)
-    const translationStats = ref({})
-    const refreshTimer = ref(null)
+    const showDevPanel = ref(false)
+    const isDevMode = ref(process.env.NODE_ENV === 'development')
     
-    const isDevMode = computed(() => process.env.NODE_ENV === 'development')
+    // 🔧 언어 전환 상태 추가
+    const isLanguageChanging = ref(false)
     
-    // 언어 목록 (플래그 포함)
+    // 지원 언어 정보
     const localesWithFlags = {
-      ko: { label: '한국어', flag: '🇰🇷', nativeName: '한국어' },
-      en: { label: 'English', flag: '🇺🇸', nativeName: 'English' },
-      vi: { label: 'Tiếng Việt', flag: '🇻🇳', nativeName: 'Tiếng Việt' }
+      ko: { label: '한국어', flag: '🇰🇷' },
+      en: { label: 'English', flag: '🇺🇸' },
+      vi: { label: 'Tiếng Việt', flag: '🇻🇳' }
     }
 
-    // 현재 언어의 번역 완성도
-    const completionPercentage = computed(() => {
-      const stats = translationStats.value[currentLocale.value]
-      return stats ? stats.completion : 100
-    })
+    // 현재 언어
+    const currentLocale = computed(() => locale.value)
 
-    // 특정 언어의 완성도 가져오기
-    function getCompletionForLanguage(code) {
-      const stats = translationStats.value[code]
-      return stats ? stats.completion : 100
-    }
-
-    // 번역 통계 새로고침
-    function refreshStats() {
-      if (enhancedTranslationManager) {
-        const analysis = enhancedTranslationManager.analyzeCompleteness()
-        translationStats.value = analysis
-        emit('translationStatsUpdated', analysis)
-      }
-    }
-
-    // 언어 변경 함수
-    function changeLanguage(event) {
-      const newLocale = event.target.value
-      setLanguage(newLocale)
-    }
-
-    function setLanguage(newLocale) {
-      if (!localesWithFlags[newLocale]) {
-        console.error('지원하지 않는 언어:', newLocale)
-        return
-      }
-
-      currentLocale.value = newLocale
-      locale.value = newLocale
+    // 🔧 언어 변경 함수 개선 - 높이 확장 방지
+    const setLanguage = async (newLanguage) => {
+      if (newLanguage === currentLocale.value) return
       
-      // 드롭다운 닫기
-      dropdownOpen.value = false
+      console.log(`🌍 언어 변경 시작: ${currentLocale.value} → ${newLanguage}`)
       
-      // 로컬 스토리지에 선택한 언어 저장
       try {
-        localStorage.setItem('awesome-board-language', newLocale)
-      } catch (error) {
-        console.warn('localStorage 저장 실패:', error)
-      }
-      
-      // 부모 컴포넌트에 언어 변경 알림
-      emit('languageChanged', {
-        language: newLocale,
-        languageInfo: localesWithFlags[newLocale]
-      })
-      
-      // 전역 이벤트 발생
-      window.dispatchEvent(new CustomEvent('language-changed', {
-        detail: { 
-          language: newLocale,
-          languageInfo: localesWithFlags[newLocale]
+        // 🔧 1. 언어 변경 시작 표시
+        isLanguageChanging.value = true
+        document.body.classList.add('language-changing')
+        
+        // 🔧 2. DOM 업데이트를 위한 약간의 지연
+        await nextTick()
+        
+        // 🔧 3. HTML lang 속성 즉시 변경
+        document.documentElement.lang = newLanguage
+        
+        // 🔧 4. 언어 변경 실행
+        const success = changeLanguage(newLanguage)
+        
+        if (success) {
+          // 🔧 5. 드롭다운 닫기
+          dropdownOpen.value = false
+          
+          // 🔧 6. DOM 재렌더링을 위한 대기
+          await nextTick()
+          
+          // 🔧 7. 추가 대기로 CSS 적용 완료 보장
+          setTimeout(() => {
+            isLanguageChanging.value = false
+            document.body.classList.remove('language-changing')
+            console.log(`✅ 언어 변경 완료: ${newLanguage}`)
+          }, 200) // CSS transition 시간과 맞춤
+          
+          // 이벤트 발생
+          emit('language-changed', { 
+            from: currentLocale.value, 
+            to: newLanguage,
+            timestamp: Date.now()
+          })
+          
+        } else {
+          console.error('❌ 언어 변경 실패')
+          isLanguageChanging.value = false
+          document.body.classList.remove('language-changing')
         }
-      }))
-      
-      console.log(`언어가 ${localesWithFlags[newLocale].label}로 변경되었습니다.`)
-      
-      // 통계 새로고침
-      setTimeout(refreshStats, 100)
+        
+      } catch (error) {
+        console.error('❌ 언어 변경 중 오류:', error)
+        isLanguageChanging.value = false
+        document.body.classList.remove('language-changing')
+      }
     }
 
-    // 컴팩트 드롭다운 토글
-    function toggleDropdown() {
+    // 드롭다운 토글
+    const toggleDropdown = () => {
       dropdownOpen.value = !dropdownOpen.value
     }
 
     // 개발 패널 토글
-    function toggleDevPanel() {
-      devPanelOpen.value = !devPanelOpen.value
-      if (devPanelOpen.value) {
-        refreshStats()
+    const toggleDevPanel = () => {
+      showDevPanel.value = !showDevPanel.value
+    }
+
+    // 번역 완성도 계산
+    const getCompletionForLanguage = (langCode) => {
+      const progress = getTranslationProgress()
+      return progress[langCode]?.percentage || 0
+    }
+
+    // 번역 통계
+    const getTranslationStats = (langCode) => {
+      const progress = getTranslationProgress()
+      return {
+        translated: progress[langCode]?.translated || 0,
+        total: progress[langCode]?.total || 0
       }
     }
 
-    // 번역 내보내기
-    function exportTranslations() {
-      if (enhancedTranslationManager && enhancedTranslationManager.exportTranslations) {
-        const data = enhancedTranslationManager.exportTranslations()
-        if (data) {
-          const blob = new Blob([data], { type: 'application/json' })
-          const url = URL.createObjectURL(blob)
-          const a = document.createElement('a')
-          a.href = url
-          a.download = `translations-${new Date().toISOString().split('T')[0]}.json`
-          a.click()
-          URL.revokeObjectURL(url)
-        }
+    // 누락 키 확인
+    const checkMissingKeys = () => {
+      const missing = checkMissingTranslations()
+      console.log('🔍 누락된 번역 키:', missing)
+      
+      if (Object.keys(missing).length === 0) {
+        alert('모든 번역이 완료되었습니다! 🎉')
+      } else {
+        const report = Object.entries(missing)
+          .map(([lang, keys]) => `${lang}: ${keys.length}개 누락`)
+          .join('\n')
+        alert(`누락된 번역:\n${report}\n\n자세한 내용은 콘솔을 확인하세요.`)
       }
     }
 
-    // 번역 분석
-    function analyzeTranslations() {
-      if (enhancedTranslationManager && enhancedTranslationManager.printDevReport) {
-        enhancedTranslationManager.printDevReport()
-      }
+    // 진행률 내보내기
+    const exportProgress = () => {
+      const progress = getTranslationProgress()
+      const data = JSON.stringify(progress, null, 2)
+      
+      const blob = new Blob([data], { type: 'application/json' })
+      const url = URL.createObjectURL(blob)
+      
+      const link = document.createElement('a')
+      link.href = url
+      link.download = `translation-progress-${new Date().toISOString().split('T')[0]}.json`
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      
+      URL.revokeObjectURL(url)
+      console.log('📊 번역 진행률 내보내기 완료')
     }
 
-    // 외부 클릭으로 드롭다운 닫기
-    function handleClickOutside(event) {
-      const switcher = event.target.closest('.enhanced-language-switcher')
-      if (!switcher) {
+    // 🔧 외부 클릭 시 드롭다운 닫기
+    const handleClickOutside = (event) => {
+      if (!event.target.closest('.language-switcher')) {
         dropdownOpen.value = false
       }
     }
 
-    // 컴포넌트 마운트 시 설정
+    // 🔧 마운트/언마운트 시 이벤트 처리
     onMounted(() => {
-      // 저장된 언어 설정 복원
-      try {
-        const savedLanguage = localStorage.getItem('awesome-board-language')
-        if (savedLanguage && localesWithFlags[savedLanguage]) {
-          currentLocale.value = savedLanguage
-          if (locale.value !== savedLanguage) {
-            locale.value = savedLanguage
-          }
-        }
-      } catch (error) {
-        console.warn('localStorage 접근 실패:', error)
-      }
-
-      // 초기 통계 로드
-      refreshStats()
-
-      // 자동 새로고침 설정
-      if (props.autoRefresh && isDevMode.value) {
-        refreshTimer.value = setInterval(refreshStats, props.refreshInterval)
-      }
-
-      // 외부 클릭 이벤트 리스너 등록
       document.addEventListener('click', handleClickOutside)
+      console.log('🚀 언어 스위처 초기화 완료')
     })
 
-    // 컴포넌트 언마운트 시 정리
     onUnmounted(() => {
-      if (refreshTimer.value) {
-        clearInterval(refreshTimer.value)
-      }
       document.removeEventListener('click', handleClickOutside)
-    })
-
-    // 언어 변경 감시
-    watch(locale, (newLocale) => {
-      if (currentLocale.value !== newLocale) {
-        currentLocale.value = newLocale
-        refreshStats()
+      // 🔧 정리 작업
+      if (isLanguageChanging.value) {
+        document.body.classList.remove('language-changing')
       }
     })
 
     return {
+      // 데이터
       currentLocale,
       dropdownOpen,
-      devPanelOpen,
-      translationStats,
+      showDevPanel,
       isDevMode,
+      isLanguageChanging,
       localesWithFlags,
-      completionPercentage,
-      changeLanguage,
+      
+      // 메서드
       setLanguage,
       toggleDropdown,
       toggleDevPanel,
-      refreshStats,
-      exportTranslations,
-      analyzeTranslations,
-      getCompletionForLanguage
+      getCompletionForLanguage,
+      getTranslationStats,
+      checkMissingKeys,
+      exportProgress,
+      
+      // 유틸리티
+      t
     }
   }
 }
 </script>
 
 <style scoped>
-.enhanced-language-switcher {
+/* 기본 컨테이너 */
+.language-switcher {
   position: relative;
   display: inline-block;
-}
-
-/* 드롭다운 스타일 */
-.dropdown-container {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.language-select {
-  padding: 8px 12px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  background: white;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.language-select:hover {
-  border-color: #007bff;
-}
-
-.language-select:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
-}
-
-.progress-indicator {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-}
-
-.progress-bar {
-  width: 40px;
-  height: 6px;
-  background: #e9ecef;
-  border-radius: 3px;
-  overflow: hidden;
-}
-
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #ff6b6b 0%, #feca57 50%, #48dbfb 100%);
-  transition: width 0.3s ease;
-}
-
-.progress-text {
-  color: #6c757d;
-  font-weight: 500;
+  user-select: none;
 }
 
 /* 버튼 스타일 */
 .language-buttons {
   display: flex;
   gap: 8px;
-  flex-wrap: wrap;
 }
 
 .lang-btn {
@@ -446,7 +348,8 @@ export default {
   background: white;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-size: 14px;
+  position: relative;
+  overflow: hidden;
 }
 
 .lang-btn:hover {
@@ -456,85 +359,82 @@ export default {
 
 .lang-btn.active {
   background: #007bff;
-  color: white;
   border-color: #007bff;
+  color: white;
 }
 
 .lang-btn .flag {
   font-size: 16px;
 }
 
-.lang-btn .completion {
-  font-size: 11px;
-  opacity: 0.8;
-  background: rgba(255, 255, 255, 0.2);
-  padding: 2px 4px;
-  border-radius: 3px;
+.lang-btn .lang-text {
+  font-size: 13px;
+  font-weight: 500;
 }
 
 /* 플래그 스타일 */
 .language-flags {
   display: flex;
-  gap: 8px;
+  gap: 4px;
   align-items: center;
 }
 
 .flag-item {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  padding: 8px;
-  border-radius: 6px;
+  gap: 4px;
+  padding: 6px 8px;
+  border-radius: 4px;
   cursor: pointer;
   transition: all 0.2s ease;
   position: relative;
 }
 
 .flag-item:hover {
-  background: #f8f9fa;
+  background: #f0f0f0;
 }
 
 .flag-item.active {
   background: #e3f2fd;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #1976d2;
 }
 
 .flag-item .flag {
-  font-size: 24px;
-  margin-bottom: 4px;
+  font-size: 18px;
 }
 
 .flag-item .lang-text {
   font-size: 12px;
-  color: #6c757d;
+  font-weight: 500;
 }
 
+/* 미니 진행률 표시 */
 .mini-progress {
   position: absolute;
-  bottom: 2px;
-  left: 2px;
-  right: 2px;
+  bottom: 0;
+  left: 0;
+  right: 0;
   height: 2px;
-  background: #e9ecef;
-  border-radius: 1px;
+  background: rgba(255, 255, 255, 0.3);
+  overflow: hidden;
 }
 
 .mini-progress-fill {
   height: 100%;
-  background: #28a745;
-  border-radius: 1px;
+  background: linear-gradient(90deg, #dc3545 0%, #ffc107 50%, #28a745 100%);
   transition: width 0.3s ease;
 }
 
 /* 컴팩트 스타일 */
 .language-compact {
   position: relative;
+  min-width: 120px;
 }
 
 .current-language {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   padding: 8px 12px;
   border: 1px solid #ddd;
   border-radius: 6px;
@@ -749,6 +649,14 @@ export default {
 .dev-toggle:hover {
   background: #f8f9fa;
   border-color: #007bff;
+}
+
+/* 🔧 언어 변경 중 표시 */
+.language-changing .lang-btn,
+.language-changing .flag-item,
+.language-changing .current-language {
+  pointer-events: none;
+  opacity: 0.7;
 }
 
 /* 반응형 디자인 */

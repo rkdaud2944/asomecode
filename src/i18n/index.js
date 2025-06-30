@@ -1,4 +1,4 @@
-// src/i18n/index.js - 완전한 파일
+// src/i18n/index.js - 높이 확장 문제 해결된 완전한 파일
 
 import { createI18n } from 'vue-i18n'
 
@@ -57,26 +57,100 @@ export const i18n = createI18n({
   globalInjection: true
 })
 
-// 언어 변경 유틸리티 함수
+// 🔧 DOM 조작 함수들 - 높이 확장 방지
+function updateDOMLanguage(language) {
+  // HTML lang 속성 업데이트
+  document.documentElement.lang = language
+  
+  // CSS 변수 즉시 적용을 위한 클래스 추가
+  document.body.setAttribute('data-language', language)
+  
+  // 언어별 폰트 로딩 최적화
+  updateFontLoading(language)
+}
+
+function updateFontLoading(language) {
+  const fontMap = {
+    ko: 'Pretendard, "Noto Sans KR", sans-serif',
+    en: 'Pretendard, Inter, sans-serif', 
+    vi: 'Inter, Roboto, sans-serif'
+  }
+  
+  // 메인 폰트 패밀리 업데이트
+  document.documentElement.style.setProperty('--primary-font', fontMap[language])
+}
+
+// 🔧 레이아웃 안정화 함수
+function stabilizeLayout() {
+  // 레이아웃 재계산 강제 실행
+  if (typeof window !== 'undefined') {
+    // 다음 프레임에서 실행하여 CSS 적용 완료 보장
+    requestAnimationFrame(() => {
+      // 모든 chapter 요소의 크기 재계산
+      const chapterElements = document.querySelectorAll('.home-chapter, .curriculum-chapter')
+      chapterElements.forEach(element => {
+        // 강제 reflow를 통한 레이아웃 안정화
+        element.style.display = 'none'
+        element.offsetHeight // reflow 강제 실행
+        element.style.display = ''
+      })
+    })
+  }
+}
+
+// 🔧 디바운스된 레이아웃 안정화
+let layoutStabilizeTimeout
+function debouncedStabilizeLayout() {
+  clearTimeout(layoutStabilizeTimeout)
+  layoutStabilizeTimeout = setTimeout(stabilizeLayout, 100)
+}
+
+// 🔧 언어 변경 유틸리티 함수 개선
 export function changeLanguage(newLanguage) {
   if (!['ko', 'en', 'vi'].includes(newLanguage)) {
     console.error('지원하지 않는 언어:', newLanguage)
     return false
   }
   
-  i18n.global.locale.value = newLanguage
-  saveLanguage(newLanguage)
+  const oldLanguage = i18n.global.locale.value
+  if (oldLanguage === newLanguage) {
+    console.log('이미 선택된 언어입니다:', newLanguage)
+    return true
+  }
   
-  // HTML lang 속성 업데이트
-  document.documentElement.lang = newLanguage
+  console.log(`🌍 언어 변경 시작: ${oldLanguage} → ${newLanguage}`)
   
-  // 사용자 정의 이벤트 발생
-  window.dispatchEvent(new CustomEvent('language-changed', {
-    detail: { language: newLanguage }
-  }))
-  
-  console.log(`🌍 언어 변경: ${newLanguage}`)
-  return true
+  try {
+    // 🔧 1. DOM 언어 속성 즉시 업데이트
+    updateDOMLanguage(newLanguage)
+    
+    // 🔧 2. i18n 언어 설정
+    i18n.global.locale.value = newLanguage
+    
+    // 🔧 3. 로컬 스토리지 저장
+    saveLanguage(newLanguage)
+    
+    // 🔧 4. 레이아웃 안정화 (디바운스)
+    debouncedStabilizeLayout()
+    
+    // 🔧 5. 사용자 정의 이벤트 발생 (지연)
+    setTimeout(() => {
+      window.dispatchEvent(new CustomEvent('language-changed', {
+        detail: { 
+          language: newLanguage,
+          previousLanguage: oldLanguage,
+          timestamp: Date.now()
+        }
+      }))
+    }, 150) // CSS 전환 시간보다 짧게 설정
+    
+    console.log(`✅ 언어 변경 완료: ${newLanguage}`)
+    return true
+    
+  } catch (error) {
+    console.error('❌ 언어 변경 중 오류:', error)
+    return false
+  }
 }
 
 // 현재 언어 가져오기
@@ -146,8 +220,88 @@ export function safeTranslate(key, fallback = null, params = {}) {
   }
 }
 
-// 개발 모드에서만 번역 상태 로깅 (Pinia 초기화 대기)
+// 🔧 언어 변경 감지 및 자동 최적화
+export function setupLanguageOptimization() {
+  // 브라우저 언어 변경 감지
+  window.addEventListener('languagechange', () => {
+    const browserLang = detectBrowserLanguage()
+    const currentLang = getCurrentLanguage()
+    
+    if (browserLang !== currentLang && 
+        supportedLanguages[browserLang] && 
+        !getSavedLanguage()) {
+      console.log('🔄 브라우저 언어 변경 감지:', browserLang)
+      changeLanguage(browserLang)
+    }
+  })
+  
+  // 페이지 가시성 변경 시 레이아웃 최적화
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+      debouncedStabilizeLayout()
+    }
+  })
+  
+  // 윈도우 리사이즈 시 레이아웃 최적화
+  window.addEventListener('resize', debouncedStabilizeLayout)
+  
+  // 폰트 로딩 완료 시 레이아웃 최적화
+  if (document.fonts) {
+    document.fonts.ready.then(() => {
+      debouncedStabilizeLayout()
+    })
+  }
+}
+
+// 🔧 초기화 시 DOM 설정
+function initializeDOMSettings() {
+  const currentLang = getCurrentLanguage()
+  updateDOMLanguage(currentLang)
+  
+  // 초기 레이아웃 안정화
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', stabilizeLayout)
+  } else {
+    stabilizeLayout()
+  }
+}
+
+// 🔧 언어별 최적화 설정
+export function getLanguageOptimizations(language = getCurrentLanguage()) {
+  const optimizations = {
+    ko: {
+      fontSize: '14px',
+      lineHeight: '1.5',
+      letterSpacing: '0',
+      wordBreak: 'keep-all'
+    },
+    en: {
+      fontSize: '13px', 
+      lineHeight: '1.4',
+      letterSpacing: '-0.1px',
+      wordBreak: 'break-word'
+    },
+    vi: {
+      fontSize: '12px',
+      lineHeight: '1.5', 
+      letterSpacing: '-0.2px',
+      wordBreak: 'break-word'
+    }
+  }
+  
+  return optimizations[language] || optimizations.ko
+}
+
+// 🔧 메모리 정리 함수
+export function cleanup() {
+  clearTimeout(layoutStabilizeTimeout)
+  window.removeEventListener('resize', debouncedStabilizeLayout)
+  document.removeEventListener('visibilitychange', debouncedStabilizeLayout)
+}
+
+// 개발 모드에서만 번역 상태 로깅
 if (process.env.NODE_ENV === 'development') {
+  // 초기화 완료 후 상태 출력
   setTimeout(() => {
     console.log('🌍 i18n 번역 상태:')
     console.table(getTranslationProgress())
@@ -156,7 +310,23 @@ if (process.env.NODE_ENV === 'development') {
     if (Object.keys(missing).length > 0) {
       console.warn('⚠️ 누락된 번역:', missing)
     }
-  }, 2000) // 2초 지연으로 Pinia 초기화 완료 대기
+    
+    console.log('🎯 현재 언어 최적화 설정:', getLanguageOptimizations())
+  }, 2000)
+  
+  // 언어 변경 이벤트 감지
+  window.addEventListener('language-changed', (event) => {
+    console.log('🔄 언어 변경 이벤트:', event.detail)
+    console.log('🎯 새 언어 최적화 설정:', getLanguageOptimizations(event.detail.language))
+  })
+}
+
+// 🔧 초기 설정 실행
+initializeDOMSettings()
+
+// 🔧 최적화 설정 (브라우저 환경에서만)
+if (typeof window !== 'undefined') {
+  setupLanguageOptimization()
 }
 
 export default i18n

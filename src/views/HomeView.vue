@@ -183,6 +183,11 @@ export default {
     window.addEventListener('mouseup', this.globalMouseUpHandler)
     
 
+    window.addEventListener('language-changed', this.handleLanguageChange)
+    
+    this.$nextTick(() => {
+      this.stabilizeChapterLayout()
+    })
     const debugMode = localStorage.getItem('awesome-debug-mode') === 'true'
     if (debugMode && process.env.NODE_ENV === 'development') {
       document.documentElement.setAttribute('data-debug', 'true')
@@ -194,19 +199,20 @@ export default {
 
   beforeUnmount() {
     window.removeEventListener('mouseup', this.globalMouseUpHandler)
+    window.removeEventListener('language-changed', this.handleLanguageChange)
   },
 
   methods: {
-    // 📍 핵심: Chapter 텍스트 길이에 따른 CSS 클래스 반환
+    // 📍 핵심: Chapter 텍스트 길이에 따른 CSS 클래스 반환 (개선)
     getChapterClass(chapterText) {
       const textLength = chapterText.length
       const currentLang = this.currentLanguage
       
-      // 언어별 길이 기준 설정
+      // 언어별 길이 기준 설정 (여유도 증가)
       const lengthThresholds = {
-        ko: { short: 3, medium: 5 },      // "32차" = 3글자
-        en: { short: 9, medium: 14 },     // 8 → 9, 12 → 14 (여유 증가)
-        vi: { short: 11, medium: 17 }     // 10 → 11, 15 → 17 (여유 증가)
+        ko: { short: 3, medium: 5 },      
+        en: { short: 10, medium: 16 },    // 9→10, 14→16 (여유 증가)
+        vi: { short: 12, medium: 18 }     // 11→12, 17→18 (여유 증가)
       }
       
       const thresholds = lengthThresholds[currentLang] || lengthThresholds.ko
@@ -220,63 +226,106 @@ export default {
       }
     },
 
-    // 📍 동적 Chapter 스타일 (일반)
+    // 📍 동적 Chapter 스타일 (일반) - 높이 고정 추가
     chapterStyle(card) {
       return {
         color: card.txtChapter,
         backgroundColor: card.bgChapter,
-        // 언어별 추가 스타일
-        ...this.getLanguageSpecificChapterStyle()
+        // 🔧 언어별 추가 스타일 + 높이 고정
+        ...this.getLanguageSpecificChapterStyle(),
+        // 🔧 높이 확장 방지를 위한 추가 속성
+        boxSizing: 'border-box',
+        verticalAlign: 'middle'
       }
     },
 
-    // 📍 동적 Chapter 스타일 (호버)
+    // 📍 동적 Chapter 스타일 (호버) - 높이 고정 추가
     chapterHoverStyle(card) {
       return {
         color: card.hoverTxtChapter,
         backgroundColor: card.hoverBgChapter,
-        // 언어별 추가 스타일
-        ...this.getLanguageSpecificChapterStyle()
+        // 🔧 언어별 추가 스타일 + 높이 고정
+        ...this.getLanguageSpecificChapterStyle(),
+        // 🔧 높이 확장 방지를 위한 추가 속성
+        boxSizing: 'border-box',
+        verticalAlign: 'middle'
       }
     },
 
-    // 📍 언어별 특정 스타일 반환
-     getLanguageSpecificChapterStyle() {
+    // 📍 언어별 특정 스타일 반환 (개선 - 높이 고정)
+    getLanguageSpecificChapterStyle() {
       const currentLang = this.currentLanguage
       
       switch(currentLang) {
         case 'en':
           return {
-            fontSize: '13px',  // 11px → 13px
-            padding: '5px 8px',  // 4px 6px → 5px 8px
-            minWidth: '85px',  // 80px → 85px
+            fontSize: '13px',
+            padding: '5px 8px',
+            minWidth: '85px',
+            maxWidth: '110px',
             textAlign: 'center',
             whiteSpace: 'nowrap',
             overflow: 'hidden',
             textOverflow: 'ellipsis',
-            letterSpacing: '-0.1px'  // -0.2px → -0.1px
+            letterSpacing: '-0.1px',
+            // 🔧 높이 고정으로 확장 방지
+            height: 'auto',
+            maxHeight: '38px',
+            lineHeight: '1.1'
           }
         case 'vi':
           return {
-            fontSize: '12px',  // 10px → 12px
-            padding: '4px 7px',  // 3px 5px → 4px 7px
-            minWidth: '90px',  // 85px → 90px
+            fontSize: '12px',
+            padding: '4px 7px',
+            minWidth: '90px',
+            maxWidth: '105px',
             textAlign: 'center',
             whiteSpace: 'nowrap',
             overflow: 'hidden',
             textOverflow: 'ellipsis',
-            letterSpacing: '-0.2px'  // -0.3px → -0.2px
+            letterSpacing: '-0.2px',
+            // 🔧 높이 고정으로 확장 방지
+            height: 'auto',
+            maxHeight: '36px',
+            lineHeight: '1.1'
           }
         case 'ko':
         default:
           return {
-            fontSize: '14px',  // 12px → 14px
-            padding: '6px 10px',  // 5px 8px → 6px 10px
-            minWidth: '60px',  // 50px → 60px
+            fontSize: '14px',
+            padding: '6px 10px',
+            minWidth: '60px',
             textAlign: 'center',
-            letterSpacing: '0'
+            letterSpacing: '0',
+            whiteSpace: 'normal',
+            overflow: 'visible',
+            textOverflow: 'clip',
+            // 🔧 높이 고정으로 확장 방지
+            height: 'auto',
+            maxHeight: '40px',
+            lineHeight: '1.2'
           }
       }
+    },
+
+    // 🔧 언어 변경 감지 및 레이아웃 안정화
+    handleLanguageChange() {
+      this.$nextTick(() => {
+        // DOM 업데이트 후 레이아웃 강제 재계산
+        this.stabilizeChapterLayout()
+      })
+    },
+
+    // 🔧 Chapter 레이아웃 안정화 함수
+    stabilizeChapterLayout() {
+      const chapterElements = document.querySelectorAll('.home-chapter')
+      chapterElements.forEach(element => {
+        // 강제 reflow로 레이아웃 안정화
+        const display = element.style.display
+        element.style.display = 'none'
+        element.offsetHeight // reflow 강제 실행
+        element.style.display = display || ''
+      })
     },
 
     // 📍 기존 메서드들
@@ -314,7 +363,7 @@ export default {
       console.error('Error:', error)
       // 에러 처리 로직
     }
-  }
+  },
 }
 </script>
 
@@ -322,6 +371,7 @@ export default {
 <style scoped src="@/assets/css/font.css"/>
 
 <style scoped>
+
 /* 📍 컴포넌트별 추가 스타일 */
 .tip {
   cursor: pointer;
